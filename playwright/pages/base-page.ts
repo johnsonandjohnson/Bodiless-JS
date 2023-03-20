@@ -12,36 +12,65 @@
  * limitations under the License.
  */
 // base-page.ts
+/* eslint-disable max-len */
+/* eslint-disable jest/no-standalone-expect */
 import {expect, Page} from '@playwright/test';
 
 export class BasePage {
   readonly page: Page;
+
   readonly switcherIcon: string;
+
   readonly editIcon: string;
+
   readonly pathToImages: string;
+
   readonly imageOneName: string;
+
   readonly imageTwoName: string;
+
   readonly menuBarLeft: string;
+
   readonly menuBarRight: string;
+
   readonly docsIcon: string;
+
   readonly pageIcon: string;
+
   readonly newPageIcon: string;
+
   readonly headerAddPageForm: string;
+
   readonly fieldAddPageForm: string;
+
   readonly closeIconAddPageForm: string;
+
   readonly checkmarkIconAddPageForm: string;
+
   readonly commitHistoryPanel: string;
+
   readonly addMainMenuItemButton: string;
+
   readonly firstMenuItem: string;
+
   readonly editMenuLinkButton: string;
+
   readonly linkInput: string;
+
   readonly submitButton: string;
+
   readonly firstMenuTitle: string;
+
   readonly secondMenuTitle: string;
+
   readonly addSubMenuItem: string;
+
   readonly addSubMenuListItem: string;
+
   readonly docsPath: string;
+
   readonly docsTitle: string;
+
   readonly bodilessDocUrl: string;
 
   constructor(page: Page) {

@@ -5,6 +5,7 @@ env:
   NODE_OPTIONS: --max_old_space_size=4096
 on:
   pull_request_target:
+    types: [labeled]
     branches:
       - main
 jobs:
@@ -12,7 +13,9 @@ jobs:
     name: Setup, Build, Lint and Test
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
       # install a specific version of Node using
       # https://github.com/actions/setup-node
       - name: Use Node.js v16.13

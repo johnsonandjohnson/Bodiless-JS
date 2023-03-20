@@ -12,6 +12,9 @@
  * limitations under the License.
  */
 // cards.spec.ts
+/* eslint-disable jest/no-standalone-expect */
+/* eslint-disable jest/expect-expect */
+/* eslint-disable max-len */
 import { test, Page, expect } from '@playwright/test';
 import { CardsPage } from '../../pages/cards-page';
 

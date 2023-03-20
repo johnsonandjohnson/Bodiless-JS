@@ -12,6 +12,8 @@
  * limitations under the License.
  */
 // pdp.spec.ts
+/* eslint-disable max-len */
+/* eslint-disable jest/expect-expect */
 import { expect, Page, test } from '@playwright/test';
 import { PdpPage } from '../../pages/pdp-page';
 
@@ -74,7 +76,7 @@ test.describe('PDP (Product Details Page) smoke tests', () => {
 
   test('PDP: 7 - checking the page in Preview Mode', async () => {
     await pdpPage.togglePreviewMode();
-    await page.waitForSelector(pdpPage.titleXpath, { timeout:10000 });
+    await page.waitForSelector(pdpPage.titleXpath, { timeout: 10000 });
     expect.soft(await page.locator(pdpPage.titleXpath).innerText()).toEqual(pdpPage.title);
     expect.soft(await page.locator(pdpPage.accordionOverviewBodyXpath).innerText()).toEqual(pdpPage.accordionBody);
     expect.soft(await page.locator(pdpPage.imagePlaceholderXpath).getAttribute('src')).toMatch(pdpPage.imagePathRegex);
@@ -83,7 +85,7 @@ test.describe('PDP (Product Details Page) smoke tests', () => {
 
   test('PDP: 8 - checking that the data still present in Edit Mode', async () => {
     await pdpPage.toggleEditMode();
-    await page.waitForSelector(pdpPage.titleXpath, { timeout:10000 });
+    await page.waitForSelector(pdpPage.titleXpath, { timeout: 10000 });
     expect.soft(await page.locator(pdpPage.accordionOverviewBodyXpath).innerText()).toEqual(pdpPage.accordionBody);
     expect.soft(await page.locator(pdpPage.titleXpath).innerText()).toEqual(pdpPage.title);
     expect.soft(await page.locator(pdpPage.imagePlaceholderXpath).getAttribute('src')).toMatch(pdpPage.imagePathRegex);

@@ -17,27 +17,49 @@ import { BasePage } from './base-page';
 
 export class CardsPage extends BasePage {
   readonly page: Page;
+
   readonly pagePath: string;
+
   readonly title: string;
+
   readonly description: string;
+
   readonly ctaLabel: string;
+
   readonly cardUrl: string;
+
   readonly normalizedUrl: string;
+
   readonly imageAltText: string;
+
   readonly editedPostfix: string;
+
   readonly titleXpath: string;
+
   readonly descriptionXpath: string;
+
   readonly ctaLabelXpath: string;
+
   readonly imagePlaceholderXpath: string;
+
   readonly urlFieldCTAXpath: string;
+
   readonly linkIconCTAXpath: string;
+
   readonly checkmarkIconLinkCTAFormXpath: string;
+
   readonly altFieldXpath: string;
+
   readonly checkmarkIconImageFormXpath: string;
+
   readonly imageIconXpath: string;
+
   readonly ctaButtonXpath: string;
+
   readonly imageLinkXpath: string;
+
   readonly imageOrigPathRegex: RegExp;
+
   readonly imageUpdPathRegex: RegExp;
 
   constructor(page: Page) {
@@ -64,8 +86,8 @@ export class CardsPage extends BasePage {
     this.ctaButtonXpath = '//*[@id="card-horizontal"]//a[@data-card-element="link"]';
     this.imageLinkXpath = '//div[@id="card-horizontal"]//a[@data-card-element="image-link"]';
     // tslint:disable-next-line:prefer-template
-    this.imageOrigPathRegex = new RegExp('images\\/pages' + this.pagePath + '[a-zA-Z0-9]+\\/' + this.imageOneName, '');
+    this.imageOrigPathRegex = new RegExp(`images\\/pages${this.pagePath}[a-zA-Z0-9]+\\/${this.imageOneName}`, '');
     // tslint:disable-next-line:prefer-template
-    this.imageUpdPathRegex = new RegExp('images\\/pages' + this.pagePath + '[a-zA-Z0-9]+\\/' + this.imageTwoName, '');
+    this.imageUpdPathRegex = new RegExp(`images\\/pages${this.pagePath}[a-zA-Z0-9]+\\/${this.imageTwoName}`, '');
   }
 }

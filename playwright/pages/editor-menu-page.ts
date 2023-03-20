@@ -27,15 +27,11 @@ export class EditorMenuPage extends BasePage {
     let value;
     if (position === 'left') {
       const element = await this.page.locator(this.menuBarLeft);
-      value = await element.evaluate((el) => {
-        return window.getComputedStyle(el).left;
-      });
+      value = await element.evaluate((el) => window.getComputedStyle(el).left);
     }
     if (position === 'right') {
       const element = await this.page.locator(this.menuBarRight);
-      value = await element.evaluate((el) => {
-        return window.getComputedStyle(el).right;
-      });
+      value = await element.evaluate((el) => window.getComputedStyle(el).right);
     }
     return value;
   }

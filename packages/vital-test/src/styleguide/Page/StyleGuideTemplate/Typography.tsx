@@ -14,93 +14,91 @@
 
 import React from 'react';
 import {
-  flowHoc,
-  H1,
-  H2,
-  H3,
-  H4,
-  H5,
-  P,
   as,
+  flowHoc,
   replaceWith,
+  on,
+  Div,
+  A,
+  withDesign,
+  varyDesigns,
 } from '@bodiless/fclasses';
-import { withEditorPlain } from '@bodiless/vital-editors';
-import { vitalTypography } from '@bodiless/vital-elements';
-import { LinkClean, vitalLink } from '@bodiless/vital-link';
-import { withNodeKey } from '@bodiless/core';
+import { EditorPlainClean, vitalEditorPlain } from '@bodiless/vital-editors';
+import { asFluidToken, vitalTypography } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
+import { withDefaultContent, withNodeKey, withParent } from '@bodiless/core';
+import { vitalLink } from '@bodiless/vital-link';
+import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
-const H1Title = flowHoc(
-  withEditorPlain('title', 'Page Title'),
-  as(vitalTypography.H1, 'py-5'),
-)(H1);
-const VitalH1 = flowHoc(
-  withEditorPlain('H1', 'Header 1'),
-  as(vitalTypography.H1),
-)(H1);
-const VitalH2 = flowHoc(
-  withEditorPlain('H2', 'Header 2'),
-  as(vitalTypography.H2),
-)(H2);
-const VitalH3 = flowHoc(
-  withEditorPlain('H3', 'Header 3'),
-  as(vitalTypography.H3),
-)(H3);
-const VitalH4 = flowHoc(
-  withEditorPlain('H4', 'Header 4'),
-  as(vitalTypography.H4),
-)(H4);
-const VitalH5 = flowHoc(
-  withEditorPlain('H5', 'Header 5'),
-  as(vitalTypography.H5),
-)(H5);
-const VitalBody = flowHoc(
-  withEditorPlain('Body', 'Body Copy'),
-  as(vitalTypography.Body),
-)(P);
-const VitalEyebrow = flowHoc(
-  withEditorPlain('Eyebrow', 'Eyebrow'),
-  as(vitalTypography.Eyebrow),
-)(P);
-const VitalRest = flowHoc(
-  withEditorPlain('Rest', 'Rest: i.e. Breadcrumbs / Review Numbers'),
-  as(vitalTypography.Rest),
-)(P);
-const VitalDemoLink = flowHoc(
-  withEditorPlain('Link1', 'Link'),
-  as(
-    vitalTypography.Link,
-    vitalLink.Default,
-    vitalLink.Sidecar,
+const BaseVariation = {
+  '': on(EditorPlainClean)(
+    vitalEditorPlain.Default,
+    withParent(Div),
   ),
-  withNodeKey('demo-link'),
-)(LinkClean);
-const Gradient = flowHoc(
-  withEditorPlain('Gradient', 'Gradient'),
-  as(vitalTypography.Gradient),
-)(P);
+};
 
-const Examples = (props: any) => (
-  <>
-    <H1Title />
-    <VitalH1 />
-    <VitalH2 />
-    <VitalH3 />
-    <VitalH4 />
-    <VitalH5 />
-    <VitalBody />
-    <VitalEyebrow />
-    <VitalDemoLink />
-    <VitalRest />
-    <br />
-    <Gradient />
-  </>
+const TypographyVariations = {
+  H1: withDesign({ Parent: vitalTypography.H1 }),
+  H2: withDesign({ Parent: vitalTypography.H2 }),
+  H3: withDesign({ Parent: vitalTypography.H3 }),
+  H4: withDesign({ Parent: vitalTypography.H4 }),
+  H5: withDesign({ Parent: vitalTypography.H5 }),
+  Body: withDesign({ Parent: vitalTypography.Body }),
+  Eyebrow: withDesign({ Parent: vitalTypography.Eyebrow }),
+  Gradient: withDesign({ Parent: vitalTypography.Gradient }),
+  Rest: withDesign({ Parent: vitalTypography.Rest }),
+};
+
+const vitalTypographyVariations = varyDesigns(
+  BaseVariation,
+  TypographyVariations,
 );
+
+const LinkVariation = {
+  Link: on(EditorPlainClean)(
+    vitalEditorPlain.Default,
+    withParent(A),
+    withDesign({
+      Parent: as(
+        vitalTypography.Link,
+        vitalLink.Default,
+        vitalLink.Sidecar,
+      )
+    }),
+    withNodeKey('linktext'),
+  ),
+};
+
+const vitalTypographyFlowContainer = asFluidToken({
+  Components: {
+    ...vitalTypographyVariations,
+    ...LinkVariation,
+  },
+});
+
+const data = {
+  examples$H1: { text: 'An example H1 Title' },
+  examples$H2: { text: 'An example H2 Title' },
+  examples$H3: { text: 'An example H3 Title' },
+  examples$H4: { text: 'An example H4 Title' },
+  examples$H5: { text: 'An example H5 Title' },
+  examples$Body: { text: 'An example of the Body' },
+  examples$Eyebrow: { text: 'An example of the Eyebrow' },
+  examples$Gradient: { text: 'An example of the Gradient' },
+  examples$Rest: { text: 'An example of the Rest' },
+  examples$Link$linktext: { text: 'An example of the Link' },
+  examples$Link: { href: '/test/' },
+};
 
 export const Typography = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
   Meta: flowHoc.meta.term('Token')('Typography'),
   Content: {
     Title: replaceWith(() => <>Typography</>),
-    Examples: replaceWith(Examples),
+    Description: replaceWith(() => <>The following are examples of Vital Typography.</>),
+    Examples: on(StyleGuideExamplesClean)(
+      vitalStyleGuideExamples.Default,
+      vitalTypographyFlowContainer,
+      withDefaultContent(data),
+    ),
   },
 });

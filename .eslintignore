@@ -14,4 +14,3 @@ packages/gatsby-plugin-akamai-auth/index.js
 **/.cache
 **/static
 **/node_modules
-playwright
