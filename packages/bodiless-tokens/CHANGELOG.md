@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.28](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.27...v1.0.0-rc.28) (2023-03-20)
+
+**Note:** Version bump only for package @bodiless/tokens
+
+
+
+
+
 # [1.0.0-rc.27](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.26...v1.0.0-rc.27) (2023-03-16)
 
 **Note:** Version bump only for package @bodiless/tokens

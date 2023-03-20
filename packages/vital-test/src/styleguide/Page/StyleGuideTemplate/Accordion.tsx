@@ -15,59 +15,88 @@
 import React from 'react';
 import {
   flowHoc,
-  as,
   replaceWith,
-  H3,
-  Section,
+  on,
+  varyDesigns,
 } from '@bodiless/fclasses';
-import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { AccordionClean, vitalAccordion } from '@bodiless/vital-accordion';
-import { vitalTypography, vitalColor } from '@bodiless/vital-elements';
-import { withNodeKey } from '@bodiless/core';
+import { asFluidToken } from '@bodiless/vital-elements';
+import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
+import { withDefaultContent } from '@bodiless/core';
+import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
-const C = {
-  H3: as(vitalTypography.H3)(H3),
-  Example: as(vitalColor.BgPrimaryPage, 'p-4 mb-12')(Section),
+const BaseVariation = {
+  // using '' means it won't add any string to name key of the variations
+  '': on(AccordionClean)(
+    vitalAccordion.Default,
+  ),
 };
 
-const DefaultAccordion = as(
-  vitalAccordion.Default,
-  withNodeKey('default'),
-)(AccordionClean);
+const AccordionVariations = {
+  Default: '',
+  FAQ: vitalAccordion.WithFAQSchema,
+};
 
-const ExpandedAccordion = as(
-  vitalAccordion.Default,
-  vitalAccordion.WithInitiallyExpanded,
-  withNodeKey('expanded'),
-)(AccordionClean);
-
-const FAQAccordion = as(
-  vitalAccordion.Default,
-  vitalAccordion.WithFAQSchema,
-  withNodeKey('faq'),
-)(AccordionClean);
-
-const Examples = () => (
-  <>
-    <C.Example>
-      <C.H3>Default</C.H3>
-      <DefaultAccordion />
-    </C.Example>
-    <C.Example>
-      <C.H3>Initially expanded</C.H3>
-      <ExpandedAccordion />
-    </C.Example>
-    <C.Example>
-      <C.H3>With FAQ schema</C.H3>
-      <FAQAccordion />
-    </C.Example>
-  </>
+const vitalAccordionVariations = varyDesigns(
+  BaseVariation,
+  AccordionVariations,
+  {
+    '': '', // vary on itself and produce closed accordion variation
+    Expanded: vitalAccordion.WithInitiallyExpanded,
+  }
 );
+
+const vitalAccordionFlowContainer = asFluidToken({
+  Components: {
+    ...vitalAccordionVariations,
+  },
+});
+
+const simplebody = [
+  {
+    type: 'paragraph',
+    children: [
+      {
+        text: 'Lorem ipsum '
+      },
+      {
+        text: 'dolor',
+        Bold: true
+      },
+      {
+        text: ' sit amet'
+      },
+      {
+        text: 'super',
+        SuperScript: true
+      },
+      {
+        text: ', consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. '
+      }
+    ]
+  }
+];
+
+const data = {
+  examples$Default$accordion$title: { text: 'What is the Accordion Default?' },
+  examples$Default$accordion$body: simplebody,
+  examples$DefaultExpanded$accordion$title: { text: 'What is Expanded on Open Accordion?' },
+  examples$DefaultExpanded$accordion$body: simplebody,
+  examples$FAQ$accordion$title: { text: 'What is FAQ accordion?' },
+  examples$FAQ$accordion$body: simplebody,
+  examples$FAQExpanded$accordion$title: { text: 'What is Expanded on a FAQ accordion?' },
+  examples$FAQExpanded$accordion$body: simplebody,
+};
 
 export const Accordion = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
   Meta: flowHoc.meta.term('Token')('Accordion'),
   Content: {
     Title: replaceWith(() => <>Accordion</>),
-    Examples: replaceWith(Examples),
+    Description: replaceWith(() => <>The following are examples of Vital Accordion.</>),
+    Examples: on(StyleGuideExamplesClean)(
+      vitalStyleGuideExamples.Default,
+      vitalAccordionFlowContainer,
+      withDefaultContent(data),
+    ),
   },
 });

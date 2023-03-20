@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/backend",
-  "version": "1.0.0-rc.27",
+  "version": "1.0.0-rc.28",
   "description": "",
   "main": "",
   "files": [
@@ -12,7 +12,7 @@
     "bodiless-backend": "./bin/bodiless-backend"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.27",
+    "@bodiless/cli": "^1.0.0-rc.28",
     "body-parser": "^1.18.3",
     "copyfiles": "^2.1.1",
     "dotenv": "^8.2.0",

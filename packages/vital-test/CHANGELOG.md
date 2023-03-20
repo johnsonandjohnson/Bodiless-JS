@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.28](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.27...v1.0.0-rc.28) (2023-03-20)
+
+
+### Bug Fixes
+
+* **styleguide:** accordion & buttons & video ([#2007](https://github.com/johnsonandjohnson/bodiless-js/issues/2007)) ([0e078dc](https://github.com/johnsonandjohnson/bodiless-js/commit/0e078dc605912be5240bca5da7a2b52ba2859cab))
+
+
+
+
+
 # [1.0.0-rc.27](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.26...v1.0.0-rc.27) (2023-03-16)
 
 

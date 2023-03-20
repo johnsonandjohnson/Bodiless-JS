@@ -13,45 +13,42 @@
  */
 
 import React from 'react';
-import { withNodeKey } from '@bodiless/core';
 import {
-  flowHoc,
-  as,
-  replaceWith,
-  H3,
+  flowHoc, replaceWith, on,
 } from '@bodiless/fclasses';
+import { asFluidToken } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { YouTubeClean, vitalYouTube } from '@bodiless/vital-youtube';
-import { vitalTypography } from '@bodiless/vital-elements';
+import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
-const C = {
-  H3: as(vitalTypography.H3)(H3),
-};
-
-const DefaultVideo = as(
-  vitalYouTube.Default,
-  withNodeKey('defaultvideo'),
-)(YouTubeClean);
-
-const HeroVideo = as(
-  vitalYouTube.Hero,
-  withNodeKey('herovideo'),
-)(YouTubeClean);
-
-const Examples = () => (
-  <>
-    <C.H3>Default</C.H3>
-    <DefaultVideo />
-    <hr className="my-4" />
-    <C.H3>Hero</C.H3>
-    <HeroVideo />
-  </>
-);
+const WithYouTubeVariations = asFluidToken({
+  Components: {
+    // TBD (we want to remove base exporting and switch it to Basic)
+    Basic: on(YouTubeClean)(vitalYouTube.Base),
+    WithFullScreenEnabled: on(YouTubeClean)(
+      vitalYouTube.Base,
+      vitalYouTube.WithFullScreenEnabled,
+    ),
+    WithSchema: on(YouTubeClean)(
+      vitalYouTube.Base,
+      vitalYouTube.WithSchema
+    ),
+    WithResponsive16By9Embed: on(YouTubeClean)(
+      vitalYouTube.Base,
+      vitalYouTube.WithResponsive16By9Embed
+    ),
+    Default: on(YouTubeClean)(vitalYouTube.Default),
+    Hero: on(YouTubeClean)(vitalYouTube.Hero),
+  },
+});
 
 export const Video = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
   Meta: flowHoc.meta.term('Token')('Video'),
   Content: {
     Title: replaceWith(() => <>Video</>),
-    Examples: replaceWith(Examples),
+    Examples: on(StyleGuideExamplesClean)(
+      vitalStyleGuideExamples.Default,
+      WithYouTubeVariations,
+    ),
   },
 });
