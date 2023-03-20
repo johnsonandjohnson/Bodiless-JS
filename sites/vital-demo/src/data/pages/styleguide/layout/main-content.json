@@ -1,0 +1,74 @@
+{
+  "items": [
+    {
+      "uuid": "8d842bf0-a0ce-11ed-9b69-25783962dfa0",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "ImagePlainLandscape"
+    },
+    {
+      "uuid": "9877f960-a0ce-11ed-9b69-25783962dfa0",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/2"
+      },
+      "type": "ImagePlainLandscape"
+    },
+    {
+      "uuid": "9a1ef2a0-a0ce-11ed-9b69-25783962dfa0",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/2"
+      },
+      "type": "ImagePlainLandscape"
+    },
+    {
+      "uuid": "32e634b0-a0d1-11ed-9b69-25783962dfa0",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/3"
+      },
+      "type": "ImagePlainLandscape"
+    },
+    {
+      "uuid": "3a3d2c50-a0d1-11ed-9b69-25783962dfa0",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/3"
+      },
+      "type": "ImagePlainLandscape"
+    },
+    {
+      "uuid": "4c34c850-a0d1-11ed-9b69-25783962dfa0",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/3"
+      },
+      "type": "ImagePlainLandscape"
+    },
+    {
+      "uuid": "7ad805a0-a0d1-11ed-9b69-25783962dfa0",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/4"
+      },
+      "type": "ImagePlainLandscape"
+    },
+    {
+      "uuid": "8494b2a0-a0d1-11ed-9b69-25783962dfa0",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/4"
+      },
+      "type": "ImagePlainLandscape"
+    },
+    {
+      "uuid": "862e1750-a0d1-11ed-9b69-25783962dfa0",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/4"
+      },
+      "type": "ImagePlainLandscape"
+    },
+    {
+      "uuid": "87561c90-a0d1-11ed-9b69-25783962dfa0",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/4"
+      },
+      "type": "ImagePlainLandscape"
+    }
+  ]
+}

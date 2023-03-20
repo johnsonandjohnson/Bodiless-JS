@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/gatsby-plugin-akamai-auth",
-  "version": "1.0.0-rc.26",
+  "version": "1.0.0-rc.28",
   "description": "A Gatsby plugin to enable authentication using Akamai Identity Cloud/Janarain.",
   "author": "Ali Al Mustafa <aalmusta@its.jnj.com>",
   "homepage": "",
@@ -35,7 +35,7 @@
     "theme:init": "echo $null >> index.js"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.26",
+    "@bodiless/cli": "^1.0.0-rc.28",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.4",
     "copyfiles": "^2.1.1",

@@ -17,22 +17,39 @@ import { BasePage } from './base-page';
 
 export class LinkTogglePage extends BasePage {
   readonly page: Page;
+
   readonly label: string;
+
   readonly url: string;
+
   readonly normalizedUrl: string;
+
   readonly editedPostfix: string;
+
   readonly labelXpath: string;
+
   readonly labelPreviewXpath: string;
+
   readonly linkXpath: string;
+
   readonly linkIconAddXpath: string;
+
   readonly urlFieldAddXpath: string;
+
   readonly linkIconEditXpath: string;
+
   readonly removeLinkXpath: string;
+
   readonly linkTextRequest: string;
+
   readonly linkToggleRequest: string;
+
   readonly linkRequest: string;
+
   readonly checkmarkIconLinkAddFormXpath: string;
+
   readonly urlFieldEditXpath: string;
+
   readonly checkmarkIconLinkEditFormXpath: string;
 
   constructor(page: Page) {
@@ -43,7 +60,7 @@ export class LinkTogglePage extends BasePage {
     this.linkRequest = 'linktoggle1$link';
     this.label = 'AT - Label -';
     this.url = 'AT-Url';
-    this.normalizedUrl = '/' + this.url + '/';
+    this.normalizedUrl = `/${this.url}/`;
     this.editedPostfix = 'edited';
     this.labelXpath = '//*[@data-linktoggle-element="link-toggle"]//*[@class="bodiless-inline-editable"]';
     this.labelPreviewXpath = '//*[@data-linktoggle-element="link-toggle"]//span';

@@ -17,36 +17,60 @@ import { BasePage } from './base-page';
 
 export class PdpPage extends BasePage {
   readonly page: Page;
+
   readonly pagePath: string;
+
   readonly pdpURL: string;
+
   readonly pdpPagePath: string;
+
   readonly title: string;
+
   readonly accordionBody: string;
+
   readonly pageIconXpath: string;
+
   readonly newPageIconXpath: string;
+
   readonly fieldAddPageFormXpath: string;
+
   readonly checkmarkIconAddPageFormXpath: string;
+
   readonly newPageLinkXpath: string;
+
   readonly titleXpath: string;
+
   readonly accordionOverviewBodyXpath: string;
+
   readonly accordionDirectionsExpandXpath: string;
+
   readonly accordionDirectionsBodyExpandedXpath: string;
+
   readonly accordionDirectionsBodyPlaceholderXpath: string;
+
   readonly bvTextXpath: string;
+
   readonly editBVIconXpath: string;
+
   readonly closeBVFormXpath: string;
+
   readonly imagePlaceholderXpath: string;
+
   readonly imageIconXpath: string;
+
   readonly checkmarkIconImageFormXpath: string;
+
   readonly flexboxXpath: string;
+
   readonly addComponentIconXpath: string;
+
   readonly imagePathRegex: RegExp;
 
   constructor(page: Page) {
     super(page);
     this.page = page;
     this.pagePath = '/products/';
-    this.pdpURL = 'pdp-autotest' + Math.floor(Math.random() * 10000).toString();
+    this.pdpURL = `pdp-autotest${Math.floor(Math.random() * 10000).toString()}`;
     this.pdpPagePath = this.pagePath + this.pdpURL;
     this.title = 'AT - PDP title';
     this.accordionBody = 'AT - Overview';
@@ -68,6 +92,6 @@ export class PdpPage extends BasePage {
     this.checkmarkIconImageFormXpath = '//form[@aria-label="Context Menu Select Image Form"]//button[@aria-label="Submit"]';
     this.flexboxXpath = '//*[@data-product-element="flow-container"]';
     this.addComponentIconXpath = '//button[@aria-label="Add Flow Container"]';
-    this.imagePathRegex = new RegExp('images/pages' + this.pdpPagePath + '/[a-zA-Z0-9]+/' + this.imageOneName, '');
+    this.imagePathRegex = new RegExp(`images/pages${this.pdpPagePath}/[a-zA-Z0-9]+/${this.imageOneName}`, '');
   }
 }
