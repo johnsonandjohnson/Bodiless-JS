@@ -23,7 +23,7 @@ Base makes a clickable image:
 
 #### Defined in
 
-[vital-layout/src/components/Logo/tokens/vitalLogo.ts:65](https://github.com/johnsonandjohnson/Bodiless-JS/blob/0e078dc60/packages/vital-layout/src/components/Logo/tokens/vitalLogo.ts#L65)
+[vital-layout/src/components/Logo/tokens/vitalLogo.ts:65](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-layout/src/components/Logo/tokens/vitalLogo.ts#L65)
 
 ___
 
@@ -52,4 +52,4 @@ export default {
 
 #### Defined in
 
-[vital-layout/src/components/Logo/tokens/vitalLogo.ts:86](https://github.com/johnsonandjohnson/Bodiless-JS/blob/0e078dc60/packages/vital-layout/src/components/Logo/tokens/vitalLogo.ts#L86)
+[vital-layout/src/components/Logo/tokens/vitalLogo.ts:86](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-layout/src/components/Logo/tokens/vitalLogo.ts#L86)
