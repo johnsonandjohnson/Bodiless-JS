@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 // editorMenu.spec.ts
-'use strict';
+/* eslint-disable jest/expect-expect */
 import { expect, Page, test } from '@playwright/test';
 import { EditorMenuPage } from '../../pages/editor-menu-page';
 

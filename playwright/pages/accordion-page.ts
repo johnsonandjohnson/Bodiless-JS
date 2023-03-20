@@ -17,17 +17,29 @@ import { BasePage } from './base-page';
 
 export class AccordionPage extends BasePage {
   readonly page: Page;
+
   readonly title: string;
+
   readonly body: string;
+
   readonly editedPostfix: string;
+
   readonly titleFirstXpath: string;
+
   readonly bodyFirstXpath: string;
+
   readonly plusIconFirstXpath: string;
+
   readonly minusIconFirstXpath: string;
+
   readonly bodySecondXpath: string;
+
   readonly plusIconSecondXpath: string;
+
   readonly minusIconSecondXpath: string;
+
   readonly accordionBodyRequest: string;
+
   readonly accordionTitleRequest: string;
 
   constructor(page: Page) {

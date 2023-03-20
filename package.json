@@ -28,7 +28,7 @@
     "fix:target": "eslint --fix  --cache --ext .js,.jsx,.ts,.tsx",
     "fix:change": "git diff --name-only --diff-filter=d master... | grep -e 'tsx$' -e 'jsx$' -e 'js$' -e 'ts$' | xargs -L 1 npm run fix:target",
     "fresh": "npm run clean && lerna clean -y && rimraf node_modules && npm run setup",
-    "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx packages sites --",
+    "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx packages sites playwright --",
     "lint:target": "eslint --cache --ext .js,.jsx,.ts,.tsx",
     "lint:change": "git diff --name-only --diff-filter=d master... | grep -e 'tsx$' -e 'jsx$' -e 'js$' -e 'ts$' | xargs -L 1 npm run lint:target",
     "new": "node ./scripts/new-starter",

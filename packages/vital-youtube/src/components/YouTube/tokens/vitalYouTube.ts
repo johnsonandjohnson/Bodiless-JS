@@ -91,7 +91,7 @@ const Default = asYouTubeToken({
 const Hero = asYouTubeToken(Default);
 
 export default {
-  Base,
+  Base, // TBD Switch to Basic
   Default,
   WithFullScreenEnabled,
   WithSchema,

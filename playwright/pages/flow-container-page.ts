@@ -12,29 +12,48 @@
  * limitations under the License.
  */
 // flow-container-page.ts
-import { BasePage } from './base-page';
 import { Page } from '@playwright/test';
+import { BasePage } from './base-page';
 
 export class FlowContainerPage extends BasePage {
   readonly page: Page;
+
   readonly flowContainerDefault:string;
+
   readonly flowContainerLibrary:string;
+
   readonly flowContainer50And100:string;
+
   readonly flowContainer100Only:string;
+
   readonly flowContainer1Item:string;
+
   readonly flowContainer25Width:string;
+
   readonly flowContainer33Width:string;
+
   readonly flowContainer50Width:string;
+
   readonly flowContainer66Width:string;
+
   readonly flowContainer75Width:string;
+
   readonly flowContainerContentful:string;
+
   readonly flowContainerLimitedFlow:string;
+
   readonly flowContainerNestedFlow:string;
+
   readonly addFlowContainerButton:string;
+
   readonly imagesCheckbox:string;
+
   readonly squareImageButton:string;
+
   readonly squareImageButtonInsideContainer: string;
+
   readonly selectImageButton: string;
+
   readonly component: {
     richText: string,
     table: string,
@@ -50,25 +69,41 @@ export class FlowContainerPage extends BasePage {
     curator: string,
     flowContainer: string,
   };
+
   readonly orientation: {
     NA: string,
     horizontal: string,
     vertical: string,
   };
+
   readonly searchField: string;
+
   readonly componentCategories: string;
+
   readonly typeSection: string;
+
   readonly orientationSection: string;
+
   readonly gridBox: string;
+
   readonly simpleRichText: string;
+
   readonly basicRichText: string;
+
   readonly fullRichText: string;
+
   readonly landscapeLinkableImage: string;
+
   readonly squareLinkableImage: string;
+
   readonly landscapeImage: string;
+
   readonly squareImage: string;
+
   readonly closeFormButton: string;
+
   readonly addComponentForm: string;
+
   readonly structure: {
     withTitleAndBody: string,
     withCTA: string,
@@ -77,33 +112,61 @@ export class FlowContainerPage extends BasePage {
     noBody: string,
     noTitleAndBody: string,
   };
+
   readonly clearLink: string;
+
   readonly componentWrapper: string;
+
   readonly cardStructure: string;
+
   readonly swapComponentButton: string;
+
   readonly deleteComponentButton: string;
+
   readonly accordionCheckbox: string;
+
   readonly accordionTitle: string;
+
   readonly accordionInPicker: string;
+
   readonly accordionPlusButton: string;
+
   readonly accordionBody: string;
+
   readonly accordionMinusButton: string;
+
   readonly contentfulCheckbox: string;
+
   readonly addComponentButton: string;
+
   readonly editImageButton: string;
+
   readonly imageAlt: string;
+
   readonly altText: string;
+
   readonly accordionBodyText: string;
+
   readonly accordionText: string;
+
   readonly accordionBodyPreview: string;
+
   readonly accordionTitlePreview: string;
+
   readonly elementInside33Width: string;
+
   readonly imageLinkField: string;
+
   readonly imageLinkText: string;
+
   readonly imageLink: string;
+
   readonly flowContainerImage: string;
+
   readonly imagePathRegex: RegExp;
+
   readonly pagePath: string;
+
   readonly imageName: string;
 
   constructor(page: Page) {
@@ -202,6 +265,6 @@ export class FlowContainerPage extends BasePage {
     this.pagePath = '/flow-container/';
     this.imageName = 'img_615x502.jpg';
     // tslint:disable-next-line:prefer-template
-    this.imagePathRegex = new RegExp('images\\/pages' + this.pagePath + '[a-zA-Z0-9]+\\/' + this.imageName, '');
+    this.imagePathRegex = new RegExp(`images\\/pages${this.pagePath}[a-zA-Z0-9]+\\/${this.imageName}`, '');
   }
 }
