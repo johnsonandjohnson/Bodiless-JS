@@ -22,8 +22,7 @@ import Base from './Base';
 /**
   * TBD: STUB Topic Base Card Design.
   */
-const BaseTopic = asCardToken(Base, {
-  ...Base,
+const Topic = asCardToken(Base, {
   Components: {
     DescriptionWrapper: replaceWith(() => null),
     RatingWrapper: replaceWith(() => null),
@@ -33,8 +32,6 @@ const BaseTopic = asCardToken(Base, {
     flowHoc.meta.term('Sub Type')('Topic'),
   ),
 });
-
-const Topic = BaseTopic;
 
 export interface VitalCardTopic {
   /**
