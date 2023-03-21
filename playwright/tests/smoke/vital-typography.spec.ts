@@ -17,8 +17,7 @@ import { VitalTypographyPage } from '../../pages/vital-typography';
 test.describe('Vital Typography', () => {
   test('Should click on Link typography element', async ({ page }) => {
     const typographyPage: VitalTypographyPage = new VitalTypographyPage();
-    await page.goto(typographyPage.relativeUrl);
-    await page.waitForLoadState();
+    await typographyPage.open(page);
     const element = page.getByTestId(typographyPage.linkId)
       .locator('a');
     await element.click({ noWaitAfter: false });

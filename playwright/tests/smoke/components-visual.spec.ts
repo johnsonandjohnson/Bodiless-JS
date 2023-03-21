@@ -14,14 +14,12 @@
 import { Locator, Page, test as baseTest } from '@playwright/test';
 import {
   BatchInfo, Configuration, VisualGridRunner, BrowserType, DeviceName, ScreenOrientation, Eyes,
-  Target, IosDeviceName, AndroidDeviceName
+  Target, IosDeviceName, AndroidDeviceName, Region, CheckSettingsAutomation
 } from '@applitools/eyes-playwright';
-import { VitalPage } from '../../pages/vital-page';
-import { VitalCardsPage } from '../../pages/vital-cards';
-import { VitalTypographyPage } from '../../pages/vital-typography';
-import { VitalLayoutPage } from '../../pages/vital-layout';
-import { VitalProductPage } from '../../pages/vital-product';
-import { VitalGenericTemplatePage } from '../../pages/vital-generic-template';
+import {
+  VitalCardsPage, VitalTypographyPage, VitalButtonsPage, VitalAccordionPage, VitalVideoPage,
+  VitalLayoutPage, VitalProductPage, VitalGenericTemplatePage, VitalPage
+} from '../../pages';
 
 const variations: VisualParameters[] = [
   {
@@ -31,6 +29,23 @@ const variations: VisualParameters[] = [
   {
     suite: 'Typography',
     page: new VitalTypographyPage()
+  },
+  {
+    suite: 'Buttons',
+    page: new VitalButtonsPage()
+  },
+  {
+    suite: 'Accordions',
+    page: new VitalAccordionPage()
+  },
+  {
+    suite: 'Video',
+    page: new VitalVideoPage(),
+    /**
+     * Animated YouTube icon, it's not affected by resizing on different devices and so always
+     * located by the same coordinates.
+     */
+    ignoreRegion: new Region(7, 7, 50, 50)
   }
 ];
 
@@ -95,12 +110,16 @@ const runVisualTest = (data: VisualParameters[],
 
         /* eslint-disable jest/expect-expect */
         test(element.name??elementId, async ({ page, eyes }) => {
-          await page.goto(vitalPage.relativeUrl);
-          await page.waitForLoadState();
+          await vitalPage.open(page);
 
-          const element = elementFinder(page, elementId);
+          const element: Locator = elementFinder(page, elementId);
 
-          await eyes.check(elementId, Target.region(element).strict().fully());
+          const settings: CheckSettingsAutomation = Target.region(element).strict().fully();
+          if (param.ignoreRegion) {
+            settings.ignoreRegion(param.ignoreRegion as Region);
+          }
+
+          await eyes.check(elementId, settings);
         });
         /* eslint-enable jest/expect-expect */
       });
@@ -115,5 +134,6 @@ runVisualTest(compositions, (page: Page, elementId: string) => page.getByTestId(
 
 type VisualParameters = {
   suite: string,
-  page: VitalPage
+  page: VitalPage,
+  ignoreRegion?: Region
 };

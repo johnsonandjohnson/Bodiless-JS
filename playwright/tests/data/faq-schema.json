@@ -1,0 +1,23 @@
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@name": "Questions and answers",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "What is FAQ accordion?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Lorem ipsum dolor sit ametsuper, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What is Expanded on a FAQ accordion?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Lorem ipsum dolor sit ametsuper, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+            }
+        }
+    ]
+}
