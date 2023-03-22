@@ -11,6 +11,8 @@ on:
 jobs:
   setup:
     name: Setup, Build, Lint and Test
+    permissions:
+      pull-requests: write
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -69,6 +71,11 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+      - uses: actions-ecosystem/action-remove-labels@v1
+        if: always()
+        with:
+          labels: ${{ github.event.label.name }}
+          fail_on_error: false
   # Generate event file for Attach Unit Test Results helper workflow
   event_file:
     name: "Event File"
