@@ -78,7 +78,7 @@ Renames and re-exports [vitalAccordionTitle](modules.md#vitalaccordiontitle)
 
 #### Defined in
 
-[vital-accordion/src/components/AccordionBody/types.ts:17](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-accordion/src/components/AccordionBody/types.ts#L17)
+[vital-accordion/src/components/AccordionBody/types.ts:17](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-accordion/src/components/AccordionBody/types.ts#L17)
 
 ___
 
@@ -88,7 +88,7 @@ ___
 
 #### Defined in
 
-[vital-accordion/src/components/AccordionBody/types.ts:22](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-accordion/src/components/AccordionBody/types.ts#L22)
+[vital-accordion/src/components/AccordionBody/types.ts:22](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-accordion/src/components/AccordionBody/types.ts#L22)
 
 ___
 
@@ -108,7 +108,7 @@ ___
 
 #### Defined in
 
-[vital-accordion/src/components/Accordion/types.ts:39](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-accordion/src/components/Accordion/types.ts#L39)
+[vital-accordion/src/components/Accordion/types.ts:39](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-accordion/src/components/Accordion/types.ts#L39)
 
 ___
 
@@ -129,7 +129,7 @@ ___
 
 #### Defined in
 
-[vital-accordion/src/components/Accordion/types.ts:30](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-accordion/src/components/Accordion/types.ts#L30)
+[vital-accordion/src/components/Accordion/types.ts:30](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-accordion/src/components/Accordion/types.ts#L30)
 
 ___
 
@@ -139,7 +139,7 @@ ___
 
 #### Defined in
 
-[vital-accordion/src/components/Accordion/types.ts:47](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-accordion/src/components/Accordion/types.ts#L47)
+[vital-accordion/src/components/Accordion/types.ts:47](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-accordion/src/components/Accordion/types.ts#L47)
 
 ___
 
@@ -159,7 +159,7 @@ ___
 
 #### Defined in
 
-[vital-accordion/src/components/AccordionTitle/types.ts:17](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-accordion/src/components/AccordionTitle/types.ts#L17)
+[vital-accordion/src/components/AccordionTitle/types.ts:17](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-accordion/src/components/AccordionTitle/types.ts#L17)
 
 ___
 
@@ -169,7 +169,7 @@ ___
 
 #### Defined in
 
-[vital-accordion/src/components/AccordionTitle/types.ts:25](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-accordion/src/components/AccordionTitle/types.ts#L25)
+[vital-accordion/src/components/AccordionTitle/types.ts:25](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-accordion/src/components/AccordionTitle/types.ts#L25)
 
 ## Variables
 
@@ -191,7 +191,7 @@ limitations under the License.
 
 #### Defined in
 
-[vital-accordion/src/components/AccordionBody/AccordionBodyClean.tsx:50](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-accordion/src/components/AccordionBody/AccordionBodyClean.tsx#L50)
+[vital-accordion/src/components/AccordionBody/AccordionBodyClean.tsx:50](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-accordion/src/components/AccordionBody/AccordionBodyClean.tsx#L50)
 
 ___
 
@@ -213,7 +213,7 @@ limitations under the License.
 
 #### Defined in
 
-[vital-accordion/src/components/Accordion/AccordionClean.tsx:80](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-accordion/src/components/Accordion/AccordionClean.tsx#L80)
+[vital-accordion/src/components/Accordion/AccordionClean.tsx:80](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-accordion/src/components/Accordion/AccordionClean.tsx#L80)
 
 ___
 
@@ -223,7 +223,7 @@ ___
 
 #### Defined in
 
-[vital-accordion/src/components/Accordion/AccordionContext.tsx:38](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-accordion/src/components/Accordion/AccordionContext.tsx#L38)
+[vital-accordion/src/components/Accordion/AccordionContext.tsx:38](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-accordion/src/components/Accordion/AccordionContext.tsx#L38)
 
 ___
 
@@ -245,7 +245,7 @@ limitations under the License.
 
 #### Defined in
 
-[vital-accordion/src/components/AccordionTitle/AccordionTitleClean.tsx:103](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-accordion/src/components/AccordionTitle/AccordionTitleClean.tsx#L103)
+[vital-accordion/src/components/AccordionTitle/AccordionTitleClean.tsx:103](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-accordion/src/components/AccordionTitle/AccordionTitleClean.tsx#L103)
 
 ___
 
@@ -265,7 +265,7 @@ ___
 
 #### Defined in
 
-[vital-accordion/src/components/Accordion/tokens/vitalAccordion.ts:73](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-accordion/src/components/Accordion/tokens/vitalAccordion.ts#L73)
+[vital-accordion/src/components/Accordion/tokens/vitalAccordion.ts:73](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-accordion/src/components/Accordion/tokens/vitalAccordion.ts#L73)
 
 ___
 
@@ -283,7 +283,7 @@ ___
 
 #### Defined in
 
-[vital-accordion/src/components/AccordionBody/tokens/vitalAccordionBody.ts:53](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-accordion/src/components/AccordionBody/tokens/vitalAccordionBody.ts#L53)
+[vital-accordion/src/components/AccordionBody/tokens/vitalAccordionBody.ts:53](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-accordion/src/components/AccordionBody/tokens/vitalAccordionBody.ts#L53)
 
 ___
 
@@ -299,7 +299,7 @@ ___
 
 #### Defined in
 
-[vital-accordion/src/components/FlowContainer/index.ts:49](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-accordion/src/components/FlowContainer/index.ts#L49)
+[vital-accordion/src/components/FlowContainer/index.ts:49](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-accordion/src/components/FlowContainer/index.ts#L49)
 
 ___
 
@@ -317,7 +317,7 @@ ___
 
 #### Defined in
 
-[vital-accordion/src/components/AccordionTitle/tokens/vitalAccordionTitle.ts:61](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-accordion/src/components/AccordionTitle/tokens/vitalAccordionTitle.ts#L61)
+[vital-accordion/src/components/AccordionTitle/tokens/vitalAccordionTitle.ts:61](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-accordion/src/components/AccordionTitle/tokens/vitalAccordionTitle.ts#L61)
 
 ## Functions
 
@@ -337,7 +337,7 @@ ___
 
 #### Defined in
 
-[vital-accordion/src/components/AccordionBody/AccordionBodyClean.tsx:52](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-accordion/src/components/AccordionBody/AccordionBodyClean.tsx#L52)
+[vital-accordion/src/components/AccordionBody/AccordionBodyClean.tsx:52](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-accordion/src/components/AccordionBody/AccordionBodyClean.tsx#L52)
 
 ___
 
@@ -357,7 +357,7 @@ ___
 
 #### Defined in
 
-[vital-accordion/src/components/AccordionTitle/AccordionTitleClean.tsx:105](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-accordion/src/components/AccordionTitle/AccordionTitleClean.tsx#L105)
+[vital-accordion/src/components/AccordionTitle/AccordionTitleClean.tsx:105](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-accordion/src/components/AccordionTitle/AccordionTitleClean.tsx#L105)
 
 ___
 
@@ -377,7 +377,7 @@ ___
 
 #### Defined in
 
-[vital-accordion/src/components/Accordion/AccordionClean.tsx:84](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-accordion/src/components/Accordion/AccordionClean.tsx#L84)
+[vital-accordion/src/components/Accordion/AccordionClean.tsx:84](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-accordion/src/components/Accordion/AccordionClean.tsx#L84)
 
 ___
 
@@ -391,7 +391,7 @@ ___
 
 #### Defined in
 
-[vital-accordion/src/components/Accordion/AccordionContext.tsx:36](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-accordion/src/components/Accordion/AccordionContext.tsx#L36)
+[vital-accordion/src/components/Accordion/AccordionContext.tsx:36](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-accordion/src/components/Accordion/AccordionContext.tsx#L36)
 
 ___
 
@@ -405,7 +405,7 @@ ___
 
 #### Defined in
 
-[vital-accordion/src/components/Accordion/AccordionContext.tsx:64](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-accordion/src/components/Accordion/AccordionContext.tsx#L64)
+[vital-accordion/src/components/Accordion/AccordionContext.tsx:64](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-accordion/src/components/Accordion/AccordionContext.tsx#L64)
 
 ___
 
@@ -419,7 +419,7 @@ ___
 
 #### Defined in
 
-[vital-accordion/src/components/Accordion/AccordionContext.tsx:65](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-accordion/src/components/Accordion/AccordionContext.tsx#L65)
+[vital-accordion/src/components/Accordion/AccordionContext.tsx:65](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-accordion/src/components/Accordion/AccordionContext.tsx#L65)
 
 ___
 
@@ -433,7 +433,7 @@ ___
 
 #### Defined in
 
-[vital-accordion/src/components/Accordion/AccordionContext.tsx:67](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-accordion/src/components/Accordion/AccordionContext.tsx#L67)
+[vital-accordion/src/components/Accordion/AccordionContext.tsx:67](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-accordion/src/components/Accordion/AccordionContext.tsx#L67)
 
 ___
 
@@ -447,7 +447,7 @@ ___
 
 #### Defined in
 
-[vital-accordion/src/components/Accordion/AccordionContext.tsx:66](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-accordion/src/components/Accordion/AccordionContext.tsx#L66)
+[vital-accordion/src/components/Accordion/AccordionContext.tsx:66](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-accordion/src/components/Accordion/AccordionContext.tsx#L66)
 
 ___
 
@@ -461,7 +461,7 @@ ___
 
 #### Defined in
 
-[vital-accordion/src/components/Accordion/AccordionContext.tsx:68](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-accordion/src/components/Accordion/AccordionContext.tsx#L68)
+[vital-accordion/src/components/Accordion/AccordionContext.tsx:68](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-accordion/src/components/Accordion/AccordionContext.tsx#L68)
 
 ___
 
@@ -475,7 +475,7 @@ ___
 
 #### Defined in
 
-[vital-accordion/src/components/Accordion/AccordionContext.tsx:69](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-accordion/src/components/Accordion/AccordionContext.tsx#L69)
+[vital-accordion/src/components/Accordion/AccordionContext.tsx:69](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-accordion/src/components/Accordion/AccordionContext.tsx#L69)
 
 ___
 
@@ -505,4 +505,4 @@ a carriage return (Enter) in the title, forcing it to be one line.
 
 #### Defined in
 
-[vital-accordion/src/components/AccordionTitle/AccordionTitleClean.tsx:76](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77c02dc26/packages/vital-accordion/src/components/AccordionTitle/AccordionTitleClean.tsx#L76)
+[vital-accordion/src/components/AccordionTitle/AccordionTitleClean.tsx:76](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-accordion/src/components/AccordionTitle/AccordionTitleClean.tsx#L76)
