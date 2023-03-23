@@ -58,7 +58,7 @@
 
 #### Defined in
 
-[StructureDataProvider.tsx:23](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/bodiless-schema-org/src/StructureDataProvider.tsx#L23)
+[StructureDataProvider.tsx:23](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/bodiless-schema-org/src/StructureDataProvider.tsx#L23)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-[StructureDataProvider.tsx:25](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/bodiless-schema-org/src/StructureDataProvider.tsx#L25)
+[StructureDataProvider.tsx:25](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/bodiless-schema-org/src/StructureDataProvider.tsx#L25)
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 #### Defined in
 
-[StructureDataProvider.tsx:21](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/bodiless-schema-org/src/StructureDataProvider.tsx#L21)
+[StructureDataProvider.tsx:21](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/bodiless-schema-org/src/StructureDataProvider.tsx#L21)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 #### Defined in
 
-[StructureDataProvider.tsx:22](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/bodiless-schema-org/src/StructureDataProvider.tsx#L22)
+[StructureDataProvider.tsx:22](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/bodiless-schema-org/src/StructureDataProvider.tsx#L22)
 
 ___
 
@@ -119,7 +119,7 @@ ___
 
 #### Defined in
 
-[StructureDataProvider.tsx:24](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/bodiless-schema-org/src/StructureDataProvider.tsx#L24)
+[StructureDataProvider.tsx:24](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/bodiless-schema-org/src/StructureDataProvider.tsx#L24)
 
 ## Variables
 
@@ -129,7 +129,7 @@ ___
 
 #### Defined in
 
-[schemas/FAQ/index.tsx:58](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/bodiless-schema-org/src/schemas/FAQ/index.tsx#L58)
+[schemas/FAQ/index.tsx:58](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/bodiless-schema-org/src/schemas/FAQ/index.tsx#L58)
 
 ___
 
@@ -139,7 +139,7 @@ ___
 
 #### Defined in
 
-[schemas/Product/index.tsx:23](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/bodiless-schema-org/src/schemas/Product/index.tsx#L23)
+[schemas/Product/index.tsx:23](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/bodiless-schema-org/src/schemas/Product/index.tsx#L23)
 
 ___
 
@@ -149,7 +149,7 @@ ___
 
 #### Defined in
 
-[StructureDataProvider.tsx:35](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/bodiless-schema-org/src/StructureDataProvider.tsx#L35)
+[StructureDataProvider.tsx:35](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/bodiless-schema-org/src/StructureDataProvider.tsx#L35)
 
 ___
 
@@ -159,7 +159,7 @@ ___
 
 #### Defined in
 
-[schemas/Web/index.tsx:24](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/bodiless-schema-org/src/schemas/Web/index.tsx#L24)
+[schemas/Web/index.tsx:24](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/bodiless-schema-org/src/schemas/Web/index.tsx#L24)
 
 ## Functions
 
@@ -185,7 +185,7 @@ ___
 
 #### Defined in
 
-[schemas/Organization/index.tsx:131](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/bodiless-schema-org/src/schemas/Organization/index.tsx#L131)
+[schemas/Organization/index.tsx:131](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/bodiless-schema-org/src/schemas/Organization/index.tsx#L131)
 
 ___
 
@@ -211,7 +211,7 @@ ___
 
 #### Defined in
 
-[schemas/Product/index.tsx:140](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/bodiless-schema-org/src/schemas/Product/index.tsx#L140)
+[schemas/Product/index.tsx:140](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/bodiless-schema-org/src/schemas/Product/index.tsx#L140)
 
 ___
 
@@ -237,7 +237,7 @@ ___
 
 #### Defined in
 
-[StructureDataProvider.tsx:76](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/bodiless-schema-org/src/StructureDataProvider.tsx#L76)
+[StructureDataProvider.tsx:76](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/bodiless-schema-org/src/StructureDataProvider.tsx#L76)
 
 ___
 
@@ -263,7 +263,7 @@ ___
 
 #### Defined in
 
-[schemas/Video/index.tsx:44](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/bodiless-schema-org/src/schemas/Video/index.tsx#L44)
+[schemas/Video/index.tsx:44](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/bodiless-schema-org/src/schemas/Video/index.tsx#L44)
 
 ___
 
@@ -289,7 +289,7 @@ ___
 
 #### Defined in
 
-[schemas/Web/index.tsx:70](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/bodiless-schema-org/src/schemas/Web/index.tsx#L70)
+[schemas/Web/index.tsx:70](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/bodiless-schema-org/src/schemas/Web/index.tsx#L70)
 
 ___
 
@@ -309,7 +309,7 @@ ___
 
 #### Defined in
 
-[util.ts:19](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/bodiless-schema-org/src/util.ts#L19)
+[util.ts:19](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/bodiless-schema-org/src/util.ts#L19)
 
 ___
 
@@ -329,7 +329,7 @@ ___
 
 #### Defined in
 
-[util.ts:23](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/bodiless-schema-org/src/util.ts#L23)
+[util.ts:23](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/bodiless-schema-org/src/util.ts#L23)
 
 ___
 
@@ -347,7 +347,7 @@ true or false if the page to be a home page.
 
 #### Defined in
 
-[util.ts:61](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/bodiless-schema-org/src/util.ts#L61)
+[util.ts:61](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/bodiless-schema-org/src/util.ts#L61)
 
 ___
 
@@ -361,7 +361,7 @@ ___
 
 #### Defined in
 
-[StructureDataProvider.tsx:33](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/bodiless-schema-org/src/StructureDataProvider.tsx#L33)
+[StructureDataProvider.tsx:33](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/bodiless-schema-org/src/StructureDataProvider.tsx#L33)
 
 ___
 
@@ -405,7 +405,7 @@ ___
 
 #### Defined in
 
-[schemas/FAQ/index.tsx:63](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/bodiless-schema-org/src/schemas/FAQ/index.tsx#L63)
+[schemas/FAQ/index.tsx:63](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/bodiless-schema-org/src/schemas/FAQ/index.tsx#L63)
 
 ___
 
@@ -431,7 +431,7 @@ ___
 
 #### Defined in
 
-[schemas/FAQ/index.tsx:114](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/bodiless-schema-org/src/schemas/FAQ/index.tsx#L114)
+[schemas/FAQ/index.tsx:114](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/bodiless-schema-org/src/schemas/FAQ/index.tsx#L114)
 
 ___
 
@@ -469,7 +469,7 @@ ___
 
 #### Defined in
 
-[schemas/Organization/index.tsx:24](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/bodiless-schema-org/src/schemas/Organization/index.tsx#L24)
+[schemas/Organization/index.tsx:24](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/bodiless-schema-org/src/schemas/Organization/index.tsx#L24)
 
 ___
 
@@ -513,7 +513,7 @@ ___
 
 #### Defined in
 
-[schemas/Product/index.tsx:43](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/bodiless-schema-org/src/schemas/Product/index.tsx#L43)
+[schemas/Product/index.tsx:43](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/bodiless-schema-org/src/schemas/Product/index.tsx#L43)
 
 ___
 
@@ -551,4 +551,4 @@ ___
 
 #### Defined in
 
-[schemas/Web/index.tsx:31](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/bodiless-schema-org/src/schemas/Web/index.tsx#L31)
+[schemas/Web/index.tsx:31](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/bodiless-schema-org/src/schemas/Web/index.tsx#L31)

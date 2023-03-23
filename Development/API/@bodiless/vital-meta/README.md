@@ -54,7 +54,7 @@ Renames and re-exports [vitalMetaHelmet](README.md#vitalmetahelmet)
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:57](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L57)
+[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:57](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L57)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:67](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L67)
+[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:67](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L67)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:41](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L41)
+[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:41](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L41)
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:45](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L45)
+[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:45](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L45)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:49](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L49)
+[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:49](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L49)
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:53](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L53)
+[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:53](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L53)
 
 ___
 
@@ -114,7 +114,7 @@ ___
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:34](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L34)
+[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:34](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L34)
 
 ___
 
@@ -124,7 +124,7 @@ ___
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:30](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L30)
+[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:30](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L30)
 
 ___
 
@@ -134,7 +134,7 @@ ___
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:71](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L71)
+[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:71](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L71)
 
 ___
 
@@ -144,7 +144,7 @@ ___
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:118](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L118)
+[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:118](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L118)
 
 ___
 
@@ -154,7 +154,7 @@ ___
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:139](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L139)
+[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:139](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L139)
 
 ___
 
@@ -164,7 +164,7 @@ ___
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:129](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L129)
+[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:129](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L129)
 
 ___
 
@@ -174,7 +174,7 @@ ___
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:135](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L135)
+[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:135](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L135)
 
 ___
 
@@ -184,7 +184,7 @@ ___
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:106](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L106)
+[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:106](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L106)
 
 ___
 
@@ -194,7 +194,7 @@ ___
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:125](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L125)
+[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:125](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L125)
 
 ___
 
@@ -204,7 +204,7 @@ ___
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:98](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L98)
+[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:98](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L98)
 
 ___
 
@@ -214,7 +214,7 @@ ___
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:102](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L102)
+[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:102](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L102)
 
 ___
 
@@ -224,7 +224,7 @@ ___
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:110](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L110)
+[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:110](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L110)
 
 ___
 
@@ -234,7 +234,7 @@ ___
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:94](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L94)
+[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:94](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L94)
 
 ___
 
@@ -244,7 +244,7 @@ ___
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:114](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L114)
+[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:114](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L114)
 
 ___
 
@@ -273,7 +273,7 @@ limitations under the License.
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:162](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L162)
+[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:162](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L162)
 
 ___
 
@@ -283,7 +283,7 @@ ___
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/helpers.tsx:74](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-meta/src/components/MetaHelmet/helpers.tsx#L74)
+[vital-meta/src/components/MetaHelmet/helpers.tsx:74](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-meta/src/components/MetaHelmet/helpers.tsx#L74)
 
 ___
 
@@ -293,7 +293,7 @@ ___
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/helpers.tsx:76](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-meta/src/components/MetaHelmet/helpers.tsx#L76)
+[vital-meta/src/components/MetaHelmet/helpers.tsx:76](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-meta/src/components/MetaHelmet/helpers.tsx#L76)
 
 ## Functions
 
@@ -307,7 +307,7 @@ ___
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/helpers.tsx:62](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-meta/src/components/MetaHelmet/helpers.tsx#L62)
+[vital-meta/src/components/MetaHelmet/helpers.tsx:62](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-meta/src/components/MetaHelmet/helpers.tsx#L62)
 
 ___
 
@@ -325,7 +325,7 @@ true or false if the page to be a home page.
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/helpers.tsx:25](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-meta/src/components/MetaHelmet/helpers.tsx#L25)
+[vital-meta/src/components/MetaHelmet/helpers.tsx:25](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-meta/src/components/MetaHelmet/helpers.tsx#L25)
 
 ___
 
@@ -348,4 +348,4 @@ ___
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/helpers.tsx:78](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-meta/src/components/MetaHelmet/helpers.tsx#L78)
+[vital-meta/src/components/MetaHelmet/helpers.tsx:78](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-meta/src/components/MetaHelmet/helpers.tsx#L78)

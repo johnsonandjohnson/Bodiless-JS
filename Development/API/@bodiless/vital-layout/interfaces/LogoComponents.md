@@ -28,7 +28,7 @@ Used for the image of the logo
 
 #### Defined in
 
-[vital-layout/src/components/Logo/LogoClean.tsx:43](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-layout/src/components/Logo/LogoClean.tsx#L43)
+[vital-layout/src/components/Logo/LogoClean.tsx:43](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-layout/src/components/Logo/LogoClean.tsx#L43)
 
 ___
 
@@ -40,7 +40,7 @@ Used for the link of the logo
 
 #### Defined in
 
-[vital-layout/src/components/Logo/LogoClean.tsx:47](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-layout/src/components/Logo/LogoClean.tsx#L47)
+[vital-layout/src/components/Logo/LogoClean.tsx:47](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-layout/src/components/Logo/LogoClean.tsx#L47)
 
 ___
 
@@ -52,4 +52,4 @@ Wrapper for the Logo
 
 #### Defined in
 
-[vital-layout/src/components/Logo/LogoClean.tsx:39](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-layout/src/components/Logo/LogoClean.tsx#L39)
+[vital-layout/src/components/Logo/LogoClean.tsx:39](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-layout/src/components/Logo/LogoClean.tsx#L39)

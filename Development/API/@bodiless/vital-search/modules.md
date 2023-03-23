@@ -189,7 +189,7 @@ ___
 
 #### Defined in
 
-[vital-search/src/SearchBox/types.ts:17](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchBox/types.ts#L17)
+[vital-search/src/SearchBox/types.ts:17](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchBox/types.ts#L17)
 
 ___
 
@@ -228,7 +228,7 @@ ___
 
 #### Defined in
 
-[vital-search/src/SearchLayout/types.ts:17](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchLayout/types.ts#L17)
+[vital-search/src/SearchLayout/types.ts:17](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchLayout/types.ts#L17)
 
 ___
 
@@ -245,7 +245,7 @@ ___
 
 #### Defined in
 
-[vital-search/src/SearchMenu/types.ts:18](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchMenu/types.ts#L18)
+[vital-search/src/SearchMenu/types.ts:18](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchMenu/types.ts#L18)
 
 ___
 
@@ -274,7 +274,7 @@ ___
 
 #### Defined in
 
-[vital-search/src/SearchResult/types.ts:17](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchResult/types.ts#L17)
+[vital-search/src/SearchResult/types.ts:17](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchResult/types.ts#L17)
 
 ___
 
@@ -294,7 +294,7 @@ ___
 
 #### Defined in
 
-[vital-search/src/SearchResults/types.ts:17](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchResults/types.ts#L17)
+[vital-search/src/SearchResults/types.ts:17](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchResults/types.ts#L17)
 
 ___
 
@@ -312,7 +312,7 @@ ___
 
 #### Defined in
 
-[vital-search/src/SearchSuggestion/types.ts:17](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchSuggestion/types.ts#L17)
+[vital-search/src/SearchSuggestion/types.ts:17](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchSuggestion/types.ts#L17)
 
 ___
 
@@ -330,7 +330,7 @@ ___
 
 #### Defined in
 
-[vital-search/src/SearchSuggestions/types.ts:17](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchSuggestions/types.ts#L17)
+[vital-search/src/SearchSuggestions/types.ts:17](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchSuggestions/types.ts#L17)
 
 ___
 
@@ -347,7 +347,7 @@ ___
 
 #### Defined in
 
-[vital-search/src/SearchToggler/types.ts:18](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchToggler/types.ts#L18)
+[vital-search/src/SearchToggler/types.ts:18](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchToggler/types.ts#L18)
 
 ___
 
@@ -623,7 +623,7 @@ limitations under the License.
 
 #### Defined in
 
-[vital-search/src/SearchLayout/SearchLayoutClean.tsx:40](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchLayout/SearchLayoutClean.tsx#L40)
+[vital-search/src/SearchLayout/SearchLayoutClean.tsx:40](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchLayout/SearchLayoutClean.tsx#L40)
 
 ___
 
@@ -645,7 +645,7 @@ limitations under the License.
 
 #### Defined in
 
-[vital-search/src/SearchMenu/SearchMenuClean.tsx:58](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchMenu/SearchMenuClean.tsx#L58)
+[vital-search/src/SearchMenu/SearchMenuClean.tsx:58](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchMenu/SearchMenuClean.tsx#L58)
 
 ___
 
@@ -655,7 +655,7 @@ ___
 
 #### Defined in
 
-[vital-search/src/SearchMenuContext.tsx:30](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchMenuContext.tsx#L30)
+[vital-search/src/SearchMenuContext.tsx:30](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchMenuContext.tsx#L30)
 
 ___
 
@@ -709,7 +709,7 @@ limitations under the License.
 
 #### Defined in
 
-[vital-search/src/SearchToggler/SearchTogglerClean.tsx:76](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchToggler/SearchTogglerClean.tsx#L76)
+[vital-search/src/SearchToggler/SearchTogglerClean.tsx:76](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchToggler/SearchTogglerClean.tsx#L76)
 
 ___
 
@@ -737,7 +737,7 @@ ___
 
 #### Defined in
 
-[vital-search/src/SearchBox/tokens/vitalSearchBox.ts:69](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchBox/tokens/vitalSearchBox.ts#L69)
+[vital-search/src/SearchBox/tokens/vitalSearchBox.ts:69](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchBox/tokens/vitalSearchBox.ts#L69)
 
 ___
 
@@ -753,7 +753,7 @@ ___
 
 #### Defined in
 
-[vital-search/src/SearchLayout/tokens/vitalSearchLayout.ts:36](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchLayout/tokens/vitalSearchLayout.ts#L36)
+[vital-search/src/SearchLayout/tokens/vitalSearchLayout.ts:36](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchLayout/tokens/vitalSearchLayout.ts#L36)
 
 ___
 
@@ -770,7 +770,7 @@ ___
 
 #### Defined in
 
-[vital-search/src/SearchMenu/tokens/vitalSearchMenu.ts:51](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchMenu/tokens/vitalSearchMenu.ts#L51)
+[vital-search/src/SearchMenu/tokens/vitalSearchMenu.ts:51](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchMenu/tokens/vitalSearchMenu.ts#L51)
 
 ___
 
@@ -786,7 +786,7 @@ ___
 
 #### Defined in
 
-[vital-search/src/SearchResult/tokens/vitalSearchResult.ts:33](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchResult/tokens/vitalSearchResult.ts#L33)
+[vital-search/src/SearchResult/tokens/vitalSearchResult.ts:33](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchResult/tokens/vitalSearchResult.ts#L33)
 
 ___
 
@@ -802,7 +802,7 @@ ___
 
 #### Defined in
 
-[vital-search/src/SearchResults/tokens/vitalSearchResults.ts:31](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchResults/tokens/vitalSearchResults.ts#L31)
+[vital-search/src/SearchResults/tokens/vitalSearchResults.ts:31](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchResults/tokens/vitalSearchResults.ts#L31)
 
 ___
 
@@ -818,7 +818,7 @@ ___
 
 #### Defined in
 
-[vital-search/src/SearchSuggestion/tokens/vitalSearchSuggestion.ts:34](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchSuggestion/tokens/vitalSearchSuggestion.ts#L34)
+[vital-search/src/SearchSuggestion/tokens/vitalSearchSuggestion.ts:34](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchSuggestion/tokens/vitalSearchSuggestion.ts#L34)
 
 ___
 
@@ -834,7 +834,7 @@ ___
 
 #### Defined in
 
-[vital-search/src/SearchSuggestions/tokens/vitalSearchSuggestions.ts:41](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchSuggestions/tokens/vitalSearchSuggestions.ts#L41)
+[vital-search/src/SearchSuggestions/tokens/vitalSearchSuggestions.ts:41](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchSuggestions/tokens/vitalSearchSuggestions.ts#L41)
 
 ___
 
@@ -850,7 +850,7 @@ ___
 
 #### Defined in
 
-[vital-search/src/SearchToggler/tokens/vitalSearchToggler.ts:36](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchToggler/tokens/vitalSearchToggler.ts#L36)
+[vital-search/src/SearchToggler/tokens/vitalSearchToggler.ts:36](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchToggler/tokens/vitalSearchToggler.ts#L36)
 
 ___
 
@@ -902,7 +902,7 @@ bodiless-search/lib/components/Search.token.d.ts:15
 
 #### Defined in
 
-[vital-search/src/SearchBox/SearchBoxClean.tsx:19](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchBox/SearchBoxClean.tsx#L19)
+[vital-search/src/SearchBox/SearchBoxClean.tsx:19](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchBox/SearchBoxClean.tsx#L19)
 
 ___
 
@@ -922,7 +922,7 @@ ___
 
 #### Defined in
 
-[vital-search/src/SearchLayout/SearchLayoutClean.tsx:42](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchLayout/SearchLayoutClean.tsx#L42)
+[vital-search/src/SearchLayout/SearchLayoutClean.tsx:42](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchLayout/SearchLayoutClean.tsx#L42)
 
 ___
 
@@ -956,7 +956,7 @@ This HOC needs to be inside a SearchMenuContext to work. The
 
 #### Defined in
 
-[vital-search/src/SearchToggler/SearchTogglerClean.tsx:42](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchToggler/SearchTogglerClean.tsx#L42)
+[vital-search/src/SearchToggler/SearchTogglerClean.tsx:42](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchToggler/SearchTogglerClean.tsx#L42)
 
 ___
 
@@ -978,7 +978,7 @@ Create a desktop search token.
 
 #### Defined in
 
-[vital-search/src/SearchMenu/SearchMenuClean.tsx:63](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchMenu/SearchMenuClean.tsx#L63)
+[vital-search/src/SearchMenu/SearchMenuClean.tsx:63](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchMenu/SearchMenuClean.tsx#L63)
 
 ___
 
@@ -1012,7 +1012,7 @@ This HOC needs to be inside a SearchMenuContext to work. The
 
 #### Defined in
 
-[vital-search/src/SearchMenu/SearchMenuClean.tsx:42](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchMenu/SearchMenuClean.tsx#L42)
+[vital-search/src/SearchMenu/SearchMenuClean.tsx:42](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchMenu/SearchMenuClean.tsx#L42)
 
 ___
 
@@ -1032,7 +1032,7 @@ ___
 
 #### Defined in
 
-[vital-search/src/SearchResult/SearchResultClean.tsx:18](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchResult/SearchResultClean.tsx#L18)
+[vital-search/src/SearchResult/SearchResultClean.tsx:18](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchResult/SearchResultClean.tsx#L18)
 
 ___
 
@@ -1052,7 +1052,7 @@ ___
 
 #### Defined in
 
-[vital-search/src/SearchResults/SearchResultsClean.tsx:19](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchResults/SearchResultsClean.tsx#L19)
+[vital-search/src/SearchResults/SearchResultsClean.tsx:19](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchResults/SearchResultsClean.tsx#L19)
 
 ___
 
@@ -1072,7 +1072,7 @@ ___
 
 #### Defined in
 
-[vital-search/src/SearchSuggestion/SearchSuggestionClean.tsx:18](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchSuggestion/SearchSuggestionClean.tsx#L18)
+[vital-search/src/SearchSuggestion/SearchSuggestionClean.tsx:18](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchSuggestion/SearchSuggestionClean.tsx#L18)
 
 ___
 
@@ -1092,7 +1092,7 @@ ___
 
 #### Defined in
 
-[vital-search/src/SearchSuggestions/SearchSuggestionsClean.tsx:18](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchSuggestions/SearchSuggestionsClean.tsx#L18)
+[vital-search/src/SearchSuggestions/SearchSuggestionsClean.tsx:18](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchSuggestions/SearchSuggestionsClean.tsx#L18)
 
 ___
 
@@ -1114,7 +1114,7 @@ Create a search toggler token.
 
 #### Defined in
 
-[vital-search/src/SearchToggler/SearchTogglerClean.tsx:81](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchToggler/SearchTogglerClean.tsx#L81)
+[vital-search/src/SearchToggler/SearchTogglerClean.tsx:81](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchToggler/SearchTogglerClean.tsx#L81)
 
 ___
 
@@ -1142,7 +1142,7 @@ ___
 
 #### Defined in
 
-[vital-search/src/SearchMenuContext.tsx:55](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchMenuContext.tsx#L55)
+[vital-search/src/SearchMenuContext.tsx:55](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchMenuContext.tsx#L55)
 
 ___
 
@@ -1156,7 +1156,7 @@ ___
 
 #### Defined in
 
-[vital-search/src/SearchMenuContext.tsx:53](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchMenuContext.tsx#L53)
+[vital-search/src/SearchMenuContext.tsx:53](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchMenuContext.tsx#L53)
 
 ___
 
@@ -1170,7 +1170,7 @@ ___
 
 #### Defined in
 
-[vital-search/src/SearchMenuContext.tsx:36](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchMenuContext.tsx#L36)
+[vital-search/src/SearchMenuContext.tsx:36](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchMenuContext.tsx#L36)
 
 ___
 
@@ -1224,7 +1224,7 @@ ___
 
 #### Defined in
 
-[vital-search/src/SearchMenuContext.tsx:38](https://github.com/johnsonandjohnson/Bodiless-JS/blob/77abc63fa/packages/vital-search/src/SearchMenuContext.tsx#L38)
+[vital-search/src/SearchMenuContext.tsx:38](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9dbde5975/packages/vital-search/src/SearchMenuContext.tsx#L38)
 
 ___
 
