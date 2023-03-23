@@ -109,7 +109,7 @@ const runVisualTest = (data: VisualParameters[],
         const elementId: string = element.id;
 
         /* eslint-disable jest/expect-expect */
-        test(element.name??elementId, async ({ page, eyes }) => {
+        test(`${param.suite} - ${element.name??elementId}`, async ({ page, eyes }) => {
           await vitalPage.open(page);
 
           const element: Locator = elementFinder(page, elementId);
