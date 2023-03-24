@@ -72,7 +72,7 @@ const test = baseTest.extend< { eyes: Eyes } >({
 
     const batch: BatchInfo = new BatchInfo({
       id: process.env.APPLITOOLS_BATCH_ID,
-      name: 'Bodiless JS Components Visual'
+      name: process.env.APPLITOOLS_BATCH_NAME??'Bodiless JS Components Visual'
     });
     configuration.setBatch(batch);
     configuration.setApiKey(process.env.APPLITOOLS_API_KEY as string);
