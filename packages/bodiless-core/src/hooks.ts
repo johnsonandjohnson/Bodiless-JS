@@ -18,8 +18,21 @@ import {
 } from 'react';
 import { v1 } from 'uuid';
 import PageEditContext from './PageEditContext';
+import { useAccessContext } from './AccessContext';
 
-export const useEditContext = () => useContext(PageEditContext.context);
+export const useEditContext = (resourceId?: string) => {
+  const pageEditContext = useContext(PageEditContext.context);
+
+  const accessContext = useAccessContext();
+  if (accessContext.canEdit(resourceId)) return pageEditContext;
+
+  return new Proxy(pageEditContext, {
+    get: function get(target, prop, receiver: any) {
+      if (prop === 'isEdit') return false;
+      return Reflect.get(target, prop, receiver);
+    }
+  });
+};
 
 export const useUUID = () => useRef(v1()).current;
 

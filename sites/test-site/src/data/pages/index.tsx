@@ -12,13 +12,17 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { FC } from 'react';
 import { graphql } from 'gatsby';
-import { Page } from '@bodiless/gatsby-theme-bodiless';
+import { Page, PageProps } from '@bodiless/gatsby-theme-bodiless';
 import { Editable, asBodilessList } from '@bodiless/components';
+import {
+  accessContext, AccessControl, useNode
+} from '@bodiless/core';
 import {
   withDesign, replaceWith, addClasses, stylable, flowHoc,
 } from '@bodiless/fclasses';
+import type { AclInterface } from '@bodiless/core';
 import Layout from '../../components/Layout';
 import { asEditableImage } from '../../components/Image';
 import { FlowContainerDefault } from '../../components/FlowContainer';
@@ -38,13 +42,37 @@ const EditableBulletPoints = flowHoc(
   }),
 )('ul');
 
+class TestSiteAcl implements AclInterface {
+  protected resources: string[] = [];
+
+  // eslint-disable-next-line class-methods-use-this
+  isAllowed(resourceId?: string) {
+    if (!resourceId) {
+      const { pagePath } = useNode().node;
+      // check if resource is allowed
+      return (this.resources.indexOf(pagePath) !== -1);
+    }
+    return true;
+  }
+}
+const testSiteAcl: AclInterface = new TestSiteAcl();
+const withAclProvider = (Component: FC<PageProps>) => (props: PageProps) => {
+  const control = new AccessControl(testSiteAcl);
+  return (
+    <accessContext.Provider value={control}>
+      <Component {...props} />
+    </accessContext.Provider>
+  );
+};
+const AclPage = withAclProvider(Page);
+
 const HeaderImage = flowHoc(
   asEditableImage('header_image'),
   addClasses('w-full'),
 )('img');
 
 const HomePage = (props: any) => (
-  <Page {...props}>
+  <AclPage {...props}>
     <Layout>
       <div className="flex my-3">
         <HeaderImage />
@@ -59,7 +87,7 @@ const HomePage = (props: any) => (
         nodeKey={HOME_PAGE_PATH}
       />
     </Layout>
-  </Page>
+  </AclPage>
 );
 
 export const query = graphql`
