@@ -131,11 +131,10 @@ export class VitalCardsPage extends VitalPage {
   }
 
   getElements(): VitalElement[] {
-    return this.vitalCards.map((card) => ({id: card.id}));
+    return this.vitalCards;
   }
 }
 
-type VitalCard = {
-  id: string,
+interface VitalCard extends VitalElement {
   hasButton?: boolean
-};
+}

@@ -11,14 +11,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { Page } from '@playwright/test';
+
 export abstract class VitalPage {
   readonly relativeUrl: string;
 
   readonly mainContentSelector: string;
 
+  readonly linkWrapperSelector: string;
+
   constructor(relativeUrl: string) {
     this.relativeUrl = relativeUrl;
     this.mainContentSelector = 'main-content';
+    this.linkWrapperSelector = '[data-layer-region="Link:Wrapper"]';
+  }
+
+  async open(page: Page): Promise<void> {
+    await page.goto(this.relativeUrl);
+    await page.waitForLoadState();
   }
 
   abstract getElements(): VitalElement[];

@@ -21,10 +21,9 @@ test.describe('Vital Cards', () => {
 
   cardsPage.vitalCards.filter((card) => card.hasButton).forEach((card) => {
     test(`Should click on button in ${card.id} card`, async ({ page }) => {
-      await page.goto(cardsPage.relativeUrl);
-      await page.waitForLoadState();
+      await cardsPage.open(page);
       const element = page.getByTestId(card.id)
-        .locator('[data-layer-region="Link:Wrapper"]');
+        .locator(cardsPage.linkWrapperSelector);
       await element.click({ noWaitAfter: false });
       expect(page.url().endsWith('#')).toBeTruthy();
     });

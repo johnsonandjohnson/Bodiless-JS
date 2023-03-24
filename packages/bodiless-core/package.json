@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/core",
-  "version": "1.0.0-rc.28",
+  "version": "1.0.0-rc.29",
   "description": "Edit context for BodilessJS site editor",
   "author": "Chris Oden <coden@its.jnj.com>",
   "license": "Apache-2.0",
@@ -28,8 +28,8 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.28",
-    "@bodiless/fclasses": "^1.0.0-rc.28",
+    "@bodiless/cli": "^1.0.0-rc.29",
+    "@bodiless/fclasses": "^1.0.0-rc.29",
     "@types/react-tag-autocomplete": "^6.0.0",
     "axios": "^0.21.0",
     "enzyme": "^3.9.0",

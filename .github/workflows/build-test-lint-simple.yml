@@ -11,6 +11,8 @@ on:
 jobs:
   setup:
     name: Setup, Build, Lint and Test
+    permissions:
+      pull-requests: write
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -19,9 +21,10 @@ jobs:
       # install a specific version of Node using
       # https://github.com/actions/setup-node
       - name: Use Node.js v16.13
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: 16.13
+          cache: 'npm'
       - name: Print Git Version
         run: git --version
       - name: Setup git user
@@ -69,6 +72,11 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+      - uses: actions-ecosystem/action-remove-labels@v1
+        if: always()
+        with:
+          labels: ${{ github.event.label.name }}
+          fail_on_error: false
   # Generate event file for Attach Unit Test Results helper workflow
   event_file:
     name: "Event File"
