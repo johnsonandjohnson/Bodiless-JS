@@ -30,17 +30,22 @@ import {
 import './Editable.css';
 import { HOC, flowHoc } from '@bodiless/fclasses';
 
+// We need to omit keys which are used by ContentEditable
+type SpanProps = Omit<JSX.IntrinsicElements['span'], 'onChange'|'ref'>;
+
 type EditableOverrides = {
   sanitizer?: (text: string) => string,
 };
 
 export type UseEditableOverrides = (props: EditableProps) => EditableOverrides;
 
-type EditableProps = {
+type EditableBaseProps = {
   placeholder?: string,
   children?: string,
   useOverrides?: UseEditableOverrides,
-} & Partial<WithNodeProps>;
+} & SpanProps;
+
+type EditableProps = EditableBaseProps & Partial<WithNodeProps>;
 
 export type EditableData = {
   text: string;
@@ -59,21 +64,25 @@ export const isEditableData = (d: any): d is EditableData => {
   return true;
 };
 
-const Text = observer((props: EditableProps) => {
-  const { placeholder, useOverrides = () => ({}) }: EditableProps = props;
+const Text = observer((props: EditableBaseProps) => {
+  const {
+    placeholder, useOverrides = () => ({}), children, ...rest
+  }: EditableProps = props;
   const { sanitizer = identity }: EditableOverrides = useOverrides(props);
   const { node } = useNode<EditableData>();
   const text = sanitizer(
-    (node.data.text !== undefined ? node.data.text : props.children) || placeholder || '',
+    (node.data.text !== undefined ? node.data.text : children) || placeholder || '',
   );
   // eslint-disable-next-line react/no-danger
-  return <span dangerouslySetInnerHTML={{ __html: text }} />;
+  return <span {...rest} dangerouslySetInnerHTML={{ __html: text }} />;
 });
-const EditableText = observer((props: EditableProps) => {
+const EditableText = observer((props: EditableBaseProps) => {
   const { node } = useNode<EditableData>();
-  const { placeholder = '', useOverrides = () => ({}) }: EditableProps = props;
+  const {
+    placeholder = '', useOverrides = () => ({}), children, ...rest
+  } = props;
   const { sanitizer = identity }: EditableOverrides = useOverrides(props);
-  const text = (node.data.text !== undefined ? node.data.text : props.children) || '';
+  const text = (node.data.text !== undefined ? node.data.text : children) || '';
   const [hasFocus, setFocus] = useState(false);
   const ref = useRef<HTMLElement>(null);
   const onChange = useCallback(() => {
@@ -91,6 +100,7 @@ const EditableText = observer((props: EditableProps) => {
   }, []);
   return (
     <ContentEditable
+      {...rest}
       innerRef={ref}
       tagName="span"
       className="bodiless-inline-editable"
