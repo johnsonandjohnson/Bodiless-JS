@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import { withNodeKey } from '@bodiless/core';
 import { vitalRichText } from '@bodiless/vital-editors';
 import {
   asVitalTokenSpec, vitalColor, vitalFontSize, vitalTextDecoration
