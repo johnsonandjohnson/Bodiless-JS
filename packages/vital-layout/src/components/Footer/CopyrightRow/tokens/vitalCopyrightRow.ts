@@ -63,9 +63,6 @@ const Base = asCopyrightRowToken({
   Editors: {
     Copyright,
   },
-  Schema: {
-    Copyright: withNodeKey({ nodeKey: 'copyright', nodeCollection: 'site' }),
-  },
 });
 
 const CopyrightNoSocialLinks = asCopyrightRowToken({
