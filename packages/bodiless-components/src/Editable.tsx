@@ -115,7 +115,7 @@ const EditableText = observer((props: EditableBaseProps) => {
 });
 
 const Editable = withNode(
-  observer((props: EditableProps) => {
+  observer((props: EditableBaseProps) => {
     const { isEdit } = useEditContext();
     return isEdit ? (
       <EditableText {...props} />
