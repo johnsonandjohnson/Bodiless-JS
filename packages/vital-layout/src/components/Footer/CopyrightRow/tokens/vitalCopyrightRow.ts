@@ -18,6 +18,7 @@ import {
 } from '@bodiless/vital-elements';
 import { addProps, as, replaceWith } from '@bodiless/fclasses';
 import { vitalLink } from '@bodiless/vital-link';
+import { withNodeKey } from '@bodiless/core';
 import { asCopyrightRowToken } from '../CopyrightRowClean';
 import type { CopyrightRowToken } from '../CopyrightRowClean';
 import { vitalSocialLinks } from '../../SocialLinks';
@@ -61,6 +62,9 @@ const Base = asCopyrightRowToken({
   },
   Editors: {
     Copyright,
+  },
+  Schema: {
+    Copyright: withNodeKey('copyright'),
   },
 });
 

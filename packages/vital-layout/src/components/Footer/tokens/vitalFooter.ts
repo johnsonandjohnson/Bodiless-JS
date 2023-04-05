@@ -50,8 +50,7 @@ const Base = asFooterToken({
     Wrapper: vitalColor.BgSecondaryFooter,
   },
   Schema: {
-    FooterMenu: withNodeKey({ nodeKey: 'footer-menu', nodeCollection: 'site' }),
-    CopyrightRow: withNodeKey({ nodeKey: 'copyright', nodeCollection: 'site' }),
+    FooterMenu: withNodeKey('footer-menu'),
     _: withNode,
   },
 });
