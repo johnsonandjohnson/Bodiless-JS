@@ -36,12 +36,31 @@ describe('Editable', () => {
       const wrapper = mount(<Editable data-foo="bar" nodeKey="bar">Now is the time</Editable>);
       expect(wrapper.find('span').prop('data-foo')).toBe('bar');
     });
+
+    it('Passes classname to span', () => {
+      const wrapper = mount(<Editable nodeKey="bar" className="baz">Now is the time</Editable>);
+      expect(wrapper.find('span').prop('className')?.split(' ')).toContain('baz');
+    });
+
+    it('Accepts a custom tag', () => {
+      const wrapper = mount(<Editable data-foo="bar" nodeKey="bar" tagName="h1">Now is the time</Editable>);
+      expect(wrapper.find('h1').prop('data-foo')).toBe('bar');
+    });
   });
 
   describe('When not editable', () => {
     it('Passes props to span', () => {
       const wrapper = mount(<Editable data-foo="bar" nodeKey="bar">Now is the time</Editable>);
       expect(wrapper.find('span').prop('data-foo')).toBe('bar');
+    });
+    it('Passes classname to span', () => {
+      const wrapper = mount(<Editable nodeKey="bar" className="baz">Now is the time</Editable>);
+      expect(wrapper.find('span').prop('className')?.split(' ')).toContain('baz');
+    });
+
+    it('Accepts a custom tag', () => {
+      const wrapper = mount(<Editable data-foo="bar" nodeKey="bar" tagName="h1">Now is the time</Editable>);
+      expect(wrapper.find('h1').prop('data-foo')).toBe('bar');
     });
   });
 });

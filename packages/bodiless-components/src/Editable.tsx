@@ -30,9 +30,6 @@ import {
 import './Editable.css';
 import { HOC, flowHoc } from '@bodiless/fclasses';
 
-// We need to omit keys which are used by ContentEditable
-type SpanProps = Omit<JSX.IntrinsicElements['span'], 'onChange'|'ref'>;
-
 type EditableOverrides = {
   sanitizer?: (text: string) => string,
 };
@@ -43,7 +40,9 @@ type EditableBaseProps = {
   placeholder?: string,
   children?: string,
   useOverrides?: UseEditableOverrides,
-} & SpanProps;
+  tagName?: keyof JSX.IntrinsicElements,
+  className?: string,
+};
 
 type EditableProps = EditableBaseProps & Partial<WithNodeProps>;
 
@@ -66,7 +65,7 @@ export const isEditableData = (d: any): d is EditableData => {
 
 const Text = observer((props: EditableBaseProps) => {
   const {
-    placeholder, useOverrides = () => ({}), children, ...rest
+    placeholder, useOverrides = () => ({}), children, tagName: Tag = 'span', ...rest
   }: EditableProps = props;
   const { sanitizer = identity }: EditableOverrides = useOverrides(props);
   const { node } = useNode<EditableData>();
@@ -74,12 +73,13 @@ const Text = observer((props: EditableBaseProps) => {
     (node.data.text !== undefined ? node.data.text : children) || placeholder || '',
   );
   // eslint-disable-next-line react/no-danger
-  return <span {...rest} dangerouslySetInnerHTML={{ __html: text }} />;
+  return <Tag {...rest} dangerouslySetInnerHTML={{ __html: text }} />;
 });
 const EditableText = observer((props: EditableBaseProps) => {
   const { node } = useNode<EditableData>();
   const {
-    placeholder = '', useOverrides = () => ({}), children, ...rest
+    placeholder = '', useOverrides = () => ({}), children, tagName = 'span',
+    className, ...rest
   } = props;
   const { sanitizer = identity }: EditableOverrides = useOverrides(props);
   const text = (node.data.text !== undefined ? node.data.text : children) || '';
@@ -98,12 +98,13 @@ const EditableText = observer((props: EditableBaseProps) => {
       document.execCommand('insertHTML', false, pasteText);
     }
   }, []);
+  const finalClassName = `bodiless-inline-editable ${className}`.trim();
   return (
     <ContentEditable
       {...rest}
       innerRef={ref}
-      tagName="span"
-      className="bodiless-inline-editable"
+      tagName={tagName}
+      className={finalClassName}
       onChange={onChange}
       onPaste={pasteAsPlainText}
       onFocus={onFocus}
