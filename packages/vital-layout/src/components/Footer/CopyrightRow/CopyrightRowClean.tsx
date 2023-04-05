@@ -13,7 +13,7 @@
  */
 
 import React, { FC } from 'react';
-import { Div, designable, Fragment } from '@bodiless/fclasses';
+import { Div, designable } from '@bodiless/fclasses';
 import { RichTextClean } from '@bodiless/vital-editors';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { withoutHydration } from '@bodiless/hydration';
@@ -23,7 +23,7 @@ import type { CopyrightRowComponents, CopyrightRowProps } from './types';
 const copyrightRowComponents: CopyrightRowComponents = {
   Wrapper: Div,
   CopyrightWrapper: Div,
-  Disclaimer: Fragment,
+  Disclaimer: RichTextClean,
   Copyright: RichTextClean,
   SocialLinksWrapper: Div,
   SocialLinks: SocialLinksClean,
