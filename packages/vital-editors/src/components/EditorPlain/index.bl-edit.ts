@@ -13,8 +13,9 @@
  */
 
 import { Editable } from '@bodiless/components';
-import { withoutHydrationInline } from '@bodiless/hydration';
+import { withoutHydration, withoutHydrationInline } from '@bodiless/hydration';
 import { stylable } from '@bodiless/fclasses';
 
 export const EditorPlainClean = withoutHydrationInline()(stylable(Editable));
+export const BlockEditorPlainClean = withoutHydration()(stylable(Editable));
 export { default as vitalEditorPlain } from './tokens';
