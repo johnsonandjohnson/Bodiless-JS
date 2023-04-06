@@ -62,7 +62,7 @@ export class LinkTogglePage extends BasePage {
     this.url = 'AT-Url';
     this.normalizedUrl = `/${this.url}/`;
     this.editedPostfix = 'edited';
-    this.labelXpath = '//*[@data-linktoggle-element="link-toggle"]//*[@class="bodiless-inline-editable"]';
+    this.labelXpath = '//*[@data-linktoggle-element="link-toggle"]//*[@data-test-id="bodiless-inline-editable"]';
     this.labelPreviewXpath = '//*[@data-linktoggle-element="link-toggle"]//span';
     this.linkXpath = '//*[@data-linktoggle-element="link-toggle"]//a';
     this.linkIconAddXpath = '//*[@aria-label="Local Context Menu"]//*[@aria-label="Add Link"]';

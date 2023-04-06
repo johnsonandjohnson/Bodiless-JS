@@ -98,7 +98,7 @@ const EditableText = observer((props: EditableBaseProps) => {
       document.execCommand('insertHTML', false, pasteText);
     }
   }, []);
-  const finalClassName = `bodiless-inline-editable ${className}`.trim();
+  const finalClassName = (className?.split(' ') || []).concat('bodiless-inline-editable').join(' ');
   return (
     <ContentEditable
       {...rest}
@@ -111,6 +111,7 @@ const EditableText = observer((props: EditableBaseProps) => {
       onBlur={onBlur}
       html={hasFocus ? text : sanitizer(text)}
       data-placeholder={placeholder}
+      data-test-id="bodiless-inline-editable"
     />
   );
 });

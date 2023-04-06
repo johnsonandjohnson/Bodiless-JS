@@ -42,6 +42,21 @@ describe('Editable', () => {
       expect(wrapper.find('span').prop('className')?.split(' ')).toContain('baz');
     });
 
+    it('Adds inline-editable class when className provided', () => {
+      const wrapper = mount(<Editable nodeKey="bar" className="baz">Now is the time</Editable>);
+      expect(wrapper.find('span').prop('className')?.split(' ')).toContain('bodiless-inline-editable');
+    });
+
+    it('Adds inline-editable class when no className provided', () => {
+      const wrapper = mount(<Editable nodeKey="bar">Now is the time</Editable>);
+      expect(wrapper.find('span').prop('className')).toBe('bodiless-inline-editable');
+    });
+  
+    it('Adds test id for playwright', () => {
+      const wrapper = mount(<Editable nodeKey="bar">Now is the time</Editable>);
+      expect(wrapper.find('span').prop('data-test-id')).toBe('bodiless-inline-editable');
+    });
+
     it('Accepts a custom tag', () => {
       const wrapper = mount(<Editable data-foo="bar" nodeKey="bar" tagName="h1">Now is the time</Editable>);
       expect(wrapper.find('h1').prop('data-foo')).toBe('bar');
