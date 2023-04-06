@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/vital-accordion",
-  "version": "1.0.0-rc.30",
+  "version": "1.0.0-rc.31",
   "description": "Clean, designable Accordion component for VitalDS based projects",
   "author": "Lucas Varela <lvarelab@its.jnj.com>",
   "license": "Apache-2.0",
@@ -30,14 +30,14 @@
     "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx ./src"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.30",
-    "@bodiless/components": "^1.0.0-rc.30",
-    "@bodiless/core": "^1.0.0-rc.30",
-    "@bodiless/fclasses": "^1.0.0-rc.30",
-    "@bodiless/layouts": "^1.0.0-rc.30",
-    "@bodiless/schema-org": "^1.0.0-rc.30",
-    "@bodiless/vital-editors": "^1.0.0-rc.30",
-    "@bodiless/vital-elements": "^1.0.0-rc.30",
+    "@bodiless/cli": "^1.0.0-rc.31",
+    "@bodiless/components": "^1.0.0-rc.31",
+    "@bodiless/core": "^1.0.0-rc.31",
+    "@bodiless/fclasses": "^1.0.0-rc.31",
+    "@bodiless/layouts": "^1.0.0-rc.31",
+    "@bodiless/schema-org": "^1.0.0-rc.31",
+    "@bodiless/vital-editors": "^1.0.0-rc.31",
+    "@bodiless/vital-elements": "^1.0.0-rc.31",
     "lodash": "^4.17.19"
   },
   "peerDependencies": {
