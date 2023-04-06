@@ -18,11 +18,10 @@ import type { FilteredItemType } from '@bodiless/filtering';
 import { ContentNode } from '@bodiless/core';
 import { Token, addProps } from '@bodiless/fclasses';
 import type { FlowContainerWrapperProps } from '@bodiless/layouts';
+import MD5 from 'crypto-js/md5';
 import { ItemsDataType, pushPLPAnalytics } from '../util/pushPLPAnalytics';
 
-const crypto = require('crypto');
-
-const generateHash = (str: string) => crypto.createHash('md5').update(str).digest('hex');
+const generateHash = (str: string) => MD5(str).toString();
 
 const FILTER_BY_GROUP = 'filter_by_group';
 
