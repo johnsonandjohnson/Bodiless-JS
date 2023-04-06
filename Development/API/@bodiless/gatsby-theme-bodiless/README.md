@@ -47,7 +47,7 @@
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/types.ts:34](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/gatsby-theme-bodiless/src/dist/types.ts#L34)
+[packages/gatsby-theme-bodiless/src/dist/types.ts:34](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/gatsby-theme-bodiless/src/dist/types.ts#L34)
 
 ## Variables
 
@@ -57,7 +57,7 @@
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyLink/asGatsbyLink.tsx:81](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/gatsby-theme-bodiless/src/dist/GatsbyLink/asGatsbyLink.tsx#L81)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyLink/asGatsbyLink.tsx:81](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/gatsby-theme-bodiless/src/dist/GatsbyLink/asGatsbyLink.tsx#L81)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/Page.bl-edit.tsx:107](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/gatsby-theme-bodiless/src/dist/Page.bl-edit.tsx#L107)
+[packages/gatsby-theme-bodiless/src/dist/Page.bl-edit.tsx:107](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/gatsby-theme-bodiless/src/dist/Page.bl-edit.tsx#L107)
 
 ___
 
@@ -80,7 +80,7 @@ for GatsbyImg is available, or it renders the input component, otherwise.
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx:256](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx#L256)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx:256](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx#L256)
 
 ___
 
@@ -92,7 +92,7 @@ ___
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyLink/asGatsbyLink.tsx:67](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/gatsby-theme-bodiless/src/dist/GatsbyLink/asGatsbyLink.tsx#L67)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyLink/asGatsbyLink.tsx:67](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/gatsby-theme-bodiless/src/dist/GatsbyLink/asGatsbyLink.tsx#L67)
 
 ## Functions
 
@@ -118,7 +118,7 @@ ___
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyLink/asGatsbyLink.tsx:76](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/gatsby-theme-bodiless/src/dist/GatsbyLink/asGatsbyLink.tsx#L76)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyLink/asGatsbyLink.tsx:76](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/gatsby-theme-bodiless/src/dist/GatsbyLink/asGatsbyLink.tsx#L76)
 
 ___
 
@@ -142,7 +142,7 @@ when node data is not empty in store, then it merges default content data with n
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/getImageContentFrom.ts:28](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/getImageContentFrom.ts#L28)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/getImageContentFrom.ts:28](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/getImageContentFrom.ts#L28)
 
 ___
 
@@ -166,7 +166,7 @@ Boolean
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx:273](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx#L273)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx:273](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx#L273)
 
 ___
 
@@ -210,7 +210,7 @@ ___
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImageLibrary.ts:22](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImageLibrary.ts#L22)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImageLibrary.ts:22](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImageLibrary.ts#L22)
 
 ___
 
@@ -234,7 +234,7 @@ and the corresponding image preset stored in the image node JSON file.
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImageLogger.tsx:30](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImageLogger.tsx#L30)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImageLogger.tsx:30](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImageLogger.tsx#L30)
 
 ___
 
@@ -257,7 +257,7 @@ which enriches image node data with image preset provided as an input.
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImageNode.tsx:28](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImageNode.tsx#L28)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImageNode.tsx:28](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImageNode.tsx#L28)
 
 ___
 
@@ -289,7 +289,7 @@ ___
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImagePreset.ts:24](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImagePreset.ts#L24)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImagePreset.ts:24](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImagePreset.ts#L24)
 
 ___
 
@@ -321,4 +321,4 @@ but Gatsby Image is not enabled for the image
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx:282](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx#L282)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx:282](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx#L282)

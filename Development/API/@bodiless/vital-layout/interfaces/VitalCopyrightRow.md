@@ -10,35 +10,22 @@ Tokens for the vital Copyright Row which consists of copyright & social links.
 
 ### Properties
 
-- [Base](VitalCopyrightRow.md#base)
-- [CopyrightNoSocialLinks](VitalCopyrightRow.md#copyrightnosociallinks)
+- [CopyrightOnly](VitalCopyrightRow.md#copyrightonly)
 - [Default](VitalCopyrightRow.md#default)
+- [NoDisclaimer](VitalCopyrightRow.md#nodisclaimer)
+- [NoSocialLinks](VitalCopyrightRow.md#nosociallinks)
 
 ## Properties
 
-### Base
+### CopyrightOnly
 
-• **Base**: `TokenSpec`<[`CopyrightRowComponents`](CopyrightRowComponents.md), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\>
+• **CopyrightOnly**: `TokenSpec`<[`CopyrightRowComponents`](CopyrightRowComponents.md), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\>
 
-Base applies the following:
-- Vital Styled Copyright editor on left
-- Social Links on right
+Same as Default but only Copyright (no social links or disclaimer).
 
 #### Defined in
 
-[vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts:100](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts#L100)
-
-___
-
-### CopyrightNoSocialLinks
-
-• **CopyrightNoSocialLinks**: `TokenSpec`<[`CopyrightRowComponents`](CopyrightRowComponents.md), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\>
-
-Copyright only
-
-#### Defined in
-
-[vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts:108](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts#L108)
+[vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts:125](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts#L125)
 
 ___
 
@@ -46,8 +33,34 @@ ___
 
 • **Default**: `TokenSpec`<[`CopyrightRowComponents`](CopyrightRowComponents.md), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\>
 
-Inherits Base
+Default applies the following:
+- Vital Styled Copyright editor on left
+- Social Links on right
 
 #### Defined in
 
-[vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts:104](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts#L104)
+[vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts:113](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts#L113)
+
+___
+
+### NoDisclaimer
+
+• **NoDisclaimer**: `TokenSpec`<[`CopyrightRowComponents`](CopyrightRowComponents.md), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\>
+
+Same as Default but no disclaimer
+
+#### Defined in
+
+[vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts:121](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts#L121)
+
+___
+
+### NoSocialLinks
+
+• **NoSocialLinks**: `TokenSpec`<[`CopyrightRowComponents`](CopyrightRowComponents.md), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\>
+
+Same as Default but no social links
+
+#### Defined in
+
+[vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts:117](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts#L117)

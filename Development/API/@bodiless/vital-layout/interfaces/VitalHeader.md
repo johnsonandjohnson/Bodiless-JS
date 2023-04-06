@@ -27,7 +27,7 @@ Base applies the following as defaults:
 
 #### Defined in
 
-[vital-layout/src/components/Header/tokens/vitalHeader.ts:107](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-layout/src/components/Header/tokens/vitalHeader.ts#L107)
+[vital-layout/src/components/Header/tokens/vitalHeader.ts:107](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-layout/src/components/Header/tokens/vitalHeader.ts#L107)
 
 ___
 
@@ -61,7 +61,7 @@ export default {
 
 #### Defined in
 
-[vital-layout/src/components/Header/tokens/vitalHeader.ts:133](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-layout/src/components/Header/tokens/vitalHeader.ts#L133)
+[vital-layout/src/components/Header/tokens/vitalHeader.ts:133](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-layout/src/components/Header/tokens/vitalHeader.ts#L133)
 
 ___
 
@@ -73,4 +73,4 @@ Extendable token that adds language selector
 
 #### Defined in
 
-[vital-layout/src/components/Header/tokens/vitalHeader.ts:137](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-layout/src/components/Header/tokens/vitalHeader.ts#L137)
+[vital-layout/src/components/Header/tokens/vitalHeader.ts:137](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-layout/src/components/Header/tokens/vitalHeader.ts#L137)

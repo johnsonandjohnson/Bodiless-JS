@@ -41,7 +41,7 @@ Container slot is for the content/template of the page.
 
 #### Defined in
 
-[vital-layout/src/components/Layout/types.ts:62](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-layout/src/components/Layout/types.ts#L62)
+[vital-layout/src/components/Layout/types.ts:62](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-layout/src/components/Layout/types.ts#L62)
 
 ___
 
@@ -53,7 +53,7 @@ The ContainerWrapper wrapper of the layout.  By default this is Div.
 
 #### Defined in
 
-[vital-layout/src/components/Layout/types.ts:66](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-layout/src/components/Layout/types.ts#L66)
+[vital-layout/src/components/Layout/types.ts:66](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-layout/src/components/Layout/types.ts#L66)
 
 ___
 
@@ -65,7 +65,7 @@ Footer slot is a component often displaying secondary menu & copyright.
 
 #### Defined in
 
-[vital-layout/src/components/Layout/types.ts:53](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-layout/src/components/Layout/types.ts#L53)
+[vital-layout/src/components/Layout/types.ts:53](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-layout/src/components/Layout/types.ts#L53)
 
 ___
 
@@ -78,7 +78,7 @@ Useful if you need to add additional styling to apply to entire footer.
 
 #### Defined in
 
-[vital-layout/src/components/Layout/types.ts:58](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-layout/src/components/Layout/types.ts#L58)
+[vital-layout/src/components/Layout/types.ts:58](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-layout/src/components/Layout/types.ts#L58)
 
 ___
 
@@ -90,7 +90,7 @@ Header slot is a component often holding holding logo/menu.
 
 #### Defined in
 
-[vital-layout/src/components/Layout/types.ts:44](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-layout/src/components/Layout/types.ts#L44)
+[vital-layout/src/components/Layout/types.ts:44](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-layout/src/components/Layout/types.ts#L44)
 
 ___
 
@@ -103,7 +103,7 @@ Useful if you need to add additional styling to apply to entire header.
 
 #### Defined in
 
-[vital-layout/src/components/Layout/types.ts:49](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-layout/src/components/Layout/types.ts#L49)
+[vital-layout/src/components/Layout/types.ts:49](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-layout/src/components/Layout/types.ts#L49)
 
 ___
 
@@ -115,7 +115,7 @@ Helmet slot to append additional items to helmet of layout.
 
 #### Defined in
 
-[vital-layout/src/components/Layout/types.ts:40](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-layout/src/components/Layout/types.ts#L40)
+[vital-layout/src/components/Layout/types.ts:40](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-layout/src/components/Layout/types.ts#L40)
 
 ___
 
@@ -127,7 +127,7 @@ The OuterContainer wrapper of the layout.  By default this is Div.
 
 #### Defined in
 
-[vital-layout/src/components/Layout/types.ts:32](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-layout/src/components/Layout/types.ts#L32)
+[vital-layout/src/components/Layout/types.ts:32](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-layout/src/components/Layout/types.ts#L32)
 
 ___
 
@@ -140,7 +140,7 @@ By default this is Fragment and not rendered.
 
 #### Defined in
 
-[vital-layout/src/components/Layout/types.ts:76](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-layout/src/components/Layout/types.ts#L76)
+[vital-layout/src/components/Layout/types.ts:76](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-layout/src/components/Layout/types.ts#L76)
 
 ___
 
@@ -153,7 +153,7 @@ By default this is Fragment and not rendered.
 
 #### Defined in
 
-[vital-layout/src/components/Layout/types.ts:71](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-layout/src/components/Layout/types.ts#L71)
+[vital-layout/src/components/Layout/types.ts:71](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-layout/src/components/Layout/types.ts#L71)
 
 ___
 
@@ -165,4 +165,4 @@ Accessibility slot to render a skip to content link as top most element.
 
 #### Defined in
 
-[vital-layout/src/components/Layout/types.ts:36](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-layout/src/components/Layout/types.ts#L36)
+[vital-layout/src/components/Layout/types.ts:36](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-layout/src/components/Layout/types.ts#L36)

@@ -62,7 +62,7 @@ VitalCardCore.Basic
 
 #### Defined in
 
-[vital-card/src/components/Card/tokens/vitalCard.ts:153](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-card/src/components/Card/tokens/vitalCard.ts#L153)
+[vital-card/src/components/Card/tokens/vitalCard.ts:153](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-card/src/components/Card/tokens/vitalCard.ts#L153)
 
 ___
 
@@ -83,7 +83,7 @@ VitalCardCategory.Category
 
 #### Defined in
 
-[vital-card/src/components/Card/tokens/Category.ts:46](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-card/src/components/Card/tokens/Category.ts#L46)
+[vital-card/src/components/Card/tokens/Category.ts:46](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-card/src/components/Card/tokens/Category.ts#L46)
 
 ___
 
@@ -153,7 +153,7 @@ VitalCardCore.Default
 
 #### Defined in
 
-[vital-card/src/components/Card/tokens/vitalCard.ts:149](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-card/src/components/Card/tokens/vitalCard.ts#L149)
+[vital-card/src/components/Card/tokens/vitalCard.ts:149](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-card/src/components/Card/tokens/vitalCard.ts#L149)
 
 ___
 
@@ -216,7 +216,7 @@ VitalCardHero.Hero
 
 #### Defined in
 
-[vital-card/src/components/Card/tokens/Hero.ts:121](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-card/src/components/Card/tokens/Hero.ts#L121)
+[vital-card/src/components/Card/tokens/Hero.ts:121](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-card/src/components/Card/tokens/Hero.ts#L121)
 
 ___
 
@@ -230,7 +230,7 @@ VitalCardHero.HeroLeftImageContentCentered
 
 #### Defined in
 
-[vital-card/src/components/Card/tokens/Hero.ts:125](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-card/src/components/Card/tokens/Hero.ts#L125)
+[vital-card/src/components/Card/tokens/Hero.ts:125](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-card/src/components/Card/tokens/Hero.ts#L125)
 
 ___
 
@@ -249,7 +249,7 @@ VitalCardProduct.Product
 
 #### Defined in
 
-[vital-card/src/components/Card/tokens/Product.ts:39](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-card/src/components/Card/tokens/Product.ts#L39)
+[vital-card/src/components/Card/tokens/Product.ts:39](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-card/src/components/Card/tokens/Product.ts#L39)
 
 ___
 
@@ -270,7 +270,7 @@ VitalCardTopic.Topic
 
 #### Defined in
 
-[vital-card/src/components/Card/tokens/Topic.ts:46](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-card/src/components/Card/tokens/Topic.ts#L46)
+[vital-card/src/components/Card/tokens/Topic.ts:46](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-card/src/components/Card/tokens/Topic.ts#L46)
 
 ___
 
@@ -287,7 +287,7 @@ VitalCardCore.WithFlexGrowImage
 
 #### Defined in
 
-[vital-card/src/components/Card/tokens/vitalCard.ts:173](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-card/src/components/Card/tokens/vitalCard.ts#L173)
+[vital-card/src/components/Card/tokens/vitalCard.ts:173](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-card/src/components/Card/tokens/vitalCard.ts#L173)
 
 ___
 
@@ -304,7 +304,7 @@ VitalCardBase.WithFlowContainerPreview
 
 #### Defined in
 
-[vital-card/src/components/Card/tokens/Base.ts:224](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-card/src/components/Card/tokens/Base.ts#L224)
+[vital-card/src/components/Card/tokens/Base.ts:224](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-card/src/components/Card/tokens/Base.ts#L224)
 
 ___
 
@@ -323,7 +323,7 @@ VitalCardBase.WithHorizontalContentAtTop
 
 #### Defined in
 
-[vital-card/src/components/Card/tokens/Base.ts:212](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-card/src/components/Card/tokens/Base.ts#L212)
+[vital-card/src/components/Card/tokens/Base.ts:212](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-card/src/components/Card/tokens/Base.ts#L212)
 
 ___
 
@@ -342,7 +342,7 @@ VitalCardBase.WithHorizontalContentCentered
 
 #### Defined in
 
-[vital-card/src/components/Card/tokens/Base.ts:219](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-card/src/components/Card/tokens/Base.ts#L219)
+[vital-card/src/components/Card/tokens/Base.ts:219](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-card/src/components/Card/tokens/Base.ts#L219)
 
 ___
 
@@ -362,7 +362,7 @@ VitalCardBase.WithHorizontalLeftOrientation
 
 #### Defined in
 
-[vital-card/src/components/Card/tokens/Base.ts:197](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-card/src/components/Card/tokens/Base.ts#L197)
+[vital-card/src/components/Card/tokens/Base.ts:197](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-card/src/components/Card/tokens/Base.ts#L197)
 
 ___
 
@@ -378,7 +378,7 @@ VitalCardBase.WithHorizontalOrientationBase
 
 #### Defined in
 
-[vital-card/src/components/Card/tokens/Base.ts:189](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-card/src/components/Card/tokens/Base.ts#L189)
+[vital-card/src/components/Card/tokens/Base.ts:189](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-card/src/components/Card/tokens/Base.ts#L189)
 
 ___
 
@@ -398,7 +398,7 @@ VitalCardBase.WithHorizontalRightOrientation
 
 #### Defined in
 
-[vital-card/src/components/Card/tokens/Base.ts:205](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-card/src/components/Card/tokens/Base.ts#L205)
+[vital-card/src/components/Card/tokens/Base.ts:205](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-card/src/components/Card/tokens/Base.ts#L205)
 
 ___
 
@@ -417,7 +417,7 @@ VitalCardCore.WithNoDescription
 
 #### Defined in
 
-[vital-card/src/components/Card/tokens/vitalCard.ts:160](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-card/src/components/Card/tokens/vitalCard.ts#L160)
+[vital-card/src/components/Card/tokens/vitalCard.ts:160](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-card/src/components/Card/tokens/vitalCard.ts#L160)
 
 ___
 
@@ -433,7 +433,7 @@ VitalCardCore.WithNoEyebrow
 
 #### Defined in
 
-[vital-card/src/components/Card/tokens/vitalCard.ts:168](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-card/src/components/Card/tokens/vitalCard.ts#L168)
+[vital-card/src/components/Card/tokens/vitalCard.ts:168](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-card/src/components/Card/tokens/vitalCard.ts#L168)
 
 ___
 
@@ -449,7 +449,7 @@ VitalCardCore.WithNoTitle
 
 #### Defined in
 
-[vital-card/src/components/Card/tokens/vitalCard.ts:164](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-card/src/components/Card/tokens/vitalCard.ts#L164)
+[vital-card/src/components/Card/tokens/vitalCard.ts:164](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-card/src/components/Card/tokens/vitalCard.ts#L164)
 
 ___
 
@@ -465,7 +465,7 @@ VitalCardBase.WithPrimaryButton
 
 #### Defined in
 
-[vital-card/src/components/Card/tokens/Base.ts:232](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-card/src/components/Card/tokens/Base.ts#L232)
+[vital-card/src/components/Card/tokens/Base.ts:232](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-card/src/components/Card/tokens/Base.ts#L232)
 
 ___
 
@@ -481,7 +481,7 @@ VitalCardBase.WithPrimaryTextLink
 
 #### Defined in
 
-[vital-card/src/components/Card/tokens/Base.ts:228](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-card/src/components/Card/tokens/Base.ts#L228)
+[vital-card/src/components/Card/tokens/Base.ts:228](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-card/src/components/Card/tokens/Base.ts#L228)
 
 ___
 
@@ -497,7 +497,7 @@ VitalCardBase.WithSecondaryButton
 
 #### Defined in
 
-[vital-card/src/components/Card/tokens/Base.ts:236](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-card/src/components/Card/tokens/Base.ts#L236)
+[vital-card/src/components/Card/tokens/Base.ts:236](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-card/src/components/Card/tokens/Base.ts#L236)
 
 ___
 
@@ -513,4 +513,4 @@ VitalCardBase.WithVerticalOrientation
 
 #### Defined in
 
-[vital-card/src/components/Card/tokens/Base.ts:185](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-card/src/components/Card/tokens/Base.ts#L185)
+[vital-card/src/components/Card/tokens/Base.ts:185](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-card/src/components/Card/tokens/Base.ts#L185)
