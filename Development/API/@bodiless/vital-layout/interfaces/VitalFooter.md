@@ -27,7 +27,7 @@ Base applies the following:
 
 #### Defined in
 
-[vital-layout/src/components/Footer/tokens/vitalFooter.ts:106](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ad864af6f/packages/vital-layout/src/components/Footer/tokens/vitalFooter.ts#L106)
+[vital-layout/src/components/Footer/tokens/vitalFooter.ts:106](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-layout/src/components/Footer/tokens/vitalFooter.ts#L106)
 
 ___
 
@@ -60,7 +60,7 @@ export default {
 
 #### Defined in
 
-[vital-layout/src/components/Footer/tokens/vitalFooter.ts:131](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ad864af6f/packages/vital-layout/src/components/Footer/tokens/vitalFooter.ts#L131)
+[vital-layout/src/components/Footer/tokens/vitalFooter.ts:131](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-layout/src/components/Footer/tokens/vitalFooter.ts#L131)
 
 ___
 
@@ -72,7 +72,7 @@ Token that extends base with to move rewards above footer on 2xl responsive view
 
 #### Defined in
 
-[vital-layout/src/components/Footer/tokens/vitalFooter.ts:135](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ad864af6f/packages/vital-layout/src/components/Footer/tokens/vitalFooter.ts#L135)
+[vital-layout/src/components/Footer/tokens/vitalFooter.ts:135](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-layout/src/components/Footer/tokens/vitalFooter.ts#L135)
 
 ___
 
@@ -84,4 +84,4 @@ An extendable token to move rewards above footer on 2xl responsive viewports
 
 #### Defined in
 
-[vital-layout/src/components/Footer/tokens/vitalFooter.ts:139](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ad864af6f/packages/vital-layout/src/components/Footer/tokens/vitalFooter.ts#L139)
+[vital-layout/src/components/Footer/tokens/vitalFooter.ts:139](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-layout/src/components/Footer/tokens/vitalFooter.ts#L139)

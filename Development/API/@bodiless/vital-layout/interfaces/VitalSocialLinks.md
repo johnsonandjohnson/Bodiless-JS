@@ -23,7 +23,7 @@ Base applies styling to have social links in a row at specific size
 
 #### Defined in
 
-[vital-layout/src/components/Footer/SocialLinks/tokens/vitalSocialLinks.ts:47](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ad864af6f/packages/vital-layout/src/components/Footer/SocialLinks/tokens/vitalSocialLinks.ts#L47)
+[vital-layout/src/components/Footer/SocialLinks/tokens/vitalSocialLinks.ts:47](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-layout/src/components/Footer/SocialLinks/tokens/vitalSocialLinks.ts#L47)
 
 ___
 
@@ -35,4 +35,4 @@ Inherits Base
 
 #### Defined in
 
-[vital-layout/src/components/Footer/SocialLinks/tokens/vitalSocialLinks.ts:51](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ad864af6f/packages/vital-layout/src/components/Footer/SocialLinks/tokens/vitalSocialLinks.ts#L51)
+[vital-layout/src/components/Footer/SocialLinks/tokens/vitalSocialLinks.ts:51](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b4639a195/packages/vital-layout/src/components/Footer/SocialLinks/tokens/vitalSocialLinks.ts#L51)

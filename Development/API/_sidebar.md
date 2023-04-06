@@ -14,4 +14,3 @@
 * [@bodiless/vital-meta](/Development/API/@bodiless/vital-meta/README)
 * [@bodiless/vital-table](/Development/API/@bodiless/vital-table/README)
 * [@bodiless/vital-youtube](/Development/API/@bodiless/vital-youtube/README)
-* [@bodiless/vital-search](/Development/API/@bodiless/vital-search/README)
