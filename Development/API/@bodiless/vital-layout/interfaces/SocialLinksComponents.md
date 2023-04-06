@@ -37,7 +37,7 @@ Used for Facebook social link
 
 #### Defined in
 
-[vital-layout/src/components/Footer/SocialLinks/types.ts:40](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Footer/SocialLinks/types.ts#L40)
+[vital-layout/src/components/Footer/SocialLinks/types.ts:40](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ad864af6f/packages/vital-layout/src/components/Footer/SocialLinks/types.ts#L40)
 
 ___
 
@@ -49,7 +49,7 @@ Used for Instagram social link
 
 #### Defined in
 
-[vital-layout/src/components/Footer/SocialLinks/types.ts:44](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Footer/SocialLinks/types.ts#L44)
+[vital-layout/src/components/Footer/SocialLinks/types.ts:44](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ad864af6f/packages/vital-layout/src/components/Footer/SocialLinks/types.ts#L44)
 
 ___
 
@@ -61,7 +61,7 @@ Used for Youtube social link
 
 #### Defined in
 
-[vital-layout/src/components/Footer/SocialLinks/types.ts:48](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Footer/SocialLinks/types.ts#L48)
+[vital-layout/src/components/Footer/SocialLinks/types.ts:48](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ad864af6f/packages/vital-layout/src/components/Footer/SocialLinks/types.ts#L48)
 
 ___
 
@@ -73,7 +73,7 @@ Inner wrapper used for styling
 
 #### Defined in
 
-[vital-layout/src/components/Footer/SocialLinks/types.ts:36](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Footer/SocialLinks/types.ts#L36)
+[vital-layout/src/components/Footer/SocialLinks/types.ts:36](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ad864af6f/packages/vital-layout/src/components/Footer/SocialLinks/types.ts#L36)
 
 ___
 
@@ -85,4 +85,4 @@ Wrapper around social links component
 
 #### Defined in
 
-[vital-layout/src/components/Footer/SocialLinks/types.ts:32](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Footer/SocialLinks/types.ts#L32)
+[vital-layout/src/components/Footer/SocialLinks/types.ts:32](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ad864af6f/packages/vital-layout/src/components/Footer/SocialLinks/types.ts#L32)

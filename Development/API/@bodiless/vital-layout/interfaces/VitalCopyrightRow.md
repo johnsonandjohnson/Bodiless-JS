@@ -26,7 +26,7 @@ Base applies the following:
 
 #### Defined in
 
-[vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts:100](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts#L100)
+[vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts:100](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ad864af6f/packages/vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts#L100)
 
 ___
 
@@ -38,7 +38,7 @@ Copyright only
 
 #### Defined in
 
-[vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts:108](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts#L108)
+[vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts:108](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ad864af6f/packages/vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts#L108)
 
 ___
 
@@ -50,4 +50,4 @@ Inherits Base
 
 #### Defined in
 
-[vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts:104](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts#L104)
+[vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts:104](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ad864af6f/packages/vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts#L104)

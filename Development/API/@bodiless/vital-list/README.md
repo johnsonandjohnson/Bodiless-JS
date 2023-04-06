@@ -51,7 +51,7 @@ Renames and re-exports [vitalTitleInfographicBase](README.md#vitaltitleinfograph
 
 #### Defined in
 
-[vital-list/src/components/List/ListClean.tsx:30](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-list/src/components/List/ListClean.tsx#L30)
+[vital-list/src/components/List/ListClean.tsx:30](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ad864af6f/packages/vital-list/src/components/List/ListClean.tsx#L30)
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 #### Defined in
 
-[vital-list/src/components/List/ListClean.tsx:36](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-list/src/components/List/ListClean.tsx#L36)
+[vital-list/src/components/List/ListClean.tsx:36](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ad864af6f/packages/vital-list/src/components/List/ListClean.tsx#L36)
 
 ___
 
@@ -83,7 +83,7 @@ limitations under the License.
 
 #### Defined in
 
-[vital-list/src/components/TitleInfographic/TitleInfographicClean.tsx:64](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-list/src/components/TitleInfographic/TitleInfographicClean.tsx#L64)
+[vital-list/src/components/TitleInfographic/TitleInfographicClean.tsx:64](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ad864af6f/packages/vital-list/src/components/TitleInfographic/TitleInfographicClean.tsx#L64)
 
 ___
 
@@ -107,7 +107,7 @@ ___
 
 #### Defined in
 
-[vital-list/src/components/List/tokens/vitalList.ts:93](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-list/src/components/List/tokens/vitalList.ts#L93)
+[vital-list/src/components/List/tokens/vitalList.ts:93](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ad864af6f/packages/vital-list/src/components/List/tokens/vitalList.ts#L93)
 
 ___
 
@@ -123,7 +123,7 @@ ___
 
 #### Defined in
 
-[vital-list/src/components/FlowContainer/index.ts:53](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-list/src/components/FlowContainer/index.ts#L53)
+[vital-list/src/components/FlowContainer/index.ts:53](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ad864af6f/packages/vital-list/src/components/FlowContainer/index.ts#L53)
 
 ___
 
@@ -139,7 +139,7 @@ ___
 
 #### Defined in
 
-[vital-list/src/components/TitleInfographic/tokens/vitalTitleInfographic.ts:43](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-list/src/components/TitleInfographic/tokens/vitalTitleInfographic.ts#L43)
+[vital-list/src/components/TitleInfographic/tokens/vitalTitleInfographic.ts:43](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ad864af6f/packages/vital-list/src/components/TitleInfographic/tokens/vitalTitleInfographic.ts#L43)
 
 ## Functions
 
@@ -159,7 +159,7 @@ ___
 
 #### Defined in
 
-[vital-list/src/components/List/ListClean.tsx:37](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-list/src/components/List/ListClean.tsx#L37)
+[vital-list/src/components/List/ListClean.tsx:37](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ad864af6f/packages/vital-list/src/components/List/ListClean.tsx#L37)
 
 ___
 
@@ -179,7 +179,7 @@ ___
 
 #### Defined in
 
-[vital-list/src/components/List/ListClean.tsx:38](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-list/src/components/List/ListClean.tsx#L38)
+[vital-list/src/components/List/ListClean.tsx:38](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ad864af6f/packages/vital-list/src/components/List/ListClean.tsx#L38)
 
 ___
 
@@ -199,4 +199,4 @@ ___
 
 #### Defined in
 
-[vital-list/src/components/TitleInfographic/TitleInfographicClean.tsx:62](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-list/src/components/TitleInfographic/TitleInfographicClean.tsx#L62)
+[vital-list/src/components/TitleInfographic/TitleInfographicClean.tsx:62](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ad864af6f/packages/vital-list/src/components/TitleInfographic/TitleInfographicClean.tsx#L62)
