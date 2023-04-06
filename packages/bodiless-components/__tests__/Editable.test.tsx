@@ -51,7 +51,7 @@ describe('Editable', () => {
       const wrapper = mount(<Editable nodeKey="bar">Now is the time</Editable>);
       expect(wrapper.find('span').prop('className')).toBe('bodiless-inline-editable');
     });
-  
+
     it('Adds test id for playwright', () => {
       const wrapper = mount(<Editable nodeKey="bar">Now is the time</Editable>);
       expect(wrapper.find('span').prop('data-test-id')).toBe('bodiless-inline-editable');
