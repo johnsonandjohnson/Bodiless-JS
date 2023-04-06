@@ -27,7 +27,6 @@ import {
   as,
   flowHoc,
 } from '@bodiless/fclasses';
-import { vitalSearchMenu, vitalSearchToggler, asSearchMenuToggler } from '@bodiless/vital-search';
 import { vitalButtons } from '@bodiless/vital-buttons';
 import { vitalLogo } from '../../Logo';
 import { asHeaderToken } from '../HeaderClean';
@@ -37,10 +36,8 @@ import BurgerIcon from '../assets/BurgerIcon';
 const Base = asHeaderToken({
   Core: {
     MenuToggler: asBurgerMenuToggler,
-    SearchToggler: asSearchMenuToggler,
   },
   Components: {
-    SearchToggler: vitalSearchToggler.Default,
     Logo: vitalLogo.Default,
     Menu: vitalMenu.TopNav,
     BurgerMenu: flowHoc(
@@ -48,8 +45,6 @@ const Base = asHeaderToken({
       // @TODO: Is there a better way to inject WhereToBuy and (future) LanguageButton
       // components into the menu? Maybe, move the components to another package...
     ),
-    DesktopSearch: vitalSearchMenu.Default,
-    MobileSearch: vitalSearchMenu.Mobile,
     // UtilityMenu: vitalMenu.Utility,
     WhereToBuy: vitalButtons.WhereToBuy,
   },

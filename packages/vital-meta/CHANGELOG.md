@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.32](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.31...v1.0.0-rc.32) (2023-04-06)
+
+**Note:** Version bump only for package @bodiless/vital-meta
+
+
+
+
+
 # [1.0.0-rc.31](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.30...v1.0.0-rc.31) (2023-04-06)
 
 

@@ -13,6 +13,7 @@
  */
 
 import { vitalHeaderBase, asHeaderToken } from '@bodiless/vital-layout';
+import { vitalSearchHeader } from '@bodiless/vital-search';
 import { LinkClean, vitalLink, asLinkToken } from '@bodiless/vital-link';
 import { asLanguageSelector, withLanguageNode } from '@bodiless/i18n';
 import {
@@ -30,6 +31,8 @@ export const asLanguageSelectorLink = on(LinkClean)(
 
 const Default = asHeaderToken(
   vitalHeaderBase.Base,
+  // @todo Remove this if you don't want search on your site.
+  vitalSearchHeader.WithSearch,
   vitalHeaderBase.WithLanguageSelector,
   {
     Core: {
