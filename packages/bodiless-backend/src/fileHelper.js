@@ -15,7 +15,7 @@
 const fs = require('fs');
 const fse = require('fs-extra');
 const path = require('path');
-const crypto = require('crypto');
+const MD5 = require('crypto-js/md5');
 
 const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
 
@@ -27,7 +27,7 @@ const copyFilePromise = (from, to) => new Promise((resolve, reject) => {
   });
 });
 
-const generateHash = str => crypto.createHash('md5').update(str).digest('hex');
+const generateHash = str => MD5(str).toString();
 
 const isImage = fileType => {
   const imageFileTypes = [
