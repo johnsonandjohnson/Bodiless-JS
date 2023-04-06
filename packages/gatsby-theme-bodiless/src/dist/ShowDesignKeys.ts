@@ -17,7 +17,7 @@ import {
 } from '@bodiless/fclasses';
 
 const ShowDesignKeys = (
-  process.env.NODE_ENV === 'development' || process.env.BODILESS_SHOWDESIGNKEYS === '1'
+  BL_IS_EDIT || process.env.BODILESS_SHOWDESIGNKEYS === '1'
 ) ? withShowDesignKeys()(Fragment) : Fragment;
 
 export default ShowDesignKeys;

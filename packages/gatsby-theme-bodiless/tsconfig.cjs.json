@@ -1,27 +1,22 @@
 {
   "extends": "../../tsconfig.settings.json",
   "compilerOptions": {
+    "module": "commonjs",
     "rootDir": "src",
-    "outDir": "lib",
+    "outDir": "./cjs",
     "baseUrl": ".",
-    "declaration": true,
-    "declarationMap": true,
-    "composite": true,
-    "allowJs": false,
-    "downlevelIteration": true,
-    "lib": [
-      "dom",
-      "es2019"
-    ]
+    "allowJs": false
   },
   "include": [
-    "src",
-    "../../@types/*"
+    "./src/dist/fsLogger.ts",
+    "./src/dist/fsLogHandler.ts",
+    "./src/dist/GatsbyImage/GatsbyImagePresets.ts",
+    "./src/dist/DefaultContent"
   ],
   "exclude": [
     "lib",
     "node_modules",
     "__tests__/**/*.*",
     "src/**/__tests__/**/*.*"
-  ]
+   ]
 }

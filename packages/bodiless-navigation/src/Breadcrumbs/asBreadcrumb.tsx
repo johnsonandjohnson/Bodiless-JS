@@ -94,8 +94,7 @@ const asBreadcrumb = ({
       store,
     });
 
-    const isProduction = process.env.NODE_ENV === 'production';
-    if (isProduction) {
+    if (!BL_IS_EDIT) {
       // To avoid flicker, we need to populate the store on render
       // otherwise the breadcrumbs render with no items before
       // a layout effect is executed.

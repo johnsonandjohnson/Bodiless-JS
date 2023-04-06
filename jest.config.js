@@ -24,6 +24,7 @@ module.exports = {
   testResultsProcessor: 'jest-sonar-reporter',
   globals: {
     __PATH_PREFIX__: '',
+    BL_IS_EDIT: JSON.stringify(process.env.NODE_ENV !== 'production'),
     'ts-jest': {
       tsconfig: './config/tsconfig.test.json',
     },

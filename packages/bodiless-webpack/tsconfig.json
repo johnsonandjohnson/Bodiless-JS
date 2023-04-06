@@ -8,7 +8,8 @@
     "baseUrl": "."
   },
   "include": [
-    "src"
+    "src",
+    "../../@types/*"
   ],
   "exclude": [
     "lib",
