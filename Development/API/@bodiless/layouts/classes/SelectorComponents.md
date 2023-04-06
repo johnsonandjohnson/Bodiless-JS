@@ -43,7 +43,7 @@
 
 #### Defined in
 
-[bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx:64](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx#L64)
+[bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx:64](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx#L64)
 
 ## Properties
 
@@ -53,7 +53,7 @@
 
 #### Defined in
 
-[bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx:60](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx#L60)
+[bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx:60](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx#L60)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 #### Defined in
 
-[bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx:62](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx#L62)
+[bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx:62](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx#L62)
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 #### Defined in
 
-[bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx:58](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx#L58)
+[bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx:58](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx#L58)
 
 ## Accessors
 
@@ -91,7 +91,7 @@ SelectorComponentsInterface.components
 
 #### Defined in
 
-[bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx:75](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx#L75)
+[bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx:75](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx#L75)
 
 ___
 
@@ -109,7 +109,7 @@ SelectorComponentsInterface.selectableComponents
 
 #### Defined in
 
-[bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx:80](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx#L80)
+[bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx:80](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx#L80)
 
 ## Methods
 
@@ -123,7 +123,7 @@ SelectorComponentsInterface.selectableComponents
 
 #### Defined in
 
-[bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx:85](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx#L85)
+[bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx:85](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx#L85)
 
 ___
 
@@ -137,7 +137,7 @@ ___
 
 #### Defined in
 
-[bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx:105](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx#L105)
+[bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx:105](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx#L105)
 
 ___
 
@@ -157,4 +157,4 @@ ___
 
 #### Defined in
 
-[bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx:68](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx#L68)
+[bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx:68](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx#L68)

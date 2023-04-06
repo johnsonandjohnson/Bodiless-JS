@@ -53,7 +53,7 @@ Wrapper container fo user interactions in header
 
 #### Defined in
 
-[vital-layout/src/components/Header/types.ts:75](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/vital-layout/src/components/Header/types.ts#L75)
+[vital-layout/src/components/Header/types.ts:75](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Header/types.ts#L75)
 
 ___
 
@@ -65,7 +65,7 @@ Used for burger menu on smaller breakpoints.
 
 #### Defined in
 
-[vital-layout/src/components/Header/types.ts:67](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/vital-layout/src/components/Header/types.ts#L67)
+[vital-layout/src/components/Header/types.ts:67](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Header/types.ts#L67)
 
 ___
 
@@ -77,7 +77,7 @@ Wrapper around burger menu toggler
 
 #### Defined in
 
-[vital-layout/src/components/Header/types.ts:63](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/vital-layout/src/components/Header/types.ts#L63)
+[vital-layout/src/components/Header/types.ts:63](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Header/types.ts#L63)
 
 ___
 
@@ -89,7 +89,7 @@ Container to hold the specific header components
 
 #### Defined in
 
-[vital-layout/src/components/Header/types.ts:39](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/vital-layout/src/components/Header/types.ts#L39)
+[vital-layout/src/components/Header/types.ts:39](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Header/types.ts#L39)
 
 ___
 
@@ -101,7 +101,7 @@ Used for a search box on desktop
 
 #### Defined in
 
-[vital-layout/src/components/Header/types.ts:103](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/vital-layout/src/components/Header/types.ts#L103)
+[vital-layout/src/components/Header/types.ts:103](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Header/types.ts#L103)
 
 ___
 
@@ -113,7 +113,7 @@ Used for language selector link/select
 
 #### Defined in
 
-[vital-layout/src/components/Header/types.ts:91](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/vital-layout/src/components/Header/types.ts#L91)
+[vital-layout/src/components/Header/types.ts:91](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Header/types.ts#L91)
 
 ___
 
@@ -125,7 +125,7 @@ Wrapper around language selector
 
 #### Defined in
 
-[vital-layout/src/components/Header/types.ts:87](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/vital-layout/src/components/Header/types.ts#L87)
+[vital-layout/src/components/Header/types.ts:87](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Header/types.ts#L87)
 
 ___
 
@@ -137,7 +137,7 @@ Used for logo
 
 #### Defined in
 
-[vital-layout/src/components/Header/types.ts:71](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/vital-layout/src/components/Header/types.ts#L71)
+[vital-layout/src/components/Header/types.ts:71](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Header/types.ts#L71)
 
 ___
 
@@ -149,7 +149,7 @@ Used for the desktop menu
 
 #### Defined in
 
-[vital-layout/src/components/Header/types.ts:59](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/vital-layout/src/components/Header/types.ts#L59)
+[vital-layout/src/components/Header/types.ts:59](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Header/types.ts#L59)
 
 ___
 
@@ -161,7 +161,7 @@ Container to hold the menu components
 
 #### Defined in
 
-[vital-layout/src/components/Header/types.ts:43](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/vital-layout/src/components/Header/types.ts#L43)
+[vital-layout/src/components/Header/types.ts:43](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Header/types.ts#L43)
 
 ___
 
@@ -173,7 +173,7 @@ Used for icon/link to open menu on smaller breakpoints
 
 #### Defined in
 
-[vital-layout/src/components/Header/types.ts:51](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/vital-layout/src/components/Header/types.ts#L51)
+[vital-layout/src/components/Header/types.ts:51](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Header/types.ts#L51)
 
 ___
 
@@ -185,7 +185,7 @@ Wrapper around menu toggler
 
 #### Defined in
 
-[vital-layout/src/components/Header/types.ts:47](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/vital-layout/src/components/Header/types.ts#L47)
+[vital-layout/src/components/Header/types.ts:47](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Header/types.ts#L47)
 
 ___
 
@@ -197,7 +197,7 @@ Wrapper around menu
 
 #### Defined in
 
-[vital-layout/src/components/Header/types.ts:55](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/vital-layout/src/components/Header/types.ts#L55)
+[vital-layout/src/components/Header/types.ts:55](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Header/types.ts#L55)
 
 ___
 
@@ -209,7 +209,7 @@ Used to show mobile search box
 
 #### Defined in
 
-[vital-layout/src/components/Header/types.ts:107](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/vital-layout/src/components/Header/types.ts#L107)
+[vital-layout/src/components/Header/types.ts:107](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Header/types.ts#L107)
 
 ___
 
@@ -221,7 +221,7 @@ Used for the link/toggle on smaller devices to show search box
 
 #### Defined in
 
-[vital-layout/src/components/Header/types.ts:111](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/vital-layout/src/components/Header/types.ts#L111)
+[vital-layout/src/components/Header/types.ts:111](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Header/types.ts#L111)
 
 ___
 
@@ -233,7 +233,7 @@ Used for secondary/utility menu
 
 #### Defined in
 
-[vital-layout/src/components/Header/types.ts:83](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/vital-layout/src/components/Header/types.ts#L83)
+[vital-layout/src/components/Header/types.ts:83](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Header/types.ts#L83)
 
 ___
 
@@ -245,7 +245,7 @@ Wrapper around utility menu
 
 #### Defined in
 
-[vital-layout/src/components/Header/types.ts:79](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/vital-layout/src/components/Header/types.ts#L79)
+[vital-layout/src/components/Header/types.ts:79](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Header/types.ts#L79)
 
 ___
 
@@ -257,7 +257,7 @@ Used for a Link to Where to buy
 
 #### Defined in
 
-[vital-layout/src/components/Header/types.ts:99](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/vital-layout/src/components/Header/types.ts#L99)
+[vital-layout/src/components/Header/types.ts:99](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Header/types.ts#L99)
 
 ___
 
@@ -269,7 +269,7 @@ Wrapper around where to buy toggler
 
 #### Defined in
 
-[vital-layout/src/components/Header/types.ts:95](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/vital-layout/src/components/Header/types.ts#L95)
+[vital-layout/src/components/Header/types.ts:95](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Header/types.ts#L95)
 
 ___
 
@@ -281,4 +281,4 @@ Wrapper around entire header
 
 #### Defined in
 
-[vital-layout/src/components/Header/types.ts:35](https://github.com/johnsonandjohnson/Bodiless-JS/blob/3d2b99578/packages/vital-layout/src/components/Header/types.ts#L35)
+[vital-layout/src/components/Header/types.ts:35](https://github.com/johnsonandjohnson/Bodiless-JS/blob/bb211c74a/packages/vital-layout/src/components/Header/types.ts#L35)
