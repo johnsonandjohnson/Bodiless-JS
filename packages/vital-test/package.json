@@ -5,6 +5,7 @@
   "description": "Test Package for a Design System package based on Vital DS",
   "author": "Heidi Vanyo <hvanyo@its.jnj.com>",
   "license": "Apache-2.0",
+  "private": true,
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
