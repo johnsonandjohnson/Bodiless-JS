@@ -23,7 +23,7 @@ Base Styled PLACEHOLDER
 
 #### Defined in
 
-[vital-layout/src/components/Footer/Rewards/tokens/vitalRewards.ts:119](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-layout/src/components/Footer/Rewards/tokens/vitalRewards.ts#L119)
+[vital-layout/src/components/Footer/Rewards/tokens/vitalRewards.ts:119](https://github.com/johnsonandjohnson/Bodiless-JS/blob/44996d2bd/packages/vital-layout/src/components/Footer/Rewards/tokens/vitalRewards.ts#L119)
 
 ___
 
@@ -35,4 +35,4 @@ Inherits Base
 
 #### Defined in
 
-[vital-layout/src/components/Footer/Rewards/tokens/vitalRewards.ts:123](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-layout/src/components/Footer/Rewards/tokens/vitalRewards.ts#L123)
+[vital-layout/src/components/Footer/Rewards/tokens/vitalRewards.ts:123](https://github.com/johnsonandjohnson/Bodiless-JS/blob/44996d2bd/packages/vital-layout/src/components/Footer/Rewards/tokens/vitalRewards.ts#L123)

@@ -25,7 +25,7 @@ Same as Default but only Copyright (no social links or disclaimer).
 
 #### Defined in
 
-[vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts:125](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts#L125)
+[vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts:125](https://github.com/johnsonandjohnson/Bodiless-JS/blob/44996d2bd/packages/vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts#L125)
 
 ___
 
@@ -39,7 +39,7 @@ Default applies the following:
 
 #### Defined in
 
-[vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts:113](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts#L113)
+[vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts:113](https://github.com/johnsonandjohnson/Bodiless-JS/blob/44996d2bd/packages/vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts#L113)
 
 ___
 
@@ -51,7 +51,7 @@ Same as Default but no disclaimer
 
 #### Defined in
 
-[vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts:121](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts#L121)
+[vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts:121](https://github.com/johnsonandjohnson/Bodiless-JS/blob/44996d2bd/packages/vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts#L121)
 
 ___
 
@@ -63,4 +63,4 @@ Same as Default but no social links
 
 #### Defined in
 
-[vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts:117](https://github.com/johnsonandjohnson/Bodiless-JS/blob/38970844d/packages/vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts#L117)
+[vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts:117](https://github.com/johnsonandjohnson/Bodiless-JS/blob/44996d2bd/packages/vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts#L117)
