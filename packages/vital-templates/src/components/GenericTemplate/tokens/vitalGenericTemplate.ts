@@ -16,7 +16,6 @@ import {
   on,
   as,
   flowIf,
-  addProps,
   withDesign,
   Img,
   Fragment,
@@ -28,7 +27,6 @@ import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
 import { ContentListingClean, vitalContentListing } from '@bodiless/vital-content-listing';
 import { withNode, withNodeKey, useNode } from '@bodiless/core';
 import { vitalSpacing } from '@bodiless/vital-elements';
-import { SearchLayoutClean, vitalSearchLayout } from '@bodiless/vital-search';
 import { vitalBreadcrumbs } from '@bodiless/vital-navigation';
 import { vitalImage } from '@bodiless/vital-image';
 import { YouTubeClean, vitalYouTube } from '@bodiless/vital-youtube';
@@ -128,24 +126,9 @@ const Generic = asGenericTemplateToken({
   },
 });
 
-const Search = asGenericTemplateToken({
-  ...Default,
-  Meta: {
-    title: 'Search',
-  },
-  Components: {
-    ...Default.Components,
-    Breadcrumb: as(Default.Components.Breadcrumb, addProps({ children: 'Search', })),
-    TopContent: replaceWith(Fragment),
-    Content: on(SearchLayoutClean)(vitalSearchLayout.Default),
-    BottomContent: replaceWith(Fragment),
-  }
-});
-
 export default {
   Default,
   Generic,
   ContentListing,
   WithNoBreadcrumbsOnHomePage,
-  Search,
 };

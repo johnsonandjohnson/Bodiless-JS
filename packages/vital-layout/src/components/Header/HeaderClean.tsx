@@ -27,7 +27,6 @@ import {
   BurgerMenuClean,
   MenuClean,
 } from '@bodiless/vital-navigation';
-import { SearchTogglerClean, SearchMenuClean } from '@bodiless/vital-search';
 import { LogoClean } from '../Logo';
 import type { HeaderComponents, HeaderProps } from './types';
 
@@ -45,9 +44,9 @@ const headerComponents: HeaderComponents = {
   ActionMenuContainer: Div,
   UtilityMenuWrapper: Fragment,
   UtilityMenu: MenuClean,
-  DesktopSearch: SearchMenuClean,
-  MobileSearch: SearchMenuClean,
-  SearchToggler: SearchTogglerClean,
+  DesktopSearch: Fragment,
+  MobileSearch: Fragment,
+  SearchToggler: Fragment,
   LanguageSelectorWrapper: Fragment,
   LanguageSelector: Fragment,
   WhereToBuyWrapper: Fragment,

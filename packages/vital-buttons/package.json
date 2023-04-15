@@ -1,7 +1,7 @@
 {
   "name": "@bodiless/vital-buttons",
   "sideEffects": false,
-  "version": "1.0.0-rc.29",
+  "version": "1.0.0-rc.34",
   "description": "",
   "author": "Heidi Vanyo <hvanyo@its.jnj.com>",
   "license": "Apache-2.0",
@@ -33,15 +33,15 @@
     "react": "^17.0.2"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.29",
-    "@bodiless/components": "^1.0.0-rc.29",
-    "@bodiless/components-ui": "^1.0.0-rc.29",
-    "@bodiless/core": "^1.0.0-rc.29",
-    "@bodiless/fclasses": "^1.0.0-rc.29",
-    "@bodiless/hydration": "^1.0.0-rc.29",
-    "@bodiless/vital-editors": "^1.0.0-rc.29",
-    "@bodiless/vital-elements": "^1.0.0-rc.29",
-    "@bodiless/vital-link": "^1.0.0-rc.29",
+    "@bodiless/cli": "^1.0.0-rc.34",
+    "@bodiless/components": "^1.0.0-rc.34",
+    "@bodiless/components-ui": "^1.0.0-rc.34",
+    "@bodiless/core": "^1.0.0-rc.34",
+    "@bodiless/fclasses": "^1.0.0-rc.34",
+    "@bodiless/hydration": "^1.0.0-rc.34",
+    "@bodiless/vital-editors": "^1.0.0-rc.34",
+    "@bodiless/vital-elements": "^1.0.0-rc.34",
+    "@bodiless/vital-link": "^1.0.0-rc.34",
     "lodash": "^4.17.19",
     "tailwindcss": "^3.0.23"
   }

@@ -23,6 +23,7 @@ import type { CopyrightRowComponents, CopyrightRowProps } from './types';
 const copyrightRowComponents: CopyrightRowComponents = {
   Wrapper: Div,
   CopyrightWrapper: Div,
+  Disclaimer: RichTextClean,
   Copyright: RichTextClean,
   SocialLinksWrapper: Div,
   SocialLinks: SocialLinksClean,
@@ -31,6 +32,7 @@ const copyrightRowComponents: CopyrightRowComponents = {
 const CopyrightRowCleanBase: FC<CopyrightRowProps> = ({ components: C, ...rest }) => (
   <C.Wrapper {...rest}>
     <C.CopyrightWrapper>
+      <C.Disclaimer />
       <C.Copyright />
     </C.CopyrightWrapper>
     <C.SocialLinksWrapper>

@@ -13,7 +13,7 @@
  */
 
 import React, { ComponentType, FC } from 'react';
-import { createHash } from 'crypto';
+import MD5 from 'crypto-js/md5';
 import {
   useMenuOptionUI, WithNodeKeyProps, withNodeKey, withNode, ifEditable,
   withLocalContextMenu, withContextActivator, withEditButton, withNodeDataHandlers,
@@ -141,7 +141,7 @@ export const withKeyFromData = <P extends { componentData: any }>(Component: Com
   const WithKeyFromData = (props: P) => {
     const { componentData } = props;
     const json = JSON.stringify(componentData);
-    const key = createHash('md5').update(json).digest('hex');
+    const key = MD5(json).toString();
     return <Component {...props} key={key} />;
   };
   return WithKeyFromData;

@@ -14,7 +14,8 @@
 
 import {
   StaticInline as EditorPlainClean,
+  StaticBlock as BlockEditorPlainClean,
   staticTokenCollection as vitalEditorPlain,
 } from '@bodiless/hydration';
 
-export { EditorPlainClean, vitalEditorPlain };
+export { EditorPlainClean, BlockEditorPlainClean, vitalEditorPlain };

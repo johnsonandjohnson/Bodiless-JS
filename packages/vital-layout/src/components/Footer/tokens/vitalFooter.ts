@@ -50,7 +50,7 @@ const Default = asFooterToken({
     Wrapper: vitalColor.BgSecondaryFooter,
   },
   Schema: {
-    FooterMenu: withNodeKey({ nodeKey: 'footer-menu', nodeCollection: 'site' }),
+    FooterMenu: withNodeKey('footer-menu'),
     _: withNode,
   },
 });

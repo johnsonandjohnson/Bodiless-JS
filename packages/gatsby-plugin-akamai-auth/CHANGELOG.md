@@ -3,6 +3,49 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.34](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v1.0.0-rc.33...v1.0.0-rc.34) (2023-04-13)
+
+**Note:** Version bump only for package @bodiless/gatsby-plugin-akamai-auth
+
+
+
+
+
+# [1.0.0-rc.33](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v1.0.0-rc.32...v1.0.0-rc.33) (2023-04-06)
+
+**Note:** Version bump only for package @bodiless/gatsby-plugin-akamai-auth
+
+
+
+
+
+# [1.0.0-rc.32](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v1.0.0-rc.31...v1.0.0-rc.32) (2023-04-06)
+
+**Note:** Version bump only for package @bodiless/gatsby-plugin-akamai-auth
+
+
+
+
+
+# [1.0.0-rc.31](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v1.0.0-rc.30...v1.0.0-rc.31) (2023-04-06)
+
+
+### Bug Fixes
+
+* **@bodiless/search, gatsby-theme-bodiless:** Fix/transpile to esm search and gatsby theme bodiless ([#2023](https://github.com/johnsonandjohnson/Bodiless-JS/issues/2023)) ([ad864af](https://github.com/johnsonandjohnson/Bodiless-JS/commit/ad864af6f0ef30b8df91528d7e9d4adc6615fbf9))
+
+
+
+
+
+# [1.0.0-rc.30](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v1.0.0-rc.29...v1.0.0-rc.30) (2023-04-06)
+
+**Note:** Version bump only for package @bodiless/gatsby-plugin-akamai-auth
+
+
+
+
+
 # [1.0.0-rc.29](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v1.0.0-rc.28...v1.0.0-rc.29) (2023-03-21)
 
 **Note:** Version bump only for package @bodiless/gatsby-plugin-akamai-auth

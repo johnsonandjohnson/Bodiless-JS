@@ -36,11 +36,15 @@ type EditableOverrides = {
 
 export type UseEditableOverrides = (props: EditableProps) => EditableOverrides;
 
-type EditableProps = {
+type EditableBaseProps = {
   placeholder?: string,
   children?: string,
   useOverrides?: UseEditableOverrides,
-} & Partial<WithNodeProps>;
+  tagName?: keyof JSX.IntrinsicElements,
+  className?: string,
+};
+
+type EditableProps = EditableBaseProps & Partial<WithNodeProps>;
 
 export type EditableData = {
   text: string;
@@ -59,21 +63,26 @@ export const isEditableData = (d: any): d is EditableData => {
   return true;
 };
 
-const Text = observer((props: EditableProps) => {
-  const { placeholder, useOverrides = () => ({}) }: EditableProps = props;
+const Text = observer((props: EditableBaseProps) => {
+  const {
+    placeholder, useOverrides = () => ({}), children, tagName: Tag = 'span', ...rest
+  }: EditableProps = props;
   const { sanitizer = identity }: EditableOverrides = useOverrides(props);
   const { node } = useNode<EditableData>();
   const text = sanitizer(
-    (node.data.text !== undefined ? node.data.text : props.children) || placeholder || '',
+    (node.data.text !== undefined ? node.data.text : children) || placeholder || '',
   );
   // eslint-disable-next-line react/no-danger
-  return <span dangerouslySetInnerHTML={{ __html: text }} />;
+  return <Tag {...rest} dangerouslySetInnerHTML={{ __html: text }} />;
 });
-const EditableText = observer((props: EditableProps) => {
+const EditableText = observer((props: EditableBaseProps) => {
   const { node } = useNode<EditableData>();
-  const { placeholder = '', useOverrides = () => ({}) }: EditableProps = props;
+  const {
+    placeholder = '', useOverrides = () => ({}), children, tagName = 'span',
+    className, ...rest
+  } = props;
   const { sanitizer = identity }: EditableOverrides = useOverrides(props);
-  const text = (node.data.text !== undefined ? node.data.text : props.children) || '';
+  const text = (node.data.text !== undefined ? node.data.text : children) || '';
   const [hasFocus, setFocus] = useState(false);
   const ref = useRef<HTMLElement>(null);
   const onChange = useCallback(() => {
@@ -89,23 +98,26 @@ const EditableText = observer((props: EditableProps) => {
       document.execCommand('insertHTML', false, pasteText);
     }
   }, []);
+  const finalClassName = (className?.split(' ') || []).concat('bodiless-inline-editable').join(' ');
   return (
     <ContentEditable
+      {...rest}
       innerRef={ref}
-      tagName="span"
-      className="bodiless-inline-editable"
+      tagName={tagName}
+      className={finalClassName}
       onChange={onChange}
       onPaste={pasteAsPlainText}
       onFocus={onFocus}
       onBlur={onBlur}
       html={hasFocus ? text : sanitizer(text)}
       data-placeholder={placeholder}
+      data-test-id="bodiless-inline-editable"
     />
   );
 });
 
 const Editable = withNode(
-  observer((props: EditableProps) => {
+  observer((props: EditableBaseProps) => {
     const { isEdit } = useEditContext();
     return isEdit ? (
       <EditableText {...props} />

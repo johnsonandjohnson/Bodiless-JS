@@ -13,7 +13,7 @@
  */
 
 import { ComponentOrTag } from '@bodiless/fclasses';
-import { createHash } from 'crypto';
+import MD5 from 'crypto-js/md5';
 import { useNode } from '@bodiless/core';
 import React, { FC, useRef, useLayoutEffect } from 'react';
 import memoize from 'lodash/memoize';
@@ -54,7 +54,7 @@ const getDisplayName = (WrappedComponent: ComponentOrTag<any>) => (typeof Wrappe
 
 const useWrapperId = (nodeKey?: string | undefined) => {
   const { node: { path = []}} = useNode();
-  return createHash('md5').update([...path, nodeKey].filter(Boolean).join('$')).digest('hex');
+  return MD5([...path, nodeKey].filter(Boolean).join('$')).toString();
 };
 
 const withoutHydrationClientSideEdit: WithoutHydrationFunction = (
