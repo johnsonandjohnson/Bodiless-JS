@@ -10,22 +10,9 @@ Tokens for the vital logo
 
 ### Properties
 
-- [Base](VitalLogo.md#base)
 - [Default](VitalLogo.md#default)
 
 ## Properties
-
-### Base
-
-• **Base**: `TokenSpec`<[`LogoComponents`](LogoComponents.md), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\>
-
-Base makes a clickable image:
-
-#### Defined in
-
-[vital-layout/src/components/Logo/tokens/vitalLogo.ts:65](https://github.com/johnsonandjohnson/Bodiless-JS/blob/44996d2bd/packages/vital-layout/src/components/Logo/tokens/vitalLogo.ts#L65)
-
-___
 
 ### Default
 
@@ -52,4 +39,4 @@ export default {
 
 #### Defined in
 
-[vital-layout/src/components/Logo/tokens/vitalLogo.ts:86](https://github.com/johnsonandjohnson/Bodiless-JS/blob/44996d2bd/packages/vital-layout/src/components/Logo/tokens/vitalLogo.ts#L86)
+[vital-layout/src/components/Logo/tokens/vitalLogo.ts:82](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8f5687376/packages/vital-layout/src/components/Logo/tokens/vitalLogo.ts#L82)

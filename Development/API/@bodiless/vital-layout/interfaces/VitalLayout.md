@@ -10,23 +10,10 @@ Tokens for the vital layout
 
 ### Properties
 
-- [Base](VitalLayout.md#base)
 - [Default](VitalLayout.md#default)
 - [StyleGuide](VitalLayout.md#styleguide)
 
 ## Properties
-
-### Base
-
-• **Base**: `TokenSpec`<[`LayoutComponents`](LayoutComponents.md), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\>
-
-Base that defines the default layout.
-
-#### Defined in
-
-[vital-layout/src/components/Layout/tokens/vitalLayout.ts:88](https://github.com/johnsonandjohnson/Bodiless-JS/blob/44996d2bd/packages/vital-layout/src/components/Layout/tokens/vitalLayout.ts#L88)
-
-___
 
 ### Default
 
@@ -39,7 +26,7 @@ Inherits from Base & assigns the components vitalHeader.Default & vitalFooter.Fo
 import { asLayoutToken, vitalHeader, vitalLayoutBase } from '@bodiless/vital-layout';
 import asMyFooter from '../../../components/Footer';
 
-const Default = asLayoutToken(vitalLayoutBase.Base, {
+const Default = asLayoutToken(vitalLayoutBase.Default, {
   Components: {
     Header: vitalHeader.Default,
     Footer: asMyFooter,
@@ -75,7 +62,7 @@ export default {
 
 #### Defined in
 
-[vital-layout/src/components/Layout/tokens/vitalLayout.ts:132](https://github.com/johnsonandjohnson/Bodiless-JS/blob/44996d2bd/packages/vital-layout/src/components/Layout/tokens/vitalLayout.ts#L132)
+[vital-layout/src/components/Layout/tokens/vitalLayout.ts:123](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8f5687376/packages/vital-layout/src/components/Layout/tokens/vitalLayout.ts#L123)
 
 ___
 
@@ -87,4 +74,4 @@ Special layout to demonstrate components.  Only used for testing purposing.
 
 #### Defined in
 
-[vital-layout/src/components/Layout/tokens/vitalLayout.ts:136](https://github.com/johnsonandjohnson/Bodiless-JS/blob/44996d2bd/packages/vital-layout/src/components/Layout/tokens/vitalLayout.ts#L136)
+[vital-layout/src/components/Layout/tokens/vitalLayout.ts:127](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8f5687376/packages/vital-layout/src/components/Layout/tokens/vitalLayout.ts#L127)
