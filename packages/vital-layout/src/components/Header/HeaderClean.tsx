@@ -42,6 +42,8 @@ const headerComponents: HeaderComponents = {
   BurgerMenu: BurgerMenuClean,
   Logo: LogoClean,
   ActionMenuContainer: Div,
+  OuterUtilityMenuWrapper: Fragment,
+  OuterUtilityMenu: Fragment,
   UtilityMenuWrapper: Fragment,
   UtilityMenu: MenuClean,
   DesktopSearch: Fragment,
@@ -55,6 +57,9 @@ const headerComponents: HeaderComponents = {
 
 const HeaderCleanBase: FC<HeaderProps> = ({ components: C, ...rest }) => (
   <C.Wrapper {...rest}>
+    <C.OuterUtilityMenuWrapper>
+      <C.OuterUtilityMenu />
+    </C.OuterUtilityMenuWrapper>
     <C.Container>
       <C.MenuTogglerWrapper>
         <C.MenuToggler />
