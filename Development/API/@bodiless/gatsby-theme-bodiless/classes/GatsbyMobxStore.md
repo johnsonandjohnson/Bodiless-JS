@@ -386,7 +386,7 @@ BodilessMobxStore.parseData
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyMobxStore.ts:32](https://github.com/johnsonandjohnson/Bodiless-JS/blob/70131d630/packages/gatsby-theme-bodiless/src/dist/GatsbyMobxStore.ts#L32)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyMobxStore.ts:32](https://github.com/johnsonandjohnson/Bodiless-JS/blob/cf67a5d2a/packages/gatsby-theme-bodiless/src/dist/GatsbyMobxStore.ts#L32)
 
 ___
 
