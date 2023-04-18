@@ -7,7 +7,7 @@
   ],
   "license": "Apache-2.0",
   "scripts": {
-    "bootstrap": "npm run clean:symlinks && npx lerna@^5.0.0 bootstrap --hoist --strict",
+    "bootstrap": "npm run clean:symlinks && npx lerna@^5.0.0 bootstrap --hoist --strict && patch-package",
     "bootstrap:gatsby-cloud": "npm i && npx lerna@^5.0.0 bootstrap",
     "build": "cross-env NODE_ENV=production lerna run build --stream --ignore @bodiless/gatsby-starter-bodiless",
     "build:only": "cross-env NODE_ENV=production lerna run build --stream --scope",
@@ -135,7 +135,8 @@
     "tslint-config-airbnb": "^5.11.1",
     "typedoc": "^0.22.6",
     "typedoc-plugin-markdown": "^3.11.3",
-    "typescript": "^4.0.0"
+    "typescript": "^4.0.0",
+    "patch-package": "^6.5.1"
   },
   "repository": {
     "type": "git",
