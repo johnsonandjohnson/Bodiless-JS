@@ -28,7 +28,7 @@ Width classes are applied to this wrapper dynamically to control layout.
 
 #### Defined in
 
-[bodiless-layouts/src/FlowContainer/types.ts:106](https://github.com/johnsonandjohnson/Bodiless-JS/blob/cf67a5d2a/packages/bodiless-layouts/src/FlowContainer/types.ts#L106)
+[bodiless-layouts/src/FlowContainer/types.ts:106](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8696b8433/packages/bodiless-layouts/src/FlowContainer/types.ts#L106)
 
 ___
 
@@ -42,4 +42,4 @@ the layout of its children.
 
 #### Defined in
 
-[bodiless-layouts/src/FlowContainer/types.ts:101](https://github.com/johnsonandjohnson/Bodiless-JS/blob/cf67a5d2a/packages/bodiless-layouts/src/FlowContainer/types.ts#L101)
+[bodiless-layouts/src/FlowContainer/types.ts:101](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8696b8433/packages/bodiless-layouts/src/FlowContainer/types.ts#L101)

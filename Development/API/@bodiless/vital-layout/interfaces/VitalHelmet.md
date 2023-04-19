@@ -45,7 +45,7 @@ export default {
 
 #### Defined in
 
-[vital-layout/src/components/Helmet/tokens/vitalHelmet.ts:81](https://github.com/johnsonandjohnson/Bodiless-JS/blob/cf67a5d2a/packages/vital-layout/src/components/Helmet/tokens/vitalHelmet.ts#L81)
+[vital-layout/src/components/Helmet/tokens/vitalHelmet.ts:81](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8696b8433/packages/vital-layout/src/components/Helmet/tokens/vitalHelmet.ts#L81)
 
 ___
 
@@ -57,7 +57,7 @@ WithDesktopStaticBody token applies static position on body.
 
 #### Defined in
 
-[vital-layout/src/components/Helmet/tokens/vitalHelmet.ts:85](https://github.com/johnsonandjohnson/Bodiless-JS/blob/cf67a5d2a/packages/vital-layout/src/components/Helmet/tokens/vitalHelmet.ts#L85)
+[vital-layout/src/components/Helmet/tokens/vitalHelmet.ts:85](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8696b8433/packages/vital-layout/src/components/Helmet/tokens/vitalHelmet.ts#L85)
 
 ___
 
@@ -69,4 +69,4 @@ WithFixedBody token applies fixed position on body to prevent scrolling.
 
 #### Defined in
 
-[vital-layout/src/components/Helmet/tokens/vitalHelmet.ts:89](https://github.com/johnsonandjohnson/Bodiless-JS/blob/cf67a5d2a/packages/vital-layout/src/components/Helmet/tokens/vitalHelmet.ts#L89)
+[vital-layout/src/components/Helmet/tokens/vitalHelmet.ts:89](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8696b8433/packages/vital-layout/src/components/Helmet/tokens/vitalHelmet.ts#L89)
