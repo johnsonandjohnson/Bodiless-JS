@@ -23,7 +23,7 @@ import {
 
 import { asEditable } from '@bodiless/components';
 import {
-  withContextActivator, withLocalContextMenu,
+  withContextActivator, withLocalContextMenu, observer
 } from '@bodiless/core';
 import {
   useNode, withDefaultContent, withNode, withNodeKey,
@@ -33,7 +33,6 @@ import {
 } from '@bodiless/fclasses';
 import { withContentLibrary } from '@bodiless/layouts';
 import { ComponentSelector } from '@bodiless/layouts-ui';
-import { observer } from 'mobx-react';
 import Layout from '../../../components/Layout';
 import { asEditableImage } from '../../../components/Image';
 

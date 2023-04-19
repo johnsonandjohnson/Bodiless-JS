@@ -15,7 +15,7 @@
 import flowRight from 'lodash/flowRight';
 import type { Enhancer } from '@bodiless/fclasses';
 import withNode, { withNodeKey } from './withNode';
-import { withNodeDataHandlers } from './hoc';
+import { withNodeDataHandlers } from './hoc.bl-edit';
 import type { WithNodeProps, WithNodeKeyProps } from './NodeTypes';
 
 /**

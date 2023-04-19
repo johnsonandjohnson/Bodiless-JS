@@ -13,10 +13,9 @@
  */
 
 import React, { ComponentType, HTMLProps, PropsWithChildren } from 'react';
-import { observer } from 'mobx-react';
 import { SortableContainer, SortEndHandler } from 'react-sortable-hoc';
 import {
-  useContextActivator, withLocalContextMenu, withContextActivator,
+  useContextActivator, withLocalContextMenu, withContextActivator, observer,
 } from '@bodiless/core';
 import omit from 'lodash/omit';
 import { flowHoc } from '@bodiless/fclasses';

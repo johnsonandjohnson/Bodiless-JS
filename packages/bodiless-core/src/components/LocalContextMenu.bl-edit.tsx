@@ -13,10 +13,10 @@
  */
 
 import React, { FC, ComponentType, ReactElement } from 'react';
-import { observer } from 'mobx-react';
 import Tooltip from 'rc-tooltip';
 
 import flow from 'lodash/flow';
+import { observer } from '../mobx.bl-edit';
 import { useEditContext } from '../hooks';
 import { useUI } from './PageEditor';
 import { TMenuOption } from '../Types/ContextMenuTypes';

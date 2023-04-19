@@ -17,7 +17,6 @@ import React, {
   useCallback, useEffect,
 } from 'react';
 import { useFormApi, useFormState } from 'informed';
-import { observer } from 'mobx-react';
 import {
   useEditContext,
   withMenuOptions,
@@ -25,6 +24,7 @@ import {
   MenuOptionsDefinition,
   useMenuOptionUI,
   ContextMenuForm,
+  observer,
 } from '@bodiless/core';
 import {
   withNode,

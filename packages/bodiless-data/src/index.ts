@@ -17,7 +17,7 @@ import withData from './withData';
 import {
   withNodeAndHandlers,
   withNodeDataHandlers,
-} from './hoc';
+} from './hoc.bl-edit';
 import { withBodilessData } from './withBodilessData';
 import NodeProvider, { useNode, useNodeDataHandlers } from './NodeProvider';
 import type { NodeDataHandlers } from './NodeProvider';

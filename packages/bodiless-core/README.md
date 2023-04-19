@@ -134,7 +134,7 @@ To access the current page edit context, simply use the `useEditContext()`
 and/or `useContextActivator()` hooks.
 
 ```javascript
-import { observer } from 'mobx-react';
+import { observer } from '@bodiless/core';
 const Example = observer(props => {
   const { isActive, isEdit } = useEditContext();
   const { onClick } = useContextActivator();

@@ -17,10 +17,10 @@
 import React, {
   FC, createContext, useContext, useEffect, useCallback,
 } from 'react';
-import { observer } from 'mobx-react';
 
 import ContextMenu from './ContextMenu';
 import { useEditContext } from '../hooks';
+import { observer } from '../mobx.bl-edit';
 import { IContextMenuProps as ContextMenuProps, TMenuOption } from '../Types/ContextMenuTypes';
 import { useRegisterMenuOptions } from '../PageContextProvider';
 

@@ -13,7 +13,6 @@
  */
 import ResizeObserver from 'resize-observer-polyfill';
 
-import { observer } from 'mobx-react';
 import React, {
   ComponentType as CT, EventHandler, FC,
   useEffect,
@@ -22,6 +21,7 @@ import React, {
 } from 'react';
 import pick from 'lodash/pick';
 import { HOC } from '@bodiless/fclasses';
+import { observer } from './mobx.bl-edit';
 import { useContextActivator, useExtendHandler, useClickOutside } from './hooks';
 import LocalContextMenu from './components/LocalContextMenu.bl-edit';
 

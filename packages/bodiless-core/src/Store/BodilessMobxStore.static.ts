@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 /**
  * Copyright © 2019 Johnson & Johnson
  *
@@ -13,7 +12,9 @@
  * limitations under the License.
  */
 
+import { StoreItem } from './StoreItem';
 import type { BodilessStoreBackend, BodilessStoreConfig, BodilessStore } from './types';
+import { ItemStateEvent } from './types';
 
 export type DataSource = {
   slug: string,
@@ -37,7 +38,7 @@ export type DataSource = {
 export abstract class BodilessMobxStore<D> implements BodilessStore<D> {
   static nodeChildDelimiter = '$';
 
-  store = new Map<string, any>();
+  store = new Map<string, StoreItem>();
 
   client: BodilessStoreBackend|undefined;
 
@@ -61,11 +62,51 @@ export abstract class BodilessMobxStore<D> implements BodilessStore<D> {
    */
   protected abstract parseData(rawData: D): Map<string, any>;
 
-  getPendingItems() {
-    return [];
-  }
+  getPendingItems = () => ([]);
 
-  updateData(rawData: D) {}
+  /**
+   * Called at initial page render to initialize our data.
+   * Note - we just copy the results to our unobserved data structure unless modifications
+   * have been made, in which case we update the observable store.
+   *
+   * @param rawData
+   * The data with which to update the store. Should inclue both page level and site level
+   * data necessary to render a page.
+   */
+  updateData(rawData: D) {
+    if (rawData === undefined) {
+      return;
+    }
+    this.data = {};
+    const { store } = this;
+
+    const parsedData = this.parseData(rawData);
+    // Add all query results into the Mobx store.
+    parsedData.forEach((data, key) => {
+      const existingData = store.get(key);
+      // TODO: Determine why isEqual gives (apparently) false positives for RGLGrid data.
+      // if (!existingData || !isEqual(existingData.data, data)) {
+
+      // Invoke Mobx @action to update store.
+      if (
+        !existingData
+        || JSON.stringify(existingData.data) !== JSON.stringify(data)
+      ) {
+        this.setNode([key], data, ItemStateEvent.UpdateFromServer);
+      }
+    });
+    // Remove Mobx store entries that are not present in query results
+    Array.from(this.store.keys()).forEach(key => {
+      if (!parsedData.has(key)) {
+        const item = this.store.get(key);
+        // The item should not be removed if it is not clean
+        // as far as it may not be delivered to the server yet
+        if (item!.isClean()) {
+          this.deleteItem(key, false);
+        }
+      }
+    });
+  }
 
   getKeys = () => Array.from(this.store.keys());
 
@@ -77,14 +118,30 @@ export abstract class BodilessMobxStore<D> implements BodilessStore<D> {
     return storeValue || dataValue || {};
   };
 
-  setItem = () => {};
+  setItem = (key: string, item: StoreItem) => {
+    this.store.set(key, item);
+  };
 
-  deleteItem = () => {};
+  deleteItem = (key: string, soft = true) => {
+    if (soft) {
+      const item = this.store.get(key);
+      return item && item.delete();
+    }
+    return this.store.delete(key);
+  };
 
   /**
      * Mobx action saves or updates items.
      */
-  setNode = () => {};
+  setNode = (keyPath: string[], value = {}, event = ItemStateEvent.UpdateFromBrowser) => {
+    const key = keyPath.join(BodilessMobxStore.nodeChildDelimiter);
+    const item = this.store.get(key);
+    if (item) {
+      item.update(value, event);
+    } else {
+      this.setItem(key, new StoreItem(this, key, value, event));
+    }
+  };
 
   getChildrenNodes = (keyPath: string[]) => {
     const key = keyPath.join(BodilessMobxStore.nodeChildDelimiter);

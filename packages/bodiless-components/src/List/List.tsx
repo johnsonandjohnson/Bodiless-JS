@@ -18,8 +18,7 @@ import React, {
   useMemo,
 } from 'react';
 import flow from 'lodash/flow';
-import { observer } from 'mobx-react';
-import { useActivateOnEffect } from '@bodiless/core';
+import { observer, useActivateOnEffect } from '@bodiless/core';
 import { withNode } from '@bodiless/data';
 import {
   designable, addProps, withDesign, Fragment,

@@ -13,12 +13,12 @@
  */
 
 import React, { ComponentType } from 'react';
-import { observer } from 'mobx-react';
 import {
   ifReadOnly,
   ifEditable,
   useEditToggle,
   ifToggledOn,
+  observer,
 } from '@bodiless/core';
 import { addProps } from '@bodiless/fclasses';
 import { Editor, Element } from 'slate';

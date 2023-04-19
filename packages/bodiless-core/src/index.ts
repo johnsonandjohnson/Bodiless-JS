@@ -13,7 +13,6 @@
  */
 
 import { ComponentType } from 'react';
-import { configure } from 'mobx';
 import PageContextProvider, { withMenuOptions, useRegisterMenuOptions } from './PageContextProvider';
 import PageEditContext from './PageEditContext';
 import asStatic from './asStatic';
@@ -76,9 +75,7 @@ import {
 } from './SessionStorage';
 import withResetButton from './withResetButton';
 
-configure({
-  enforceActions: 'never',
-});
+export * from './mobx.bl-edit';
 
 export * from './components';
 export * from './Store';

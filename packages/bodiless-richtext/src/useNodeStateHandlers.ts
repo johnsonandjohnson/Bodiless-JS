@@ -12,10 +12,9 @@
  * limitations under the License.
  */
 
-import { isObservable, toJS } from 'mobx';
 import isEqual from 'react-fast-compare';
 import isEmpty from 'lodash/isEmpty';
-import { useUUID } from '@bodiless/core';
+import { useUUID, isObservable, toJS } from '@bodiless/core';
 import { useNode } from '@bodiless/data';
 import {
   EditorOnChange,

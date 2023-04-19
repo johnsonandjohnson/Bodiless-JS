@@ -13,7 +13,7 @@
  */
 
 import React, { ComponentType } from 'react';
-import { observer } from 'mobx-react';
+import { observer } from '../../src/mobx.bl-edit';
 import { TMenuOption } from '../../src/Types/ContextMenuTypes';
 import { useEditContext } from '../../src/hooks';
 

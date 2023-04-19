@@ -13,7 +13,6 @@
  */
 
 import React, { ComponentType, useState } from 'react';
-import { observer } from 'mobx-react';
 import {
   withDesign,
   designable,
@@ -26,7 +25,7 @@ import {
 import {
   asEditable,
 } from '@bodiless/components';
-import { useEditContext } from '@bodiless/core';
+import { useEditContext, observer } from '@bodiless/core';
 import { withNode } from '@bodiless/data';
 
 export type SingleAccordionComponents = {

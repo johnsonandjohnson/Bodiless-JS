@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2023 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,20 +12,19 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
-import { observer } from '@bodiless/core';
-import { withNode, useNodeDataHandlers } from '@bodiless/data';
+import { observable, action, makeObservable } from 'mobx';
 
-const NodeViewer: ComponentType<any> = withNode(
-  observer(() => {
-    const { componentData } = useNodeDataHandlers();
-    return (
-      <pre>
-        NodeLink Data:
-        {JSON.stringify(componentData, null, 2)}
-      </pre>
-    );
-  }),
-);
+class DummyContentNodeStore {
+  @observable data = {};
 
-export default NodeViewer;
+  @action setData(newData: any) {
+    this.data = { ...newData };
+  }
+
+  constructor(initialData: any) {
+    makeObservable(this);
+    this.data = { ...initialData };
+  }
+}
+
+export default DummyContentNodeStore;

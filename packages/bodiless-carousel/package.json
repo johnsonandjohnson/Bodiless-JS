@@ -42,7 +42,6 @@
     "pure-react-carousel": "^1.27.6"
   },
   "peerDependencies": {
-    "mobx-react": "^7.2.1",
     "react": "^17.0.2"
   }
 }

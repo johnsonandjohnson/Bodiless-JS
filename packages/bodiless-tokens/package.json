@@ -48,7 +48,6 @@
     "@types/crypto-js": "4.1.1"
   },
   "peerDependencies": {
-    "mobx-react": "^7.2.1",
     "react": "^17.0.2"
   }
 }

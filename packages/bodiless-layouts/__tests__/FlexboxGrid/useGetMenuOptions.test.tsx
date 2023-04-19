@@ -43,6 +43,7 @@ jest.mock('@bodiless/core', () => ({
   withLocalContextMenu: jest.fn((c:any) => c),
   contextMenuForm: jest.fn(() => contextMenuFormInner),
   useGetter: jest.fn((options: any) => () => options),
+  observer: jest.requireActual('@bodiless/core').observer
 }));
 jest.mock('@bodiless/data', () => ({
   useNode: jest.fn(),

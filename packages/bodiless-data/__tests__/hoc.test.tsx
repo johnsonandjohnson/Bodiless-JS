@@ -17,7 +17,7 @@ import { shallow } from 'enzyme';
 import { observable } from 'mobx';
 import {
   withNodeDataHandlers,
-} from '../src/hoc';
+} from '../src/hoc.bl-edit';
 
 const TestComponent = ({ element: Element }: any) => (
   <Element><div>Test Component</div></Element>

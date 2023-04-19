@@ -18,7 +18,6 @@
 import React, { HTMLProps, FC } from 'react';
 import { graphql } from 'gatsby';
 
-import { observer } from 'mobx-react';
 import {
   flowIf, hasProp, addClasses, withoutProps, StylableProps,
   removeClasses, flowHoc,
@@ -34,6 +33,7 @@ import {
   LocalContextMenu,
   ContextWrapper,
   ContextWrapperProps,
+  observer
 } from '@bodiless/core';
 import {
   withNode,

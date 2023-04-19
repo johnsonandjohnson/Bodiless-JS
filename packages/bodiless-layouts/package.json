@@ -34,7 +34,6 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "peerDependencies": {
-    "mobx-react": "^7.2.1",
     "react": "^17.0.2"
   },
   "dependencies": {

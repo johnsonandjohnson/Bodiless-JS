@@ -88,7 +88,7 @@
     "gatsby-plugin-postcss": "5.10.0",
     "gatsby-plugin-react-helmet": "^5.10.0",
     "gatsby-plugin-remove-serviceworker": "^1.0.0",
-    "gatsby-plugin-robots-txt": "^1.7.0",
+    "gatsby-plugin-robots-txt": "1.7.0",
     "gatsby-plugin-sharp": "^4.11.1",
     "gatsby-plugin-typescript": "^4.10.1",
     "gatsby-source-filesystem": "^4.11.1",
@@ -116,8 +116,6 @@
   },
   "peerDependencies": {
     "gatsby": "^4.11.2",
-    "mobx": "^6.0.0",
-    "mobx-react": "^7.2.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   }

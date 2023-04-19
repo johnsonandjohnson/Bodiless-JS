@@ -26,7 +26,6 @@ import {
   extendDesign,
   varyDesigns,
 } from '@bodiless/fclasses';
-import { observer } from 'mobx-react';
 
 import {
   asBodilessChameleon, withChameleonContext, withChameleonButton,
@@ -40,7 +39,7 @@ import {
 import { withAllTitlesFromTerms, ComponentSelectorScale } from '@bodiless/layouts';
 
 import {
-  useMenuOptionUI, asBodilessComponent,
+  useMenuOptionUI, asBodilessComponent, observer
 } from '@bodiless/core';
 import { asHeader1, asHeader2 } from '../../../components/Elements.token';
 import Layout from '../../../components/Layout';

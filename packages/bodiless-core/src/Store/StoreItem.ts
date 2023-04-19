@@ -15,7 +15,7 @@
 import path from 'path';
 import {
   observable, action, makeObservable,
-} from 'mobx';
+} from '../mobx.bl-edit';
 import type { BodilessStoreConfig } from './types';
 import { ItemState, ItemStateEvent } from './types';
 

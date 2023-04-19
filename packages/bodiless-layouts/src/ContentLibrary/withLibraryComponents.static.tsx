@@ -13,7 +13,7 @@
  */
 
 import React, { FC } from 'react';
-import { observer } from 'mobx-react';
+import { observer } from '@bodiless/core';
 import {
   useNode,
   ContentNode,

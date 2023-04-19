@@ -13,7 +13,7 @@
  */
 
 import {
-  withMenuOptions, withContextActivator,
+  withMenuOptions, withContextActivator, observer,
 } from '@bodiless/core';
 import {
   ContentNode, WithNodeKeyProps, withNodeKey, withNode, withNodeDataHandlers,
@@ -28,7 +28,6 @@ import {
 } from '@bodiless/fclasses';
 import flow from 'lodash/flow';
 import flowRight from 'lodash/flowRight';
-import { observer } from 'mobx-react';
 import { v4 } from 'uuid';
 import {
   TokenSelectorProps, TokenSelectorData, withKeyFromData, withTokensFromData,

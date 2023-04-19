@@ -15,10 +15,10 @@
 import React, { ComponentType, FC, HTMLProps } from 'react';
 import {
   useEditContext,
-  TMenuOption
+  TMenuOption,
+  observer,
 } from '@bodiless/core';
 import flow from 'lodash/flow';
-import { observer } from 'mobx-react';
 import {
   DesignableComponentsProps, designable, StylableProps, Div,
 } from '@bodiless/fclasses';

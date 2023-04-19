@@ -14,7 +14,7 @@
 
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react';
-import { observer } from 'mobx-react';
+import { observer } from '../mobx.bl-edit';
 import { useEditContext } from '../hooks';
 import { useContextMenuContext, useMenuOptionUI } from './ContextMenuContext.bl-edit';
 import type { IContextMenuItemProps as IProps, ContextMenuFormProps, TMenuOption } from '../Types/ContextMenuTypes';

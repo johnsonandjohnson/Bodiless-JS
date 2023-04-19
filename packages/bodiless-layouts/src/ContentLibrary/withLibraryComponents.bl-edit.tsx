@@ -13,13 +13,13 @@
  */
 
 import React, { FC } from 'react';
-import { observer } from 'mobx-react';
 import {
   useContextMenuForm,
   createMenuOptionGroup,
   useMenuOptionUI,
   useEditContext,
   useGetter,
+  observer,
 } from '@bodiless/core';
 import {
   useNode,

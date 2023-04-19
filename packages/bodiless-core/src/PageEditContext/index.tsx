@@ -13,13 +13,13 @@
  */
 
 import React, { ConsumerProps, FC, ReactElement } from 'react';
-import { Observer } from 'mobx-react';
 import {
   DefinesLocalEditContext,
   PageEditContextInterface,
   PageEditStoreInterface,
   TMenuOptionGetter,
 } from './types';
+import { Observer } from '../mobx.bl-edit';
 import { TOverlaySettings } from '../Types/PageOverlayTypes';
 import { defaultStore, defaultOverlaySettings } from './Store';
 

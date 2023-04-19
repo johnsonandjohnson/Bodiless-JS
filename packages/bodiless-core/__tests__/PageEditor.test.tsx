@@ -13,8 +13,8 @@
  */
 
 import React from 'react';
-import { observer } from 'mobx-react';
 import { mount } from 'enzyme';
+import { observer } from '../src/mobx.bl-edit';
 import { useEditContext } from '../src/hooks';
 import PageEditor from '../src/components/PageEditor';
 import { Menu, menuRendered, itemRendered } from './helpers/Menu';

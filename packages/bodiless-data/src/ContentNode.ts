@@ -12,21 +12,8 @@
  * limitations under the License.
  */
 
-import { observable, action, makeObservable } from 'mobx';
 import identity from 'lodash/identity';
-
-class DummyContentNodeStore {
-  @observable data = {};
-
-  @action setData(newData: any) {
-    this.data = { ...newData };
-  }
-
-  constructor(initialData: any) {
-    makeObservable(this);
-    this.data = { ...initialData };
-  }
-}
+import DummyContentNodeStore from './DummyContentNodeStore.bl-edit';
 
 export type Actions = {
   setNode(path: string[], data: any): void;

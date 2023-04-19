@@ -26,13 +26,13 @@ import { createEditor, Editor } from 'slate';
 import {
   Slate, withReact, useSlate
 } from 'slate-react';
-import { observer } from 'mobx-react';
 import {
   useEditContext,
   useContextActivator,
   withMenuOptions,
   ifToggledOn,
   useUUID,
+  observer,
 } from '@bodiless/core';
 import { withNode } from '@bodiless/data';
 import {

@@ -13,11 +13,11 @@
  */
 
 import React from 'react';
-import { observer } from 'mobx-react';
 import { flowHoc } from '@bodiless/fclasses';
 import type {
   Condition, FlowHoc, ComponentWithMeta, ComponentOrTag,
 } from '@bodiless/fclasses';
+import { observer } from './mobx.bl-edit';
 
 /**
  * Allow components to be toggled on/off based on the value of useToggle function

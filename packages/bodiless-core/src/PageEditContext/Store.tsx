@@ -12,15 +12,15 @@
  * limitations under the License.
  */
 
-import {
-  action, computed, observable, extendObservable, makeObservable,
-} from 'mobx';
 import type { ObservableMap } from 'mobx';
 import type {
   PageEditContextInterface,
   PageEditStoreInterface,
   TPageOverlayStore,
 } from './types';
+import {
+  action, computed, observable, extendObservable, makeObservable,
+} from '../mobx.bl-edit';
 import type { TMenuOption } from '../Types/ContextMenuTypes';
 import {
   getFromSessionStorage,
