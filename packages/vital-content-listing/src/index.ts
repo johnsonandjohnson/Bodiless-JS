@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+export * from './components/ContentListingTemplate';
 export * from './components/ContentListing';
 export * from './components/ContentListingFlowContainer';
 export * from './components/Filter';

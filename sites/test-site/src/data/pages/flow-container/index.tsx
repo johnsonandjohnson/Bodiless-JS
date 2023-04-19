@@ -22,7 +22,8 @@ import { Page } from '@bodiless/gatsby-theme-bodiless';
 // @ts-ignore Could not find declaration file.
 import resolvedConfigs from
   '@bodiless/fclasses/src/tailwindcss/resolveConfig';
-import { withDefaultContent, withNodeKey, withResetButton } from '@bodiless/core';
+import { withResetButton } from '@bodiless/core';
+import { withDefaultContent, withNodeKey } from '@bodiless/data';
 import {
   H2 as BaseH2, addClasses, flowHoc, addProps, withDesign, startWith,
 } from '@bodiless/fclasses';

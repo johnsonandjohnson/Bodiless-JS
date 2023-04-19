@@ -13,7 +13,7 @@
  */
 
 import React, { ComponentType } from 'react';
-import { useNode } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import { withShowDesignKeys } from '@bodiless/fclasses';
 import Helmet from 'react-helmet';
 import withDataLayerItem, { withDefaultDataLayer } from '../gtm';

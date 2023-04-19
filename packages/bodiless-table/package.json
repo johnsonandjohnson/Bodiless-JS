@@ -30,6 +30,7 @@
   "dependencies": {
     "@bodiless/cli": "^1.0.0-rc.37",
     "@bodiless/core": "^1.0.0-rc.37",
+    "@bodiless/data": "^1.0.0-rc.37",
     "@bodiless/fclasses": "^1.0.0-rc.37",
     "lodash": "^4.17.19",
     "uuid": "^3.3.2"

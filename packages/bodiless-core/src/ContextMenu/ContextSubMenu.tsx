@@ -19,8 +19,8 @@ import React, {
 import { addProps, Div } from '@bodiless/fclasses';
 import ContextMenuItem from '../components/ContextMenuItem';
 import { ContextMenuBase } from '../components/ContextMenu';
-import { useMenuOptionUI } from '../components/ContextMenuContext';
-import { FormChrome } from '../contextMenuForm';
+import { useMenuOptionUI } from '../components/ContextMenuContext.bl-edit';
+import { FormChrome } from '../contextMenuForm.bl-edit';
 import type { IContextMenuItemProps, ContextMenuFormProps } from '../Types/ContextMenuTypes';
 
 // A context to hold the child menu items.

@@ -15,7 +15,7 @@
 /* eslint-disable import/prefer-default-export */
 
 import React, { ComponentType, useMemo } from 'react';
-import { withDefaultContent } from '@bodiless/core';
+import { withDefaultContent } from '@bodiless/data';
 import flow from 'lodash/flow';
 import { Enhancer } from '@bodiless/fclasses';
 import { deserializeHtml } from './htmlDeserializer';

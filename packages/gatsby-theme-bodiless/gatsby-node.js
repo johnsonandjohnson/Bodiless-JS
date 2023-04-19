@@ -253,13 +253,33 @@ exports.createPages = async ({ actions, graphql, getNode }) => {
 exports.onCreateWebpackConfig = ({
   stage, actions, plugins
 }, pluginOptions) => {
+  let commonTags = '';
+  try {
+    const commonTagsPath = require.resolve('common-tags');
+    commonTags = pathUtil.join(commonTagsPath.split('common-tags')[0], 'common-tags');
+  } catch (error) {
+    // Empty catch.
+  }
   actions.setWebpackConfig({
     plugins: [
       new webpack.DefinePlugin({
         BL_IS_EDIT: JSON.stringify(process.env.NODE_ENV !== 'production')
       })
-    ]
+    ],
   });
+  if (commonTags) {
+    // Force common-tags to be tree shakeable. Issue submitted to common-tags https://github.com/zspecza/common-tags/issues/219.
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            include: commonTags,
+            sideEffects: false
+          }
+        ]
+      }
+    });
+  }
   if (stage === 'build-javascript') {
     actions.setWebpackConfig({
       resolve: {

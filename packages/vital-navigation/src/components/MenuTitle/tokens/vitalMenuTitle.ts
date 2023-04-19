@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { withNodeKey, withSidecarNodes } from '@bodiless/core';
+import { withNodeKey, withSidecarNodes } from '@bodiless/data';
 import {
   Div,
   as,

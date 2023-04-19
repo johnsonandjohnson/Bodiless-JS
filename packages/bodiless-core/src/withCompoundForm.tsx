@@ -17,7 +17,7 @@ import React, {
 } from 'react';
 import { useFormState, useFormApi, Scope } from 'informed';
 import { HOC } from '@bodiless/fclasses';
-import { ContextMenuForm, FormBodyProps, FormBodyRenderer } from './contextMenuForm';
+import { ContextMenuForm, FormBodyProps, FormBodyRenderer } from './contextMenuForm.bl-edit';
 import type { ContextMenuFormProps } from './Types/ContextMenuTypes';
 import type { MenuOptionsDefinition } from './Types/PageContextProviderTypes';
 import { withMenuOptions } from './PageContextProvider';

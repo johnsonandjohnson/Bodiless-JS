@@ -13,7 +13,7 @@
  */
 
 import type { ReactNode } from 'react';
-import type { FormBodyProps as ContextMenuFormBodyProps } from '../contextMenuForm';
+import type { FormBodyProps as ContextMenuFormBodyProps } from '../contextMenuForm.bl-edit';
 import type { TMenuOption } from './ContextMenuTypes';
 import type { MenuOptionsDefinition } from './PageContextProviderTypes';
 

@@ -26,7 +26,8 @@ import {
 import {
   asEditable,
 } from '@bodiless/components';
-import { withNode, useEditContext } from '@bodiless/core';
+import { useEditContext } from '@bodiless/core';
+import { withNode } from '@bodiless/data';
 
 export type SingleAccordionComponents = {
   Wrapper: ComponentType<StylableProps>,

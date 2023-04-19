@@ -13,7 +13,7 @@
  */
 
 import withContentLibrary from './withContentLibrary';
-import { withLibraryComponents } from './withLibraryComponents';
+import { withLibraryComponents } from './withLibraryComponents.bl-edit';
 
 export * from './withLibraryContext';
 export {

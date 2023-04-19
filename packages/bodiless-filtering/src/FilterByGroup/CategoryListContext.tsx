@@ -16,7 +16,7 @@ import React, {
   createContext,
   useContext,
 } from 'react';
-import { useNode } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import { useListContext } from '@bodiless/components';
 import type { ComponentOrTag } from '@bodiless/fclasses';
 

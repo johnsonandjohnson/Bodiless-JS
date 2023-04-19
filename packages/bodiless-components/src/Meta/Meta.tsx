@@ -16,13 +16,15 @@ import React, { ComponentType as CT, PropsWithChildren } from 'react';
 import { HelmetProps } from 'react-helmet';
 import { FieldProps } from 'informed';
 import { withoutProps } from '@bodiless/fclasses';
+import { ifEditable, asReadOnly } from '@bodiless/core';
 import {
   useNode, withNodeKey, withNode, withSidecarNodes, withNodeDataHandlers,
-  withData, ifEditable, asReadOnly, useGitContext,
-} from '@bodiless/core';
-import type { WithNodeKeyProps } from '@bodiless/core';
+  withData,
+} from '@bodiless/data';
+import { useGitContext } from '@bodiless/git';
+import type { WithNodeKeyProps } from '@bodiless/data';
 import flowRight from 'lodash/flowRight';
-import { withMetaSnippet } from './withMetaForm';
+import { withMetaSnippet } from './withMetaForm.bl-edit';
 
 type BaseProps = PropsWithChildren<HelmetProps>;
 type Data = {

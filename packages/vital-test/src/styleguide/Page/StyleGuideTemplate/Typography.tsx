@@ -26,7 +26,8 @@ import {
 import { EditorPlainClean, vitalEditorPlain } from '@bodiless/vital-editors';
 import { asFluidToken, vitalTypography } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
-import { withDefaultContent, withNodeKey, withParent } from '@bodiless/core';
+import { withParent } from '@bodiless/core';
+import { withDefaultContent, withNodeKey } from '@bodiless/data';
 import { vitalLink } from '@bodiless/vital-link';
 import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 

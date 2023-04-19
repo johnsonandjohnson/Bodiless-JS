@@ -13,7 +13,8 @@
  */
 
 import { ComponentType } from 'react';
-import { withChild, withNodeKey } from '@bodiless/core';
+import { withChild } from '@bodiless/core';
+import { withNodeKey } from '@bodiless/data';
 import {
   addClasses, withoutProps, flowHoc, addProps, HOC,
 } from '@bodiless/fclasses';

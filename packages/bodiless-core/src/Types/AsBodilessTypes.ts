@@ -15,8 +15,8 @@
 import type {
   ComponentOrTag, HOCWithMeta
 } from '@bodiless/fclasses';
+import type { WithNodeProps, WithNodeKeyProps } from '@bodiless/data';
 import type { EditButtonOptions, UseBodilessOverrides } from './EditButtonTypes';
-import type { WithNodeProps, WithNodeKeyProps } from './NodeTypes';
 
 /**
  * Options for making a component "bodiless".

@@ -13,7 +13,7 @@
  */
 import {
   WithNodeKeyProps, withNode,
-} from '@bodiless/core';
+} from '@bodiless/data';
 import {
   asBodilessList, asStylableList, asChameleonSubList,
 } from '@bodiless/components';

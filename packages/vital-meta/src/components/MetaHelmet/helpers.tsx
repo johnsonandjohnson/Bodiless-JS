@@ -15,7 +15,8 @@
 import React from 'react';
 import { HOC } from '@bodiless/fclasses';
 import { withMetaForm } from '@bodiless/components';
-import { useMenuOptionUI, useNode } from '@bodiless/core';
+import { useMenuOptionUI } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 
 /**
  * isHomePage verify if the page is a home page.

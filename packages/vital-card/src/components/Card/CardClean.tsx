@@ -26,7 +26,7 @@ import {
   Fragment,
   as,
 } from '@bodiless/fclasses';
-import { withNode } from '@bodiless/core';
+import { withNode } from '@bodiless/data';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { LinkClean } from '@bodiless/vital-link';
 import { withoutHydration } from '@bodiless/hydration';

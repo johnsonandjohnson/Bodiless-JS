@@ -16,7 +16,7 @@ import React, { FC, useState } from 'react';
 import uniqBy from 'lodash/uniqBy';
 import ContextMenuItem from './ContextMenuItem';
 import StructuredChildren from '../ContextMenu/StructuredChildren';
-import ContextMenuProvider, { getUI } from './ContextMenuContext';
+import ContextMenuProvider, { getUI } from './ContextMenuContext.bl-edit';
 import {
   IContextMenuProps, ContextMenuFormProps, TMenuOption, MenuOptionDefaultComponents,
 } from '../Types/ContextMenuTypes';

@@ -14,7 +14,7 @@
  */
 
 import React from 'react';
-import { withNodeKey } from '@bodiless/core';
+import { withNodeKey } from '@bodiless/data';
 import {
   flowHoc,
   as,

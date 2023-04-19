@@ -12,4 +12,5 @@
  * limitations under the License.
  */
 
-export * from './FileUpload';
+export * from './FileUpload.bl-edit';
+export * from './types';

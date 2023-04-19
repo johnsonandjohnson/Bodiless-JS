@@ -18,9 +18,11 @@ import {
   withNotificationButton,
   withSwitcherButton,
   OnNodeErrorNotification,
+} from '@bodiless/core';
+import {
   useGitButtons,
   GitContextProvider,
-} from '@bodiless/core';
+} from '@bodiless/git';
 import {
   Fragment,
 } from '@bodiless/fclasses';

@@ -13,7 +13,7 @@
  */
 
 import omit from 'lodash/omit';
-import { withNodeKey } from '@bodiless/core';
+import { withNodeKey } from '@bodiless/data';
 import { ifComponentSelector } from '@bodiless/layouts';
 import {
   flowHoc, replaceWith, on, as, extendMeta, Div,

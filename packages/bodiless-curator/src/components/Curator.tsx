@@ -16,7 +16,7 @@ import React, { ComponentType, FC } from 'react';
 import flow from 'lodash/flow';
 import { AsBodiless, asBodilessComponent, useEditContext } from '@bodiless/core';
 import {
-  designable, A, Div, flowHoc
+  designable, A, Div, flowHoc, ComponentWithMeta
 } from '@bodiless/fclasses';
 import { useCuratorFormOptions, withCuratorFormSnippet } from './CuratorFormOptions';
 import CuratorProvider from './CuratorProvider';
@@ -77,7 +77,7 @@ const asBodilessCurator: AsBodiless<CuratorProps, CuratorData> = (
   asBodilessComponent(useCuratorFormOptions())(nodeKeys, defaultData, useOverrides),
 );
 
-const CuratorClean = flowHoc(
+const CuratorClean: ComponentWithMeta = flowHoc(
   designable(CuratorComponentsStart, 'Curator'),
   asBodilessCurator(),
 )(CuratorBase);

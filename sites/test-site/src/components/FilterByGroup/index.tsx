@@ -26,7 +26,7 @@ import {
 import {
   addProps, flowHoc, withDesign, Fragment, replaceWith,
 } from '@bodiless/fclasses';
-import { withNodeKey } from '@bodiless/core';
+import { withNodeKey } from '@bodiless/data';
 import { asFilterByGroupResponsive, asFilterByGroupDefaultStyle } from './token';
 import { breakpoints as allBreakpoints } from '../Page';
 

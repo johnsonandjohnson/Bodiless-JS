@@ -13,7 +13,7 @@
  */
 
 import { flowIf } from '@bodiless/fclasses';
-import { useNode } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import { asElementToken } from '@bodiless/vital-elements';
 import { vitalEditorPlainBase, withAutoSuperscript } from '@bodiless/vital-editors';
 

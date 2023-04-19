@@ -12,16 +12,13 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
-import { withNode } from '@bodiless/core';
-import {
-  Div,
-  withoutProps,
-  DesignableProps,
-} from '@bodiless/fclasses';
-import { observer } from 'mobx-react';
+import React from 'react';
+import type { FC } from 'react';
+import { withNode } from '@bodiless/data';
+import { Div, withoutProps } from '@bodiless/fclasses';
+import type { DesignableProps } from '@bodiless/fclasses';
 import { useItemHandlers } from './model';
-import { FlowContainerItem, FlowContainerComponents } from './types';
+import type { FlowContainerItem, FlowContainerComponents } from './types';
 import { SelectorComponents } from '../ComponentSelector/SelectorComponents';
 
 const flowContainerComponentStart: FlowContainerComponents = {
@@ -74,4 +71,4 @@ const StaticFlowContainer: FC<DesignableProps & { id?: string }> = ({ design, id
 
 StaticFlowContainer.displayName = 'FlowContainer';
 
-export default observer(StaticFlowContainer);
+export default StaticFlowContainer;

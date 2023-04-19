@@ -13,11 +13,13 @@
  */
 
 import {
+  withParent,
+} from '@bodiless/core';
+import {
   withNode,
   withNodeKey,
-  withParent,
   withSidecarNodes,
-} from '@bodiless/core';
+} from '@bodiless/data';
 import {
   GatsbyImagePresets,
   withoutGatsbyImageProps,

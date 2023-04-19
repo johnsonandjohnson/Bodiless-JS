@@ -14,8 +14,9 @@
 
 import React, { Fragment, ComponentType, useMemo } from 'react';
 import {
-  useNode, TMenuOption, withMenuOptions, withOnlyProps,
+  TMenuOption, withMenuOptions, withOnlyProps,
 } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import { observer } from 'mobx-react';
 import { ComponentOrTag, HOC } from '@bodiless/fclasses';
 

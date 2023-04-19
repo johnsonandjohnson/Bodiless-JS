@@ -20,7 +20,7 @@ import {
   Div,
   flowHoc,
 } from '@bodiless/fclasses';
-import { withNodeKey } from '@bodiless/core';
+import { withNodeKey } from '@bodiless/data';
 import ResponsiveMenu, { BurgerMenuToggler } from '../Menu';
 import { ResponsiveSearchBox } from '../Search';
 import Logo from './logo';

@@ -16,7 +16,7 @@
 import React, {
   createContext, useContext, FC, useRef,
 } from 'react';
-import { WithNodeKeyProps, withSidecarNodes, withBodilessData } from '@bodiless/core';
+import { WithNodeKeyProps, withSidecarNodes, withBodilessData } from '@bodiless/data';
 import {
   ComponentOrTag, Fragment, DesignableComponents, Design, HOC, flowHoc, replaceWith, as,
   replaceable,

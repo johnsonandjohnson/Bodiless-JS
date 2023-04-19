@@ -30,11 +30,11 @@ import { observer } from 'mobx-react';
 import {
   useEditContext,
   useContextActivator,
-  withNode,
   withMenuOptions,
   ifToggledOn,
   useUUID,
 } from '@bodiless/core';
+import { withNode } from '@bodiless/data';
 import {
   designable,
   withDisplayName,

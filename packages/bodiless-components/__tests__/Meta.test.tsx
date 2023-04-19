@@ -17,11 +17,13 @@ import { Helmet } from 'react-helmet';
 import flowRight from 'lodash/flowRight';
 import { shallow, mount } from 'enzyme';
 import {
-  DefaultContentNode,
-  NodeProvider,
   PageEditContext,
   useEditContext,
 } from '@bodiless/core';
+import {
+  DefaultContentNode,
+  NodeProvider,
+} from '@bodiless/data';
 import { withMeta, withTitle, withMetaHtml } from '../src/Meta/Meta';
 
 const getMockNode = (data: string) => {

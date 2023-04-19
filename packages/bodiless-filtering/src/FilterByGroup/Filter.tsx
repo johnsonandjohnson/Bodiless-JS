@@ -17,14 +17,16 @@ import React, { FC } from 'react';
 import flow from 'lodash/flow';
 import isEmpty from 'lodash/isEmpty';
 import {
-  withNodeKey,
-  withNode,
-  withNodeDataHandlers,
   ifReadOnly,
   ifEditable,
   withContextActivator,
   withLocalContextMenu,
 } from '@bodiless/core';
+import {
+  withNodeKey,
+  withNode,
+  withNodeDataHandlers,
+} from '@bodiless/data';
 import {
   designable,
   Div,

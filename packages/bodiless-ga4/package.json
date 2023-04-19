@@ -6,6 +6,7 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
+  "sideEffects": false,
   "files": [
     "/lib",
     "/doc",
@@ -31,6 +32,7 @@
     "@bodiless/cli": "^1.0.0-rc.37",
     "@bodiless/components": "^1.0.0-rc.37",
     "@bodiless/core": "^1.0.0-rc.37",
+    "@bodiless/data": "^1.0.0-rc.37",
     "@bodiless/fclasses": "^1.0.0-rc.37",
     "@bodiless/filtering": "^1.0.0-rc.37",
     "@bodiless/layouts": "^1.0.0-rc.37",

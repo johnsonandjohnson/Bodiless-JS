@@ -27,7 +27,7 @@ import {
 } from 'slate-react';
 import {
   withNode
-} from '@bodiless/core';
+} from '@bodiless/data';
 import {
   designable,
   withDisplayName,

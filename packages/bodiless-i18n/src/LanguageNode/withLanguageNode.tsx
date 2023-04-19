@@ -3,7 +3,7 @@ import {
   DefaultContentNode,
   NodeProvider,
   useNode,
-} from '@bodiless/core';
+} from '@bodiless/data';
 import { HOC } from '@bodiless/fclasses';
 import { LanguageContentNode } from './LanguageContentNode';
 import { useLanguageContext } from '../LanguageProvider';

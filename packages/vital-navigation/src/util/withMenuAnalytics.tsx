@@ -13,7 +13,7 @@
  */
 
 import React from 'react';
-import { useNode } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import { HOC, withDesign } from '@bodiless/fclasses';
 
 const withAnalyticsAttr: HOC = Component => props => {

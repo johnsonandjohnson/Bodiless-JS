@@ -13,7 +13,7 @@
  */
 
 import flowRight from 'lodash/flowRight';
-import { withNode, withNodeKey } from '@bodiless/core';
+import { withNode, withNodeKey } from '@bodiless/data';
 
 const asBodilessHelmet = (nodeKey?: string) => flowRight(
   withNodeKey({ nodeKey, nodeCollection: 'site' }),

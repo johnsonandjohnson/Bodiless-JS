@@ -19,7 +19,7 @@ import { mount } from 'enzyme';
 import flowRight from 'lodash/flowRight';
 import { withMenuOptions } from '../src/PageContextProvider';
 import { useEditContext } from '../src/hooks';
-import { withContextActivator } from '../src/hoc';
+import { withContextActivator } from '../src/hoc.bl-edit';
 import PageEditContext from '../src/PageEditContext';
 
 describe('useMemo for getMenuOptions', () => {

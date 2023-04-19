@@ -16,14 +16,16 @@ import React from 'react';
 import {
   TMenuOption,
   withContextActivator,
-  withData,
   withLocalContextMenu,
   withMenuOptions,
+} from '@bodiless/core';
+import {
+  withData,
   withNode,
   withNodeDataHandlers,
   withNodeKey,
   WithNodeProps,
-} from '@bodiless/core';
+} from '@bodiless/data';
 import {
   withoutProps,
   HOC,

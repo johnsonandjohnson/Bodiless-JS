@@ -14,11 +14,11 @@
 
 import ContextMenu from './ContextMenu';
 import ContextWrapper from './ContextWrapper';
-import LocalContextMenu from './LocalContextMenu';
+import LocalContextMenu from './LocalContextMenu.bl-edit';
 import PageEditor from './PageEditor';
 import StaticPage from './StaticPage';
 import PageOverlay from './PageOverlay';
-import ContextMenuProvider, { getUI } from './ContextMenuContext';
+import ContextMenuProvider, { getUI } from './ContextMenuContext.bl-edit';
 import type {
   IContextMenuProps as ContextMenuProps,
   ButtonVariantProps,

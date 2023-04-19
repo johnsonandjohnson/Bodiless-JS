@@ -13,7 +13,7 @@
  */
 
 import { StoreItem, DEFAULT_REQUEST_DELAY } from '../src/Store/StoreItem';
-import { BodilessMobxStore } from '../src/Store/BodilessMobxStore';
+import { BodilessMobxStore } from '../src/Store/BodilessMobxStore.bl-edit';
 import { BodilessBackendClient } from '../src/BackendClient/BodilessBackendClient';
 import { ItemStateEvent } from '../src/Store/types';
 
@@ -56,7 +56,7 @@ jest.mock('../src/BackendClient/BodilessBackendClient', () => ({
   }),
 }));
 
-jest.mock('../src/Store/BodilessMobxStore', () => ({
+jest.mock('../src/Store/BodilessMobxStore.bl-edit', () => ({
   BodilessMobxStore: () => ({
     client: new BodilessBackendClient(),
   }),

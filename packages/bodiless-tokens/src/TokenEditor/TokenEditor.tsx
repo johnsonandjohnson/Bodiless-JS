@@ -20,7 +20,7 @@ import {
 import { FlowContainer } from '@bodiless/layouts-ui';
 import {
   useNode, WithNodeKeyProps, withNodeKey, withNodeDataHandlers, withNode, WithNodeProps,
-} from '@bodiless/core';
+} from '@bodiless/data';
 import flow from 'lodash/flow';
 import TokenPrinter, { TokenPrinterProps } from '../TokenPrinter';
 import { withTokenNamesFromData } from '../withTokenSelector';

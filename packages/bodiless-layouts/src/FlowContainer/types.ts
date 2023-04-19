@@ -12,7 +12,8 @@
  * limitations under the License.
  */
 
-import { WithNodeProps, TMenuOptionGetter } from '@bodiless/core';
+import { TMenuOptionGetter } from '@bodiless/core';
+import { WithNodeProps } from '@bodiless/data';
 import {
   DesignableComponents, ComponentOrTag, DesignableProps,
 } from '@bodiless/fclasses';

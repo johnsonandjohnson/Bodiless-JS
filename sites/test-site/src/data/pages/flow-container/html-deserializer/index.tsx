@@ -15,7 +15,8 @@
 import React, { useContext, useState, FC } from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-import { withNodeKey, withResetButton, withNode } from '@bodiless/core';
+import { withResetButton } from '@bodiless/core';
+import { withNodeKey, withNode } from '@bodiless/data';
 import {
   H3 as BaseH3,
   Textarea as BaseTextArea,

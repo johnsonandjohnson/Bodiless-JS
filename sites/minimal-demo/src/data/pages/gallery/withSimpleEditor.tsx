@@ -3,7 +3,8 @@ import {
   addClasses, as, startWith, withDesign, A, Em, Strong,
 } from '@bodiless/fclasses';
 import { asBodilessLink, withPlaceholder } from '@bodiless/components';
-import { withChild, withNodeKey } from '@bodiless/core';
+import { withNodeKey } from '@bodiless/data';
+import { withChild } from '@bodiless/core';
 
 const asBold = as(
   startWith(Strong),

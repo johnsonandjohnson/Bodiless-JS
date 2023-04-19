@@ -1,0 +1,39 @@
+{
+  "name": "@bodiless/git",
+  "version": "1.0.0-rc.37",
+  "description": "GIT integration for BodilessJS.",
+  "author": "Marco Pagliarulo <mpaglia1@its.jnj.com>",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "sideEffects": false,
+  "typings": "lib/index.d.ts",
+  "files": [
+    "/lib",
+    "/doc"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "run-p build:lib",
+    "build:lib": "tsc -p ./tsconfig.json",
+    "build:watch": "npm run build:lib -- --watch",
+    "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api ./src",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
+  },
+  "dependencies": {
+    "@bodiless/core": "^1.0.0-rc.37",
+    "axios": "^0.21.0",
+    "enzyme": "^3.9.0",
+    "informed": "^3.34.0",
+    "lodash": "^4.17.19",
+    "universal-cookie": "^4.0.3"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2"
+  }
+}

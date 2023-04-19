@@ -1,4 +1,4 @@
-import { DefaultContentNode } from '@bodiless/core';
+import { DefaultContentNode } from '@bodiless/data';
 
 /**
  * LanguageContentNode class allows to handle content nodes for current language.

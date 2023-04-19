@@ -14,7 +14,7 @@
 
 import React, { ComponentType } from 'react';
 import type { FC } from 'react';
-import { withNode, withDefaultContent } from '@bodiless/core';
+import { withNode, withDefaultContent } from '@bodiless/data';
 
 import { ComponentSelector, ComponentDisplayMode } from '@bodiless/layouts';
 import { componentSelectorUi } from '@bodiless/layouts-ui';

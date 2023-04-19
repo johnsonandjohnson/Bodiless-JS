@@ -13,9 +13,12 @@
  */
 
 import {
-  ContentNode, WithNodeKeyProps, withNodeKey, withNode, withNodeDataHandlers,
-  withMenuOptions, withContextActivator, useNode,
+  withMenuOptions, withContextActivator,
 } from '@bodiless/core';
+import {
+  ContentNode, WithNodeKeyProps, withNodeKey, withNode, withNodeDataHandlers,
+  useNode,
+} from '@bodiless/data';
 import React, {
   ComponentType, HTMLProps, FC, useCallback,
 } from 'react';

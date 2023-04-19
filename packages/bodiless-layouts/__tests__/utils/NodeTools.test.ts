@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { DefaultContentNode } from '@bodiless/core';
+import { DefaultContentNode } from '@bodiless/data';
 import axios from 'axios';
 import {
   isImageNode, updateLibData, convertAssetImagePath, AssetImagePathConvertType,

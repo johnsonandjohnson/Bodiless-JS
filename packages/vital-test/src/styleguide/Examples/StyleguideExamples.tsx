@@ -15,7 +15,7 @@
 import React, { useMemo } from 'react';
 import identity from 'lodash/identity';
 import type { FC } from 'react';
-import { withNode, withDefaultContent, withNodeKey } from '@bodiless/core';
+import { withNode, withDefaultContent, withNodeKey } from '@bodiless/data';
 
 import {
   designable, flowHoc, DesignableComponentsProps,

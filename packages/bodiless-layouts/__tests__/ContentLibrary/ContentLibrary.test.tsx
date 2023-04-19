@@ -13,12 +13,15 @@
  */
 
 import {
-  PageEditContext, useNode, DefaultContentNode, NodeProvider,
+  PageEditContext,
   PageContextProvider,
+} from '@bodiless/core';
+import {
+  useNode, DefaultContentNode, NodeProvider,
   withNodeKey,
   withNode,
   ContentNode,
-} from '@bodiless/core';
+} from '@bodiless/data';
 import React, { FC } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount, ReactWrapper } from 'enzyme';

@@ -14,9 +14,10 @@
 
 import React, { useState, FC } from 'react';
 import flow from 'lodash/flow';
+import { TagType } from '@bodiless/core';
 import {
-  withNode, DefaultContentNode, NodeProvider, TagType,
-} from '@bodiless/core';
+  withNode, DefaultContentNode, NodeProvider,
+} from '@bodiless/data';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
 import type { TagsNodeType } from '../src/TagButton/types';

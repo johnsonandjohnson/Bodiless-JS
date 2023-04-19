@@ -14,8 +14,10 @@
 
 import React, { ComponentType } from 'react';
 import {
-  useNode, ContentNode, useContextMenuForm,
-  createMenuOptionGroup, withMenuOptions, NodeProvider,
+  useNode, ContentNode, NodeProvider,
+} from '@bodiless/data';
+import {
+  useContextMenuForm, createMenuOptionGroup, withMenuOptions,
 } from '@bodiless/core';
 import type { OptionGroupDefinition } from '@bodiless/core';
 import type { ComponentOrTag } from '@bodiless/fclasses';

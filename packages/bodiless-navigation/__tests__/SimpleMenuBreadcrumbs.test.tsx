@@ -18,8 +18,11 @@ import { mount, ReactWrapper } from 'enzyme';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import cheerio from 'cheerio';
 import {
-  withDefaultContent, ifToggledOn, asReadOnly, withNodeKey,
+  ifToggledOn, asReadOnly,
 } from '@bodiless/core';
+import {
+  withDefaultContent, withNodeKey,
+} from '@bodiless/data';
 import {
   replaceWith, withDesign, addProps, flowHoc
 } from '@bodiless/fclasses';
@@ -32,7 +35,7 @@ import {
 } from '../src';
 import type { BreadcrumbStoreItemsReducer } from '../src/Breadcrumbs/types';
 
-const { DefaultContentNode } = require('@bodiless/core');
+const { DefaultContentNode } = require('@bodiless/data');
 
 const Breadcrumbs = flow(
   asBreadcrumbs,

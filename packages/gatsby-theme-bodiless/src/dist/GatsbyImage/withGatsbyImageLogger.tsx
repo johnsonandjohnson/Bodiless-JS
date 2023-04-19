@@ -13,7 +13,7 @@
  */
 
 import React, { FC } from 'react';
-import { useNode } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import { HOC } from '@bodiless/fclasses';
 import { log } from '../fsLogger';
 import GatsbyImagePresets from './GatsbyImagePresets';

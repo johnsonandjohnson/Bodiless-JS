@@ -22,7 +22,7 @@ import {
   replaceWith,
   flowHoc,
 } from '@bodiless/fclasses';
-import { withNode } from '@bodiless/core';
+import { withNode } from '@bodiless/data';
 import { withTitle, withFacet } from '@bodiless/layouts';
 import { FlowContainer } from '@bodiless/layouts-ui';
 

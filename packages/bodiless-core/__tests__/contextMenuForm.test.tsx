@@ -20,7 +20,7 @@ import React, { useState } from 'react';
 import { mount, shallow } from 'enzyme';
 import {
   contextMenuForm, ContextMenuForm, FormBodyRenderer,
-} from '../src/contextMenuForm';
+} from '../src/contextMenuForm.bl-edit';
 import type { ContextMenuFormProps } from '../src/Types/ContextMenuTypes';
 
 describe('contextMenuForm', () => {

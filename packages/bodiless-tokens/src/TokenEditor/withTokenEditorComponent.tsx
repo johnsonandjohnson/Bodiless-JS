@@ -18,8 +18,11 @@ import {
   addProps, flowHoc, startWith, Design,
 } from '@bodiless/fclasses';
 import {
-  withDefaultContent, useNode, withContextActivator, withActivatorWrapper,
+  withContextActivator, withActivatorWrapper,
 } from '@bodiless/core';
+import {
+  withDefaultContent, useNode,
+} from '@bodiless/data';
 import { ifComponentSelector } from '@bodiless/layouts';
 import withTokensFromProps from '../withTokensFromProps';
 import { withTokenPanelPane } from '../TokenPanelPane';

@@ -18,9 +18,9 @@ import {
   withContextActivator,
   withLocalContextMenu,
   ifEditable,
-  useNode,
   withMenuOptions,
 } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import { observer } from 'mobx-react';
 
 type Data = {

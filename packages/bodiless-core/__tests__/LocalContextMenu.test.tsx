@@ -19,7 +19,7 @@ import { mount, shallow } from 'enzyme';
 import { v1 } from 'uuid';
 import Tooltip from 'rc-tooltip';
 import PageEditContext from '../src/PageEditContext';
-import LocalContextMenu from '../src/components/LocalContextMenu';
+import LocalContextMenu from '../src/components/LocalContextMenu.bl-edit';
 import ContextMenu from '../src/components/ContextMenu';
 import { TMenuOptionGetter } from '../src/PageEditContext/types';
 import { useUUID, useEditContext } from '../src/hooks';

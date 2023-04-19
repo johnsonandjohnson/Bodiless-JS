@@ -13,7 +13,7 @@
  */
 import { asElementToken } from '@bodiless/vital-elements';
 import { withoutHydration } from '@bodiless/hydration';
-import { withNodeKey } from '@bodiless/core';
+import { withNodeKey } from '@bodiless/data';
 
 export const vitalImage = new Proxy({}, {
   get: (target, prop) => {

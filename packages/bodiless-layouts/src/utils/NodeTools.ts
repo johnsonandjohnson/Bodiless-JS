@@ -14,7 +14,7 @@
 
 import { extname } from 'path';
 import { AxiosResponse } from 'axios';
-import { ContentNode } from '@bodiless/core';
+import { ContentNode } from '@bodiless/data';
 import BackendClient from './BackendClient';
 
 const imageExtensions = [

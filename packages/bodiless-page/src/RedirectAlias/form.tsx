@@ -26,10 +26,12 @@ import {
   useEditContext,
   useMenuOptionUI,
   withMenuOptions,
+} from '@bodiless/core';
+import {
   withNode,
   withNodeKey,
   useNode,
-} from '@bodiless/core';
+} from '@bodiless/data';
 import type {
   ContextMenuFormProps,
 } from '@bodiless/core';

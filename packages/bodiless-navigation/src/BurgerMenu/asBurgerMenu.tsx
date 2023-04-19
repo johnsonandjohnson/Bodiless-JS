@@ -14,7 +14,7 @@
 
 import { ComponentType } from 'react';
 import isEmpty from 'lodash/isEmpty';
-import { useNode, withDefaultContent } from '@bodiless/core';
+import { useNode, withDefaultContent } from '@bodiless/data';
 import { asAccordionWrapper, asAccordionTitle, asAccordionBody } from '@bodiless/accordion';
 import {
   Fragment, withDesign, replaceWith, flowHoc, addProps, HOC, flowIf, startWith,

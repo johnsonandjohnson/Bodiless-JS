@@ -15,8 +15,8 @@
 import { ComponentType } from 'react';
 import {
   ContextWrapperProps,
-  GitContextProviderProps,
 } from '@bodiless/core';
+import type { GitContextProviderProps } from '@bodiless/git';
 import {
   PageDataContextProviderProps,
 } from '@bodiless/page';

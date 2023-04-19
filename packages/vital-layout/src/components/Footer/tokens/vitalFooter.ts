@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { withNode, withNodeKey } from '@bodiless/core';
+import { withNode, withNodeKey } from '@bodiless/data';
 import { vitalColor, vitalSpacing } from '@bodiless/vital-elements';
 import { vitalMenu } from '@bodiless/vital-navigation';
 import {

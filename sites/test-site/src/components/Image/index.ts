@@ -17,8 +17,10 @@
 import { ComponentType } from 'react';
 import {
   withChild,
-  withSidecarNodes,
 } from '@bodiless/core';
+import {
+  withSidecarNodes,
+} from '@bodiless/data';
 import flowRight from 'lodash/flowRight';
 import {
   withImagePlaceholder,

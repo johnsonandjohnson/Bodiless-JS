@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { withNode, withNodeKey } from '@bodiless/core';
+import { withNode, withNodeKey } from '@bodiless/data';
 import { as } from '@bodiless/fclasses';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
 import { vitalContentListingFlowContainer } from '../../ContentListingFlowContainer';

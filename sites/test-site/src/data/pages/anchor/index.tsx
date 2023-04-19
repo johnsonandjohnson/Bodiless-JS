@@ -16,7 +16,7 @@ import React, { ComponentType } from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { asBodilessAnchor, asBodilessList } from '@bodiless/components';
-import { withSidecarNodes, withNode } from '@bodiless/core';
+import { withSidecarNodes, withNode } from '@bodiless/data';
 import {
   A, H1, H2, H4, P, Ul, Li, addClasses, withDesign, replaceWith, flowHoc,
 } from '@bodiless/fclasses';

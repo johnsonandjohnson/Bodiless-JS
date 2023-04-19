@@ -12,7 +12,8 @@
  * limitations under the License.
  */
 
-import { useEditContext, useNode, withNodeKey } from '@bodiless/core';
+import { useEditContext } from '@bodiless/core';
+import { useNode, withNodeKey } from '@bodiless/data';
 import { as, flowIf, replaceWith } from '@bodiless/fclasses';
 import {
   withSingleAllowedTag,

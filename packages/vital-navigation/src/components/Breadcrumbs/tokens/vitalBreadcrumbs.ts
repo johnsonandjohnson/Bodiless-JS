@@ -12,7 +12,8 @@
  * limitations under the License.
  */
 
-import { asReadOnly, withNodeKey } from '@bodiless/core';
+import { asReadOnly } from '@bodiless/core';
+import { withNodeKey } from '@bodiless/data';
 import { withoutLinkWhenLinkDataEmpty } from '@bodiless/components';
 import {
   withDesign,

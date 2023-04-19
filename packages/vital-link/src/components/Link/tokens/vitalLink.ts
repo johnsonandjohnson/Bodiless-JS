@@ -22,7 +22,7 @@ import {
   on,
   flowHoc,
 } from '@bodiless/fclasses';
-import { withSidecarNodes, withNodeKey } from '@bodiless/core';
+import { withSidecarNodes, withNodeKey } from '@bodiless/data';
 import { vitalColor, vitalTypography } from '@bodiless/vital-elements';
 import { asLinkToken } from '../LinkClean';
 import { useExternalLinkToggle, asEditableLink, useIsDownloadLink } from '../util';

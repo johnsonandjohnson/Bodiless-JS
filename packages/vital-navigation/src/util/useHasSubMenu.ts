@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { useNode } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 
 /**
  * A hook that returns `true` if a menu has submenu, `false` otherwise.

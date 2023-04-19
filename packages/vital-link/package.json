@@ -36,7 +36,7 @@
     "@bodiless/cli": "^1.0.0-rc.37",
     "@bodiless/components": "^1.0.0-rc.37",
     "@bodiless/components-ui": "^1.0.0-rc.37",
-    "@bodiless/core": "^1.0.0-rc.37",
+    "@bodiless/data": "^1.0.0-rc.37",
     "@bodiless/fclasses": "^1.0.0-rc.37",
     "@bodiless/hydration": "^1.0.0-rc.37",
     "@bodiless/richtext": "^1.0.0-rc.37",

@@ -20,8 +20,8 @@ import {
   useMenuOptionUI,
   useEditContext,
   TagType,
-  useNodeDataHandlers,
 } from '@bodiless/core';
+import { useNodeDataHandlers } from '@bodiless/data';
 import { flowHoc } from '@bodiless/fclasses';
 import type { HOC } from '@bodiless/fclasses';
 import { TagButtonProps, TagsNodeType, WithRegisterSuggestionsType } from './types';

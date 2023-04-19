@@ -14,7 +14,7 @@
 
 import React from 'react';
 import type { ComponentType } from 'react';
-import { ContentNode, NodeProvider } from '@bodiless/core';
+import { ContentNode, NodeProvider } from '@bodiless/data';
 
 class MockContentNode<D> implements ContentNode<D> {
   data: D = {} as D;

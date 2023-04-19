@@ -22,31 +22,22 @@ import {
   useEditContext, useUUID, useContextActivator, useExtendHandler,
   useGetter, useLocalStorage, useClickOutside,
 } from './hooks';
-import withNode, { withNodeKey } from './withNode';
-import withSidecarNodes, { startSidecarNodes, endSidecarNodes } from './withSidecarNodes';
 import withEditButton, { createMenuOptionGroup } from './withEditButton';
-import useContextMenuForm, { contextMenuForm, ContextMenuForm } from './contextMenuForm';
-import type { FormBodyProps, FormBodyRenderer } from './contextMenuForm';
+import useContextMenuForm, { contextMenuForm, ContextMenuForm } from './contextMenuForm.bl-edit';
+import type { FormBodyProps, FormBodyRenderer, ContextMenuPropsType } from './contextMenuForm.bl-edit';
 import withCompoundForm, { useRegisterSnippet } from './withCompoundForm';
 import withEditFormSnippet, { useEditFormProps } from './withEditFormSnippet';
 import type { Options as EditFormSnippetOptions } from './withEditFormSnippet';
-import withData from './withData';
-import NodeProvider, { useNode, useNodeDataHandlers } from './NodeProvider';
-import type { NodeDataHandlers } from './NodeProvider';
-import { DefaultContentNode } from './ContentNode';
-import type { ContentNode, Path as ContentNodePath } from './ContentNode';
 import {
-  withNodeAndHandlers,
-  withNodeDataHandlers,
   withLocalContextMenu,
   withContextActivator,
   withExtendHandler,
   withOnlyProps,
   withResizeDetector,
   withClickOutside,
-} from './hoc';
+} from './hoc.bl-edit';
 import { ifToggledOff, ifToggledOn, withFlowToggle } from './withFlowToggle';
-import { ifEditable, ifReadOnly, useEditToggle } from './withEditToggle';
+import { ifEditable, ifReadOnly, useEditToggle } from './withEditToggle.bl-edit';
 import type {
   ContextMenuFormProps, IContextMenuItemProps, TMenuOption, TooltipProps,
 } from './Types/ContextMenuTypes';
@@ -55,7 +46,6 @@ import type {
   OptionGroupDefinition, EditButtonOptions, EditButtonProps, UseBodilessOverrides,
 } from './Types/EditButtonTypes';
 import type { TMenuOptionGetter, MenuOptionsDefinition } from './Types/PageContextProviderTypes';
-import type { WithNodeProps, WithNodeKeyProps } from './Types/NodeTypes';
 import type { TOverlaySettings } from './Types/PageOverlayTypes';
 import type { Snippet as FormSnippet } from './withCompoundForm';
 import {
@@ -75,9 +65,8 @@ import withChild, { withAppendChild, withPrependChild } from './withChild';
 import withParent from './withParent';
 import asBodilessComponent, { withActivatorWrapper } from './asBodilessComponent/asBodilessComponent.bl-edit';
 import asBodilessReadOnlyComponent from './asBodilessComponent/asBodilessReadOnlyComponent';
-import { withBodilessData } from './asBodilessComponent/withBodilessData';
 import type { BodilessOptions, AsBodiless } from './Types/AsBodilessTypes';
-import { useMenuOptionUI } from './components/ContextMenuContext';
+import { useMenuOptionUI } from './components/ContextMenuContext.bl-edit';
 import ContextSubMenu from './ContextMenu/ContextSubMenu';
 import withSwitcherButton from './withSwitcherButton';
 import OnNodeErrorNotification from './OnNodeErrorNotification';
@@ -85,27 +74,23 @@ import {
   getFromSessionStorage,
   saveToSessionStorage,
 } from './SessionStorage';
+import withResetButton from './withResetButton';
 
 configure({
   enforceActions: 'never',
 });
 
 export * from './components';
-export * from './Contentful';
 export * from './Store';
 export * from './BackendClient';
-export * from './Git';
 
 export {
   asBodilessComponent,
   asBodilessReadOnlyComponent,
-  withBodilessData,
   asStatic,
   asReadOnly,
   withContextActivator,
   withActivatorWrapper,
-  withNodeAndHandlers,
-  withNodeDataHandlers,
   withLocalContextMenu,
   PageContextProvider,
   withMenuOptions,
@@ -118,24 +103,14 @@ export {
   withEditButton,
   createMenuOptionGroup,
   useEditFormProps,
-  withNode,
-  withNodeKey,
-  withSidecarNodes,
   withCompoundForm,
   withEditFormSnippet,
   useRegisterSnippet,
-  startSidecarNodes,
-  endSidecarNodes,
   contextMenuForm,
   useContextMenuForm,
   ContextMenuForm,
   ContextSubMenu,
   useMenuOptionUI,
-  withData,
-  NodeProvider,
-  useNode,
-  useNodeDataHandlers,
-  DefaultContentNode,
   ifEditable,
   ifReadOnly,
   withOnlyProps,
@@ -166,20 +141,18 @@ export {
   OnNodeErrorNotification,
   getFromSessionStorage,
   saveToSessionStorage,
+  withResetButton
 };
 
 export type {
-  ContentNode,
-  ContentNodePath,
   BodilessOptions,
   PageEditContextInterface,
   TMenuOption,
   TMenuOptionGetter,
-  WithNodeProps,
-  WithNodeKeyProps,
   EditButtonOptions,
   FormBodyProps,
   FormBodyRenderer,
+  ContextMenuPropsType,
   OptionGroupDefinition,
   UseBodilessOverrides,
   EditButtonProps,
@@ -190,7 +163,6 @@ export type {
   FormSnippet,
   MenuOptionsDefinition,
   EditFormSnippetOptions,
-  NodeDataHandlers,
   TooltipProps,
 };
 

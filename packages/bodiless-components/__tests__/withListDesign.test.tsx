@@ -17,7 +17,7 @@ import React, { FC } from 'react';
 import {
   HOC, withDesign, addProps, replaceWith, withoutProps, Tag, flowHoc,
 } from '@bodiless/fclasses';
-import { withDefaultContent } from '@bodiless/core';
+import { withDefaultContent } from '@bodiless/data';
 import flow from 'lodash/flow';
 import { render, ComponentType } from 'enzyme';
 import { withSubLists } from '../src/List/asChameleonSubList';

@@ -14,9 +14,12 @@
 
 import {
   withChild,
+} from '@bodiless/core';
+import {
   withNode,
   withNodeKey,
-} from '@bodiless/core';
+} from '@bodiless/data';
+
 import { vitalColor, vitalSpacing } from '@bodiless/vital-elements';
 import {
   vitalBurgerMenu,

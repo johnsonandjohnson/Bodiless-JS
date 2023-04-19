@@ -14,9 +14,9 @@
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { ComponentType } from 'react';
-import { withNode, useNode } from '@bodiless/core';
+import { withNode, useNode } from '@bodiless/data';
 import { LinkData } from '@bodiless/components';
-import type { WithNodeProps } from '@bodiless/core';
+import type { WithNodeProps } from '@bodiless/data';
 import {
   designable, addProps, Fragment, withDesign, replaceWith, withoutProps, ComponentOrTag, flowIf,
 } from '@bodiless/fclasses';

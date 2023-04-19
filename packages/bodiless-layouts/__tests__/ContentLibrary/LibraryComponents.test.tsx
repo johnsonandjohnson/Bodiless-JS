@@ -21,20 +21,20 @@ import {
   withNode,
   useNode,
   withDefaultContent,
-} from '@bodiless/core';
+} from '@bodiless/data';
 
 import {
   flowHoc,
   withDesign,
   startWith,
 } from '@bodiless/fclasses';
-// import type {ContentNode } from '@bodiless/core';
+// import type {ContentNode } from '@bodiless/data';
 import {
   withTitle,
   withDesc,
   withFacet,
 } from '../../src/meta';
-import { withLibraryComponents } from '../../src/ContentLibrary/withLibraryComponents';
+import { withLibraryComponents } from '../../src/ContentLibrary/withLibraryComponents.bl-edit';
 import { CONTENT_LIBRARY_TYPE_PREFIX } from '../../src/ContentLibrary/withLibraryContext';
 import EditFlowContainer, { EditFlowContainerComponents } from '../../src/FlowContainer/EditFlowContainer';
 

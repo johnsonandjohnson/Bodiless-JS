@@ -19,7 +19,7 @@ import {
   asBodilessList,
   withSubListDesign, withSubLists, asBodilessChameleon, asEditable,
 } from '@bodiless/components';
-import { withNode } from '@bodiless/core';
+import { withNode } from '@bodiless/data';
 import { asLink, asEditableLink } from '../../../components/Elements.token';
 import { asToggledSubList } from './ListDemo';
 import { withItemMargin } from './SimpleListDemo';

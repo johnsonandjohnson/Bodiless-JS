@@ -16,8 +16,8 @@ import {
   useNode,
   withNode,
   withNodeKey,
-} from '@bodiless/core';
-import type { ContentNode } from '@bodiless/core';
+} from '@bodiless/data';
+import type { ContentNode } from '@bodiless/data';
 import { flowHoc, HOCWithMeta } from '@bodiless/fclasses';
 import { withContentLibrary, ComponentSelector } from '@bodiless/layouts';
 import path from 'path';

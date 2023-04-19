@@ -14,12 +14,15 @@
 import { withoutProps, flowHoc } from '@bodiless/fclasses';
 import {
   withContextActivator,
-  withNode,
-  withNodeDataHandlers,
   withLocalContextMenu,
   ifEditable,
-  withNodeKey,
 } from '@bodiless/core';
+
+import {
+  withNode,
+  withNodeDataHandlers,
+  withNodeKey,
+} from '@bodiless/data';
 import { withTagButton, TagsNodeType } from '../TagButton';
 import type { UseTagButtonOverrides } from '../TagButton';
 

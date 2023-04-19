@@ -17,7 +17,7 @@ import React, {
 } from 'react';
 import flowRight from 'lodash/flowRight';
 import { useMenuOptionUI } from '@bodiless/core';
-import { addProps } from '@bodiless/fclasses';
+import { ComponentWithMeta, addProps } from '@bodiless/fclasses';
 import { withFormHeader, withFormSnippet, asBaseBodilessIframe } from '@bodiless/components';
 import type { AsBodiless } from '@bodiless/core';
 import type { IframeProps, IframeData } from '@bodiless/components';
@@ -203,7 +203,7 @@ const asBodilessYouTube: AsBodiless<Props, IframeData> = (
   withYouTubePlayerTransformer,
 );
 
-const YouTube = asBodilessYouTube()('iframe');
+const YouTube = asBodilessYouTube()('iframe') as ComponentWithMeta;
 
 export default YouTube;
 export {

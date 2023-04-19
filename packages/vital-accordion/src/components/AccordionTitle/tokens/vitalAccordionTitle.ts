@@ -13,7 +13,7 @@
  */
 
 import { withPlaceholder } from '@bodiless/components';
-import { withNodeKey } from '@bodiless/core';
+import { withNodeKey } from '@bodiless/data';
 import { as, on } from '@bodiless/fclasses';
 import { asSchemaSource } from '@bodiless/schema-org';
 import { EditorPlainClean, vitalEditorPlain } from '@bodiless/vital-editors';

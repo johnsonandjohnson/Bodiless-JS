@@ -22,7 +22,7 @@ import {
 import { AccordionClean, vitalAccordion } from '@bodiless/vital-accordion';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
-import { withDefaultContent } from '@bodiless/core';
+import { withDefaultContent } from '@bodiless/data';
 import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
 const BaseVariation = {

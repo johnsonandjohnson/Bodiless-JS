@@ -20,7 +20,7 @@ import {
   flowHoc,
   Div,
 } from '@bodiless/fclasses';
-import { withNode, withNodeKey, withDefaultContent } from '@bodiless/core';
+import { withNode, withNodeKey, withDefaultContent } from '@bodiless/data';
 import { asBodilessLink } from '@bodiless/components-ui';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { asEditable } from '@bodiless/components';

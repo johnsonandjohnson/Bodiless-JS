@@ -17,7 +17,7 @@ import differenceWith from 'lodash/differenceWith';
 import isEmpty from 'lodash/isEmpty';
 import omit from 'lodash/omit';
 import negate from 'lodash/negate';
-import { useNode } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import {
   Enhancer, flowIf,
 } from '@bodiless/fclasses';

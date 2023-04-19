@@ -17,7 +17,7 @@ import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
 import {
   EditorPlainClean, vitalEditorPlain, RichTextClean, vitalRichText
 } from '@bodiless/vital-editors';
-import { withNodeKey } from '@bodiless/core';
+import { withNodeKey } from '@bodiless/data';
 import {
   on, replaceWith, Fragment, as
 } from '@bodiless/fclasses';

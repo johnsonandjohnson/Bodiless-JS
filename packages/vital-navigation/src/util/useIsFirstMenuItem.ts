@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { useNode } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 
 /**
  * A hook that returns `true` if the menu item is first, `false` otherwise.

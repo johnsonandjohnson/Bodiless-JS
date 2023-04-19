@@ -14,8 +14,9 @@
 
 import { Fragment } from 'react';
 import {
-  withSidecarNodes, ifReadOnly, ifEditable, withOnlyProps,
+  ifReadOnly, ifEditable, withOnlyProps,
 } from '@bodiless/core';
+import { withSidecarNodes } from '@bodiless/data';
 import type { UseBodilessOverrides, EditButtonProps } from '@bodiless/core';
 import flowRight from 'lodash/flowRight';
 import identity from 'lodash/identity';

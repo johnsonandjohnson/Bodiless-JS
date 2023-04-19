@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { withNodeKey } from '@bodiless/core';
+import { withNodeKey } from '@bodiless/data';
 import { useIsBurgerMenuHidden, withBurgerMenuProvider, withBreadcrumbStore } from '@bodiless/vital-navigation';
 import {
   addProps,

@@ -15,9 +15,11 @@
 import React, { ComponentType } from 'react';
 import { withoutProps } from '@bodiless/fclasses';
 import {
-  useMenuOptionUI, withEditFormSnippet, withNodeDataHandlers,
-  WithNodeKeyProps, ifEditable, withNode, withNodeKey, ifReadOnly, withData,
+  useMenuOptionUI, withEditFormSnippet, ifEditable, ifReadOnly
 } from '@bodiless/core';
+import {
+  withNodeDataHandlers, WithNodeKeyProps, withNode, withNodeKey, withData,
+} from '@bodiless/data';
 import { flowRight } from 'lodash';
 
 type Props = {

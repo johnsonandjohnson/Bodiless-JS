@@ -20,7 +20,8 @@ import type { FC, ReactNode } from 'react';
 import pick from 'lodash/pick';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import { asBodilessChameleon } from '@bodiless/components';
-import { withNodeKey, withParent } from '@bodiless/core';
+import { withParent } from '@bodiless/core';
+import { withNodeKey } from '@bodiless/data';
 
 const colors = ['red', 'blue', 'teal', 'green', 'yellow', 'purple', 'orange'];
 const createColorDesign = (prefix: string) => colors.reduce(

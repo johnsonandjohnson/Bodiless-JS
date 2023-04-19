@@ -27,7 +27,7 @@ import {
   addProps,
   DesignableProps,
 } from '@bodiless/fclasses';
-import { withNode } from '@bodiless/core';
+import { withNode } from '@bodiless/data';
 
 export type CardComponents = {
   Wrapper: ComponentType<StylableProps>,

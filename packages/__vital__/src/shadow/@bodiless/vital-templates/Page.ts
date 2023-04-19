@@ -1,4 +1,5 @@
-/**
+// @ts-nocheck
+/*
  * Copyright © 2022 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,9 +19,6 @@ import { asFluidToken } from '@bodiless/vital-elements';
 import {
   vitalPageBase, vitalPDPTemplate, vitalGenericTemplate, GenericTemplateClean, PDPTemplateClean,
 } from '@bodiless/vital-templates';
-import {
-  vitalSearchGenericTemplate, withSearchMenuProvider, withSearchResult
-} from '@bodiless/vital-search';
 
 const Default = asFluidToken(vitalPageBase.Default, {
   Core: {
@@ -36,17 +34,17 @@ const Default = asFluidToken(vitalPageBase.Default, {
       },
     ]),
   },
-  Components: {
-    PDP: on(PDPTemplateClean)(vitalPDPTemplate.Default),
-    // Adds a template for search results.
-    // @todo remove if you don't want search on your site
-    Search: on(GenericTemplateClean)(vitalSearchGenericTemplate.Search),
-    ContentListing: on(GenericTemplateClean)(vitalGenericTemplate.ContentListing),
-  },
+  // @todo Restore if you want these special templates on your site.
+  // Components: {
+  //   PDP: on(PDPTemplateClean)(vitalPDPTemplate.Default),
+  //   // Adds a template for search results.
+  //   Search: on(GenericTemplateClean)(vitalSearchGenericTemplate.Search),
+  //   ContentListing: on(GenericTemplateClean)(vitalContentListingTemplate.Default),
+  // },
   Compose: {
     // Adds the search context.
-    // @todo remove if you don't want search on your site
-    WithSearchContext: as(withSearchMenuProvider, withSearchResult),
+    // @todo Restore if you want search on your site
+    // WithSearchContext: as(withSearchMenuProvider, withSearchResult),
   },
 });
 

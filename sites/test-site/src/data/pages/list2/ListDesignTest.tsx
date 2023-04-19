@@ -19,7 +19,7 @@ import {
 import {
   asSubList, asBodilessList, withSubLists,
 } from '@bodiless/components';
-// import { withDefaultContent } from '@bodiless/core';
+// import { withDefaultContent } from '@bodiless/data';
 
 const withItemTitle = (title: string) => withDesign({
   Title: flowHoc(

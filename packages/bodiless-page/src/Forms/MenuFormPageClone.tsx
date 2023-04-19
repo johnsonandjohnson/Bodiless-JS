@@ -20,8 +20,8 @@ import {
   contextMenuForm,
   handleBackendResponse,
   useEditContext,
-  useNode,
 } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import { usePageMenuOptionUI } from '../MenuOptionUI';
 import { verifyPage } from '../Operations';
 import {

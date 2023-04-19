@@ -36,6 +36,7 @@
     "@bodiless/components": "^1.0.0-rc.37",
     "@bodiless/components-ui": "^1.0.0-rc.37",
     "@bodiless/core": "^1.0.0-rc.37",
+    "@bodiless/data": "^1.0.0-rc.37",
     "@bodiless/fclasses": "^1.0.0-rc.37",
     "@bodiless/organisms": "^1.0.0-rc.37",
     "enzyme": "^3.9.0",

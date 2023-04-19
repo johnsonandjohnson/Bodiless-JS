@@ -14,12 +14,14 @@
 
 import React, { FC } from 'react';
 import {
-  useMenuOptionUI, ContextMenuForm, ifEditable, withMenuOptions, useNode,
+  useMenuOptionUI, ContextMenuForm, ifEditable, withMenuOptions
 } from '@bodiless/core';
+import {
+  useNode,
+} from '@bodiless/data';
 import type {
-  ContextMenuFormProps,
+  ContextMenuFormProps, ContextMenuPropsType
 } from '@bodiless/core';
-import { ContextMenuPropsType } from '@bodiless/core/lib/contextMenuForm';
 
 type Data = {
   url: string,

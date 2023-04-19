@@ -14,8 +14,8 @@
 
 import {
   handleBackendResponse,
-  useNode,
 } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import { useField } from 'informed';
 import type {
   FormValue,

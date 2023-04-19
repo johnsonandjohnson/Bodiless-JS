@@ -13,14 +13,16 @@
  */
 
 import {
-  WithNodeKeyProps,
-  withNodeKey,
-  useNode,
-  NodeProvider,
   withOnlyProps,
   useEditContext,
   withActivateOnEffect,
 } from '@bodiless/core';
+import {
+  WithNodeKeyProps,
+  withNodeKey,
+  useNode,
+  NodeProvider,
+} from '@bodiless/data';
 import React, {
   ComponentType, PropsWithChildren, FC,
 } from 'react';
@@ -35,7 +37,7 @@ import { useGetLinkHref } from '../Link';
 import { useGetDisabledPages } from '../PageDisable';
 import type { PageDisabledDataItems } from '../PageDisable';
 
-import withListButtons from './withListButtons';
+import withListButtons from './withListButtons.bl-edit';
 import BodilessList from './List';
 import {
   ListData, UseListOverrides, ListProps, ListComponents,

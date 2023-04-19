@@ -41,9 +41,11 @@ jest.mock('@bodiless/core', () => ({
   withContextActivator: jest.fn(() => (c:any) => c),
   useActivateOnEffect: jest.fn(() => activateOnEffect),
   withLocalContextMenu: jest.fn((c:any) => c),
-  useNode: jest.fn(),
   contextMenuForm: jest.fn(() => contextMenuFormInner),
   useGetter: jest.fn((options: any) => () => options),
+}));
+jest.mock('@bodiless/data', () => ({
+  useNode: jest.fn(),
 }));
 
 const Foo: ComponentWithMeta = () => <>Foo</>;

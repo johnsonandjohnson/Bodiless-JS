@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { withNode } from '@bodiless/core';
+import { withNode } from '@bodiless/data';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { flowHoc, Iframe } from '@bodiless/fclasses';
 import { Embed } from '@bodiless/organisms';

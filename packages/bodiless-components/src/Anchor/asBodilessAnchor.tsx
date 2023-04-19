@@ -16,9 +16,11 @@ import React, { HTMLProps, useCallback } from 'react';
 import {
   asBodilessComponent,
   useMenuOptionUI,
+} from '@bodiless/core';
+import {
   useNode,
   withSidecarNodes,
-} from '@bodiless/core';
+} from '@bodiless/data';
 import type {
   BodilessOptions,
   AsBodiless,

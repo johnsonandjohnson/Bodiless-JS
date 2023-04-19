@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { BodilessMobxStore } from '../src/Store/BodilessMobxStore';
+import { BodilessMobxStore } from '../src/Store/BodilessMobxStore.bl-edit';
 import { StoreItem } from '../src/Store/StoreItem';
 
 const deleteItemMock = jest.fn();

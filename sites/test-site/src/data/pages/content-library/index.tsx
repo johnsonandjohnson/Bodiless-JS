@@ -23,9 +23,11 @@ import {
 
 import { asEditable } from '@bodiless/components';
 import {
-  useNode, withContextActivator, withLocalContextMenu, withDefaultContent,
-  withNode, withNodeKey,
+  withContextActivator, withLocalContextMenu,
 } from '@bodiless/core';
+import {
+  useNode, withDefaultContent, withNode, withNodeKey,
+} from '@bodiless/data';
 import {
   H1, H2, addClasses, flowHoc,
 } from '@bodiless/fclasses';

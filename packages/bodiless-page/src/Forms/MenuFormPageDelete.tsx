@@ -21,8 +21,8 @@ import {
   contextMenuForm,
   handleBackendResponse,
   useEditContext,
-  useNode,
 } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import { ComponentFormSpinner } from '@bodiless/ui';
 import { usePageMenuOptionUI } from '../MenuOptionUI';
 import { createRedirect } from '../Operations';

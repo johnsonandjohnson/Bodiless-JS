@@ -20,7 +20,7 @@ import {
   withDesign, flowHoc, addClasses, H1 as H1$, H2 as H2$, Ul, Div,
 } from '@bodiless/fclasses';
 import { observer } from 'mobx-react';
-import { useNode, withNode, withNodeKey } from '@bodiless/core';
+import { useNode, withNode, withNodeKey } from '@bodiless/data';
 import {
   withBurgerMenuProvider, withOverviewLink, withMenuDesign,
   asBodilessMenu, asTopNav, withListSubMenu, withColumnSubMenu,

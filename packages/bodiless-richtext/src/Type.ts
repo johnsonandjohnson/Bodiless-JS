@@ -20,7 +20,7 @@ import type {
   RenderElementProps,
 } from 'slate-react/dist/components/editable';
 import type { DesignableComponents, DesignableProps } from '@bodiless/fclasses';
-import { WithNodeProps } from '@bodiless/core';
+import { WithNodeProps } from '@bodiless/data';
 import type { UI } from './RichTextContext';
 import type { Deserializer } from './serializers';
 

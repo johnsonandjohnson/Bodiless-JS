@@ -16,7 +16,7 @@ import { as, replaceWith } from '@bodiless/fclasses';
 import { GA4DataLayerProductItemHelmet } from '@bodiless/ga4';
 import { vitalImage } from '@bodiless/vital-image';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
-import { withNodeKey } from '@bodiless/core';
+import { withNodeKey } from '@bodiless/data';
 import { asSchemaSource, WithProductSchema } from '@bodiless/schema-org';
 import { vitalEditorPlain } from '@bodiless/vital-editors';
 import { vitalTypography } from '@bodiless/vital-elements';

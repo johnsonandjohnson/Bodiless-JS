@@ -19,8 +19,9 @@ import { observer } from 'mobx-react';
 import flowRight from 'lodash/flowRight';
 
 import {
-  withNode, withMenuOptions, withResizeDetector, withActivateOnEffect,
+  withMenuOptions, withResizeDetector, withActivateOnEffect,
 } from '@bodiless/core';
+import { withNode } from '@bodiless/data';
 import {
   stylable, ComponentOrTag,
 } from '@bodiless/fclasses';

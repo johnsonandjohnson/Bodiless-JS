@@ -17,7 +17,7 @@ import { flow } from 'lodash';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { BVRatingsSummary, BVReviews } from '@bodiless/bv';
-import { withNode } from '@bodiless/core';
+import { withNode } from '@bodiless/data';
 import {
   addProps,
   withDesign,

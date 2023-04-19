@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@bodiless/cli": "^1.0.0-rc.37",
+    "@bodiless/data": "^1.0.0-rc.37",
     "@bodiless/fclasses": "^1.0.0-rc.37",
     "@types/react-tag-autocomplete": "^6.0.0",
     "axios": "^0.21.0",

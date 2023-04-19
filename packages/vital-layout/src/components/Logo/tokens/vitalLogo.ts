@@ -19,7 +19,7 @@ import {
   withNode,
   withNodeKey,
   withSidecarNodes,
-} from '@bodiless/core';
+} from '@bodiless/data';
 import { asBodilessLink } from '@bodiless/components-ui';
 import { asLogoToken } from '../LogoClean';
 import type { LogoToken } from '../LogoClean';

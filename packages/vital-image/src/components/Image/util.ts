@@ -13,7 +13,8 @@
  */
 
 import { flowHoc } from '@bodiless/fclasses';
-import { ContentNodePath, withDefaultContent, withResetButton } from '@bodiless/core';
+import { withResetButton } from '@bodiless/core';
+import { ContentNodePath, withDefaultContent } from '@bodiless/data';
 import { getImageContentFrom } from '@bodiless/gatsby-theme-bodiless';
 
 /**

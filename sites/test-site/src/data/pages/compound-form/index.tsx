@@ -16,12 +16,13 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { flowRight } from 'lodash';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
+import { useMenuOptionUI, withCompoundForm, withEditFormSnippet } from '@bodiless/core';
 import {
-  useMenuOptionUI, withCompoundForm,
   withNodeDataHandlers,
-  withNodeKey, withNode, withEditFormSnippet,
+  withNodeKey, withNode,
   WithNodeKeyProps, withData,
-} from '@bodiless/core';
+} from '@bodiless/data';
+
 import { Div, withoutProps } from '@bodiless/fclasses';
 import Layout from '../../../components/Layout';
 

@@ -13,18 +13,22 @@
  */
 
 import {
+  withEditFormSnippet as withBaseEditFormSnippet,
+} from '@bodiless/core';
+import {
   withSidecarNodes,
   withNode,
   withNodeKey,
   withNodeDataHandlers,
-  withEditFormSnippet as withBaseEditFormSnippet,
   withData,
-} from '@bodiless/core';
+} from '@bodiless/data';
 import { withoutProps } from '@bodiless/fclasses';
 import type {
-  WithNodeKeyProps,
   EditFormSnippetOptions,
 } from '@bodiless/core';
+import type {
+  WithNodeKeyProps,
+} from '@bodiless/data';
 import flowRight from 'lodash/flowRight';
 
 type EditFormSnippet<P, D> = {

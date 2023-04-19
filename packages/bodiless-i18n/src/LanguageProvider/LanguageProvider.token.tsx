@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNode } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import {
   addProps, HOC, flowHoc, removeProps
 } from '@bodiless/fclasses';

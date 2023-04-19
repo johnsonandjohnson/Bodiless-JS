@@ -28,8 +28,6 @@ import { Div } from '@bodiless/ui';
 import {
   TMenuOptionGetter,
   PageContextProvider,
-  withNode,
-  useNodeDataHandlers,
   useEditContext,
   contextMenuForm,
   getUI,
@@ -37,6 +35,10 @@ import {
   ContextWrapper,
   ContextWrapperProps,
 } from '@bodiless/core';
+import {
+  withNode,
+  useNodeDataHandlers,
+} from '@bodiless/data';
 import { Editable } from '@bodiless/components';
 import { Image } from '@bodiless/components-ui';
 import { Page } from '@bodiless/gatsby-theme-bodiless';

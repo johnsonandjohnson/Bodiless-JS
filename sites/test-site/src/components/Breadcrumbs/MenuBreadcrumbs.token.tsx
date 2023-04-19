@@ -14,14 +14,16 @@
 
 import React from 'react';
 import {
-  WithNodeKeyProps,
-  withSidecarNodes,
-  withNode,
-  withNodeKey,
   withChild,
   asReadOnly,
   ifToggledOn,
 } from '@bodiless/core';
+import {
+  WithNodeKeyProps,
+  withSidecarNodes,
+  withNode,
+  withNodeKey,
+} from '@bodiless/data';
 import { withoutLinkWhenLinkDataEmpty } from '@bodiless/components';
 import {
   withBreadcrumbStartingTrail,

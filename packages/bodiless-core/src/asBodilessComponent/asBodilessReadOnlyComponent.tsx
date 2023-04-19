@@ -15,8 +15,7 @@
 import identity from 'lodash/identity';
 import flowRight from 'lodash/flowRight';
 import { withoutProps } from '@bodiless/fclasses';
-import withData from '../withData';
-import { withBodilessData } from './withBodilessData';
+import { withData, withBodilessData } from '@bodiless/data';
 import type { BodilessOptions, AsBodiless } from '../Types/AsBodilessTypes';
 
 export const withActivatorWrapper = identity;

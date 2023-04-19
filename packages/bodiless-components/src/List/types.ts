@@ -14,7 +14,8 @@
 
 import type { HTMLProps } from 'react';
 import type { DesignableComponentsProps, DesignableProps, ComponentOrTag } from '@bodiless/fclasses';
-import type { WithNodeProps, EditButtonOptions } from '@bodiless/core';
+import type { EditButtonOptions } from '@bodiless/core';
+import type { WithNodeProps } from '@bodiless/data';
 
 export type ListComponents = {
   Wrapper: ComponentOrTag<any>,

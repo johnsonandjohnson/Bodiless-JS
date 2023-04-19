@@ -3,7 +3,7 @@ import {
   H2, Section, addClasses, as, stylable, replaceWith, withMeta, withDesign,
 } from '@bodiless/fclasses';
 import { FlowContainer } from '@bodiless/layouts-ui';
-import { withNode } from '@bodiless/core';
+import { withNode } from '@bodiless/data';
 import CaptionedImage from './CaptionedImage';
 
 const asGalleryTile = addClasses('mx-2 border-8');

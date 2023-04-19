@@ -16,20 +16,22 @@ import React, { useCallback, useEffect } from 'react';
 import { useFormState, useFormApi } from 'informed';
 import {
   withEditButton,
-  withNodeDataHandlers,
   EditButtonOptions,
-  withSidecarNodes,
-  withNode,
-  withNodeKey,
   ifEditable,
   withLocalContextMenu,
   withContextActivator,
-  useNode,
   ContextMenuFormProps,
   getUI,
   useEditContext,
-  ContentNode,
 } from '@bodiless/core';
+import {
+  withNodeDataHandlers,
+  withSidecarNodes,
+  withNode,
+  withNodeKey,
+  useNode,
+  ContentNode,
+} from '@bodiless/data';
 import {
   flowHoc,
   withDesign,

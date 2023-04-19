@@ -12,13 +12,4 @@
  * limitations under the License.
  */
 
-import ContextWrapper from './ContextWrapper';
-import PageEditor from './PageEditor';
-import PageOverlay from './PageOverlay';
-import ReactTagsField from './ReactTags';
-import LocalContextMenu from './LocalContextMenu';
-
-export {
-  ContextWrapper, PageEditor, PageOverlay,
-  ReactTagsField, LocalContextMenu,
-};
+export * from './index.bl-edit';

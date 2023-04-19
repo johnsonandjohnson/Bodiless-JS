@@ -26,7 +26,7 @@ import {
   withFullScreenEnabled as withBodilessFullScreenEnabled,
   withYouTubePlayerSettings,
 } from '@bodiless/youtube';
-import { withNodeKey } from '@bodiless/core';
+import { withNodeKey } from '@bodiless/data';
 import { asYouTubeToken } from '../YouTubeClean';
 import { defaultPlayerSettings } from '../util';
 

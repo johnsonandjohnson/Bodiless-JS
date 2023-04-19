@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { withSidecarNodes } from '@bodiless/core';
+import { withSidecarNodes } from '@bodiless/data';
 import { flowHoc } from '@bodiless/fclasses';
 import { withTagProps } from './FilterByGroupContext';
 import withFilterByTags from './withFilterByTags';

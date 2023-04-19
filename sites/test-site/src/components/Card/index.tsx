@@ -14,11 +14,13 @@
 
 import {
   withContextActivator,
-  withDefaultContent,
   withMenuOptions,
   withResetButton,
-  withSidecarNodes,
 } from '@bodiless/core';
+import {
+  withDefaultContent,
+  withSidecarNodes,
+} from '@bodiless/data';
 import {
   CardClean,
   asTestableCard,

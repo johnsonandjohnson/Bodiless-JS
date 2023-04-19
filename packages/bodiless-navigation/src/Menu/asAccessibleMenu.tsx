@@ -16,8 +16,9 @@ import React, {
   ComponentType, FC, useRef, useCallback, useEffect,
 } from 'react';
 import {
-  withParent, withAppendChild, useNode, useClickOutside, withChild,
+  withParent, withAppendChild, useClickOutside, withChild,
 } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import { LinkData, useListContext } from '@bodiless/components';
 import {
   addProps,

@@ -14,7 +14,8 @@
 
 import { ComponentType as CT } from 'react';
 import flow from 'lodash/flow';
-import { withChild, withNodeKey, WithNodeKeyProps } from '@bodiless/core';
+import { withChild } from '@bodiless/core';
+import { withNodeKey, WithNodeKeyProps } from '@bodiless/data';
 import { UseEditableOverrides, withPlaceholder } from '@bodiless/components';
 import {
   as,

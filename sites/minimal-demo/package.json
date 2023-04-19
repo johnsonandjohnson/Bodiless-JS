@@ -16,6 +16,7 @@
     "@bodiless/components": "^1.0.0-rc.37",
     "@bodiless/components-ui": "^1.0.0-rc.37",
     "@bodiless/core": "^1.0.0-rc.37",
+    "@bodiless/data": "^1.0.0-rc.37",
     "@bodiless/documentation": "^1.0.0-rc.37",
     "@bodiless/fclasses": "^1.0.0-rc.37",
     "@bodiless/gatsby-theme-bodiless": "^1.0.0-rc.37",

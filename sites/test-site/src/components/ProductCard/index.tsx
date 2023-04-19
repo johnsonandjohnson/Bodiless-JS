@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { withSidecarNodes } from '@bodiless/core';
+import { withSidecarNodes } from '@bodiless/data';
 import {
   withDesign, startWith, flowHoc, A
 } from '@bodiless/fclasses';

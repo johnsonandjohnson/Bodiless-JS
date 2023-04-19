@@ -15,7 +15,8 @@
 import { isObservable, toJS } from 'mobx';
 import isEqual from 'react-fast-compare';
 import isEmpty from 'lodash/isEmpty';
-import { useNode, useUUID } from '@bodiless/core';
+import { useUUID } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import {
   EditorOnChange,
   Value,

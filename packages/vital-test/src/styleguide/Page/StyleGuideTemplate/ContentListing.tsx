@@ -13,7 +13,7 @@
  */
 
 import React from 'react';
-import { withNode, withNodeKey } from '@bodiless/core';
+import { withNode, withNodeKey } from '@bodiless/data';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import {
   as, flowHoc, replaceWith,

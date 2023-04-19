@@ -221,4 +221,8 @@ const extendMeta = (
   return undefined;
 });
 
-export { flowHoc, withTokenFilter, extendMeta };
+const noop: HOC = C => C as ComponentWithMeta;
+
+export {
+  flowHoc, withTokenFilter, extendMeta, noop
+};

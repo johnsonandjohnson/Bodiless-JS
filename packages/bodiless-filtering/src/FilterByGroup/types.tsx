@@ -13,7 +13,8 @@
  */
 
 import { ComponentType, HTMLProps } from 'react';
-import { TagType as BaseTagType, WithNodeProps, ContentNode } from '@bodiless/core';
+import { TagType as BaseTagType } from '@bodiless/core';
+import { WithNodeProps, ContentNode } from '@bodiless/data';
 import { StylableProps, DesignableComponentsProps, DesignableProps } from '@bodiless/fclasses';
 import { ListProps } from '@bodiless/components';
 

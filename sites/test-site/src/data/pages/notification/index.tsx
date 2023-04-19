@@ -15,12 +15,14 @@
 import React, { useCallback } from 'react';
 import { graphql } from 'gatsby';
 import {
-  withNode,
-  withNodeKey,
   useNotifications,
   useNotify,
-  useNode,
 } from '@bodiless/core';
+import {
+  withNode,
+  withNodeKey,
+  useNode,
+} from '@bodiless/data';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { flowRight } from 'lodash';
 import { observer } from 'mobx-react';

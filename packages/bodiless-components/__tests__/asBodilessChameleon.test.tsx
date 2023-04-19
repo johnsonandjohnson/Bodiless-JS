@@ -17,9 +17,11 @@ import {
   mount, ComponentType, ReactWrapper, shallow,
 } from 'enzyme';
 import {
-  DefaultContentNode, NodeProvider, useNode, withNodeKey, withNode,
   PageEditContext, PageContextProvider, ifToggledOff,
 } from '@bodiless/core';
+import {
+  DefaultContentNode, NodeProvider, useNode, withNodeKey, withNode,
+} from '@bodiless/data';
 import flowRight from 'lodash/flowRight';
 import flow from 'lodash/flow';
 import identity from 'lodash/identity';

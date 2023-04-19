@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { useNode } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import {
   flowHoc, addProps, Div, flowIf, replaceWith, Fragment
 } from '@bodiless/fclasses';

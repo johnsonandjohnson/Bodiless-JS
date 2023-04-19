@@ -17,7 +17,7 @@ import {
   Div, designable, addClasses, replaceWith, DesignableComponentsProps, flowHoc, flowIf,
   HOC,
 } from '@bodiless/fclasses';
-import { useNode, withNodeKey } from '@bodiless/core';
+import { useNode, withNodeKey } from '@bodiless/data';
 import { withSearchResult } from '@bodiless/search';
 import { withBurgerMenuProvider, withBreadcrumbStore } from '@bodiless/navigation';
 import { withOidcProvider } from '@bodiless/oidc';

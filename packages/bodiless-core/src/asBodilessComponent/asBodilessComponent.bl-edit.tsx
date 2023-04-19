@@ -18,17 +18,16 @@ import omit from 'lodash/omit';
 import identity from 'lodash/identity';
 import flowRight from 'lodash/flowRight';
 import type { HOC, ComponentOrTag } from '@bodiless/fclasses';
+import { withData, withBodilessData } from '@bodiless/data';
 import { withoutProps } from '@bodiless/fclasses';
 import {
   withContextActivator, withLocalContextMenu,
-} from '../hoc';
-import { ifReadOnly, ifEditable } from '../withEditToggle';
+} from '../hoc.bl-edit';
+import { ifReadOnly, ifEditable } from '../withEditToggle.bl-edit';
 import withEditButton from '../withEditButton';
-import withData from '../withData';
 import type { EditButtonProps, UseBodilessOverrides } from '../Types/EditButtonTypes';
 import { useContextActivator } from '../hooks';
 import { ifToggledOn } from '../withFlowToggle';
-import { withBodilessData } from './withBodilessData';
 import type { BodilessOptions, AsBodiless } from '../Types/AsBodilessTypes';
 
 /**

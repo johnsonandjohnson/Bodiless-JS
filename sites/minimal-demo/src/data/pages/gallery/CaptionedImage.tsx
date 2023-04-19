@@ -1,6 +1,6 @@
 import React, { FC, HTMLProps } from 'react';
 import { asBodilessImage } from '@bodiless/components-ui';
-import { withNode } from '@bodiless/core';
+import { withNode } from '@bodiless/data';
 import {
   Img, Section, Div, addClasses, as, stylable,
 } from '@bodiless/fclasses';

@@ -19,7 +19,7 @@ import {
 } from '@bodiless/fclasses';
 import {
   WithNodeKeyProps, withDefaultContent,
-} from '@bodiless/core';
+} from '@bodiless/data';
 import asBodilessList, {
   asSubList,
 } from '../src/List/asBodilessList';

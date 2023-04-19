@@ -13,7 +13,7 @@
  */
 
 import { flowHoc, HOCWithMeta } from '@bodiless/fclasses';
-import { withNodeKey } from '@bodiless/core';
+import { withNodeKey } from '@bodiless/data';
 import { withImageLibrary } from '@bodiless/components-ui';
 import type { AsBodilessImage } from '@bodiless/components';
 import withGatsbyImageNode from './withGatsbyImageNode';

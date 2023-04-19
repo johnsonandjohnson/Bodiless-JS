@@ -25,7 +25,7 @@ import {
   HOC,
 } from '@bodiless/fclasses';
 import { ifEditable, withChild } from '@bodiless/core';
-import type { WithNodeKeyProps } from '@bodiless/core';
+import type { WithNodeKeyProps } from '@bodiless/data';
 import { asBodilessList } from '@bodiless/components';
 import negate from 'lodash/negate';
 import {

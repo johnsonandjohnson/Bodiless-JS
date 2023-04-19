@@ -16,9 +16,11 @@ import React, {
   createContext, useContext, Fragment, ComponentType,
 } from 'react';
 import {
-  useNode, useMenuOptionUI, EditButtonOptions, withEditButton,
-  withNode, withSidecarNodes, withNodeKey, withNodeDataHandlers,
+  useMenuOptionUI, EditButtonOptions, withEditButton,
 } from '@bodiless/core';
+import {
+  useNode, withNode, withSidecarNodes, withNodeKey, withNodeDataHandlers,
+} from '@bodiless/data';
 import { addClasses, flowHoc } from '@bodiless/fclasses';
 import { Option } from 'informed';
 import { observer } from 'mobx-react';

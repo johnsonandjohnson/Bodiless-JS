@@ -14,7 +14,7 @@
 
 /* eslint-disable quote-props */
 import identity from 'lodash/identity';
-import { withDefaultContent, WithNodeKeyProps, WithNodeProps } from '@bodiless/core';
+import { withDefaultContent, WithNodeKeyProps, WithNodeProps } from '@bodiless/data';
 import {
   withDesign, addProps, flowHoc, Injector
 } from '@bodiless/fclasses';

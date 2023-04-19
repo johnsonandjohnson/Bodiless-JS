@@ -20,7 +20,7 @@ import flowRight from 'lodash/flowRight';
 import { Enhancer } from '@bodiless/fclasses';
 import { EditButtonProps, EditButtonOptions } from './Types/EditButtonTypes';
 import type { FormBodyRenderer as Renderer } from './Types/EditButtonTypes';
-import type { FormBodyProps as ContextMenuFormBodyProps } from './contextMenuForm';
+import type { FormBodyProps as ContextMenuFormBodyProps } from './contextMenuForm.bl-edit';
 import { useRegisterSnippet } from './withCompoundForm';
 import type { Snippet } from './withCompoundForm';
 

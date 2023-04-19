@@ -12,8 +12,8 @@
  * limitations under the License.
  */
 
-import { getContentFrom } from '@bodiless/core';
-import type { ContentNodePath as Path, GetContentFrom } from '@bodiless/core';
+import { getContentFrom } from '@bodiless/data';
+import type { ContentNodePath as Path, GetContentFrom } from '@bodiless/data';
 import type { GatsbyImageData } from './asGatsbyImage';
 
 export type GetImageContentFrom = GetContentFrom<GatsbyImageData>;

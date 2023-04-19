@@ -24,7 +24,7 @@ import { ButtonClean, vitalButtons } from '@bodiless/vital-buttons';
 import { asFluidToken, vitalTypography } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { LinkClean, vitalLink } from '@bodiless/vital-link';
-import { withDefaultContent } from '@bodiless/core';
+import { withDefaultContent } from '@bodiless/data';
 import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
 const label = {

@@ -16,7 +16,7 @@
 import React, { useState } from 'react';
 import { observer } from 'mobx-react';
 import { useEditContext } from '../hooks';
-import { useContextMenuContext, useMenuOptionUI } from './ContextMenuContext';
+import { useContextMenuContext, useMenuOptionUI } from './ContextMenuContext.bl-edit';
 import type { IContextMenuItemProps as IProps, ContextMenuFormProps, TMenuOption } from '../Types/ContextMenuTypes';
 
 /**

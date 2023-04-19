@@ -34,7 +34,9 @@
   "dependencies": {
     "@bodiless/cli": "^1.0.0-rc.37",
     "@bodiless/core": "^1.0.0-rc.37",
+    "@bodiless/data": "^1.0.0-rc.37",
     "@bodiless/fclasses": "^1.0.0-rc.37",
+    "@bodiless/git": "^1.0.0-rc.37",
     "@bodiless/layouts": "^1.0.0-rc.37",
     "@bodiless/ui": "^1.0.0-rc.37",
     "axios": "^0.21.0",

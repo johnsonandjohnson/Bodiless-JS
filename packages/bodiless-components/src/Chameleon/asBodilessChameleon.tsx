@@ -15,18 +15,19 @@
 import React, { FC } from 'react';
 import {
   ifEditable,
-  useNode,
   ifReadOnly,
 } from '@bodiless/core';
 import type {
-  WithNodeKeyProps, UseBodilessOverrides,
+  UseBodilessOverrides,
 } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
+import type { WithNodeKeyProps } from '@bodiless/data';
 import {
   HOC, flowHoc, Enhancer,
 } from '@bodiless/fclasses';
 import { ComponentSelectorOptions } from '@bodiless/layouts';
 import { ChameleonData } from './types';
-import withChameleonButton, { withoutChameleonButtonProps } from './withChameleonButton';
+import withChameleonButton, { withoutChameleonButtonProps } from './withChameleonButton.bl-edit';
 import applyChameleon from './applyChameleon';
 import withChameleonContext from './withChameleonContext';
 
