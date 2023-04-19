@@ -15,7 +15,6 @@
 import { ContentListing, ContentListingMultiple } from './ContentListing';
 import { Editors, EditorsMonoFont } from './Editors';
 import { Typography } from './Typography';
-import { Layout } from './Layout';
 import { Header } from './Header';
 import { FlowContainer } from './FlowContainer';
 import { Images } from './Images';
@@ -35,7 +34,6 @@ export const VitalTestStyleGuideTemplate = {
   Editors,
   EditorsMonoFont,
   Typography,
-  Layout,
   Header,
   Images,
   FlowContainer,

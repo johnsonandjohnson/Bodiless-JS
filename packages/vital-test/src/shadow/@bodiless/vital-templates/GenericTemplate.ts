@@ -17,16 +17,19 @@ import {
 } from '@bodiless/fclasses';
 import { asGenericTemplateToken, vitalGenericTemplateBase } from '@bodiless/vital-templates';
 
-const Generic = asGenericTemplateToken(vitalGenericTemplateBase.Generic, {
+// Note: when used with the __vital__ package on vital-demo, that package takes precedence
+// over this one.  This test override has no effect and just an example.
+
+const Default = asGenericTemplateToken(vitalGenericTemplateBase.Default, {
   Behavior: {
     TemplateWrapper: flowHoc(
       replaceWith(Div),
-      addProps({ 'data-shadowed-by': '__vital__:GenericTemplate' }),
+      addProps({ 'data-shadowed-by': '__vitaltest__:GenericTemplate' }),
     ),
   },
 });
 
 export default {
   ...vitalGenericTemplateBase,
-  Generic,
+  Default,
 };

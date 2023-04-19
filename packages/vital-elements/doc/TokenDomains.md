@@ -23,7 +23,7 @@ differently as described below.
 - `Spacing`: Tokens which sit somewhere between `Theme` and `Layout`; e.g., padding, margin,
   line-spacing, etc.
 - `Theme`: Tokens which apply styling which is very likely to be overridden; e.g., colors,
-  typography, etc.
+  typography, sizing such as `width` and `height`, etc. 
 - `Editors`: Tokens which define how a component's data are edited.
 - `Content`: Tokens which provide default content or other fixed props. Any hardcoded, translatable
   strings belong in this domain.

@@ -12,11 +12,17 @@
  * limitations under the License.
  */
 
+import { on, as } from '@bodiless/fclasses';
 import { withLanguages } from '@bodiless/i18n';
 import { asFluidToken } from '@bodiless/vital-elements';
-import { vitalPageBase } from '@bodiless/vital-templates';
+import {
+  vitalPageBase, vitalPDPTemplate, vitalGenericTemplate, GenericTemplateClean, PDPTemplateClean,
+} from '@bodiless/vital-templates';
+import {
+  vitalSearchGenericTemplate, withSearchMenuProvider, withSearchResult
+} from '@bodiless/vital-search';
 
-const Default = asFluidToken(vitalPageBase.Base, {
+const Default = asFluidToken(vitalPageBase.Default, {
   Core: {
     _: withLanguages([
       {
@@ -29,6 +35,18 @@ const Default = asFluidToken(vitalPageBase.Base, {
         label: 'Español',
       },
     ]),
+  },
+  Components: {
+    PDP: on(PDPTemplateClean)(vitalPDPTemplate.Default),
+    // Adds a template for search results.
+    // @todo remove if you don't want search on your site
+    Search: on(GenericTemplateClean)(vitalSearchGenericTemplate.Search),
+    ContentListing: on(GenericTemplateClean)(vitalGenericTemplate.ContentListing),
+  },
+  Compose: {
+    // Adds the search context.
+    // @todo remove if you don't want search on your site
+    WithSearchContext: as(withSearchMenuProvider, withSearchResult),
   },
 });
 

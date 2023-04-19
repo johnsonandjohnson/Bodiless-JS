@@ -22,6 +22,13 @@
       "type": "FilterableContent"
     },
     {
+      "uuid": "b2f5ede0-c4c0-11ed-9149-6f3ee38db21b",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "FilterableContent"
+    },
+    {
       "uuid": "8316cfd0-e682-11ec-91a9-c50c27ab8f75",
       "wrapperProps": {
         "className": "w-full"

@@ -14,7 +14,8 @@
 
 import FlowContainerClean, { FlowContainerComponents } from './FlowContainerClean';
 import vitalFlowContainer from './tokens';
-import vitalFlowContainerOrig, { VitalFlowContainer } from './tokens/vitalFlowContainer';
+import vitalFlowContainerOrig from './tokens/vitalFlowContainer';
+import type { VitalFlowContainer } from './tokens/vitalFlowContainer';
 
 /**
  * Use this version of the vital flow container tokens when extending or shadowing.
@@ -23,9 +24,10 @@ import vitalFlowContainerOrig, { VitalFlowContainer } from './tokens/vitalFlowCo
  */
 const vitalFlowContainerBase = vitalFlowContainerOrig;
 
+export type { VitalFlowContainer };
 export {
   FlowContainerClean, vitalFlowContainer, vitalFlowContainerBase,
-  VitalFlowContainer, FlowContainerComponents,
+  FlowContainerComponents,
 };
 
 // Static flow container has edit/static alternatives.

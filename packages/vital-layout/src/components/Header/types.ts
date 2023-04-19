@@ -74,6 +74,16 @@ export interface HeaderComponents extends DesignableComponents {
    */
   ActionMenuContainer: ComponentOrTag<any>,
   /**
+   * Wrapper around utility menu that is shown above the Header.
+   * Not used by Default.
+   */
+  OuterUtilityMenuWrapper: ComponentOrTag<any>,
+  /**
+   * Used for secondary/utility menu that is shown above the Header.
+   * Not used by Default.
+   */
+  OuterUtilityMenu: ComponentOrTag<any>,
+  /**
    * Wrapper around utility menu
    */
   UtilityMenuWrapper: ComponentOrTag<any>,

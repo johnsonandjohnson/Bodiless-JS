@@ -14,7 +14,7 @@
 
 import omit from 'lodash/omit';
 import {
-  addProps, replaceWith, as, on, flowHoc,
+  addProps, replaceWith, as, flowHoc,
 } from '@bodiless/fclasses';
 import {
   withMandatoryCategories,
@@ -24,16 +24,8 @@ import {
 } from '@bodiless/layouts';
 import { asFluidToken, vitalSpacing } from '@bodiless/vital-elements';
 import type { FluidToken } from '@bodiless/vital-elements';
-import { vitalImageFlowContainer } from '@bodiless/vital-image';
-import { vitalEditorsFlowContainer } from '@bodiless/vital-editors';
-import { vitalYouTubeFlowContainer } from '@bodiless/vital-youtube';
-import { vitalListFlowContainer } from '@bodiless/vital-list';
-import { vitalCardFlowContainer } from '@bodiless/vital-card';
-import { vitalTableFlowContainer } from '@bodiless/vital-table';
-import { vitalAccordionFlowContainer } from '@bodiless/vital-accordion';
-import { vitalButtonFlowContainer } from '@bodiless/vital-buttons';
 
-import FlowContainerClean, { FlowContainerPreview } from '../FlowContainerClean';
+import { FlowContainerPreview } from '../FlowContainerClean';
 
 const blacklistCategories = ['Group'];
 const mandatoryCategories = ['Type'];
@@ -77,7 +69,7 @@ const WithSingleConstraint = asFluidToken({
 });
 
 const WithTabletOneThirdConstraint = asFluidToken({
-  Core: {
+  Layout: {
     Wrapper: 'w-full',
     ComponentWrapper: 'w-full md:w-1/3',
   },
@@ -95,24 +87,8 @@ const AsFlowContainerItem = asFluidToken({
   },
 });
 
-/**
- * @private
- * A Composable token that collects all the different Vital DS components.
- */
-const WithBaseVariations = asFluidToken(
-  vitalImageFlowContainer.WithImageVariations,
-  vitalEditorsFlowContainer.WithEditorVariations,
-  vitalYouTubeFlowContainer.WithYouTubeVariations,
-  vitalListFlowContainer.WithListVariations,
-  vitalCardFlowContainer.WithCardVariations,
-  vitalTableFlowContainer.WithTableVariations,
-  vitalAccordionFlowContainer.WithAccordionVariations,
-  vitalButtonFlowContainer.WithButtonVariations,
-);
-
 const ContentRegion = asFluidToken(
   omit(Base, 'Spacing'),
-  WithBaseVariations,
   {
     Compose: {
       AsFlowContainerItem,
@@ -124,12 +100,6 @@ const ContentRegion = asFluidToken(
   },
 );
 
-const WithContentRegionVariations = asFluidToken({
-  Components: {
-    ContentRegion: on(FlowContainerClean)(ContentRegion),
-  },
-});
-
 const Default = asFluidToken(
   {
     ...Base,
@@ -138,8 +108,6 @@ const Default = asFluidToken(
       ComponentWrapper: vitalSpacing.Gutter,
     },
   },
-  WithBaseVariations,
-  WithContentRegionVariations,
 );
 
 const Hero = asFluidToken(
@@ -149,7 +117,6 @@ const Hero = asFluidToken(
       WithFullWidthConstraint,
     },
   },
-  WithBaseVariations,
 );
 
 const WithContentLibrary = asFluidToken(

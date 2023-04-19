@@ -33,6 +33,15 @@ export default (props: any) => (
       <div className="m-2 p-2 w-1/3 h-12 border-blue border">
         <Editable nodeKey="sitedatapage" nodeCollection="site" placeholder="Site level data..." />
       </div>
+      <h4 className="text-base font-bold">The following is site level with custom tag and prop</h4>
+      <div className="m-2 p-2 w-1/3 h-12 border-blue border">
+        <Editable
+          nodeKey="sitedatapage-2"
+          placeholder="Page level data with custom tag..."
+          tagName="section"
+          data-custom-attr="custom"
+        />
+      </div>
     </Layout>
   </Page>
 );

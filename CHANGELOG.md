@@ -3,6 +3,153 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.37](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.36...v1.0.0-rc.37) (2023-04-18)
+
+
+### Bug Fixes
+
+* **gatsby-theme-bodiless, lerna:** patch Lerna canary version generation [canary] ([#2037](https://github.com/johnsonandjohnson/bodiless-js/issues/2037)) ([cf67a5d](https://github.com/johnsonandjohnson/bodiless-js/commit/cf67a5d2ae28f150313fb2ff87e3112de3992fa6))
+
+
+
+
+
+# [1.0.0-rc.36](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.35...v1.0.0-rc.36) (2023-04-18)
+
+
+### Bug Fixes
+
+* **vital-layout:** Add outer Utility menu to header ([#2034](https://github.com/johnsonandjohnson/bodiless-js/issues/2034)) ([70131d6](https://github.com/johnsonandjohnson/bodiless-js/commit/70131d63012770a24dc9b90ecb066ee312215d03))
+
+
+
+
+
+# [1.0.0-rc.35](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.34...v1.0.0-rc.35) (2023-04-17)
+
+
+### Bug Fixes
+
+* **vital-layout/templates:** Update Layout/Templates ([#2004](https://github.com/johnsonandjohnson/bodiless-js/issues/2004)) ([8f56873](https://github.com/johnsonandjohnson/bodiless-js/commit/8f56873760f217a619035a0f97202c727fb92627))
+
+
+
+
+
+# [1.0.0-rc.34](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.33...v1.0.0-rc.34) (2023-04-13)
+
+
+### Bug Fixes
+
+* **vital-test:** change vital-test package to private ([#2030](https://github.com/johnsonandjohnson/bodiless-js/issues/2030)) ([44996d2](https://github.com/johnsonandjohnson/bodiless-js/commit/44996d2bd9a2ffad0b50db9f535224bfcbf4a082))
+
+
+
+
+
+# [1.0.0-rc.33](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.32...v1.0.0-rc.33) (2023-04-06)
+
+
+### Features
+
+* **components:** 'Editable' passes through html props. [Canary] ([#2020](https://github.com/johnsonandjohnson/bodiless-js/issues/2020)) ([3897084](https://github.com/johnsonandjohnson/bodiless-js/commit/38970844d74ba647a1803f3ef94e4e4dd22239c4))
+
+
+
+
+
+# [1.0.0-rc.32](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.31...v1.0.0-rc.32) (2023-04-06)
+
+**Note:** Version bump only for package bodiless-js
+
+
+
+
+
+# [1.0.0-rc.31](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.30...v1.0.0-rc.31) (2023-04-06)
+
+
+### Bug Fixes
+
+* **@bodiless/search, gatsby-theme-bodiless:** Fix/transpile to esm search and gatsby theme bodiless ([#2023](https://github.com/johnsonandjohnson/bodiless-js/issues/2023)) ([ad864af](https://github.com/johnsonandjohnson/bodiless-js/commit/ad864af6f0ef30b8df91528d7e9d4adc6615fbf9))
+
+
+
+
+
+# [1.0.0-rc.30](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.29...v1.0.0-rc.30) (2023-04-06)
+
+
+### Features
+
+* **gatsby-theme-bodiless, backend, hydration, layouts, tokens, ga4:** Replace crypto-browserify with crypto-js ([#1955](https://github.com/johnsonandjohnson/bodiless-js/issues/1955)) ([bb211c7](https://github.com/johnsonandjohnson/bodiless-js/commit/bb211c74a9e6a1e2e148a5b0d2e5a380250553fe))
+
+
+
+
+
+# [1.0.0-rc.29](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.28...v1.0.0-rc.29) (2023-03-21)
+
+**Note:** Version bump only for package bodiless-js
+
+
+
+
+
+# [1.0.0-rc.28](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.27...v1.0.0-rc.28) (2023-03-20)
+
+
+### Bug Fixes
+
+* **styleguide:** accordion & buttons & video ([#2007](https://github.com/johnsonandjohnson/bodiless-js/issues/2007)) ([0e078dc](https://github.com/johnsonandjohnson/bodiless-js/commit/0e078dc605912be5240bca5da7a2b52ba2859cab))
+
+
+
+
+
+# [1.0.0-rc.27](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.26...v1.0.0-rc.27) (2023-03-16)
+
+
+### Bug Fixes
+
+* **styleguide:** Swap Styleguide for Layout & Typography ([#2003](https://github.com/johnsonandjohnson/bodiless-js/issues/2003)) ([d24e9b1](https://github.com/johnsonandjohnson/bodiless-js/commit/d24e9b1123e36e49d850f755fc5ecccf1f1f92b1))
+
+
+
+
+
+# [1.0.0-rc.26](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.25...v1.0.0-rc.26) (2023-03-14)
+
+**Note:** Version bump only for package bodiless-js
+
+
+
+
+
+# [1.0.0-rc.25](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.24...v1.0.0-rc.25) (2023-03-01)
+
+
+### Bug Fixes
+
+* **vital-buttons, vital-elements:** Fix WTB button font-size on desktop. ([7ba10ab](https://github.com/johnsonandjohnson/bodiless-js/commit/7ba10abfc8c57fb883763502ab9cf2512434f160))
+* **vital-buttons, vital-elements:** Fix WTB button font-size on desktop. ([dc5aab8](https://github.com/johnsonandjohnson/bodiless-js/commit/dc5aab8e04c389ecaaff67afc74f73acbb8db29d))
+
+
+### Features
+
+* **chore:** Address PR Feedback, remove Header Links from Typography ([62eaf2a](https://github.com/johnsonandjohnson/bodiless-js/commit/62eaf2a54ca00cd9dda6036f9a52618e3ad61f8a))
+* **chore:** Cleanup Vital Component tokens ([723c773](https://github.com/johnsonandjohnson/bodiless-js/commit/723c7736311c5b6f3d79bdddec76bdcb1e75551a))
+* **chore:** Code cleanup ([680cc4b](https://github.com/johnsonandjohnson/bodiless-js/commit/680cc4b55d7b93bd5fac2a8a9f4ea3c73cf1a642))
+* **chore:** Code Cleanup ([aa2994f](https://github.com/johnsonandjohnson/bodiless-js/commit/aa2994ffce3aef33f95ab45a2ca4ba60e2b8e35b))
+* **chore:** Code Cleanup ([0b9b2f8](https://github.com/johnsonandjohnson/bodiless-js/commit/0b9b2f8edb72eb340f90c338d90b1af8e855f8a5))
+* **chore:** Small code cleanup ([9277807](https://github.com/johnsonandjohnson/bodiless-js/commit/9277807b958b74cb68afa0d1d7f8fef8017c61c5))
+* **chore:** Toggle vercel build ([5bf1f82](https://github.com/johnsonandjohnson/bodiless-js/commit/5bf1f82ab7eea829c8b4a05c3ea651058a8c0b77))
+* **vital-elements:** Address PR Feedback, simplify typography tokens and updated Domain tokens documentation ([c11fbc8](https://github.com/johnsonandjohnson/bodiless-js/commit/c11fbc8770b420b45872ad2f7794e2f4b10014f2))
+
+
+
+
+
 # [1.0.0-rc.24](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.23...v1.0.0-rc.24) (2023-02-23)
 
 

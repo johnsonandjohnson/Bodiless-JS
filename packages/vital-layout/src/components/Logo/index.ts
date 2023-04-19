@@ -12,7 +12,8 @@
  * limitations under the License.
  */
 
-import vitalLogoBaseOrig, { VitalLogo } from './tokens/vitalLogo';
+import vitalLogoBaseOrig from './tokens/vitalLogo';
+import type { VitalLogo } from './tokens/vitalLogo';
 
 /**
  * Use this version of the vital logo tokens when extending or shadowing.
@@ -25,4 +26,5 @@ export { default as LogoClean, asLogoToken } from './LogoClean';
 export { default as vitalLogo } from './tokens';
 export type { LogoComponents } from './LogoClean';
 
-export { vitalLogoBase, VitalLogo};
+export { vitalLogoBase };
+export type { VitalLogo };

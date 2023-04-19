@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/ga4",
-  "version": "1.0.0-rc.24",
+  "version": "1.0.0-rc.37",
   "description": "Provides integration to support DataLayer in Google Analytics",
   "author": "Heidi Vanyo <hvanyo@its.jnj.com>",
   "license": "Apache-2.0",
@@ -28,17 +28,19 @@
     "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.24",
-    "@bodiless/components": "^1.0.0-rc.24",
-    "@bodiless/core": "^1.0.0-rc.24",
-    "@bodiless/fclasses": "^1.0.0-rc.24",
-    "@bodiless/filtering": "^1.0.0-rc.24",
-    "@bodiless/layouts": "^1.0.0-rc.24",
-    "@bodiless/search": "^1.0.0-rc.24",
+    "@bodiless/cli": "^1.0.0-rc.37",
+    "@bodiless/components": "^1.0.0-rc.37",
+    "@bodiless/core": "^1.0.0-rc.37",
+    "@bodiless/fclasses": "^1.0.0-rc.37",
+    "@bodiless/filtering": "^1.0.0-rc.37",
+    "@bodiless/layouts": "^1.0.0-rc.37",
+    "@bodiless/search": "^1.0.0-rc.37",
     "common-tags": "^1.8.0",
+    "crypto-js": "^4.1.1",
     "lodash": "^4.17.19"
   },
   "devDependencies": {
+    "@types/crypto-js": "4.1.1",
     "enzyme": "^3.9.0"
   },
   "peerDependencies": {

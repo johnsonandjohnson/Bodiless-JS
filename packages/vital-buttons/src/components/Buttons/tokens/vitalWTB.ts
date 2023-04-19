@@ -18,7 +18,7 @@ import {
   startWith,
   withProps,
 } from '@bodiless/fclasses';
-import { vitalColor, vitalTextDecoration, } from '@bodiless/vital-elements';
+import { vitalColor, vitalTextDecoration, vitalFontSize } from '@bodiless/vital-elements';
 import { asButtonToken } from '../ButtonClean';
 import { CartIcon } from '../assets/CartIcon';
 
@@ -39,8 +39,7 @@ const WhereToBuy = asButtonToken({
       vitalColor.TextPrimaryFooterCopy,
       vitalTextDecoration.Bold,
       vitalTextDecoration.Uppercase,
-      // @TODO: Create token? It should be same size for both mobile and desktop...
-      'text-m-base',
+      vitalFontSize.Base,
       'rounded',
     ),
     Icon: 'w-6 h-6',

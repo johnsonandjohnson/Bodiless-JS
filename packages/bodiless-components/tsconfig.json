@@ -6,7 +6,8 @@
     "allowJs": false
   },
   "include": [
-    "src"
+    "src",
+    "../../@types/*"
   ],
   "exclude": [
     "lib",

@@ -38,13 +38,18 @@ const Link = asElementToken({
 
 const H1 = asElementToken({
   Core: {
-    _: vitalFontSize.XXXL,
+    /**
+     * Note that in scope of a Typography Token, we consider
+     * `font-size` and `font-weight` as an attribute of the 'Core' Domain
+     * since they are likely to be preserved when changing H1 Theme.
+     */
+    _: as(
+      vitalFontSize.XXXL,
+      vitalTextDecoration.Bold,
+    ),
   },
   Theme: {
-    _: as(
-      vitalTextDecoration.Bold,
-      vitalColor.TextPrimaryHeaderCopy,
-    ),
+    _: vitalColor.TextPrimaryHeaderCopy,
   },
   Spacing: {
     _: 'mt-10 mb-5 lg:mb-6',
@@ -54,13 +59,18 @@ const H1 = asElementToken({
 
 const H2 = asElementToken({
   Core: {
-    _: vitalFontSize.XXL,
-  },
-  Theme: {
+    /**
+     * Note that in scope of a Typography Token, we consider
+     * `font-size` and `font-weight` as an attribute of the 'Core' Domain
+     * since they are likely to be preserved when changing H1 Theme.
+     */
     _: as(
       vitalTextDecoration.Bold,
-      vitalColor.TextPrimaryHeaderCopy,
+      vitalFontSize.XXL,
     ),
+  },
+  Theme: {
+    _: vitalColor.TextPrimaryHeaderCopy,
   },
   Spacing: {
     _: 'mb-5',
@@ -70,13 +80,18 @@ const H2 = asElementToken({
 
 const H3 = asElementToken({
   Core: {
-    _: vitalFontSize.XL,
+    /**
+     * Note that in scope of a Typography Token, we consider
+     * `font-size` and `font-weight` as an attribute of the 'Core' Domain
+     * since they are likely to be preserved when changing H1 Theme.
+     */
+    _: as(
+      vitalFontSize.XL,
+      vitalTextDecoration.Medium,
+    ),
   },
   Theme: {
-    _: as(
-      vitalTextDecoration.Medium,
-      vitalColor.TextPrimaryHeaderCopy,
-    ),
+    _: vitalColor.TextPrimaryHeaderCopy,
   },
   Spacing: {
     _: 'mb-5',
@@ -86,13 +101,18 @@ const H3 = asElementToken({
 
 const H4 = asElementToken({
   Core: {
-    _: vitalFontSize.XL,
+    /**
+     * Note that in scope of a Typography Token, we consider
+     * `font-size` and `font-weight` as an attribute of the 'Core' Domain
+     * since they are likely to be preserved when changing H1 Theme.
+     */
+    _: as(
+      vitalFontSize.XL,
+      vitalTextDecoration.Normal,
+    ),
   },
   Theme: {
-    _: as(
-      vitalTextDecoration.Normal,
-      vitalColor.TextPrimaryHeaderCopy,
-    ),
+    _: vitalColor.TextPrimaryHeaderCopy,
   },
   Spacing: {
     _: 'mb-5.75 lg:mb-9',
@@ -101,13 +121,18 @@ const H4 = asElementToken({
 
 const H5 = asElementToken({
   Core: {
-    _: vitalFontSize.Base,
+    /**
+     * Note that in scope of a Typography Token, we consider
+     * `font-size` and `font-weight` as an attribute of the 'Core' Domain
+     * since they are likely to be preserved when changing H1 Theme.
+     */
+    _: as(
+      vitalFontSize.Base,
+      vitalTextDecoration.Medium,
+    ),
   },
   Theme: {
-    _: as(
-      vitalTextDecoration.Medium,
-      vitalColor.TextPrimaryHeaderCopy,
-    ),
+    _: vitalColor.TextPrimaryHeaderCopy,
   },
   Spacing: {
     _: 'mb-5 lg:mb-4.5',
@@ -119,56 +144,6 @@ const HeaderLink = as(
   vitalColor.TextPrimaryInteractive,
   vitalTextDecoration.Underline,
 );
-
-const H1Link = asElementToken({
-  ...H1,
-  Theme: {
-    _: as(
-      vitalTextDecoration.Bold,
-      HeaderLink,
-    ),
-  },
-});
-
-const H2Link = asElementToken({
-  ...H2,
-  Theme: {
-    _: as(
-      vitalTextDecoration.Bold,
-      HeaderLink,
-    ),
-  },
-});
-
-const H3Link = asElementToken({
-  ...H3,
-  Theme: {
-    _: as(
-      vitalTextDecoration.Medium,
-      HeaderLink,
-    ),
-  },
-});
-
-const H4Link = asElementToken({
-  ...H4,
-  Theme: {
-    _: as(
-      vitalTextDecoration.Normal,
-      HeaderLink,
-    ),
-  },
-});
-
-const H5Link = asElementToken({
-  ...H5,
-  Theme: {
-    _: as(
-      vitalTextDecoration.Medium,
-      HeaderLink,
-    ),
-  },
-});
 
 const Body = asElementToken({
   Core: {
@@ -240,11 +215,7 @@ export default {
   H3,
   H4,
   H5,
-  H1Link,
-  H2Link,
-  H3Link,
-  H4Link,
-  H5Link,
+  HeaderLink,
   Body,
   Eyebrow,
   EyebrowNoSpacing,

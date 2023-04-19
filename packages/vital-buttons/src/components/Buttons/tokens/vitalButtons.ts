@@ -67,15 +67,16 @@ const Base = asButtonToken({
 const WithArrow = asButtonToken({
   Layout: {
     Wrapper: 'flex-row-reverse',
+    Icon: 'inline-block',
   },
   Components: {
     Icon: replaceWith(Span),
   },
   Theme: {
-    Icon: 'vital-arrow group-hover:text-current text-transparent',
+    Icon: 'w-6 h-2 vital-arrow group-hover:text-current text-transparent',
   },
   Spacing: {
-    Icon: 'inline-block pr-1 w-6 h-2',
+    Icon: 'pr-1',
     Wrapper: 'pl-12 pr-6 py-3.5 group',
   },
   Meta: flowHoc.meta.term('Style')('With Hover Arrow'),

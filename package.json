@@ -7,7 +7,7 @@
   ],
   "license": "Apache-2.0",
   "scripts": {
-    "bootstrap": "npm run clean:symlinks && npx lerna@^5.0.0 bootstrap --hoist --strict",
+    "bootstrap": "npm run clean:symlinks && npx lerna@^5.0.0 bootstrap --hoist --strict && patch-package",
     "bootstrap:gatsby-cloud": "npm i && npx lerna@^5.0.0 bootstrap",
     "build": "cross-env NODE_ENV=production lerna run build --stream --ignore @bodiless/gatsby-starter-bodiless",
     "build:only": "cross-env NODE_ENV=production lerna run build --stream --scope",
@@ -28,7 +28,7 @@
     "fix:target": "eslint --fix  --cache --ext .js,.jsx,.ts,.tsx",
     "fix:change": "git diff --name-only --diff-filter=d master... | grep -e 'tsx$' -e 'jsx$' -e 'js$' -e 'ts$' | xargs -L 1 npm run fix:target",
     "fresh": "npm run clean && lerna clean -y && rimraf node_modules && npm run setup",
-    "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx packages sites --",
+    "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx packages sites playwright --",
     "lint:target": "eslint --cache --ext .js,.jsx,.ts,.tsx",
     "lint:change": "git diff --name-only --diff-filter=d master... | grep -e 'tsx$' -e 'jsx$' -e 'js$' -e 'ts$' | xargs -L 1 npm run lint:target",
     "new": "node ./scripts/new-starter",
@@ -39,7 +39,8 @@
     "publish:major": "lerna version major --conventional-commits",
     "lerna:publish": "lerna publish from-git --yes --dist-tag latest",
     "lerna:canary": "lerna publish --canary --include-merged-tags --preid ks-canary --dist-tag ks-canary --force-publish",
-    "pw:run": "npx playwright test playwright/tests/smoke/* --project=chromium --workers 1",
+    "pw:run": "npx playwright test playwright/tests/smoke-deprecated/* --project=chromium --workers 1",
+    "playwright:run": "npx playwright test playwright/tests/smoke/* --project=chromium --workers 3",
     "psh:setup-starter": "node ./scripts/psh-setup-starter",
     "serve": "lerna run serve --scope @sites/${APP_SITE_NAME:-test-site} --stream",
     "setup": "npm run bootstrap && npm run build:packages",
@@ -50,6 +51,7 @@
     "sites:update": "npm run sites:pack && npm run sites:install",
     "sites:launch-test": "npm run sites:clone-local ${APP_SITE_DIR_NAME:-test-site} && npm run sites:update ${APP_SITE_DIR_NAME:-test-site} && cd sites/${APP_SITE_DIR_NAME:-test-site} && npm install --legacy-peer-deps && npm run start",
     "sites:launch-monorepo": "cd sites/${APP_SITE_DIR_NAME:-test-site} && npm run start",
+    "sites:launch-vital": "cd sites/vital-demo && npm run serve:test",
     "start": "lerna run start --stream --scope @sites/${APP_SITE_NAME:-test-site}",
     "sync:fix": "syncpack fix-mismatches",
     "sync:check": "syncpack list-mismatches",
@@ -57,7 +59,8 @@
     "test:monorepo-pw": "WAIT_ON_TIMEOUT=600000 start-server-and-test sites:launch-monorepo http://localhost:8005 pw:run",
     "test:ci": "WAIT_ON_TIMEOUT=600000 start-server-and-test sites:launch-test http://localhost:8005 cy:run",
     "test:monorepo": "WAIT_ON_TIMEOUT=600000 start-server-and-test sites:launch-monorepo http://localhost:8005 cy:run",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "test:playwright": "APPLITOOLS_BATCH_ID=`uuidgen` WAIT_ON_TIMEOUT=600000 start-server-and-test sites:launch-vital http://localhost:8005 playwright:run"
   },
   "husky": {
     "hooks": {
@@ -81,6 +84,7 @@
     "@babel/plugin-proposal-decorators": "^7.4.0",
     "@babel/plugin-transform-modules-commonjs": "7.5.0",
     "@babel/runtime": "^7.4.2",
+    "@applitools/eyes-playwright": "^1.13.0",
     "@playwright/test": "^1.30.0",
     "@types/enzyme": "^3.9.1",
     "@types/jest": "^24.0.18",
@@ -131,7 +135,8 @@
     "tslint-config-airbnb": "^5.11.1",
     "typedoc": "^0.22.6",
     "typedoc-plugin-markdown": "^3.11.3",
-    "typescript": "^4.0.0"
+    "typescript": "^4.0.0",
+    "patch-package": "^6.5.1"
   },
   "repository": {
     "type": "git",

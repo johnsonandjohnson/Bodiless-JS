@@ -21,6 +21,8 @@ export * from './SearchSuggestion';
 export * from './SearchSuggestions';
 export * from './SearchToggler';
 export * from './SearchMenuContext';
+export * from './GenericTemplate';
+export * from './Header';
 
 // Re-export everything from @bodiless/search so site builders
 // only need to import @bodiless/vital-search in their sites.

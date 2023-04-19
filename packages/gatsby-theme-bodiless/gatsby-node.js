@@ -20,6 +20,7 @@
  */
 const pathUtil = require('path');
 const fs = require('fs');
+const webpack = require('webpack');
 const { getDisabledPages } = require('@bodiless/components/node-api');
 const { createFilePath } = require('gatsby-source-filesystem');
 const { addStaticReplacementPlugin } = require('@bodiless/webpack');
@@ -252,6 +253,13 @@ exports.createPages = async ({ actions, graphql, getNode }) => {
 exports.onCreateWebpackConfig = ({
   stage, actions, plugins
 }, pluginOptions) => {
+  actions.setWebpackConfig({
+    plugins: [
+      new webpack.DefinePlugin({
+        BL_IS_EDIT: JSON.stringify(process.env.NODE_ENV !== 'production')
+      })
+    ]
+  });
   if (stage === 'build-javascript') {
     actions.setWebpackConfig({
       resolve: {
@@ -273,9 +281,6 @@ exports.onCreateWebpackConfig = ({
       ],
       resolve: {
         fallback: {
-          crypto: require.resolve('crypto-browserify'),
-          // stream is required for crypto
-          stream: require.resolve('stream-browserify'),
           path: require.resolve('path-browserify'),
         },
       },

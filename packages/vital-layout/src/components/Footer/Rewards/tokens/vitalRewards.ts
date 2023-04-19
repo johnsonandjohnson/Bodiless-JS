@@ -34,7 +34,7 @@ const RewardsFormElement = as(
 );
 const RewardColorCopy = 'text-vital-primary-header-copy 2xl:text-vital-primary-footer-copy';
 
-const Base = asRewardsToken({
+const Default = asRewardsToken({
   Components: {
     Wrapper: startWith(Div),
   },
@@ -102,10 +102,6 @@ const Base = asRewardsToken({
   },
 });
 
-const Default = asRewardsToken({
-  ...Base,
-});
-
 /**
  * Tokens for the vital Rewards PLACEHOLDER
  *
@@ -114,11 +110,7 @@ const Default = asRewardsToken({
  */
 export interface VitalRewards {
   /**
-   * Base Styled PLACEHOLDER
-   */
-  Base: RewardsToken,
-  /**
-   * Inherits Base
+   * Defines the default Rewards placeholder
    */
   Default: RewardsToken,
 }
@@ -131,7 +123,6 @@ export interface VitalRewards {
  * @see [[RewardsClean]]
  */
 const vitalRewards: VitalRewards = {
-  Base,
   Default,
 };
 

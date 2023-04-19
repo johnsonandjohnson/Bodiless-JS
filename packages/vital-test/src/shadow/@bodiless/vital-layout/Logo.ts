@@ -17,7 +17,7 @@ import { addProps } from '@bodiless/fclasses';
 
 const Default = asLogoToken(vitalLogoBase.Default, {
   Behavior: {
-    Wrapper: addProps({ 'data-shadowed-by': '__vital__:Logo' }),
+    Wrapper: addProps({ 'data-shadowed-by': '__vitaltest__:Logo' }),
   },
 });
 

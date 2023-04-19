@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/webpack",
-  "version": "1.0.0-rc.24",
+  "version": "1.0.0-rc.37",
   "description": "Portable webpack configuration for bodiless sites",
   "author": "Chris Oden <coden@its.jnj.com>",
   "homepage": "",
@@ -31,7 +31,7 @@
     "prepack": "npm run clean && npm run build"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.24",
+    "@bodiless/cli": "^1.0.0-rc.37",
     "@statoscope/webpack-plugin": "^5.20.1",
     "lodash": "^4.17.19",
     "webpack": "^5.69.1"

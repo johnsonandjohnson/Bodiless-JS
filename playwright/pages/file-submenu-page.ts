@@ -17,20 +17,35 @@ import { BasePage } from './base-page';
 
 export class FileSubmenuPage extends BasePage {
   readonly page: Page;
+
   readonly fileForm: string;
+
   readonly fileFormButton: string;
+
   readonly fileFormCloseButton: string;
+
   readonly historyButton: string;
+
   readonly pushButton: string;
+
   readonly pullButton: string;
+
   readonly revertButton: string;
+
   readonly historyFormTitle: string;
+
   readonly historyFormItems: string;
+
   readonly historyFormSubmitButton: string;
+
   readonly historyFormCloseButton: string;
+
   readonly revertFormTitle: string;
+
   readonly revertFormDescription: string;
+
   readonly revertFormSubmitButton: string;
+
   readonly revertFormCloseButton: string;
 
   constructor(page: Page) {

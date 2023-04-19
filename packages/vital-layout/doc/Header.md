@@ -47,10 +47,10 @@ extend/override the specific domains within that token.
 ```js
 const BrandXHeader = asHeaderToken({
   // Will spread all existing header functionality across all domains.
-  ...vitalHeader.Base,
+  ...vitalHeader.Default,
   Components: {
     // Will spread all header components as is.
-    ...vitalHeader.Base.Components,
+    ...vitalHeader.Default.Components,
     // Will replace the DesktopSearch slot with the custom component
     DesktopSearch: brandXSearch.Default,
   },

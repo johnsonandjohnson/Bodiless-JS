@@ -1,0 +1,24 @@
+name: Pull request info
+
+on:
+  pull_request_target:
+    types: [opened]
+    branches:
+      - main
+
+jobs:
+  test-run-info:
+    if: ${{ github.run_attempt == 1 }}
+    permissions:
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add test run info
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: |
+            Thank you for creating a pull request on GitHub! We appreciate your contribution to our repository.
+
+            In order to enable our tests to run on your changes, we kindly ask that you wait until one of our repository members adds the **ready-to-test** label to your pull request. (Please request on the GitHub issue you are addressing.) This will ensure that our testing process runs smoothly and we can quickly verify the changes you've made.
+            
+            Thank you for your understanding and we look forward to reviewing your changes soon!

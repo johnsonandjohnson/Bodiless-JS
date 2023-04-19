@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/backend",
-  "version": "1.0.0-rc.24",
+  "version": "1.0.0-rc.37",
   "description": "",
   "main": "",
   "files": [
@@ -18,9 +18,10 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.24",
+    "@bodiless/cli": "^1.0.0-rc.37",
     "body-parser": "^1.18.3",
     "copyfiles": "^2.1.1",
+    "crypto-js": "^4.1.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "formidable": "^1.2.1",
@@ -47,6 +48,7 @@
     "@types/morgan": "^1.9.4",
     "@types/react": "^17.0.39",
     "@types/rimraf": "^3.0.0",
+    "@types/crypto-js": "4.1.1",
     "@types/supertest": "^2.0.8",
     "@types/tmp": "^0.2.3",
     "morgan": "^1.9.1",

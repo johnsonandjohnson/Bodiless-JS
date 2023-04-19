@@ -44,10 +44,10 @@ extend/override the specific domains within that token.
 ```js
 const BrandXFooter = asFooterToken({
   // Will spread all existing footer functionality across all domains.
-  ...vitalFooter.Base,
+  ...vitalFooter.Default,
   Components: {
     // Will spread all footer components as is.
-    ...vitalFooter.Base.Components,
+    ...vitalFooter.Default.Components,
     // Will replace the Rewards slot with the custom component
     Rewards: brandXRewards.Default,
   },

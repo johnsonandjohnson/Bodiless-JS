@@ -9,7 +9,8 @@
   },
   "include": [
     "src",
-    "getDocs.js"
+    "getDocs.js",
+    "../../@types/*"
   ],
   "exclude": [
     "lib",

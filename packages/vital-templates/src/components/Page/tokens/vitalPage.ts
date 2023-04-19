@@ -16,12 +16,10 @@ import { as, on, Token } from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { WithGA4DesignKeys } from '@bodiless/ga4';
-import { withSearchResult, withSearchMenuProvider } from '@bodiless/vital-search';
 import { asBodilessPage } from '../asBodilessPage';
 import { GenericTemplateClean, vitalGenericTemplate } from '../../GenericTemplate';
-import { PDPTemplateClean, vitalPDPTemplate } from '../../PDPTemplate';
 
-const Base = asFluidToken({
+const Default = asFluidToken({
   Core: {
     _: as(
       asBodilessChameleon(
@@ -39,9 +37,6 @@ const Base = asFluidToken({
   },
   Components: {
     _default: on(GenericTemplateClean)(vitalGenericTemplate.Generic),
-    PDP: on(PDPTemplateClean)(vitalPDPTemplate.Default),
-    Search: on(GenericTemplateClean)(vitalGenericTemplate.Search),
-    ContentListing: on(GenericTemplateClean)(vitalGenericTemplate.ContentListing),
   },
   // @todo restore tools
   // Behavior: {
@@ -60,18 +55,6 @@ const Base = asFluidToken({
   },
 });
 
-const Default = asFluidToken({
-  ...Base,
-});
-
-const WithSearchContext = asFluidToken({
-  Compose: {
-    _: as(withSearchMenuProvider, withSearchResult),
-  }
-});
-
 export default {
-  Base,
   Default,
-  WithSearchContext,
 };

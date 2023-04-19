@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/vital-elements",
-  "version": "1.0.0-rc.24",
+  "version": "1.0.0-rc.37",
   "description": "Layout components for the bodiless vital design system",
   "author": "Chris Odem <coden@its.jnj.com>",
   "license": "Apache-2.0",
@@ -30,11 +30,11 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.24",
-    "@bodiless/components": "^1.0.0-rc.24",
-    "@bodiless/core": "^1.0.0-rc.24",
-    "@bodiless/fclasses": "^1.0.0-rc.24",
-    "@bodiless/hydration": "^1.0.0-rc.24",
+    "@bodiless/cli": "^1.0.0-rc.37",
+    "@bodiless/components": "^1.0.0-rc.37",
+    "@bodiless/core": "^1.0.0-rc.37",
+    "@bodiless/fclasses": "^1.0.0-rc.37",
+    "@bodiless/hydration": "^1.0.0-rc.37",
     "@types/webpack": "^5.0.0",
     "lodash": "^4.17.19",
     "mobx": "^6.0.0",

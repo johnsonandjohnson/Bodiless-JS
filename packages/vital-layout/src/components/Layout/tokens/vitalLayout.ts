@@ -29,12 +29,14 @@ import { vitalHelmet } from '../../Helmet';
 import { LayoutIds } from './constants';
 import { StyleGuide } from './StyleGuide';
 
-const Base = asLayoutToken({
+const Default = asLayoutToken({
   Core: {
     _: as(withBurgerMenuProvider, withBreadcrumbStore),
   },
   Components: {
     Helmet: vitalHelmet.Default,
+    Header: vitalHeader.Default,
+    Footer: vitalFooter.Default,
   },
   SEO: {
     _: WithStructuredDataProvider,
@@ -50,13 +52,14 @@ const Base = asLayoutToken({
     ),
   },
   Layout: {
+    OuterContainer: 'flex flex-col',
+    ContainerWrapper: 'flex-grow',
     Helmet: flowIf(
       not(useIsBurgerMenuHidden),
     )(as(vitalHelmet.WithFixedBody, vitalHelmet.WithDesktopStaticBody)),
   },
   Theme: {
-    OuterContainer: 'flex flex-col h-screen',
-    ContainerWrapper: 'flex-grow',
+    OuterContainer: 'h-screen',
   },
   Content: {
     Header: addProps({ id: LayoutIds.HeaderContent }),
@@ -67,13 +70,6 @@ const Base = asLayoutToken({
   }
 });
 
-const Default = asLayoutToken(Base, {
-  Components: {
-    Header: vitalHeader.Default,
-    Footer: vitalFooter.FooterWithRewards,
-  },
-});
-
 /**
  * Tokens for the vital layout
  *
@@ -82,10 +78,6 @@ const Default = asLayoutToken(Base, {
  */
 export interface VitalLayout {
   /**
-   * Base that defines the default layout.
-   */
-  Base: LayoutToken,
-  /**
    * Inherits from Base & assigns the components vitalHeader.Default & vitalFooter.FootWithRewards
    *
    * @example Override default to use custom Footer.
@@ -93,7 +85,7 @@ export interface VitalLayout {
    * import { asLayoutToken, vitalHeader, vitalLayoutBase } from '@bodiless/vital-layout';
    * import asMyFooter from '../../../components/Footer';
    *
-   * const Default = asLayoutToken(vitalLayoutBase.Base, {
+   * const Default = asLayoutToken(vitalLayoutBase.Default, {
    *   Components: {
    *     Header: vitalHeader.Default,
    *     Footer: asMyFooter,
@@ -143,7 +135,6 @@ export interface VitalLayout {
  * @see [[LayoutClean]]
  */
 const vitalLayout: VitalLayout = {
-  Base,
   Default,
   StyleGuide,
 };

@@ -1,0 +1,20 @@
+{
+  "extends": "../../tsconfig.settings.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "rootDir": "src",
+    "outDir": "./lib/cjs",
+    "baseUrl": ".",
+    "allowJs": false
+  },
+  "include": [
+    "src/scripts",
+    "src/searchTool"
+  ],
+  "exclude": [
+    "lib",
+    "node_modules",
+    "__tests__/**/*.*",
+    "src/**/__tests__/**/*.*"
+   ]
+}

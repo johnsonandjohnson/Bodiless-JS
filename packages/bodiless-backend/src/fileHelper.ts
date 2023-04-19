@@ -15,7 +15,7 @@
 import fs from 'fs';
 import fse from 'fs-extra';
 import path from 'path';
-import crypto from 'crypto';
+import MD5 from 'crypto-js/md5';
 import type { Files, File } from 'formidable';
 
 const getStaticPath = () => (process.env.BODILESS_BACKEND_STATIC_PATH || '');
@@ -29,7 +29,7 @@ const copyFilePromise = (from: string, to: string) => new Promise((resolve, reje
   });
 });
 
-const generateHash = (str: string) => crypto.createHash('md5').update(str).digest('hex');
+const generateHash = (str: string) => MD5(str).toString();
 
 const isImage = (fileType: string) => {
   const imageFileTypes = [

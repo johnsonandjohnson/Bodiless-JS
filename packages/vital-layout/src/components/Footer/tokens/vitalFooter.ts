@@ -22,7 +22,7 @@ import { vitalRewards, RewardsClean } from '../Rewards';
 import { vitalCopyrightRow } from '../CopyrightRow';
 import { asFooterToken, FooterToken } from '../FooterClean';
 
-const Base = asFooterToken({
+const Default = asFooterToken({
   Components: {
     FooterMenu: vitalMenu.Footer,
     CopyrightRow: vitalCopyrightRow.Default,
@@ -50,13 +50,9 @@ const Base = asFooterToken({
     Wrapper: vitalColor.BgSecondaryFooter,
   },
   Schema: {
-    FooterMenu: withNodeKey({ nodeKey: 'footer-menu', nodeCollection: 'site' }),
+    FooterMenu: withNodeKey('footer-menu'),
     _: withNode,
   },
-});
-
-const Default = asFooterToken({
-  ...Base,
 });
 
 const WithRewardsExpanding2XL = asFooterToken({
@@ -87,10 +83,6 @@ const WithRewardsExpanding2XL = asFooterToken({
   },
 });
 
-const FooterWithRewards = asFooterToken(Base, {
-  ...WithRewardsExpanding2XL,
-});
-
 /**
  * Tokens for the vital footer
  *
@@ -98,12 +90,6 @@ const FooterWithRewards = asFooterToken(Base, {
  * @see [[FooterClean]]
  */
 export interface VitalFooter {
-  /**
-   * Base applies the following:
-   * - Footer Menu
-   * - Copyright row (with copyright editor & social links)
-   */
-  Base: FooterToken,
   /**
    * Inherits from Base
    * @example Will remove Menu components
@@ -130,10 +116,6 @@ export interface VitalFooter {
    */
   Default: FooterToken,
   /**
-   * Token that extends base with to move rewards above footer on 2xl responsive viewports
-   */
-  FooterWithRewards: FooterToken,
-  /**
    * An extendable token to move rewards above footer on 2xl responsive viewports
    */
   WithRewardsExpanding2XL: FooterToken,
@@ -147,9 +129,7 @@ export interface VitalFooter {
  * @see [[FooterClean]]
  */
 const vitalFooter: VitalFooter = {
-  Base,
   Default,
-  FooterWithRewards,
   WithRewardsExpanding2XL,
 };
 

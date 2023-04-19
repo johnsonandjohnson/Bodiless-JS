@@ -27,20 +27,17 @@ import {
   as,
   flowHoc,
 } from '@bodiless/fclasses';
-import { vitalSearchMenu, vitalSearchToggler, asSearchMenuToggler } from '@bodiless/vital-search';
 import { vitalButtons } from '@bodiless/vital-buttons';
 import { vitalLogo } from '../../Logo';
 import { asHeaderToken } from '../HeaderClean';
 import type { HeaderToken } from '../HeaderClean';
 import BurgerIcon from '../assets/BurgerIcon';
 
-const Base = asHeaderToken({
+const Default = asHeaderToken({
   Core: {
     MenuToggler: asBurgerMenuToggler,
-    SearchToggler: asSearchMenuToggler,
   },
   Components: {
-    SearchToggler: vitalSearchToggler.Default,
     Logo: vitalLogo.Default,
     Menu: vitalMenu.TopNav,
     BurgerMenu: flowHoc(
@@ -48,8 +45,6 @@ const Base = asHeaderToken({
       // @TODO: Is there a better way to inject WhereToBuy and (future) LanguageButton
       // components into the menu? Maybe, move the components to another package...
     ),
-    DesktopSearch: vitalSearchMenu.Default,
-    MobileSearch: vitalSearchMenu.Mobile,
     // UtilityMenu: vitalMenu.Utility,
     WhereToBuy: vitalButtons.WhereToBuy,
   },
@@ -67,11 +62,11 @@ const Base = asHeaderToken({
       'py-3 lg:py-0',
     ),
     ActionMenuContainer: 'pl-5',
-    // @todo perhaps this should be an element spcing token ike "LargeIconSize".
-    MenuToggler: 'w-6 h-6',
     MenuTogglerWrapper: 'my-4',
   },
   Theme: {
+    // @todo perhaps this should be an element spcing token ike "LargeIconSize".
+    MenuToggler: 'w-6 h-6',
     Wrapper: vitalColor.BgPrimaryPage,
   },
   Schema: {
@@ -92,10 +87,6 @@ const WithLanguageSelector = asHeaderToken({
   }
 });
 
-const Default = asHeaderToken({
-  ...Base,
-});
-
 /**
  * Tokens for the vital header
  *
@@ -104,14 +95,10 @@ const Default = asHeaderToken({
  */
 export interface VitalHeader {
   /**
-   * Base applies the following as defaults:
+   * Default applies the following as defaults:
    * - Logo
    * - Togglers: BurgerMenu, Search
    * - Defines the components: Logo, Menu, BurgerMenu, Search, WhereToBuy
-   */
-  Base: HeaderToken,
-  /**
-   * Inherits Base
    *
    * @example Will remove Search components & Where to Buy components
    * ```js
@@ -150,7 +137,6 @@ export interface VitalHeader {
  * @see [[HeaderClean]]
  */
 const vitalHeader: VitalHeader = {
-  Base,
   Default,
   WithLanguageSelector,
 };

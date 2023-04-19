@@ -16,7 +16,6 @@ import {
   on,
   as,
   flowIf,
-  addProps,
   withDesign,
   Img,
   Fragment,
@@ -28,7 +27,6 @@ import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
 import { ContentListingClean, vitalContentListing } from '@bodiless/vital-content-listing';
 import { withNode, withNodeKey, useNode } from '@bodiless/core';
 import { vitalSpacing } from '@bodiless/vital-elements';
-import { SearchLayoutClean, vitalSearchLayout } from '@bodiless/vital-search';
 import { vitalBreadcrumbs } from '@bodiless/vital-navigation';
 import { vitalImage } from '@bodiless/vital-image';
 import { YouTubeClean, vitalYouTube } from '@bodiless/vital-youtube';
@@ -54,7 +52,7 @@ const WithNoBreadcrumbsOnHomePage = asGenericTemplateToken({
   },
 });
 
-const Base = asGenericTemplateToken({
+const Default = asGenericTemplateToken({
   Components: {
     PageWrapper: vitalLayout.Default,
     Breadcrumb: as(vitalBreadcrumbs.Default),
@@ -63,7 +61,7 @@ const Base = asGenericTemplateToken({
       withDesign({
         Image: on(Img)(vitalImage.Hero),
         Video: on(YouTubeClean)(vitalYouTube.Hero),
-        HeroCard: on(CardStatic)(vitalCardStatic.Hero),
+        HeroCard: on(CardStatic)(vitalCardStatic.HeroLeftImageContentCentered),
       }),
     ),
     Content: as(vitalFlowContainer.Default),
@@ -96,52 +94,41 @@ const Base = asGenericTemplateToken({
   Compose: {
     WithNoBreadcrumbsOnHomePage,
   },
+  Meta: {
+    title: 'Default',
+  },
 });
 
 const ContentListing = asGenericTemplateToken({
-  ...Base,
+  ...Default,
   Meta: {
     title: 'Content Listing',
   },
   Components: {
-    ...Base.Components,
+    ...Default.Components,
     Content: on(ContentListingClean)(vitalContentListing.Default),
   },
   Schema: {
-    ...Base.Schema,
+    ...Default.Schema,
     Content: as(
       withNodeKey({ nodeKey: 'content-listing', nodeCollection: 'site' }),
       withNode,
-      Base.Schema.Content,
+      Default.Schema.Content,
     ),
   }
 });
 
+// Holding here for backward compabitility document as deprecated.
 const Generic = asGenericTemplateToken({
-  ...Base,
+  ...Default,
   Meta: {
     title: 'Generic',
   },
 });
 
-const Search = asGenericTemplateToken({
-  ...Base,
-  Meta: {
-    title: 'Search',
-  },
-  Components: {
-    ...Base.Components,
-    Breadcrumb: as(Base.Components.Breadcrumb, addProps({ children: 'Search', })),
-    TopContent: replaceWith(Fragment),
-    Content: on(SearchLayoutClean)(vitalSearchLayout.Default),
-    BottomContent: replaceWith(Fragment),
-  }
-});
-
 export default {
-  Base,
+  Default,
   Generic,
   ContentListing,
   WithNoBreadcrumbsOnHomePage,
-  Search,
 };

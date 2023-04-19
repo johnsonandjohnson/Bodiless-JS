@@ -15,3 +15,4 @@
 import vitalCardFlowContainer from './vitalCardFlowContainer';
 
 export default vitalCardFlowContainer;
+export type { VitalCardFlowContainer } from './vitalCardFlowContainer';

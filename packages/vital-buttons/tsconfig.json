@@ -7,7 +7,8 @@
     "preserveSymlinks": false,
   },
   "include": [
-    "src"
+    "src",
+    "../../@types/*"
   ],
   "exclude": [
     "lib",

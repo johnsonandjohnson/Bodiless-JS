@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import omit from 'lodash/omit';
 import { as } from '@bodiless/fclasses';
 import { vitalTypography } from '@bodiless/vital-elements';
 import {
@@ -20,7 +21,7 @@ import {
 
 const Default = asSearchResultToken({
   Theme: {
-    ItemH3: as(vitalTypography.H3Link),
+    ItemH3: as(omit(vitalTypography.H1, 'Theme'), vitalTypography.HeaderLink),
     ItemParagraph: vitalTypography.Body,
   },
   Spacing: {

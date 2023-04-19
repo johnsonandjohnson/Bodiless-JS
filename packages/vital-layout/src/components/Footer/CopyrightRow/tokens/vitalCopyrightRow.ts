@@ -12,18 +12,19 @@
  * limitations under the License.
  */
 
-import { withNodeKey } from '@bodiless/core';
+import omit from 'lodash/omit';
 import { vitalRichText } from '@bodiless/vital-editors';
 import {
-  asVitalTokenSpec, vitalColor, vitalFontSize, vitalTextDecoration
+  asFluidToken, vitalColor, vitalFontSize, vitalTextDecoration
 } from '@bodiless/vital-elements';
 import { addProps, as, replaceWith } from '@bodiless/fclasses';
 import { vitalLink } from '@bodiless/vital-link';
+import { withNodeKey } from '@bodiless/core';
 import { asCopyrightRowToken } from '../CopyrightRowClean';
 import type { CopyrightRowToken } from '../CopyrightRowClean';
 import { vitalSocialLinks } from '../../SocialLinks';
 
-const Copyright = asVitalTokenSpec()({
+const vitalCopyrightRowRichTextDefault = asFluidToken({
   ...vitalRichText.Basic,
   Theme: {
     paragraph: as(
@@ -32,7 +33,7 @@ const Copyright = asVitalTokenSpec()({
       vitalTextDecoration.Normal,
     ),
     Link: as(
-      vitalLink.Base,
+      omit(vitalLink.Default, 'Theme'),
       vitalTextDecoration.Bold,
       vitalTextDecoration.Underline,
     ),
@@ -42,9 +43,11 @@ const Copyright = asVitalTokenSpec()({
   },
 });
 
-const Base = asCopyrightRowToken({
+const Default = asCopyrightRowToken({
   Components: {
     SocialLinks: vitalSocialLinks.Default,
+    Copyright: vitalCopyrightRowRichTextDefault,
+    Disclaimer: vitalCopyrightRowRichTextDefault,
   },
   Layout: {
     CopyrightWrapper: 'w-full xl:w-3/4',
@@ -52,6 +55,7 @@ const Base = asCopyrightRowToken({
   },
   Spacing: {
     Copyright: 'py-6 2xl:py-0 md:mb-4 2xl:mb-0', // Vertical
+    Disclaimer: 'mb-2',
     SocialLinksWrapper: 'py-6 2xl:py-0', // Vertical
   },
   Theme: {
@@ -60,18 +64,16 @@ const Base = asCopyrightRowToken({
       'border-t border-b md:border-0',
     ),
   },
-  Editors: {
-    Copyright,
-  },
   Schema: {
-    Copyright: withNodeKey({ nodeKey: 'copyright', nodeCollection: 'site' }),
+    Copyright: withNodeKey('copyright'),
+    Disclaimer: withNodeKey('disclaimer'),
   },
 });
 
-const CopyrightNoSocialLinks = asCopyrightRowToken({
-  ...Base,
+const NoSocialLinks = asCopyrightRowToken({
+  ...Default,
   Components: {
-    ...Base.Components,
+    ...Default.Components,
     SocialLinksWrapper: replaceWith(() => null),
     SocialLinks: replaceWith(() => null),
   },
@@ -81,8 +83,20 @@ const CopyrightNoSocialLinks = asCopyrightRowToken({
   },
 });
 
-const Default = asCopyrightRowToken({
-  ...Base,
+const NoDisclaimer = asCopyrightRowToken({
+  ...Default,
+  Components: {
+    ...Default.Components,
+    Disclaimer: replaceWith(() => null),
+  },
+});
+
+const CopyrightOnly = asCopyrightRowToken({
+  ...NoSocialLinks,
+  Components: {
+    ...NoSocialLinks.Components,
+    Disclaimer: replaceWith(() => null),
+  },
 });
 
 /**
@@ -93,19 +107,23 @@ const Default = asCopyrightRowToken({
  */
 export interface VitalCopyrightRow {
   /**
-   * Base applies the following:
+   * Default applies the following:
    * - Vital Styled Copyright editor on left
    * - Social Links on right
    */
-  Base: CopyrightRowToken,
-  /**
-   * Inherits Base
-   */
   Default: CopyrightRowToken,
   /**
-   * Copyright only
+   * Same as Default but no social links
    */
-  CopyrightNoSocialLinks: CopyrightRowToken,
+  NoSocialLinks: CopyrightRowToken,
+  /**
+   * Same as Default but no disclaimer
+   */
+  NoDisclaimer: CopyrightRowToken,
+  /**
+   * Same as Default but only Copyright (no social links or disclaimer).
+   */
+  CopyrightOnly: CopyrightRowToken,
 }
 
 /**
@@ -116,9 +134,10 @@ export interface VitalCopyrightRow {
  * @see [[CopyrightRowClean]]
  */
 const vitalCopyrightRow: VitalCopyrightRow = {
-  Base,
   Default,
-  CopyrightNoSocialLinks,
+  NoSocialLinks,
+  NoDisclaimer,
+  CopyrightOnly,
 };
 
 export default vitalCopyrightRow;

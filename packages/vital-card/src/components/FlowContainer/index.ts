@@ -14,7 +14,7 @@
 
 import vitalCardFlowContainer from './tokens';
 import vitalCardFlowContainerBaseOrig, {
-  VitalCardFlowContainer
+  VitalCardFlowContainer,
 } from './tokens/vitalCardFlowContainer';
 
 /**

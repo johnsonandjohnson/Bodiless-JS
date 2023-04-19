@@ -25,7 +25,7 @@ import { asPDPTemplateToken } from '../PDPTemplateClean';
 import { vitalGenericTemplate } from '../../GenericTemplate';
 import { TemplateNodeKeys } from '../../TemplatesNodeKeys';
 
-const Default = asPDPTemplateToken(vitalGenericTemplate.Base, {
+const Default = asPDPTemplateToken(vitalGenericTemplate.Default, {
   Meta: {
     title: 'Product Detail Listing',
   },

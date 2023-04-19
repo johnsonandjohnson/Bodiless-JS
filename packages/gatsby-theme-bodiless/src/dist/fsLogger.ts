@@ -11,6 +11,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+declare global {
+  // eslint-disable-next-line
+  var BODILESS_GATSBY_LOGS: string[];
+}
 
 export const log = (message: string) => {
   global.BODILESS_GATSBY_LOGS = global.BODILESS_GATSBY_LOGS || [];

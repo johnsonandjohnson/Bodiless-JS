@@ -15,3 +15,4 @@
 import vitalCard from './vitalCard';
 
 export default vitalCard;
+export type { VitalCard } from './vitalCard';

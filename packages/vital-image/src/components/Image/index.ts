@@ -14,7 +14,8 @@
 
 import { BodilessImageComponents } from '@bodiless/gatsby-theme-bodiless';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
-import vitalImageBaseOrig, { VitalImage } from './tokens/vitalImage';
+import vitalImageBaseOrig from './tokens/vitalImage';
+import type { VitalImage } from './tokens/vitalImage';
 
 /**
  * A token modifier that respects the Image Components.
@@ -30,9 +31,9 @@ const asImageToken = asVitalTokenSpec<BodilessImageComponents>();
  */
 const vitalImageBase = vitalImageBaseOrig;
 
+export type { VitalImage, BodilessImageComponents };
 export {
   vitalImageBase, asImageToken,
-  VitalImage, BodilessImageComponents,
 };
 
 export * from './index.bl-edit';
