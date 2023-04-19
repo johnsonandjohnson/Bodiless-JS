@@ -42,6 +42,14 @@ interface CopyrightRowComponents extends DesignableComponents {
    * Used for the social links
    */
   SocialLinks: ComponentOrTag<any>,
+  /**
+   * Wrapper for the Disclaimer
+   */
+  DisclaimerWrapper: ComponentOrTag<any>,
+  /**
+   * Used for the Disclaimer
+   */
+  Disclaimer: ComponentOrTag<any>,
 }
 
 type CopyrightRowProps = DesignableComponentsProps<CopyrightRowComponents>;
