@@ -103,7 +103,7 @@ test.describe('Flow container', async () => {
     ]);
     const containerWidth = await page.locator(flowContainerPage.flowContainer33Width).boundingBox();
     const contentfulWidth = await page.locator(flowContainerPage.elementInside33Width).boundingBox();
-    const ratio = Math.floor(((contentfulWidth?.width || 0) + 40) / (containerWidth?.width || 0) * 100);
+    const ratio = Math.floor((((contentfulWidth?.width || 0) + 40) / (containerWidth?.width || 0)) * 100);
     expect.soft(ratio).toBeCloseTo(32);
   });
 

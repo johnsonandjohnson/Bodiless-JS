@@ -13,7 +13,9 @@
  */
 // editorMenu.spec.ts
 
-import { expect, Page, test, BrowserContext } from '@playwright/test';
+import {
+  expect, Page, test, BrowserContext
+} from '@playwright/test';
 import { EditorMenuPage } from '../../pages/editor-menu-page';
 
 async function checkEditorMenuButtons(page: Page, editorMenuPage: EditorMenuPage) {
