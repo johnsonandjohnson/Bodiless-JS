@@ -47,7 +47,7 @@ limitations under the License.
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:329](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8696b8433/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L329)
+[vital-image/src/components/Image/tokens/vitalImage.ts:329](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8924e8534/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L329)
 
 ___
 
@@ -63,7 +63,7 @@ Use this version of the vital image tokens when extending or shadowing.
 
 #### Defined in
 
-[vital-image/src/components/Image/index.ts:32](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8696b8433/packages/vital-image/src/components/Image/index.ts#L32)
+[vital-image/src/components/Image/index.ts:32](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8924e8534/packages/vital-image/src/components/Image/index.ts#L32)
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 #### Defined in
 
-[vital-image/src/components/FlowContainer/tokens/vitalImageFlowContainer.ts:87](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8696b8433/packages/vital-image/src/components/FlowContainer/tokens/vitalImageFlowContainer.ts#L87)
+[vital-image/src/components/FlowContainer/tokens/vitalImageFlowContainer.ts:87](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8924e8534/packages/vital-image/src/components/FlowContainer/tokens/vitalImageFlowContainer.ts#L87)
 
 ___
 
@@ -87,7 +87,7 @@ Use this version of the vital card tokens when extending or shadowing.
 
 #### Defined in
 
-[vital-image/src/components/FlowContainer/index.ts:25](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8696b8433/packages/vital-image/src/components/FlowContainer/index.ts#L25)
+[vital-image/src/components/FlowContainer/index.ts:25](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8924e8534/packages/vital-image/src/components/FlowContainer/index.ts#L25)
 
 ## Token Collection Functions
 
@@ -109,4 +109,4 @@ A token modifier that respects the Image Components.
 
 #### Defined in
 
-[vital-image/src/components/Image/index.ts:25](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8696b8433/packages/vital-image/src/components/Image/index.ts#L25)
+[vital-image/src/components/Image/index.ts:25](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8924e8534/packages/vital-image/src/components/Image/index.ts#L25)

@@ -35,7 +35,7 @@ Used for the copyright
 
 #### Defined in
 
-[vital-layout/src/components/Footer/CopyrightRow/types.ts:36](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8696b8433/packages/vital-layout/src/components/Footer/CopyrightRow/types.ts#L36)
+[vital-layout/src/components/Footer/CopyrightRow/types.ts:36](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8924e8534/packages/vital-layout/src/components/Footer/CopyrightRow/types.ts#L36)
 
 ___
 
@@ -47,7 +47,7 @@ Wrapper for the Copyright
 
 #### Defined in
 
-[vital-layout/src/components/Footer/CopyrightRow/types.ts:32](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8696b8433/packages/vital-layout/src/components/Footer/CopyrightRow/types.ts#L32)
+[vital-layout/src/components/Footer/CopyrightRow/types.ts:32](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8924e8534/packages/vital-layout/src/components/Footer/CopyrightRow/types.ts#L32)
 
 ___
 
@@ -59,7 +59,7 @@ Used for the Disclaimer
 
 #### Defined in
 
-[vital-layout/src/components/Footer/CopyrightRow/types.ts:52](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8696b8433/packages/vital-layout/src/components/Footer/CopyrightRow/types.ts#L52)
+[vital-layout/src/components/Footer/CopyrightRow/types.ts:52](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8924e8534/packages/vital-layout/src/components/Footer/CopyrightRow/types.ts#L52)
 
 ___
 
@@ -71,7 +71,7 @@ Wrapper for the Disclaimer
 
 #### Defined in
 
-[vital-layout/src/components/Footer/CopyrightRow/types.ts:48](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8696b8433/packages/vital-layout/src/components/Footer/CopyrightRow/types.ts#L48)
+[vital-layout/src/components/Footer/CopyrightRow/types.ts:48](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8924e8534/packages/vital-layout/src/components/Footer/CopyrightRow/types.ts#L48)
 
 ___
 
@@ -83,7 +83,7 @@ Used for the social links
 
 #### Defined in
 
-[vital-layout/src/components/Footer/CopyrightRow/types.ts:44](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8696b8433/packages/vital-layout/src/components/Footer/CopyrightRow/types.ts#L44)
+[vital-layout/src/components/Footer/CopyrightRow/types.ts:44](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8924e8534/packages/vital-layout/src/components/Footer/CopyrightRow/types.ts#L44)
 
 ___
 
@@ -95,7 +95,7 @@ Wrapper for the Social Links
 
 #### Defined in
 
-[vital-layout/src/components/Footer/CopyrightRow/types.ts:40](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8696b8433/packages/vital-layout/src/components/Footer/CopyrightRow/types.ts#L40)
+[vital-layout/src/components/Footer/CopyrightRow/types.ts:40](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8924e8534/packages/vital-layout/src/components/Footer/CopyrightRow/types.ts#L40)
 
 ___
 
@@ -107,4 +107,4 @@ Wrapper for Copyright Row component
 
 #### Defined in
 
-[vital-layout/src/components/Footer/CopyrightRow/types.ts:28](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8696b8433/packages/vital-layout/src/components/Footer/CopyrightRow/types.ts#L28)
+[vital-layout/src/components/Footer/CopyrightRow/types.ts:28](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8924e8534/packages/vital-layout/src/components/Footer/CopyrightRow/types.ts#L28)
