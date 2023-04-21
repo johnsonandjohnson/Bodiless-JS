@@ -20,10 +20,6 @@ export type DataSource = {
   slug: string,
 };
 
-// const Logger = require('../service/Logger.js');
-
-// const logger = new Logger('BodilessMobxStore', HttpService);
-
 /**
  * The bodiless store manages a key-value collection of content nodes. These
  * are observable, so that observer components will re-render when relevant
@@ -62,7 +58,13 @@ export abstract class BodilessMobxStore<D> implements BodilessStore<D> {
    */
   protected abstract parseData(rawData: D): Map<string, any>;
 
-  getPendingItems = () => ([]);
+  /**
+   * Returns a list of items which have not yet been seriaized.
+   */
+  getPendingItems() {
+    return Array.from(this.store.values())
+      .filter(item => item.isPending());
+  }
 
   /**
    * Called at initial page render to initialize our data.
@@ -150,7 +152,18 @@ export abstract class BodilessMobxStore<D> implements BodilessStore<D> {
     return children;
   };
 
-  deleteNode = () => {};
+  deleteNode = (keyPath: string[]) => {
+    const children = this.getChildrenNodes(keyPath);
+    children.forEach(child => {
+      this.deleteItem(child[0]);
+    });
+    const key = keyPath.join(BodilessMobxStore.nodeChildDelimiter);
+    this.deleteItem(key);
+  };
 
-  hasError = () => false;
+  hasError = () => {
+    const itemsWithError = Array.from(this.store.values())
+      .filter(item => item.hasFlushingError);
+    return itemsWithError.length > 0;
+  };
 }

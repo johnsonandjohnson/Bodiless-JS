@@ -12,11 +12,11 @@
  * limitations under the License.
  */
 
-import { staticFunction } from '@bodiless/hydration';
+import identity from 'lodash/identity';
 
-export const observer = staticFunction;
+export const observer = identity;
 export const isObservable = () => false;
-export const toJS = staticFunction;
+export const toJS = identity;
 
 const annotation = (arg1: any, arg2: any) => {
   if (typeof arg1 === 'function') {
@@ -26,12 +26,12 @@ const annotation = (arg1: any, arg2: any) => {
   if (typeof arg2 === 'function') {
     return arg2;
   }
-  return staticFunction;
+  return identity;
 };
 
 export const action = annotation;
 export const computed = annotation;
 export const makeObservable = () => {};
-export const Observer = staticFunction;
+export const Observer = identity;
 export const observable = annotation;
 export const extendObservable = () => {};

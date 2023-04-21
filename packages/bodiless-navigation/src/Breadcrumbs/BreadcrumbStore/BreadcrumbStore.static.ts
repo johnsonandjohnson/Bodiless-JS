@@ -23,33 +23,33 @@ import type { BreadcrumbStoreType, BreadcrumbItemType } from './types';
  */
 export class BreadcrumbStore implements BreadcrumbStoreType {
   // eslint-disable-next-line max-len
-  private items: Map<string, BreadcrumbItemType> = new Map<string, BreadcrumbItemType>();
+  protected items: Map<string, BreadcrumbItemType> = new Map<string, BreadcrumbItemType>();
 
-  private activeItem?: BreadcrumbItemType = undefined;
+  protected activeItem?: BreadcrumbItemType = undefined;
 
-  private pagePath: string;
+  protected pagePath: string;
 
   constructor(pagePath: string) {
     this.pagePath = pagePath;
   }
 
-  private setActiveItem(item: BreadcrumbItemType | undefined) {
+  protected setActiveItem(item: BreadcrumbItemType | undefined) {
     this.activeItem = item;
   }
 
-  private isNewActive(item: BreadcrumbItemType) {
+  protected isNewActive(item: BreadcrumbItemType) {
     return (item.hasPath(this.pagePath) || item.isSubpathOf(this.pagePath))
       && (!this.activeItem || this.activeItem.isSubpathOf(item));
   }
 
-  private updateActive() {
+  protected updateActive() {
     this.setActiveItem(undefined);
     this.items.forEach((item: BreadcrumbItemType) => {
       if (this.isNewActive(item)) this.setActiveItem(item);
     });
   }
 
-  private isActiveItemPathChanged(item: BreadcrumbItemType) {
+  protected isActiveItemPathChanged(item: BreadcrumbItemType) {
     return this.activeItem !== undefined
       && this.activeItem.isEqual(item)
       && !this.activeItem.hasPath(item);
@@ -80,12 +80,16 @@ export class BreadcrumbStore implements BreadcrumbStoreType {
     return this.pagePath;
   }
 
-  get breadcrumbTrail() {
+  protected getBreadcrumbTrail() {
     if (this.activeItem === undefined) return [];
     return [
       this.activeItem,
       ...this.activeItem.getAncestors(),
     ].reverse();
+  }
+
+  get breadcrumbTrail() {
+    return this.getBreadcrumbTrail();
   }
 
   export() {

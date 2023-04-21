@@ -12,17 +12,10 @@
  * limitations under the License.
  */
 
-import React, { Component } from 'react';
-import pick from 'lodash/pick';
-import path from 'path';
-import { NodeProvider, DefaultContentNode } from '@bodiless/data';
 import { BodilessBackendClient } from '../BackendClient/BodilessBackendClient';
 import { BodilessMobxStore } from './BodilessMobxStore.bl-edit';
 import { BodilessStore } from './types';
-
-type State = {
-  store: BodilessStore<any>,
-};
+import { BodilessStoreProvider as StaticBodilessStoreProvider } from './BodilessStoreProvider.static';
 
 export type Props = {
   data: any,
@@ -40,53 +33,7 @@ class DefaultStore
   }
 }
 
-export class BodilessStoreProvider extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      store: this.createStore(),
-    };
-  }
-
-  // eslint-disable-next-line react/state-in-constructor
-  readonly state: State;
-
-  // React hook inserts props into mobx store.
-  static getDerivedStateFromProps(props: Props, state: State) {
-    const { data } = props;
-    const { store } = state;
-    store.updateData(data);
-    return null;
-  }
-
-  // Prevent unnecessary renders when the incoming data change.
-  // Mobx will take care of updating components whose data have changed.
-  shouldComponentUpdate() {
-    return false;
-  }
-
-  get slug() {
-    const { pageContext: { slug } } = this.props;
-    return slug;
-  }
-
-  // Create ContentNode instance for consumption by React components.
-  getRootNode(collection = 'Page') {
-    const { store } = this.state;
-    const actions = pick(store, ['setNode', 'deleteNode']);
-    const getters = {
-      ...pick(store, ['getNode', 'getKeys', 'hasError']),
-      getPagePath: () => this.slug,
-      // eslint-disable-next-line no-confusing-arrow
-      getBaseResourcePath: () => collection === 'Page'
-        ? path.join('pages', this.slug)
-        : 'site/',
-    };
-
-    const node = new DefaultContentNode(actions, getters, collection);
-    return node;
-  }
-
+class BodilessStoreProvider extends StaticBodilessStoreProvider {
   /**
    * Creates the store which will be provided.
    *
@@ -95,15 +42,6 @@ export class BodilessStoreProvider extends Component<Props, State> {
   protected createStore(): BodilessStore<any> {
     return new DefaultStore({ slug: this.slug, client: new BodilessBackendClient() });
   }
-
-  render() {
-    const { children } = this.props;
-    return (
-      <NodeProvider node={this.getRootNode('Site')} collection="site">
-        <NodeProvider node={this.getRootNode('Page')} collection="_default">
-          {children}
-        </NodeProvider>
-      </NodeProvider>
-    );
-  }
 }
+
+export { BodilessStoreProvider };

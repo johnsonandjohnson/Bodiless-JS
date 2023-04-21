@@ -60,30 +60,8 @@ export const withOnlyProps = <Q extends object>(...keys: string[]) => (
   }
 );
 
-/**
- * Creates an HOC which provides the base component event handler which activates the current
- * context.
- *
- * @param event
- * The event which should trigger the context activation.
- *
- * @returns
- * An HOC which injects the event handler.
- */
 export const withContextActivator = identity;
 
-/**
- * HOC which attaches a local context menu to the base component.
- * A component with a local context menu will display a hovering
- * toolbar with context menu options when it is the innermost such
- * component in an active context.
- *
- * @param Component
- * The base component.
- *
- * @returns
- * A component with local context menu attached.
- */
 export const withLocalContextMenu: HOC = identity;
 
 export type ClickOutsideProps = {
@@ -123,13 +101,6 @@ export type resizeDetectorProps = {
   ) => void;
 };
 
-/**
- * Utility hoc to add resize detector to the original component.
- * Optionally a callback can be provided by the component.
- * If the callback is not provided, as default the component is rendered at resize.
- *
- * @return An HOC which will detect resize.
- */
 export const withResizeDetector = <P extends object>(Component: CT<P> | string) => {
   const WithResizeDetector = (props: P & resizeDetectorProps) => <Component {...props} />;
 

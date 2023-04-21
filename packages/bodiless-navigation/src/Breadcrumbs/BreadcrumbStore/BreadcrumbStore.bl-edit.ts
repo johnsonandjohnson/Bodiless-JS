@@ -16,6 +16,7 @@ import {
   observable, action, computed, makeObservable,
 } from '@bodiless/core';
 import type { BreadcrumbStoreType, BreadcrumbItemType } from './types';
+import { BreadcrumbStore as BreadcrumbStoreStatic } from './BreadcrumbStore.static';
 
 /**
  * MobX storage of breadcrumb items.
@@ -24,83 +25,35 @@ import type { BreadcrumbStoreType, BreadcrumbItemType } from './types';
  * + get breadcrumb trail.
  * + check if last breadcrumb item exists in the store.
  */
-export class BreadcrumbStore implements BreadcrumbStoreType {
-  // eslint-disable-next-line max-len
-  @observable private items: Map<string, BreadcrumbItemType> = new Map<string, BreadcrumbItemType>();
+export class BreadcrumbStore extends BreadcrumbStoreStatic implements BreadcrumbStoreType {
+  @observable
+  protected items: Map<string, BreadcrumbItemType> = new Map<string, BreadcrumbItemType>();
 
-  @observable private activeItem?: BreadcrumbItemType = undefined;
-
-  private pagePath: string;
+  @observable
+  protected activeItem?: BreadcrumbItemType = undefined;
 
   constructor(pagePath: string) {
-    this.pagePath = pagePath;
+    super(pagePath);
     makeObservable(this);
   }
 
-  @action private setActiveItem(item: BreadcrumbItemType | undefined) {
-    this.activeItem = item;
+  @action
+  protected setActiveItem(item: BreadcrumbItemType | undefined) {
+    return super.setActiveItem(item);
   }
 
-  private isNewActive(item: BreadcrumbItemType) {
-    return (item.hasPath(this.pagePath) || item.isSubpathOf(this.pagePath))
-      && (!this.activeItem || this.activeItem.isSubpathOf(item));
+  @action
+  setItem(item: BreadcrumbItemType) {
+    return super.setItem(item);
   }
 
-  private updateActive() {
-    this.setActiveItem(undefined);
-    this.items.forEach((item: BreadcrumbItemType) => {
-      if (this.isNewActive(item)) this.setActiveItem(item);
-    });
+  @action
+  deleteItem(item: BreadcrumbItemType | string) {
+    return super.deleteItem(item);
   }
 
-  private isActiveItemPathChanged(item: BreadcrumbItemType) {
-    return this.activeItem !== undefined
-      && this.activeItem.isEqual(item)
-      && !this.activeItem.hasPath(item);
-  }
-
-  getItem(key: string) {
-    return this.items.get(key);
-  }
-
-  @action setItem(item: BreadcrumbItemType) {
-    this.items.set(item.uuid, item);
-    if (this.isActiveItemPathChanged(item)) this.updateActive();
-    if (this.isNewActive(item)) this.setActiveItem(item);
-    return item;
-  }
-
-  @action deleteItem(item: BreadcrumbItemType | string) {
-    const uuid = typeof item === 'string' ? item : item.uuid;
-    const result = this.items.delete(uuid);
-    if (
-      this.activeItem !== undefined
-      && this.activeItem.isEqual(item)
-    ) this.updateActive();
-    return result;
-  }
-
-  getPagePath() {
-    return this.pagePath;
-  }
-
-  @computed get breadcrumbTrail() {
-    if (this.activeItem === undefined) return [];
-    return [
-      this.activeItem,
-      ...this.activeItem.getAncestors(),
-    ].reverse();
-  }
-
-  export() {
-    return Array.from(this.items.values());
-  }
-
-  hasCurrentPageItem() {
-    return this.activeItem !== undefined && this.activeItem.hasPath(this.pagePath);
-  }
-
-  toString() {
-    return this.breadcrumbTrail.map(i => i.toString()).join('--');
+  @computed
+  get breadcrumbTrail() {
+    return this.getBreadcrumbTrail();
   }
 }
