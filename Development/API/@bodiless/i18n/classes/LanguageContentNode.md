@@ -114,7 +114,7 @@ ___
 
 #### Defined in
 
-[bodiless-i18n/src/LanguageNode/LanguageContentNode.ts:10](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8924e8534/packages/bodiless-i18n/src/LanguageNode/LanguageContentNode.ts#L10)
+[bodiless-i18n/src/LanguageNode/LanguageContentNode.ts:10](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/bodiless-i18n/src/LanguageNode/LanguageContentNode.ts#L10)
 
 ___
 
@@ -412,7 +412,7 @@ ___
 
 #### Defined in
 
-[bodiless-i18n/src/LanguageNode/LanguageContentNode.ts:27](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8924e8534/packages/bodiless-i18n/src/LanguageNode/LanguageContentNode.ts#L27)
+[bodiless-i18n/src/LanguageNode/LanguageContentNode.ts:27](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/bodiless-i18n/src/LanguageNode/LanguageContentNode.ts#L27)
 
 ___
 
@@ -433,7 +433,7 @@ ___
 
 #### Defined in
 
-[bodiless-i18n/src/LanguageNode/LanguageContentNode.ts:12](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8924e8534/packages/bodiless-i18n/src/LanguageNode/LanguageContentNode.ts#L12)
+[bodiless-i18n/src/LanguageNode/LanguageContentNode.ts:12](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/bodiless-i18n/src/LanguageNode/LanguageContentNode.ts#L12)
 
 ___
 
