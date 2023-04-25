@@ -85,7 +85,7 @@
     "@babel/plugin-transform-modules-commonjs": "7.5.0",
     "@babel/runtime": "^7.4.2",
     "@applitools/eyes-playwright": "^1.13.0",
-    "@playwright/test": "^1.29.1",
+    "@playwright/test": "^1.30.0",
     "@types/enzyme": "^3.9.1",
     "@types/jest": "^24.0.18",
     "@types/lodash": "^4.14.158",

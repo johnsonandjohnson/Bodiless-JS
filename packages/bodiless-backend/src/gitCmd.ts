@@ -12,14 +12,36 @@
  * limitations under the License.
  */
 
-const { spawn } = require('child_process');
-const Logger = require('./logger');
+import { spawn } from 'child_process';
+import type { SpawnOptionsWithoutStdio } from 'child_process';
+import Logger from './logger';
 
 const logger = new Logger('BACKEND');
+
+export type GitInfoType = {
+  stdout: string,
+  stderr: string,
+  code: number | null;
+};
+
+export class GitCmdError extends Error {
+  code: number | null = 0;
+
+  info?: GitInfoType;
+}
+
 /*
 This Class wraps spawn and lets us build out git commands with standard responses
 */
 class GitCmd {
+  cmd: string = '';
+
+  params: string[] = [];
+
+  files: string[] = [];
+
+  options?: SpawnOptionsWithoutStdio;
+
   constructor() {
     this.cmd = 'git';
     this.params = [];
@@ -27,17 +49,17 @@ class GitCmd {
     this.options = {};
   }
 
-  add(...params) {
+  add(...params: string[]) {
     this.params.push(...params);
     return this;
   }
 
-  set(options) {
+  set(options: SpawnOptionsWithoutStdio) {
     this.options = { ...this.options, ...options };
     return this;
   }
 
-  addFiles(...files) {
+  addFiles(...files: string[]) {
     this.files.push(...files);
     // const rawFiles = [...arguments]
     // this.files.push(...rawFiles.map((file) => file.replace(/ /,'\ ')))
@@ -46,12 +68,17 @@ class GitCmd {
 
   spawn() {
     const args = [...this.params, ...this.files];
-    logger.log([`Spawning command: ${this.cmd}`, ...args, Date.now(), process.cwd()]);
+    logger.log(
+      `Spawning command: ${this.cmd}`,
+      ...args,
+      Date.now().toString(),
+      process.cwd()
+    );
     return spawn(this.cmd, args, this.options);
   }
 
   exec() {
-    return new Promise((resolve, reject) => {
+    return new Promise<GitInfoType>((resolve, reject) => {
       const cmd = this.spawn();
       let stderr = '';
       let stdout = '';
@@ -67,7 +94,11 @@ class GitCmd {
         stderr += err.message;
       });
       cmd.on('close', code => {
-        logger.log(stdout, stderr, code);
+        logger.log(
+          stdout,
+          stderr,
+          `${code || 0}`,
+        );
         if (code === 0) {
           resolve({ stdout, stderr, code });
           return;
@@ -78,8 +109,8 @@ class GitCmd {
           return;
         }
 
-        const error = new Error(`${stderr}`);
-        error.code = `${code}`;
+        const error = new GitCmdError(`${stderr}`);
+        error.code = code;
         error.info = { stdout, stderr, code };
         reject(error);
       });
@@ -91,4 +122,4 @@ class GitCmd {
   }
 }
 
-module.exports = GitCmd;
+export default GitCmd;

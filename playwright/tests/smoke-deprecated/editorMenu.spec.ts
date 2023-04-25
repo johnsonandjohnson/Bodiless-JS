@@ -12,8 +12,10 @@
  * limitations under the License.
  */
 // editorMenu.spec.ts
-/* eslint-disable jest/expect-expect */
-import { expect, Page, test } from '@playwright/test';
+
+import {
+  expect, Page, test, BrowserContext
+} from '@playwright/test';
 import { EditorMenuPage } from '../../pages/editor-menu-page';
 
 async function checkEditorMenuButtons(page: Page, editorMenuPage: EditorMenuPage) {
@@ -34,7 +36,7 @@ async function checkAddNewPageButton(page: Page, editorMenuPage: EditorMenuPage)
 
 test.describe('Editor Menu (left and right)', () => {
   let page: Page;
-  let context:any;
+  let context: BrowserContext;
   let editorMenuPage: EditorMenuPage;
   test.beforeAll(async ({ browser }) => {
     context = await browser.newContext();

@@ -13,21 +13,26 @@
  */
 
 import request from 'supertest';
+import Backend from '../src/backend';
 
 const backendPrefix = '/prefix';
 const backendFilePath = '/files';
 
 const mockPageDelete = jest.fn();
-const mockPage = jest.fn().mockImplementation(() => ({
-  delete: mockPageDelete.mockResolvedValue(true),
-}));
+const mockPage = jest.fn();
 
-jest.mock('../src/page', () => mockPage);
+jest.mock('../src/page', () => (
+  function Page(pagePath: string) {
+    mockPage(pagePath);
+    return {
+      file: `${pagePath}.json`,
+      path: pagePath,
+      delete: mockPageDelete.mockResolvedValue('ok'),
+    };
+  }));
 jest.mock('../src/logger');
 
 const getApp = () => {
-  // eslint-disable-next-line global-require
-  const Backend = require('../src/backend');
   const backend = new Backend();
   return backend.getApp();
 };
@@ -46,10 +51,16 @@ describe('delete content endpoint', () => {
     .delete(`${backendPrefix}/content/${filePath}`);
 
   it('should invoke local file deletion', async () => {
+    jest.setTimeout(30000);
     const app = getApp();
     const filePath = 'test';
-    await performRequest(app, filePath);
-    expect(mockPage.mock.calls[0][0]).toBe(filePath);
-    expect(mockPageDelete).toHaveBeenCalledTimes(1);
+    try {
+      await performRequest(app, filePath);
+      expect(mockPage.mock.calls[0][0]).toBe(filePath);
+      expect(mockPageDelete).toHaveBeenCalledTimes(1);
+    } catch (error: any) {
+      console.log('error:', error);
+      throw new Error(error);
+    }
   });
 });

@@ -14,11 +14,13 @@
  */
 
 class Logger {
-  constructor(prefix) {
+  prefix: string = '';
+
+  constructor(prefix: string) {
     this.prefix = `[${prefix.toUpperCase()}]`;
   }
 
-  print(message, severity) {
+  print(message: string[], severity?: string) {
     const fullMessage = [this.prefix, new Date().toISOString(), ...message];
     switch (severity) {
       case 'error':
@@ -32,17 +34,17 @@ class Logger {
     }
   }
 
-  log(...args) {
+  log(...args: string[]) {
     this.print(args);
   }
 
-  error(...args) {
+  error(...args: string[]) {
     this.print(args, 'error');
   }
 
-  warn(...args) {
+  warn(...args: string[]) {
     this.print(args, 'warn');
   }
 }
 
-module.exports = Logger;
+export default Logger;
