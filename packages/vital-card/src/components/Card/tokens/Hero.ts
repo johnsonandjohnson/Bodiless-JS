@@ -28,10 +28,6 @@ import Base, {
 
 const Hero = asCardToken({
   ...Base,
-  Editors: {
-    ...Base.Editors,
-    Wrapper: undefined, // Remove Link Editor from Cards;
-  },
   Components: {
     ...Base.Components,
     Wrapper: replaceWith(Div),

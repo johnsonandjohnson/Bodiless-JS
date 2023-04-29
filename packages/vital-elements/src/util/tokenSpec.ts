@@ -31,7 +31,6 @@ const defaultDomains = {
   Layout: {},
   Spacing: {},
   Theme: {},
-  Editors: {},
   A11yContent: {},
   Content: {},
   Behavior: {},

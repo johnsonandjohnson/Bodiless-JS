@@ -19,7 +19,7 @@ import { withNodeKey } from '@bodiless/data';
 import { asTitleInfographicToken } from '../TitleInfographicClean';
 
 const Default = asTitleInfographicToken({
-  Editors: {
+  Components: {
     Title: vitalRichText.Default,
     Image: vitalImage.Plain,
   },

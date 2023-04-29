@@ -31,7 +31,6 @@ const defaultDomains = {
   Layout: {},
   Spacing: {},
   Theme: {},
-  Editors: {},
   Content: {},
   Behavior: {},
   Schema: {},

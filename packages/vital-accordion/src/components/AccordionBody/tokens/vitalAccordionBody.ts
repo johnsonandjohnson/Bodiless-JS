@@ -27,7 +27,7 @@ const Base = asAccordionBodyToken({
       flowIf(useIsAccordionContracted)(as('hidden')),
     ),
   },
-  Editors: {
+  Components: {
     Content: on(RichTextClean)(vitalRichText.Default),
   },
   Content: {

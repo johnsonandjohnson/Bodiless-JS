@@ -26,6 +26,7 @@ import {
   asGatsbyImage,
   withGatsbyImageLogger,
   withGatsbyImageNode,
+  withGatsbyImagePreset,
 } from '@bodiless/gatsby-theme-bodiless';
 import {
   flowHoc,
@@ -44,6 +45,20 @@ import { withoutHydration } from '@bodiless/hydration';
 
 // @ts-ignore Cannot find module
 import landscapeImage from '../../../../assets/landscape_image.png';
+
+/**
+ * @private
+ * Provides the editable schema for an image depending on the Gatsby preset. Also
+ * provides a default node key.
+ *
+ * @param preset
+ * The Gatsby image preset to use.
+ */
+const withImageSchema = (preset?: GatsbyImagePresets) => flowHoc(
+  asBodilessImage(),
+  preset === undefined ? withoutGatsbyImageProps : withGatsbyImageNode(preset),
+  withNodeKey('image'),
+);
 
 /**
  * @private
@@ -68,31 +83,19 @@ const Base = asElementToken({
       withoutHydration(),
     ),
   },
-  Schema: {
-    _: withNodeKey('image'),
-  },
   Meta: flowHoc.meta.term('Type')('Image'),
 });
 
 const WithEditorPlain = asElementToken({
-  Editors: {
-    _: asBodilessImage(),
-  },
-  Behavior: {
-    _: as(
-      withNode,
-      withoutGatsbyImageProps,
-    ),
+  Schema: {
+    _: withImageSchema(),
   },
   Meta: flowHoc.meta.term('Optimization')('Plain'),
 });
 
 const WithEditorBlurUp = asElementToken({
-  Editors: {
-    _: asBodilessImage(),
-  },
-  Behavior: {
-    _: withGatsbyImageNode(GatsbyImagePresets.FluidWithWebp),
+  Schema: {
+    _: withImageSchema(GatsbyImagePresets.FluidWithWebp),
   },
   Meta: extendMeta(
     flowHoc.meta.term('Optimization')('Optimized'),
@@ -104,11 +107,8 @@ const WithEditorBlurUp = asElementToken({
 });
 
 const WithEditorTraced = asElementToken({
-  Editors: {
-    _: asBodilessImage(),
-  },
-  Behavior: {
-    _: withGatsbyImageNode(GatsbyImagePresets.FluidWithWebpTracedSVG),
+  Schema: {
+    _: withImageSchema(GatsbyImagePresets.FluidWithWebpTracedSVG),
   },
   Meta: extendMeta(
     flowHoc.meta.term('Optimization')('Optimized'),
@@ -120,11 +120,8 @@ const WithEditorTraced = asElementToken({
 });
 
 const WithEditorNoEffect = asElementToken({
-  Editors: {
-    _: asBodilessImage(),
-  },
-  Behavior: {
-    _: withGatsbyImageNode(GatsbyImagePresets.FluidWithWebpNoBase64),
+  Schema: {
+    _: withImageSchema(GatsbyImagePresets.FluidWithWebpNoBase64),
   },
   Meta: extendMeta(
     flowHoc.meta.term('Optimization')('Optimized'),

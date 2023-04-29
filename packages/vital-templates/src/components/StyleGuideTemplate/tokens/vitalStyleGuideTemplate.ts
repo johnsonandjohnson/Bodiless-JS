@@ -25,9 +25,6 @@ import { vitalLayout, LayoutClean } from '@bodiless/vital-layout';
 import { asStyleGuideTemplateToken } from '../StyleGuideTemplateClean';
 
 const Default = asStyleGuideTemplateToken({
-  Components: {
-    Wrapper: on(LayoutClean)(vitalLayout.Default),
-  },
   Theme: {
     TitleWrapper: vitalTypography.H1,
     Container: as(
@@ -35,9 +32,10 @@ const Default = asStyleGuideTemplateToken({
       vitalSpacing.WithSiteXLConstraint
     ),
   },
-  Editors: {
+  Components: {
     Title: on(EditorPlainClean)(vitalEditorPlain.Default),
     Description: on(RichTextClean)(vitalRichText.Default),
+    Wrapper: on(LayoutClean)(vitalLayout.Default),
   },
   Schema: {
     Title: withNodeKey('title'),

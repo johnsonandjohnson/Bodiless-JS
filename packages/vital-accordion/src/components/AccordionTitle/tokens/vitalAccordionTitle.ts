@@ -21,7 +21,7 @@ import { vitalColor, vitalFontSize, vitalTextDecoration } from '@bodiless/vital-
 import { asAccordionTitleToken, withAccordionTitleHandler } from '../AccordionTitleClean';
 
 const Base = asAccordionTitleToken({
-  Editors: {
+  Components: {
     Label: on(EditorPlainClean)(vitalEditorPlain.Default),
   },
   Content: {

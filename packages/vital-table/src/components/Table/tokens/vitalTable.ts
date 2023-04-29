@@ -44,7 +44,7 @@ const Base = asTableToken({
   Schema: {
     _: asBodilessTable(),
   },
-  Editors: {
+  Components: {
     CellContent: on(RichTextClean)(vitalRichText.Default, addProps({ placeholder: 'Cell' })),
   },
 });

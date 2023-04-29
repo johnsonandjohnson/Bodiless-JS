@@ -48,7 +48,7 @@ const Base = asButtonToken({
   Spacing: {
     Wrapper: 'px-6 py-3.5',
   },
-  Editors: {
+  Components: {
     Body: on(EditorPlainClean)(vitalEditorPlain.Default),
   },
   Content: {

@@ -34,13 +34,6 @@ import { CardNodeKeys } from './constants';
 const RTENoTheme = asFluidToken(omit(vitalRichText.BasicNoLink, 'Theme'));
 
 const Base = asCardToken({
-  Editors: {
-    Wrapper: asBodilessLink(),
-    Title: on(EditorPlainClean)(vitalEditorPlain.Default),
-    Eyebrow: on(EditorPlainClean)(vitalEditorPlain.Default),
-    Description: on(RichTextClean)(RTENoTheme),
-    CTAText: on(EditorPlainClean)(vitalEditorPlain.Default),
-  },
   Content: {
     Title: withPlaceholder('Card Title'),
     Eyebrow: withPlaceholder('Card Eyebrow'),
@@ -55,6 +48,11 @@ const Base = asCardToken({
     CTAText: withNodeKey(CardNodeKeys.CTA),
   },
   Components: {
+    Wrapper: asBodilessLink(),
+    Title: on(EditorPlainClean)(vitalEditorPlain.Default),
+    Eyebrow: on(EditorPlainClean)(vitalEditorPlain.Default),
+    Description: on(RichTextClean)(RTENoTheme),
+    CTAText: on(EditorPlainClean)(vitalEditorPlain.Default),
     Image: vitalImage.Default,
     CTAWrapper: replaceWith(() => null),
   },
