@@ -16,7 +16,6 @@ import {
   withParent,
 } from '@bodiless/core';
 import {
-  withNode,
   withNodeKey,
   withSidecarNodes,
 } from '@bodiless/data';
@@ -26,7 +25,6 @@ import {
   asGatsbyImage,
   withGatsbyImageLogger,
   withGatsbyImageNode,
-  withGatsbyImagePreset,
 } from '@bodiless/gatsby-theme-bodiless';
 import {
   flowHoc,
