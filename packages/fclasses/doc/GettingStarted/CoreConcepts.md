@@ -7,7 +7,7 @@ ecosystem.  A good understanding of these is essential before proceeding.
 
 These core paradigms from  modern design system thinking define the architecture of the
 FClassers APIs.  In particular, FClasses builds on and extends the notion
-of design tokens to provide reusable and recomposable bits of styling and
+of design tokens to provide reusable and composable bits of styling and
 functionality which can be applied at all levels of the design system, from atoms
 all the way up to pages.
 
