@@ -33,8 +33,7 @@ const LinkBase: FC<LinkBaseProps> = ({ components: C, children, ...rest }) => (
     <C.Icon />
     {children
       ? <C.Body>{children}</C.Body>
-      : <C.Body />
-    }
+      : <C.Body />}
     <C.Body>
       {children}
     </C.Body>
