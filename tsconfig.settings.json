@@ -58,6 +58,8 @@
       "@bodiless/layouts-ui/*": ["bodiless-layouts-ui/src/*"],
       "@bodiless/navigation": ["bodiless-navigation/src"],
       "@bodiless/navigation/*": ["bodiless-navigation/src/*"],
+      "@bodiless/next": ["bodiless-oidc/next"],
+      "@bodiless/next/*": ["bodiless-oidc/next/*"],
       "@bodiless/oidc": ["bodiless-oidc/src"],
       "@bodiless/oidc/*": ["bodiless-oidc/src/*"],
       "@bodiless/organisms": ["bodiless-organisms/src"],

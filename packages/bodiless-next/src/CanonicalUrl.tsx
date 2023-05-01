@@ -1,5 +1,5 @@
 /**
- * Copyright © 2021 Johnson & Johnson
+ * Copyright © 2023 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,7 +11,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import React, { FC } from 'react';
+import { Helmet } from 'react-helmet';
+import { useRouter } from 'next/router';
 
-export * from './form';
-export * from './hooks';
-export * from './types';
+const CanonicalURL: FC = () => {
+  const siteUrl = process.env.SITE_URL || '';
+  const router = useRouter();
+  const cleanPath = router.asPath;
+  const canonicalUrl = `${siteUrl}${router.asPath === '/' ? '' : cleanPath}`;
+
+  return (
+    <Helmet>
+      <link
+        key={canonicalUrl}
+        rel="canonical"
+        href={canonicalUrl}
+      />
+    </Helmet>
+  );
+};
+
+export default CanonicalURL;

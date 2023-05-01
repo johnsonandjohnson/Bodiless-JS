@@ -1,5 +1,5 @@
 /**
- * Copyright © 2022 Johnson & Johnson
+ * Copyright © 2023 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,10 +12,13 @@
  * limitations under the License.
  */
 
-const getDisabledPages = require('./getDisabledPages');
-const getRedirectAliases = require('./getRedirectAliases');
+import {
+  Fragment,
+  withShowDesignKeys,
+} from '@bodiless/fclasses';
 
-module.exports = {
-  getDisabledPages,
-  getRedirectAliases,
-};
+const ShowDesignKeys = (
+  process.env.NODE_ENV === 'development' || process.env.BODILESS_SHOWDESIGNKEYS === '1'
+) ? withShowDesignKeys()(Fragment) : Fragment;
+
+export default ShowDesignKeys;

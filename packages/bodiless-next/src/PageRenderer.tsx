@@ -1,5 +1,5 @@
 /**
- * Copyright © 2021 Johnson & Johnson
+ * Copyright © 2023 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,7 +11,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import React, { FC } from 'react';
 
-export * from './form';
-export * from './hooks';
-export * from './types';
+/**
+ * Page renderer which handle the different generated pages.
+ * E.g. If the props contains the redirect path, it generates the redirect meta.
+ */
+const PageRenderer: FC = ({Component, ...rest} :any) => {
+  const { redirect = [] } = rest;
+  if (redirect.length) {
+    const content = `0; URL='${redirect[0].toPath}'`;
+    return (
+      <meta httpEquiv="refresh" content={content} />
+    );
+  }
+  return (
+    <Component {...rest} />
+  );
+};
+
+export default PageRenderer;

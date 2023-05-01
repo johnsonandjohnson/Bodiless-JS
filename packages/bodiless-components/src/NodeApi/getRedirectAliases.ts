@@ -1,5 +1,5 @@
 /**
- * Copyright © 2022 Johnson & Johnson
+ * Copyright © 2023 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,22 +12,24 @@
  * limitations under the License.
  */
 
-const path = require('path');
-const fs = require('fs');
+import { resolve } from 'path';
+import { readFileSync } from 'fs';
 
-module.exports = () => {
+const getRedirectAliases = () => {
   try {
-    const sitePath = path.resolve();
-    const disablePagesPath = `${sitePath}/src/data/site/disabled-pages.json`;
-    const json = fs.readFileSync(disablePagesPath);
+    const sitePath = resolve();
+    const aliasesPath = `${sitePath}/src/data/site/redirect-aliases.json`;
+    const json = readFileSync(aliasesPath);
     const data = JSON.parse(json.toString());
-    return data.disabledPages || {};
-  } catch (error) {
-    if (error.code === 'ENOENT') {
-      console.log("No pages to disable. The file doesn't exist:", error.path);
+    return data || {};
+  } catch (error: any) {
+    if (error && error.code && error.code === 'ENOENT') {
+      console.log("No redirect aliases found. The file doesn't exist:", error.path);
     } else {
       console.error(error);
     }
     return [];
   }
 };
+
+export default getRedirectAliases;

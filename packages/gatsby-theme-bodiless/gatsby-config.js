@@ -15,7 +15,7 @@
 const path = require('path');
 const fg = require('fast-glob');
 const fs = require('fs');
-const { getDisabledPages } = require('@bodiless/components/node-api');
+const { getDisabledPages } = require('@bodiless/components/lib/cjs/NodeApi');
 const { createDefaultContentPlugins } = require('./cjs/dist/DefaultContent');
 
 require('dotenv').config({

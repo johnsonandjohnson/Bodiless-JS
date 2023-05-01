@@ -21,7 +21,7 @@
 const pathUtil = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
-const { getDisabledPages } = require('@bodiless/components/node-api');
+const { getDisabledPages } = require('@bodiless/components/lib/cjs/NodeApi');
 const { createFilePath } = require('gatsby-source-filesystem');
 const { addStaticReplacementPlugin } = require('@bodiless/webpack');
 const { onCreateNode, createSlug, createGitInfo } = require('./create-node');

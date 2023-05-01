@@ -4,7 +4,7 @@ const {
   createDefaultContentPlugins,
   getSampleDefaultContentConfig,
 } = require('@bodiless/gatsby-theme-bodiless/cjs/dist/DefaultContent');
-const { getDisabledPages } = require('@bodiless/components/node-api');
+const { getDisabledPages } = require('@bodiless/components/lib/cjs/NodeApi');
 const getSSIEntities = require('@bodiless/gatsby-plugin-ssi/read-ssi-entities');
 const {
   getConfig: getSiteDefaultContentConfig,
