@@ -21,13 +21,6 @@ import {
   withSidecarNodes,
 } from '@bodiless/data';
 import {
-  GatsbyImagePresets,
-  withoutGatsbyImageProps,
-  asGatsbyImage,
-  withGatsbyImageLogger,
-  withGatsbyImageNode,
-} from '@bodiless/gatsby-theme-bodiless';
-import {
   flowHoc,
   stylable,
   addProps,
@@ -41,6 +34,13 @@ import { asBodilessLink, asBodilessImage } from '@bodiless/components-ui';
 import { asElementToken } from '@bodiless/vital-elements';
 import type { ElementToken } from '@bodiless/vital-elements';
 import { withoutHydration } from '@bodiless/hydration';
+import {
+  ImagePresets,
+  withoutImageProps,
+  asImage,
+  withImageLogger,
+  withImageNode,
+} from './vitalImage.gatsby';
 
 // @ts-ignore Cannot find module
 import landscapeImage from '../../../../assets/landscape_image.png';
@@ -62,9 +62,9 @@ const objectFitCoverProps = {
 const Base = asElementToken({
   Core: {
     _: as(
-      asGatsbyImage,
+      asImage,
       stylable,
-      withGatsbyImageLogger(),
+      withImageLogger(),
       withoutHydration(),
     ),
   },
@@ -81,7 +81,7 @@ const WithEditorPlain = asElementToken({
   Behavior: {
     _: as(
       withNode,
-      withoutGatsbyImageProps,
+      withoutImageProps,
     ),
   },
   Meta: flowHoc.meta.term('Optimization')('Plain'),
@@ -92,7 +92,7 @@ const WithEditorBlurUp = asElementToken({
     _: asBodilessImage(),
   },
   Behavior: {
-    _: withGatsbyImageNode(GatsbyImagePresets.FluidWithWebp),
+    _: withImageNode(ImagePresets.FluidWithWebp),
   },
   Meta: extendMeta(
     flowHoc.meta.term('Optimization')('Optimized'),
@@ -108,7 +108,7 @@ const WithEditorTraced = asElementToken({
     _: asBodilessImage(),
   },
   Behavior: {
-    _: withGatsbyImageNode(GatsbyImagePresets.FluidWithWebpTracedSVG),
+    _: withImageNode(ImagePresets.FluidWithWebpTracedSVG),
   },
   Meta: extendMeta(
     flowHoc.meta.term('Optimization')('Optimized'),
@@ -124,7 +124,7 @@ const WithEditorNoEffect = asElementToken({
     _: asBodilessImage(),
   },
   Behavior: {
-    _: withGatsbyImageNode(GatsbyImagePresets.FluidWithWebpNoBase64),
+    _: withImageNode(ImagePresets.FluidWithWebpNoBase64),
   },
   Meta: extendMeta(
     flowHoc.meta.term('Optimization')('Optimized'),
