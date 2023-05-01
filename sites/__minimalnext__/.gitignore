@@ -1,0 +1,21 @@
+# Project dependencies
+node_modules
+doc
+yarn-error.log
+
+# Temporary files
+.DS_Store
+.swp
+
+public/lunr.en.json
+public/robots.txt
+public/sitemap-*.xml
+public/manifest.webmanifest
+public/doc
+public/icons/icon-*x*.png
+public/icons/favicon-32x32.png
+out
+.cache
+src/components/index.css
+next-env.d.ts
+.next
