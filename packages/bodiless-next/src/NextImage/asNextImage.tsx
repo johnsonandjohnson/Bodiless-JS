@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { ComponentType as CT } from 'react';
+import React, { CSSProperties, ComponentType as CT } from 'react';
 import omit from 'lodash/omit';
 import NextPluginImage, {
   ImageProps as NextPluginImageProps, StaticImageData
@@ -87,8 +87,12 @@ const asDesignableNextImage = (ImageComponent: CT<any>) => {
       NextImage,
       Image
     } = components;
+    type objectFit = CSSProperties['objectFit'];
 
-    const { objectFit = 'fill', ...restImgStyle} = imgStyle;
+    const style = {
+      objectFit: 'fill' as objectFit,
+      ...imgStyle
+    };
 
     const priority = loading === 'eager';
 
@@ -98,7 +102,7 @@ const asDesignableNextImage = (ImageComponent: CT<any>) => {
         <Image
           src={(src as StaticImageData).src || src}
           alt={alt}
-          style={imgStyle}
+          style={style}
           loading={loading}
           {
             ...omit(rest, 'canonicalPreset', '_nodeKey')
@@ -113,10 +117,9 @@ const asDesignableNextImage = (ImageComponent: CT<any>) => {
           <NextImage
             src={src}
             alt={alt}
-            style={restImgStyle || {}}
+            style={style}
             priority={priority}
             loading={loading}
-            objectFit={objectFit}
             {
               ...omit(rest, 'canonicalPreset', '_nodeKey')
             }
@@ -128,7 +131,7 @@ const asDesignableNextImage = (ImageComponent: CT<any>) => {
         <Image
           src={src}
           alt={alt}
-          style={imgStyle}
+          style={style}
           loading={loading}
           {
             ...omit(rest, 'canonicalPreset', '_nodeKey')
@@ -138,12 +141,13 @@ const asDesignableNextImage = (ImageComponent: CT<any>) => {
     }
 
     type PresetProps = {
-      layout?: 'fill' | 'fixed' | 'intrinsic' | 'responsive',
       useBlur: boolean
+      layoutStyle?: CSSProperties
+      sizes?: any,
+      fill?: boolean
     };
 
     const presetProps: PresetProps = {
-      layout: 'fill',
       useBlur: false,
     };
 
@@ -152,12 +156,10 @@ const asDesignableNextImage = (ImageComponent: CT<any>) => {
       case NextImagePresets.FixedTracedSVG:
       case NextImagePresets.FixedWithWebp:
       case NextImagePresets.FixedWithWebpTracedSVG:
-        presetProps.layout = 'fixed';
         presetProps.useBlur = true;
         break;
       case NextImagePresets.FixedNoBase64:
       case NextImagePresets.FixedWithWebpNoBase64:
-        presetProps.layout = 'fixed';
         presetProps.useBlur = false;
         break;
       case NextImagePresets.Fluid:
@@ -165,21 +167,17 @@ const asDesignableNextImage = (ImageComponent: CT<any>) => {
       case NextImagePresets.FluidTracedSVG:
       case NextImagePresets.FluidWithWebp:
       case NextImagePresets.FluidWithWebpTracedSVG:
-        presetProps.layout = 'responsive';
-        presetProps.useBlur = true;
-        break;
       case NextImagePresets.FluidNoBase64:
       case NextImagePresets.FluidWithWebpNoBase64:
-        presetProps.layout = 'responsive';
+        presetProps.layoutStyle = { width: '100%', height: 'auto' };
+        presetProps.sizes = '100vw';
         presetProps.useBlur = true;
         break;
       default:
+        presetProps.fill = true;
+        presetProps.sizes = '100vw';
         break;
     }
-
-    const widthHeightAvailable = !!(width && height);
-
-    const layout = widthHeightAvailable ? presetProps.layout : 'fill';
 
     const imageProps = {
       alt,
@@ -200,11 +198,14 @@ const asDesignableNextImage = (ImageComponent: CT<any>) => {
 
     return (
       <NextImage
-        layout={layout}
         {...imageProps}
-        style={imgStyle}
+        style={{
+          ...presetProps.layoutStyle,
+          ...style
+        }}
+        sizes={presetProps.sizes || undefined}
+        fill={presetProps.fill || undefined}
         priority={priority}
-        objectFit={objectFit}
         loading={loading}
         {...omit(rest, 'canonicalPreset', '_nodeKey')}
       />
