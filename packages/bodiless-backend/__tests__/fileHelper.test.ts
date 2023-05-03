@@ -28,8 +28,7 @@ const getApp = () => {
 };
 
 describe('Create fileHelper endpoint', () => {
-  // preparing environment variables
-  // clearing mocks
+  // preparing environment variables; clearing mocks
   beforeEach(() => {
     jest.resetModules();
     process.env.GATSBY_BACKEND_PREFIX = backendPrefix;
