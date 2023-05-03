@@ -90,7 +90,7 @@
 
 #### Defined in
 
-[vital-layout/src/components/Footer/CopyrightRow/types.ts:55](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Footer/CopyrightRow/types.ts#L55)
+[vital-layout/src/components/Footer/CopyrightRow/types.ts:55](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Footer/CopyrightRow/types.ts#L55)
 
 ___
 
@@ -100,7 +100,7 @@ ___
 
 #### Defined in
 
-[vital-layout/src/components/Footer/types.ts:78](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Footer/types.ts#L78)
+[vital-layout/src/components/Footer/types.ts:78](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Footer/types.ts#L78)
 
 ___
 
@@ -110,7 +110,7 @@ ___
 
 #### Defined in
 
-[vital-layout/src/components/Header/types.ts:124](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Header/types.ts#L124)
+[vital-layout/src/components/Header/types.ts:124](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Header/types.ts#L124)
 
 ___
 
@@ -120,7 +120,7 @@ ___
 
 #### Defined in
 
-[vital-layout/src/components/Helmet/types.ts:54](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Helmet/types.ts#L54)
+[vital-layout/src/components/Helmet/types.ts:54](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Helmet/types.ts#L54)
 
 ___
 
@@ -130,7 +130,7 @@ ___
 
 #### Defined in
 
-[vital-layout/src/components/Layout/types.ts:79](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Layout/types.ts#L79)
+[vital-layout/src/components/Layout/types.ts:79](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Layout/types.ts#L79)
 
 ___
 
@@ -140,7 +140,7 @@ ___
 
 #### Defined in
 
-[vital-layout/src/components/Footer/Rewards/types.ts:38](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Footer/Rewards/types.ts#L38)
+[vital-layout/src/components/Footer/Rewards/types.ts:38](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Footer/Rewards/types.ts#L38)
 
 ___
 
@@ -150,7 +150,7 @@ ___
 
 #### Defined in
 
-[vital-layout/src/components/Footer/SocialLinks/types.ts:51](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Footer/SocialLinks/types.ts#L51)
+[vital-layout/src/components/Footer/SocialLinks/types.ts:51](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Footer/SocialLinks/types.ts#L51)
 
 ## Component Variables
 
@@ -163,7 +163,7 @@ with copyright & social links.
 
 #### Defined in
 
-[vital-layout/src/components/Footer/CopyrightRow/CopyrightRowClean.tsx:55](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Footer/CopyrightRow/CopyrightRowClean.tsx#L55)
+[vital-layout/src/components/Footer/CopyrightRow/CopyrightRowClean.tsx:55](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Footer/CopyrightRow/CopyrightRowClean.tsx#L55)
 
 ___
 
@@ -175,7 +175,7 @@ A clean footer to be used in pages layouts following vital design.
 
 #### Defined in
 
-[vital-layout/src/components/Footer/FooterClean.tsx:65](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Footer/FooterClean.tsx#L65)
+[vital-layout/src/components/Footer/FooterClean.tsx:65](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Footer/FooterClean.tsx#L65)
 
 ___
 
@@ -187,7 +187,7 @@ A clean header to be used in pages layouts following vital design.
 
 #### Defined in
 
-[vital-layout/src/components/Header/HeaderClean.tsx:100](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Header/HeaderClean.tsx#L100)
+[vital-layout/src/components/Header/HeaderClean.tsx:100](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Header/HeaderClean.tsx#L100)
 
 ___
 
@@ -199,7 +199,7 @@ Use this version of the header when all components are static.
 
 #### Defined in
 
-[vital-layout/src/components/Header/HeaderClean.tsx:108](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Header/HeaderClean.tsx#L108)
+[vital-layout/src/components/Header/HeaderClean.tsx:108](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Header/HeaderClean.tsx#L108)
 
 ___
 
@@ -212,7 +212,7 @@ head section, html or body tags.
 
 #### Defined in
 
-[vital-layout/src/components/Helmet/HelmetClean.tsx:81](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Helmet/HelmetClean.tsx#L81)
+[vital-layout/src/components/Helmet/HelmetClean.tsx:81](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Helmet/HelmetClean.tsx#L81)
 
 ___
 
@@ -224,7 +224,7 @@ This is the base component for layout.
 
 #### Defined in
 
-[vital-layout/src/components/Layout/LayoutClean.tsx:92](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Layout/LayoutClean.tsx#L92)
+[vital-layout/src/components/Layout/LayoutClean.tsx:92](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Layout/LayoutClean.tsx#L92)
 
 ___
 
@@ -236,7 +236,7 @@ Clean component to be used for the site logo
 
 #### Defined in
 
-[vital-layout/src/components/Logo/LogoClean.tsx:82](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Logo/LogoClean.tsx#L82)
+[vital-layout/src/components/Logo/LogoClean.tsx:82](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Logo/LogoClean.tsx#L82)
 
 ___
 
@@ -252,7 +252,7 @@ RECOMMEND TO NOT EXTEND/OVERRIDE and marked as deprecated.
 
 #### Defined in
 
-[vital-layout/src/components/Footer/Rewards/RewardsClean.tsx:61](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Footer/Rewards/RewardsClean.tsx#L61)
+[vital-layout/src/components/Footer/Rewards/RewardsClean.tsx:61](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Footer/Rewards/RewardsClean.tsx#L61)
 
 ___
 
@@ -269,7 +269,7 @@ In future it will move to its own package and be a list of icons.
 
 #### Defined in
 
-[vital-layout/src/components/Footer/SocialLinks/SocialLinksClean.tsx:52](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Footer/SocialLinks/SocialLinksClean.tsx#L52)
+[vital-layout/src/components/Footer/SocialLinks/SocialLinksClean.tsx:52](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Footer/SocialLinks/SocialLinksClean.tsx#L52)
 
 ___
 
@@ -281,7 +281,7 @@ ___
 
 #### Defined in
 
-[vital-layout/src/components/Footer/CopyrightRow/CopyrightRowClean.tsx:47](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Footer/CopyrightRow/CopyrightRowClean.tsx#L47)
+[vital-layout/src/components/Footer/CopyrightRow/CopyrightRowClean.tsx:47](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Footer/CopyrightRow/CopyrightRowClean.tsx#L47)
 
 ___
 
@@ -299,7 +299,7 @@ Tokens for Vital Copyright Row
 
 #### Defined in
 
-[vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts:136](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts#L136)
+[vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts:136](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Footer/CopyrightRow/tokens/vitalCopyrightRow.ts#L136)
 
 ___
 
@@ -313,7 +313,7 @@ Use this version of the vital copyrightrow tokens when extending or shadowing.
 
 #### Defined in
 
-[vital-layout/src/components/Footer/CopyrightRow/index.ts:22](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Footer/CopyrightRow/index.ts#L22)
+[vital-layout/src/components/Footer/CopyrightRow/index.ts:22](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Footer/CopyrightRow/index.ts#L22)
 
 ___
 
@@ -329,7 +329,7 @@ Tokens for Vital Footer
 
 #### Defined in
 
-[vital-layout/src/components/Footer/tokens/vitalFooter.ts:131](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Footer/tokens/vitalFooter.ts#L131)
+[vital-layout/src/components/Footer/tokens/vitalFooter.ts:131](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Footer/tokens/vitalFooter.ts#L131)
 
 ___
 
@@ -343,7 +343,7 @@ Use this version of the vital footer tokens when extending or shadowing.
 
 #### Defined in
 
-[vital-layout/src/components/Footer/index.ts:22](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Footer/index.ts#L22)
+[vital-layout/src/components/Footer/index.ts:22](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Footer/index.ts#L22)
 
 ___
 
@@ -359,7 +359,7 @@ Tokens for Vital Header
 
 #### Defined in
 
-[vital-layout/src/components/Header/tokens/vitalHeader.ts:139](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Header/tokens/vitalHeader.ts#L139)
+[vital-layout/src/components/Header/tokens/vitalHeader.ts:139](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Header/tokens/vitalHeader.ts#L139)
 
 ___
 
@@ -373,7 +373,7 @@ Use this version of the vital helmet tokens when extending or shadowing.
 
 #### Defined in
 
-[vital-layout/src/components/Header/index.ts:22](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Header/index.ts#L22)
+[vital-layout/src/components/Header/index.ts:22](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Header/index.ts#L22)
 
 ___
 
@@ -389,7 +389,7 @@ Tokens for Vital Helmet
 
 #### Defined in
 
-[vital-layout/src/components/Helmet/tokens/vitalHelmet.ts:99](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Helmet/tokens/vitalHelmet.ts#L99)
+[vital-layout/src/components/Helmet/tokens/vitalHelmet.ts:99](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Helmet/tokens/vitalHelmet.ts#L99)
 
 ___
 
@@ -403,7 +403,7 @@ Use this version of the vital helmet tokens when extending or shadowing.
 
 #### Defined in
 
-[vital-layout/src/components/Helmet/index.ts:22](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Helmet/index.ts#L22)
+[vital-layout/src/components/Helmet/index.ts:22](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Helmet/index.ts#L22)
 
 ___
 
@@ -419,7 +419,7 @@ Tokens for Vital Layout
 
 #### Defined in
 
-[vital-layout/src/components/Layout/tokens/vitalLayout.ts:137](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Layout/tokens/vitalLayout.ts#L137)
+[vital-layout/src/components/Layout/tokens/vitalLayout.ts:137](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Layout/tokens/vitalLayout.ts#L137)
 
 ___
 
@@ -433,7 +433,7 @@ Use this version of the vital layout tokens when extending or shadowing.
 
 #### Defined in
 
-[vital-layout/src/components/Layout/index.ts:23](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Layout/index.ts#L23)
+[vital-layout/src/components/Layout/index.ts:23](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Layout/index.ts#L23)
 
 ___
 
@@ -449,7 +449,7 @@ Tokens for Vital Logo
 
 #### Defined in
 
-[vital-layout/src/components/Logo/tokens/vitalLogo.ts:92](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Logo/tokens/vitalLogo.ts#L92)
+[vital-layout/src/components/Logo/tokens/vitalLogo.ts:92](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Logo/tokens/vitalLogo.ts#L92)
 
 ___
 
@@ -463,7 +463,7 @@ Use this version of the vital logo tokens when extending or shadowing.
 
 #### Defined in
 
-[vital-layout/src/components/Logo/index.ts:23](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Logo/index.ts#L23)
+[vital-layout/src/components/Logo/index.ts:23](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Logo/index.ts#L23)
 
 ___
 
@@ -479,7 +479,7 @@ Tokens for Vital Copyright Row
 
 #### Defined in
 
-[vital-layout/src/components/Footer/Rewards/tokens/vitalRewards.ts:125](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Footer/Rewards/tokens/vitalRewards.ts#L125)
+[vital-layout/src/components/Footer/Rewards/tokens/vitalRewards.ts:125](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Footer/Rewards/tokens/vitalRewards.ts#L125)
 
 ___
 
@@ -493,7 +493,7 @@ Use this version of the vital rewards tokens when extending or shadowing.
 
 #### Defined in
 
-[vital-layout/src/components/Footer/Rewards/index.ts:24](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Footer/Rewards/index.ts#L24)
+[vital-layout/src/components/Footer/Rewards/index.ts:24](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Footer/Rewards/index.ts#L24)
 
 ___
 
@@ -509,7 +509,7 @@ Tokens for Vital Social Links
 
 #### Defined in
 
-[vital-layout/src/components/Footer/SocialLinks/tokens/vitalSocialLinks.ts:53](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Footer/SocialLinks/tokens/vitalSocialLinks.ts#L53)
+[vital-layout/src/components/Footer/SocialLinks/tokens/vitalSocialLinks.ts:53](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Footer/SocialLinks/tokens/vitalSocialLinks.ts#L53)
 
 ___
 
@@ -523,7 +523,7 @@ Use this version of the vital sociallinks tokens when extending or shadowing.
 
 #### Defined in
 
-[vital-layout/src/components/Footer/SocialLinks/index.ts:25](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Footer/SocialLinks/index.ts#L25)
+[vital-layout/src/components/Footer/SocialLinks/index.ts:25](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Footer/SocialLinks/index.ts#L25)
 
 ## Token Collection Functions
 
@@ -545,7 +545,7 @@ A token modifier that respects the CopyRightRow Components.
 
 #### Defined in
 
-[vital-layout/src/components/Footer/CopyrightRow/CopyrightRowClean.tsx:62](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Footer/CopyrightRow/CopyrightRowClean.tsx#L62)
+[vital-layout/src/components/Footer/CopyrightRow/CopyrightRowClean.tsx:62](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Footer/CopyrightRow/CopyrightRowClean.tsx#L62)
 
 ___
 
@@ -567,7 +567,7 @@ A token modifier that respects the Footer Components.
 
 #### Defined in
 
-[vital-layout/src/components/Footer/FooterClean.tsx:72](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Footer/FooterClean.tsx#L72)
+[vital-layout/src/components/Footer/FooterClean.tsx:72](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Footer/FooterClean.tsx#L72)
 
 ___
 
@@ -589,7 +589,7 @@ A token modifier that respects the Header Components.
 
 #### Defined in
 
-[vital-layout/src/components/Header/HeaderClean.tsx:115](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Header/HeaderClean.tsx#L115)
+[vital-layout/src/components/Header/HeaderClean.tsx:115](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Header/HeaderClean.tsx#L115)
 
 ___
 
@@ -611,7 +611,7 @@ A token modifier that respects the Helmet Components.
 
 #### Defined in
 
-[vital-layout/src/components/Helmet/HelmetClean.tsx:90](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Helmet/HelmetClean.tsx#L90)
+[vital-layout/src/components/Helmet/HelmetClean.tsx:90](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Helmet/HelmetClean.tsx#L90)
 
 ___
 
@@ -633,7 +633,7 @@ A token modifier that respects the Layout Components.
 
 #### Defined in
 
-[vital-layout/src/components/Layout/LayoutClean.tsx:99](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Layout/LayoutClean.tsx#L99)
+[vital-layout/src/components/Layout/LayoutClean.tsx:99](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Layout/LayoutClean.tsx#L99)
 
 ___
 
@@ -655,7 +655,7 @@ A token modifier that respects the Logo Components.
 
 #### Defined in
 
-[vital-layout/src/components/Logo/LogoClean.tsx:75](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Logo/LogoClean.tsx#L75)
+[vital-layout/src/components/Logo/LogoClean.tsx:75](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Logo/LogoClean.tsx#L75)
 
 ___
 
@@ -677,7 +677,7 @@ A token modifier that respects the Rewards Components.
 
 #### Defined in
 
-[vital-layout/src/components/Footer/Rewards/RewardsClean.tsx:68](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Footer/Rewards/RewardsClean.tsx#L68)
+[vital-layout/src/components/Footer/Rewards/RewardsClean.tsx:68](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Footer/Rewards/RewardsClean.tsx#L68)
 
 ___
 
@@ -699,4 +699,4 @@ A token modifier that respects the Social Links Components.
 
 #### Defined in
 
-[vital-layout/src/components/Footer/SocialLinks/SocialLinksClean.tsx:59](https://github.com/johnsonandjohnson/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Footer/SocialLinks/SocialLinksClean.tsx#L59)
+[vital-layout/src/components/Footer/SocialLinks/SocialLinksClean.tsx:59](https://github.com/johnsonandjohnson/Bodiless-JS/blob/035171bdd/packages/vital-layout/src/components/Footer/SocialLinks/SocialLinksClean.tsx#L59)
