@@ -14,11 +14,9 @@
 
 import FilterByGroupClean, { asFilterByGroupToken } from './FilterByGroupClean';
 import vitalFilterByGroup from './tokens';
-import vitalFilterByGroupBase from './tokens/vitalFilterByGroup';
 
 export {
   FilterByGroupClean,
   asFilterByGroupToken,
   vitalFilterByGroup,
-  vitalFilterByGroupBase,
 };

@@ -26,10 +26,10 @@ import withFilterByTags from '../src/FilterByGroup/withFilterByTags';
 type TestData = { [key: string]: TagsNodeType };
 
 const testTags: TestData = {
-  foo: { tags: [{ id: 'fooID', name: 'foo' }] },
-  bar: { tags: [{ id: 'barID', name: 'bar' }] },
-  baz: { tags: [{ id: 'batID', name: 'bat' }] },
-  bat: { tags: [{ id: 'bazID', name: 'baz' }] },
+  foo: { tags: [{ value: 'fooID', label: 'foo' }] },
+  bar: { tags: [{ value: 'barID', label: 'bar' }] },
+  baz: { tags: [{ value: 'batID', label: 'bat' }] },
+  bat: { tags: [{ value: 'bazID', label: 'baz' }] },
 };
 
 const getMockNode = () => {
@@ -60,16 +60,16 @@ const TestFilterSelector = () => {
     <div>
       <div>
         <h2>Select a tag to filter by</h2>
-        <button id="show-foo" type="button" onClick={() => setTags([{ id: 'fooID', name: 'foo' }])}>
+        <button id="show-foo" type="button" onClick={() => setTags([{ value: 'fooID', label: 'foo' }])}>
           foo
         </button>
-        <button id="show-bar" type="button" onClick={() => setTags([{ id: 'barID', name: 'bar' }])}>
+        <button id="show-bar" type="button" onClick={() => setTags([{ value: 'barID', label: 'bar' }])}>
           bar
         </button>
-        <button id="show-baz" type="button" onClick={() => setTags([{ id: 'barID', name: 'bat' }])}>
+        <button id="show-baz" type="button" onClick={() => setTags([{ value: 'barID', label: 'bat' }])}>
           baz
         </button>
-        <button id="show-bat" type="button" onClick={() => setTags([{ id: 'bazID', name: 'baz' }])}>
+        <button id="show-bat" type="button" onClick={() => setTags([{ value: 'bazID', label: 'baz' }])}>
           bat
         </button>
       </div>

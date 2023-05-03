@@ -39,7 +39,7 @@
     "@bodiless/layouts": "^1.0.0-rc.37",
     "@bodiless/layouts-ui": "^1.0.0-rc.37",
     "crypto-js": "^4.1.1",
-    "informed": "^3.34.0",
+    "informed": "^4.44.0",
     "lodash": "^4.17.19",
     "md5-hex": "^4.0.0",
     "uuid": "^3.3.2"
@@ -48,6 +48,6 @@
     "@types/crypto-js": "4.1.1"
   },
   "peerDependencies": {
-    "react": "^17.0.2"
+    "react": "^18.2.0"
   }
 }

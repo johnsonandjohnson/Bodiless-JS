@@ -15,7 +15,8 @@
 import merge from 'lodash/merge';
 import flatten from 'lodash/flatten';
 import path from 'path';
-import type { TailwindConfig } from 'tailwindcss/tailwind-config';
+import type { Config as TailwindConfig } from 'tailwindcss';
+import type { RawFile } from 'tailwindcss/types/config';
 
 export type Package = {
   root: string,
@@ -32,7 +33,10 @@ const getTailwindConfigs = (packages: Package[]) => packages
     ...(
       tailwindConfig.content !== undefined && Array.isArray(tailwindConfig.content)
         ? {
-          content: tailwindConfig.content.map((rule: string) => path.join(root, rule)),
+          content: tailwindConfig.content.map((rule: string | RawFile) => {
+            const { raw = null } = rule as RawFile;
+            return raw ? path.join(root, raw) : path.join(root, rule.toString());
+          }),
         }
         : {}
     ),

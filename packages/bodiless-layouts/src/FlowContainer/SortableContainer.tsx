@@ -12,13 +12,28 @@
  * limitations under the License.
  */
 
-import React, { ComponentType, HTMLProps, PropsWithChildren } from 'react';
-import { SortableContainer, SortEndHandler } from 'react-sortable-hoc';
+import React, {
+  ComponentType,
+  HTMLProps,
+  PropsWithChildren,
+  useState,
+} from 'react';
+import {
+  DndContext,
+  useSensors,
+  useSensor,
+  MouseSensor,
+  TouchSensor,
+  closestCenter
+} from '@dnd-kit/core';
+import { SortableContext, SortableContextProps, rectSortingStrategy } from '@dnd-kit/sortable';
 import {
   useContextActivator, withLocalContextMenu, withContextActivator, observer,
 } from '@bodiless/core';
 import omit from 'lodash/omit';
 import { flowHoc } from '@bodiless/fclasses';
+
+import type { UniqueIdentifier } from '@dnd-kit/core';
 
 type FinalUI = {
   FlowContainerEmptyWrapper: ComponentType<HTMLProps<HTMLDivElement>> | string,
@@ -26,11 +41,16 @@ type FinalUI = {
 
 export type UI = Partial<FinalUI>;
 
+export type onSortEndArgs = {
+  oldIndex: number,
+  newIndex: number
+};
+
 export type SortableListProps = PropsWithChildren<{
-  onSortEnd: SortEndHandler;
+  onSortEnd: (arg: onSortEndArgs) => void;
   ui?: UI;
   className?: string;
-}>;
+} & SortableContextProps>;
 
 const defaultUI: FinalUI = {
   FlowContainerEmptyWrapper: 'div',
@@ -56,22 +76,73 @@ const FlowContainerEmpty = flowHoc(
   withLocalContextMenu,
 )(FlowContainerEmpty$);
 
-const SortableListWrapper = SortableContainer(
-  observer(
-    ({ children, ui, ...rest }: SortableListProps): React.ReactElement<SortableListProps> => {
-      const children$ = React.Children.toArray(children);
-      const content = children && children$.length
-        ? children
-        : <FlowContainerEmpty />;
-      return (
-        <section {...rest} {...useContextActivator()}>
-          {content}
-        </section>
-      );
-    },
-  ),
+const SortableListWrapper = observer(
+  ({
+    children,
+    ui,
+    onSortEnd,
+    ...rest
+  }: SortableListProps): React.ReactElement<SortableListProps> => {
+    const children$ = React.Children.toArray(children);
+    const content = children && children$.length
+      ? children
+      : <FlowContainerEmpty />;
+
+    const items = children$.map((item: any, index: number) => item.props.nodeKey);
+
+    const [, setActiveId] = useState<UniqueIdentifier | null>(null);
+    const getIndex = (id: UniqueIdentifier) => items.indexOf(id);
+
+    const sensors = useSensors(
+      useSensor(MouseSensor, {
+        // Require the mouse to move by 10 pixels before activating.
+        // Slight distance prevents sortable logic messing with
+        // interactive elements in the handler toolbar component.
+        activationConstraint: {
+          distance: 5,
+        },
+      }),
+      useSensor(TouchSensor, {
+        // Press delay of 250ms, with tolerance of 5px of movement.
+        activationConstraint: {
+          delay: 250,
+          tolerance: 5,
+        },
+      })
+    );
+    return children && children$.length ?(
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragStart={({ active }) => {
+          if (active) {
+            setActiveId(active.id);
+          }
+        }}
+        onDragEnd={({ active, over }) => {
+          if (over && active.id !== over.id) {
+            onSortEnd({
+              oldIndex: getIndex(active.id),
+              newIndex: getIndex(over.id),
+            });
+          }
+          setActiveId(null);
+        }}
+        onDragCancel={() => { setActiveId(null); }}
+      >
+        <SortableContext items={items} strategy={rectSortingStrategy}>
+          <section {...rest} {...useContextActivator()}>
+            {content}
+          </section>
+        </SortableContext>
+      </DndContext>
+    ) : (
+      <section {...rest} {...useContextActivator()}>
+        {content}
+      </section>
+    );
+  },
 );
-SortableListWrapper.displayName = 'SortableListWrapper';
 
 const EditListView = ({
   onSortEnd,
@@ -80,9 +151,6 @@ const EditListView = ({
   ...rest
 }: SortableListProps) => (
   <SortableListWrapper
-    axis="xy"
-    useDragHandle
-    transitionDuration={0}
     onSortEnd={onSortEnd}
     ui={ui}
     {...omit(rest, 'itemCount')}

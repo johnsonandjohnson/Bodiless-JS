@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { useContext } from 'react';
+import React, { useContext, PropsWithChildren } from 'react';
 import { ContentNode, DefaultContentNode } from './ContentNode';
 
 export type NodeMap<D> = {
@@ -61,13 +61,14 @@ export type Props = {
   collection?: string;
 };
 
-const NodeProvider: React.FC<Props> = ({ node, collection, children }) => {
+const NodeProvider: React.FC<PropsWithChildren<Props>> = ({ node, collection, children }) => {
   const currentValue = useContext(NodeContext);
+  const { activeCollection: currentActiveCollection, collections} = currentValue;
   // If no collection specified, then create a new node in the active collection.
-  const activeCollection = collection || currentValue.activeCollection || '_default';
+  const activeCollection = collection || currentActiveCollection || '_default';
   const newValue = {
     activeCollection,
-    collections: { ...currentValue.collections, [activeCollection]: node },
+    collections: { ...collections, [activeCollection]: node },
   };
   return <NodeContext.Provider value={newValue}>{children}</NodeContext.Provider>;
 };

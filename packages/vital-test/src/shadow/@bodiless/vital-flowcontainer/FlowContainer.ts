@@ -13,12 +13,12 @@
  */
 
 import { asFluidToken } from '@bodiless/vital-elements';
-import vitalFlowContainerBase from '--vital--/lib/shadow/@bodiless/vital-flowcontainer/FlowContainer';
+import vitalFlowContainer from '--vital--/lib/shadow/@bodiless/vital-flowcontainer/FlowContainer';
 import { addProps } from '@bodiless/fclasses';
 
 const Default = asFluidToken(
-  vitalFlowContainerBase.Default,
-  vitalFlowContainerBase.WithContentLibrary,
+  vitalFlowContainer.Default,
+  vitalFlowContainer.WithContentLibrary,
   {
     Behavior: {
       Wrapper: addProps({ 'data-shadowed-by': 'vital-test:FlowContainer' }),
@@ -27,6 +27,6 @@ const Default = asFluidToken(
 );
 
 export default {
-  ...vitalFlowContainerBase,
+  ...vitalFlowContainer,
   Default,
 };

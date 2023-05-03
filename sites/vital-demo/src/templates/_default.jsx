@@ -15,7 +15,6 @@
 import { Fragment } from 'react';
 import { graphql } from 'gatsby';
 import { as } from '@bodiless/fclasses';
-import { asFluidToken } from '@bodiless/vital-elements';
 import { vitalPage } from '@bodiless/vital-templates';
 
 const DefaultPage = as(vitalPage.Default)(Fragment);

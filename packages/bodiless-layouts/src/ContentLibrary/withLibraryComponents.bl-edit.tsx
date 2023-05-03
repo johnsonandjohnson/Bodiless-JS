@@ -120,13 +120,13 @@ const withLibraryMenuOptions = (
             <ComponentFormFieldWrapper>
               <ComponentFormLabel>
                 Name
-                <ComponentFormText field="library-name" id="id-library-name" aria-describedby="name" placeholder="Default Name" />
+                <ComponentFormText name="library-name" id="id-library-name" aria-describedby="name" placeholder="Default Name" />
               </ComponentFormLabel>
             </ComponentFormFieldWrapper>
             <ComponentFormFieldWrapper>
               <ComponentFormLabel>
                 Description
-                <ComponentFormText field="library-description" id="id-library-description" aria-describedby="description" placeholder="" />
+                <ComponentFormText name="library-description" id="id-library-description" aria-describedby="description" placeholder="" />
               </ComponentFormLabel>
             </ComponentFormFieldWrapper>
           </>

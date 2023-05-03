@@ -34,14 +34,16 @@ const ContextLoggerBase: ComponentOrTag<any> = () => {
   const randomSuggestions = useRef([] as TagType[]);
 
   const tagElements = allSuggestions.map(tag => (
-    <TagComponent key={tag.id}>{ tag.name || ' - ' }</TagComponent>
+    <TagComponent key={tag.value}>{ tag.label || ' - ' }</TagComponent>
   ));
 
   const addRandomTag = () => {
     /* eslint-disable no-bitwise */
     const newTag = new BodilessTag(`#${(Math.random() * 0xFFFFFF << 0).toString(16)}`);
     randomSuggestions.current.push(newTag);
-    registerSuggestions(randomSuggestions.current.map(tag => new Tag(tag.id.toString(), tag.name)));
+    registerSuggestions(randomSuggestions.current.map(
+      tag => new Tag((tag.value || '').toString(), tag.label)
+    ));
     setAllSuggestions(getSuggestions());
   };
 

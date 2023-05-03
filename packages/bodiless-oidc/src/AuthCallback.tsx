@@ -12,7 +12,12 @@
  * limitations under the License.
  */
 
-import React, { ComponentType, FC, useEffect } from 'react';
+import React, {
+  ComponentType,
+  FC,
+  useEffect,
+  PropsWithChildren
+} from 'react';
 import { User } from 'oidc-client-ts';
 
 import { useBodilessOidc } from './AuthContext';
@@ -31,7 +36,7 @@ export type AuthCallbackProps = {
  * @param props Optional `onSuccess` and `onError` callbacks.
  * @see AuthCallbackProps
  */
-export const AuthCallback: FC<AuthCallbackProps> = ({
+export const AuthCallback: FC<PropsWithChildren<AuthCallbackProps>> = ({
   onSuccess,
   onError,
   children,

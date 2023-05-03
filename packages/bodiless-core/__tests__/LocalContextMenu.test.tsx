@@ -13,8 +13,9 @@
  */
 
 /* eslint class-methods-use-this: ["error", { "exceptMethods": ["isInnermost"] }] */
+// @ts-nocheck
 
-import React, { FC, useEffect } from 'react';
+import React, { FC, PropsWithChildren, useEffect } from 'react';
 import { mount, shallow } from 'enzyme';
 import { v1 } from 'uuid';
 import Tooltip from 'rc-tooltip';
@@ -45,7 +46,7 @@ type Props = {
 const fooText = Math.random().toString();
 const Foo: React.FC<any> = props => <span {...props}>{fooText}</span>;
 
-const MockContextProvider: FC<Props> = ({
+const MockContextProvider: FC<PropsWithChildren<Props>> = ({
   active, children, getMenuOptions, id, name, tooltipsDisabled,
 }) => {
   class MockPageEditContext extends PageEditContext {

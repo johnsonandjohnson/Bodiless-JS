@@ -58,7 +58,7 @@ const withType = withFacet('Type');
 
 const Foo1: FC<any> = () => {
   const { node } = useNode();
-  return (<i>{node.data}</i>);
+  return (<i>{node.data.toString()}</i>);
 };
 Foo1.displayName = 'Foo1';
 const variants1 = {

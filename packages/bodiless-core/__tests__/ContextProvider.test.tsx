@@ -15,7 +15,7 @@
  */
 
 import React, {
-  useEffect, FC, useCallback, useLayoutEffect,
+  useEffect, FC, useCallback, useLayoutEffect, PropsWithChildren,
 } from 'react';
 import {
   shallow, mount, ReactWrapper,
@@ -31,7 +31,7 @@ import {
 } from './helpers/Menu';
 
 const activatorFired = jest.fn();
-const Activator: FC<any> = ({ id = 'activate', children }) => {
+const Activator: FC<PropsWithChildren<any>> = ({ id = 'activate', children }) => {
   const context = useEditContext();
   const onClick = useCallback(() => {
     context.activate();
@@ -45,7 +45,7 @@ const Activator: FC<any> = ({ id = 'activate', children }) => {
 };
 
 const foobarRendered = jest.fn();
-const FooBar: FC<any> = ({
+const FooBar: FC<PropsWithChildren<any>> = ({
   children, foo, bar, peer,
 }) => {
   foobarRendered();
@@ -97,7 +97,7 @@ const RemoveTest = ({ baz, peer, ...rest }: any) => (
 );
 
 const bazRendered = jest.fn();
-const Baz: FC<any> = ({ children, peer }) => {
+const Baz: FC<PropsWithChildren<any>> = ({ children, peer }) => {
   bazRendered();
   const options = [{
     name: 'baz',

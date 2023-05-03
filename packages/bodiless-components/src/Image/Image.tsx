@@ -24,7 +24,7 @@ import {
   AsBodiless,
 } from '@bodiless/core';
 import { addProps } from '@bodiless/fclasses';
-import { withFieldApi } from 'informed';
+import { useFieldApi } from 'informed';
 import { FileUpload } from '../FileUpload';
 import type { FileUploadPickerUI } from '../FileUpload';
 import withPropsFromPlaceholder from '../withPropsFromPlaceholder';
@@ -52,7 +52,10 @@ export const DropZonePlugin = flow(
 type ImageProps = HTMLProps<HTMLImageElement>;
 type Props = ImageProps & { ui?: TImagePickerUI};
 
-const ImageDropZonePlugin: ComponentType<{ ui?: Partial<TImagePickerUI> }> = withFieldApi('src')(DropZonePlugin);
+const ImageDropZonePlugin: ComponentType<{ ui?: Partial<TImagePickerUI> }> = (props) => {
+  const fieldApi = useFieldApi('src');
+  return <DropZonePlugin fieldApi={fieldApi} {...props} />;
+};
 
 // Options used to create an edit button.
 const options: BodilessOptions<Props, Data> = {
@@ -67,11 +70,11 @@ const options: BodilessOptions<Props, Data> = {
     return (
       <>
         <ComponentFormLabel htmlFor="image-src">Src</ComponentFormLabel>
-        <ComponentFormText field="src" id="image-src" />
+        <ComponentFormText name="src" id="image-src" />
         <ComponentFormLabel htmlFor="image-alt">Alt</ComponentFormLabel>
-        <ComponentFormText field="alt" id="image-alt" />
+        <ComponentFormText name="alt" id="image-alt" />
         <ComponentFormLabel htmlFor="image-title">Title</ComponentFormLabel>
-        <ComponentFormText field="title" id="image-title" />
+        <ComponentFormText name="title" id="image-title" />
         <ImageDropZonePlugin ui={imagePickerUI} />
       </>
     );

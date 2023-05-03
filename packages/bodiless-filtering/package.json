@@ -40,11 +40,11 @@
     "@bodiless/data": "^1.0.0-rc.37",
     "@bodiless/fclasses": "^1.0.0-rc.37",
     "@bodiless/organisms": "^1.0.0-rc.37",
-    "informed": "^3.34.0",
+    "informed": "^4.44.0",
     "lodash": "^4.17.19",
     "uuid": "^3.3.2"
   },
   "peerDependencies": {
-    "react": "^17.0.2"
+    "react": "^18.2.0"
   }
 }

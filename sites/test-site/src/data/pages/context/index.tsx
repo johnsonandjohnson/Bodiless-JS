@@ -59,7 +59,7 @@ const demoForm = (text: string) => contextMenuForm<Values>({
     return (
       <>
         <ComponentFormLabel htmlFor="left-form-txt">{text}</ComponentFormLabel>
-        <ComponentFormText field="text" id="left-form-txt" />
+        <ComponentFormText name="text" id="left-form-txt" />
       </>
     );
   },

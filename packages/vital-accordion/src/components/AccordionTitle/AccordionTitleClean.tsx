@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC, useCallback } from 'react';
+import React, { FC, PropsWithChildren, useCallback } from 'react';
 import {
   designable,
   Span,
@@ -22,7 +22,7 @@ import {
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { useEditContext } from '@bodiless/core';
 import { AddIcon, RemoveIcon } from '../../assets';
-import { useAccordionContext } from '../Accordion';
+import { useAccordionContext } from '../Accordion/AccordionContext';
 import {
   AccordionTitleBaseProps,
   AccordionTitleComponents,
@@ -35,7 +35,7 @@ const accordionTitleComponents: AccordionTitleComponents = {
   OpenIcon: AddIcon,
   CloseIcon: RemoveIcon,
 };
-const AccordionTitleBase: FC<AccordionTitleBaseProps> = ({
+const AccordionTitleBase: FC<PropsWithChildren<AccordionTitleBaseProps>> = ({
   components, children,
 }) => {
   const {

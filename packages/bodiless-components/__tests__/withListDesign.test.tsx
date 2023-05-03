@@ -12,14 +12,14 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, ComponentType } from 'react';
 
 import {
   HOC, withDesign, addProps, replaceWith, withoutProps, Tag, flowHoc,
 } from '@bodiless/fclasses';
 import { withDefaultContent } from '@bodiless/data';
 import flow from 'lodash/flow';
-import { render, ComponentType } from 'enzyme';
+import { render } from 'enzyme';
 import { withSubLists } from '../src/List/asChameleonSubList';
 import asBodilessList, { asSubList } from '../src/List/asBodilessList';
 

@@ -12,29 +12,30 @@
  * limitations under the License.
  */
 
-import { vitalSubMenuBase, asSubMenuToken } from '@bodiless/vital-navigation';
+import { asSubMenuToken } from '@bodiless/vital-navigation';
+import { vitalSubMenu } from '@bodiless/vital-navigation/lib/base';
 import { addProps } from '@bodiless/fclasses';
 
-const Footer = asSubMenuToken(vitalSubMenuBase.Footer, {
+const Footer = asSubMenuToken(vitalSubMenu.Footer, {
   Behavior: {
     _: addProps({ 'data-shadowed-by-2': '__vital__:FooterSubMenu' }),
   },
 });
 
-const TopNav = asSubMenuToken(vitalSubMenuBase.TopNav, {
+const TopNav = asSubMenuToken(vitalSubMenu.TopNav, {
   Behavior: {
     _: addProps({ 'data-shadowed-by': '__vital__:TopNavSubMenu' }),
   },
 });
 
-const Burger = asSubMenuToken(vitalSubMenuBase.Burger, {
+const Burger = asSubMenuToken(vitalSubMenu.Burger, {
   Behavior: {
     _: addProps({ 'data-shadowed-by': '__vital__:BurgerSubMenu' }),
   },
 });
 
 export default {
-  ...vitalSubMenuBase,
+  ...vitalSubMenu,
   Footer,
   TopNav,
   Burger,

@@ -39,11 +39,11 @@
     "@bodiless/fclasses": "^1.0.0-rc.37",
     "@bodiless/ui": "^1.0.0-rc.37",
     "axios": "^0.21.0",
-    "informed": "^3.34.0",
+    "informed": "^4.44.0",
     "lodash": "^4.17.19",
     "sleep-promise": "^8.0.1"
   },
   "peerDependencies": {
-    "react": "^17.0.2"
+    "react": "^18.2.0"
   }
 }

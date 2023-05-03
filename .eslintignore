@@ -1,5 +1,6 @@
 html.js
 **/lib
+**/doc
 packages/bodiless-backend/bin
 packages/gatsby-theme-bodiless/dist
 packages/gatsby-theme-bodiless/cjs

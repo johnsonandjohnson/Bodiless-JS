@@ -15,13 +15,11 @@
 import {
   ComponentType,
   HTMLProps,
+  ReactNode,
 } from 'react';
 import { AxiosPromise } from 'axios';
 import type {
-  BaseFieldProps,
-  FormValue,
-  FormValues,
-  FormError,
+  FieldProps as BaseFieldProps,
 } from 'informed';
 
 enum PageStatus {
@@ -40,7 +38,7 @@ type PageState = {
   formTitle?: string,
   linkId?: string,
   isRedirectActive?: boolean,
-  FormFields?: (Label: ComponentType<HTMLProps<HTMLLabelElement>>) => void,
+  FormFields?: (Label: ComponentType<HTMLProps<HTMLLabelElement>>) => ReactNode,
 };
 
 type PageMenuOptions = {
@@ -76,8 +74,8 @@ type CustomFieldProps = {
   required?: boolean,
   simpleValidation?: boolean,
 };
-type FieldProps = Omit<BaseFieldProps, 'field'> & CustomFieldProps;
-type FieldValidate = (value: FormValue, values: FormValues) => FormError;
+type FieldProps = Omit<BaseFieldProps<any>, 'name'> & CustomFieldProps;
+type FieldValidate = (value: unknown) => Record<string, unknown>;
 
 type PageDataContextProps = {
   pagePath: string,
@@ -90,6 +88,7 @@ type PageDataContextProviderProps = {
 };
 
 export {
+  CustomFieldProps,
   PageClient,
   PageProps,
   PageMenuOptions,

@@ -12,10 +12,11 @@
  * limitations under the License.
  */
 
-import { vitalTableBase, asTableToken } from '@bodiless/vital-table';
+import { asTableToken } from '@bodiless/vital-table';
+import { vitalTable } from '@bodiless/vital-table/lib/base';
 import { addProps } from '@bodiless/fclasses';
 
-const Default = asTableToken(vitalTableBase.Default, {
+const Default = asTableToken(vitalTable.Default, {
   Behavior: {
     Wrapper: addProps({ 'data-shadowed-by': '__vital__:Table' }),
   },
@@ -32,6 +33,6 @@ const Default = asTableToken(vitalTableBase.Default, {
 });
 
 export default {
-  ...vitalTableBase,
+  ...vitalTable,
   Default,
 };

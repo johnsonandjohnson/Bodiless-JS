@@ -12,16 +12,17 @@
  * limitations under the License.
  */
 
-import { vitalBurgerMenuBase, asBurgerMenuToken } from '@bodiless/vital-navigation';
+import { asBurgerMenuToken } from '@bodiless/vital-navigation';
+import { vitalBurgerMenu } from '@bodiless/vital-navigation/lib/base';
 import { addProps } from '@bodiless/fclasses';
 
-const Default = asBurgerMenuToken(vitalBurgerMenuBase.Default, {
+const Default = asBurgerMenuToken(vitalBurgerMenu.Default, {
   Behavior: {
     Wrapper: addProps({ 'data-shadowed-by': '__vital__:BurgerMenu' }),
   },
 });
 
 export default {
-  ...vitalBurgerMenuBase,
+  ...vitalBurgerMenu,
   Default,
 };

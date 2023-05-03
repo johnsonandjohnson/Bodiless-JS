@@ -12,17 +12,17 @@
  * limitations under the License.
  */
 
-export * from './SearchBox';
-export * from './SearchLayout';
-export * from './SearchMenu';
-export * from './SearchResult';
-export * from './SearchResults';
-export * from './SearchSuggestion';
-export * from './SearchSuggestions';
-export * from './SearchToggler';
+export * from './components/SearchBox';
+export * from './components/SearchLayout';
+export * from './components/SearchMenu';
+export * from './components/SearchResult';
+export * from './components/SearchResults';
+export * from './components/SearchSuggestion';
+export * from './components/SearchSuggestions';
+export * from './components/SearchToggler';
 export * from './SearchMenuContext';
-export * from './GenericTemplate';
-export * from './Header';
+export * from './components/GenericTemplate';
+export * from './components/Header';
 
 // Re-export everything from @bodiless/search so site builders
 // only need to import @bodiless/vital-search in their sites.

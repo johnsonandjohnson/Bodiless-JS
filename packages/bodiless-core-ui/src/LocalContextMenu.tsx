@@ -12,7 +12,12 @@
  * limitations under the License.
  */
 
-import React, { FC, ComponentType, ReactNode } from 'react';
+import React, {
+  FC,
+  ComponentType,
+  ReactNode,
+  PropsWithChildren
+} from 'react';
 import ReactTooltip from 'rc-tooltip';
 import flow from 'lodash/flow';
 import {
@@ -64,9 +69,9 @@ const GroupTitle = flow(
   removeClasses('bl-mb-grid-2 bl-min-w-xl-grid-1'),
   addClassesIf(({ index }: any = {}) => Number(index) > 0)('hover:bl-underline bl-cursor-pointer'),
   addClassesIf(({ index }: any = {}) => index === 0)('bl-underline'),
-)(ComponentFormTitle) as ComponentType<{ index?: number }>;
+)(ComponentFormTitle) as ComponentType<PropsWithChildren<{ index?: number }>>;
 
-const ContextMenuGroup: FC<IContextMenuItemProps> = ({
+const ContextMenuGroup: FC<PropsWithChildren<IContextMenuItemProps>> = ({
   children,
   index,
   option,

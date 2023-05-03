@@ -21,6 +21,7 @@ import {
   useEditContext,
   TagType,
 } from '@bodiless/core';
+import type { InputRenderer } from 'react-tag-autocomplete';
 import { useNodeDataHandlers } from '@bodiless/data';
 import { flowHoc } from '@bodiless/fclasses';
 import type { HOC } from '@bodiless/fclasses';
@@ -47,27 +48,37 @@ export const tagButtonOptions: TagButtonType = {
     const {
       getSuggestions = () => [],
       placeholder = 'Select Tags',
-      noSuggestionsText = 'No matching tags found.',
-      minQueryLength = 1,
+      noOptionsText = 'No matching tags found.',
       allowNew = true,
       allowMultipleTags = true,
       inputAttributes = { name: 'react-tags-input' },
       formTitle = 'Tags',
       formBodyText = 'Select from available tags:',
       seeAllText = 'See all tags',
-      autofocus = false,
     } = componentProps;
 
     const suggestions = getSuggestions();
+    const suggestionsTransform = (value: string, suggestions: TagType[]) => (
+      suggestions.filter((tag: TagType) => value && tag.label.search(value) >= 0)
+    );
 
     const context = useEditContext();
     const displayListOfTags = () => context.showPageOverlay({
       message: suggestions
         .slice()
-        .reduce((acc: any, _tag: TagType) => `${acc}\n${_tag.name}`, ''),
+        .reduce((acc: any, _tag: TagType) => `${acc}\n${_tag.label}`, ''),
       hasSpinner: false,
       hasCloseButton: true,
     });
+
+    const Input: InputRenderer = ({ classNames, inputWidth, ...inputProps }) => (
+      <input
+        className={classNames.input}
+        style={{ width: inputWidth }}
+        {...inputProps}
+        {...inputAttributes}
+      />
+    );
 
     return (
       <>
@@ -76,12 +87,12 @@ export const tagButtonOptions: TagButtonType = {
         <ReactTags
           suggestions={suggestions}
           placeholderText={placeholder}
-          noSuggestionsText={noSuggestionsText}
-          minQueryLength={minQueryLength}
+          noOptionsText={noOptionsText}
           allowNew={allowNew}
           allowMultipleTags={allowMultipleTags}
-          inputAttributes={inputAttributes}
-          autofocus={autofocus}
+          selected={[]}
+          renderInput={Input}
+          suggestionsTransform={suggestionsTransform}
         />
         <ComponentFormUnwrapButton type="button" onClick={displayListOfTags}>
           {seeAllText}

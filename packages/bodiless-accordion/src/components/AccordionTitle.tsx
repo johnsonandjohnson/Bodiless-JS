@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import {
   designable,
   Div,
@@ -43,7 +43,7 @@ const accordionTitleComponents:AccordionTitleComponents = {
 
 type AccordionTitleBaseProps =
   Omit<AccordionTitleProps, 'design'> & DesignableComponentsProps<AccordionTitleComponents>;
-const AccordionTitleBase: FC<AccordionTitleBaseProps> = ({
+const AccordionTitleBase: FC<PropsWithChildren<AccordionTitleBaseProps>> = ({
   components, children,
 }) => {
   const {

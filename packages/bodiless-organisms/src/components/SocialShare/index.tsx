@@ -14,6 +14,7 @@
 
 import React, {
   FunctionComponent as FC,
+  PropsWithChildren,
   useState,
 } from 'react';
 import flow from 'lodash/flow';
@@ -32,7 +33,9 @@ import {
   SocialShareProps,
 } from './types';
 
-const WrapperClean: FC = ({ children, ...props }) => <Div {...props}>{ children }</Div>;
+const WrapperClean: FC<PropsWithChildren> = (
+  { children, ...props }
+) => <Div {...props}>{ children }</Div>;
 /**
  * Display a social share button.
  *

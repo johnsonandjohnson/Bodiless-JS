@@ -87,8 +87,7 @@ const DeletePageForm = (props : PageState) => {
               fieldLabel="Add optional redirect"
               placeholder="/redirectpage"
               simpleValidation
-              validateOnChange
-              validateOnBlur
+              validateOn="change-blur"
             />
           </ContextMenuProvider>
         </>
@@ -162,7 +161,7 @@ const menuFormPageDelete = (client: PageClient) => contextMenuForm({
   const { ComponentFormText } = usePageMenuOptionUI();
   const {
     invalid,
-    submits,
+    submitted,
     values,
   } = formState;
   const {
@@ -193,7 +192,7 @@ const menuFormPageDelete = (client: PageClient) => contextMenuForm({
         });
     }
 
-    if (submits && path && !invalid) {
+    if (submitted && path && !invalid) {
       context.showPageOverlay({ hasSpinner: false });
       actualState = PageStatus.Pending;
       setState({ status: PageStatus.Pending });
@@ -220,12 +219,12 @@ const menuFormPageDelete = (client: PageClient) => contextMenuForm({
           formApi.setValue('keepOpen', false);
         });
     }
-  }, [submits]);
+  }, [submitted]);
   const { status, errorMessage } = state;
 
   return (
     <>
-      <ComponentFormText type="hidden" field="keepOpen" initialValue />
+      <ComponentFormText type="hidden" name="keepOpen" initialValue />
       <DeletePageForm
         status={status}
         errorMessage={errorMessage}

@@ -70,7 +70,7 @@ const formGitCommit = (client: GitClient) => contextMenuForm({
   );
   return (
     <>
-      <ComponentFormText type="hidden" field="keepOpen" initialValue />
+      <ComponentFormText type="hidden" name="keepOpen" initialValue />
       <SaveChanges ui={ui} formState={formState} formApi={formApi} client={client} />
     </>
   );
@@ -86,15 +86,15 @@ const formGitPull = (client: GitClient, notifyOfChanges: ChangeNotifier) => cont
       window.location.reload();
     }
   },
-  hasSubmit: ({ keepOpen }) => keepOpen,
+  hasSubmit: ({ keepOpen }) => keepOpen as boolean,
 })(({ ui }: any) => {
   const { ComponentFormTitle, ComponentFormText } = getUI(ui);
   return (
     <>
       <ComponentFormTitle>Pull Changes</ComponentFormTitle>
-      <ComponentFormText type="hidden" field="keepOpen" initialValue={false} />
-      <ComponentFormText type="hidden" field="mergeMain" initialValue={false} />
-      <ComponentFormText type="hidden" field="refreshWhenDone" initialValue={false} />
+      <ComponentFormText type="hidden" name="keepOpen" initialValue={false} />
+      <ComponentFormText type="hidden" name="mergeMain" initialValue={false} />
+      <ComponentFormText type="hidden" name="refreshWhenDone" initialValue={false} />
       <RemoteChanges client={client} notifyOfChanges={notifyOfChanges} ui={ui} />
     </>
   );
@@ -111,14 +111,14 @@ const formGitReset = (client: GitClient) => contextMenuForm({
       window.location.reload();
     }
   },
-  hasSubmit: ({ keepOpen }) => keepOpen,
+  hasSubmit: ({ keepOpen }) => keepOpen as boolean,
 })(
   ({ ui, formState, formApi }: any) => {
     const { ComponentFormText } = getUI(ui);
     return (
       <>
-        <ComponentFormText type="hidden" field="keepOpen" initialValue />
-        <ComponentFormText type="hidden" field="reload" initialValue={false} />
+        <ComponentFormText type="hidden" name="keepOpen" initialValue />
+        <ComponentFormText type="hidden" name="reload" initialValue={false} />
         <Reset ui={ui} formState={formState} formApi={formApi} client={client} />
       </>
     );

@@ -29,12 +29,12 @@ const useTagsAccessors = () => {
   let { tag } = useBaseTagsAccessors();
   if (currentItem === TAG_ANY_KEY) {
     tag = {
-      id: TAG_ANY_KEY,
-      name: TAG_ANY_LABEL,
+      value: TAG_ANY_KEY,
+      label: TAG_ANY_LABEL,
     };
   }
   return {
-    tag: new Tag(tag.id.toString(), tag.name, categoryId, categoryName),
+    tag: new Tag(tag.value ? tag.value.toString() : tag.label, tag.label, categoryId, categoryName),
   };
 };
 

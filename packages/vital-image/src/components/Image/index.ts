@@ -14,7 +14,6 @@
 
 import { BodilessImageComponents } from '@bodiless/gatsby-theme-bodiless';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
-import vitalImageBaseOrig from './tokens/vitalImage';
 import type { VitalImage } from './tokens/vitalImage';
 
 /**
@@ -24,16 +23,9 @@ import type { VitalImage } from './tokens/vitalImage';
  */
 const asImageToken = asVitalTokenSpec<BodilessImageComponents>();
 
-/**
- * Use this version of the vital image tokens when extending or shadowing.
- * @category Token Collection
- * @see [[VitalImage]]
- */
-const vitalImageBase = vitalImageBaseOrig;
-
 export type { VitalImage, BodilessImageComponents };
 export {
-  vitalImageBase, asImageToken,
+  asImageToken,
 };
 
 export * from './index.bl-edit';

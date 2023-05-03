@@ -14,7 +14,7 @@
 
 /* eslint-disable no-nested-ternary */
 import React, {
-  FC, createContext, useContext, ReactNode,
+  FC, createContext, useContext, ReactNode, PropsWithChildren
 } from 'react';
 import { addProps, Div } from '@bodiless/fclasses';
 import ContextMenuItem from '../components/ContextMenuItem';
@@ -30,7 +30,7 @@ const SubMenuChildren = () => {
   return <>{children}</>;
 };
 
-const ContextSubMenu: FC<IContextMenuItemProps> = props => {
+const ContextSubMenu: FC<PropsWithChildren<IContextMenuItemProps>> = props => {
   const {
     option: option$, name, children, ...rest
   } = props;

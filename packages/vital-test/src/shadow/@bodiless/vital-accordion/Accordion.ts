@@ -12,16 +12,17 @@
  * limitations under the License.
  */
 
-import { vitalAccordionBase, asAccordionToken } from '@bodiless/vital-accordion';
+import { asAccordionToken } from '@bodiless/vital-accordion';
 import { addProps } from '@bodiless/fclasses';
+import { vitalAccordion } from '@bodiless/vital-accordion/lib/base';
 
-const Default = asAccordionToken(vitalAccordionBase.Default, {
+const Default = asAccordionToken(vitalAccordion.Default, {
   Behavior: {
     Wrapper: addProps({ 'data-shadowed-by': 'vital:Accordion' }),
   },
 });
 
 export default {
-  ...vitalAccordionBase,
+  ...vitalAccordion,
   Default,
 };

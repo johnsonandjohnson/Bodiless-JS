@@ -28,7 +28,7 @@ const asFilterableByGroup = (nodeKey: string = '_tags') => flowHoc(
     formTitle: 'Group Membership',
     formBodyText: 'Select from available groups:',
     seeAllText: 'View All Groups',
-    noSuggestionsText: 'No matching groups found.',
+    noOptionsText: 'No matching groups found.',
   }),
 );
 

@@ -13,7 +13,7 @@
  */
 
 import React, {
-  FC, useEffect, useLayoutEffect, useRef, useMemo,
+  FC, useEffect, useLayoutEffect, useRef, useMemo, PropsWithChildren,
 } from 'react';
 import pickBy from 'lodash/pickBy';
 import { HOC } from '@bodiless/fclasses';
@@ -103,7 +103,9 @@ export const useRegisterMenuOptions = (
  *
  * @param props
  */
-const PageContextProvider: FC<PageContextProviderProps> = ({ children, ...rest }) => {
+const PageContextProvider: FC<PropsWithChildren<PageContextProviderProps>> = (
+  { children, ...rest }
+) => {
   const context = useEditContext();
   const newValue = useNewContext(rest, context);
   useEffect(() => {

@@ -18,14 +18,12 @@ import {
   withProps,
 } from '@bodiless/fclasses';
 import { useLanguageContext } from '@bodiless/i18n';
-import {
-  asRewardsToken,
-  vitalRewardsBase
-} from '@bodiless/vital-layout';
+import { asRewardsToken } from '@bodiless/vital-layout';
+import { vitalRewards } from '@bodiless/vital-layout/lib/base';
 
 const isCurrentLanguageEs = () => useLanguageContext().getCurrentLanguage().name === 'es';
 
-const Default = asRewardsToken(vitalRewardsBase.Default, {
+const Default = asRewardsToken(vitalRewards.Default, {
   Content: {
     Brand: flowIf(isCurrentLanguageEs)(
       withProps({
@@ -39,6 +37,6 @@ const Default = asRewardsToken(vitalRewardsBase.Default, {
 });
 
 export default {
-  ...vitalRewardsBase,
+  ...vitalRewards,
   Default,
 };

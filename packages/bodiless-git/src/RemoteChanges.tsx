@@ -78,7 +78,7 @@ const RemoteChanges = (
 ) => {
   const formApi = useFormApi();
   // @Todo revise the use of formState, possibly use informed multistep.
-  if (formApi.getState().submits === 0) {
+  if (formApi.getFormState().submitted) {
     return (
       <FetchChanges
         client={client}

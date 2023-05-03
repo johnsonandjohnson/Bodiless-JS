@@ -57,7 +57,7 @@ const submitValueHandler = (data: { [field: string]: boolean }) => ({
 //   const { ComponentFormLabel, ComponentFormCheckBox } = useMenuOptionUI();
 //   return (
 //     <ComponentFormLabel>
-//       <ComponentFormCheckBox field={name} />
+//       <ComponentFormCheckBox  name={name} />
 //       {name}
 //     </ComponentFormLabel>
 //   );
@@ -70,7 +70,7 @@ const useCategoryCheckboxes = (map: TokenMap<any>) => {
       <ComponentFormLabel>{cat}</ComponentFormLabel>
       {map.namesFor(cat).map(name => (
         <ComponentFormLabel>
-          <ComponentFormCheckBox field={name} />
+          <ComponentFormCheckBox name={name} />
           {name}
         </ComponentFormLabel>
       ))}

@@ -18,27 +18,31 @@ import { ReactTagsField as ReactTagsFieldClean, ReactTagsFieldProps } from '@bod
 const ReactTagsField: ComponentType<ReactTagsFieldProps> = props => {
   const classes = {
     root: `
-      bl-flex bl-relative bl-flex-col-reverse bl-rounded-sm bl-text-xs
-      bl-leading-tight bl-cursor-text bl-gray-900`,
-    rootFocused: 'is-focused',
-    selected: 'bl-max-w-xl-grid-1 bl-inline',
-    selectedTag: `
-      bl-inline-block bl-box-border bl-mr-grid-1 bl-mb-grid-1
-      bl-py-grid-1 bl-px-grid-2 bl-border bl-border-solid
-      bl-border-gray-400 bl-gray-900 bl-rounded-sm bl-bg-gray-100
-      bl-react-tags__selected-tag`,
-    selectedTagName: 'bl-text-gray-900',
-    search: 'bl-inline-block bl-py-grid-1 bl-px-grid-0 bl-mb-grid-1 bl-max-w-full bl-min-w-xl-grid-1',
-    searchInput: 'bl-text-gray-900 bl-react-tags__search-input',
-    suggestions: 'bl-text-gray-900 bl-absolute bl-top-full bl-w-full bl-left-grid-0 bl-z-10 bl-react-tags__suggestions',
-    suggestionActive: 'is-active',
-    suggestionDisabled: 'is-disabled',
+        bl-flex bl-relative bl-flex-col-reverse bl-rounded-sm bl-text-xs
+        bl-leading-tight bl-cursor-text bl-gray-900`,
+    rootIsActive: 'is-active',
+    rootIsDisabled: 'is-disabled',
+    rootIsInvalid: 'is-invalid',
+    label: 'react-tags__label',
+    tag: `
+    bl-box-border bl-mr-grid-1 bl-mb-grid-1
+    bl-py-grid-1 bl-px-grid-2 bl-border bl-border-solid
+    bl-border-gray-400 bl-gray-900 bl-rounded-sm bl-bg-gray-100
+    bl-react-tags__selected-tag`,
+    tagList: 'bl-max-w-xl-grid-1 bl-inline',
+    tagListItem: 'bl-inline-block',
+    tagName: 'bl-text-gray-900',
+    comboBox: 'bl-inline-block bl-py-grid-1 bl-px-grid-0 bl-mb-grid-1 bl-max-w-full bl-min-w-xl-grid-1',
+    input: 'bl-text-gray-900 bl-react-tags__search-input',
+    listBox: 'bl-text-gray-900 bl-absolute bl-top-full bl-w-full bl-left-grid-0 bl-z-10 bl-react-tags__listbox',
+    noOptions: 'react-tags__listbox-no-options',
+    option: 'react-tags__listbox-option',
+    optionIsActive: 'is-active',
   };
 
   return (
     <ReactTagsFieldClean
       classNames={classes}
-      autoresize={false}
       {...props}
     />
   );

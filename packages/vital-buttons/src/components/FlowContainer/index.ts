@@ -11,40 +11,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import { asFluidToken } from '@bodiless/vital-elements';
-import { on, varyDesigns, flowHoc } from '@bodiless/fclasses';
-import {
-  asButtonToken, ButtonClean, vitalButtons,
-} from '../Buttons';
-
-const BaseVariation = {
-  Button: on(ButtonClean)(vitalButtons.Default),
-};
-
-const ColorVariations = {
-  Primary: vitalButtons.Primary,
-  Secondary: vitalButtons.Secondary,
-};
-
-const ButtonStyles = {
-  WithArrow: vitalButtons.WithArrow,
-  WithOutArrow: asButtonToken({
-    Meta: flowHoc.meta.term('Style')('Without Hover Arrow'),
-  }),
-};
-
-/**
- * Token which adds image variations to a flow container.
- */
-const WithButtonVariations = asFluidToken({
-  Components: {
-    ...varyDesigns(
-      BaseVariation,
-      ColorVariations,
-      ButtonStyles,
-    ),
-  }
-});
-
-export const vitalButtonFlowContainer = { WithButtonVariations };
+export { vitalButtonFlowContainer } from './tokens';

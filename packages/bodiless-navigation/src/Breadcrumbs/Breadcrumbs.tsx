@@ -13,7 +13,7 @@
  */
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { ComponentType } from 'react';
+import React, { ComponentType, PropsWithChildren } from 'react';
 import { withNode, useNode } from '@bodiless/data';
 import { LinkData } from '@bodiless/components';
 import type { WithNodeProps } from '@bodiless/data';
@@ -34,7 +34,7 @@ import type {
   CleanBreadcrumbItemType,
 } from './types';
 
-const ItemNodeProvider = withNode(Fragment) as ComponentType<WithNodeProps>;
+const ItemNodeProvider = withNode(Fragment) as ComponentType<PropsWithChildren<WithNodeProps>>;
 const useIsLink = (linkNodeKey: string) => {
   const { node } = useNode();
   const linkHref = node.child<LinkData>(linkNodeKey);

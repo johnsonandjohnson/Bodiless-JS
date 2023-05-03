@@ -192,7 +192,7 @@ export class FlowContainerPage extends BasePage {
     this.selectImageButton = 'button[aria-label="Select Image"]';
     this.imagesCheckbox = '#Image';
     this.squareImageButton = '#gridlistboxinner > div:nth-child(1) > div > button';
-    this.squareImageButtonInsideContainer = '#flowContainer > div > img';
+    this.squareImageButtonInsideContainer = '#flowContainer > div > div > img';
     this.component = {
       richText: '#Rich\\ Text',
       table: '#Table',
@@ -254,7 +254,7 @@ export class FlowContainerPage extends BasePage {
     this.accordionBodyPreview = 'div[data-bl-design-key="AccordionBody:Content"]';
     this.accordionTitle = 'div[aria-label="Filter"] div[role="textbox"]';
     this.accordionTitlePreview = 'div[data-bl-design-key="AccordionTitle:Label"]';
-    this.squareImageButtonInsideContainer = '#flowContainer > div > img';
+    this.squareImageButtonInsideContainer = '#flowContainer > div > div > img';
     this.altText = 'alt-test';
     this.imageAlt = '#image-alt';
     this.accordionBodyText = 'accordion-body-text';

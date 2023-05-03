@@ -12,13 +12,13 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import {
   designable,
   Div,
 } from '@bodiless/fclasses';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
-import { useAccordionContext } from '../Accordion';
+import { useAccordionContext } from '../Accordion/AccordionContext';
 import { AccordionBodyComponents, AccordionBodyBaseProps } from './types';
 
 const AccordionBodyComponentsStart:AccordionBodyComponents = {
@@ -26,7 +26,7 @@ const AccordionBodyComponentsStart:AccordionBodyComponents = {
   Content: Div,
 };
 
-const AccordionBodyBase: FC<AccordionBodyBaseProps> = ({
+const AccordionBodyBase: FC<PropsWithChildren<AccordionBodyBaseProps>> = ({
   components, children, ...rest
 }) => {
   const { Wrapper, Content } = components;

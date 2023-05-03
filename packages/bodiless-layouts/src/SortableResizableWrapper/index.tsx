@@ -12,8 +12,9 @@
  * limitations under the License.
  */
 
-import { SortableElement, SortableHandle } from 'react-sortable-hoc';
 import React, { ComponentType, HTMLProps } from 'react';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS, Transform } from '@dnd-kit/utilities';
 import CleanReresizable, { ResizeCallback, ResizableProps } from 're-resizable';
 import { SnapData } from '../FlowContainer/utils/appendTailwindWidthClass';
 import { DIRECTIONS } from '../withDirection/withDirection';
@@ -38,6 +39,7 @@ const getUI = (ui: UI = {}) => ({ ...defaultUI, ...ui });
 
 export type Props = {
   isEnabled: boolean;
+  sortId: string
   children: React.ReactNode;
   className: string;
   snapData?: SnapData;
@@ -52,33 +54,55 @@ export type Props = {
   direction?: string;
 };
 
-const Handle = SortableHandle(({ component: Component, ...rest }: any) => (
+const Handle = ({ component: Component, ...rest }: any) => (
   <Component {...rest} />
-));
+);
 
-const SortableResizableWrapper = SortableElement((props: Props) => {
+const SortableResizableWrapper = (props: Props) => {
   const {
-    isEnabled,
+    isEnabled = true,
     children,
-    className,
+    className = '',
     ui,
     direction,
+    sortId,
     ...resizableProps
   } = props;
   const {
     DragHandle, ResizeHandle, ResizeHandleRTL, Reresizable,
   } = getUI(ui);
+
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+  } = useSortable({id: sortId});
+
+  const style = {
+    transform: CSS.Transform.toString({
+      ...transform,
+      scaleX: 1,
+      scaleY: 1,
+    } as Transform),
+    transition,
+  };
+
   const childrenWithDragHandle = (
-    <>
-      <Handle
-        component={DragHandle}
-        style={{
-          display: isEnabled ? 'block' : 'none',
-        }}
-      />
+    <div ref={setNodeRef} style={style} {...attributes}>
+      <div {...listeners} style={{display: 'contents'}}>
+        <Handle
+          component={DragHandle}
+          style={{
+            display: isEnabled ? 'block' : 'none',
+          }}
+        />
+      </div>
       {children}
-    </>
+    </div>
   );
+
   const ENABLED_DRAG_SIDES = {
     top: false,
     right: isEnabled && direction !== DIRECTIONS.RTL,
@@ -95,6 +119,7 @@ const SortableResizableWrapper = SortableElement((props: Props) => {
       enable={ENABLED_DRAG_SIDES}
       scale={1}
       className={className}
+      // @ts-ignore
       handleComponent={
         direction === DIRECTIONS.RTL
           ? { left: ResizeHandleRTL }
@@ -105,17 +130,15 @@ const SortableResizableWrapper = SortableElement((props: Props) => {
       {childrenWithDragHandle}
     </Reresizable>
   );
-});
+};
 
 SortableResizableWrapper.defaultProps = {
-  className: '',
   onClick: () => {},
   onResize: () => {},
   defaultSize: {
     width: '',
     height: '',
   },
-  isEnabled: true,
 };
 
 export default SortableResizableWrapper;

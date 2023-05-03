@@ -14,5 +14,4 @@
 
 export { default as BurgerMenuClean, asBurgerMenuToken } from './BurgerMenuClean';
 export { default as vitalBurgerMenu } from './tokens';
-export { default as vitalBurgerMenuBase } from './tokens/vitalBurgerMenu';
 export type { BurgerMenuComponents, BurgerMenuProps } from './types';

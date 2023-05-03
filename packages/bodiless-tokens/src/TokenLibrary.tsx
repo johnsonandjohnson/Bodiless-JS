@@ -22,7 +22,6 @@ import {
   useNode, withNode, withSidecarNodes, withNodeKey, withNodeDataHandlers,
 } from '@bodiless/data';
 import { addClasses, flowHoc } from '@bodiless/fclasses';
-import { Option } from 'informed';
 import flow from 'lodash/flow';
 import { Tokens } from './TokenMap';
 
@@ -80,22 +79,22 @@ const useEditButtonOptions = (): EditButtonOptions<any, any> => {
         </ComponentFormTitle>
         <ComponentFormLabel>
           Target
-          <ComponentFormSelect field="target">
-            <Option value="typography">Typography</Option>
-            <Option value="card">Card</Option>
+          <ComponentFormSelect name="target">
+            <option value="typography">Typography</option>
+            <option value="card">Card</option>
           </ComponentFormSelect>
         </ComponentFormLabel>
         <ComponentFormLabel>
           Name
-          <ComponentFormText field="name" />
+          <ComponentFormText name="name" />
         </ComponentFormLabel>
         <ComponentFormLabel>
           ClassName
-          <ComponentFormText field="className" />
+          <ComponentFormText name="className" />
         </ComponentFormLabel>
         <ComponentFormLabel>
           Category
-          <ComponentFormText field="category" />
+          <ComponentFormText name="category" />
         </ComponentFormLabel>
       </>
     );

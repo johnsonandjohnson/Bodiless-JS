@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { ComponentType } from 'react';
+import { ComponentType, PropsWithChildren } from 'react';
 import {
   ContextWrapperProps,
 } from '@bodiless/core';
@@ -23,8 +23,8 @@ import {
 import GatsbyNodeProvider from './GatsbyNodeProvider.bl-edit';
 
 export type FinalUI = {
-  ContextWrapper: ComponentType<ContextWrapperProps>;
-  PageEditor: ComponentType;
+  ContextWrapper: ComponentType<PropsWithChildren<ContextWrapperProps>>;
+  PageEditor: ComponentType<PropsWithChildren>;
 };
 
 export type UI = Partial<FinalUI>;

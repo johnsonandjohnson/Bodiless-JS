@@ -52,8 +52,9 @@ import type { YouTubePlayerSettings } from './YouTube';
 import PageDimensionsProvider, {
   usePageDimensionsContext,
   withPageDimensionsContext,
-  BreakpointsType,
 } from './PageDimensionsProvider';
+import type { BreakpointsType } from './PageDimensionsProvider';
+
 import withResponsiveVariants from './withResponsiveVariants';
 import withBodilessLinkToggle from './withBodilessLinkToggle';
 

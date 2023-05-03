@@ -30,7 +30,7 @@
     "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
   },
   "peerDependencies": {
-    "react": "^17.0.2"
+    "react": "^18.2.0"
   },
   "dependencies": {
     "@bodiless/cli": "^1.0.0-rc.37",

@@ -53,8 +53,11 @@ const startSidecarNodes: HOC = Component => {
 const endSidecarNodes: HOC = Component => {
   const EndSidecarNodes = (props: any) => {
     const oldValue = useContext(SidecarNodeContext);
+    // eslint-disable-next-line react/destructuring-assignment
     if (oldValue.length === 0) return <Component {...props} />;
+    // eslint-disable-next-line react/destructuring-assignment
     const newNodeProviderValue = oldValue[oldValue.length - 1];
+    // eslint-disable-next-line react/destructuring-assignment
     const newValue = oldValue.slice(0, -1);
     return (
       <NodeContext.Provider value={newNodeProviderValue}>

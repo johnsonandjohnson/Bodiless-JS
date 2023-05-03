@@ -12,17 +12,4 @@
  * limitations under the License.
  */
 
-import { on } from '@bodiless/fclasses';
-import { asFluidToken } from '@bodiless/vital-elements';
-import { YouTubeClean, vitalYouTube } from '../YouTube';
-
-/**
- * Flow Container variations for YouTube component.
- */
-const WithYouTubeVariations = asFluidToken({
-  Components: {
-    YouTube: on(YouTubeClean)(vitalYouTube.Default),
-  },
-});
-
-export const vitalYouTubeFlowContainer = { WithYouTubeVariations };
+export { vitalYouTubeFlowContainer } from './tokens';

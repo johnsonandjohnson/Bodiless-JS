@@ -14,6 +14,7 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
+import { act } from 'react-test-renderer';
 import CommitsList from '../src/CommitsList';
 
 const mockedGitLogOutput = `
@@ -38,15 +39,28 @@ const mockedClient = {
 };
 
 describe('CommitsList component', () => {
-  it('should show a spinner while a request to the back-end is processed', () => {
+  it('should show a spinner while a request to the back-end is processed', async () => {
     const wrapper = mount(<CommitsList client={mockedClient} />);
-    expect(wrapper!.find('.bodiless-spinner').length > 0).toBe(true);
+    await act(async () => {
+      wrapper.update();
+    });
+    expect(wrapper.find('.bodiless-spinner').length > 0).toBe(true);
   });
   it('should render a list of selectable items once a responce is recieved', async () => {
     const wrapper = mount(<CommitsList client={mockedClient} />);
-    return new Promise(resolve => setImmediate(resolve)).then(() => {
+    wrapper.update();
+    // Hacky solution, update the component twice inside indipendent act. Migrating away from
+    // Enzyme it should be refactored better.
+    await act(async () => {
+      await Promise.resolve(wrapper);
+      await new Promise(resolve => setImmediate(resolve));
       wrapper.update();
-      expect(wrapper.find('input[type="radio"]').length > 0).toBe(true);
     });
+    await act(async () => {
+      await Promise.resolve(wrapper);
+      await new Promise(resolve => setImmediate(resolve));
+      wrapper.update();
+    });
+    expect(wrapper.find('input[type="radio"]').length > 0).toBe(true);
   });
 });

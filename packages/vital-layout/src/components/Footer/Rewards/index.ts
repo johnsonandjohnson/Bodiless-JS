@@ -14,17 +14,10 @@
 
 // @TODO: As Rewards is implemented, move it outside Footer component into
 // a more appropriate place.
-import vitalRewardsBaseOrig, { VitalRewards } from './tokens/vitalRewards';
-
-/**
- * Use this version of the vital rewards tokens when extending or shadowing.
- * @category Token Collection
- * @see [[vitalRewards]]
- */
-const vitalRewardsBase = vitalRewardsBaseOrig;
+import type { VitalRewards } from './tokens/vitalRewards';
 
 export { RewardsClean, asRewardsToken } from './RewardsClean';
 export { default as vitalRewards } from './tokens';
 export type { RewardsComponents, RewardsProps } from './types';
 
-export { vitalRewardsBase, VitalRewards };
+export type { VitalRewards };

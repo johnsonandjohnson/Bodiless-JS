@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { useContext, ComponentType } from 'react';
+import React, { useContext, ComponentType, PropsWithChildren, } from 'react';
 import { flowIf } from '@bodiless/fclasses';
 import negate from 'lodash/negate';
 
@@ -34,7 +34,9 @@ type Props = {
   mode: ComponentDisplayMode,
 };
 
-const ComponentDisplayModeProvider: ComponentType<Props> = ({ children, mode = defaultMode }) => {
+const ComponentDisplayModeProvider: ComponentType<PropsWithChildren<Props>> = (
+  { children, mode = defaultMode }
+) => {
   const contextValue = { mode };
   return (
     <ComponentDisplayModeContext.Provider value={contextValue}>

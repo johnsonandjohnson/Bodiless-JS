@@ -36,9 +36,9 @@
     "@bodiless/data": "^1.0.0-rc.37",
     "@bodiless/fclasses": "^1.0.0-rc.37",
     "@bodiless/hydration": "^1.0.0-rc.37",
-    "@emotion/core": "^10.0.14",
-    "@emotion/css": "^10.0.14",
-    "@emotion/styled": "^10.0.14",
+    "@emotion/core": "^11.0.0",
+    "@emotion/css": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "is-hotkey": "^0.1.6",
     "lodash": "^4.17.19",
     "rc-tooltip": "^5.1.1",
@@ -51,8 +51,8 @@
     "uuid": "^3.3.2"
   },
   "peerDependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/rc-tooltip": "^3.7.1",

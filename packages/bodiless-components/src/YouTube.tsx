@@ -151,20 +151,23 @@ const withYouTubePlayerAPI = (Component: ComponentType<any>) => {
 const useYouTubePlayerAPI = () => useContext(YouTubePlayerAPIContext);
 const ifYouTubePlayerAPILoaded = () => useContext(YouTubePlayerAPIContext).isLoaded;
 const ifNotYouTubePlayerAPILoaded = () => !useContext(YouTubePlayerAPIContext).isLoaded;
+type YouTubeFormSrcErrors = {
+  src: string
+};
 
 const withYouTubeFormSrcSnippet = withFormSnippet({
   nodeKeys: 'src',
   defaultData: { src: '' },
   snippetOptions: {
     renderForm: ({ formState, scope }) => {
-      const errors = scope ? formState.errors[scope] : formState.error;
+      const errors = (scope ? formState.errors[scope] : formState.errors) as YouTubeFormSrcErrors;
       const {
         ComponentFormLabel,
         ComponentFormText,
         ComponentFormWarning,
       } = useMenuOptionUI();
       const validate = useCallback(
-        (value: string) => (!value || !isValidYouTubeUrl(value)
+        (value: unknown) => (!value || !isValidYouTubeUrl(value.toString())
           ? 'Invalid YouTube URL specified.'
           : undefined),
         [],
@@ -173,11 +176,10 @@ const withYouTubeFormSrcSnippet = withFormSnippet({
         <React.Fragment key="src">
           <ComponentFormLabel htmlFor="src">URL</ComponentFormLabel>
           <ComponentFormText
-            field="src"
+            name="src"
             placeholder="https://"
             validate={validate}
-            validateOnChange
-            validateOnBlur
+            validateOn="change-blur"
           />
           {errors && errors.src && (
           <ComponentFormWarning>{errors.src}</ComponentFormWarning>

@@ -38,7 +38,7 @@ type BasicOptions = {
 
 export type Options = {
   label: string;
-  useFormElement?: () => CT<FieldProps<any, any>>,
+  useFormElement?: () => CT<FieldProps<any>>,
   placeholder?: string;
   attribute?: string;
 } & BasicOptions;

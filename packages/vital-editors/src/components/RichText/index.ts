@@ -13,4 +13,3 @@
  */
 
 export { vitalRichText, RichTextClean } from './index.bl-edit';
-export { default as vitalRichTextBase } from './tokens/vitalRichText';

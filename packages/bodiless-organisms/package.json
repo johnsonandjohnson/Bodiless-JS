@@ -40,19 +40,18 @@
     "@bodiless/fclasses": "^1.0.0-rc.37",
     "@bodiless/richtext": "^1.0.0-rc.37",
     "@bodiless/richtext-ui": "^1.0.0-rc.37",
-    "@types/react-burger-menu": "^2.6.0",
-    "@types/react-tag-autocomplete": "^6.0.0",
     "lodash": "^4.17.19",
-    "react-tag-autocomplete": "^6.0.0",
+    "react-tag-autocomplete": "^7.0.0-rc.5",
     "tailwindcss-aspect-ratio": "^3.0.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "@types/react-burger-menu": "^2.6.0",
     "@types/uuid": "^3.4.4"
   },
   "peerDependencies": {
     "mobx": "^6.0.0",
     "mobx-react": "^7.2.1",
-    "react": "^17.0.2"
+    "react": "^18.2.0"
   }
 }

@@ -13,6 +13,5 @@
  */
 
 export { default as GenericTemplateClean, asGenericTemplateToken } from './GenericTemplateClean';
-export { default as vitalGenericTemplateBase } from './tokens/vitalGenericTemplate';
 export { default as vitalGenericTemplate } from './tokens';
 export type { GenericTemplateComponents } from './types';

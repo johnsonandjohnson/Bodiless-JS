@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { hydrateRoot } from 'react-dom/client';
 import { mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 import cheerio from 'cheerio';
@@ -114,7 +114,7 @@ describe('when using withoutHydration', () => {
         const { DryComponent, root } = initializeProductionTest();
 
         act(() => {
-          ReactDOM.hydrate(<DryComponent />, root);
+          hydrateRoot(root, <DryComponent />);
         });
 
         const $ = cheerio.load(root.outerHTML);
@@ -131,12 +131,10 @@ describe('when using withoutHydration', () => {
         const DryComponent = withoutHydration()(InteractiveComponent);
 
         act(() => {
-          ReactDOM.hydrate(
+          hydrateRoot(root,
             <RemountingComponent>
               <DryComponent />
-            </RemountingComponent>,
-            root
-          );
+            </RemountingComponent>);
         });
 
         const $ = cheerio.load(root.outerHTML);
@@ -155,10 +153,8 @@ describe('when using withoutHydration', () => {
         const Component = RerenderingComponent(DryComponent);
 
         act(() => {
-          ReactDOM.hydrate(
-            <Component />,
-            root
-          );
+          hydrateRoot(root,
+            <Component />);
         });
 
         const $ = cheerio.load(root.outerHTML);
@@ -182,7 +178,7 @@ describe('when using withoutHydration', () => {
         root.innerHTML = dryInteractive;
 
         act(() => {
-          ReactDOM.hydrate(<DryComponent optionalProp="This is an example." />, root);
+          hydrateRoot(root, <DryComponent optionalProp="This is an example." />);
         });
 
         const $ = cheerio.load(root.outerHTML);

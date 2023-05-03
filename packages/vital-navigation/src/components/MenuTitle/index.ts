@@ -13,7 +13,6 @@
  */
 
 export { default as vitalMenuTitle } from './tokens';
-export { default as vitalMenuTitleBase } from './tokens/vitalMenuTitle';
 export {
   default as MenuTitleClean,
   asMenuTitleToken

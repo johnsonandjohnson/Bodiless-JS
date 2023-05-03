@@ -57,6 +57,7 @@ export const withContextActivator = (
  */
 export const withLocalContextMenu: HOC = Component => {
   const WithLocalContextMenu = (props: any) => (
+    // @ts-ignore
     <LocalContextMenu>
       <Component {...props} />
     </LocalContextMenu>

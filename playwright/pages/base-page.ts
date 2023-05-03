@@ -89,7 +89,7 @@ export class BasePage {
     this.pageIcon = '//*[@aria-label="Page"]';
     this.newPageIcon = '//*[@aria-label="New"]';
     this.headerAddPageForm = '//*[@aria-label="Context Submenu Form"]//h3[text()="Add a Blank Page"]';
-    this.fieldAddPageForm = '//*[@aria-label="Context Submenu Form"]//input[@name="new-page-path"]';
+    this.fieldAddPageForm = '//*[@aria-label="Context Submenu Form"]//input[@name="pagePath"]';
     this.closeIconAddPageForm = '//*[@aria-label="Context Submenu Form"]//*[@aria-label="Cancel"]';
     this.checkmarkIconAddPageForm = '//*[@aria-label="Context Submenu Form"]//*[@aria-label="Submit"]';
     this.editMenuLinkButton = 'button[aria-label="Edit Menu Link"]';

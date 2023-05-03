@@ -13,7 +13,7 @@
  */
 
 import React, {
-  ComponentType, FC, useRef, useCallback, useEffect,
+  ComponentType, FC, useRef, useCallback, useEffect, KeyboardEvent,
 } from 'react';
 import {
   withParent, withAppendChild, useClickOutside, withChild,
@@ -59,7 +59,7 @@ const ClickOutside = React.forwardRef<HTMLLIElement, any>((props, ref) => {
 const FocusOnEsc = React.forwardRef<any, any>((props, ref) => {
   if (typeof ref === 'function') return null;
   if (ref && ref.current) {
-    const escFunction = useCallback((event) => {
+    const escFunction = useCallback((event: KeyboardEvent) => {
       // Listen for ESC key only
       const key = event.key || event.keyCode;
       if (key === 'Escape' || key === 'Esc' || key === 27) {

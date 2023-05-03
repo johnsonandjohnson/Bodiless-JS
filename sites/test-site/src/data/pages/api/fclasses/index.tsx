@@ -12,7 +12,12 @@
  * limitations under the License.
  */
 
-import React, { useContext, useState, FC } from 'react';
+import React, {
+  useContext,
+  useState,
+  FC,
+  PropsWithChildren,
+} from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
@@ -30,7 +35,7 @@ const ToggleContext = React.createContext({
   toggle: () => {},
 });
 
-const ToggleProvider: FC = ({ children }) => {
+const ToggleProvider: FC<PropsWithChildren> = ({ children }) => {
   const [state, setState] = useState(false);
   const contextValue = {
     state,

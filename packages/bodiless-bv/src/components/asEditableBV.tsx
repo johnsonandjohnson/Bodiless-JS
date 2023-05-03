@@ -41,7 +41,7 @@ export const editButtonOptions: EditButtonOptions<any, BVNodeDataType> = {
       <>
         <ComponentFormTitle>Bazaarvoice</ComponentFormTitle>
         <ComponentFormLabel htmlFor="bv-product-id">BV Product External ID</ComponentFormLabel>
-        <ComponentFormText field="productId" id="bv-product-id" />
+        <ComponentFormText name="productId" id="bv-product-id" />
       </>
     );
   },

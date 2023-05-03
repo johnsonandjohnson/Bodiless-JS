@@ -54,6 +54,10 @@ const submitValueHandler = ({ id, ...rest }: Data) => ({
   ...rest,
 });
 
+type AnchorOptionsErrors = {
+  id?: string
+};
+
 const anchorOptions: BodilessOptions<Props, Data> = {
   icon: 'local_offer',
   groupLabel: 'Anchor',
@@ -62,10 +66,12 @@ const anchorOptions: BodilessOptions<Props, Data> = {
   global: false,
   local: true,
   renderForm: ({ formState, scope }) => {
-    const errors = scope ? formState.errors[scope] : formState.errors;
+    const errors = (
+      scope ? formState.errors[scope] : formState.errors
+    ) as AnchorOptionsErrors;
     const values: any = scope ? formState.values[scope] : formState.values;
     const validate = useCallback(
-      (value: string) => (value && !isValidHtmlId(value)
+      (value: unknown) => (value && !isValidHtmlId(value as string)
         ? 'Must be a valid HTML id.'
         : undefined),
       [],
@@ -81,10 +87,9 @@ const anchorOptions: BodilessOptions<Props, Data> = {
       <>
         <ComponentFormLabel htmlFor="id">ID</ComponentFormLabel>
         <ComponentFormText
-          field="id"
+          name="id"
           validate={validate}
-          validateOnChange
-          validateOnBlur
+          validateOn="change-blur"
           placeholder="Descriptive ID"
         />
         {hasValues && !hasErrors && (

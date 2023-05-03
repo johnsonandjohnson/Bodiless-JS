@@ -13,9 +13,9 @@
  */
 
 import React, {
-  createContext, useRef, useContext, MutableRefObject, FC,
+  createContext, useRef, useContext, MutableRefObject, FC
 } from 'react';
-import { useFormState, useFormApi, Scope } from 'informed';
+import { useFormApi, Scope } from 'informed';
 import { HOC } from '@bodiless/fclasses';
 import { ContextMenuForm, FormBodyProps, FormBodyRenderer } from './contextMenuForm.bl-edit';
 import type { ContextMenuFormProps } from './Types/ContextMenuTypes';
@@ -63,7 +63,7 @@ const SnippetContext = createContext<MutableRefObject<Snippet<any>[]>|undefined>
 const Snippets = <D extends object>(props$: FormProps<D>) => {
   const { snippets: snippets$, ...rest$ } = props$;
   const renderProps: FormBodyProps<D> = {
-    formState: useFormState(),
+    formState: useFormApi().getFormState(),
     formApi: useFormApi(),
     ...rest$,
   };

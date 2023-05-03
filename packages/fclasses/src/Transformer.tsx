@@ -12,18 +12,18 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
+import React, { ComponentType, PropsWithChildren } from 'react';
 // type TransformerFunction = (a:object) => object;
 type WithTransformerProps<P, Q, X> = {
   transformFixed: (p: P) => X;
   transformPassthrough: (p: P) => Q;
 };
 type TransformerProps<P, Q, X> = WithTransformerProps<P, Q, X> & {
-  Component: ComponentType<X & Q>;
+  Component: ComponentType<PropsWithChildren<X & Q>>;
   passedProps: P;
 };
 class Transformer<P, Q, X> extends React.Component<TransformerProps<P, Q, X>> {
-  fixedProps: Object = {};
+  fixedProps;
 
   constructor(props: TransformerProps<P, Q, X>) {
     super(props);
@@ -33,13 +33,14 @@ class Transformer<P, Q, X> extends React.Component<TransformerProps<P, Q, X>> {
 
   render() {
     const { Component, transformPassthrough, passedProps } = this.props;
-    const props = { ...this.fixedProps as X, ...transformPassthrough(passedProps) };
+    const props = {...this.fixedProps as X, ...transformPassthrough(passedProps) };
+    // @ts-ignore
     return <Component {...props} />;
   }
 }
 
 export const withTransformer = <P, Q, X extends Object>(funcs: WithTransformerProps<P, Q, X>) => (
-  (Component: ComponentType<Q & X>) => (props: P) => {
+  (Component: ComponentType<PropsWithChildren<Q & X>>) => (props: P) => {
     const {
       transformFixed,
       transformPassthrough,

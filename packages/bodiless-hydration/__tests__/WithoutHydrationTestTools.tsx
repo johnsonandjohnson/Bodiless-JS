@@ -1,4 +1,9 @@
-import React, { useState, useEffect, FC } from 'react';
+import React, {
+  useState,
+  useEffect,
+  FC,
+  PropsWithChildren
+} from 'react';
 import { HOC } from '@bodiless/fclasses';
 
 import { WithoutHydrationWrapperFunction } from '../src/withoutHydration/types';
@@ -34,7 +39,7 @@ export const InteractiveComponent: FC<InteractiveComponentProps> = () => {
   );
 };
 
-export const RemountingComponent: FC = ({ children }) => {
+export const RemountingComponent: FC<PropsWithChildren> = ({ children }) => {
   const [hasHydrated, setHasHydrated] = useState(false);
   const [isClientSide, setIsClientSide] = useState(false);
 

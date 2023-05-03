@@ -30,11 +30,10 @@
     "@bodiless/fclasses": "^1.0.0-rc.37",
     "@bodiless/layouts": "^1.0.0-rc.37",
     "@bodiless/ui": "^1.0.0-rc.37",
-    "re-resizable": "^4.11.0",
-    "react-sortable-hoc": "^2.0.0"
+    "re-resizable": "^4.11.0"
   },
   "peerDependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }

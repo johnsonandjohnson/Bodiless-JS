@@ -12,16 +12,17 @@
  * limitations under the License.
  */
 
-import { vitalYouTubeBase, asYouTubeToken } from '@bodiless/vital-youtube';
+import { asYouTubeToken } from '@bodiless/vital-youtube';
+import { vitalYouTube } from '@bodiless/vital-youtube/lib/base';
 import { addProps } from '@bodiless/fclasses';
 
-const Default = asYouTubeToken(vitalYouTubeBase.Default, {
+const Default = asYouTubeToken(vitalYouTube.Default, {
   Behavior: {
     Wrapper: addProps({ 'data-shadowed-by': '__vital__:YouTube' }),
   },
 });
 
 export default {
-  ...vitalYouTubeBase,
+  ...vitalYouTube,
   Default,
 };

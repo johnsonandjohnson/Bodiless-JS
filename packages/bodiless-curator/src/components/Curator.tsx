@@ -44,7 +44,7 @@ const CuratorBase: FC<CuratorProps> = ({
   const { isEdit } = useEditContext();
   const { Container } = components;
   // @ts-ignore non-defined props.
-  const { curatorSrc, containerId } = props;
+  const { curatorSrc, containerId, ...rest } = props;
 
   const script = (
     `(function(){
@@ -55,7 +55,7 @@ const CuratorBase: FC<CuratorProps> = ({
   );
   if (isEdit) {
     return (
-      <CuratorPlaceholder {...props} />
+      <CuratorPlaceholder {...rest} />
     );
   }
   return (

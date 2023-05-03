@@ -12,10 +12,11 @@
  * limitations under the License.
  */
 
-import { asTokenGroup, vitalSpacingBase, SpacingMeta } from '@bodiless/vital-elements';
+import { asTokenGroup, SpacingMeta } from '@bodiless/vital-elements';
+import { vitalSpacing } from '@bodiless/vital-elements/lib/base';
 
 const OverrideSpacing = asTokenGroup(SpacingMeta)({
-  ...vitalSpacingBase,
+  ...vitalSpacing,
   WithSiteMargin: 'mx-site-percent md:mx-md-site-percent 2xl:px-40 shadowed-sitemargin-class',
 });
 

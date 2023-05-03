@@ -12,10 +12,4 @@
  * limitations under the License.
  */
 
-import vitalContentListingFlowContainer from './tokens';
-import vitalContentListingFlowContainerBase from './tokens/vitalContentListingFlowContainer';
-
-export {
-  vitalContentListingFlowContainer,
-  vitalContentListingFlowContainerBase,
-};
+export { default as vitalContentListingFlowContainer } from './tokens';

@@ -12,29 +12,30 @@
  * limitations under the License.
  */
 
-import { vitalMenuBase, asMenuToken } from '@bodiless/vital-navigation';
+import { asMenuToken } from '@bodiless/vital-navigation';
+import { vitalMenu } from '@bodiless/vital-navigation/lib/base';
 import { addProps } from '@bodiless/fclasses';
 
-const TopNav = asMenuToken(vitalMenuBase.TopNav, {
+const TopNav = asMenuToken(vitalMenu.TopNav, {
   Core: {
     _: addProps({ 'data-shadowed-by': '__vital__Menu_TopNav' }),
   },
 });
 
-const Footer = asMenuToken(vitalMenuBase.Footer, {
+const Footer = asMenuToken(vitalMenu.Footer, {
   Core: {
     _: addProps({ 'data-shadowed-by': '__vital__Menu_Footer' }),
   },
 });
 
-const Utility = asMenuToken(vitalMenuBase.Utility, {
+const Utility = asMenuToken(vitalMenu.Utility, {
   Core: {
     _: addProps({ 'data-shadowed-by': '__vital__Menu_Utility' }),
   },
 });
 
 export default {
-  ...vitalMenuBase,
+  ...vitalMenu,
   TopNav,
   Footer,
   Utility,

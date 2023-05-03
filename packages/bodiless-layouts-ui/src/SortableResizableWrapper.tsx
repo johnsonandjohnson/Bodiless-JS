@@ -13,7 +13,6 @@
  */
 
 import React, { FC } from 'react';
-import { SortableElementProps } from 'react-sortable-hoc';
 import {
   SortableResizableWrapper as CleanWrapper,
   SortableResizableUI,
@@ -28,6 +27,11 @@ const ui: SortableResizableUI = {
   ResizeHandle,
   ResizeHandleRTL,
   DragHandle,
+};
+
+// @TODO: define type if dnd-react doesn't
+type SortableElementProps = {
+
 };
 
 const Wrapper: FC<SortableResizableProps & SortableElementProps> = ({ className, ...rest }) => {

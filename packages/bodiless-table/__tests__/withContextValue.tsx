@@ -12,10 +12,12 @@
  * limitations under the License.
  */
 
-import React, { Context as ContextType, ComponentType } from 'react';
+import React, { Context as ContextType, ComponentType, PropsWithChildren } from 'react';
 
-const withContextValue = <P, A> (Context:ContextType<A>) => (value:A) => (
-  (Component:ComponentType<P>) => (props:P) => (
+const withContextValue = <P extends JSX.IntrinsicAttributes, A> (Context:ContextType<A>) => (
+  value:A
+) => (
+  (Component:ComponentType<PropsWithChildren<P >>) => (props:P) => (
     <Context.Provider value={value}>
       <Component {...props} />
     </Context.Provider>
