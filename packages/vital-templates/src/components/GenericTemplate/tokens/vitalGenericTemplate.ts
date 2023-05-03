@@ -13,33 +13,19 @@
  */
 
 import {
-  on,
   as,
   flowIf,
-  withDesign,
-  Img,
   Fragment,
   replaceWith,
 } from '@bodiless/fclasses';
-import { asBodilessChameleon } from '@bodiless/components';
 import { vitalLayout } from '@bodiless/vital-layout';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
 import { withNode, withNodeKey, useNode } from '@bodiless/data';
 import { vitalSpacing } from '@bodiless/vital-elements';
 import { vitalBreadcrumbs } from '@bodiless/vital-navigation';
-import { vitalImage } from '@bodiless/vital-image';
-import { YouTubeClean, vitalYouTube } from '@bodiless/vital-youtube';
-import { CardStatic, vitalCardStatic } from '@bodiless/vital-card';
 import { asGenericTemplateToken } from '../GenericTemplateClean';
 import { TemplateNodeKeys } from '../../TemplatesNodeKeys';
-
-const heroDefaultData = {
-  component: 'Image',
-};
-
-const heroUseOverrides = () => ({
-  groupLabel: 'Hero'
-});
+import { vitalHero } from '../../Hero';
 
 const isHomePage = () => useNode().node.pagePath === '/';
 
@@ -55,14 +41,7 @@ const Default = asGenericTemplateToken({
   Components: {
     PageWrapper: vitalLayout.Default,
     Breadcrumb: as(vitalBreadcrumbs.Default),
-    TopContent: as(
-      asBodilessChameleon('component', heroDefaultData, heroUseOverrides),
-      withDesign({
-        Image: on(Img)(vitalImage.Hero),
-        Video: on(YouTubeClean)(vitalYouTube.Hero),
-        HeroCard: on(CardStatic)(vitalCardStatic.HeroLeftImageContentCentered),
-      }),
-    ),
+    TopContent: vitalHero.Default,
     Content: as(vitalFlowContainer.Default),
     BottomContent: as(vitalFlowContainer.Default),
   },

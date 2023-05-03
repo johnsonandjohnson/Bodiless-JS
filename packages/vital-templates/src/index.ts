@@ -16,4 +16,5 @@ export * from './components/GenericTemplate';
 export * from './components/PDPTemplate';
 export * from './components/StyleGuideTemplate';
 export * from './components/Page';
+export * from './components/Hero';
 export { TemplateNodeKeys } from './components/TemplatesNodeKeys';
