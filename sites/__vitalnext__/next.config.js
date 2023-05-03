@@ -3,13 +3,13 @@ const NextWebpackConfig = require('@bodiless/next/lib/cjs/Webpack/Config').defau
 const bodilessNextConfig = require('@bodiless/next/lib/cjs/NextConfig/nextConfig');
 const { addTokenShadowPlugin, addStatoscopePlugin } = require('@bodiless/webpack');
 const shadow = require('--vital--/shadow');
+const { addTokenSpecReplacementLoader } = require('@bodiless/vital-elements/lib/cjs/util/tokenSpecReplacementPlugin');
 
 module.exports = {
   ...bodilessNextConfig,
   reactStrictMode: false,
   webpack: (config, options) => {
-    let nextConfig = addTokenShadowPlugin(config, { resolvers: [shadow] });
-    nextConfig = NextWebpackConfig(nextConfig, {
+    let nextConfig = NextWebpackConfig(config, {
       nextWebpack: options
     });
     if (!options.dev && !options.isServer) {
@@ -22,6 +22,10 @@ module.exports = {
 
       nextConfig = addStatoscopePlugin(nextConfig, options);
     }
+    nextConfig = addTokenShadowPlugin(nextConfig, { resolvers: [shadow] });
+
+    nextConfig = addTokenSpecReplacementLoader(nextConfig);
+
     return nextConfig;
   },
 };
