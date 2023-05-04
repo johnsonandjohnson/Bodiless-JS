@@ -35,4 +35,4 @@ recomposed or extended.
 
 Okay, enough talk.  Let's dive into some code to see how these blocks fit together.
 
-[Next: Clean Components](./CleanComponents.md)
+[Next: Composition from Without](./CompositionFromWithout.md)
