@@ -1,0 +1,66 @@
+{
+  "id": "card",
+  "tabs": [
+    {
+      "id": "bodiless-Kmd8Nb3inj",
+      "type": "template"
+    },
+    {
+      "id": "overview",
+      "type": "subPage"
+    }
+  ],
+  "title": "Card",
+  "statuses": {},
+  "subPages": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "slices": [
+        {
+          "id": "ks-content-block-z6oyLDb-mS",
+          "data": {
+            "md": ["This is our card!"],
+            "columns": 1,
+            "autoEdit": false
+          },
+          "blockId": "markdown-slice"
+        }
+      ]
+    }
+  ],
+  "templates": [
+    {
+      "id": "bodiless-Kmd8Nb3inj",
+      "path": "@bodiless/vital-card",
+      "spec": {
+        "isInferred": true
+      },
+      "alias": "knapsackCardSpec",
+      "demos": ["wAphvQRJOn"],
+      "title": "Vital Card",
+      "slices": [],
+      "demosById": {
+        "wAphvQRJOn": {
+          "id": "wAphvQRJOn",
+          "data": {
+            "props": {
+              "Default": true
+            },
+            "slots": {},
+            "extras": {
+              "title": {
+                "text": "Here is a title to edit"
+              }
+            }
+          },
+          "type": "data",
+          "title": "New Variation",
+          "description": "A description"
+        }
+      },
+      "templateLanguageId": "bodiless"
+    }
+  ],
+  "description": "Cards are important!"
+}
