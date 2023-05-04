@@ -1,24 +1,48 @@
 {
   "id": "card",
+  "tabs": [
+    {
+      "id": "bodiless-Kmd8Nb3inj",
+      "type": "template"
+    },
+    {
+      "id": "overview",
+      "type": "subPage"
+    }
+  ],
   "title": "Card",
-  "description": "",
   "statuses": {},
+  "subPages": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "slices": [
+        {
+          "id": "ks-content-block-z6oyLDb-mS",
+          "data": {
+            "md": ["This is our card!"],
+            "columns": 1,
+            "autoEdit": false
+          },
+          "blockId": "markdown-slice"
+        }
+      ]
+    }
+  ],
   "templates": [
     {
       "id": "bodiless-Kmd8Nb3inj",
-      "title": "Vital Card",
       "path": "@bodiless/vital-card",
-      "alias": "knapsackCardSpec",
-      "templateLanguageId": "bodiless",
       "spec": {
         "isInferred": true
       },
+      "alias": "knapsackCardSpec",
+      "demos": ["wAphvQRJOn"],
+      "title": "Vital Card",
+      "slices": [],
       "demosById": {
         "wAphvQRJOn": {
           "id": "wAphvQRJOn",
-          "title": "New Variation",
-          "description": "A description",
-          "type": "data",
           "data": {
             "props": {
               "Default": true
@@ -29,38 +53,14 @@
                 "text": "Here is a title to edit"
               }
             }
-          }
+          },
+          "type": "data",
+          "title": "New Variation",
+          "description": "A description"
         }
       },
-      "demos": ["wAphvQRJOn"],
-      "slices": []
+      "templateLanguageId": "bodiless"
     }
   ],
-  "tabs": [
-    {
-      "type": "template",
-      "id": "bodiless-Kmd8Nb3inj"
-    },
-    {
-      "type": "subPage",
-      "id": "overview"
-    }
-  ],
-  "subPages": [
-    {
-      "id": "overview",
-      "title": "Overview",
-      "slices": [
-        {
-          "id": "ks-content-block-z6oyLDb-mS",
-          "blockId": "markdown-slice",
-          "data": {
-            "autoEdit": false,
-            "md": ["This is our card!"],
-            "columns": 1
-          }
-        }
-      ]
-    }
-  ]
+  "description": "Description to card"
 }
