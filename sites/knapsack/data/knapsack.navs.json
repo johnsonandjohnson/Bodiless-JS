@@ -1,0 +1,71 @@
+{
+  "primary": [],
+  "secondary": [
+    {
+      "id": "components",
+      "name": "Components",
+      "path": "",
+      "parentId": "root"
+    },
+    {
+      "id": "docs",
+      "name": "Docs",
+      "path": "",
+      "parentId": "root"
+    },
+    {
+      "id": "intro",
+      "name": "Intro",
+      "path": "/pages/intro",
+      "parentId": "docs"
+    },
+    {
+      "path": "/pattern/card",
+      "parentId": "components",
+      "id": "card",
+      "name": "Card"
+    },
+    {
+      "path": "/pattern/text-decoration",
+      "parentId": "components",
+      "id": "text-decoration",
+      "name": "Elements"
+    },
+    {
+      "path": "/pattern/font-size",
+      "parentId": "components",
+      "id": "font-size",
+      "name": "Font Size"
+    },
+    {
+      "path": "/pattern/color",
+      "parentId": "components",
+      "id": "color",
+      "name": "Colors"
+    },
+    {
+      "path": "/pattern/typography",
+      "parentId": "components",
+      "id": "typography",
+      "name": "Typography"
+    },
+    {
+      "path": "/pattern/generic-template",
+      "parentId": "components",
+      "id": "generic-template",
+      "name": "Generic Template"
+    },
+    {
+      "path": "/pattern/accordion",
+      "parentId": "components",
+      "id": "accordion",
+      "name": "Accordion"
+    },
+    {
+      "path": "/pattern/button",
+      "parentId": "components",
+      "id": "button",
+      "name": "Button"
+    }
+  ]
+}
