@@ -55,7 +55,7 @@ export { default as vitalFoo } from './tokens';
 export { default as vitalFooBase } from './components/Foo/tokens/vitalFoo';
 ```
 
-**File `./lib/components/index.ts`:**
+**File `./lib/index.ts`:**
 
 ```js
 export * from './components/Foo';

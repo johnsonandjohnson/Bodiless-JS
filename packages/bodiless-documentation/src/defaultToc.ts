@@ -40,6 +40,7 @@ const toc = {
       'IntroToBodilessConcepts.md': '',
       'DesignElementConcepts.md': '',
       'CreatingBodilessComponents.md': '',
+      'Shadowing.md': '',
     },
     'Packages.md': '',
     Architecture: {
