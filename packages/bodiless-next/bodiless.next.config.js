@@ -13,7 +13,7 @@
  */
 const disabledPages = [];
 /*
-  const getDisabledPages = require('@bodiless/components/lib/cjs/NodeApi/getDisabledPages').default;
+  const { getDisabledPages } = require('@bodiless/page/lib/cjs/NodeApi');
 
   const disablePageList = getDisabledPages();
   disabledPages = Object.keys(disablePageList).filter(

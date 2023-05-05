@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { getRedirectAliases } from '@bodiless/components/lib/cjs/NodeApi';
+import { getRedirectAliases } from '@bodiless/page/lib/cjs/NodeApi';
 import type { AliasItem } from '@bodiless/page';
 
 type Redirects = {

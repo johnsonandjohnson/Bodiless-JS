@@ -11,10 +11,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { posix, join } from 'path';
+import { join } from 'path';
 import minimatch from 'minimatch';
 import { simpleSitemapAndIndex, SitemapItemLoose } from 'sitemap';
-import { getPages } from '@bodiless/components/lib/cjs/NodeApi';
+import { getPages } from '@bodiless/page/lib/cjs/NodeApi';
 
 import bodilessNextConfigPath, { SitemapxmlConfig } from '../NextConfig/bodilessNextConfigLoader';
 
@@ -63,7 +63,7 @@ const generateSitemapXml = async (options: Partial<SitemapxmlConfig> | undefined
   )) : pages;
 
   const serializedPages = filteredPages.map((page: string) => serialize(
-    new URL(posix.join(siteUrl, page)).pathname
+    new URL(page, siteUrl).pathname
   ));
 
   const sitemapxmlOptions = {

@@ -12,11 +12,15 @@
  * limitations under the License.
  */
 
-import getRedirectAliases from '@bodiless/components/lib/NodeApi/getRedirectAliases';
+import {
+  findComponentPath,
+  findSubPageTemplateTemplate,
+  findTemplate,
+  getRedirectAliases
+} from '@bodiless/page/lib/cjs/NodeApi';
+import { createGitInfo } from '@bodiless/git/lib/cjs/NodeApi';
 import path from 'path';
 import fs from 'fs';
-import git from 'isomorphic-git';
-import findUp from 'find-up';
 import fg from 'fast-glob';
 import NodeCache from 'node-cache';
 import { getPlaiceholder } from 'plaiceholder';
@@ -33,74 +37,6 @@ export type gitInfo = {
 
 const propsCache = new NodeCache();
 const redirectsCache = new NodeCache();
-
-const findGitFolder = async () => await findUp('.git', { type: 'directory' }) || '';
-
-/**
- * Get git info from local fs .git directory.
- *
- * @returns {
-*  repo: string,
-*  sha: string,
-*  branch: string,
-* }
-*/
-const getGitInfoFromFs = async (): Promise<gitInfo> => {
-  let repo = '';
-  let sha = '';
-  let branch = '';
-
-  const gitInfo = propsCache.get<gitInfo>('GitInfoFromFs');
-  if (gitInfo) {
-    return gitInfo;
-  }
-
-  const gitDir = await findGitFolder();
-  if (gitDir) {
-    try {
-      const projectRoot = path.dirname(gitDir);
-      const remotes = await git.listRemotes({ fs, dir: projectRoot });
-      const origin = remotes.find(v => v.remote === 'origin');
-      repo = origin?.url ?? '';
-      branch = await git.currentBranch({ fs, dir: projectRoot }) || '';
-      sha = await git.resolveRef({ fs, dir: projectRoot, ref: 'HEAD' }) || '';
-      propsCache.set('GitInfoFromFs', { repo, sha, branch });
-      return { repo, sha, branch };
-    } catch (err) {
-      console.log('Failed to retrieve git info from fs. ', err);
-      return { repo, sha, branch };
-    }
-  }
-
-  return { repo, sha, branch };
-};
-
-/**
-* Get current git repo info.
-*
-* @returns Promise<{
-*  repo: string,
-*  sha: string,
-*  branch: string,
-* }>
-*/
-export const createGitInfo = async (): Promise<gitInfo> => {
-  try {
-    const gitInfoFs = await getGitInfoFromFs();
-    if (gitInfoFs) {
-      console.log('Git info from fs. ', gitInfoFs);
-      return gitInfoFs;
-    }
-  } catch (err) {
-    console.log('Failed to create git info. ', err);
-  }
-
-  return {
-    repo: '',
-    sha: '',
-    branch: '',
-  };
-};
 
 type getServerSideProps = {
   params: {
@@ -120,31 +56,6 @@ type pageData = {
   },
   data: Data,
 };
-
-/**
- * Helper function to find page component.
- * @param  {...string} pathSegments Path to component directory.
- */
-export const findComponentPath = (...pathSegments: string[]): string | null => {
-  let componentPath;
-  // Allowed component extensions are jsx, tsx and json.
-  ['index.jsx', 'index.tsx', 'index.json'].some(item => {
-    componentPath = path.resolve(...pathSegments, item);
-    if (fs.existsSync(componentPath)) {
-      return true;
-    }
-    return false;
-  });
-  return componentPath || null;
-};
-
-export type cachedTemplate = {
-  template: string,
-  subpage_template: string,
-  path: string,
-};
-
-const cachedTemplates: { [key: string]: cachedTemplate | Boolean } = {};
 
 const discoverDefaultContent = (depth = 1) => {
   let dir = path.resolve(process.cwd());
@@ -172,56 +83,6 @@ const discoverDefaultContent = (depth = 1) => {
     dir = path.resolve(dir, '..');
   }
   return defaultContentPaths;
-};
-
-export const readTemplateFile = (indexPath: string) => {
-  if (Object.keys(cachedTemplates).includes(indexPath)) {
-    return cachedTemplates[indexPath];
-  }
-  if (!fs.existsSync(indexPath)) {
-    cachedTemplates[indexPath] = false;
-    return cachedTemplates[indexPath];
-  }
-  const contents = fs.readFileSync(indexPath);
-  try {
-    const parsedContent = JSON.parse(contents.toString());
-    cachedTemplates[indexPath] = {
-      template: parsedContent['#template'],
-      subpage_template: parsedContent['#subpage_template'],
-      path: parsedContent.path,
-    };
-  } catch (exception) {
-    cachedTemplates[indexPath] = false;
-  }
-  return cachedTemplates[indexPath];
-};
-
-const findSubPageTemplateTemplate = (indexPath: string, basePath: string): string => {
-  const templates = readTemplateFile(indexPath);
-  const { subpage_template = '', template = '_default'} = templates as cachedTemplate;
-  if (subpage_template) return subpage_template;
-  if (template) return template;
-  const parentPath = path.dirname(path.dirname(indexPath));
-  if (parentPath <= basePath) {
-    return '_default';
-  }
-  return findSubPageTemplateTemplate(`${parentPath}/index.json`, basePath);
-};
-
-const findTemplate = (indexPath: string, basePath: string, isFirst = true): string => {
-  const templates = readTemplateFile(indexPath);
-  const { subpage_template = '', template = '_default'} = templates as cachedTemplate;
-  if (isFirst && template) {
-    return template;
-  }
-  if (!isFirst && subpage_template) {
-    return subpage_template;
-  }
-  const parentPath = path.dirname(path.dirname(indexPath));
-  if (parentPath <= basePath) {
-    return '_default';
-  }
-  return findTemplate(`${parentPath}/index.json`, basePath, false);
 };
 
 const loadDataFromFiles = async (filepath :string, publicPath: string) => {
@@ -266,7 +127,7 @@ const getStaticProps = async ({ params }: getServerSideProps) => {
 
   const { slug = [''] } = params;
 
-  const slugString = `/${path.posix.join(...slug)}`;
+  const slugString = `/${slug.join('/')}`;
 
   const redirect = redirects.filter((redirect: AliasItem) => redirect.fromPath === slugString);
 
@@ -281,7 +142,7 @@ const getStaticProps = async ({ params }: getServerSideProps) => {
   const defaultContentSources = [];
   const gitInfo = await createGitInfo();
 
-  const realSlug = hasTrailingSlash() ? `${slugString}/` : slugString;
+  const realSlug = hasTrailingSlash() ? `${slugString}/`.replace('//', '/') : slugString;
 
   const templateBasePath = ['.', 'src', 'templates'];
   const pagesBasePath = ['.', 'src', 'data', 'pages'];

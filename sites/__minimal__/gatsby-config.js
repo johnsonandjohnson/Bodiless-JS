@@ -5,7 +5,7 @@ const { execSync } = require('child_process');
 //   createDefaultContentPlugins,
 //   getSampleDefaultContentConfig,
 // } = require('@bodiless/gatsby-theme-bodiless/dist/DefaultContent');
-const { getDisabledPages } = require('@bodiless/components/lib/cjs/NodeApi');
+const { getDisabledPages } = require('@bodiless/page/lib/cjs/NodeApi');
 // const getSSIEntities = require('@bodiless/gatsby-plugin-ssi/read-ssi-entities');
 // const {
 //   getConfig: getSiteDefaultContentConfig,

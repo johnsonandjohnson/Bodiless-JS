@@ -23,6 +23,7 @@
     "@bodiless/i18n": "^1.0.0-rc.37",
     "@bodiless/layouts": "^1.0.0-rc.37",
     "@bodiless/layouts-ui": "^1.0.0-rc.37",
+    "@bodiless/page": "^1.0.0-rc.37",
     "@bodiless/schema-org": "^1.0.0-rc.37",
     "@bodiless/ui": "^1.0.0-rc.37",
     "@bodiless/vital-buttons": "^1.0.0-rc.37",

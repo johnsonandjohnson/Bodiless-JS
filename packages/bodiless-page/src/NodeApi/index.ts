@@ -16,6 +16,9 @@ import getDisabledPages from './getDisabledPages';
 import getRedirectAliases from './getRedirectAliases';
 import getPages from './getPages';
 
+export * from './findTemplate';
+export * from './findComponentPath';
+
 export {
   getDisabledPages,
   getRedirectAliases,

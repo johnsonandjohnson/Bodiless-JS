@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-const { getRedirectAliases } = require('@bodiless/components/lib/cjs/NodeApi');
+const { getRedirectAliases } = require('@bodiless/page/lib/cjs/NodeApi');
 
 module.exports = async ({ actions }, logger) => {
   const { createRedirect } = actions;

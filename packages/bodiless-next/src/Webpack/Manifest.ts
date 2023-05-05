@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { join, posix, resolve } from 'path';
+import { join, resolve } from 'path';
 import { writeFileSync, existsSync, mkdirSync } from 'fs';
 import sharp from 'sharp';
 import bodilessNextConfigPath, { ManifestConfig } from '../NextConfig/bodilessNextConfigLoader';
@@ -64,7 +64,7 @@ const generateManifest = (options: ManifestConfig | undefined) => {
       const imgPath = join(destinationDir, `icon-${size}x${size}.png`);
       generateIcon(imgPath, icon, size);
       return {
-        src: posix.join('icons', `icon-${size}x${size}.png`),
+        src: ['icons', `icon-${size}x${size}.png`].join('/').replace('//', '/'),
         sizes: `${size}x${size}`,
         type: 'image/png',
       };

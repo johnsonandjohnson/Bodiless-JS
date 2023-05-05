@@ -11,16 +11,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import getPages from '@bodiless/components/lib/NodeApi/getPages';
-import getDisabledPages from '@bodiless/components/lib/NodeApi/getDisabledPages';
-import getRedirectAliases from '@bodiless/components/lib/NodeApi/getRedirectAliases';
+import {
+  getPages,
+  getDisabledPages,
+  getRedirectAliases
+} from '@bodiless/page/lib/cjs/NodeApi';
 
 import type { AliasItem } from '@bodiless/page';
 import { hasTrailingSlash } from './nextConfig';
 
 const getStaticPaths = async () => {
   const pages = await getPages();
-
   const disablePageList = getDisabledPages();
   const disabledPages = Object.keys(disablePageList).filter(
     item => disablePageList[item].pageDisabled === true,
