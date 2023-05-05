@@ -1,13 +1,14 @@
 # Shadowing Tokens
 
 Bodiless provides a mechanism to extend or override the tokens provided by a package, changing their
-effect wherever they are used on your site. We call this mechanism _token shadowing_. A simplistic
-definition of shadowing is: providing a token that replaces the existing design token. Whether you
-extend or override the token by shadowing is a choice made by the Site Builder. This method is
-similar to [Gatsby Component
-Shadowing](https://www.gatsbyjs.com/blog/2019-04-29-component-shadowing/ ':target=_blank'), but more
-restrictive. In particular, only token collections are shadowable using this technique, and the
-package to be shadowed must be structured specifically to enable this feature.
+effect wherever they are used on your site, allowing you to easily customize components and elements
+to meet your design requirements. We call this mechanism _token shadowing_. A simplistic definition
+of shadowing is: providing a token that replaces the existing design token. Whether you extend or
+override the token by shadowing is a choice made by the Site Builder. This method is similar to
+[Gatsby Component Shadowing](https://www.gatsbyjs.com/blog/2019-04-29-component-shadowing/
+':target=_blank'), but more restrictive. In particular, only token collections are shadowable using
+this technique, and the package to be shadowed must be structured specifically to enable this
+feature.
 
 When discussing shadowing, we may speak in terms of shadowing components or elements; know that what
 we're technically talking about is shadowing the token collections _of_ those components or
@@ -156,13 +157,19 @@ To export a shadowed version of a token collection:
     ```
 
     !> **IMPORTANT:** In the file path, `./lib/shadow/base-package/Foo.js`, `base-package` needs to
-    match the name of the package from which you are importing the base collection. For example, if
-    you look in the
+    **match the name of the package from which you are importing the base collection.** For example,
+    if you look in the
     [`vital-test`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-test)
     package, you'll see that each of the modules defining shadowed token collections are under
     `shadow/@bodiless/vital-xxx/`; this is because each of the names of the packages from which it's
     importing the base collections are of the form `@bodiless/vital-xxx` (e.g.,
-    `@bodiless/vital-card`).
+    `@bodiless/vital-card`), as described in their respective `package.json` files.
+
+    !> **IMPORTANT:** When defining your shadowed token collection, **always use the base token
+    collection** (e.g., `yourFooBase`), which is the _unshadowed_ token collection. If you were to
+    use `yourFoo`, for example — which is what is being _shadowed_ — it becomes a recursive
+    shadowing, and will fail with the error: "Cannot read properties of undefined (reading
+    'Default')."
 
 01. Place a file at your package root called `shadow.js`. This should export a single function which
     receives a component name and package name, and returns the _resolved_ module containing the
@@ -232,6 +239,61 @@ more effort than simply rewriting it.
 
 TODO: Document patterns for extending and overriding
 
+### Using `omit` to Remove Domains
+
+TODO: Fill out section
+
+### Using `omit` to Remove Components
+
+There may be instances where there are components within a token collection that you don't wish to
+utilize. Via shadowing, you can use the `omit` function to remove components from a token
+collection. To put it another way, by shadowing a component, you're able to remove sub-components
+from it using the `omit` function.
+
+```js
+import omit from 'lodash/omit';
+import { fooBase, asFooToken } from 'base-package';
+
+const SomeToken = asFooToken({
+  ...fooBase.SomeToken,
+  Layout: {
+    ...omit(fooBase.SomeToken.Layout, 'Bar'),
+  },
+  Schema: {
+    ...omit(fooBase.SomeToken.Schema, 'Bar'),
+  },
+  Theme: {
+    ...omit(fooBase.SomeToken.Theme, 'Bar'),
+  },
+});
+
+export default {
+  ...fooBase,
+  SomeToken,
+};
+```
+
+In the example above, we've created a file — say,
+`packages/our-package/src/shadow/base-package/Foo.ts` — and we're shadowing `Foo`, which utilizes
+the `Bar` component. For whatever reason, we've decided we don't want to utilize the `Bar` component
+in our version of `Foo`, so, using `omit`, we've removed `Bar` from each domain where it is used.
+
+Looking here—
+
+```js
+  Layout: {
+    ...omit(fooBase.SomeToken.Layout, 'Bar'),
+  },
+```
+
+—we're spreading the `Layout` components — except `Bar` — across the `Layout` domain, for some token
+(literally `SomeToken` in this case) that we're defining for our shadowed version of `Foo`. We use
+this pattern for the `Schema` and `Theme` domains as well, where `Bar` has also been set.
+
+?> **Note:** For a real-world use case of using `omit` to remove components, see [Removing
+Components from Vital Rich Text Editor by
+Shadowing](/VitalDesignSystem/Components/VitalEditors/RichTextCustomizing#removing-components-from-vital-rich-text-editor-by-shadowing).
+
 ## Important Notes
 
 TODO: Add and Refine
@@ -282,7 +344,12 @@ There are some gotchas on shadowing we are trying to fix in Vital packages.
 
 TODO: Add and Refine
 
-- If you add a new shadow file, you need to restart Gatsby dev to pick up this new shadowing.
+- When you add a new shadow file, you need to:
+  01. Rebuild your package with `npm run build -- --scope=<your-site>`;
+  01. Restart Gatsby Dev via `npm run start`;
+  01. The token shadow plugin will then pick up the new file to be shadowed.
+- So that you don't need to constantly rebuild the package after each change, run `npm run
+  build:watch`; this will rebuild the package on each change.
 - Make sure you spell filenames correctly — they must match exactly.  
 - Review [`packages/vital-test/src/shadow/@bodiless/`][] for examples and patterns of shadowing.
 - If you shadow an element that is a fragment by default, it will never appear — you must add it!
@@ -290,7 +357,6 @@ TODO: Add and Refine
 - If you have multiple packages shadow, the first one takes priority and second one is skipped!
 - A good tip for shadowing to confirm it's working is shadow a behavior and addProp to DOM.  
   E.g.:
-
   ```js
     Behavior: {
       Wrapper: addProps({ 'data-shadowed-by': 'mypackage:mycomponent' }),
@@ -316,7 +382,8 @@ instructions.
 
 Within the Bodiless repository, there is a
 [`vital-test`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-test/src/shadow/%40bodiless)
-package that shadows all components and provides examples — it is a good resource.
+package that shadows all components and provides examples — it is a good resource for reference and
+learning.
 
 In addition, to determine what is possible to shadow, we recommend visiting the [API
 documentation](../../../Development/API/).
