@@ -40,6 +40,8 @@ export const isEditClientSide = !!(
   && process.env.NODE_ENV === 'development'
 );
 
+export const isEdit = process.env.NODE_ENV === 'development';
+
 /**
  * InnerHtml is memoized to allow retrieving it on component remount.
  */
@@ -173,7 +175,7 @@ export const withoutHydration: WithoutHydrationWrapperFunction = (options) => {
 
   if (isStaticClientSide) return withoutHydrationClientSide(optionsWithDefault);
 
-  if (isEditClientSide) return withoutHydrationClientSideEdit(optionsWithDefault);
+  if (isEdit) return withoutHydrationClientSideEdit(optionsWithDefault);
 
   return withoutHydrationServerSide(optionsWithDefault);
 };
