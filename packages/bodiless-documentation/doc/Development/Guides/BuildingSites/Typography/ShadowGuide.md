@@ -116,7 +116,7 @@ import {
 } from '@bodiless/vital-layout';
 
 // Recompose the Default token by using the Base component.
-const Default = asLayoutToken(vitalLayoutBase.Base, {
+const Default = asLayoutToken(vitalLayoutBase.Default, {
   // Then assign the tokens that will give us default style/behaviors
   // of the header/footer components.
   Components: {
@@ -132,7 +132,7 @@ export default {
 ```
 
 In reviewing the code, you can see we are recomposing or overriding the Default token. We start with
-the `vitalLayoutBase.Base`, then assign the default tokens of the header/footer components, and,
+the `vitalLayoutBase.Default`, then assign the default tokens of the header/footer components, and,
 lastly, export it.
 
 ?> **REMINDER:** Rebuild the Package with `npm run build -- --scope=<mysite>` and restart your site.
