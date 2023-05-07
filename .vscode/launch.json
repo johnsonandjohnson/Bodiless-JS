@@ -128,8 +128,6 @@
             ],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
-            // Update the node version below if v16.13.0 is not available locally.
-            "runtimeExecutable": "${userHome}/.nvm/versions/node/v16.13.0/bin/node",
         },
         {
             "name": "Launch Chrome",

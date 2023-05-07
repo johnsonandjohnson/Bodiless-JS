@@ -24,7 +24,7 @@ import {
 import type { ContextMenuFormProps } from '../src/Types/ContextMenuTypes';
 
 describe('contextMenuForm', () => {
-  it('Applies options as props to the innter ContextMenuForm', () => {
+  it('Applies options as props to the inner ContextMenuForm', () => {
     const render = jest.fn();
     const submitValues = jest.fn();
     const closeForm = jest.fn();
