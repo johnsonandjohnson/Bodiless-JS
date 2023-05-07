@@ -42,6 +42,8 @@ const serialize = (page: string) => ({
 
 const generateSitemapXml = async (options: Partial<SitemapxmlConfig> | undefined) => {
   const siteUrl = process.env.SITE_URL || '';
+  if (!siteUrl) return;
+
   const pages = await getPages();
 
   const mergedOptions = {
