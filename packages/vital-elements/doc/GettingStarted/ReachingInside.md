@@ -113,12 +113,13 @@ const WelcomeH2 = asDialogToken({
   },
 });
 
-// Add an analytics attribute
-const WelcomeWithData = asDilogToken({
-  ...Welcome,
-  Analytics: {
-    Title: addProps('data-layer-id', 'dialog-title'),
-  }m
+// Add some microdata
+const WithQuestionSchema = asDialogToken({
+  SEO: {
+    Wrapper: addProps({ itemscope: true, itemtype: 'https://schema.org/Question' }).
+    TitleWrapper: addProps({ itemProp: 'name' }),
+    MessageWrapper: addProps({ itemprop: 'acceptedAnswer' }),
+  },
 });
 
 // Change the class of the message
