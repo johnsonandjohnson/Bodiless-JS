@@ -24,7 +24,7 @@ export type FancyBorderProps = {
 };
 
 const FancyBorder: FC<PropsWithChildren<FancyBorderProps>> = props => (
-  <div className={'FancyBorder FancyBorder-' + props.color}>
+  <div className={`FancyBorder FancyBorder-${props.color}`}>
     {props.children}
   </div>
 );
@@ -56,9 +56,10 @@ const WelcomeDialog: FC = () => (
 );
 ```
 
-In this example, we take a generic "Dialog" component and create a specific variation of
-it by creating a new component which supplies props.  In a sense you could say we are
-composing *from within* -- the composition happens *inside* the new component.
+In this example, we take a generic `Dialog` component and create a specific
+variation of it by creating a new `WelcomeDialog` component which supplies
+props. In a sense you could say we are composing *from within* -- the
+composition happens *inside* the new component.
 
 In Vital, you would accomplish the same thing *from without*, by creating a token:
 
@@ -66,7 +67,7 @@ In Vital, you would accomplish the same thing *from without*, by creating a toke
 import { addProps, as } from '@bodiless/fclasses';
 import { asElementToken } from '@bodiless/vital-elements';
 
-const WithWelcomeText = asElementToken({
+const Welcome = asElementToken({
   Content: {
     _: addProps({
         title: 'Welcome',
@@ -75,7 +76,7 @@ const WithWelcomeText = asElementToken({
   }
 });
 
-const WelcomeDialog = as(WithWelcomeText)(Dialog);
+const WelcomeDialog = as(Welcome)(Dialog);
 ```
 
 This may take a bit of getting used to, but it opens up a powerful pattern for extension
@@ -92,9 +93,8 @@ type DialogProps = {
 } & FancyBorderProps;
 
 const Dialog: FC<DialogProps> = props => {
-  const className = props.color === FancyBorderColor.Blue ? 'FancyBorder-blue' : 'FancyBorder-red';
   return (
-    <FancyBorder className={className}>
+    <FancyBorder color={props.color}>
       <h1 className="Dialog-title">
         {props.title}
       </h1>
@@ -104,11 +104,7 @@ const Dialog: FC<DialogProps> = props => {
     </FancyBorder>
   );
 }
-```
 
-If you wanted to provide different specialized variations, you'd have to export different
-components, for example:
-```js
 export const WelcomeDialog: FC = props => (
     <Dialog
       color={FancyBorderColor.Blue},
@@ -116,22 +112,13 @@ export const WelcomeDialog: FC = props => (
       message="Thank you for visiting our spacecraft!" />
 );
 
-export const FarewellDialog: FC = props => (
-    <Dialog
-      color={FancyBorderColor.Red}
-      title="Welcome"
-      message="Thank you for visiting our spacecraft!" />
-);
 ```
 
-But what if these components are provided by an upstream library, and I want to
-use them, but on my site a farewell dialog is blue and a welcome dialog is red?
-I have to create new components, manually replicating the content and changing
-the color:
+Now, let's assume these components are provided by an upstream library, and I
+want to use them, but on my site a welcome dialog is red, not blue. I have to
+create a new component, manually replicating the content and changing the color:
 
 ```ts
-import { Dialog } from 'upstream-library';
-
 const MyWelcomeDialog FC = () => (
   <Dialog
     color={FancyBorderColor.Red}
@@ -139,20 +126,12 @@ const MyWelcomeDialog FC = () => (
     message="Thank you for visiting our spacecraft!"
   />
 );
-
-const MyFareWellDialog: FC = () => (
-  <Dialog
-    color={FancyBorderColor.Blue}
-    title="Farewell"
-    message="Don't forget your spacesuit!"
-  />
-);
 ```
 
 Now, if the upstream library changes the content:
 
 ```ts
-const WelcomeDialog: FC = props => (
+const WelcomeDialog: FC = () => (
   <Dialog
     color={FancyBorderColor.Blue}
     title="Wilkommen! Bienvenu! Welcome!"
@@ -168,44 +147,50 @@ Using tokens, on the other hand, the upstream library can export these specializ
 independently:
 
 ```ts
-const WithBlueTheme = asElementToken({
+const Welcome = asElementToken({
   Theme: {
     _: addProps({ color: FancyBorderColor.Blue }),
   },
-});
-
-const WithRedTheme = asElementToken({
-  Theme: {
-    _: addProps({ color: FancyBorderColor.Red }),
+  Content: {
+    _: addProps({
+        title: 'Welcome',
+        message: 'Thank you for visiting our spacecraft!',
+    }),
   },
 });
 
+// Tokens are usually exported in a keyed dictionary called a "collection".
 export const upstreamDialog = {
-  WithWelcomeText,
-  WithFarewellText,
-  WithRedTheme,
-  WithBlueTheme,
+  Welcome,
 };
 ```
 
-And I can recompose them independently:
+Don't worry too much about the structure of the token--we'll get into that later. For
+now it's enough to know that a token is a structured set of Higher Order Components
+which compose styling or behavior onto a component. In this case, the token uses
+the `addProps` utility to create those Higher Order Components.
+
+Now I can recompose these attributes independently:
 
 ```ts
-import { Dialog, upstreamDialog } from 'upstream-library';
-
-const MyWelcomeDialog = as(
-  upstreamDialog.WithWelcomeText,
-  upstreamDialog.WithRedBorder
-)(Dialog);
-
-const MyFarewellDialog - as(
-  upstreamDialog.WIthFarewellText,
-  upstreamDialog.WithBlueBorder)(Dialog
-);
+const Welcome = asElementToken({
+  ...upstreamDialog.Welcome,
+  Theme: {
+    _: addProps({ color: FancyBorderColor.Red })
+  }
+});
+const WelcomeDialog = as(MyWelcome)(Dialog);
 ```
 
-Now if the text changes upstream, I'll receive the enhancement while still
-retaining my customization.
+THis is just plain old Javascript object composition -- we keep all the
+top-level keys of the original token, but supply our own `Theme`.
+
+Now if the content changes upstream, we'll receive the enhancement while still
+retaining our customization.
+
+Note that the upstream library no longer exports the specialized version
+of the component (`WellcomeDialog`).  Instead it exports the specialization
+as a token which can be more easily extended or customized downstream.
 
 [Next: Reaching Inside](ReachingInside.md)
 

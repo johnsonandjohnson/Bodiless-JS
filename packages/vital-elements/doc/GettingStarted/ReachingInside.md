@@ -5,14 +5,15 @@ component library (or really, *token* library) while selectively extending
 it, but it has one significant limitation.  The various configuration options
 exposed by the `Dialog` component must be defined by the upstream library.
 
-By definition, this `Dialog` component can have a color (only red or blue),
-a  title (plain text) and a message (also plain text).  If I want to add
-a new variation (a new color, an icon for the title, rich text for the message,
-etc) I need to go back to the team maintaining the component and ask them
-to add new props (eg 'messageType', 'titleIcon', etc.).
+By definition, this `Dialog` component can have a color (only red or blue), a
+title (plain text) and a message (also plain text). If I want to add a new
+variation (eg, change the element used to render the title, add some analytics
+attributes, change a class on the description, etc) I need to go back to the
+team maintaining the component and ask them to add new props (eg `titleElement`,
+`dataLayerIds`, `messageClass`, etc).
 
-In this section we will refactor it according to Vital principles so that
-a downstream consumer can implement any of these variations herself.
+In this section we will refactor according to Vital principles so that a
+downstream consumer can implement any of these variations herself.
 
 We begin by turning the `Dialog` component itself into a "clean" component:
 
@@ -52,13 +53,10 @@ const DialogCleanBase: FC<DialogBaseProps> = ({ components: C, ...rest }) => (
 const DialogClean = designable(dialogComponents, 'Dialog')(DialogCleanBase);
 
 const asDialogToken = asVitalTokenSpec<DialogComponents>();
-
-export default DialogClean;
-export { asDialogToken };
 ```
 
-As you can see, this component has zero functionality or styling built in.  Instead, we apply
-these with tokens.
+As you can see, this component has zero functionality or styling built in.  Instead, we use
+the `designable` utility to allow these to be provided by tokens:
 
 ```ts
 // Apply default styling
@@ -69,47 +67,70 @@ const Default = asDialogToken({
   }
 });
 
-// Provide color variations
-const WithBlueTheme = asDialogToken({
+const Welcome = asDialogToken({
+  ...Default,
   Theme: {
-    Wrapper: addProps({ color: DialogColors.Blue }),
+    ...Default.Theme,
+    Border: addProps({ color: FancyBorderColor.Blue }),
   },
-});
-
-// Provide content
-const WithWelcomeContent = asDialogToken({
   Content: {
     Title: addProps({ children: 'Welcome!' }),
     Message: addProps({ children: 'Thank you for visiting our spacecraft!' }),
   },
 });
 
-...
+const upstreamDialog = {
+  Default,
+  Welcome,
+  // ...could export any number of variations.
+}l
+
+export { DialogClean, upstreamDialog, asDialogToken };
 ```
 
 Now I can still recompose my dialog exactly as before:
 ```ts
-const MyWelcomeDialog = as(
-  upstreamDialog.WithWelcomeText,
-  upstreamDialog.WithRedBorder
-)(Dialog);
+const Welcome = asElementToken({
+  ...upstreamDialog.Welcome,
+  Theme: {
+    // Use all the `Theme` from upstream...
+    ...upstreamDialog.Welcome.Theme,
+    //  ...except the `Border` which I want to override.
+    Border: addProps({ color: FancyBorderColor.Red })
+  }
+});
 ```
 
 But I can *also* introduce new variations:
-```ts
-import WavingHand from '@mui/icons-material/WavingHand';
 
-// Customize the upstream WithWelcomeText token to use an icon for the title.
-const WithCustomWelcomeText = asDialogToken({
-  ...upstreamDialog.WithWelcomeText,
-  Content: {
-    // Reuse the existing upstream welcome content.
-    ...upstreamDialog.WithWelcomeText.Content,
-    // But replace the title
-   Title: replaceWith(WavingHand),
+```ts
+// Change the element used to render the title
+const WelcomeH2 = asDialogToken({
+  ...Welcome,
+  Components: {
+    ...upstreamDialog.Welcome.Components,
+    Title: startWith('h2'),
   },
 });
 
+// Add an analytics attribute
+const WelcomeWithData = asDilogToken({
+  ...Welcome,
+  Analytics: {
+    Title: addProps('data-layer-id', 'dialog-title'),
+  }m
+});
 
+// Change the class of the message
+const WelcomeWithRedMessage = asDialogToken({
+  ...Welcome,
+  Theme: {
+    ...Welcome.Theme,
+    Message: 'Dialog-message--red',
+  },
+});
 ```
 
+The possibilities are endless!
+
+[Next: Anatomy Of A Token](./AnatomyOfAToken.md)
