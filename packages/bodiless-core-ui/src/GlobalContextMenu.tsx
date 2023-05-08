@@ -28,14 +28,14 @@ import {
   ComponentFormDescription, ComponentFormWarning, ComponentFormLink, ComponentFormFieldWrapper,
   ComponentFormFieldTitle, ComponentFormCheckBox, ComponentFormRadio, ComponentFormRadioGroup,
   ComponentFormSelect, ComponentFormOption, ComponentFormTextArea, ContextSubMenu,
-  ToolbarButtonLabel, HorizontalToolbarButton, ComponentFormSpinner,
+  ToolbarButtonLabel, HorizontalToolbarButton, ComponentFormSpinner, ToolbarVertical,
 } from '@bodiless/ui';
 import ReactTagsField from './ReactTags';
 
 const Toolbar = flow(
-  addClasses('bl-flex bl-flex-col bl-w-grid-12 bl-bg-black bl-rounded bl-z-50 bl-px-grid-2 bl-py-2 bl-fixed bl-top-grid-0 bl-left-grid-0 bl-text-white'),
-  addProps({ role: 'toolbar', 'aria-label': 'Global Context Menu Left', id: 'global-context-menu' }),
-)(Div);
+  addClasses('bl-w-grid-12 bl-fixed bl-top-grid-0 bl-left-grid-0'),
+  addProps({ 'aria-label': 'Global Context Menu Left', id: 'global-context-menu' }),
+)(ToolbarVertical);
 
 const ToolbarRight = flow(
   addClasses('bl-right-grid-0'),

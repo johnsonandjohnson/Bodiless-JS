@@ -15,7 +15,6 @@
 export * from './index.bl-edit';
 
 export { default as vitalLink } from './tokens';
-export { default as vitalLinkBase } from './tokens/vitalLink';
 export {
   useExternalLinkToggle, useIsDownloadLink, asEditableLink, anchorTo,
 } from './util';

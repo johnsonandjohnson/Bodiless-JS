@@ -53,7 +53,7 @@ const ListBase: FC<ListBaseProps> = ({
     Title,
   } = components;
 
-  const { addItem, deleteItem } = useItemsMutators({ unwrap, onDelete });
+  const { addItem, deleteItem, moveItem } = useItemsMutators({ unwrap, onDelete });
   const { getItems } = useItemsAccessors();
   const { setId } = useActivateOnEffect();
   const dataItems = getItems();
@@ -83,7 +83,11 @@ const ListBase: FC<ListBaseProps> = ({
       ) {
         value.deleteItem = () => deleteItem(currentItem);
       }
-
+      if (dataItems.includes(currentItem)) {
+        value.moveItem = (offset: number) => {
+          moveItem(currentItem, offset);
+        };
+      }
       return value;
     }),
     [dataItems, prependItems, appendItems],

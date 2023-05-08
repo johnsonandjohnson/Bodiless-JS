@@ -11,39 +11,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import identity from 'lodash/identity';
-import { asFluidToken } from '@bodiless/vital-elements';
-import { on, varyDesigns, flowHoc } from '@bodiless/fclasses';
-import { AccordionClean, vitalAccordion, asAccordionToken } from '../Accordion';
-
-const BaseVariation = {
-  Accordion: on(AccordionClean)(vitalAccordion.Default, vitalAccordion.WithFlowContainerPreview),
-};
-
-const AccordionVariations = {
-  _: identity,
-  FAQSchema: vitalAccordion.WithFAQSchema,
-};
-
-const BehaviorVariations = {
-  Collapsed: asAccordionToken({
-    Meta: flowHoc.meta.term('Behavior')('Collapsed on Open'),
-  }),
-  Expanded: vitalAccordion.WithInitiallyExpanded,
-};
-
-/**
- * Token which adds Accordion variations to a flow container.
- */
-const WithAccordionVariations = asFluidToken({
-  Components: {
-    ...varyDesigns(
-      BaseVariation,
-      AccordionVariations,
-      BehaviorVariations,
-    ),
-  }
-});
-
-export const vitalAccordionFlowContainer = { WithAccordionVariations };
+export { vitalAccordionFlowContainer } from './tokens';

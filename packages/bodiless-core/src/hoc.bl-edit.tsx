@@ -19,10 +19,9 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { HOC } from '@bodiless/fclasses';
+import { HOC, addProps } from '@bodiless/fclasses';
 import { observer } from './mobx.bl-edit';
-import { useContextActivator } from './hooks';
-import LocalContextMenu from './components/LocalContextMenu.bl-edit';
+import { useContextActivator, useEditContext } from './hooks';
 import { withClickOutside, withExtendHandler, withOnlyProps } from './hoc.static';
 import type { resizeDetectorProps, ClickOutsideProps } from './hoc.static';
 
@@ -55,14 +54,12 @@ export const withContextActivator = (
  * @returns
  * A component with local context menu attached.
  */
-export const withLocalContextMenu: HOC = Component => {
-  const WithLocalContextMenu = (props: any) => (
-    <LocalContextMenu>
-      <Component {...props} />
-    </LocalContextMenu>
-  );
-  return WithLocalContextMenu;
-};
+export const withLocalContextMenu = addProps(() => {
+  const { id } = useEditContext();
+  return {
+    'data-context-menu-id': id,
+  };
+});
 
 /**
  * Utility hoc to add resize detector to the original component.

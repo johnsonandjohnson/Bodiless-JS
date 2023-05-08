@@ -12,16 +12,17 @@
  * limitations under the License.
  */
 
-import { vitalSearchMenuBase, asSearchMenuToken } from '@bodiless/vital-search';
+import { asSearchMenuToken } from '@bodiless/vital-search';
+import { vitalSearchMenu } from '@bodiless/vital-search/lib/base';
 import { addProps } from '@bodiless/fclasses';
 
-const Default = asSearchMenuToken(vitalSearchMenuBase.Default, {
+const Default = asSearchMenuToken(vitalSearchMenu.Default, {
   Behavior: {
     _: addProps({ 'data-shadowed-by': '__vital__:SearchMenu' }),
   },
 });
 
 export default {
-  ...vitalSearchMenuBase,
+  ...vitalSearchMenu,
   Default,
 };

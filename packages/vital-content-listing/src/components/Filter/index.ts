@@ -14,7 +14,6 @@
 
 import FilterClean, { asFilterListToken, asFilterTagTitleToken, asFilterToken } from './FilterClean';
 import vitalFilter from './tokens';
-import vitalFilterBase from './tokens/vitalFilter';
 
 export {
   FilterClean,
@@ -22,5 +21,4 @@ export {
   asFilterTagTitleToken,
   asFilterToken,
   vitalFilter,
-  vitalFilterBase,
 };

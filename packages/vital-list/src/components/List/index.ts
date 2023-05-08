@@ -22,7 +22,3 @@ export {
 export {
   default as vitalList
 } from './tokens';
-
-export {
-  default as vitalListBase
-} from './tokens/vitalList';

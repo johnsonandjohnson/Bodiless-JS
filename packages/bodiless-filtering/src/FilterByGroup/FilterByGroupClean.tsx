@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import {
   designable, Div, Button, withoutProps, H3, DesignableComponentsProps, flowHoc,
 } from '@bodiless/fclasses';
@@ -36,7 +36,7 @@ const FilterByGroupComponentsStart:FilterByGroupComponents = {
 type FilterByGroupBaseProps =
   Omit<FilterByGroupProps, 'design'> & DesignableComponentsProps<FilterByGroupComponents>;
 
-const FilterByGroupBase: FC<FilterByGroupBaseProps> = ({
+const FilterByGroupBase: FC<PropsWithChildren<FilterByGroupBaseProps>> = ({
   components,
   children,
   resetButtonText = 'Reset',

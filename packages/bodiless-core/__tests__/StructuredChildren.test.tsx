@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import { shallow } from 'enzyme';
 import StructuredChildren, {
   asElementArray, addMissingGroups,
@@ -20,12 +20,12 @@ import StructuredChildren, {
 } from '../src/ContextMenu/StructuredChildren';
 import type { IContextMenuItemProps } from '../src/Types/ContextMenuTypes';
 
-const Item: FC<IContextMenuItemProps> = ({ children }) => <>{children}</>;
-const Group: FC<IContextMenuItemProps> = ({ children }) => <>{children}</>;
+const Item: FC<PropsWithChildren<IContextMenuItemProps>> = ({ children }) => <>{children}</>;
+const Group: FC<PropsWithChildren<IContextMenuItemProps>> = ({ children }) => <>{children}</>;
 
 describe('asElementArray', () => {
   it('Removes children which are not elements', () => {
-    const Test: FC = ({ children }) => {
+    const Test: FC<PropsWithChildren> = ({ children }) => {
       const newChildren = asElementArray(children);
       return <div>{newChildren}</div>;
     };

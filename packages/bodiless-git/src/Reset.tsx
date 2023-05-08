@@ -56,13 +56,13 @@ const Reset = (props: Props) => {
     ComponentFormDescription,
     Spinner,
   } = getUI(ui);
-  const { submits, invalid } = formState;
+  const { submitted, invalid } = formState;
   const [state, setState] = useState<ResetStatus>({
     status: ResetState.Init,
   });
   useEffect(() => {
     // If the form is submitted and valid then lets try reset.
-    if (submits === 1 && invalid === false) {
+    if (submitted && invalid === false) {
       context.showPageOverlay({ hasSpinner: false });
       setState({ status: ResetState.Pending });
       client.reset()
@@ -78,7 +78,7 @@ const Reset = (props: Props) => {
           formApi.setValue('keepOpen', false);
         });
     }
-  }, [submits]);
+  }, [submitted]);
 
   const { status, errorMessage } = state;
   const formTitle = 'Revert to saved';

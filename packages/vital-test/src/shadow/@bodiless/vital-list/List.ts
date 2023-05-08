@@ -12,16 +12,17 @@
  * limitations under the License.
  */
 
-import { vitalListBase, asListToken } from '@bodiless/vital-list';
+import { asListToken } from '@bodiless/vital-list';
+import { vitalList } from '@bodiless/vital-list/lib/base';
 import { addProps } from '@bodiless/fclasses';
 
-const Default = asListToken(vitalListBase.Default, {
+const Default = asListToken(vitalList.Default, {
   Behavior: {
     _: addProps({ 'data-shadowed-by': '__vital__:List' }),
   },
 });
 
 export default {
-  ...vitalListBase,
+  ...vitalList,
   Default,
 };

@@ -17,7 +17,7 @@ import {
   useMenuOptionUI,
 } from '@bodiless/core';
 import identity from 'lodash/identity';
-import { withFieldApi } from 'informed';
+import { useFieldApi } from 'informed';
 import DefaultNormalHref from './NormalHref';
 import {
   LinkData,
@@ -42,7 +42,10 @@ const DEFAULT_ALLOWED_FILE_TYPES = [
   'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
 ];
 
-const FileUpload: ComponentType<Omit<FileUploadProps, 'fieldApi'>> = withFieldApi('href')(BaseFileUpload);
+const FileUpload: ComponentType<Omit<FileUploadProps, 'fieldApi'>> = (props) => {
+  const fieldApi = useFieldApi('href');
+  return <BaseFileUpload fieldApi={fieldApi} {...props} />;
+};
 
 const useEditFormOverrides = (
   overrides: ReturnType<UseLinkOverrides>
@@ -82,12 +85,12 @@ const useEditFormOverrides = (
         <>
           <ComponentFormTitle>Link</ComponentFormTitle>
           <ComponentFormLabel htmlFor="link-href">URL</ComponentFormLabel>
-          <ComponentFormText field="href" id="link-href" aria-describedby="description" placeholder="/link" />
+          <ComponentFormText name="href" id="link-href" aria-describedby="description" placeholder="/link" />
           <ComponentFormDescription id="description">
             {instructions}
           </ComponentFormDescription>
           <ComponentFormLabel htmlFor="aria-label">Aria Label</ComponentFormLabel>
-          <ComponentFormText field="aria-label" id="aria-label" aria-describedby="description" placeholder="aria-label" />
+          <ComponentFormText name="aria-label" id="aria-label" aria-describedby="description" placeholder="aria-label" />
           <ComponentFormLabel>File Upload</ComponentFormLabel>
           <FileUpload ui={fileUploadUI} accept={fileUploadAccept} />
           {unwrap && (

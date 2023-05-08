@@ -12,10 +12,11 @@
  * limitations under the License.
  */
 
-import { asTokenGroup, vitalTextDecorationBase, TextDecorationMeta } from '@bodiless/vital-elements';
+import { asTokenGroup, TextDecorationMeta } from '@bodiless/vital-elements';
+import { vitalTextDecoration } from '@bodiless/vital-elements/lib/base';
 
 const OverrideTextDecoration = asTokenGroup(TextDecorationMeta)({
-  ...vitalTextDecorationBase,
+  ...vitalTextDecoration,
   Bold: 'font-bold shadowed-bold-class',
 });
 

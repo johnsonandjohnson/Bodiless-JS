@@ -33,6 +33,6 @@
   "peerDependencies": {
     "mobx": "^6.0.0",
     "mobx-react": "^7.2.1",
-    "react": "^17.0.2"
+    "react": "^18.2.0"
   }
 }

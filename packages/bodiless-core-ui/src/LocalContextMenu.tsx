@@ -12,7 +12,12 @@
  * limitations under the License.
  */
 
-import React, { FC, ComponentType, ReactNode } from 'react';
+import React, {
+  FC,
+  ComponentType,
+  ReactNode,
+  PropsWithChildren
+} from 'react';
 import ReactTooltip from 'rc-tooltip';
 import flow from 'lodash/flow';
 import {
@@ -30,14 +35,14 @@ import {
   ComponentFormUnwrapButton, ComponentFormTextArea, ComponentFormDescription, ComponentFormWarning,
   ComponentFormFieldWrapper, ComponentFormFieldTitle, ComponentFormCheckBox, ComponentFormRadio,
   ComponentFormRadioGroup, ComponentFormSelect, ComponentFormOption, ContextSubMenu,
-  ToolbarButtonLabel,
+  ToolbarButtonLabel, ToolbarHorizontal,
   ComponentFormSpinner,
 } from '@bodiless/ui';
 import ReactTagsField from './ReactTags';
 
 // Stacked toolbar orientation...
 // Horizontal
-const toolbarClasses = 'bl-flex bl-divide-x rtl:bl-divide-x-reverse bl-divide-white';
+const toolbarClasses = 'bl-divide-x rtl:bl-divide-x-reverse bl-divide-white';
 const groupClasses = 'bl-px-3';
 // Vertical
 // const toolbarClasses = '';
@@ -47,8 +52,8 @@ const groupClasses = 'bl-px-3';
 // For accessibility attributes, see https://www.w3.org/TR/wai-aria-practices/examples/toolbar/toolbar.html
 const Toolbar = flow(
   addClasses(toolbarClasses),
-  addProps({ role: 'toolbar', 'aria-label': 'Local Context Menu' }),
-)(Div);
+  addProps({ 'aria-label': 'Local Context Menu' }),
+)(ToolbarHorizontal);
 
 type Props = {
   overlay: ReactNode | (() => ReactNode);
@@ -64,9 +69,9 @@ const GroupTitle = flow(
   removeClasses('bl-mb-grid-2 bl-min-w-xl-grid-1'),
   addClassesIf(({ index }: any = {}) => Number(index) > 0)('hover:bl-underline bl-cursor-pointer'),
   addClassesIf(({ index }: any = {}) => index === 0)('bl-underline'),
-)(ComponentFormTitle) as ComponentType<{ index?: number }>;
+)(ComponentFormTitle) as ComponentType<PropsWithChildren<{ index?: number }>>;
 
-const ContextMenuGroup: FC<IContextMenuItemProps> = ({
+const ContextMenuGroup: FC<PropsWithChildren<IContextMenuItemProps>> = ({
   children,
   index,
   option,

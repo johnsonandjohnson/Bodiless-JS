@@ -45,7 +45,7 @@ const asTaggableItem = (
     'registerSuggestions',
     'getSuggestions',
     'allowNew',
-    'noSuggestionsText',
+    'noOptionsText',
     'componentData',
     'inputAttributes',
     'seeAllText',

@@ -14,6 +14,7 @@
 
 import React, {
   FC,
+  PropsWithChildren,
   createContext,
   useContext,
   useState,
@@ -37,7 +38,7 @@ const MenuContext = createContext<MenuContextType>({
  */
 const useMenuContext = () => useContext(MenuContext);
 
-const MenuContextProvider: FC = ({ children }) => {
+const MenuContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const [activeSubmenu, setActiveSubmenu] = useState<string>();
 
   return (

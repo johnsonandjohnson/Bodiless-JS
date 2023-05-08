@@ -13,4 +13,3 @@
  */
 
 export { default as vitalTypography } from './tokens';
-export { default as vitalTypographyBase } from './tokens/vitalTypography';

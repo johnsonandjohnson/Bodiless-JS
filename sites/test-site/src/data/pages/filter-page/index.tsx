@@ -32,7 +32,7 @@ const Switcher = () => {
     <>
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label className="py-4 block">
-        <input className="mr-2" type="checkbox" checked={multiple} onClick={() => setMultiple(v => !v)} />
+        <input className="mr-2" type="checkbox" checked={multiple} onChange={() => {}} onClick={() => setMultiple(v => !v)} />
         Allow selecting multiple terms in each category
       </label>
       <Filter>

@@ -43,7 +43,7 @@ type PropsWithUi = {
 };
 
 type PropsWithNotify = {
-  notifyOfChanges: ChangeNotifier;
+  notifyOfChanges?: ChangeNotifier;
 };
 
 type MessageProps = {
@@ -78,7 +78,7 @@ const RemoteChanges = (
 ) => {
   const formApi = useFormApi();
   // @Todo revise the use of formState, possibly use informed multistep.
-  if (formApi.getState().submits === 0) {
+  if (formApi.getFormState().submitted) {
     return (
       <FetchChanges
         client={client}
@@ -327,7 +327,7 @@ const FetchChanges = (
           messageData: (error as any).message,
         });
       } finally {
-        notifyOfChanges();
+        if (notifyOfChanges) notifyOfChanges();
         context.hidePageOverlay();
       }
     })();
@@ -391,7 +391,7 @@ const PullChanges = (
       } finally {
         formApi.setValue('keepOpen', false);
         context.hidePageOverlay();
-        notifyOfChanges();
+        if (notifyOfChanges) notifyOfChanges();
       }
     })();
   }, []);

@@ -12,13 +12,15 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import {
   NotificationProvider,
   withNotificationButton,
   withSwitcherButton,
   OnNodeErrorNotification,
   observer,
+  useDocsButton,
+  useEditButton,
 } from '@bodiless/core';
 import {
   useGitButtons,
@@ -63,7 +65,13 @@ const GitButtons: FC = () => {
   return <></>;
 };
 
-const EditPage: FC<PageProps> = observer(({ children, ui, ...rest }) => {
+const EditButtons: FC = () => {
+  useDocsButton();
+  useEditButton();
+  return <></>;
+};
+
+const EditPage: FC<PropsWithChildren<PageProps>> = observer(({ children, ui, ...rest }) => {
   const { PageEditor: Editor, ContextWrapper: Wrapper } = getUI(ui);
   const { pageContext } = rest;
   const {
@@ -86,6 +94,7 @@ const EditPage: FC<PageProps> = observer(({ children, ui, ...rest }) => {
               <SwitcherButton />
               <NotificationButton />
               <Editor>
+                <EditButtons />
                 <OnNodeErrorNotification />
                 <NewPageButton />
                 <MovePageButton />

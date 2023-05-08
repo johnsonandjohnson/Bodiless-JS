@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
+import React, { ComponentType, PropsWithChildren } from 'react';
 import { graphql } from 'gatsby';
 import Helmet from 'react-helmet';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
@@ -39,7 +39,7 @@ const $withMenuOverviewLink = withMenuDesign(['List', 'Columns', 'Cards'])(
   withOverviewLink('Custom Overview Link'),
 );
 
-const BurgerMenuProvider = withBurgerMenuProvider(Div) as ComponentType;
+const BurgerMenuProvider = withBurgerMenuProvider(Div) as ComponentType<PropsWithChildren>;
 
 const DemoMenu = flowHoc(
   withNodeKey({ nodeKey: 'DemoMenu' }),

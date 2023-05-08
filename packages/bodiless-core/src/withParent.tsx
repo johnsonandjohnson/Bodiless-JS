@@ -47,7 +47,7 @@ const withParent = (
 ): HOC => (
   Component,
 ) => {
-  type Components = { [Parent: string]: ComponentType };
+  type Components = { [Parent: string]: ComponentType<PropsWithChildren> };
   const startComponents: Components = { [designKey]: Parent };
   const WithParent = (props: PropsWithChildren<DesignableComponentsProps<Components>>) => {
     const { components, ...rest } = props;

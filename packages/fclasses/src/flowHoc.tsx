@@ -45,7 +45,7 @@ const preserveMeta = (hoc: HOC): HOC => <P extends object, Q extends object = P>
     return Object.assign(NewComponent, finalMeta);
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.warn(`KNOWN ISSUE: ${(e as Error).message}`);
+    // console.warn(`KNOWN ISSUE: ${(e as Error).message}`);
     return Component as ComponentWithMeta;
   }
 };

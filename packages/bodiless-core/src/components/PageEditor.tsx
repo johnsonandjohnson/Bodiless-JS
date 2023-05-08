@@ -15,7 +15,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, {
-  FC, createContext, useContext, useEffect, useCallback,
+  FC, createContext, useContext, useEffect, useCallback, PropsWithChildren,
 } from 'react';
 
 import ContextMenu from './ContextMenu';
@@ -23,6 +23,8 @@ import { useEditContext } from '../hooks';
 import { observer } from '../mobx.bl-edit';
 import { IContextMenuProps as ContextMenuProps, TMenuOption } from '../Types/ContextMenuTypes';
 import { useRegisterMenuOptions } from '../PageContextProvider';
+import LocalContextMenuPopup from './LocalContextMenuPopup.bl-edit';
+import useLocalOptions from './useLocalOptions';
 
 type CompleteUI = {
   GlobalContextMenu: React.ComponentType<ContextMenuProps>;
@@ -56,11 +58,17 @@ const GlobalContextMenu: FC<Props> = observer(() => {
 });
 
 /**
- * Component providing the global Bodiless UI elements, the Main Menu and Page Overlay.
- * Also provides the Edit and Docs buttons on the main menu.
+ * @private
+ *
+ * Renders the local context menu.
  */
-const PageEditor: FC<Props> = ({ children, ui }) => {
-  const context = useEditContext();
+export const LocalContextMenu = observer(() => {
+  const { LocalContextMenu: Menu } = useUI();
+  const options = useLocalOptions();
+  return <Menu options={options} />;
+});
+
+export const useDocsButton = () => {
   const getMenuOptions = useCallback(() => [
     {
       name: 'docs',
@@ -70,6 +78,18 @@ const PageEditor: FC<Props> = ({ children, ui }) => {
         window.open(process.env.BODILESS_DOCS_URL, '_blank');
       },
     },
+  ], []);
+
+  // Register buttons to the main menu.
+  useRegisterMenuOptions({
+    getMenuOptions,
+    name: 'Docs',
+  });
+};
+
+export const useEditButton = () => {
+  const context = useEditContext();
+  const getMenuOptions = useCallback(() => [
     {
       name: 'edit',
       icon: 'edit',
@@ -82,18 +102,25 @@ const PageEditor: FC<Props> = ({ children, ui }) => {
     },
   ], []);
 
-  const newUI = {
-    ...useUI(),
-    ...ui,
-  };
-
-  const { PageOverlay = () => null } = newUI;
-
   // Register buttons to the main menu.
   useRegisterMenuOptions({
     getMenuOptions,
     name: 'Editor',
   });
+};
+
+/**
+ * Component providing the global Bodiless UI elements, the Main Menu and Page Overlay.
+ * Also provides the Edit and Docs buttons on the main menu.
+ */
+const PageEditor: FC<PropsWithChildren<Props>> = ({ children, ui }) => {
+  const context = useEditContext();
+
+  const newUI = {
+    ...useUI(),
+    ...ui,
+  };
+  const { PageOverlay = () => null } = newUI;
   useEffect(() => {
     if (!context.isActive) context.activate();
   }, []);
@@ -102,6 +129,9 @@ const PageEditor: FC<Props> = ({ children, ui }) => {
     <uiContext.Provider value={newUI}>
       {children}
       <GlobalContextMenu />
+      <LocalContextMenuPopup>
+        <LocalContextMenu />
+      </LocalContextMenuPopup>
       <PageOverlay />
     </uiContext.Provider>
   );

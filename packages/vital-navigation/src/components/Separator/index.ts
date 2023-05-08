@@ -13,4 +13,3 @@
  */
 
 export { default as vitalSeparator } from './tokens';
-export { default as vitalSeparatorBase } from './tokens/vitalSeparator';

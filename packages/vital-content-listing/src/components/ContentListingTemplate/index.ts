@@ -12,10 +12,4 @@
  * limitations under the License.
  */
 
-import vitalContentListingTemplate from './tokens';
-import vitalContentListingTemplateBase from './tokens/vitalContentListingTemplate';
-
-export {
-  vitalContentListingTemplate,
-  vitalContentListingTemplateBase,
-};
+export { default as vitalContentListingTemplate } from './tokens';

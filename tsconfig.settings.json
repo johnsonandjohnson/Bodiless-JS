@@ -27,6 +27,8 @@
       "--vital--/*": ["__vital__/src/*"],
       "@bodiless/accordion": ["bodiless-accordion/src"],
       "@bodiless/accordion/*": ["bodiless-accordion/src/*"],
+      "@bodiless/backend": ["bodiless-backend/src"],
+      "@bodiless/backend/*": ["bodiless-backend/src/*"],
       "@bodiless/bv": ["bodiless-bv/src"],
       "@bodiless/bv/*": ["bodiless-bv/src/*"],
       "@bodiless/card": ["bodiless-card/src"],

@@ -13,14 +13,14 @@
  */
 
 import { asHeaderToken } from '@bodiless/vital-layout';
-import vitalHeaderBase from '--vital--/lib/shadow/@bodiless/vital-layout/Header';
+import vitalHeader from '--vital--/lib/shadow/@bodiless/vital-layout/Header';
 import { vitalSearchHeader } from '@bodiless/vital-search';
 import { addProps } from '@bodiless/fclasses';
 
 const Default = asHeaderToken(
-  vitalHeaderBase.Default,
+  vitalHeader.Default,
   vitalSearchHeader.WithSearch,
-  vitalHeaderBase.WithLanguageSelector,
+  vitalHeader.WithLanguageSelector,
   {
     Behavior: {
       Wrapper: addProps({ 'data-shadowed-by': 'vital-test:Header' }),
@@ -29,6 +29,6 @@ const Default = asHeaderToken(
 );
 
 export default {
-  ...vitalHeaderBase,
+  ...vitalHeader,
   Default,
 };

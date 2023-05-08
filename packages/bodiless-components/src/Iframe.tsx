@@ -58,19 +58,25 @@ const withoutPointerEvents = addProps({
 
 const isNonNegativeNumber = (value: string) => /^\d+$/.test(value);
 
+type HeightSnippetErrors = {
+  height?: string
+};
+
 const withHeightSnippet = withFormSnippet({
   nodeKeys: 'height',
   defaultData: { height: '' },
   snippetOptions: {
     renderForm: ({ formState, scope }) => {
-      const errors = scope ? formState.errors[scope] : formState.errors;
+      const errors = (
+        scope ? formState.errors[scope] : formState.errors
+      ) as HeightSnippetErrors;
       const {
         ComponentFormLabel,
         ComponentFormText,
         ComponentFormWarning,
       } = useMenuOptionUI();
       const validate = useCallback(
-        (value: string) => (value && !isNonNegativeNumber(value)
+        (value: unknown) => (value && !isNonNegativeNumber(value.toString())
           ? 'Height must be a non-negative number.'
           : undefined),
         [],
@@ -79,10 +85,9 @@ const withHeightSnippet = withFormSnippet({
         <React.Fragment key="height">
           <ComponentFormLabel htmlFor="height">Height (in pixels)</ComponentFormLabel>
           <ComponentFormText
-            field="height"
+            name="height"
             validate={validate}
-            validateOnChange
-            validateOnBlur
+            validateOn="change-blur"
           />
           {errors && errors.height && (
             <ComponentFormWarning>{errors.height}</ComponentFormWarning>
@@ -102,7 +107,7 @@ const withSrcSnippet = withFormSnippet({
       return (
         <React.Fragment key="src">
           <ComponentFormLabel htmlFor="src">URL</ComponentFormLabel>
-          <ComponentFormText field="src" />
+          <ComponentFormText name="src" />
         </React.Fragment>
       );
     },

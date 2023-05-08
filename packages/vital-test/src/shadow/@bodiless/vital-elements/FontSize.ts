@@ -12,10 +12,11 @@
  * limitations under the License.
  */
 
-import { asTokenGroup, vitalFontSizeBase, FontSizeMeta } from '@bodiless/vital-elements';
+import { asTokenGroup, FontSizeMeta } from '@bodiless/vital-elements';
+import { vitalFontSize } from '@bodiless/vital-elements/lib/base';
 
 const OverrideFontSize = asTokenGroup(FontSizeMeta)({
-  ...vitalFontSizeBase,
+  ...vitalFontSize,
   Base: 'text-m-base lg:text-base shadowed-textsizebase-class',
 });
 

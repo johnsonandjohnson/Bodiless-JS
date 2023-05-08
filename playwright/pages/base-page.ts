@@ -89,7 +89,7 @@ export class BasePage {
     this.pageIcon = '//*[@aria-label="Page"]';
     this.newPageIcon = '//*[@aria-label="New"]';
     this.headerAddPageForm = '//*[@aria-label="Context Submenu Form"]//h3[text()="Add a Blank Page"]';
-    this.fieldAddPageForm = '//*[@aria-label="Context Submenu Form"]//input[@name="new-page-path"]';
+    this.fieldAddPageForm = '//*[@aria-label="Context Submenu Form"]//input[@name="pagePath"]';
     this.closeIconAddPageForm = '//*[@aria-label="Context Submenu Form"]//*[@aria-label="Cancel"]';
     this.checkmarkIconAddPageForm = '//*[@aria-label="Context Submenu Form"]//*[@aria-label="Submit"]';
     this.editMenuLinkButton = 'button[aria-label="Edit Menu Link"]';
@@ -162,8 +162,8 @@ export class BasePage {
 
   async isImageVisible(imageXpath: string) {
     expect(await this.page.locator(imageXpath).isVisible()).toBeTruthy();
-    const imageDimentions = await this.page.locator(imageXpath).boundingBox();
-    expect(imageDimentions!.width).toBeGreaterThan(0);
-    expect(imageDimentions!.height).toBeGreaterThan(0);
+    const imageDimensions = await this.page.locator(imageXpath).boundingBox();
+    expect(imageDimensions!.width).toBeGreaterThan(0);
+    expect(imageDimensions!.height).toBeGreaterThan(0);
   }
 }

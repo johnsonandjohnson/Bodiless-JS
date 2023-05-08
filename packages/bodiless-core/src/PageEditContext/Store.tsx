@@ -43,6 +43,8 @@ export const defaultOverlaySettings: TOverlaySettings = {
  * Holds the current UI state for the editor.
  */
 export class PageEditStore implements PageEditStoreInterface {
+  @observable localContextMenuKey = new Date();
+
   @observable activeContext: PageEditContextInterface | undefined = undefined;
 
   @observable isEdit = getFromSessionStorage('isEdit', false);
@@ -58,6 +60,11 @@ export class PageEditStore implements PageEditStoreInterface {
 
   @observable
   optionMap = new Map() as ObservableMap<string, ObservableMap<string, TMenuOption>>;
+
+  @action
+  refreshLocalContextMenu() {
+    this.localContextMenuKey = new Date();
+  }
 
   @action reset() {
     this.activeContext = undefined;

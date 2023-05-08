@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, PropsWithChildren } from 'react';
 import { GitContextProps, GitContextProviderProps } from './types';
 
 const defaultGitInfo: GitContextProps = {
@@ -28,7 +28,9 @@ const GitContext = React.createContext<GitContextProps>(defaultGitInfo);
  *
  * @param props
  */
-export const GitContextProvider: FC<GitContextProviderProps> = ({ children, gitInfo }) => (
+export const GitContextProvider: FC<PropsWithChildren<GitContextProviderProps>> = (
+  { children, gitInfo }
+) => (
   <GitContext.Provider value={gitInfo}>
     {children}
   </GitContext.Provider>

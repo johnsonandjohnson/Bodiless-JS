@@ -13,5 +13,7 @@
  */
 
 export {
-  ContextWrapper, PageEditor, PageOverlay, LocalContextMenu, ReactTagsField
+  ContextWrapper, PageEditor, PageOverlay, ReactTagsField
 } from '@bodiless/core';
+
+export { Fragment as LocalContextMenu, Fragment as GlobalContextMenu } from 'react';

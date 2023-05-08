@@ -91,19 +91,19 @@ const SaveChanges = (props: Props) => {
     ComponentFormText,
     Spinner,
   } = getUI(ui);
-  const { submits, invalid } = formState;
+  const { submitted, invalid } = formState;
   const [state, setState] = useState<SaveStatus>({
     status: SaveState.Init,
   });
   const formTitle = 'Upload changes';
   useEffect(() => {
     // If the form is submitted and valid then lets try reset.
-    if (submits === 1 && invalid === false) {
+    if (submitted && invalid === false) {
       context.showPageOverlay({ hasSpinner: false });
       setState({ status: SaveState.Pending });
       // client.reset()
       handle(client.commit(
-        formApi.getValue('commitMessage'),
+        formApi.getValue('commitMessage') as string,
         [backendFilePath, backendStaticPath],
         [],
         [],
@@ -120,7 +120,7 @@ const SaveChanges = (props: Props) => {
           formApi.setValue('keepOpen', false);
         });
     }
-  }, [submits]);
+  }, [submitted]);
 
   const { status } = state;
 
@@ -157,7 +157,7 @@ const SaveChanges = (props: Props) => {
           <ComponentFormLabel htmlFor="commit-txt">
             Description:
           </ComponentFormLabel>
-          <ComponentFormText field="commitMessage" id="commit-txt" />
+          <ComponentFormText name="commitMessage" id="commit-txt" />
         </>
       );
     }

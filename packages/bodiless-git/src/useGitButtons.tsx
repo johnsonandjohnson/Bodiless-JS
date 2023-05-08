@@ -24,7 +24,8 @@ import {
   useRegisterMenuOptions,
   contextMenuForm,
   useNotify,
-  BodilessBackendClient
+  BodilessBackendClient,
+  PageEditContext,
 } from '@bodiless/core';
 import type { TMenuOption } from '@bodiless/core';
 import CommitsList from './CommitsList';
@@ -70,13 +71,13 @@ const formGitCommit = (client: GitClient) => contextMenuForm({
   );
   return (
     <>
-      <ComponentFormText type="hidden" field="keepOpen" initialValue />
+      <ComponentFormText type="hidden" name="keepOpen" initialValue />
       <SaveChanges ui={ui} formState={formState} formApi={formApi} client={client} />
     </>
   );
 });
 
-const formGitPull = (client: GitClient, notifyOfChanges: ChangeNotifier) => contextMenuForm({
+const formGitPull = (client: GitClient, notifyOfChanges?: ChangeNotifier) => contextMenuForm({
   submitValues: (values: any) => {
     const { keepOpen } = values;
     return keepOpen;
@@ -86,15 +87,15 @@ const formGitPull = (client: GitClient, notifyOfChanges: ChangeNotifier) => cont
       window.location.reload();
     }
   },
-  hasSubmit: ({ keepOpen }) => keepOpen,
+  hasSubmit: ({ keepOpen }) => keepOpen as boolean,
 })(({ ui }: any) => {
   const { ComponentFormTitle, ComponentFormText } = getUI(ui);
   return (
     <>
       <ComponentFormTitle>Pull Changes</ComponentFormTitle>
-      <ComponentFormText type="hidden" field="keepOpen" initialValue={false} />
-      <ComponentFormText type="hidden" field="mergeMain" initialValue={false} />
-      <ComponentFormText type="hidden" field="refreshWhenDone" initialValue={false} />
+      <ComponentFormText type="hidden" name="keepOpen" initialValue={false} />
+      <ComponentFormText type="hidden" name="mergeMain" initialValue={false} />
+      <ComponentFormText type="hidden" name="refreshWhenDone" initialValue={false} />
       <RemoteChanges client={client} notifyOfChanges={notifyOfChanges} ui={ui} />
     </>
   );
@@ -111,14 +112,14 @@ const formGitReset = (client: GitClient) => contextMenuForm({
       window.location.reload();
     }
   },
-  hasSubmit: ({ keepOpen }) => keepOpen,
+  hasSubmit: ({ keepOpen }) => keepOpen as boolean,
 })(
   ({ ui, formState, formApi }: any) => {
     const { ComponentFormText } = getUI(ui);
     return (
       <>
-        <ComponentFormText type="hidden" field="keepOpen" initialValue />
-        <ComponentFormText type="hidden" field="reload" initialValue={false} />
+        <ComponentFormText type="hidden" name="keepOpen" initialValue />
+        <ComponentFormText type="hidden" name="reload" initialValue={false} />
         <Reset ui={ui} formState={formState} formApi={formApi} client={client} />
       </>
     );
@@ -127,28 +128,37 @@ const formGitReset = (client: GitClient) => contextMenuForm({
 
 const defaultClient = new BodilessBackendClient();
 
+export enum GitButtons {
+  Push = 'saveChanges',
+  File = 'file',
+  Pull = 'pull',
+  Revert = 'resetChanges',
+  History = 'listCommits',
+}
+
 const getMenuOptions = (
   client: GitClient,
   context: any,
-  notifyOfChanges: ChangeNotifier,
+  notifyOfChanges?: ChangeNotifier,
+  filter?: GitButtons[],
 ): TMenuOption[] => {
   const saveChanges = canCommit ? formGitCommit(client) : undefined;
-  return [
+  const buttons: TMenuOption[] = [
     {
-      name: 'file',
+      name: GitButtons.File,
       label: 'File',
       icon: 'cloud',
       Component: ContextSubMenu,
     },
     {
-      name: 'Pull',
+      name: GitButtons.Pull,
       label: 'Pull',
       icon: 'cloud_download',
       handler: () => formGitPull(client, notifyOfChanges),
       group: 'file',
     },
     {
-      name: 'savechanges',
+      name: GitButtons.Push,
       icon: 'cloud_upload',
       label: 'Push',
       isDisabled: () => !canCommit,
@@ -156,14 +166,14 @@ const getMenuOptions = (
       group: 'file',
     },
     {
-      name: 'listCommits',
+      name: GitButtons.History,
       icon: 'book',
       label: 'History',
       handler: () => formGetCommitsList(client),
       group: 'file',
     },
     {
-      name: 'resetchanges',
+      name: GitButtons.Revert,
       label: 'Revert',
       icon: 'undo',
       isHidden: () => !context.isEdit,
@@ -171,13 +181,13 @@ const getMenuOptions = (
       group: 'file',
     },
   ];
+  return buttons.filter(b => !filter || !filter.includes(b.name as GitButtons));
 };
 
 export type ChangeNotifier = () => Promise<void>;
 
-const useGitButtons = ({ client = defaultClient } = {}) => {
+const useGitNotify = ({ client = defaultClient } = {}) => {
   const [notifications, setNotifications] = useState([] as any);
-  const context = useEditContext();
 
   useNotify(notifications);
 
@@ -218,16 +228,32 @@ const useGitButtons = ({ client = defaultClient } = {}) => {
     }
   }, []);
 
+  return notifyOfChanges;
+};
+
+type UseGitButtonOptions = {
+  client?: BodilessBackendClient,
+  excludeButtons?: GitButtons[],
+};
+
+type UseGitButtons = (options?: UseGitButtonOptions) => void;
+
+const useGitButtons: UseGitButtons = ({
+  client = defaultClient,
+  excludeButtons,
+} = {}) => {
+  const context = useEditContext();
+
+  const notifyOfChanges = useGitNotify({ client });
+
   const menuOptions = useMemo(
-    () => getMenuOptions(client, context, notifyOfChanges), [notifyOfChanges],
+    () => getMenuOptions(client, context, notifyOfChanges, excludeButtons), [notifyOfChanges],
   );
 
-  let rootContext = context;
-  while (rootContext.parent) rootContext = rootContext.parent;
   useRegisterMenuOptions({
     getMenuOptions: useGetter(menuOptions),
     name: 'Git',
-  }, rootContext);
+  }, PageEditContext.root);
 };
 
 export default useGitButtons;

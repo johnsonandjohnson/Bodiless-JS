@@ -14,6 +14,7 @@
 
 import React, {
   FC,
+  PropsWithChildren,
   createContext,
   useContext,
   useState,
@@ -35,7 +36,7 @@ const AccordionContext = createContext<AccordionContextInterface>({
 
 const useAccordionContext = () => useContext(AccordionContext);
 
-const AccordionProvider: FC<AccordionProviderProps> = ({
+const AccordionProvider: FC<PropsWithChildren<AccordionProviderProps>> = ({
   children,
   collapsible = true,
   expanded = false,

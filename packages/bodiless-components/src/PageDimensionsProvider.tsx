@@ -18,6 +18,7 @@ import React, {
   useState,
   useEffect,
   useContext,
+  PropsWithChildren,
 } from 'react';
 import throttle from 'lodash/throttle';
 import { HOC } from '@bodiless/fclasses';
@@ -73,7 +74,9 @@ const getDimensions = (breakpoints?: BreakpointsType): PageDimensions => {
   return { width: 0, height: 0, size: 'sm' };
 };
 
-const PageDimensionsProvider: FC<PageDimensionsProviderProps> = ({ children, breakpoints }) => {
+const PageDimensionsProvider: FC<PropsWithChildren<PageDimensionsProviderProps>> = (
+  { children, breakpoints }
+) => {
   const [dimensions, setDimensions] = useState<PageDimensions>(getDimensions(breakpoints));
 
   useEffect(() => {

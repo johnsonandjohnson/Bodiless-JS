@@ -29,11 +29,14 @@
     "@bodiless/core": "^1.0.0-rc.37",
     "axios": "^0.21.0",
     "enzyme": "^3.9.0",
-    "informed": "^3.34.0",
+    "informed": "^4.44.0",
     "lodash": "^4.17.19",
     "universal-cookie": "^4.0.3"
   },
   "peerDependencies": {
-    "react": "^17.0.2"
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "react-test-renderer": "^18.0.0"
   }
 }

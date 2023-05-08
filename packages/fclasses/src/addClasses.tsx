@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import union from 'lodash/union';
 import difference from 'lodash/difference';
 import capitalize from 'lodash/capitalize';
@@ -60,6 +60,7 @@ export type StylableProps = {
    * The accumulated classes which should be added to the component.
    */
   fClasses?: FClasses;
+  children?: ReactNode;
 };
 
 type Classable = {

@@ -16,7 +16,13 @@
 import React, {
   useCallback, useEffect,
 } from 'react';
-import { useFormApi, useFormState } from 'informed';
+import {
+  Multistep,
+  useFormApi,
+  useMultistepApi,
+  FieldState,
+  useFormState
+} from 'informed';
 import {
   useEditContext,
   withMenuOptions,
@@ -52,141 +58,143 @@ const defaultFormValues: FormValues = {
   indexingDisabled: false,
 };
 
-// Create an enum with the step values
-enum Steps { FeaturesSelect, Confirmation }
-
-const FormBodyBase = () => {
+const FeaturesSelectForm = () => {
   const { node } = useNode<PageDisabledData>();
+  const { data, pagePath } = node;
   const disabledPages = useGetDisabledPages(node);
-  const { pagePath, data } = node;
   const disabledItems = disabledPages[pagePath] || {};
   const pageData = {
     ...defaultFormValues,
     ...disabledItems,
   };
   const {
-    ComponentFormTitle,
+    setValue, getFormState
+  } = useFormApi();
+
+  const {
     ComponentFormDescription,
     ComponentFormFieldWrapper,
     ComponentFormLabel,
     ComponentFormCheckBox,
     ComponentFormSubmitButton,
   } = useMenuOptionUI();
-  const {
-    setValue, setValues, setStep,
-  } = useFormApi();
-  const { values: formValues, step } = useFormState();
+  const { next } = useMultistepApi();
+  useEffect(() => {
+    // Get initial values from node.
+    setValue('FeaturesSelect', pageData);
+  }, []);
 
-  const toggleSubCheckboxes = () => {
-    const { pageDisabled } = formValues;
-    const values = {
-      ...formValues,
-      menuLinksDisabled: pageDisabled,
-      contentLinksDisabled: pageDisabled,
-      indexingDisabled: pageDisabled,
-    };
-    setValues(values);
+  const toggleSubCheckboxes = (
+    fieldState: FieldState, event: React.SyntheticEvent
+  ) => {
+    if (!event) return;
+    const { values: { FeaturesSelect } } = getFormState();
+    const { pageDisabled = false} = FeaturesSelect as FormValues;
+    setValue('FeaturesSelect.pageDisabled', pageDisabled);
+    setValue('FeaturesSelect.menuLinksDisabled', pageDisabled);
+    setValue('FeaturesSelect.contentLinksDisabled', pageDisabled);
+    setValue('FeaturesSelect.indexingDisabled', pageDisabled);
   };
 
-  const toggleOffPageCheckbox = () => {
-    setValue('pageDisabled', false);
+  const toggleOffPageCheckbox = (fieldState: FieldState, event: React.SyntheticEvent) => {
+    if (!event) return;
+    setValue('FeaturesSelect.pageDisabled', false);
   };
 
-  const FeaturesSelectForm = useCallback(() => {
-    useEffect(() => {
-      // Get initial values from node.
-      setValues(pageData);
-    }, []);
-
-    return (
-      <>
-        <ComponentFormDescription>
-          Features to disable:
-        </ComponentFormDescription>
-        <ComponentFormFieldWrapper>
-          <ComponentFormLabel>
-            <ComponentFormCheckBox
-              field="pageDisabled"
-              keepState
-              onChange={toggleSubCheckboxes}
-            />
-            Page
-          </ComponentFormLabel>
-          <ComponentFormFieldWrapper className="bl-pl-5">
-            <ComponentFormLabel>
-              <ComponentFormCheckBox keepState field="menuLinksDisabled" onChange={toggleOffPageCheckbox} />
-              Menu links
-            </ComponentFormLabel>
-            <ComponentFormLabel>
-              <ComponentFormCheckBox keepState field="contentLinksDisabled" onChange={toggleOffPageCheckbox} />
-              Non-menu links
-            </ComponentFormLabel>
-            <ComponentFormLabel>
-              <ComponentFormCheckBox keepState field="indexingDisabled" onChange={toggleOffPageCheckbox} />
-              Indexing
-            </ComponentFormLabel>
-          </ComponentFormFieldWrapper>
-        </ComponentFormFieldWrapper>
-        <ComponentFormSubmitButton
-          aria-label="Submit"
-          onClick={(e: any) => {
-            e.preventDefault();
-            setStep(Steps.Confirmation);
-          }}
-        />
-      </>
-    );
-  }, [formValues]);
-
-  const ConfirmationForm = () => {
-    useEffect(() => {
-      // Prepare data - add current form values and
-      // remove items where all optons are enabled.
-      const updatedData = getCleanedUpData({
-        ...data,
-        disabledPages: {
-          ...disabledPages,
-          [pagePath]: {
-            ...disabledPages[pagePath],
-            ...formValues,
-          },
-        },
-      });
-      // Save form values in node.
-      node.setData(updatedData);
-    }, []);
-
-    const mapKeysToLabels = (key: string) => {
-      switch (key) {
-        case 'pageDisabled':
-          return 'Page';
-        case 'menuLinksDisabled':
-          return 'Menu links';
-        case 'contentLinksDisabled':
-          return 'Non-menu links';
-        case 'indexingDisabled':
-          return 'Indexing';
-        default: return '';
-      }
-    };
-
-    return (
-      <ul>
-        {Object.entries(formValues).map(
-          ([key, value]) => <li key={key}>{`${mapKeysToLabels(key)}: ${value ? 'Disabled' : 'Enabled'}`}</li>,
-        )}
-      </ul>
-    );
+  const handleSubmit = () => {
+    const { values: { FeaturesSelect } } = getFormState();
+    // Prepare data - add current form values and
+    // remove items where all optons are enabled.
+    const updatedData = getCleanedUpData({
+      ...data,
+      disabledPages: {
+        ...disabledPages,
+        [pagePath]: FeaturesSelect as FormValues,
+      },
+    });
+    // Save form values in node.
+    node.setData(updatedData);
+    next();
   };
 
   return (
-    <>
+    <Multistep.Step step="FeaturesSelect">
+      <ComponentFormDescription>
+        Features to disable:
+      </ComponentFormDescription>
+      <ComponentFormFieldWrapper>
+        <ComponentFormLabel>
+          <ComponentFormCheckBox
+            name="pageDisabled"
+            keepState
+            onChange={toggleSubCheckboxes}
+          />
+          Page
+        </ComponentFormLabel>
+        <ComponentFormFieldWrapper className="bl-pl-5">
+          <ComponentFormLabel>
+            <ComponentFormCheckBox keepState name="menuLinksDisabled" onChange={toggleOffPageCheckbox} />
+            Menu links
+          </ComponentFormLabel>
+          <ComponentFormLabel>
+            <ComponentFormCheckBox keepState name="contentLinksDisabled" onChange={toggleOffPageCheckbox} />
+            Non-menu links
+          </ComponentFormLabel>
+          <ComponentFormLabel>
+            <ComponentFormCheckBox keepState name="indexingDisabled" onChange={toggleOffPageCheckbox} />
+            Indexing
+          </ComponentFormLabel>
+        </ComponentFormFieldWrapper>
+      </ComponentFormFieldWrapper>
+      <ComponentFormSubmitButton
+        aria-label="Submit"
+        onClick={handleSubmit}
+      />
+    </Multistep.Step>
+  );
+};
+
+const ConfirmationForm = () => {
+  const { values: { FeaturesSelect = {} } } = useFormState();
+
+  const mapKeysToLabels = (key: string) => {
+    switch (key) {
+      case 'pageDisabled':
+        return 'Page';
+      case 'menuLinksDisabled':
+        return 'Menu links';
+      case 'contentLinksDisabled':
+        return 'Non-menu links';
+      case 'indexingDisabled':
+        return 'Indexing';
+      default: return '';
+    }
+  };
+
+  return (
+    <Multistep.Step step="Confirmation">
+      <ul>
+        {Object.entries(FeaturesSelect as FormValues).map(
+          ([key, value]) => <li key={key}>{`${mapKeysToLabels(key)}: ${value ? 'Disabled' : 'Enabled'}`}</li>,
+        )}
+      </ul>
+    </Multistep.Step>
+  );
+};
+
+const FormBodyBase = () => {
+  const {
+    ComponentFormTitle,
+  } = useMenuOptionUI();
+
+  return (
+    <Multistep>
       <ComponentFormTitle>
         Disable Status
       </ComponentFormTitle>
-      {step === Steps.FeaturesSelect && <FeaturesSelectForm />}
-      {step === Steps.Confirmation && <ConfirmationForm />}
-    </>
+      <FeaturesSelectForm />
+      <ConfirmationForm />
+    </Multistep>
   );
 };
 

@@ -1,0 +1,20 @@
+diff --git a/node_modules/informed/index.d.ts b/node_modules/informed/index.d.ts
+index 99da014..83b3f59 100644
+--- a/node_modules/informed/index.d.ts
++++ b/node_modules/informed/index.d.ts
+@@ -534,6 +534,15 @@ export type InformedGlobalProps = {
+ 
+ export function Informed(props: InformedGlobalProps): JSX.Element;
+ 
++/* ------------------------------- Scope ------------------------------- */
++
++type ScopeProps = {
++  scope: string,
++  key: string,
++  children?: React.ReactNode;
++};
++export function Scope(props: ScopeProps): JSX.Element;
++
+ /* ------------------------------- Inputs ------------------------------ */
+ 
+ /* -------------------------- Form/FormProvider ------------------------ */

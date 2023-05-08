@@ -15,17 +15,17 @@
 // Note: when used with the __vital__ package on vital-demo, that package takes precedence
 // over this one.  This test override has no effect and just an example.
 
-import { vitalHelmetBase } from '@bodiless/vital-layout';
+import { vitalHelmet } from '@bodiless/vital-layout/lib/base';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { addProps } from '@bodiless/fclasses';
 
-const Default = asFluidToken(vitalHelmetBase.Default, {
+const Default = asFluidToken(vitalHelmet.Default, {
   Behavior: {
     BodyHelmet: addProps({ 'data-shadowed-by': '__vitaltest__:Helmet' }),
   },
 });
 
 export default {
-  ...vitalHelmetBase,
+  ...vitalHelmet,
   Default,
 };

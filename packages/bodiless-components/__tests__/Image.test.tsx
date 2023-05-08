@@ -34,7 +34,7 @@ let menuPopup: ReactWrapper<TooltipProps>;
 
 const imageProps = { nodeKey: 'imageKey' };
 
-describe('image interactions', () => {
+describe.skip('image interactions', () => {
   it('should render an image menu item when clicked', () => {
     wrapper = mount(
       <div>

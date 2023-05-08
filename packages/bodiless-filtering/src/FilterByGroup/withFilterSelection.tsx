@@ -12,8 +12,8 @@
  * limitations under the License.
  */
 
-import React, { useCallback, useEffect } from 'react';
-import { useFormState, useFormApi } from 'informed';
+import React, { useEffect } from 'react';
+import { useFormApi, Multistep, useMultistepApi} from 'informed';
 import {
   withEditButton,
   EditButtonOptions,
@@ -23,6 +23,7 @@ import {
   ContextMenuFormProps,
   getUI,
   useEditContext,
+  ContextMenuUI,
 } from '@bodiless/core';
 import {
   withNodeDataHandlers,
@@ -58,6 +59,131 @@ const MSG_RESET_CLEAR = 'The Saved State is filtering this Page for the End User
 const MSG_RESET_SUCCESS = 'UI Filter reset to Saved State.';
 const MSG_CLEAR_SUCCESS = 'The Saved State has been cleared.';
 
+const SaveForm = ({node, ui} : {node: ContentNode<DefaultFilterData>, ui?: ContextMenuUI}) => {
+  const {
+    ComponentFormText,
+    ComponentFormDescription,
+    ComponentFormSubmitButton,
+  } = getUI(ui);
+  const { getFormState } = useFormApi();
+  const { setCurrent } = useMultistepApi();
+  const { getSelectedTags, updateSelectedTags } = useFilterByGroupContext();
+  const { tags: defaultTags = [] } = node.data;
+
+  useEffect(() => {
+    if (defaultTags.length) {
+      setCurrent('clear');
+    }
+  }, []);
+
+  // eslint-disable-next-line consistent-return
+  const handleSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    const { values } = getFormState();
+    // @ts-ignore
+    const v = values[Object.keys(values)[0]] as any;
+    // eslint-disable-next-line default-case
+    switch (v.save.filterSelectionAction) {
+      case FilterSelectionAction.save: {
+        const currentTags = getSelectedTags();
+        updateSelectedTags(currentTags);
+        node.setData({ tags: currentTags });
+        setCurrent('saveSuccess');
+        return currentTags;
+      }
+    }
+  };
+
+  return (
+    <>
+      <ComponentFormDescription>
+        {MSG_SAVE}
+      </ComponentFormDescription>
+      <ComponentFormText
+        type="hidden"
+        name="filterSelectionAction"
+        keepState
+        initialValue={FilterSelectionAction.save}
+      />
+      <ComponentFormSubmitButton
+        aria-label="Submit"
+        onClick={handleSubmit}
+      />
+    </>
+  );
+};
+
+const RestClearForm = ({node, ui} : {node: ContentNode<DefaultFilterData>, ui?: ContextMenuUI}) => {
+  const {
+    ComponentFormDescription,
+    ComponentFormLabel,
+    ComponentFormRadioGroup,
+    ComponentFormRadio,
+    ComponentFormSubmitButton,
+  } = getUI(ui);
+
+  const { getFormState } = useFormApi();
+  const { setCurrent } = useMultistepApi();
+  const { updateSelectedTags } = useFilterByGroupContext();
+  const { tags: defaultTags = [] } = node.data;
+
+  // eslint-dis
+  useEffect(() => {
+    if (!defaultTags.length) {
+      setCurrent('save');
+    }
+  }, []);
+
+  // eslint-disable-next-line consistent-return
+  const handleSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    const { values } = getFormState();
+    // @ts-ignore
+    const v = values[Object.keys(values)[0]] as any;
+    // eslint-disable-next-line default-case
+    switch (v.clear.filterSelectionAction) {
+      case FilterSelectionAction.clear: {
+        const submitValues = { tags: [] };
+        updateSelectedTags(submitValues.tags);
+        node.setData(submitValues);
+        setCurrent('clearSuccess');
+        return submitValues;
+      }
+      case FilterSelectionAction.reset: {
+        updateSelectedTags(defaultTags);
+        setCurrent('resetSuccess');
+        return { tags: defaultTags };
+      }
+    }
+  };
+
+  return (
+    <>
+      <ComponentFormDescription>
+        {MSG_RESET_CLEAR}
+      </ComponentFormDescription>
+      <ComponentFormRadioGroup
+        name="filterSelectionAction"
+        keepState
+        initialValue={FilterSelectionAction.reset}
+      >
+        <ComponentFormLabel key={FilterSelectionAction.reset}>
+          <ComponentFormRadio value={FilterSelectionAction.reset.toString()} />
+          Reset Local Filter UI to Saved State
+        </ComponentFormLabel>
+        <ComponentFormLabel key={FilterSelectionAction.clear}>
+          <ComponentFormRadio value={FilterSelectionAction.clear.toString()} />
+          Clear Saved State from Page
+        </ComponentFormLabel>
+      </ComponentFormRadioGroup>
+      <ComponentFormSubmitButton
+        aria-label="Submit"
+        onClick={handleSubmit}
+      />
+    </>
+  );
+};
+
 /**
  * Renders default filter form in different use cases:
  * - No existing default filter set yet.
@@ -71,139 +197,35 @@ const MSG_CLEAR_SUCCESS = 'The Saved State has been cleared.';
  * @returns void
  */
 const getRenderForm = (node: ContentNode<DefaultFilterData>) => (props: ContextMenuFormProps) => {
-  const { getSelectedTags, updateSelectedTags } = useFilterByGroupContext();
   const { ui } = props;
   const {
-    ComponentFormText,
     ComponentFormDescription,
-    ComponentFormLabel,
-    ComponentFormRadioGroup,
-    ComponentFormRadio,
-    ComponentFormSubmitButton,
   } = getUI(ui);
-  const { tags: defaultTags = [] } = node.data;
-  const { setStep } = useFormApi();
-  const { values, step } = useFormState();
 
-  useEffect(() => {
-    if (!defaultTags.length) {
-      setStep(FilterSelectionAction.save);
-    } else {
-      setStep(FilterSelectionAction.reset);
-    }
-  }, []);
-
-  // eslint-disable-next-line consistent-return
-  const handleSubmit = useCallback((e: React.SyntheticEvent) => {
-    e.preventDefault();
-    const v = values[Object.keys(values)[0]] as any;
-    // eslint-disable-next-line default-case
-    switch (v.filterSelectionAction) {
-      case FilterSelectionAction.clear: {
-        const submitValues = { tags: [] };
-        updateSelectedTags(submitValues.tags);
-        node.setData(submitValues);
-        setStep(FilterSelectionAction.clear_success);
-        return submitValues;
-      }
-      case FilterSelectionAction.reset: {
-        updateSelectedTags(defaultTags);
-        setStep(FilterSelectionAction.reset_success);
-        return { tags: defaultTags };
-      }
-      case FilterSelectionAction.save: {
-        const currentTags = getSelectedTags();
-        updateSelectedTags(currentTags);
-        node.setData({ tags: currentTags });
-        setStep(FilterSelectionAction.save_success);
-        return currentTags;
-      }
-    }
-  }, [values]);
-
-  const SaveForm = useCallback(() => {
-    if (step === FilterSelectionAction.save_success) {
-      return (
+  return (
+    <Multistep>
+      <Multistep.Step step="save">
+        <SaveForm ui={ui} node={node} />
+      </Multistep.Step>
+      <Multistep.Step step="saveSuccess">
         <ComponentFormDescription>
           {MSG_SAVE_SUCCESS}
         </ComponentFormDescription>
-      );
-    }
-
-    return (
-      <>
-        <ComponentFormDescription>
-          {MSG_SAVE}
-        </ComponentFormDescription>
-        <ComponentFormText
-          type="hidden"
-          field="filterSelectionAction"
-          keepState
-          initialValue={FilterSelectionAction.save}
-        />
-        <ComponentFormSubmitButton
-          aria-label="Submit"
-          onClick={handleSubmit}
-        />
-      </>
-    );
-  }, [step]);
-
-  const RestClearForm = useCallback(() => {
-    if (step === FilterSelectionAction.clear_success) {
-      return (
+      </Multistep.Step>
+      <Multistep.Step step="clear">
+        <RestClearForm ui={ui} node={node} />
+      </Multistep.Step>
+      <Multistep.Step step="clearSuccess">
         <ComponentFormDescription>
           {MSG_CLEAR_SUCCESS}
         </ComponentFormDescription>
-      );
-    }
-
-    if (step === FilterSelectionAction.reset_success) {
-      return (
+      </Multistep.Step>
+      <Multistep.Step step="resetSuccess">
         <ComponentFormDescription>
           {MSG_RESET_SUCCESS}
         </ComponentFormDescription>
-      );
-    }
-
-    return (
-      <>
-        <ComponentFormDescription>
-          {MSG_RESET_CLEAR}
-        </ComponentFormDescription>
-        <ComponentFormRadioGroup
-          field="filterSelectionAction"
-          keepState
-          initialValue={FilterSelectionAction.reset}
-        >
-          <ComponentFormLabel key={FilterSelectionAction.reset}>
-            <ComponentFormRadio value={FilterSelectionAction.reset} />
-            Reset Local Filter UI to Saved State
-          </ComponentFormLabel>
-          <ComponentFormLabel key={FilterSelectionAction.clear}>
-            <ComponentFormRadio value={FilterSelectionAction.clear} />
-            Clear Saved State from Page
-          </ComponentFormLabel>
-        </ComponentFormRadioGroup>
-        <ComponentFormSubmitButton
-          aria-label="Submit"
-          onClick={handleSubmit}
-        />
-      </>
-    );
-  }, [step, values]);
-
-  return (
-    <>
-      {(step === FilterSelectionAction.save
-        || step === FilterSelectionAction.save_success)
-        && <SaveForm />}
-      {(step === FilterSelectionAction.reset
-        || step === FilterSelectionAction.reset_success
-        || step === FilterSelectionAction.clear
-        || step === FilterSelectionAction.clear_success)
-        && <RestClearForm />}
-    </>
+      </Multistep.Step>
+    </Multistep>
   );
 };
 

@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
+import React, { ComponentType, PropsWithChildren } from 'react';
 import { graphql } from 'gatsby';
 import {
   A,
@@ -27,7 +27,7 @@ import { asEditable } from '@bodiless/components';
 import Layout from '../../../../components/Layout';
 import { asHeader3, asLink } from '../../../../components/Elements.token';
 
-const SubTitle: ComponentType = asHeader3(H3);
+const SubTitle: ComponentType<PropsWithChildren> = asHeader3(H3);
 
 const DefaultContentLink = flowHoc(
   asBodilessLink(),

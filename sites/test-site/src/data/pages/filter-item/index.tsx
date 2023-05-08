@@ -30,8 +30,8 @@ const TaggableFilterSelector = () => {
   const [tags, setTags] = useState<FilterTagType[]>([]);
   const [showAll, setShowAll] = useState(true);
   const FilterButtons = getSuggestions().map(tag => (
-    <TagButton key={tag.id} onClick={() => setTags([tag])}>
-      {tag.name}
+    <TagButton key={tag.value} onClick={() => setTags([tag])}>
+      {tag.label}
     </TagButton>
   ));
   const props = {
@@ -42,7 +42,7 @@ const TaggableFilterSelector = () => {
     seeAllText: 'View All Groups',
     formBodyText: 'Select from available groups:',
     allowNew: true,
-    noSuggestionsText: 'No matching groups found.',
+    noOptionsText: 'No matching groups found.',
     showWhenNoTagSelected: showAll,
   };
   return (
@@ -69,7 +69,7 @@ const TaggableFilterSelector = () => {
       <div>
         <h2>Selected Tags</h2>
         <p>
-          {tags.map(t => t.name).join(' ')}
+          {tags.map(t => t.label).join(' ')}
           &nbsp;
         </p>
       </div>

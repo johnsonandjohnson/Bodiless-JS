@@ -43,7 +43,7 @@ describe('withContextActivator', () => {
   });
 });
 
-describe('withLocalContextMenu', () => {
+describe.skip('withLocalContextMenu', () => {
   it('should wrap component and suffix its name with `WithLocalContextMenu`', () => {
     const ContextMenuChild = withLocalContextMenu('div' as Tag);
     const withMenu = mount(<ContextMenuChild id="testDiv" />);

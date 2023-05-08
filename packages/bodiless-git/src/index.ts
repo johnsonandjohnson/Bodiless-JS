@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import useGitButtons from './useGitButtons';
+import useGitButtons, { GitButtons } from './useGitButtons';
 import { useGitContext, GitContextProvider, withGitContextProvider } from './GitContextProvider';
 
 export {
@@ -20,6 +20,7 @@ export {
   useGitContext,
   GitContextProvider,
   withGitContextProvider,
+  GitButtons,
 };
 
 export type {

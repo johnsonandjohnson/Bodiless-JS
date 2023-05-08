@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { TailwindConfig } from 'tailwindcss/tailwind-config';
+import { Config as TailwindConfig } from 'tailwindcss';
 import { mergeConfigs, Package } from '../src/tailwindcss/mergeConfigs';
 
 describe('tailwindcss', () => {

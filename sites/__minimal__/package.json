@@ -31,8 +31,8 @@
     "gatsby": "^4.11.2",
     "gatsby-plugin-gatsby-cloud": "4.13.0",
     "postcss": "^8.4.12",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "tailwindcss": "^3.0.23",
     "tailwindcss-dir": "^4.0.0"

@@ -76,7 +76,7 @@ export class PdpPage extends BasePage {
     this.accordionBody = 'AT - Overview';
     this.pageIconXpath = '//*[@aria-label="Page"]';
     this.newPageIconXpath = '//*[@aria-label="New"]';
-    this.fieldAddPageFormXpath = '//*[@aria-label="Context Submenu Form"]//input[@name="new-page-path"]';
+    this.fieldAddPageFormXpath = '//*[@aria-label="Context Submenu Form"]//input[@name="pagePath"]';
     this.checkmarkIconAddPageFormXpath = '//*[@aria-label="Context Submenu Form"]//*[@aria-label="Submit"]';
     this.newPageLinkXpath = '//*[@id="new-page-link"]';
     this.titleXpath = '//*[@data-product-element="title"]//*[@data-slate-editor="true"]';

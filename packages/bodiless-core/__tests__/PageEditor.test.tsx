@@ -12,16 +12,28 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import { mount } from 'enzyme';
 import { observer } from '../src/mobx.bl-edit';
 import { useEditContext } from '../src/hooks';
-import PageEditor from '../src/components/PageEditor';
+import PageEditor, { useDocsButton, useEditButton } from '../src/components/PageEditor';
 import { Menu, menuRendered, itemRendered } from './helpers/Menu';
 import PageEditContext from '../src/PageEditContext';
 import { defaultStore } from '../src/PageEditContext/Store';
 
-describe('PageEditor', () => {
+const EditButton = () => {
+  useEditButton();
+  return <></>;
+};
+
+const Page: FC<PropsWithChildren<any>> = ({ children, ...rest }) => (
+  <PageEditor {...rest}>
+    <EditButton />
+    {children}
+  </PageEditor>
+);
+
+describe('Page', () => {
   beforeEach(() => {
     defaultStore.reset();
     PageEditContext.root.unregisterPeers();
@@ -34,9 +46,9 @@ describe('PageEditor', () => {
     });
 
     const wrapper = mount((
-      <PageEditor>
+      <Page>
         <Inner />
-      </PageEditor>
+      </Page>
     ));
     expect(wrapper.find('span#inner').text()).toBe('preview');
     wrapper.find('div[aria-label="Edit"]').simulate('click');
@@ -47,7 +59,7 @@ describe('PageEditor', () => {
     const buttonFinder = (n: any) => (
       n.name() === 'DefaultToolbarButton' && n.prop('aria-label') === 'Edit'
     );
-    const wrapper = mount(<PageEditor />);
+    const wrapper = mount(<Page />);
     const button = wrapper.findWhere(buttonFinder);
     expect(button.prop('isActive')).toBeFalsy();
     wrapper.find('div[aria-label="Edit"]').simulate('click');
@@ -63,9 +75,9 @@ describe('PageEditor', () => {
       return <></>;
     });
     const wrapper = mount((
-      <PageEditor>
+      <Page>
         <Inner />
-      </PageEditor>
+      </Page>
     ));
     expect(innerSpy).toBeCalledTimes(1);
     wrapper.find('div[aria-label="Edit"]').simulate('click');
@@ -76,17 +88,17 @@ describe('PageEditor', () => {
     menuRendered.mockClear();
     const Test = () => (
       <>
-        <PageEditor />
+        <Page />
         <Menu />
       </>
     );
     const wrapper = mount(<Test />);
     expect(menuRendered).toBeCalledTimes(2);
-    expect(itemRendered).toBeCalledTimes(2);
+    expect(itemRendered).toBeCalledTimes(1);
     wrapper.find('div[aria-label="Edit"]').simulate('click');
     expect(menuRendered).toBeCalledTimes(2);
     // Clicking on Edit button currently re-activates the root context
-    expect(itemRendered).toBeCalledTimes(4);
+    expect(itemRendered).toBeCalledTimes(2);
     menuRendered.mockClear();
   });
 });

@@ -14,5 +14,4 @@
 
 export { default as MenuClean, asMenuToken } from './MenuClean';
 export { default as vitalMenu } from './tokens';
-export { default as vitalMenuBase } from './tokens/vitalMenu';
 export type { MenuComponents } from './types';

@@ -31,14 +31,12 @@ const DEFAULT_OPTIONS: WithoutHydrationOptions = {
 export const isStaticClientSide = !!(
   typeof window !== 'undefined'
   && window.document
-  && window.document.createElement
   && process.env.NODE_ENV === 'production'
 );
 
 export const isEditClientSide = !!(
   typeof window !== 'undefined'
   && window.document
-  && window.document.createElement
   && process.env.NODE_ENV === 'development'
 );
 

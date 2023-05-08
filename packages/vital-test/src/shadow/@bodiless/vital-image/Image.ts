@@ -12,32 +12,31 @@
  * limitations under the License.
  */
 
-import { vitalImageBase, asImageToken } from '@bodiless/vital-image';
+import { asImageToken } from '@bodiless/vital-image';
+import { vitalImage } from '@bodiless/vital-image/lib/base';
 import { addProps } from '@bodiless/fclasses';
 
-const Default = asImageToken(vitalImageBase.Default, {
+const Default = asImageToken(vitalImage.Default, {
   Behavior: {
     _: addProps({ 'data-shadowed-by': '__vital__:Image:Gatsby' }),
   },
 });
 
-const Plain = asImageToken(vitalImageBase.Plain, {
+const Plain = asImageToken(vitalImage.Plain, {
   Behavior: {
     _: addProps({ 'data-shadowed-by': '__vital__:Image:Plain' }),
   },
 });
 
-const Hero = asImageToken(vitalImageBase.Hero, {
+const Hero = asImageToken(vitalImage.Hero, {
   Behavior: {
     _: addProps({ 'data-shadowed-by': '__vital__:Image:Hero' }),
   },
 });
 
-const vitalImage: typeof vitalImageBase = {
-  ...vitalImageBase,
+export default {
+  ...vitalImage,
   Default,
   Plain,
   Hero,
 };
-
-export default vitalImage;

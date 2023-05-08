@@ -12,32 +12,33 @@
  * limitations under the License.
  */
 
-import { asElementToken, vitalTypographyBase } from '@bodiless/vital-elements';
+import { asElementToken } from '@bodiless/vital-elements';
+import { vitalTypography } from '@bodiless/vital-elements/lib/base';
 import { addProps } from '@bodiless/fclasses';
 
 export default {
-  ...vitalTypographyBase,
-  H1: asElementToken(vitalTypographyBase.H1, {
+  ...vitalTypography,
+  H1: asElementToken(vitalTypography.H1, {
     Theme: {
       _: addProps({ 'data-shadowed-by': '__vitaltest__:Typography:H1' }),
     },
   }),
-  H2: asElementToken(vitalTypographyBase.H2, {
+  H2: asElementToken(vitalTypography.H2, {
     Theme: {
       _: addProps({ 'data-shadowed-by': '__vitaltest__:Typography:H2' }),
     },
   }),
-  H3: asElementToken(vitalTypographyBase.H3, {
+  H3: asElementToken(vitalTypography.H3, {
     Theme: {
       _: addProps({ 'data-shadowed-by': '__vitaltest__:Typography:H3' }),
     },
   }),
-  H4: asElementToken(vitalTypographyBase.H4, {
+  H4: asElementToken(vitalTypography.H4, {
     Theme: {
       _: addProps({ 'data-shadowed-by': '__vitaltest__:Typography:H4' }),
     },
   }),
-  H5: asElementToken(vitalTypographyBase.H5, {
+  H5: asElementToken(vitalTypography.H5, {
     Theme: {
       _: addProps({ 'data-shadowed-by': '__vitaltest__:Typography:H5' }),
     },

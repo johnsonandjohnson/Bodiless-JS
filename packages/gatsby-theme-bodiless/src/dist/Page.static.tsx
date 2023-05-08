@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import { StaticPage } from '@bodiless/core';
 import { ContextWrapper } from '@bodiless/core-ui';
 import { PageDataProvider } from '@bodiless/page';
@@ -25,7 +25,7 @@ const defaultUI: Omit<FinalUI, 'PageEditor'> = {
 
 const getUI = (ui: UI = {}): Omit<FinalUI, 'PageEditor'> => ({ ...defaultUI, ...ui });
 
-const Page: FC<PageProps> = ({ children, ui, ...rest }) => {
+const Page: FC<PropsWithChildren<PageProps>> = ({ children, ui, ...rest }) => {
   const { ContextWrapper: Wrapper } = getUI(ui);
   const { pageContext } = rest;
   const {

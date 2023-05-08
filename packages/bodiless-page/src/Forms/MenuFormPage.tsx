@@ -55,8 +55,7 @@ const MenuFormPage = (props : PageState) => {
             <PageURLField
               fieldFull
               required
-              validateOnChange
-              validateOnBlur
+              validateOn="change-blur"
             />
           </ContextMenuProvider>
         </>

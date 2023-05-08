@@ -94,9 +94,8 @@ const getFilteredItemData = (tagsNode: ContentNode<any>) => {
       ? titleArray[0].text
       : ''
     : titleNode.data.text || '';
-
   const { tags = [] } = tagsNode.data;
-  const tagsData = tags.length > 0 ? tags.map((tag: any) => tag.name) : [];
+  const tagsData = tags.length > 0 ? tags.map((tag: any) => tag.label || tag.name) : [];
   const itemCats = tagsData.join(',');
   return {
     item_brand: brandName,

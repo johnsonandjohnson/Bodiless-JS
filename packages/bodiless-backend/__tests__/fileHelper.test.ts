@@ -15,6 +15,7 @@
 import request from 'supertest';
 import MD5 from 'crypto-js/md5';
 import { tmpdir } from 'os';
+import Backend from '../src/backend';
 import { resolveRelativeToMe } from './tools';
 
 const backendPrefix = '/prefix';
@@ -22,22 +23,19 @@ const backendStaticPath = tmpdir();
 const filePath = resolveRelativeToMe('fixtures', 'images', 'image.png');
 
 const getApp = () => {
-  // eslint-disable-next-line global-require
-  const Backend = require('../src/backend');
   const backend = new Backend();
   return backend.getApp();
 };
 
 describe('Create fileHelper endpoint', () => {
-  // preparing environment variables
-  // clearing mocks
+  // preparing environment variables; clearing mocks
   beforeEach(() => {
     jest.resetModules();
     process.env.GATSBY_BACKEND_PREFIX = backendPrefix;
     process.env.BODILESS_BACKEND_STATIC_PATH = backendStaticPath;
   });
 
-  describe('when the image is uploaded succefully', () => {
+  describe('when the image is uploaded successfully', () => {
     const nodePath = 'Page$homepage$309e2660-767a-11ea-8222-6fba863d924a$image';
     const file = '';
     const performRequest = (app$: any) => request(app$)

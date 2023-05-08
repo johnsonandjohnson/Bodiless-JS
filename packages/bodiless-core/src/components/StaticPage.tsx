@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 
 import PageEditContext from '../PageEditContext';
 import { PageEditContextInterface } from '../PageEditContext/types';
@@ -75,11 +75,15 @@ class StaticContext implements PageEditContextInterface {
   unregisterPeer = () => {};
 
   allMenuOptions = [];
+
+  localContextMenuKey = new Date();
+
+  refreshLocalContextMenu = () => undefined;
 }
 
 const staticContext = new StaticContext();
 
-const StaticPage: FC = ({ children }) => (
+const StaticPage: FC<PropsWithChildren> = ({ children }) => (
   <PageEditContext.Provider value={staticContext}>
     {children}
   </PageEditContext.Provider>

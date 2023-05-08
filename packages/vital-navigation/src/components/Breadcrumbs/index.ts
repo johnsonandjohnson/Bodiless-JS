@@ -13,5 +13,4 @@
  */
 
 export { default as BreadcrumbsClean, asBreadcrumbsToken } from './BreadcrumbsClean';
-export { default as vitalBreadcrumbsBase } from './tokens/vitalBreadcrumbs';
 export { default as vitalBreadcrumbs } from './tokens';

@@ -37,13 +37,14 @@ const Item = observer(({
       [key]: typeof option[next] === 'string' ? option[next] : option[next].toString(),
     };
   }, {});
+  const children = (typeof option.label === 'function' ? option.label() : option.label) || option.name;
   return (
     <span
       {...rest}
       {...optionAttributes}
       id={option.name}
     >
-      {option.label || option.name}
+      {children}
     </span>
   );
 });

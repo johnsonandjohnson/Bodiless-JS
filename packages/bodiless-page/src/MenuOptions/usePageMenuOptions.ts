@@ -19,6 +19,18 @@ import {
 } from '@bodiless/core';
 import { PageMenuOptions } from '../types';
 
+const usePageMenuGroup = () => {
+  const menuOptions = [
+    {
+      name: 'page-group',
+      icon: 'description',
+      label: 'Page',
+      Component: ContextSubMenu,
+    },
+  ];
+  return menuOptions;
+};
+
 const usePageMenuOptions = (
   options: PageMenuOptions,
 ) => {
@@ -35,12 +47,7 @@ const usePageMenuOptions = (
   );
 
   const menuOptions = [
-    {
-      name: 'page-group',
-      icon: 'description',
-      label: 'Page',
-      Component: ContextSubMenu,
-    },
+    ...usePageMenuGroup(),
     {
       name,
       icon,
@@ -56,4 +63,5 @@ const usePageMenuOptions = (
 
 export {
   usePageMenuOptions,
+  usePageMenuGroup,
 };

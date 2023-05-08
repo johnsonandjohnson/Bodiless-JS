@@ -105,26 +105,26 @@ const TagTitleBase: FC<TagTitleProps> = ({
 
   const onSelect = () => (isTagSelected(tag) ? unSelectTag(tag, onChange) : selectTag(tag, onChange));
 
-  const htmlId = `filter-category-${categoryId}-input-${tag.id === TAG_ANY_KEY ? categoryId : tag.id}`;
+  const htmlId = `filter-category-${categoryId}-input-${tag.value === TAG_ANY_KEY ? categoryId : tag.value}`;
 
   return (
-    <FilterInputWrapper {...rest} key={tag.id}>
+    <FilterInputWrapper {...rest} key={tag.value}>
       <FilterGroupItemInput
         type={multipleAllowedTags ? 'checkbox' : 'radio'}
         name={categoryId}
-        value={tag.id}
+        value={tag.value}
         id={htmlId}
         onChange={onSelect}
         checked={checked}
       />
       {
-        isEmpty(tag.name) ? (
+        isEmpty(tag.label) ? (
           <FilterGroupItemPlaceholder htmlFor={htmlId}>
             { emptyTitleText }
           </FilterGroupItemPlaceholder>
         ) : (
           <FilterGroupItemLabel htmlFor={htmlId}>
-            { tag.name }
+            { tag.label }
           </FilterGroupItemLabel>
         )
       }
@@ -138,7 +138,7 @@ const TagTitle = flow(
     'onContextMenu',
     'getSuggestions',
     'allowMultipleTags',
-    'noSuggestionsText',
+    'noOptionsText',
     'seeAllText',
     'formTitle',
     'formBodyText',
@@ -160,7 +160,7 @@ const TagTitle = flow(
     formTitle: 'Group Membership',
     formBodyText: 'Select from available groups:',
     seeAllText: 'View All Groups',
-    noSuggestionsText: 'No matching groups found.',
+    noOptionsText: 'No matching groups found.',
   }),
   withNodeDataHandlers({ tags: [] }),
   withNode,

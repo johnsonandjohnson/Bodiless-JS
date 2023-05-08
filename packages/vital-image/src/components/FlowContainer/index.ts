@@ -13,16 +13,9 @@
  */
 
 import vitalImageFlowContainer from './tokens';
-import vitalImageFlowContainerBaseOrig, {
+import {
   VitalImageFlowContainer
 } from './tokens/vitalImageFlowContainer';
 
-/**
-  * Use this version of the vital card tokens when extending or shadowing.
-  * @category Token Collection
-  * @see [[VitalImageFlowContainer]]
-  */
-const vitalImageFlowContainerBase = vitalImageFlowContainerBaseOrig;
-
-export { vitalImageFlowContainer, vitalImageFlowContainerBase };
+export { vitalImageFlowContainer };
 export type { VitalImageFlowContainer };

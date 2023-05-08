@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 /* eslint-disable max-len */
-import React, { ComponentType } from 'react';
+import React, { ComponentType, PropsWithChildren } from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { asBodilessAnchor, asBodilessList } from '@bodiless/components';
@@ -42,7 +42,7 @@ const AnchorSubtitle = flowHoc(
   addClasses('my-2'),
 )(H4);
 
-const TextSection = addClasses('my-4')(P) as ComponentType;
+const TextSection = addClasses('my-4')(P) as ComponentType<PropsWithChildren>;
 
 const asAnchorLink = flowHoc(
   replaceWith(A),

@@ -78,7 +78,7 @@ describe('ContextMenuForm', () => {
     );
     it('Closes the form when the submit handler returns nothing', () => {
       const wrapper = shallow(jsx);
-      wrapper.prop('onSubmit')();
+      wrapper.prop('onSubmit')({ values: {}});
       expect(close).toHaveBeenCalled();
     });
     it('Does not close the form when the submit handler returns true', () => {
@@ -87,13 +87,13 @@ describe('ContextMenuForm', () => {
       const wrapper = shallow(
         (<ContextMenuForm closeForm={close}>{() => <></>}</ContextMenuForm>),
       );
-      wrapper.prop('onSubmit')();
+      wrapper.prop('onSubmit')({ values: {}});
       expect(close).toHaveBeenCalled();
     });
     it('Closes the form when no submit handler is provided', () => {
       close.mockReset();
       const wrapper = shallow(jsx);
-      wrapper.prop('onSubmit')();
+      wrapper.prop('onSubmit')({ values: {}});
       expect(close).not.toHaveBeenCalled();
     });
   });
@@ -116,9 +116,10 @@ describe('ContextMenuForm (High Level)', () => {
       );
     };
     const wrapper = mount(<Form closeForm={close} />);
-    const stateButton = wrapper.find('button#clickme');
+    let stateButton = wrapper.find('button#clickme');
     expect(stateButton.text()).toBe('unclicked');
     stateButton.simulate('click');
+    stateButton = wrapper.find('button#clickme');
     expect(stateButton.text()).toBe('clicked');
     const submitButton = wrapper.find('button[aria-label="Submit"]');
     submitButton.simulate('submit');

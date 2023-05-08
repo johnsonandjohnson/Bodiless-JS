@@ -12,9 +12,9 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, ComponentType } from 'react';
 import {
-  mount, ComponentType, ReactWrapper, shallow,
+  mount, ReactWrapper, shallow,
 } from 'enzyme';
 import {
   PageEditContext, PageContextProvider, ifToggledOff,

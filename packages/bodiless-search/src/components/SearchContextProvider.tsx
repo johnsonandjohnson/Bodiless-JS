@@ -13,7 +13,7 @@
  */
 
 import React, {
-  useContext, useState, FC, useRef, useEffect, useCallback, useMemo,
+  useContext, useState, FC, useRef, useEffect, useCallback, useMemo, PropsWithChildren,
 } from 'react';
 import querystring from 'query-string';
 import { HOC } from '@bodiless/fclasses';
@@ -44,7 +44,7 @@ const defaultSearchResults: TSearchResultContextValue = {
 };
 const searchResultContext = React.createContext<TSearchResultContextValue>(defaultSearchResults);
 export const useSearchResultContext = () => useContext(searchResultContext);
-export const SearchResultProvider: FC = ({ children }) => {
+export const SearchResultProvider: FC<PropsWithChildren> = ({ children }) => {
   const [results, setResult] = useState<TSearchResults>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
 

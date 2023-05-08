@@ -16,7 +16,13 @@ import React, {
   ComponentType, HTMLProps, ReactNode,
 } from 'react';
 import {
-  FieldProps, ChildFieldProps, SelectFieldProps,
+  FieldProps,
+  InputProps,
+  TextAreaProps,
+  RadioGroupProps,
+  RadioProps,
+  CheckboxProps,
+  SelectProps,
 } from 'informed';
 import Tooltip from 'rc-tooltip';
 import type { StylableProps } from '@bodiless/fclasses';
@@ -175,14 +181,14 @@ export type ContextMenuUI = {
   ComponentFormCloseButton?: ComponentType<HTMLProps<HTMLButtonElement>> | string;
   ComponentFormSubmitButton?: ComponentType<HTMLProps<HTMLButtonElement>> | string;
   ComponentFormUnwrapButton?: ComponentType<HTMLProps<HTMLButtonElement>> | string;
-  ComponentFormText?: ComponentType<FieldProps<any, any>>;
-  ComponentFormTextArea?: ComponentType<FieldProps<any, any>>;
-  ComponentFormRadioGroup?: ComponentType<FieldProps<any, any>>;
+  ComponentFormText?: ComponentType<FieldProps<InputProps>>;
+  ComponentFormTextArea?: ComponentType<FieldProps<TextAreaProps>>;
+  ComponentFormRadioGroup?: ComponentType<FieldProps<RadioGroupProps>>;
   ComponentFormFieldTitle?: ComponentType<HTMLProps<HTMLDivElement>> | string;
-  ComponentFormRadio?: ComponentType<ChildFieldProps<any, any>>;
-  ComponentFormCheckBox?: ComponentType<FieldProps<any, any>>;
-  ComponentFormSelect?: ComponentType<SelectFieldProps<any, any>>;
-  ComponentFormOption?: ComponentType<ChildFieldProps<any, any>>;
+  ComponentFormRadio?: ComponentType<RadioProps>;
+  ComponentFormCheckBox?: ComponentType<FieldProps<CheckboxProps>>;
+  ComponentFormSelect?: ComponentType<FieldProps<SelectProps>>;
+  ComponentFormOption?: ComponentType<HTMLProps<HTMLOptionElement>> | string;
   ComponentFormError?: ComponentType<HTMLProps<HTMLDivElement>> | string;
   ComponentFormWarning?: ComponentType<HTMLProps<HTMLDivElement>> | string;
   ComponentFormLink?: ComponentType<HTMLProps<HTMLAnchorElement>> | string;

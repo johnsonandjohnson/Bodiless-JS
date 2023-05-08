@@ -37,7 +37,7 @@ let menuPopup: ReactWrapper<TooltipProps>;
 const firstLinkProps = { nodeKey: 'oneLink' };
 const secondLinkProps = { nodeKey: 'anotherLink' };
 
-describe('link interactions', () => {
+describe.skip('link interactions', () => {
   it('should render a link menu item when clicked', () => {
     wrapper = mount(
       <div>

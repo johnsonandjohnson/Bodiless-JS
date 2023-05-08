@@ -12,14 +12,4 @@
  * limitations under the License.
  */
 
-import { asFluidToken } from '@bodiless/vital-elements';
-import { on } from '@bodiless/fclasses';
-import { vitalRichText, RichTextClean } from '../RichText';
-
-const WithEditorVariations = asFluidToken({
-  Components: {
-    RichText: on(RichTextClean)(vitalRichText.Default),
-  },
-});
-
-export const vitalEditorsFlowContainer = { WithEditorVariations };
+export { vitalEditorsFlowContainer} from './tokens';

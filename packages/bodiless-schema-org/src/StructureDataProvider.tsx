@@ -14,7 +14,7 @@
 
 import { HOC } from '@bodiless/fclasses';
 import React, {
-  ComponentType, createContext, useContext, useState, FC,
+  ComponentType, createContext, useContext, useState, FC, PropsWithChildren,
 } from 'react';
 import Helmet from 'react-helmet';
 
@@ -32,7 +32,7 @@ const StructuredDataContext = createContext<SDProvider>({
 
 export const useStructuredData = () => useContext(StructuredDataContext);
 
-export const StructuredDataProvider: FC = ({ children }) => {
+export const StructuredDataProvider: FC<PropsWithChildren> = ({ children }) => {
   const [schemaMap, setSchemaMap] = useState<SchemaMap>({});
 
   const setStructuredData: SchemaSetter = (schemaType, data) => {

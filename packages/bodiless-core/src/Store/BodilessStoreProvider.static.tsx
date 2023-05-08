@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { Component } from 'react';
+import React, { Component, PropsWithChildren } from 'react';
 import pick from 'lodash/pick';
 import path from 'path';
 import { NodeProvider, DefaultContentNode } from '@bodiless/data';
@@ -39,7 +39,7 @@ class DefaultStore
   }
 }
 
-export class BodilessStoreProvider extends Component<Props, State> {
+export class BodilessStoreProvider extends Component<PropsWithChildren<Props>, State> {
   constructor(props: Props) {
     super(props);
     this.state = {

@@ -13,7 +13,7 @@
  */
 
 import React, {
-  FC, useEffect, useContext, useState,
+  FC, useEffect, useContext, useState, PropsWithChildren,
 } from 'react';
 
 import { Enhancer } from '@bodiless/fclasses';
@@ -41,7 +41,9 @@ const defaultValue = {
 
 const BVLoaderContext = React.createContext<BVLoaderData>(defaultValue);
 
-export const BVLoaderProvider: FC<Props> = ({ children, scriptUrl, bvConfig }) => {
+export const BVLoaderProvider: FC<PropsWithChildren<Props>> = (
+  { children, scriptUrl, bvConfig }
+) => {
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     const scriptId = 'bvloader';

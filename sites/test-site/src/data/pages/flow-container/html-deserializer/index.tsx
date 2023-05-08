@@ -12,7 +12,12 @@
  * limitations under the License.
  */
 
-import React, { useContext, useState, FC } from 'react';
+import React, {
+  useContext,
+  useState,
+  FC,
+  PropsWithChildren
+} from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { withResetButton } from '@bodiless/core';
@@ -96,7 +101,7 @@ const HtmlStorageContext = React.createContext<HtmlStorage>({
   setHtml: () => {},
 });
 
-const HtmlStorageProvider: FC = ({ children }) => {
+const HtmlStorageProvider: FC<PropsWithChildren> = ({ children }) => {
   const [html, setHtml] = useState(defaultHtml);
   return (
     <HtmlStorageContext.Provider value={{ html, setHtml }}>

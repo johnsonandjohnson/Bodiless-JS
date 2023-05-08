@@ -12,16 +12,17 @@
  * limitations under the License.
  */
 
-import { vitalSearchTogglerBase, asSearchTogglerToken } from '@bodiless/vital-search';
+import { asSearchTogglerToken } from '@bodiless/vital-search';
+import { vitalSearchToggler } from '@bodiless/vital-search/lib/base';
 import { addProps } from '@bodiless/fclasses';
 
-const Default = asSearchTogglerToken(vitalSearchTogglerBase.Default, {
+const Default = asSearchTogglerToken(vitalSearchToggler.Default, {
   Behavior: {
     _: addProps({ 'data-shadowed-by': '__vital__:SearchToggler' }),
   },
 });
 
 export default {
-  ...vitalSearchTogglerBase,
+  ...vitalSearchToggler,
   Default,
 };

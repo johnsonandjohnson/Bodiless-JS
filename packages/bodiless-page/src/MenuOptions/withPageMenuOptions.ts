@@ -22,7 +22,7 @@ import {
   menuFormPageDelete,
   menuFormPageNew,
 } from '../Forms';
-import { usePageMenuOptions } from './usePageMenuOptions';
+import { usePageMenuGroup, usePageMenuOptions } from './usePageMenuOptions';
 
 const defaultClient = new BodilessBackendClient();
 
@@ -86,9 +86,16 @@ const withNewPageButton = withMenuOptions({
   root: true,
 });
 
+const withPageMenuGroup = withMenuOptions({
+  useMenuOptions: () => usePageMenuGroup(),
+  name: 'Page Group',
+  root: true,
+});
+
 export {
   withClonePageButton,
   withDeletePageButton,
   withMovePageButton,
   withNewPageButton,
+  withPageMenuGroup,
 };

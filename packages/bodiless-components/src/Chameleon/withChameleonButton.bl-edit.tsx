@@ -77,7 +77,7 @@ export const useChameleonSwapForm = () => {
     ));
     return (
       <>
-        <ComponentFormRadioGroup field="component">
+        <ComponentFormRadioGroup name="component">
           {radios}
         </ComponentFormRadioGroup>
       </>

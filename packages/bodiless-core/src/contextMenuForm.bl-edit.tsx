@@ -12,10 +12,14 @@
  * limitations under the License.
  */
 
-import React, { FC, ReactNode, useCallback } from 'react';
+import React, {
+  FC,
+  ReactNode, useCallback, PropsWithChildren, useRef
+} from 'react';
 import {
-  Form, FormApi, FormState, FormValues,
+  Form, useFormApi, useFormState,
 } from 'informed';
+import type { FormApi, FormState } from 'informed';
 import flow from 'lodash/flow';
 import { withClickOutside } from './hoc.bl-edit';
 import { useMenuOptionUI } from './components/ContextMenuContext.bl-edit';
@@ -32,8 +36,8 @@ export type Options<D> = {
  * The type of the props that are passed to a form body renderer.
  */
 export type FormBodyProps<D> = ContextMenuFormProps & Options<D> & {
-  formApi: FormApi<D>;
-  formState: FormState<D & FormValues>;
+  formApi: FormApi;
+  formState: FormState;
   scope?: string;
 };
 
@@ -53,7 +57,7 @@ export type FormChromeProps = {
   hasSubmit: boolean;
 } & ContextMenuFormProps;
 
-const FormChromeBase: FC<FormChromeProps> = (props) => {
+const FormChromeBase: FC<PropsWithChildren<FormChromeProps>> = (props) => {
   const {
     children,
     title,
@@ -90,7 +94,7 @@ export const ContextMenuForm = <D extends object>(props: ContextMenuPropsType<D>
     onClose,
     ui,
     submitValues = () => undefined,
-    initialValues = {} as D,
+    initialValues = {},
     hasSubmit = true,
     children = () => <></>,
     title,
@@ -104,33 +108,43 @@ export const ContextMenuForm = <D extends object>(props: ContextMenuPropsType<D>
     }
     closeForm(e);
   };
+
+  const FormContent = () => {
+    const formApi = useFormApi();
+    const formState = useFormState();
+
+    return (
+      <FormChrome
+        onClickOutside={(e: KeyboardEvent | MouseEvent) => callOnClose(e, formState.values as D)}
+        hasSubmit={typeof hasSubmit === 'function'
+          ? hasSubmit(formState.values as D) && !formState.invalid
+          : hasSubmit && !formState.invalid}
+        closeForm={(e: KeyboardEvent | MouseEvent) => callOnClose(e, formState.values as D)}
+        title={title}
+        description={description}
+      >
+        {typeof children === 'function'
+          ? children({
+            closeForm, formApi, formState, ui,
+          })
+          : children}
+      </FormChrome>
+    );
+  };
+
+  const formApiRef = useRef();
   return (
     <Form
-      onSubmit={(values: D) => {
-        if (!submitValues(values)) {
-          callOnClose(null, values);
+      formApiRef={formApiRef}
+      onSubmit={(formState: FormState) => {
+        if (!submitValues(formState.values as D)) {
+          callOnClose(null, formState.values as D);
         }
       }}
       initialValues={initialValues}
       {...rest}
     >
-      {({ formApi, formState }) => (
-        <FormChrome
-          onClickOutside={(e: KeyboardEvent | MouseEvent) => callOnClose(e, formState.values)}
-          hasSubmit={typeof hasSubmit === 'function'
-            ? hasSubmit(formState.values) && !formState.invalid
-            : hasSubmit && !formState.invalid}
-          closeForm={(e: KeyboardEvent | MouseEvent) => callOnClose(e, formState.values)}
-          title={title}
-          description={description}
-        >
-          {typeof children === 'function'
-            ? children({
-              closeForm, formApi, formState, ui,
-            })
-            : children}
-        </FormChrome>
-      )}
+      <FormContent />
     </Form>
   );
 };

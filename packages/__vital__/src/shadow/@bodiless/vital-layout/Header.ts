@@ -12,7 +12,8 @@
  * limitations under the License.
  */
 
-import { vitalHeaderBase, asHeaderToken } from '@bodiless/vital-layout';
+import { asHeaderToken } from '@bodiless/vital-layout';
+import { vitalHeader } from '@bodiless/vital-layout/lib/base';
 import { LinkClean, vitalLink, asLinkToken } from '@bodiless/vital-link';
 import { asLanguageSelector, withLanguageNode } from '@bodiless/i18n';
 import {
@@ -29,10 +30,10 @@ export const asLanguageSelectorLink = on(LinkClean)(
 );
 
 const Default = asHeaderToken(
-  vitalHeaderBase.Default,
+  vitalHeader.Default,
   // @todo Restore this if you don't want search on your site.
   // vitalSearchHeader.WithSearch,
-  vitalHeaderBase.WithLanguageSelector,
+  vitalHeader.WithLanguageSelector,
   {
     Core: {
       _: addProps({ 'data-shadowed-by': '__vital__Header' }),
@@ -48,6 +49,6 @@ const Default = asHeaderToken(
 );
 
 export default {
-  ...vitalHeaderBase,
+  ...vitalHeader,
   Default,
 };

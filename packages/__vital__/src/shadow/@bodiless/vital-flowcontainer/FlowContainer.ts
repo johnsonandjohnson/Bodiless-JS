@@ -14,7 +14,8 @@
 
 import { on } from '@bodiless/fclasses';
 import { asFluidToken } from '@bodiless/vital-elements';
-import { FlowContainerClean, vitalFlowContainerBase } from '@bodiless/vital-flowcontainer';
+import { FlowContainerClean } from '@bodiless/vital-flowcontainer';
+import { vitalFlowContainer } from '@bodiless/vital-flowcontainer/lib/base';
 import { vitalImageFlowContainer } from '@bodiless/vital-image';
 import {vitalEditorsFlowContainer } from '@bodiless/vital-editors';
 import { vitalYouTubeFlowContainer } from '@bodiless/vital-youtube';
@@ -43,7 +44,7 @@ const WithBaseVariations = asFluidToken(
  * Add variations to the content region.
  */
 const ContentRegion = asFluidToken(
-  vitalFlowContainerBase.ContentRegion,
+  vitalFlowContainer.ContentRegion,
   WithBaseVariations,
 );
 
@@ -62,7 +63,7 @@ const WithContentRegionVariations = asFluidToken({
  * a page.
  */
 const Default = asFluidToken(
-  vitalFlowContainerBase.Default,
+  vitalFlowContainer.Default,
   WithBaseVariations,
   WithContentRegionVariations,
 );
@@ -71,12 +72,12 @@ const Default = asFluidToken(
  * Add varitions to the Hero flow container.
  */
 const Hero = asFluidToken(
-  vitalFlowContainerBase.Hero,
+  vitalFlowContainer.Hero,
   WithBaseVariations,
 );
 
 export default {
-  ...vitalFlowContainerBase,
+  ...vitalFlowContainer,
   Default,
   Hero,
   ContentRegion,

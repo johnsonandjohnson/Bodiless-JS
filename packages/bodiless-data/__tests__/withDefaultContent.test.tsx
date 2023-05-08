@@ -165,7 +165,7 @@ describe('withDefaultContent', () => {
         bar: 'defaultBarValue',
       })(BazBase);
       const wrapper = mount(<Baz />);
-      expect(wrapper.find('Foo').html()).toBe('');
+      expect(wrapper.find('Foo').text()).toBe('');
     });
     it('allows merging default content with node data', () => {
       const FooConsumer = createNodeConsumer('Foo');

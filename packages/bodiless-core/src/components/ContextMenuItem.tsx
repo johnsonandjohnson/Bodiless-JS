@@ -42,21 +42,29 @@ const ContextMenuItem = observer((props: IProps) => {
   const icon = option.icon ? (typeof option.icon === 'function' ? option.icon() : option.icon) : '';
   const title = typeof option.formTitle === 'function' ? option.formTitle() : option.formTitle;
   const description = typeof option.formDescription === 'function' ? option.formDescription() : option.formDescription;
-  const activateContext = option.activateContext
-    ? (typeof option.activateContext === 'function'
-      ? option.activateContext()
-      : option.activateContext)
-    : option.activateContext !== false;
+  // const activateContext = option.activateContext
+  //   ? (typeof option.activateContext === 'function'
+  //     ? option.activateContext()
+  //     : option.activateContext)
+  //   : option.activateContext !== false;
+  const activateContext = typeof option.activateContext === 'function'
+    ? option.activateContext() : option.activateContext;
 
   const isFirst = index === 0;
   const setRenderForm = useContextMenuContext().setRenderForm || setRenderForm$;
   const context = useEditContext();
+  const { context: optionContext } = option;
+  const { local } = option;
 
   const onToolbarButtonClick = (event: React.MouseEvent<HTMLDivElement>): void => {
     const menuForm = option.handler ? option.handler(event) : undefined;
-    if (activateContext) context.activate();
+    if (local) {
+      if (activateContext) (optionContext || context).activate();
+    } else {
+      context.activate();
+    }
     if (menuForm) {
-      if (!option.local) context.toggleLocalTooltipsDisabled(!context.areLocalTooltipsDisabled);
+      if (!local) context.toggleLocalTooltipsDisabled(!context.areLocalTooltipsDisabled);
       setIsToolTipShown(!isToolTipShown);
       const formProps: Partial<ContextMenuFormProps> = {
         // @TODO Do we wnt to set the aria label here?
