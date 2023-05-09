@@ -325,6 +325,52 @@ this pattern for the `Schema` and `Theme` domains as well, where `Bar` has also 
 Components from Vital Rich Text Editor by
 Shadowing](/VitalDesignSystem/Components/VitalEditors/RichTextCustomizing#removing-components-from-vital-rich-text-editor-by-shadowing).
 
+## Testing Shadowed Tokens
+
+Before you begin setting up your theme (or whatever else you may be working on), it is a good idea
+to first make sure that your tokens are actually being shadowed.
+
+Once again, the
+[`vital-test`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-test)
+package lends itself as a valuable resource; here, you'll find a useful pattern for testing your
+shadowed tokens.
+
+For example, take a look at the shadowed Vital Button component within the `vital-test` package:
+
+[`vital-test/src/shadow/@bodiless/vital-buttons/Buttons.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-test/src/shadow/%40bodiless/vital-buttons/Buttons.ts):
+
+```ts
+import { vitalButtonsBase, asButtonToken } from '@bodiless/vital-buttons';
+import { addProps } from '@bodiless/fclasses';
+
+const Default = asButtonToken(vitalButtonsBase.Default, {
+  Behavior: {
+    Wrapper: addProps({ 'data-shadowed-by': '__vital__:DefaultButtons' }),
+  },
+});
+
+const Primary = asButtonToken(vitalButtonsBase.Primary, {
+  Behavior: {
+    Wrapper: addProps({ 'data-shadowed-by': '__vital__:PrimaryButtons' }),
+  },
+});
+
+const Secondary = asButtonToken(vitalButtonsBase.Secondary, {
+  Behavior: {
+    Wrapper: addProps({ 'data-shadowed-by': '__vital__:SecondaryButtons' }),
+  },
+});
+```
+
+For each shadowed token that we're defining (`Default`, `Primary`, `Secondary`, etc.), we add a
+prop, `data-shadowed-by`, to the outer token/wrapper — usually, `Wrapper` — of the `Behavior`
+domain. For simplicity's sake, we've set each `data-shadowed-by` prop as the name of the package and
+the token we're shadowing (e.g., `__vital__:PrimaryButtons`), but you can set them to be whatever
+makes the most sense to you.
+
+Now, when viewing your site, if you don't see this identifier on your shadowed component, then you
+know that something hasn't been configured correctly, and you're not shadowing.
+
 ## Important Notes
 
 TODO: Add and Refine
