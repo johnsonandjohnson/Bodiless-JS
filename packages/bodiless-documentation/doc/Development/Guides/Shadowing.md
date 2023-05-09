@@ -58,10 +58,14 @@ located within a package at `./lib/components/{ComponentName}/tokens`, and this 
 be re-exported from the package by an index file which imports it at the _exact path_ `./tokens`.
 
 You should also export a "base" or un-shadowed version of your token collection to allow downstream
-consumers to extend it. You may do this by exporting the tokens from their original location.
+consumers to extend it. You may do this by exporting the tokens from their original location,
+avoiding conflicts.
 
-?> **Note:** This _double export_ (e.g., `yourFoo` and `yourFooBase`) is required to prevent
-compilation errors, as it prevent an infinite loop with the imports.
+?> **Note:** This _double export_ (e.g., `yourFoo` and `yourFooBase`) is required to avoid
+conflicts. We are exporting `yourFoo`, but, in order to extend it, we need to import the original
+object. So, to avoid conflicts, we import the original object from the original file, and re-export
+it as `yourFooBase` — which is what we extend. This is necessary to prevent compilation errors, as
+we could introduce a loop by importing the same object that we are exporting.
 
 Example:
 
@@ -83,9 +87,11 @@ export default tokens;
 **File `./lib/components/Foo/index.js`:**
 
 ```js
-// This version will be shadowable, b/c it is exported from './tokens'.
+// This version will be shadowable,
+// because it is exported from './tokens'.
 export { default as yourFoo } from './tokens';
-// This version will not be shadowable, b/c it is exported from a different path.
+// This version will not be shadowable,
+// because it is exported from a different path.
 export { default as yourFooBase } from './tokens/yourFoo';
 ```
 
