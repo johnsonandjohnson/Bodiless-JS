@@ -13,6 +13,7 @@ they have their own problems when it comes to downstream customization, as
 Let's see how Vital approaches these issues using the paradigm of "Functional"
 or "Utility First" CSS as embodied in the popular [TailwindCSS library]().
 
-> TBD
+> TBD: Convert styling of dialog to tailwind, add some variations,
+> Show how it can be extended using different domains.
 
 [Next: Working with Content](./WorkingWithContent.md)
