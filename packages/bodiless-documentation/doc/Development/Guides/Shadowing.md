@@ -16,8 +16,33 @@ elements.
 
 Some additional notes about shadowing:
 
-- Every component in the Vital Design System is shadowable, and has its own API documentation about
-  shadowing its token collection.
+- TODO: Add any supplementary details here.
+
+## What Can Be Shadowed?
+
+Having gone over what shadowing is, you may be wondering which token collections can be shadowed. As
+mentioned in the overview, a package must be specifically structured to make its tokens available
+for shadowing. Basically, for it to be shadowable, a token collection must be located within the
+`src/components/{ComponentName}/tokens` directory of a package — you cannot shadow anything that is
+outside of a `{package-name}/src/components/{ComponentName}/tokens` directory.
+
+For example, in the `vital-editors` package, if you look within its
+[`src/components`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-editors/src/components)
+directory, you will see directories for the `EditorPlain`, `FlowContainer`, and `RichText`
+components; `EditorPlain` and `RichText` contain `tokens` directories and are shadowable.
+
+The [Vital Design System](/VitalDesignSystem/) provides many shadowable components, each of which
+has its own API documentation about shadowing its token collection. Also, within the Bodiless
+repository, there is a
+[`vital-test`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-test/src/shadow/%40bodiless)
+package that shadows all the available Vital components and provides examples. To continue using
+`vital-editors` as our example, if you look in
+[`vital-test/src/shadow/@bodiless/vital-editors`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-test/src/shadow/%40bodiless/vital-editors),
+you can see how to go about shadowing the `EditorPlain` and `RichText` components.
+
+To get into the finer details of the structure required to make a component shadowable, please see
+the [Creating a Shadowable Token Collection](#creating-a-shadowable-token-collection) section below,
+where we walk you through the process of structuring your own components to be shadowable.
 
 TODO: Rewrite and relocate this Note block:
 
