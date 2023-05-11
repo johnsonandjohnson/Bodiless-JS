@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dialog Tokens Matches snapshot for Welcome 1`] = `
+<div
+  className="FancyBorder FancyBorder-blue"
+>
+  <h1
+    className="Dialog-title"
+  >
+    Welcome
+  </h1>
+  <p
+    className="Dialog-message"
+  >
+    Thank you for visiting our spacecraft!
+  </p>
+</div>
+`;

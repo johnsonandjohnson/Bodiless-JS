@@ -37,7 +37,7 @@ const defaultDomains = {
   Schema: {},
 };
 
-type DefaultDomains = typeof defaultDomains;
+export type DefaultDomains = typeof defaultDomains;
 
 /**
  * Creates a token definition utility for a clean component.

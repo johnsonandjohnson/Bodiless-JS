@@ -13,3 +13,4 @@
  */
 
 export * from './tokenSpec';
+export * from './testing';
