@@ -34,9 +34,6 @@ const LinkBase: FC<PropsWithChildren<LinkBaseProps>> = ({ components: C, childre
     {children
       ? <C.Body>{children}</C.Body>
       : <C.Body />}
-    <C.Body>
-      {children}
-    </C.Body>
   </C.Wrapper>
 );
 
