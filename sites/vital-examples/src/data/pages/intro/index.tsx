@@ -8,7 +8,11 @@ const CustomWelcomeDialog = as(customDialog.Welcome)(Dialog);
 export default () => (
   // @todo Have an example wrapper for intro?
   <div className="max-w-2xl mx-auto p-2">
-    <WelcomeDialog />
-    <CustomWelcomeDialog />
+    <section className="py-2">
+      <WelcomeDialog />
+    </section>
+    <section className="py-2">
+      <CustomWelcomeDialog />
+    </section>
   </div>
 );
