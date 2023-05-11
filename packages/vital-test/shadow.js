@@ -12,7 +12,34 @@
  * limitations under the License.
  */
 
+const disabledPackages = [
+  // 'vital-accordion',
+  // 'vital-elements',
+  // 'vital-link',
+  // 'vital-search',
+  // 'vital-buttons',
+  // 'vital-flowcontainer',
+  // 'vital-list',
+  // 'vital-table',
+  // 'vital-card',
+  // 'vital-meta',
+  // 'vital-youtube',
+  // 'vital-editors',
+  // 'vital-image',
+
+  // 'vital-templates',
+  // 'vital-layout',
+  // 'vital-navigation',
+
+];
+
+const isDisabled = package => disabledPackages.some(p => new RegExp(p).test(package));
+
 module.exports = ({ componentName, packageName = 'unknown' }) => {
+  if (isDisabled(packageName)) {
+    console.log('Not shadowing', packageName);
+    return false;
+  }
   const requirePath = `./lib/shadow/${packageName}/${componentName}`;
   try {
     return require.resolve(requirePath);

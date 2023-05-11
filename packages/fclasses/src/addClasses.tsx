@@ -90,6 +90,12 @@ const modifyClassesIf = (operation: 'add' | 'remove') => <A extends object>(
       ModifyClasses.displayName = `${capitalize(operation)}Classes`;
       return ModifyClasses;
     };
+    if (condition === alwaysTrueCondition) {
+      // @ts-ignore
+      hoc.flowHocType = `${operation}Classes`;
+      // @ts-ignore
+      hoc.classes = classes;
+    }
     return hoc;
   };
 

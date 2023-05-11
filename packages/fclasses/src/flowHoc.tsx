@@ -22,6 +22,7 @@ import type {
   HOCDef, ComponentOrTag, ComponentWithMeta, TokenMeta,
   HOC, TokenFilterTest, FlowHoc, HOCWithMeta,
 } from './types';
+import { addClasses } from './addClasses';
 
 const isToken = (def: HOCDef<any, any, any>) => typeof def === 'function';
 
@@ -62,7 +63,10 @@ const preserveMeta = (hoc: HOC): HOC => <P extends object, Q extends object = P>
  * @category Token API
  */
 export const withMeta = (meta: TokenMeta): HOC => Component => {
-  const WithMeta = (props: any) => <Component {...props} />;
+  const WithMeta = typeof Component === 'string' 
+    ? (props: any) => <Component {...props} />
+    : Component;
+  // const WithMeta = (props: any) => <Component {...props} />;
   return Object.assign(WithMeta, meta);
 };
 
@@ -166,9 +170,29 @@ const flowHoc: FlowHoc<{}> & { meta: FlowHocMeta } = (...args) => {
     ...args$.filter(a => isToken(a)) as HOC[],
     withMeta(meta),
   ];
-  const hocs = filterMembers(members);
-  const hocs$ = hocs.map(t => preserveMeta(t));
-  return Object.assign(flow(hocs$), { meta, members, hocs });
+  type ExtHocs = HOC & {
+    flowHocType?: string,
+    classes?: string,
+  };
+  const hocs = filterMembers(members) as ExtHocs[];
+  // const hocs$$ = hocs.filter(h => h.flowHocType !== 'addClasses');
+  const hocs$$ = hocs.reduce(
+    (acc, next) => {
+      const last = acc.length ? acc[acc.length - 1] : undefined;
+      if (next.flowHocType === 'addClasses') {
+        if (last?.flowHocType === 'addClasses') {
+          const newLast = addClasses(`${last.classes} ${next.classes}`);
+          // console.log('nl', newLast);
+          return [...acc.slice(0, -1), newLast];
+        }
+      }
+      return [...acc, next];
+    },
+    [] as ExtHocs[]
+  );
+  console.log('after', hocs.length, hocs$$.length);
+  const hocs$ = hocs$$.map(t => preserveMeta(t));
+  return Object.assign(flow(hocs$), { meta, members, hocs: hocs$$ });
 };
 
 /**
