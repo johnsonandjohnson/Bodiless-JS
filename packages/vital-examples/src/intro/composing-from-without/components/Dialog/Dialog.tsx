@@ -11,7 +11,7 @@ const FancyBorder: FC<PropsWithChildren<FancyBorderProps>> = ({ color, children 
   </div>
 );
 
-export const Dialog: FC<DialogProps> = ({ color, title, message })=> (
+export const Dialog: FC<DialogProps> = ({ color, title, message }) => (
   <FancyBorder color={color}>
     <h1 className="Dialog-title">
       {title}
