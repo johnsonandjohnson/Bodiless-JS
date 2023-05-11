@@ -1,0 +1,35 @@
+{
+  "sourceTypes": ["html", "htm"],
+  "contentSelectors": [
+    "body *"
+  ],
+  "contentExcluders": [
+    "script",
+    "noscript",
+    "style",
+    ".bg-gray-200"
+  ],
+  "indexConfig": {
+    "ref": "id",
+    "fields": [
+      { "name": "title", "attributes": { "boost": 2 }},
+      { "name": "body" }
+    ]
+  },
+  "languages": [
+    {
+      "code": "en",
+      "name": "English",
+      "sourcePaths": [
+        "public"
+      ],
+      "excludePaths": [
+        "404*/**"
+      ],
+      "indexFileName": "lunr.en.json",
+      "indexUrlName": "",
+      "indexFilePath": "public",
+      "searchPath": "search"
+    }
+  ]
+}

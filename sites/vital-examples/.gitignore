@@ -1,0 +1,15 @@
+# Project dependencies
+node_modules
+doc
+yarn-error.log
+
+# Build directory
+/public
+
+# Temporary files
+.DS_Store
+.swp
+
+.cache
+public
+src/components/index.css

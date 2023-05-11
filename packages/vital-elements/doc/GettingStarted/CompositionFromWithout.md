@@ -92,18 +92,16 @@ type DialogProps = {
   message: string,
 } & FancyBorderProps;
 
-const Dialog: FC<DialogProps> = props => {
-  return (
-    <FancyBorder color={props.color}>
-      <h1 className="Dialog-title">
-        {props.title}
-      </h1>
-      <p className="Dialog-message">
-        {props.message}
-      </p>
-    </FancyBorder>
-  );
-}
+export const Dialog: FC<DialogProps> = ({ color, title, message })=> (
+  <FancyBorder color={color}>
+    <h1 className="Dialog-title">
+      {title}
+    </h1>
+    <p className="Dialog-message">
+      {message}
+    </p>
+  </FancyBorder>
+);
 
 export const WelcomeDialog: FC = props => (
     <Dialog
@@ -111,7 +109,6 @@ export const WelcomeDialog: FC = props => (
       title="Welcome"
       message="Thank you for visiting our spacecraft!" />
 );
-
 ```
 
 Now, let's assume these components are provided by an upstream library, and I
@@ -160,7 +157,7 @@ const Welcome = asElementToken({
 });
 
 // Tokens are usually exported in a keyed dictionary called a "collection".
-export const upstreamDialog = {
+export const exampleDialog = {
   Welcome,
 };
 ```
@@ -174,15 +171,20 @@ Now I can recompose these attributes independently:
 
 ```ts
 const Welcome = asElementToken({
-  ...upstreamDialog.Welcome,
+  ...exampleDialog.Welcome,
   Theme: {
-    _: addProps({ color: FancyBorderColor.Red })
-  }
+    _: addProps({ color: FancyBorderColor.Red }),
+  },
 });
-const WelcomeDialog = as(MyWelcome)(Dialog);
+
+const customDialog = {
+  Welcome
+};
+
+const WelcomeDialog = as(customDialog.Welcome)(Dialog);
 ```
 
-THis is just plain old Javascript object composition -- we keep all the
+This is just plain old Javascript object composition -- we keep all the
 top-level keys of the original token, but supply our own `Theme`.
 
 Now if the content changes upstream, we'll receive the enhancement while still
