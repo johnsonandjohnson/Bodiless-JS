@@ -34,7 +34,7 @@ exposed by the clean component. They are sometimes referred to as "Design Keys".
 Note, that in addition to the internal design keys exposed by the component,
 you can also specify the special `_` key here to specify a token which should
 be applied to the component as a whole, as we did in the original dialog tokens
-from [Composition From Without](./CompositionFromWithout.md):
+from [Composition From Without](./ComposingFromWithout.md):
 
 ```ts
 const Welcome = asElementToken({
