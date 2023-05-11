@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.27](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.1...v1.0.0-rc.27) (2023-03-15)
+
+
+### Features
+
+* **bodiless-ga4 & akamai-auth:** Update the Bodiless GA4 plugin and add Akamai Auth Plugin [canary] ([#1647](https://github.com/johnsonandjohnson/bodiless-js/issues/1647)) ([200d935](https://github.com/johnsonandjohnson/bodiless-js/commit/200d93523da2d68e8740a98bf18a496d3c077060))
+* **cli:** Bodiless new ([#1568](https://github.com/johnsonandjohnson/bodiless-js/issues/1568)) ([3bc0e2c](https://github.com/johnsonandjohnson/bodiless-js/commit/3bc0e2c8e06fe78751c0712d7e1d3cfb8d1fb04d)), closes [#1520](https://github.com/johnsonandjohnson/bodiless-js/issues/1520)
+* **gatsby-theme-bodiless:** Allow disabling of editor in dev mode. ([#1989](https://github.com/johnsonandjohnson/bodiless-js/issues/1989)) ([93d67b8](https://github.com/johnsonandjohnson/bodiless-js/commit/93d67b849dbc39129afe2f2a2c13285b3e7d53e2))
+
+
+
+
+
 # [1.0.0-rc.26](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.25...v1.0.0-rc.26) (2023-03-14)
 
 **Note:** Version bump only for package @sites/--minimal--

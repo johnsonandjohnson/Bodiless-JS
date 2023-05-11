@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/hydration",
-  "version": "1.0.0-rc.26",
+  "version": "1.0.0-rc.27",
   "description": "Tools to manage how React hydrates your components",
   "author": "Lucas Varela <lvarelab@its.jnj.com>",
   "license": "Apache-2.0",
@@ -25,8 +25,8 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/core": "^1.0.0-rc.26",
-    "@bodiless/fclasses": "^1.0.0-rc.26",
+    "@bodiless/core": "^1.0.0-rc.27",
+    "@bodiless/fclasses": "^1.0.0-rc.27",
     "lodash": "^4.17.19"
   },
   "devDependencies": {

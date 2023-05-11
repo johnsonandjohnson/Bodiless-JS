@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.27](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.1...v1.0.0-rc.27) (2023-03-15)
+
+
+### Bug Fixes
+
+* **vital-table:** update to beta.11 ([#1670](https://github.com/johnsonandjohnson/bodiless-js/issues/1670)) ([83e04fe](https://github.com/johnsonandjohnson/bodiless-js/commit/83e04fe8850a141a74ca824f6d728083c238238b))
+* **vital-test, __vital__:** fix Shadowing and move to vital-test ([#1787](https://github.com/johnsonandjohnson/bodiless-js/issues/1787)) ([33be350](https://github.com/johnsonandjohnson/bodiless-js/commit/33be350c21971f0a083efba94e360fbe928a071e))
+
+
+### Features
+
+* **bodiless-table:** Add extra tokens to target second & third columns ([#1918](https://github.com/johnsonandjohnson/bodiless-js/issues/1918)) ([76148f5](https://github.com/johnsonandjohnson/bodiless-js/commit/76148f59d88d60f9d38350697b580ec21980ce42))
+* **vital-table:** add vital table ([#1598](https://github.com/johnsonandjohnson/bodiless-js/issues/1598)) ([cb145ed](https://github.com/johnsonandjohnson/bodiless-js/commit/cb145ed8b22fd0d87f9bbd3eafbefcdfa1444c65))
+
+
+
+
+
 # [1.0.0-rc.26](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.25...v1.0.0-rc.26) (2023-03-14)
 
 **Note:** Version bump only for package @bodiless/vital-table

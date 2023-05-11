@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.27](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.1...v1.0.0-rc.27) (2023-03-15)
+
+
+### Bug Fixes
+
+* **vital-cards:** reorg of cards & api doc [canary] ([#1916](https://github.com/johnsonandjohnson/bodiless-js/issues/1916)) ([0752ecc](https://github.com/johnsonandjohnson/bodiless-js/commit/0752ecccf793ad819c8432b601ddf9505d859156))
+* **vital-templates:** Fix Template Names ([#1921](https://github.com/johnsonandjohnson/bodiless-js/issues/1921)) ([eb5fc55](https://github.com/johnsonandjohnson/bodiless-js/commit/eb5fc55b0b10d1421d7515cfe44daac399feeb76))
+* **vital-test, __vital__:** fix Shadowing and move to vital-test ([#1787](https://github.com/johnsonandjohnson/bodiless-js/issues/1787)) ([33be350](https://github.com/johnsonandjohnson/bodiless-js/commit/33be350c21971f0a083efba94e360fbe928a071e))
+
+
+### Features
+
+* **bodiless-ga4 & akamai-auth:** Update the Bodiless GA4 plugin and add Akamai Auth Plugin [canary] ([#1647](https://github.com/johnsonandjohnson/bodiless-js/issues/1647)) ([200d935](https://github.com/johnsonandjohnson/bodiless-js/commit/200d93523da2d68e8740a98bf18a496d3c077060))
+* **bodiless-table:** Add extra tokens to target second & third columns ([#1918](https://github.com/johnsonandjohnson/bodiless-js/issues/1918)) ([76148f5](https://github.com/johnsonandjohnson/bodiless-js/commit/76148f59d88d60f9d38350697b580ec21980ce42))
+* Vital Content Listing ([#1801](https://github.com/johnsonandjohnson/bodiless-js/issues/1801)) ([b71fbad](https://github.com/johnsonandjohnson/bodiless-js/commit/b71fbad220d4141c318a66f33819d41122ab0ee4))
+* **vital-accordion:** Add vital-accordion package ([#1899](https://github.com/johnsonandjohnson/bodiless-js/issues/1899)) ([d5e75a6](https://github.com/johnsonandjohnson/bodiless-js/commit/d5e75a60d33938d09c6b727506991d871e4b7975))
+
+
+
+
+
 # [1.0.0-rc.26](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.25...v1.0.0-rc.26) (2023-03-14)
 
 **Note:** Version bump only for package @bodiless/vital-test

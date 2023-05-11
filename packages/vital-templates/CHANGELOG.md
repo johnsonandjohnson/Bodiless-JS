@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.27](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.1...v1.0.0-rc.27) (2023-03-15)
+
+
+### Bug Fixes
+
+* **vital-cards:** reorg of cards & api doc [canary] ([#1916](https://github.com/johnsonandjohnson/bodiless-js/issues/1916)) ([0752ecc](https://github.com/johnsonandjohnson/bodiless-js/commit/0752ecccf793ad819c8432b601ddf9505d859156))
+* **vital-cards:** update cards with buttons & misc fixes ([#1805](https://github.com/johnsonandjohnson/bodiless-js/issues/1805)) ([362d7f8](https://github.com/johnsonandjohnson/bodiless-js/commit/362d7f88e053982ca901d878c68e12285c67b731))
+* **vital-demo:** Add Homepage Content & minor fixes ([#1911](https://github.com/johnsonandjohnson/bodiless-js/issues/1911)) ([6ca035c](https://github.com/johnsonandjohnson/bodiless-js/commit/6ca035cf968aab46b2170651a8223244c708d8d8))
+* **vital-templates:** Fix Template Names ([#1921](https://github.com/johnsonandjohnson/bodiless-js/issues/1921)) ([eb5fc55](https://github.com/johnsonandjohnson/bodiless-js/commit/eb5fc55b0b10d1421d7515cfe44daac399feeb76))
+* **vital-test, __vital__:** fix Shadowing and move to vital-test ([#1787](https://github.com/johnsonandjohnson/bodiless-js/issues/1787)) ([33be350](https://github.com/johnsonandjohnson/bodiless-js/commit/33be350c21971f0a083efba94e360fbe928a071e))
+
+
+### Features
+
+* **bodiless-ga4 & akamai-auth:** Update the Bodiless GA4 plugin and add Akamai Auth Plugin [canary] ([#1647](https://github.com/johnsonandjohnson/bodiless-js/issues/1647)) ([200d935](https://github.com/johnsonandjohnson/bodiless-js/commit/200d93523da2d68e8740a98bf18a496d3c077060))
+* **i18n:** Implement i18n ([#1621](https://github.com/johnsonandjohnson/bodiless-js/issues/1621)) ([7680403](https://github.com/johnsonandjohnson/bodiless-js/commit/7680403f3d1df3e1321e665e665e73140126640b))
+* **search:** Add @bodiless/vital-search ([#1628](https://github.com/johnsonandjohnson/bodiless-js/issues/1628)) ([7ce3fb8](https://github.com/johnsonandjohnson/bodiless-js/commit/7ce3fb8e943d50be19e59758a8bc4452a06e61f9))
+* Vital Content Listing ([#1801](https://github.com/johnsonandjohnson/bodiless-js/issues/1801)) ([b71fbad](https://github.com/johnsonandjohnson/bodiless-js/commit/b71fbad220d4141c318a66f33819d41122ab0ee4))
+* **vital-hero, vital-image, vital-card:** Add Hero & Card component and update Image  ([#1500](https://github.com/johnsonandjohnson/bodiless-js/issues/1500)) ([95f2c3d](https://github.com/johnsonandjohnson/bodiless-js/commit/95f2c3dcf06c6f51bb6b3d252ca6f4f576899dd4)), closes [pr#1498](https://github.com/pr/issues/1498)
+* **vital-navigation:** Add Breadcrumbs ([#1778](https://github.com/johnsonandjohnson/bodiless-js/issues/1778)) ([756284e](https://github.com/johnsonandjohnson/bodiless-js/commit/756284e2955c22fa398af293dec61b04021f0834))
+
+
+
+
+
 # [1.0.0-rc.26](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.25...v1.0.0-rc.26) (2023-03-14)
 
 **Note:** Version bump only for package @bodiless/vital-templates

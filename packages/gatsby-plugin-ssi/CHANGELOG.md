@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.27](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.1...v1.0.0-rc.27) (2023-03-15)
+
+
+### Bug Fixes
+
+* **gatsby-plugin-ssi:** Fixing Unsafe builtin usage fs.readFileSyn error in Gatsby v3 ([#1342](https://github.com/johnsonandjohnson/bodiless-js/issues/1342)) ([6a058b1](https://github.com/johnsonandjohnson/bodiless-js/commit/6a058b1ef2d45a2bb222bac6973d03440b3d589b))
+
+
+
+
+
 # [1.0.0-rc.26](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.25...v1.0.0-rc.26) (2023-03-14)
 
 **Note:** Version bump only for package @bodiless/gatsby-plugin-ssi

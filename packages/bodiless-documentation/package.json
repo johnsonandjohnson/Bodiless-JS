@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/documentation",
-  "version": "1.0.0-rc.26",
+  "version": "1.0.0-rc.27",
   "description": "A tool to aggregate markdown files for rendering by docsify",
   "author": "Erik Summerfield <esummer3@its.jnj.com>",
   "homepage": "",
@@ -37,7 +37,7 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.26",
+    "@bodiless/cli": "^1.0.0-rc.27",
     "@types/fs-extra": "^8.0.0",
     "@types/lodash": "^4.14.158",
     "@types/lodash.flow": "^3.5.6",

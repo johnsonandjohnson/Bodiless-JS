@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.27](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.1...v1.0.0-rc.27) (2023-03-15)
+
+
+### Bug Fixes
+
+* **@sites/test-site:** Disable tsconfig-paths-webpack-plugin with environment variable ([#1775](https://github.com/johnsonandjohnson/bodiless-js/issues/1775)) ([d849a5e](https://github.com/johnsonandjohnson/bodiless-js/commit/d849a5e892b83909873c0567308ede67ace2176b))
+* **core:** Support nested default content [canary] ([#1964](https://github.com/johnsonandjohnson/bodiless-js/issues/1964)) ([9eec257](https://github.com/johnsonandjohnson/bodiless-js/commit/9eec25715ea6fb40234d9b7a7e0d3d8b8e3b89b7))
+* **git workflow:** fixing `Push` is not disabled in Main branch on Test Site ([#1472](https://github.com/johnsonandjohnson/bodiless-js/issues/1472)) ([8ee741e](https://github.com/johnsonandjohnson/bodiless-js/commit/8ee741eb8951c17cf28f6c3d7f6022e255ce6215))
+* **publish:** update package config for publishing ([#1446](https://github.com/johnsonandjohnson/bodiless-js/issues/1446)) ([18e9615](https://github.com/johnsonandjohnson/bodiless-js/commit/18e9615349972598362b5468d1c8bf13750ec0c8))
+* **tailwindcss, fclasses:** Demo site content changes causing HMR bundle rebuild on edit env ([4b6fa0e](https://github.com/johnsonandjohnson/bodiless-js/commit/4b6fa0eda18d36b49d3a4c567ce52cb138457ef0))
+* **test-site, GatsbyLink:** There is a runtime error when clicking Logo after opening Email on /social-share/ ([#1602](https://github.com/johnsonandjohnson/bodiless-js/issues/1602)) ([d12134a](https://github.com/johnsonandjohnson/bodiless-js/commit/d12134acbfdf6dbccad695c0e6d71a9bac804552))
+* **test-site,__starter__:** Set correct npm root for lerna bootstrap. ([#1454](https://github.com/johnsonandjohnson/bodiless-js/issues/1454)) ([5037a5b](https://github.com/johnsonandjohnson/bodiless-js/commit/5037a5b07af69120657cd28d3efb0c8c344f8248))
+* **test-site:** restore focus on search input. ([7be2f1c](https://github.com/johnsonandjohnson/bodiless-js/commit/7be2f1c61f19181e9d13414f0dfc1e12d29ac9ee))
+* **test-site:** use test site colors ([#1576](https://github.com/johnsonandjohnson/bodiless-js/issues/1576)) ([c7f7f48](https://github.com/johnsonandjohnson/bodiless-js/commit/c7f7f4869a17e57a186e0d7053cbf64781c0916a))
+
+
+### Features
+
+* Add static replacement mechanism ([#1440](https://github.com/johnsonandjohnson/bodiless-js/issues/1440)) ([22384f1](https://github.com/johnsonandjohnson/bodiless-js/commit/22384f184e73366bc00ec619e7b08fa3e5dfc29d))
+* **bodiless-core:** BodilessJS Remove AsBodilessComponent Edit code from Static bundle [#1542](https://github.com/johnsonandjohnson/bodiless-js/issues/1542) ([#1785](https://github.com/johnsonandjohnson/bodiless-js/issues/1785)) ([3ab1ba8](https://github.com/johnsonandjohnson/bodiless-js/commit/3ab1ba88b03811a4a9100125d4a649db5667e89c))
+* **bodiless-ga4 & akamai-auth:** Update the Bodiless GA4 plugin and add Akamai Auth Plugin [canary] ([#1647](https://github.com/johnsonandjohnson/bodiless-js/issues/1647)) ([200d935](https://github.com/johnsonandjohnson/bodiless-js/commit/200d93523da2d68e8740a98bf18a496d3c077060))
+* **cli:** Bodiless new ([#1568](https://github.com/johnsonandjohnson/bodiless-js/issues/1568)) ([3bc0e2c](https://github.com/johnsonandjohnson/bodiless-js/commit/3bc0e2c8e06fe78751c0712d7e1d3cfb8d1fb04d)), closes [#1520](https://github.com/johnsonandjohnson/bodiless-js/issues/1520)
+* Fully disable save by env var. ([#1600](https://github.com/johnsonandjohnson/bodiless-js/issues/1600)) ([b19cd73](https://github.com/johnsonandjohnson/bodiless-js/commit/b19cd73422bcbb5e82125c4936b7aeb0c7c9cc7e)), closes [#1479](https://github.com/johnsonandjohnson/bodiless-js/issues/1479) [#1522](https://github.com/johnsonandjohnson/bodiless-js/issues/1522) [#1479](https://github.com/johnsonandjohnson/bodiless-js/issues/1479)
+* **vital-buttons:** Add Buttons ([#1781](https://github.com/johnsonandjohnson/bodiless-js/issues/1781)) ([e9dc1e5](https://github.com/johnsonandjohnson/bodiless-js/commit/e9dc1e55ed6f9d19dfa7d86375efd2b5ce5ca612))
+* **vital-hero, vital-image, vital-card:** Add Hero & Card component and update Image  ([#1500](https://github.com/johnsonandjohnson/bodiless-js/issues/1500)) ([95f2c3d](https://github.com/johnsonandjohnson/bodiless-js/commit/95f2c3dcf06c6f51bb6b3d252ca6f4f576899dd4)), closes [pr#1498](https://github.com/pr/issues/1498)
+* **vital-table:** add vital table ([#1598](https://github.com/johnsonandjohnson/bodiless-js/issues/1598)) ([cb145ed](https://github.com/johnsonandjohnson/bodiless-js/commit/cb145ed8b22fd0d87f9bbd3eafbefcdfa1444c65))
+
+
+
+
+
 # [1.0.0-rc.26](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.25...v1.0.0-rc.26) (2023-03-14)
 
 **Note:** Version bump only for package @sites/test-site

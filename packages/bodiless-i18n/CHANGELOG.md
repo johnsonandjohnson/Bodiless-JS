@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.27](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.1...v1.0.0-rc.27) (2023-03-15)
+
+
+### Features
+
+* **i18n:** Implement i18n ([#1621](https://github.com/johnsonandjohnson/bodiless-js/issues/1621)) ([7680403](https://github.com/johnsonandjohnson/bodiless-js/commit/7680403f3d1df3e1321e665e665e73140126640b))
+
+
+### Reverts
+
+* Revert "WIP on i18n" ([43977ce](https://github.com/johnsonandjohnson/bodiless-js/commit/43977ce6caf7483d3b5a46b622b7f3599b320a81))
+
+
+
+
+
 # [1.0.0-rc.26](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.25...v1.0.0-rc.26) (2023-03-14)
 
 **Note:** Version bump only for package @bodiless/i18n

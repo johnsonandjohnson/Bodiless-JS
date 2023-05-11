@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.27](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.1...v1.0.0-rc.27) (2023-03-15)
+
+
+### Bug Fixes
+
+* **--vital--:** Correct shadowed package paths. ([222e6b4](https://github.com/johnsonandjohnson/bodiless-js/commit/222e6b4ca160532b258aa1d3ba7e4911fc91738c))
+* **gatsby-theme-bodiless:** add autoprefixer ([#1685](https://github.com/johnsonandjohnson/bodiless-js/issues/1685)) ([f501c3a](https://github.com/johnsonandjohnson/bodiless-js/commit/f501c3a3b9d9a3efc54375bd4ba89e23d3931732))
+* **vital-cards:** reorg of cards & api doc [canary] ([#1916](https://github.com/johnsonandjohnson/bodiless-js/issues/1916)) ([0752ecc](https://github.com/johnsonandjohnson/bodiless-js/commit/0752ecccf793ad819c8432b601ddf9505d859156))
+* **vital-cards:** update cards with buttons & misc fixes ([#1805](https://github.com/johnsonandjohnson/bodiless-js/issues/1805)) ([362d7f8](https://github.com/johnsonandjohnson/bodiless-js/commit/362d7f88e053982ca901d878c68e12285c67b731))
+* **vital-test, __vital__:** fix Shadowing and move to vital-test ([#1787](https://github.com/johnsonandjohnson/bodiless-js/issues/1787)) ([33be350](https://github.com/johnsonandjohnson/bodiless-js/commit/33be350c21971f0a083efba94e360fbe928a071e))
+
+
+### Features
+
+* **chore:** Cleanup Vital Component tokens ([723c773](https://github.com/johnsonandjohnson/bodiless-js/commit/723c7736311c5b6f3d79bdddec76bdcb1e75551a))
+* **chore:** Small code cleanup ([9277807](https://github.com/johnsonandjohnson/bodiless-js/commit/9277807b958b74cb68afa0d1d7f8fef8017c61c5))
+* **cli:** Bodiless new ([#1568](https://github.com/johnsonandjohnson/bodiless-js/issues/1568)) ([3bc0e2c](https://github.com/johnsonandjohnson/bodiless-js/commit/3bc0e2c8e06fe78751c0712d7e1d3cfb8d1fb04d)), closes [#1520](https://github.com/johnsonandjohnson/bodiless-js/issues/1520)
+* **i18n:** Implement i18n ([#1621](https://github.com/johnsonandjohnson/bodiless-js/issues/1621)) ([7680403](https://github.com/johnsonandjohnson/bodiless-js/commit/7680403f3d1df3e1321e665e665e73140126640b))
+* **search:** Add @bodiless/vital-search ([#1628](https://github.com/johnsonandjohnson/bodiless-js/issues/1628)) ([7ce3fb8](https://github.com/johnsonandjohnson/bodiless-js/commit/7ce3fb8e943d50be19e59758a8bc4452a06e61f9))
+* Vital Content Listing ([#1801](https://github.com/johnsonandjohnson/bodiless-js/issues/1801)) ([b71fbad](https://github.com/johnsonandjohnson/bodiless-js/commit/b71fbad220d4141c318a66f33819d41122ab0ee4))
+* **vital-buttons:** Add Buttons ([#1781](https://github.com/johnsonandjohnson/bodiless-js/issues/1781)) ([e9dc1e5](https://github.com/johnsonandjohnson/bodiless-js/commit/e9dc1e55ed6f9d19dfa7d86375efd2b5ce5ca612))
+* **vital-elements:** Address PR Feedback, simplify typography tokens and updated Domain tokens documentation ([c11fbc8](https://github.com/johnsonandjohnson/bodiless-js/commit/c11fbc8770b420b45872ad2f7794e2f4b10014f2))
+* **vital-flowcontainer, --vital--:** Add content library functionality to vital flow container ([#1733](https://github.com/johnsonandjohnson/bodiless-js/issues/1733)) ([fbe1907](https://github.com/johnsonandjohnson/bodiless-js/commit/fbe19078e6f7e8b7810f7d87f95795ef49b168d3))
+* **vital-hero, vital-image, vital-card:** Add Hero & Card component and update Image  ([#1500](https://github.com/johnsonandjohnson/bodiless-js/issues/1500)) ([95f2c3d](https://github.com/johnsonandjohnson/bodiless-js/commit/95f2c3dcf06c6f51bb6b3d252ca6f4f576899dd4)), closes [pr#1498](https://github.com/pr/issues/1498)
+* **vital-list:** Add new vital list component ([#1554](https://github.com/johnsonandjohnson/bodiless-js/issues/1554)) ([18d6278](https://github.com/johnsonandjohnson/bodiless-js/commit/18d6278865bc21ab4c7f541a595b3e5f46b433f2)), closes [#1559](https://github.com/johnsonandjohnson/bodiless-js/issues/1559)
+* **vital-table:** add vital table ([#1598](https://github.com/johnsonandjohnson/bodiless-js/issues/1598)) ([cb145ed](https://github.com/johnsonandjohnson/bodiless-js/commit/cb145ed8b22fd0d87f9bbd3eafbefcdfa1444c65))
+
+
+
+
+
 # [1.0.0-rc.26](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.25...v1.0.0-rc.26) (2023-03-14)
 
 **Note:** Version bump only for package --vital--

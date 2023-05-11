@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.27](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.1...v1.0.0-rc.27) (2023-03-15)
+
+
+### Bug Fixes
+
+* Add missing docs to packages. ([#1556](https://github.com/johnsonandjohnson/bodiless-js/issues/1556)) ([2a4bc3d](https://github.com/johnsonandjohnson/bodiless-js/commit/2a4bc3db9a597eb4b811044b3acde4a44f4c98e8))
+* **bodiless-backend:** Fix image assets paths to be replaced on clone operation ([#1652](https://github.com/johnsonandjohnson/bodiless-js/issues/1652)) ([925cc59](https://github.com/johnsonandjohnson/bodiless-js/commit/925cc593f212df42b6979e4e3aebb8a5796b080c))
+* **bodiless-page:** `Internal Server Error` message shows when there is an attempt to create already existing page ([#1607](https://github.com/johnsonandjohnson/bodiless-js/issues/1607)) ([bfe09ec](https://github.com/johnsonandjohnson/bodiless-js/commit/bfe09ec78f55cd0d8677cadb223c1f10c97f667e))
+* **bodiless-page:** `Internal Server Error` message shows when there is an attempt to create already existing page ([#1612](https://github.com/johnsonandjohnson/bodiless-js/issues/1612)) ([cc29b38](https://github.com/johnsonandjohnson/bodiless-js/commit/cc29b38fe57d26bc0463621925ff19b01723dc8d))
+* **bodiless-page:** 500 error message update ([#1665](https://github.com/johnsonandjohnson/bodiless-js/issues/1665)) ([9ab9161](https://github.com/johnsonandjohnson/bodiless-js/commit/9ab91615be2e81c9b4b3989c4f63a128d4076608))
+* **bodiless-ui:** try find all missing bl- prefixes in editor  ([#1589](https://github.com/johnsonandjohnson/bodiless-js/issues/1589)) ([942cfd6](https://github.com/johnsonandjohnson/bodiless-js/commit/942cfd6dc522341a757f70b84cf6879f5690332b))
+
+
+### Features
+
+* Fully disable save by env var. ([#1600](https://github.com/johnsonandjohnson/bodiless-js/issues/1600)) ([b19cd73](https://github.com/johnsonandjohnson/bodiless-js/commit/b19cd73422bcbb5e82125c4936b7aeb0c7c9cc7e)), closes [#1479](https://github.com/johnsonandjohnson/bodiless-js/issues/1479) [#1522](https://github.com/johnsonandjohnson/bodiless-js/issues/1522) [#1479](https://github.com/johnsonandjohnson/bodiless-js/issues/1479)
+
+
+
+
+
 # [1.0.0-rc.26](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.25...v1.0.0-rc.26) (2023-03-14)
 
 **Note:** Version bump only for package @bodiless/page
