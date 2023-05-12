@@ -18,6 +18,56 @@ Some additional notes about shadowing:
 
 - TODO: Add any supplementary details here.
 
+## What Are the Benefits of Shadowing?
+
+As previously described, shadowing is a way to extend or override tokens, allowing you to easily
+customize components and elements.
+
+Let's say you make changes to an H3 element token, shadowing the typography. For our example, we'll
+say that you're shadowing the `H3` token in
+[`vitalTypography`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Typography/tokens/vitalTypography.ts).
+That `H3` token is used by [Vital
+Card](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-card/src/components/Card/tokens/Base.ts)
+and [Vital Rich
+Text](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-editors/src/components/RichText/tokens/vitalRichText.ts),
+and it will be replaced automatically within those components — and _anywhere_ else it is used —
+with your shadow token.
+
+To achieve similar results _without_ shadowing, you would have to redefine the component tokens. For
+example, looking at the
+[`vitalRichText`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-editors/src/components/RichText/tokens/vitalRichText.ts)
+tokens, the typography is defined in the `Theme` domain:
+
+```ts
+const Default = asVitalTokenSpec()({
+  Core: { /**/ },
+  Content: { /**/ },
+  Theme: {
+    paragraph: vitalTypography.Body,
+    Bold: vitalTextDecoration.Bold,
+    SuperScript: vitalTextDecoration.Superscript,
+    H1: vitalTypography.H1,
+    H2: vitalTypography.H2,
+    H3: vitalTypography.H3,
+    H4: vitalTypography.H4,
+    H5: vitalTypography.H5,
+    Link: vitalLink.Default,
+  },
+  Behavior: { /**/ },
+  Compose: { /**/ },
+})
+```
+
+Without shadowing, to modify the `H3` token, you would have to redefine the entire `Theme` object
+and recompose the component token, duplicating a lot of code. As you can imagine, this method would
+also require additional maintenance effort.
+
+Shadowing is also especially helpful in nested components. Let's say you have a menu, and the menu
+has a link, and the link has an H1 element in it — if you were to redefine that H1 element without
+shadowing, you would have to first redefine the link, and then use that new link component in the
+menu, and so on. It becomes a chain of updated imports, whereas, with shadowing, you just update the
+typography in one place and it gets automatically applied to everything.
+
 ## What Can Be Shadowed?
 
 Having gone over what shadowing is, you may be wondering which token collections can be shadowed. As
