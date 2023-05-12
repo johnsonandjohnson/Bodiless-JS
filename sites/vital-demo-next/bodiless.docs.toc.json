@@ -1,0 +1,21 @@
+{
+	"About": {
+		"GettingStarted.md": "",
+		"SiteBuildBasics.md": "",
+		"CorePrinciples.md": ""
+	},
+	"Design": {},
+	"Components": {},
+	"Tools": {},
+	"Development": {
+		"Packages.md": "",
+	    "Architecture": {
+	    	"Data.md": "",
+	    	"Context.md": "",
+	    	"FClasses.md": "",
+	    	"Documentation.md": ""
+	    },
+		"Release": {},
+		"Contributing.md": ""
+	}
+}

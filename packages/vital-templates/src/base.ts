@@ -14,32 +14,32 @@
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-templates/lib/shadow.
+ * Import the  token directly from @bodiless/vital-templates/lib/base.
  * @category Token Collection
  * @see [[vitalGenericTemplate]]
  */
-export { default as vitalGenericTemplate } from './components/GenericTemplate/tokens/vitalGenericTemplate';
+export { default as vitalGenericTemplateBase } from './components/GenericTemplate/tokens/vitalGenericTemplate';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-templates/lib/shadow.
+ * Import the  token directly from @bodiless/vital-templates/lib/base.
  * @category Token Collection
  * @see [[vitalPage]]
  */
-export { default as vitalPage } from './components/Page/tokens/vitalPage';
+export { default as vitalPageBase } from './components/Page/tokens/vitalPage';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-templates/lib/shadow.
+ * Import the  token directly from @bodiless/vital-templates/lib/base.
  * @category Token Collection
  * @see [[vitalPDPTemplate]]
  */
-export { default as vitalPDPTemplate } from './components/PDPTemplate/tokens/vitalPDPTemplate';
+export { default as vitalPDPTemplateBase } from './components/PDPTemplate/tokens/vitalPDPTemplate';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-templates/lib/shadow.
+ * Import the  token directly from @bodiless/vital-templates/lib/base.
  * @category Token Collection
  * @see [[vitalStyleGuideTemplate]]
  */
-export { default as vitalStyleGuideTemplate } from './components/StyleGuideTemplate/tokens/vitalStyleGuideTemplate';
+export { default as vitalStyleGuideTemplateBase } from './components/StyleGuideTemplate/tokens/vitalStyleGuideTemplate';

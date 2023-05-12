@@ -41,7 +41,7 @@ Define a Shadowing token collection as defined in [Shadow](./VitalElements/Shado
 File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-table/Table.ts`
 
 ```js
-import { vitalTableBase } from '@bodiless/vital-table';
+import { vitalTableBase } from '@bodiless/vital-table/lib/base';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { addProps } from '@bodiless/fclasses';
 

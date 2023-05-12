@@ -13,13 +13,7 @@
  */
 
 import { asTokenGroup } from '../../../util';
-
-export const SpacingMeta = {
-  categories: {
-    Type: ['Element'],
-    Group: ['Spacing'],
-  },
-};
+import { SpacingMeta } from '../meta';
 
 /*
  * Tailwind's container is specifically not used due to its feature it set's max-width

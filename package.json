@@ -60,11 +60,12 @@
     "test:ci": "WAIT_ON_TIMEOUT=600000 start-server-and-test sites:launch-test http://localhost:8005 cy:run",
     "test:monorepo": "WAIT_ON_TIMEOUT=600000 start-server-and-test sites:launch-monorepo http://localhost:8005 cy:run",
     "test:watch": "jest --watch",
-    "test:playwright": "APPLITOOLS_BATCH_ID=`uuidgen` WAIT_ON_TIMEOUT=600000 start-server-and-test sites:launch-vital http://localhost:8005 playwright:run"
+    "test:playwright": "APPLITOOLS_BATCH_ID=`uuidgen` WAIT_ON_TIMEOUT=600000 start-server-and-test sites:launch-vital http://localhost:8005 playwright:run",
+    "vital-check": "node ./scripts/vital-check"
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm run sync:check && npm run lint && npm run check"
+      "pre-push": "npm run sync:check && npm run lint && npm run check && npm run vital-check"
     }
   },
   "dependencies": {

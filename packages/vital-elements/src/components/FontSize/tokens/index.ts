@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import vitalFontSize, { FontSizeMeta } from './vitalFontSize';
+import vitalFontSize from './vitalFontSize';
 
 export default vitalFontSize;
-export { FontSizeMeta };

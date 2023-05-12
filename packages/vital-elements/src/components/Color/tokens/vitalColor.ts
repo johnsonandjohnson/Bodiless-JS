@@ -13,13 +13,7 @@
  */
 
 import { asTokenGroup } from '../../../util';
-
-export const ColorMeta = {
-  categories: {
-    Type: ['Element'],
-    Group: ['Color'],
-  },
-};
+import { ColorMeta } from '../meta';
 
 export default asTokenGroup(ColorMeta)({
   BgPrimaryBrand: 'bg-vital-primary-brand',

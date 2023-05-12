@@ -13,4 +13,4 @@
  */
 
 export { default as vitalColor } from './tokens';
-export { ColorMeta } from './tokens';
+export { ColorMeta } from './meta';

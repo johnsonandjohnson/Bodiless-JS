@@ -34,6 +34,7 @@ const toc = {
   Design: {},
   Components: {},
   Tools: {},
+  Curriculum: {},
   Development: {
     Guides: {
       'IntroToBodilessConcepts.md': '',

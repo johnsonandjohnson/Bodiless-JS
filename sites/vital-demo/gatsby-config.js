@@ -4,7 +4,7 @@ const express = require('express');
 //   createDefaultContentPlugins,
 //   getSampleDefaultContentConfig,
 // } = require('@bodiless/gatsby-theme-bodiless/dist/DefaultContent');
-const { getDisabledPages } = require('@bodiless/components/node-api');
+const { getDisabledPages } = require('@bodiless/page/lib/cjs/NodeApi');
 // const getSSIEntities = require('@bodiless/gatsby-plugin-ssi/read-ssi-entities');
 // const {
 //   getConfig: getSiteDefaultContentConfig,
@@ -99,9 +99,6 @@ const plugins = [
   //   ...getSiteDefaultContentConfig(),
   // ),
   {
-    resolve: '--vital--',
-  },
-  {
     resolve: 'gatsby-plugin-google-tagmanager',
     options: {
       id: 'GTM-N3M9LLD',
@@ -109,7 +106,7 @@ const plugins = [
     },
   },
   {
-    resolve: '@bodiless/vital-test',
+    resolve: '@bodiless/vital-demo',
   }
 ];
 

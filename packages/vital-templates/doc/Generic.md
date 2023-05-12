@@ -52,7 +52,7 @@ Example:
 
 ```js
 // Import the base collection.
-import { vitalGenericTemplateBase } from '@bodiless/vital-templates';
+import { vitalGenericTemplateBase } from '@bodiless/vital-templates/lib/base';
 import omit from 'lodash/omit';
 
 // Example 1

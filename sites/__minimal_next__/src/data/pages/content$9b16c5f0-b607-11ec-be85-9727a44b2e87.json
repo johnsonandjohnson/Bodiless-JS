@@ -1,0 +1,108 @@
+[
+  {
+    "type": "H2",
+    "children": [
+      {
+        "text": "Click the \"Edit\" button on the left to start adding content."
+      }
+    ]
+  },
+  {
+    "type": "H2",
+    "children": [
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "Learn more about building with Bodiless in the "
+      },
+      {
+        "data": {
+          "openModal": true,
+          "slatenode": {
+            "href": "https://foo.com"
+          }
+        },
+        "type": "Link",
+        "children": [
+          {
+            "text": "docs"
+          }
+        ]
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "For a more full-featured starter, check out the Vital-DS."
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "Visit us on "
+      },
+      {
+        "data": {
+          "openModal": true,
+          "slatenode": {
+            "href": "https://github.com/johnsonandjohnson/bodiless-js"
+          }
+        },
+        "type": "Link",
+        "children": [
+          {
+            "text": "GitHub"
+          }
+        ]
+      },
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": ""
+      }
+    ]
+  }
+]

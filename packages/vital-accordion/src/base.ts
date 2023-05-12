@@ -14,32 +14,32 @@
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-accordion/lib/shadow.
+ * Import the  token directly from @bodiless/vital-accordion/lib/base.
  * @category Token Collection
  * @see [[vitalAccordion]]
  */
-export { default as vitalAccordion } from './components/Accordion/tokens/vitalAccordion';
+export { default as vitalAccordionBase } from './components/Accordion/tokens/vitalAccordion';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-accordion/lib/shadow.
+ * Import the  token directly from @bodiless/vital-accordion/lib/base.
  * @category Token Collection
  * @see [[vitalAccordionBody]]
  */
-export { default as vitalAccordionBody } from './components/AccordionBody/tokens/vitalAccordionBody';
+export { default as vitalAccordionBodyBase } from './components/AccordionBody/tokens/vitalAccordionBody';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-accordion/lib/shadow.
+ * Import the  token directly from @bodiless/vital-accordion/lib/base.
  * @category Token Collection
  * @see [[vitalAccordionTitle]]
  */
-export { default as vitalAccordionTitle } from './components/AccordionTitle/tokens/vitalAccordionTitle';
+export { default as vitalAccordionTitleBase } from './components/AccordionTitle/tokens/vitalAccordionTitle';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-accordion/lib/shadow.
+ * Import the  token directly from @bodiless/vital-accordion/lib/base.
  * @category Token Collection
  * @see [[vitalAccordionFlowContainer]]
  */
-export { default as vitalAccordionFlowContainer } from './components/FlowContainer/tokens/vitalAccordionFlowContainer';
+export { default as vitalAccordionFlowContainerBase } from './components/FlowContainer/tokens/vitalAccordionFlowContainer';

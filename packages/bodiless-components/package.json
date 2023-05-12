@@ -13,8 +13,7 @@
     "/lib",
     "/bodiless.docs.json",
     "/getDocs.js",
-    "/doc",
-    "node-api"
+    "/doc"
   ],
   "repository": {
     "type": "git",

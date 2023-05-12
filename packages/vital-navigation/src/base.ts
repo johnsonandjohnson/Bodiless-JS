@@ -14,47 +14,47 @@
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-navigation/lib/shadow.
+ * Import the  token directly from @bodiless/vital-navigation/lib/base.
  * @category Token Collection
  * @see [[vitalBreadcrumbs]]
  */
-export { default as vitalBreadcrumbs } from './components/Breadcrumbs/tokens/vitalBreadcrumbs';
+export { default as vitalBreadcrumbsBase } from './components/Breadcrumbs/tokens/vitalBreadcrumbs';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-navigation/lib/shadow.
+ * Import the  token directly from @bodiless/vital-navigation/lib/base.
  * @category Token Collection
  * @see [[vitalBurgerMenu]]
  */
-export { default as vitalBurgerMenu } from './components/BurgerMenu/tokens/vitalBurgerMenu';
+export { default as vitalBurgerMenuBase } from './components/BurgerMenu/tokens/vitalBurgerMenu';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-navigation/lib/shadow.
+ * Import the  token directly from @bodiless/vital-navigation/lib/base.
  * @category Token Collection
  * @see [[vitalMenu]]
  */
-export { default as vitalMenu } from './components/Menu/tokens/vitalMenu';
+export { default as vitalMenuBase } from './components/Menu/tokens/vitalMenu';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-navigation/lib/shadow.
+ * Import the  token directly from @bodiless/vital-navigation/lib/base.
  * @category Token Collection
  * @see [[vitalMenuTitle]]
  */
-export { default as vitalMenuTitle } from './components/MenuTitle/tokens/vitalMenuTitle';
+export { default as vitalMenuTitleBase } from './components/MenuTitle/tokens/vitalMenuTitle';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-navigation/lib/shadow.
+ * Import the  token directly from @bodiless/vital-navigation/lib/base.
  * @category Token Collection
  * @see [[vitalSeparator]]
  */
-export { default as vitalSeparator } from './components/Separator/tokens/vitalSeparator';
+export { default as vitalSeparatorBase } from './components/Separator/tokens/vitalSeparator';
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-navigation/lib/shadow.
+ * Import the  token directly from @bodiless/vital-navigation/lib/base.
  * @category Token Collection
  * @see [[vitalSubMenu]]
  */
-export { default as vitalSubMenu } from './components/SubMenu/tokens/vitalSubMenu';
+export { default as vitalSubMenuBase } from './components/SubMenu/tokens/vitalSubMenu';
