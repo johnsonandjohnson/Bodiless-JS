@@ -84,10 +84,10 @@ components; `EditorPlain` and `RichText` contain `tokens` directories and are sh
 The [Vital Design System](/VitalDesignSystem/) provides many shadowable components, each of which
 has its own API documentation about shadowing its token collection. Also, within the Bodiless
 repository, there is a
-[`vital-test`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-test/src/shadow/%40bodiless)
+[`vital-demo`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-demo/src/shadow/%40bodiless)
 package that shadows all the available Vital components and provides examples. To continue using
 `vital-editors` as our example, if you look in
-[`vital-test/src/shadow/@bodiless/vital-editors`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-test/src/shadow/%40bodiless/vital-editors),
+[`vital-demo/src/shadow/@bodiless/vital-editors`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-demo/src/shadow/%40bodiless/vital-editors),
 you can see how to go about shadowing the `EditorPlain` and `RichText` components.
 
 To get into the finer details of the structure required to make a component shadowable, please see
@@ -240,7 +240,7 @@ To export a shadowed version of a token collection:
     !> **IMPORTANT:** In the file path, `./lib/shadow/base-package/Foo.js`, `base-package` needs to
     **match the name of the package from which you are importing the base collection.** For example,
     if you look in the
-    [`vital-test`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-test)
+    [`vital-demo`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-demo)
     package, you'll see that each of the modules defining shadowed token collections are under
     `shadow/@bodiless/vital-xxx/`; this is because each of the names of the packages from which it's
     importing the base collections are of the form `@bodiless/vital-xxx` (e.g.,
@@ -273,7 +273,7 @@ To export a shadowed version of a token collection:
     (e.g.,
     [`__vital__`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/__vital__/shadow.js)
     and
-    [`vital-test`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-test/shadow.js)),
+    [`vital-demo`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-demo/shadow.js)),
     you can see that there's nothing unique about them. You can copy any one of these `shadow.js`
     files into your package root, and it will work.
 
@@ -381,13 +381,13 @@ Before you begin setting up your theme (or whatever else you may be working on),
 to first make sure that your tokens are actually being shadowed.
 
 Once again, the
-[`vital-test`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-test)
+[`vital-demo`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-demo)
 package lends itself as a valuable resource; here, you'll find a useful pattern for testing your
 shadowed tokens.
 
-For example, take a look at the shadowed Vital Button component within the `vital-test` package:
+For example, take a look at the shadowed Vital Button component within the `vital-demo` package:
 
-[`vital-test/src/shadow/@bodiless/vital-buttons/Buttons.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-test/src/shadow/%40bodiless/vital-buttons/Buttons.ts):
+[`vital-demo/src/shadow/@bodiless/vital-buttons/Buttons.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-demo/src/shadow/%40bodiless/vital-buttons/Buttons.ts):
 
 ```ts
 import { vitalButtonsBase, asButtonToken } from '@bodiless/vital-buttons';
@@ -484,7 +484,7 @@ TODO: Add and Refine
   01. The token shadow plugin will then pick up the new file to be shadowed.
 - So that you don't need to constantly rebuild the package after each change, run `npm run
   build:watch`; this will rebuild the package on each change.
-- Review [`packages/vital-test/src/shadow/@bodiless/`][] for examples and patterns of shadowing.
+- Review [`packages/vital-demo/src/shadow/@bodiless/`][] for examples and patterns of shadowing.
 - As stated in the _gotchas_ above, misspellings/misnamings are a common cause of shadowing issues.
   A good way to verify that you named your shadow file properly is: when you build or run dev,
   within the console output, find the shadow replacement for the file you're expecting to be
@@ -536,7 +536,7 @@ All Vital DS tokens can be shadowed. Refer to the component's documentation and 
 instructions.
 
 Within the Bodiless repository, there is a
-[`vital-test`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-test/src/shadow/%40bodiless)
+[`vital-demo`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-demo/src/shadow/%40bodiless)
 package that shadows all components and provides examples — it is a good resource for reference and
 learning.
 
@@ -545,7 +545,7 @@ documentation](../../../Development/API/).
 
 <!-- Link Labels -->
 
-[`packages/vital-test/src/shadow/@bodiless/`]: https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-test/src/shadow/%40bodiless
+[`packages/vital-demo/src/shadow/@bodiless/`]: https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-demo/src/shadow/%40bodiless
 [`vital-layout/src/components/Footer/tokens/vitalFooter.ts`]: https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Footer/tokens/vitalFooter.ts
 [`vital-layout/src/components/Footer/tokens/index.ts`]: https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Footer/tokens/index.ts
 [`vital-layout/src/components/Footer/index.ts`]: https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Footer/index.ts
