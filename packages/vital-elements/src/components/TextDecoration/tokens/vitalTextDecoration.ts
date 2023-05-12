@@ -13,13 +13,7 @@
  */
 
 import { asTokenGroup } from '../../../util';
-
-export const TextDecorationMeta = {
-  categories: {
-    Type: ['Element'],
-    Group: ['FontDecoration'],
-  },
-};
+import { TextDecorationMeta } from '../meta';
 
 export default asTokenGroup(TextDecorationMeta)({
   Underline: 'underline',

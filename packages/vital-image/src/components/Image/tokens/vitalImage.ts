@@ -20,13 +20,6 @@ import {
   withSidecarNodes,
 } from '@bodiless/data';
 import {
-  GatsbyImagePresets,
-  withoutGatsbyImageProps,
-  asGatsbyImage,
-  withGatsbyImageLogger,
-  withGatsbyImageNode,
-} from '@bodiless/gatsby-theme-bodiless';
-import {
   flowHoc,
   stylable,
   addProps,
@@ -40,6 +33,13 @@ import { asBodilessLink, asBodilessImage } from '@bodiless/components-ui';
 import { asElementToken } from '@bodiless/vital-elements';
 import type { ElementToken } from '@bodiless/vital-elements';
 import { withoutHydration } from '@bodiless/hydration';
+import {
+  ImagePresets,
+  withoutImageProps,
+  asImage,
+  withImageLogger,
+  withImageNode,
+} from './vitalImage.gatsby';
 
 // @ts-ignore Cannot find module
 import landscapeImage from '../../../../assets/landscape_image.png';
@@ -52,9 +52,9 @@ import landscapeImage from '../../../../assets/landscape_image.png';
  * @param preset
  * The Gatsby image preset to use.
  */
-const withImageSchema = (preset?: GatsbyImagePresets) => flowHoc(
+const withImageSchema = (preset?: ImagePresets) => flowHoc(
   asBodilessImage(),
-  preset === undefined ? withoutGatsbyImageProps : withGatsbyImageNode(preset),
+  preset === undefined ? withoutImageProps : withImageNode(preset),
   withNodeKey('image'),
 );
 
@@ -75,9 +75,9 @@ const objectFitCoverProps = {
 const Base = asElementToken({
   Core: {
     _: as(
-      asGatsbyImage,
+      asImage,
       stylable,
-      withGatsbyImageLogger(),
+      withImageLogger(),
       withoutHydration(),
     ),
   },
@@ -93,7 +93,7 @@ const WithEditorPlain = asElementToken({
 
 const WithEditorBlurUp = asElementToken({
   Schema: {
-    _: withImageSchema(GatsbyImagePresets.FluidWithWebp),
+    _: withImageSchema(ImagePresets.FluidWithWebp),
   },
   Meta: extendMeta(
     flowHoc.meta.term('Optimization')('Optimized'),
@@ -106,7 +106,7 @@ const WithEditorBlurUp = asElementToken({
 
 const WithEditorTraced = asElementToken({
   Schema: {
-    _: withImageSchema(GatsbyImagePresets.FluidWithWebpTracedSVG),
+    _: withImageSchema(ImagePresets.FluidWithWebpTracedSVG),
   },
   Meta: extendMeta(
     flowHoc.meta.term('Optimization')('Optimized'),
@@ -119,7 +119,7 @@ const WithEditorTraced = asElementToken({
 
 const WithEditorNoEffect = asElementToken({
   Schema: {
-    _: withImageSchema(GatsbyImagePresets.FluidWithWebpNoBase64),
+    _: withImageSchema(ImagePresets.FluidWithWebpNoBase64),
   },
   Meta: extendMeta(
     flowHoc.meta.term('Optimization')('Optimized'),

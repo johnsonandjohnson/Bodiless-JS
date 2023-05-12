@@ -13,13 +13,7 @@
  */
 
 import { asTokenGroup } from '../../../util';
-
-export const FontSizeMeta = {
-  categories: {
-    Type: ['Element'],
-    Group: ['FontSize'],
-  },
-};
+import { FontSizeMeta } from '../meta';
 
 export default asTokenGroup(FontSizeMeta)({
   Base: 'text-m-base lg:text-base',

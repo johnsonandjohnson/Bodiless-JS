@@ -14,32 +14,32 @@
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-content-listing/lib/shadow.
+ * Import the  token directly from @bodiless/vital-content-listing/lib/base.
  * @category Token Collection
  * @see [[vitalContentListing]]
  */
-export { default as vitalContentListing } from './components/ContentListing/tokens/vitalContentListing';
+export { default as vitalContentListingBase } from './components/ContentListing/tokens/vitalContentListing';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-content-listing/lib/shadow.
+ * Import the  token directly from @bodiless/vital-content-listing/lib/base.
  * @category Token Collection
  * @see [[vitalContentListingTemplate]]
  */
-export { default as vitalContentListingTemplate } from './components/ContentListingTemplate/tokens/vitalContentListingTemplate';
+export { default as vitalContentListingTemplateBase } from './components/ContentListingTemplate/tokens/vitalContentListingTemplate';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-content-listing/lib/shadow.
+ * Import the  token directly from @bodiless/vital-content-listing/lib/base.
  * @category Token Collection
  * @see [[vitalFilter]]
  */
-export { default as vitalFilter } from './components/Filter/tokens/vitalFilter';
+export { default as vitalFilterBase } from './components/Filter/tokens/vitalFilter';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-content-listing/lib/shadow.
+ * Import the  token directly from @bodiless/vital-content-listing/lib/base.
  * @category Token Collection
  * @see [[vitalFilterByGroup]]
  */
-export { default as vitalFilterByGroup } from './components/FilterByGroup/tokens/vitalFilterByGroup';
+export { default as vitalFilterByGroupBase } from './components/FilterByGroup/tokens/vitalFilterByGroup';

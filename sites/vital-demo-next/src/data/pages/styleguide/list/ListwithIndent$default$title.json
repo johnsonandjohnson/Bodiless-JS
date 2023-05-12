@@ -1,0 +1,18 @@
+[
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "This list is indented list"
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "It indents 2.5rem."
+      }
+    ]
+  }
+]

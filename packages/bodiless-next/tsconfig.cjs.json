@@ -1,0 +1,22 @@
+{
+  "extends": "../../tsconfig.settings.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "rootDir": "src",
+    "outDir": "./lib/cjs",
+    "baseUrl": ".",
+    "paths": {
+      "*": [ "src/Webpack/*"]
+    }
+  },
+  "include": [
+    "src/Webpack",
+    "src/NextConfig",
+  ],
+  "exclude": [
+    "lib",
+    "node_modules",
+    "__tests__/**/*.*",
+    "src/**/__tests__/**/*.*"
+  ]
+}

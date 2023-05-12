@@ -38,6 +38,7 @@
     "@bodiless/navigation": "^1.0.0-rc.37",
     "@bodiless/oidc": "^1.0.0-rc.37",
     "@bodiless/organisms": "^1.0.0-rc.37",
+    "@bodiless/page": "^1.0.0-rc.37",
     "@bodiless/psh": "^1.0.0-rc.37",
     "@bodiless/richtext": "^1.0.0-rc.37",
     "@bodiless/richtext-ui": "^1.0.0-rc.37",

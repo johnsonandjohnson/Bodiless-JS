@@ -1,0 +1,102 @@
+{
+  "items": [
+    {
+      "uuid": "3f4b6f80-bcdf-11ec-bdb5-d932aedbd732",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "RichText"
+    },
+    {
+      "uuid": "2892a1f0-bcdf-11ec-bdb5-d932aedbd732",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/3"
+      },
+      "type": "ListBulletedLinked"
+    },
+    {
+      "uuid": "304c7a10-bcdf-11ec-bdb5-d932aedbd732",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/3"
+      },
+      "type": "ListNumberedLinked"
+    },
+    {
+      "uuid": "371ba410-bcdf-11ec-bdb5-d932aedbd732",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/3"
+      },
+      "type": "ListPlainLinked"
+    },
+    {
+      "uuid": "484fa1f0-bcdf-11ec-bdb5-d932aedbd732",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "RichText"
+    },
+    {
+      "uuid": "547e1240-bcdf-11ec-bdb5-d932aedbd732",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/3"
+      },
+      "type": "ListBulletedRichText"
+    },
+    {
+      "uuid": "58714570-bcdf-11ec-bdb5-d932aedbd732",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/3"
+      },
+      "type": "ListNumberedRichText"
+    },
+    {
+      "uuid": "5b46fab0-bcdf-11ec-bdb5-d932aedbd732",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/3"
+      },
+      "type": "ListPlainRichText"
+    },
+    {
+      "uuid": "41e6ac70-bce2-11ec-8cc5-13e1ba0ca81f",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "RichText"
+    },
+    {
+      "uuid": "59529d60-bce2-11ec-8cc5-13e1ba0ca81f",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/3"
+      },
+      "type": "ListBulletedPlainText"
+    },
+    {
+      "uuid": "61e57060-bce2-11ec-8cc5-13e1ba0ca81f",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/3"
+      },
+      "type": "ListNumberedPlainText"
+    },
+    {
+      "uuid": "65b60060-bce2-11ec-8cc5-13e1ba0ca81f",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/3"
+      },
+      "type": "ListPlainPlainText"
+    },
+    {
+      "uuid": "5f485eb0-bcdf-11ec-bdb5-d932aedbd732",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "RichText"
+    },
+    {
+      "uuid": "67cc8bb0-bcdf-11ec-bdb5-d932aedbd732",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "ListInfographic"
+    }
+  ]
+}

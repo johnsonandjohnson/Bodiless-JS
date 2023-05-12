@@ -18,12 +18,9 @@
 const pathUtil = require('path');
 const slash = require('slash');
 const MD5 = require('crypto-js/md5');
-const fs = require('fs');
 const fse = require('fs-extra');
 const md5File = require('md5-file');
 const { fluid: sharpFluid, fixed: sharpFixed } = require('gatsby-plugin-sharp');
-const git = require('isomorphic-git');
-const findUp = require('find-up');
 const GatsbyImagePresets = require('./cjs/dist/GatsbyImage/GatsbyImagePresets').default;
 
 const Logger = require('./Logger');
@@ -37,8 +34,6 @@ const srcSetBreakpoints = [
   834,
   1024,
 ];
-
-const findGitFolder = async () => await findUp('.git', { type: 'directory' }) || '';
 
 const getDefaultSharpArgs = () => ({
   quality: 90,
@@ -64,65 +59,6 @@ const findFilesystemNode = ({ node, getNode }) => {
     }
   }
   return fsNode;
-};
-
-/**
- * Get git info from local fs .git directory.
- *
- * @returns {
- *  repo: string,
- *  sha: string,
- *  branch: string,
- * }
- */
-const getGitInfoFromFs = async () => {
-  let repo = '';
-  let sha = '';
-  let branch = '';
-
-  const gitDir = await findGitFolder();
-  if (gitDir) {
-    try {
-      const projectRoot = pathUtil.dirname(gitDir);
-      const remotes = await git.listRemotes({ fs, dir: projectRoot });
-      const origin = remotes.find(v => v.remote === 'origin');
-      repo = origin?.url ?? '';
-      branch = await git.currentBranch({ fs, dir: projectRoot }) || '';
-      sha = await git.resolveRef({ fs, dir: projectRoot, ref: 'HEAD' }) || '';
-      return { repo, sha, branch };
-    } catch (err) {
-      logger.log('Failed to retrieve git info from fs. ', err);
-      return null;
-    }
-  }
-  return null;
-};
-
-/**
- * Get current git repo info.
- *
- * @returns Promise<{
- *  repo: string,
- *  sha: string,
- *  branch: string,
- * }>
- */
-const createGitInfo = async () => {
-  try {
-    const gitInfoFs = await getGitInfoFromFs();
-    if (gitInfoFs) {
-      logger.log('Git info from fs. ', gitInfoFs);
-      return gitInfoFs;
-    }
-  } catch (err) {
-    logger.log('Failed to create git info. ', err);
-  }
-
-  return {
-    repo: '',
-    sha: '',
-    branch: '',
-  };
 };
 
 // Adapted from create-file-path.
@@ -568,5 +504,3 @@ exports.onCreateNode = ({
 };
 
 exports.createSlug = createSlug;
-
-exports.createGitInfo = createGitInfo;

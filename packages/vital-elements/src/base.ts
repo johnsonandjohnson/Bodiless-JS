@@ -14,40 +14,40 @@
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-elements/lib/shadow.
+ * Import the  token directly from @bodiless/vital-elements/lib/base.
  * @category Token Collection
  * @see [[vitalColor]]
  */
-export { default as vitalColor } from './components/Color/tokens/vitalColor';
+export { default as vitalColorBase } from './components/Color/tokens/vitalColor';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-elements/lib/shadow.
+ * Import the  token directly from @bodiless/vital-elements/lib/base.
  * @category Token Collection
  * @see [[vitalFontSize]]
  */
-export { default as vitalFontSize } from './components/FontSize/tokens/vitalFontSize';
+export { default as vitalFontSizeBase } from './components/FontSize/tokens/vitalFontSize';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-elements/lib/shadow.
+ * Import the  token directly from @bodiless/vital-elements/lib/base.
  * @category Token Collection
  * @see [[vitalSpacing]]
  */
-export { default as vitalSpacing } from './components/Spacing/tokens/vitalSpacing';
+export { default as vitalSpacingBase } from './components/Spacing/tokens/vitalSpacing';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-elements/lib/shadow.
+ * Import the  token directly from @bodiless/vital-elements/lib/base.
  * @category Token Collection
  * @see [[vitalTextDecoration]]
  */
-export { default as vitalTextDecoration } from './components/TextDecoration/tokens/vitalTextDecoration';
+export { default as vitalTextDecorationBase } from './components/TextDecoration/tokens/vitalTextDecoration';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-elements/lib/shadow.
+ * Import the  token directly from @bodiless/vital-elements/lib/base.
  * @category Token Collection
  * @see [[vitalTypography]]
  */
-export { default as vitalTypography } from './components/Typography/tokens/vitalTypography';
+export { default as vitalTypographyBase } from './components/Typography/tokens/vitalTypography';

@@ -13,4 +13,4 @@
  */
 
 export { default as vitalFontSize } from './tokens';
-export { FontSizeMeta } from './tokens';
+export { FontSizeMeta } from './meta';

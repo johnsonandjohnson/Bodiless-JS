@@ -100,13 +100,14 @@ const asBreadcrumb = ({
       // a layout effect is executed.
       store.setItem(item);
     }
-
-    useLayoutEffect(() => {
-      store.setItem(item);
-      return () => {
-        store.deleteItem(item);
-      };
-    }, [titleNode.data, linkNode.data]);
+    if (typeof window !== 'undefined') {
+      useLayoutEffect(() => {
+        store.setItem(item);
+        return () => {
+          store.deleteItem(item);
+        };
+      }, [titleNode.data, linkNode.data]);
+    }
 
     return (
       <BreadcrumbContextProvider value={item}>

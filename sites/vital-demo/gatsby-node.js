@@ -10,14 +10,13 @@ const path = require('path');
 const fs = require('fs');
 const glob = require('glob');
 const { addTokenShadowPlugin, addStatoscopePlugin } = require('@bodiless/webpack');
-const shadow = require('--vital--/shadow');
-const shadowtest = require('@bodiless/vital-test/shadow');
+const shadow = require('@bodiless/vital-demo/shadow');
 
 // Fix sourcemap issue
 // See: https://github.com/gatsbyjs/gatsby/issues/6278#issuecomment-402540404
 exports.onCreateWebpackConfig = ({ stage, actions }) => {
   actions.setWebpackConfig(
-    addTokenShadowPlugin({}, { resolvers: [shadowtest, shadow] })
+    addTokenShadowPlugin({}, { resolvers: [shadow] })
   );
   if (stage === 'develop') {
     // When running test-site with local packages (via npm pack) we seem to get
@@ -54,7 +53,7 @@ exports.onCreateWebpackConfig = ({ stage, actions }) => {
   if (stage === 'build-javascript') {
     const options = {
       enabled: process.env.BODILESS_BUILD_STATS === '1',
-      sitePath: process.env.BODILESS_STATS_PATH || path.resolve('./'),
+      sitePath: process.env.BODILESS_STATS_PATH || path.resolve('./public'),
       name: 'vital-demo',
       open: process.env.BODILESS_OPEN_STATS === '1' ? 'file' : false,
     };

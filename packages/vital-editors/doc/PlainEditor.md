@@ -83,7 +83,8 @@ of those characters with the style `align-baseline` to all uses of the Vital Pla
 
 ```js
 import { asElementToken } from '@bodiless/vital-elements';
-import { vitalEditorPlainBase, withAutoSuperscript } from '@bodiless/vital-editors';
+import { vitalEditorPlainBase } from '@bodiless/vital-editors/lib/base';
+import { withAutoSuperscript } from '@bodiless/vital-editors';
 
 const Default = asElementToken(vitalEditorPlainBase.Default, {
   Compose: {

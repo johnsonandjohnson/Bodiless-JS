@@ -1,0 +1,26 @@
+[
+  {
+    "type": "H1",
+    "children": [
+      {
+        "text": "List Variations in FlowContainer"
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "The following variations test lists available to content editor in FlowContainer."
+      }
+    ]
+  },
+  {
+    "type": "H2",
+    "children": [
+      {
+        "text": "Linked Lists Variations"
+      }
+    ]
+  }
+]

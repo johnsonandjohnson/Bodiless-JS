@@ -24,7 +24,7 @@
   "scripts": {
     "build": "run-p build:lib copy",
     "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api src",
-    "build:lib": "tsc -p ./tsconfig.json",
+    "build:lib": "tsc -b ./tsconfig.json  ./tsconfig.cjs.json",
     "build:watch": "npm run build:lib -- --watch",
     "copy": "copyfiles -u 1 \"./src/*.css\" \"./lib/\"",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
@@ -42,7 +42,8 @@
     "react-test-renderer": "^18.0.0",
     "react-dropzone": "^10.1.5",
     "react-id-generator": "^3.0.1",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "webpack": "^5.69.1"
   },
   "devDependencies": {
     "@types/uuid": "^3.4.4",

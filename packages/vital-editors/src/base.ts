@@ -14,24 +14,24 @@
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-editors/lib/shadow.
+ * Import the  token directly from @bodiless/vital-editors/lib/base.
  * @category Token Collection
  * @see [[vitalEditorPlain]]
  */
-export { default as vitalEditorPlain } from './components/EditorPlain/tokens/vitalEditorPlain';
+export { default as vitalEditorPlainBase } from './components/EditorPlain/tokens/vitalEditorPlain';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-editors/lib/shadow.
+ * Import the  token directly from @bodiless/vital-editors/lib/base.
  * @category Token Collection
  * @see [[vitalRichText]]
  */
-export { default as vitalRichText } from './components/RichText/tokens/vitalRichText';
+export { default as vitalRichTextBase } from './components/RichText/tokens/vitalRichText';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-editors/lib/shadow.
+ * Import the  token directly from @bodiless/vital-editors/lib/base.
  * @category Token Collection
  * @see [[vitalEditorsFlowContainer]]
  */
-export { default as vitalEditorsFlowContainer } from './components/FlowContainer/tokens/vitalEditorsFlowContainer';
+export { default as vitalEditorsFlowContainerBase } from './components/FlowContainer/tokens/vitalEditorsFlowContainer';

@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import vitalColor, { ColorMeta } from './vitalColor';
+import vitalColor from './vitalColor';
 
 export default vitalColor;
-export { ColorMeta };

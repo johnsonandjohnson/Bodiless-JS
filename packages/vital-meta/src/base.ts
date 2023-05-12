@@ -14,8 +14,8 @@
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-meta/lib/shadow.
+ * Import the  token directly from @bodiless/vital-meta/lib/base.
  * @category Token Collection
  * @see [[vitalMetaHelmetvitalMetaHelmet]]
  */
-export { default as vitalMetaHelmet } from './components/MetaHelmet/tokens/vitalMetaHelmet';
+export { default as vitalMetaHelmetBase } from './components/MetaHelmet/tokens/vitalMetaHelmet';

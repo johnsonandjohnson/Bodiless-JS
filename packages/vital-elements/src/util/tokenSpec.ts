@@ -22,7 +22,7 @@ import {
   as,
 } from '@bodiless/fclasses';
 
-const defaultDomains = {
+const vitalTokenSpecDomains = {
   Core: {},
   Components: {},
   A11y: {},
@@ -37,7 +37,7 @@ const defaultDomains = {
   Schema: {},
 };
 
-export type DefaultDomains = typeof defaultDomains;
+export type DefaultDomains = typeof vitalTokenSpecDomains;
 
 /**
  * Creates a token definition utility for a clean component.
@@ -47,7 +47,7 @@ export type DefaultDomains = typeof defaultDomains;
  */
 const asVitalTokenSpec = <
   C extends DesignableComponents
->() => asTokenSpec<C, DefaultDomains>(defaultDomains);
+>() => asTokenSpec<C, DefaultDomains>(vitalTokenSpecDomains);
 
 /**
  * Creates an element level token (one in which only the _ design key is allowed);
@@ -117,7 +117,7 @@ const asSimpleToken = (...tokens: Token[]) => asElementToken({
 
 export {
   asVitalTokenSpec, asMetaToken, asElementToken, asFluidToken,
-  asTokenGroup, asSimpleToken
+  asTokenGroup, asSimpleToken, vitalTokenSpecDomains,
 };
 export type {
   ElementToken, FluidToken,

@@ -54,7 +54,7 @@ to the wrapper. In this example we add a shadowed vitalPage
 ```js
 import { withLanguages } from '@bodiless/i18n';
 import { asFluidToken } from '@bodiless/vital-elements';
-import { vitalPageBase } from '@bodiless/vital-templates';
+import { vitalPageBase } from '@bodiless/vital-templates/lib/base';
 
 const Default = asFluidToken(vitalPageBase.Base, {
   Core: {

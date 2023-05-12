@@ -62,8 +62,11 @@ const preserveMeta = (hoc: HOC): HOC => <P extends object, Q extends object = P>
  * @category Token API
  */
 export const withMeta = (meta: TokenMeta): HOC => Component => {
-  const WithMeta = (props: any) => <Component {...props} />;
-  return Object.assign(WithMeta, meta);
+  const WithMeta = typeof Component === 'string'
+    ? (props: any) => <Component {...props} />
+    : Component;
+  // const WithMeta = (props: any) => <Component {...props} />;
+  return mergeWith(WithMeta, meta, mergeMeta);
 };
 
 type TokenWithParents = HOCWithMeta & {

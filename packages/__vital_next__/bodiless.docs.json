@@ -1,0 +1,7 @@
+{
+  "Components": {
+    "Link": {
+      "README.md": "./doc/Link.md"
+    }
+  }
+}

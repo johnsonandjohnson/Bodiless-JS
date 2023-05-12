@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "uuid": "7cf63f00-c7ba-11ec-b650-af804d5be96e",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "FilterableContent"
+    },
+    {
+      "uuid": "802f49f0-c7ba-11ec-b650-af804d5be96e",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "FilterableContent"
+    },
+    {
+      "uuid": "810cffc0-c7ba-11ec-b650-af804d5be96e",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "FilterableContent"
+    }
+  ]
+}

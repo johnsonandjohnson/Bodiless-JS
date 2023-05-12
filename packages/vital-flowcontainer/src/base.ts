@@ -14,8 +14,8 @@
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-flowcontainer/lib/shadow.
+ * Import the  token directly from @bodiless/vital-flowcontainer/lib/base.
  * @category Token Collection
  * @see [[vitalFlowContainer]]
  */
-export { default as vitalFlowContainer } from './components/FlowContainer/tokens/vitalFlowContainer';
+export { default as vitalFlowContainerBase } from './components/FlowContainer/tokens/vitalFlowContainer';

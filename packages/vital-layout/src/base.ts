@@ -14,64 +14,64 @@
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-layout/lib/shadow.
+ * Import the  token directly from @bodiless/vital-layout/lib/base.
  * @category Token Collection
  * @see [[vitalFooter]]
  */
-export { default as vitalFooter } from './components/Footer/tokens/vitalFooter';
+export { default as vitalFooterBase } from './components/Footer/tokens/vitalFooter';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-layout/lib/shadow.
+ * Import the  token directly from @bodiless/vital-layout/lib/base.
  * @category Token Collection
  * @see [[vitalSocialLinks]]
  */
-export { default as vitalSocialLinks } from './components/Footer/SocialLinks/tokens/vitalSocialLinks';
+export { default as vitalSocialLinksBase } from './components/Footer/SocialLinks/tokens/vitalSocialLinks';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-layout/lib/shadow.
+ * Import the  token directly from @bodiless/vital-layout/lib/base.
  * @category Token Collection
  * @see [[vitalCopyrightRow]]
  */
-export { default as vitalCopyrightRow } from './components/Footer/CopyrightRow/tokens/vitalCopyrightRow';
+export { default as vitalCopyrightRowBase } from './components/Footer/CopyrightRow/tokens/vitalCopyrightRow';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-layout/lib/shadow.
+ * Import the  token directly from @bodiless/vital-layout/lib/base.
  * @category Token Collection
  * @see [[vitalRewards]]
  */
-export { default as vitalRewards } from './components/Footer/Rewards/tokens/vitalRewards';
+export { default as vitalRewardsBase } from './components/Footer/Rewards/tokens/vitalRewards';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-layout/lib/shadow.
+ * Import the  token directly from @bodiless/vital-layout/lib/base.
  * @category Token Collection
  * @see [[vitalHeader]]
  */
-export { default as vitalHeader } from './components/Header/tokens/vitalHeader';
+export { default as vitalHeaderBase } from './components/Header/tokens/vitalHeader';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-layout/lib/shadow.
+ * Import the  token directly from @bodiless/vital-layout/lib/base.
  * @category Token Collection
  * @see [[vitalHelmet]]
  */
-export { default as vitalHelmet } from './components/Helmet/tokens/vitalHelmet';
+export { default as vitalHelmetBase } from './components/Helmet/tokens/vitalHelmet';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-layout/lib/shadow.
+ * Import the  token directly from @bodiless/vital-layout/lib/base.
  * @category Token Collection
  * @see [[vitalLayout]]
  */
-export { default as vitalLayout } from './components/Layout/tokens/vitalLayout';
+export { default as vitalLayoutBase } from './components/Layout/tokens/vitalLayout';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-layout/lib/shadow.
+ * Import the  token directly from @bodiless/vital-layout/lib/base.
  * @category Token Collection
  * @see [[vitalLogo]]
  */
-export { default as vitalLogo } from './components/Logo/tokens/vitalLogo';
+export { default as vitalLogoBase } from './components/Logo/tokens/vitalLogo';

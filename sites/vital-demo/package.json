@@ -11,7 +11,6 @@
     "test": "__tests__"
   },
   "dependencies": {
-    "--vital--": "^1.0.0-rc.37",
     "@babel/core": "^7.9.0",
     "@bodiless/backend": "^1.0.0-rc.37",
     "@bodiless/cli": "^1.0.0-rc.37",
@@ -23,6 +22,7 @@
     "@bodiless/i18n": "^1.0.0-rc.37",
     "@bodiless/layouts": "^1.0.0-rc.37",
     "@bodiless/layouts-ui": "^1.0.0-rc.37",
+    "@bodiless/page": "^1.0.0-rc.37",
     "@bodiless/schema-org": "^1.0.0-rc.37",
     "@bodiless/ui": "^1.0.0-rc.37",
     "@bodiless/vital-buttons": "^1.0.0-rc.37",
@@ -37,7 +37,7 @@
     "@bodiless/vital-navigation": "^1.0.0-rc.37",
     "@bodiless/vital-search": "^1.0.0-rc.37",
     "@bodiless/vital-templates": "^1.0.0-rc.37",
-    "@bodiless/vital-test": "^1.0.0-rc.37",
+    "@bodiless/vital-demo": "^1.0.0-rc.37",
     "@bodiless/vital-youtube": "^1.0.0-rc.37",
     "@bodiless/webpack": "^1.0.0-rc.37",
     "autoprefixer": "^10.4.2",

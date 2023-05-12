@@ -71,8 +71,9 @@ const LocalContextMenuPopup: FC<PropsWithChildren> = ({ children }) => {
     ]
   });
 
-  useLayoutEffect(() => refs.setReference(ref), [ref, refs]);
-
+  if (typeof window !== 'undefined') {
+    useLayoutEffect(() => refs.setReference(ref), [ref, refs]);
+  }
   // Role props for screen readers
   // const role = useRole(context, { role: "tooltip" });
   // Merge all the interactions into prop getters

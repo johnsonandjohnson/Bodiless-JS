@@ -15,7 +15,7 @@ character, inline, or block-level formatting.
 
     ```js
     import { asFluidToken, vitalTypography } from '@bodiless/vital-elements';
-    import { vitalRichTextBase } from '@bodiless/vital-editors';
+    import { vitalRichTextBase } from '@bodiless/vital-editors/lib/base';
     import { asMark, withButton } from '@bodiless/richtext';
     import { flowHoc } from '@bodiless/fclasses';
 
@@ -62,7 +62,7 @@ shadowing and using the `omit` function from the Lodash package.
     ```js
     import omit from 'lodash/omit';
     import { asFluidToken } from '@bodiless/vital-elements';
-    import { vitalRichTextBase } from '@bodiless/vital-editors';
+    import { vitalRichTextBase } from '@bodiless/vital-editors/lib/base';
 
     const Default = asFluidToken({
       ...vitalRichTextBase.Default,

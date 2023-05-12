@@ -14,8 +14,8 @@
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-link/lib/shadow.
+ * Import the  token directly from @bodiless/vital-link/lib/base.
  * @category Token Collection
  * @see [[vitalLink]]
  */
-export { default as vitalLink } from './components/Link/tokens/vitalLink';
+export { default as vitalLinkBase } from './components/Link/tokens/vitalLink';
