@@ -39,6 +39,7 @@
     "mobx": "^6.0.0",
     "mobx-react": "^7.2.1",
     "react-contenteditable": "^3.2.6",
+    "react-test-renderer": "^18.0.0",
     "react-dropzone": "^10.1.5",
     "react-id-generator": "^3.0.1",
     "uuid": "^3.3.2"

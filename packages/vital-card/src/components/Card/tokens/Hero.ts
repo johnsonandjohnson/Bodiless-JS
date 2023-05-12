@@ -26,7 +26,7 @@ import Base, {
   WithHorizontalContentCentered,
 } from './Base';
 
-const HeroBase = asCardToken({
+const Hero = asCardToken({
   ...Base,
   Components: {
     ...Base.Components,
@@ -55,17 +55,11 @@ const HeroBase = asCardToken({
     flowHoc.meta.term('Type')('Card'),
     flowHoc.meta.term('Sub Type')('Hero'),
   ),
+  Compose: {
+    WithHorizontalLeftOrientation,
+    WithHorizontalContentCentered,
+  }
 });
-
-const HeroLeftImageContentCentered = asCardToken(
-  HeroBase,
-  WithHorizontalContentCentered,
-  WithHorizontalLeftOrientation,
-);
-
-const HeroRightImageContentTop = HeroBase;
-const Hero = HeroLeftImageContentCentered;
-
 export interface VitalCardHero {
   /**
    * Defines the Hero card for the Vital DS.  Intended use is first card on a page.
@@ -80,36 +74,44 @@ export interface VitalCardHero {
    * - Layout domain defines Hero with Horizontal Base
    * - Spacing domain: add custom spacing to the hero card
    * - Theme: eliminates the Typography spacing to allow Spacing domain to take fully control.
+   * - Compose: Adds `WithHorizontalLeftOrientation` and `WithHorizontalContentCentered`
    *
    * #### Customizing:
    *
-   * @example Create a custom Hero card
+   * @example Create a custom Hero card with image on right and no description.
    * ```js
-   * import { vitalCard } from '@bodiless/vital-card';
+   * import { vitalCard } from '@bodiless/vital-card/lib/base';
    *
-   * const MyCustomHero = asCardToken(
-   *   HeroBase,
-   *   WithHorizontalContentCentered,
-   *   WithHorizontalRightOrientation,
-   *   WithNoDescription,
-   * );
+   * const MyCustomHero = asCardToken({
+   *   ...vitalCard.Hero,
+   *   Compose: {
+   * .   ...omit(vitalCard.Hero.Compose, 'WithHorizontalLeftOrientation'),
+   *     WithNoDescription: vitalCard.WithNoDescription,
+   *   },
+   * }
    * ```
    *
-   * @example Shadowing the Hero card with different variations and margin on image.
+   * @example Shadowing the Hero card with image on right, content top
+   *          and custom margin.
    * ```js
-   * import { asCardToken, vitalCardBase } from '@bodiless/vital-card';
+   * import { extendDomain } from '@bodiless/fclasses';
+   * import { asCardToken } from '@bodiless/vital-card';
+   * import { vitalCardBase } from '@bodiless/vital-card/lib/base';
+   * import omit from 'lodash/omit';
    *
-   * const Hero = asCardToken(
-   *   vitalCardBase.HeroBase,
-   *   vitalCardBase.WithHorizontalContentCentered,
-   *   vitalCardBase.WithHorizontalLeftOrientation,
-   *   vitalCardBase.WithPrimaryButton,
-   *   {
-   *     Theme: {
-   *       ImageWrapper: 'mx-16',
-   *     },
+   * const Hero = asCardToken({
+   *   ...vitalCardBase.Hero,
+   *   // Extend the theme to add margin
+   *   Theme: extendDomain(vitalCardBase.Hero.Theme, {
+   *     ImageWrapper: 'mx-16',
+   *   }),
+   *   Compose: {
+   * .   // Remove the default composition to get right image, content top.
+   *     ...omit(vitalCardBase.Hero.Compose, 'WithLeftImageContentCentered'),
+   *     // Add a button.
+   *     WithPrimaryButton: vitalCardBase.WithPrimaryButton,
    *   },
-   * );
+   * });
    *
    * export default {
    *   ...vitalCardBase,
@@ -118,19 +120,8 @@ export interface VitalCardHero {
    * ```
    */
   Hero: CardToken,
-  /*
-   * Hero card with default Left Image and Content Centered.
-   *
-   */
-  HeroLeftImageContentCentered: CardToken,
-  /*
-   * Hero card with default Right Image and Content Top-Aligned
-   */
-  HeroRightImageContentTop: CardToken,
 }
 
 export {
   Hero,
-  HeroLeftImageContentCentered,
-  HeroRightImageContentTop,
 };

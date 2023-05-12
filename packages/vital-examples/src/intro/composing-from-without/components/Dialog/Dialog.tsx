@@ -1,7 +1,5 @@
 import React from 'react';
 import type { FC, PropsWithChildren } from 'react';
-import { as } from '@bodiless/fclasses';
-import exampleDialog from './tokens';
 import './styles.css';
 import type { FancyBorderProps, DialogProps } from './types';
 
@@ -11,7 +9,7 @@ const FancyBorder: FC<PropsWithChildren<FancyBorderProps>> = ({ color, children 
   </div>
 );
 
-export const Dialog: FC<DialogProps> = ({ color, title, message }) => (
+const Dialog: FC<DialogProps> = ({ color, title, message }) => (
   <FancyBorder color={color}>
     <h1 className="Dialog-title">
       {title}
@@ -30,4 +28,4 @@ export const Dialog: FC<DialogProps> = ({ color, title, message }) => (
 //   />
 // );
 
-export const WelcomeDialog = as(exampleDialog.Welcome)(Dialog);
+export default Dialog;

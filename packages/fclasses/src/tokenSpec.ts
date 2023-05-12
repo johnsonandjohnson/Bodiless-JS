@@ -153,6 +153,18 @@ const tokenMergeCustomizer = (...args: any) => {
 };
 
 /**
+ * Alias for extendDomain.
+ *
+ * @see `extendDomain`
+ * @category Design API
+ */
+function extendDesign<C extends DesignableComponents, D extends object = any>(
+  ...designs: Design<C, D>[]
+): Design<C, D> {
+  return mergeWith({}, ...designs, (a: any, b: any) => (a && b ? as(a, b) : undefined));
+}
+
+/**
  * Utility to extend a domain value. The final domain will contain the union of
  * keys from all merged designs. In the case where two or more designs have the
  * same key, the value of that key will be composed using `t`.
@@ -163,13 +175,9 @@ const tokenMergeCustomizer = (...args: any) => {
  * @param ...designs
  * Designs to extend the base design.
  *
- * @category Design API
+ * @category Token API
  */
-function extendDesign<C extends DesignableComponents, D extends object = any>(
-  ...designs: Design<C, D>[]
-): Design<C, D> {
-  return mergeWith({}, ...designs, (a: any, b: any) => (a && b ? as(a, b) : undefined));
-}
+const extendDomain = extendDesign;
 
 /**
  * Takes a set of designs or HODs and returns a single HOD which extends
@@ -302,6 +310,7 @@ export {
   on,
   withDesign,
   extendDesign,
+  extendDomain,
   extendDesignWith,
 };
 

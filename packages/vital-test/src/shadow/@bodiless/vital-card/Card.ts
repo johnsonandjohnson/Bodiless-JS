@@ -30,15 +30,8 @@ const Hero = asCardToken(vitalCard.Hero, {
   },
 });
 
-const HeroLeftImageContentCentered = asCardToken(vitalCard.HeroLeftImageContentCentered, {
-  Content: {
-    Title: addProps({ 'data-shadowed-by': '__vitaltest__:Card:HeroLeftImageCentered' }),
-  },
-});
-
 export default {
   ...vitalCard,
   Basic,
   Hero,
-  HeroLeftImageContentCentered,
 };

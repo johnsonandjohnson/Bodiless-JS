@@ -359,9 +359,8 @@ export type ComposedToken<
 export type TokenCollection<
   C extends DesignableComponents,
   D extends object = object,
-> = {
-  [name: string]: TokenSpec<C, D>,
-};
+  K extends object = any,
+> = Record<keyof K, TokenSpec<C, D>>;
 
 /**
  * Like a [[Design]], but without the `_final` property.
