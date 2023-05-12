@@ -435,7 +435,6 @@ TODO: Add and Refine
 - Ensure that all resources directly required (including `shadow.js` and your original token file)
   are included in and exported by your package.  
   In your `package.json`:
-
   ```json
   //...,
   "files": [
@@ -443,9 +442,7 @@ TODO: Add and Refine
     "./shadow.js"
   ],
   ```
-
   And, if you use the `exports` key:
-
   ```json
   //...,
   "exports": {
@@ -453,23 +450,33 @@ TODO: Add and Refine
     "./shadow.js": "./shadow.js"
   }
   ```
-
 - The above pattern for organizing your shadowed token collections is not mandatory. You can use
   whatever logic you like in `shadow.js` to resolve the shadowed token collection.
 
 ### Gotchas
 
-TODO: Add and Refine
-
-There are some gotchas on shadowing we are trying to fix in Vital packages.
-
-- If in a Vital token we have `TokenX = asFooterToken(Default, {})`. If your site shadow's `Default`
-  and uses `TokenX` — it won't get shadowing token. You would have to shadow both `Default` and
-  `TokenX`. We are trying to get rid of these in Vital.
+- If your shadowed tokens aren't working, double-check your spelling — filenames must match exactly.  
+  - Singular versus plural (e.g., `Accordion` vs. `Accordions`) can be an especially difficult typo
+    to find.
+  - This is a good "first thing" to check, as it is a common source of trouble and an easy fix.
+- Your module that defines your shadowed token collection must be in your package under
+  `./lib/shadow/base-package`, where `base-package` is identical to the _name_ of the package from
+  which you are importing the base collection.
+  - E.g., if you are shadowing from the `vital-card` package, its `name`, as defined in its
+    `package.json` file, is `@bodiless/vital-card`; therefore, your module needs to be placed under
+    `./lib/shadow/@bodiless/vital-card` within the package you're working in.
+- If you shadow an element that is a fragment by default, it won't appear.
+  - Let's say the `Wrapper` of the original element is set to a fragment; to get shadowing to work,
+    you need to replace that `Wrapper` with a `div` — `Wrapper = replaceWith(Div)` — and then add
+    your layout/theme/behavior.
+- If you have multiple packages shadowing a token collection, the first one will take priority and
+  the rest will be skipped.
+- If, in a Vital token, we have `TokenX = asFooterToken(Default, {})`, and your site shadows
+  `Default` and uses `TokenX`, you won't get the shadowing token — you have to shadow both `Default`
+  and `TokenX`.
+  - This issue is temporary, and we are removing instances of this pattern from the Vital packages.
 
 ### Tips
-
-TODO: Add and Refine
 
 - When you add a new shadow file, you need to:
   01. Rebuild your package with `npm run build -- --scope=<your-site>`;
@@ -477,18 +484,39 @@ TODO: Add and Refine
   01. The token shadow plugin will then pick up the new file to be shadowed.
 - So that you don't need to constantly rebuild the package after each change, run `npm run
   build:watch`; this will rebuild the package on each change.
-- Make sure you spell filenames correctly — they must match exactly.  
 - Review [`packages/vital-test/src/shadow/@bodiless/`][] for examples and patterns of shadowing.
-- If you shadow an element that is a fragment by default, it will never appear — you must add it!
-  - `Wrapper = replaceWith(Div)`, and then add layout/theme/behavior.
-- If you have multiple packages shadow, the first one takes priority and second one is skipped!
-- A good tip for shadowing to confirm it's working is shadow a behavior and addProp to DOM.  
+- As stated in the _gotchas_ above, misspellings/misnamings are a common cause of shadowing issues.
+  A good way to verify that you named your shadow file properly is: when you build or run dev,
+  within the console output, find the shadow replacement for the file you're expecting to be
+  shadowed.
+  - If you've created a shadow, you should see something similar to the following (in the console
+    output), after you build or run dev:
+    ```text
+    [Shadow replacement] Replacing import in /home/adalovelace/Projects/ada-proto/no
+    @sites/--ada--:dev: de_modules/@bodiless/vital-elements/lib/components/Typography/index.js
+     ↳ ./tokens → /home/adalovelace/Projects/ada-proto/packages/__ada__/lib/shadow/@
+    @sites/--ada--:dev: bodiless/vital-elements/Typography.js
+    ```
+    - The first file is the file that is being replaced, or shadowed.
+    - The second file is the file that is replacing the first file, or the file that is shadowing.
+  - If you don't see your file in the output, you've likely either:
+    - Named/spelled your shadow file incorrectly; or
+    - Forgot to create your `shadow.js` file.
+  - You won't see an error, because, at build time, we don't know what is being shadowed; you just
+    won't see it in the list of shadow replacements.
+- A good way to confirm that your shadowed component is working is to shadow a behavior and add a
+  prop to the DOM.  
   E.g.:
   ```js
-    Behavior: {
-      Wrapper: addProps({ 'data-shadowed-by': 'mypackage:mycomponent' }),
-    },
+  const SomeToken = asFooToken(yourFooBase.SomeToken, {
+    Behavior: {
+      Wrapper: addProps({ 'data-shadowed-by': 'your-package:YourComponent' }),
+    },
+  });
   ```
+  - Now, when inspecting your component, if you don't see this data attribute attached to it, then
+    you know that something hasn't been configured correctly, and you're not shadowing.
+  - For more details on how to do this, see: [Testing Shadowed Tokens](#testing-shadowed-tokens).
 
 ### Dos and Don'ts
 
