@@ -45,6 +45,7 @@ const generateSitemapXml = async (options: Partial<SitemapxmlConfig> | undefined
   if (!siteUrl) return;
 
   const pages = await getPages();
+  if (!pages.length) return;
 
   const mergedOptions = {
     ...bodilessNextConfigPath.sitemapxml,
@@ -68,7 +69,7 @@ const generateSitemapXml = async (options: Partial<SitemapxmlConfig> | undefined
     )
   )) : pages;
 
-  const serializedPages = filteredPages.filter(Boolean).map((page: string) => serialize(
+  const serializedPages = filteredPages.map((page: string) => serialize(
     new URL(page, siteUrl).pathname
   ));
 
