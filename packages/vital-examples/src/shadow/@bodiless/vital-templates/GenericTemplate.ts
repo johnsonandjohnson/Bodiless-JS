@@ -18,7 +18,7 @@ import {
 } from '@bodiless/fclasses';
 import { useLanguageContext } from '@bodiless/i18n';
 import { asGenericTemplateToken } from '@bodiless/vital-templates';
-import { vitalGenericTemplate } from '@bodiless/vital-templates/lib/base';
+import { vitalGenericTemplateBase } from '@bodiless/vital-templates/lib/base';
 
 const isHomePage = () => (
   useNode().node.pagePath === '/'
@@ -33,7 +33,7 @@ const WithNoBreadcrumbsOnHomePage = asGenericTemplateToken({
   },
 });
 
-const Default = asGenericTemplateToken(vitalGenericTemplate.Default, {
+const Default = asGenericTemplateToken(vitalGenericTemplateBase.Default, {
   Compose: {
     WithNoBreadcrumbsOnHomePage,
   },
@@ -46,6 +46,6 @@ const Default = asGenericTemplateToken(vitalGenericTemplate.Default, {
 });
 
 export default {
-  ...vitalGenericTemplate,
+  ...vitalGenericTemplateBase,
   Default,
 };

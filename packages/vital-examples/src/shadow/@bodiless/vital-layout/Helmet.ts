@@ -12,11 +12,11 @@
  * limitations under the License.
  */
 import { asHelmetToken } from '@bodiless/vital-layout';
-import { vitalHelmet } from '@bodiless/vital-layout/lib/base';
+import { vitalHelmetBase } from '@bodiless/vital-layout/lib/base';
 import { withLangDirProps } from '@bodiless/i18n';
 import { as, addProps } from '@bodiless/fclasses';
 
-const Default = asHelmetToken(vitalHelmet.Default, {
+const Default = asHelmetToken(vitalHelmetBase.Default, {
   Core: {
     LanguageHelmet: as(
       addProps({ 'data-shadowed-by': 'vitalExamplesHelmet' }),
@@ -26,6 +26,6 @@ const Default = asHelmetToken(vitalHelmet.Default, {
 });
 
 export default {
-  ...vitalHelmet,
+  ...vitalHelmetBase,
   Default,
 };

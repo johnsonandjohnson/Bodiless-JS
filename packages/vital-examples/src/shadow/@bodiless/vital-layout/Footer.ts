@@ -12,13 +12,13 @@
  * limitations under the License.
  */
 import { asFooterToken } from '@bodiless/vital-layout';
-import { vitalFooter } from '@bodiless/vital-layout/lib/base';
+import { vitalFooterBase } from '@bodiless/vital-layout/lib/base';
 import { addProps } from '@bodiless/fclasses';
 import { withLanguageNode } from '@bodiless/i18n';
 
 // Setup the vital package to use the Rewards by default.
-const Default = asFooterToken(vitalFooter.Default, {
-  ...vitalFooter.WithRewardsExpanding2XL,
+const Default = asFooterToken(vitalFooterBase.Default, {
+  ...vitalFooterBase.WithRewardsExpanding2XL,
   Behavior: {
     Container: addProps({ 'data-shadowed-by': 'vitalExamplesFooter' }),
   },
@@ -28,6 +28,6 @@ const Default = asFooterToken(vitalFooter.Default, {
 });
 
 export default {
-  ...vitalFooter,
+  ...vitalFooterBase,
   Default,
 };

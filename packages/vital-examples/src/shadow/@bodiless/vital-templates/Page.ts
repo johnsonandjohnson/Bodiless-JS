@@ -19,7 +19,7 @@ import { asFluidToken } from '@bodiless/vital-elements';
 import {
   vitalPDPTemplate, vitalGenericTemplate, GenericTemplateClean, PDPTemplateClean,
 } from '@bodiless/vital-templates';
-import { vitalPage as vitalPageBase } from '@bodiless/vital-templates/lib/base';
+import { vitalPageBase } from '@bodiless/vital-templates/lib/base';
 
 const Default = asFluidToken(vitalPageBase.Default, {
   Core: {

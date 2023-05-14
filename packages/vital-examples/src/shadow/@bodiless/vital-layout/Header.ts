@@ -13,7 +13,7 @@
  */
 
 import { asHeaderToken } from '@bodiless/vital-layout';
-import { vitalHeader } from '@bodiless/vital-layout/lib/base';
+import { vitalHeaderBase } from '@bodiless/vital-layout/lib/base';
 import { LinkClean, vitalLink, asLinkToken } from '@bodiless/vital-link';
 import { asLanguageSelector, withLanguageNode } from '@bodiless/i18n';
 import {
@@ -30,10 +30,10 @@ export const asLanguageSelectorLink = on(LinkClean)(
 );
 
 const Default = asHeaderToken(
-  vitalHeader.Default,
+  vitalHeaderBase.Default,
   // @todo Restore this if you don't want search on your site.
   // vitalSearchHeader.WithSearch,
-  vitalHeader.WithLanguageSelector,
+  vitalHeaderBase.WithLanguageSelector,
   {
     Core: {
       _: addProps({ 'data-shadowed-by': 'vitalExamplesHeader' }),
@@ -49,6 +49,6 @@ const Default = asHeaderToken(
 );
 
 export default {
-  ...vitalHeader,
+  ...vitalHeaderBase,
   Default,
 };

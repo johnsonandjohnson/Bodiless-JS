@@ -19,6 +19,7 @@
     "@bodiless/documentation": "^1.0.0-rc.37",
     "@bodiless/fclasses": "^1.0.0-rc.37",
     "@bodiless/gatsby-theme-bodiless": "^1.0.0-rc.37",
+    "@bodiless/page": "^1.0.0-rc.37",
     "@bodiless/ui": "^1.0.0-rc.37",
     "@bodiless/vital-buttons": "^1.0.0-rc.37",
     "@bodiless/vital-editors": "^1.0.0-rc.37",
