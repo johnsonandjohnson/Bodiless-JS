@@ -246,9 +246,9 @@ To export a shadowed version of a token collection:
     original base token collection to extend it.  
     For example:
 
-    **File `./lib/shadow/base-package/Foo.js`:**
+    **File `./src/shadow/base-package/Foo.ts`:**
 
-    ```js
+    ```ts
     // Import the base collection.
     import { yourFooBase } from 'base-package';
     // *** NOT: import { yourFoo } from 'base-package';
@@ -263,7 +263,7 @@ To export a shadowed version of a token collection:
     };
     ```
 
-    !> **IMPORTANT:** In the file path, `./lib/shadow/base-package/Foo.js`, `base-package` needs to
+    !> **IMPORTANT:** In the file path, `./src/shadow/base-package/Foo.ts`, `base-package` needs to
     **match the name of the package from which you are importing the base collection.** For example,
     if you look in the
     [`vital-demo`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-demo)
@@ -357,7 +357,7 @@ utilize. Via shadowing, you can use the `omit` function to remove components fro
 collection. To put it another way, by shadowing a component, you're able to remove sub-components
 from it using the `omit` function.
 
-```js
+```ts
 import omit from 'lodash/omit';
 import { fooBase, asFooToken } from 'base-package';
 
@@ -451,6 +451,13 @@ know that something hasn't been configured correctly, and you're not shadowing.
 
 TODO: Add and Refine
 
+- Many of the code examples above show snippets of TypeScript files under a package's `src`
+  directory; note that we recommend writing your own versions of these files in TypeScript under the
+  `src` directory, as well. They will then compile to JavaScript under the associated `lib`
+  directory.  
+  For example:  
+  `/packages/some-package/src/components/Foo/tokens/index.ts` →  
+  `/packages/some-package/lib/components/Foo/tokens/index.js`
 - Above, we show the contents of the compiled JavaScript files containing the shadowed token
   collections, but you should write them in TypeScript and compile them to those locations.
 - If you are extending a base token collection, be sure to import it using the `tokenCollectionBase`
@@ -533,7 +540,7 @@ TODO: Add and Refine
 - A good way to confirm that your shadowed component is working is to shadow a behavior and add a
   prop to the DOM.  
   E.g.:
-  ```js
+  ```ts
   const SomeToken = asFooToken(yourFooBase.SomeToken, {
     Behavior: {
       Wrapper: addProps({ 'data-shadowed-by': 'your-package:YourComponent' }),
