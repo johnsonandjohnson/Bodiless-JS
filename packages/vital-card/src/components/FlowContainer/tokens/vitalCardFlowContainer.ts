@@ -13,6 +13,7 @@
  */
 
 import { asFluidToken } from '@bodiless/vital-elements';
+import omit from 'lodash/omit';
 import {
   on, varyDesigns, flowHoc, extendDesign, removeClasses,
 } from '@bodiless/fclasses';
@@ -106,7 +107,7 @@ const WithBasicVariations = asFluidToken({
 const HeroVariations = varyDesigns(
   {
     Hero: on(CardStatic)(
-      vitalCardStatic.Hero,
+      asCardToken(omit(vitalCardStatic.Hero, 'Compose')),
       vitalCardStatic.WithFlowContainerPreview,
       resetVerticalPadding
     ),
