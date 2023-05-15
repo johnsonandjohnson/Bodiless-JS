@@ -10,8 +10,8 @@ additional styling and content.  It is equivalent to the following:
 ```ts
 const Welcome = asDialogToken({
   Theme: {
-    TitleWrapper: 'Dialog-title',
-    MessageWrapper: 'Dialog-message',
+    TitleWrapper: 'dialog-title-utility-classes',
+    MessageWrapper: 'dialog-message-utility-classes',
     Border: addProps({ color: FancyBorderColor.Blue }),
   },
   Content: {
@@ -50,7 +50,7 @@ const Welcome = asElementToken({
 });
 ```
 
-The *values* of hte inner keys represent higher order components which should
+The *values* of the inner keys represent higher order components which should
 be applied to the specified slot. Each can be expressed as 
 - A function, which will be interpreted as a higher order component
 - A string, which will be interpreted as a list of classes to be added via the
@@ -64,7 +64,7 @@ to a higher order component. For example:
 const WelcomeDialog = as(Welcome)(Dialog);
 ```
 
-`as` accepts a list of tokens, strings or functions and interprests them exactly as
+`as` accepts a list of tokens, strings or functions and interprets them exactly as
 described above -- creating a single HOC which applies the tokens in order to the
 component.
 
@@ -81,12 +81,12 @@ Every token you create must be similarly wrapped. This:
 - Allows you to merge multiple tokens.
 
 So whenever you create a new clean component, be sure to export an `as..Token`
-utilty to help your downstream consumers create new tokens.
+utility to help your downstream consumers create new tokens.
 
 ## Some thigs to remember
 
 ### Tokens are Javascript Objects
-  Even though they commpose Higher Order Components, tokens are really just plain
+  Even though they compose Higher Order Components, tokens are really just plain
   old Javascript objects, and can be composed using normal spread syntax:
 
   ```ts
