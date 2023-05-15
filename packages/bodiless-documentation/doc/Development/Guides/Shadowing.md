@@ -119,37 +119,52 @@ we could introduce a loop by importing the same object that we are exporting.
 
 Example:
 
-**File `./lib/components/Foo/tokens/yourFoo.js`:**
+**File `./src/components/Foo/tokens/yourFoo.ts`:**
 
-```js
-const Default = asFooToken({ ... });
+```ts
+const Default = asFooToken({ /*...*/ });
 
 export default { Default }; // Must be a default export.
 ```
 
-**File `./lib/components/Foo/tokens/index.js`:**
+**File `./src/components/Foo/tokens/index.ts`:**
 
-```js
+```ts
 import tokens from './yourFoo';
 export default tokens;
 ```
 
-**File `./lib/components/Foo/index.js`:**
+**File `./src/components/Foo/index.ts`:**
 
-```js
+```ts
 // This version will be shadowable,
 // because it is exported from './tokens'.
 export { default as yourFoo } from './tokens';
-// This version will not be shadowable,
-// because it is exported from a different path.
-export { default as yourFooBase } from './tokens/yourFoo';
 ```
 
-**File `./lib/index.js`:**
+**File `./src/base.ts`:**
 
-```js
+```ts
+/**
+ * Use this version of the {your foo} tokens when extending or shadowing.
+ * Import the token directly from @bodiless/{your-package}/lib/base.
+ * @category Token Collection
+ * @see [[yourFoo]]
+ */
+export { default as yourFooBase } from './components/Foo/tokens/yourFoo';
+```
+
+**File `./src/index.ts`:**
+
+```ts
 export * from './components/Foo';
 ```
+
+?> **Note:** The above TypeScript examples would be compiled to JavaScript from their respective
+`src` directory into the associated `lib` directory.  
+For example:  
+`/packages/some-package/src/components/Foo/tokens/index.ts` →  
+`/packages/some-package/lib/components/Foo/tokens/index.js`
 
 <!-- Inlining HTML to add multi-line info block with ordered list. -->
 <div class="warn">
@@ -162,13 +177,12 @@ export * from './components/Foo';
     Expand for code snippets from the Vital Footer component...
   </summary>
 
-  **Note:** The snippets below show code from the comparable TypeScript (i.e., uncompiled) versions
-  of the example JavaScript snippets above, hence the different paths.
-
   **File [`vital-layout/src/components/Footer/tokens/vitalFooter.ts`][]:**
 
   ```ts
-  const Default = asFooterToken({ ... });
+  import { asFooterToken, FooterToken } from '../FooterClean';
+
+  const Default = asFooterToken({ /*...*/ });
 
   export interface VitalFooter {
     Default: FooterToken,
@@ -193,13 +207,25 @@ export * from './components/Foo';
   **File [`vital-layout/src/components/Footer/index.ts`][]:**
 
   ```ts
-  import vitalFooterBaseOrig, { VitalFooter } from './tokens/vitalFooter';
+  import type { VitalFooter } from './tokens/vitalFooter';
 
-  // Use this version of the Vital Footer tokens when extending or shadowing.
-  const vitalFooterBase = vitalFooterBaseOrig;
-
+  export { default as FooterClean, asFooterToken } from './FooterClean';
   export { default as vitalFooter } from './tokens';
-  export { vitalFooterBase, VitalFooter };
+  export type { VitalFooter };
+  ```
+
+  **File [`vital-layout/src/base.ts`][]:**
+
+  ```ts
+  /**
+   * Use this version of the Vital Footer tokens when extending or shadowing.
+   * Import the  token directly from @bodiless/vital-layout/lib/base.
+   * @category Token Collection
+   * @see [[vitalFooter]]
+   */
+  export {
+    default as vitalFooterBase
+  } from './components/Footer/tokens/vitalFooter';
   ```
 
   **File [`vital-layout/src/index.ts`][]:**
@@ -549,4 +575,5 @@ documentation](../../../Development/API/).
 [`vital-layout/src/components/Footer/tokens/vitalFooter.ts`]: https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Footer/tokens/vitalFooter.ts
 [`vital-layout/src/components/Footer/tokens/index.ts`]: https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Footer/tokens/index.ts
 [`vital-layout/src/components/Footer/index.ts`]: https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Footer/index.ts
+[`vital-layout/src/base.ts`]: https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/base.ts
 [`vital-layout/src/index.ts`]: https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/index.ts
