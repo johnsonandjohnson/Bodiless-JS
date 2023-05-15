@@ -1,6 +1,6 @@
 {
   "name": "@sites/vital-examples",
-  "version": "1.0.0-rc.37",
+  "version": "0.0.0",
   "description": "Starter site for a Vital Design System Bodiless site using NextJS",
   "author": "Chris Oden <coden@its.jnj.com>",
   "homepage": "",
@@ -11,7 +11,7 @@
     "test": "__tests__"
   },
   "dependencies": {
-    "vital-examples": "^1.0.0-rc.37",
+    "vital-examples": "^0.0.0",
     "@bodiless/backend": "^1.0.0-rc.37",
     "@bodiless/cli": "^1.0.0-rc.37",
     "@bodiless/components": "^1.0.0-rc.37",
@@ -71,7 +71,7 @@
     "lint": "next lint",
     "docs": "run-s build:docs serve:docs",
     "prepare": "node ../../scripts/set-missing-symlinks.js @bodiless",
-    "prestart": "run-s build:env-vars build:docs",
+    "prestart": "run-s build:env-vars",
     "search-index": "create-search-index",
     "serve": "next start -p ${APP_PORT:-9000}",
     "serve:docs": "docsify serve ./public/generated/doc",
