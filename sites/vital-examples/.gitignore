@@ -3,13 +3,13 @@ node_modules
 doc
 yarn-error.log
 
-# Build directory
-/public
-
 # Temporary files
 .DS_Store
 .swp
 
+public/generated
+out
 .cache
-public
 src/components/index.css
+next-env.d.ts
+.next

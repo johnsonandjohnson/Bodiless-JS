@@ -21,14 +21,14 @@
       "code": "en",
       "name": "English",
       "sourcePaths": [
-        "public"
+        ".next/server/pages"
       ],
       "excludePaths": [
         "404*/**"
       ],
       "indexFileName": "lunr.en.json",
       "indexUrlName": "",
-      "indexFilePath": "public",
+      "indexFilePath": "public/generated",
       "searchPath": "search"
     }
   ]

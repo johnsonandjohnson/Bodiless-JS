@@ -12,8 +12,6 @@
  * limitations under the License.
  */
 
-/* @todo move to gatsby-theme-bodiless */
-
 /* purgecss start ignore */
 @tailwind base;
 @tailwind components;
