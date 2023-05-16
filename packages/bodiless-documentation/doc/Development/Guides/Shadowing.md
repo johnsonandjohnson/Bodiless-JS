@@ -111,6 +111,15 @@ You should also export a "base" or un-shadowed version of your token collection 
 consumers to extend it. You may do this by exporting the tokens from their original location,
 avoiding conflicts.
 
+You should also export a "base" or un-shadowed version of your token collection to allow downstream
+consumers to extend it. The "base" version must be exported from a file which is never re-exported
+by the package entry point or any other file, in order to prevent a circular dependency. As a
+convention, Bodiless exports the base tokens as a named export from a file named `base.ts`.
+
+!> **IMPORTANT: The `base.ts` file should _only_ export a token collection.** As shadowing replaces
+the entire file, any additional exports will be lost if not redefined and re-exported from the
+shadow file. Exporting anything but the shadowable token will likely lead to a runtime error.
+
 ?> **Note:** This _double export_ (e.g., `yourFoo` and `yourFooBase`) is required to avoid
 conflicts. We are exporting `yourFoo`, but, in order to extend it, we need to import the original
 object. So, to avoid conflicts, we import the original object from the original file, and re-export
@@ -249,8 +258,9 @@ To export a shadowed version of a token collection:
     **File `./src/shadow/base-package/Foo.ts`:**
 
     ```ts
+    import { asFooToken } from 'base-package';
     // Import the base collection.
-    import { yourFooBase } from 'base-package';
+    import { yourFooBase } from 'base-package/lib/base';
     // *** NOT: import { yourFoo } from 'base-package';
 
     // Override one or more of the tokens in the base collection.
@@ -272,11 +282,12 @@ To export a shadowed version of a token collection:
     importing the base collections are of the form `@bodiless/vital-xxx` (e.g.,
     `@bodiless/vital-card`), as described in their respective `package.json` files.
 
-    !> **IMPORTANT:** When defining your shadowed token collection, **always use the base token
-    collection** (e.g., `yourFooBase`), which is the _unshadowed_ token collection. If you were to
-    use `yourFoo`, for example — which is what is being _shadowed_ — it becomes a recursive
-    shadowing, and will fail with the error: "Cannot read properties of undefined (reading
-    'Default')."
+    ?> **Note:** When defining your shadowed token collection, use the base token collection (from
+    `base-package/lib/base`), which is the _unshadowed_ token collection. We recommend using the
+    naming convention `yourFooBase` to designate this collection specifically as the special import
+    for shadowing. If you were to import from the entry point of the package — which is what is
+    being _shadowed_ (e.g., `yourFoo`) — it becomes a recursive shadowing, and will fail with the
+    error: "Cannot read properties of undefined (reading 'Default')."
 
 01. Place a file at your package root called `shadow.js`. This should export a single function which
     receives a component name and package name, and returns the _resolved_ module containing the
@@ -359,7 +370,8 @@ from it using the `omit` function.
 
 ```ts
 import omit from 'lodash/omit';
-import { fooBase, asFooToken } from 'base-package';
+import { asFooToken } from 'base-package';
+import { fooBase } from 'base-package/lib/base';
 
 const SomeToken = asFooToken({
   ...fooBase.SomeToken,
@@ -416,24 +428,25 @@ For example, take a look at the shadowed Vital Button component within the `vita
 [`vital-demo/src/shadow/@bodiless/vital-buttons/Buttons.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-demo/src/shadow/%40bodiless/vital-buttons/Buttons.ts):
 
 ```ts
-import { vitalButtonsBase, asButtonToken } from '@bodiless/vital-buttons';
+import { asButtonToken } from '@bodiless/vital-buttons';
+import { vitalButtonsBase } from '@bodiless/vital-buttons/lib/base';
 import { addProps } from '@bodiless/fclasses';
 
 const Default = asButtonToken(vitalButtonsBase.Default, {
   Behavior: {
-    Wrapper: addProps({ 'data-shadowed-by': '__vital__:DefaultButtons' }),
+    Wrapper: addProps({ 'data-shadowed-by': 'vital-demo:DefaultButtons' }),
   },
 });
 
 const Primary = asButtonToken(vitalButtonsBase.Primary, {
   Behavior: {
-    Wrapper: addProps({ 'data-shadowed-by': '__vital__:PrimaryButtons' }),
+    Wrapper: addProps({ 'data-shadowed-by': 'vital-demo:PrimaryButtons' }),
   },
 });
 
 const Secondary = asButtonToken(vitalButtonsBase.Secondary, {
   Behavior: {
-    Wrapper: addProps({ 'data-shadowed-by': '__vital__:SecondaryButtons' }),
+    Wrapper: addProps({ 'data-shadowed-by': 'vital-demo:SecondaryButtons' }),
   },
 });
 ```
@@ -441,7 +454,7 @@ const Secondary = asButtonToken(vitalButtonsBase.Secondary, {
 For each shadowed token that we're defining (`Default`, `Primary`, `Secondary`, etc.), we add a
 prop, `data-shadowed-by`, to the outer token/wrapper — usually, `Wrapper` — of the `Behavior`
 domain. For simplicity's sake, we've set each `data-shadowed-by` prop as the name of the package and
-the token we're shadowing (e.g., `__vital__:PrimaryButtons`), but you can set them to be whatever
+the token we're shadowing (e.g., `vital-demo:PrimaryButtons`), but you can set them to be whatever
 makes the most sense to you.
 
 Now, when viewing your site, if you don't see this identifier on your shadowed component, then you
@@ -504,10 +517,17 @@ TODO: Add and Refine
     your layout/theme/behavior.
 - If you have multiple packages shadowing a token collection, the first one will take priority and
   the rest will be skipped.
-- If, in a Vital token, we have `TokenX = asFooterToken(Default, {})`, and your site shadows
-  `Default` and uses `TokenX`, you won't get the shadowing token — you have to shadow both `Default`
-  and `TokenX`.
+- If, in a Vital token, we have `TokenX = asFooToken(Default, {})`, and your site shadows `Default`
+  and uses `TokenX`, you won't get the shadowing token — you have to shadow both `Default` and
+  `TokenX`.
   - This issue is temporary, and we are removing instances of this pattern from the Vital packages.
+- Ensure that you are shadowing the correct token(s). Some components use specific tokens — not just
+  the `Default`.
+  - For example, Vital Menu exports a number of tokens:
+    [`vital-navigation/src/components/Menu/tokens/vitalMenu.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-navigation/src/components/Menu/tokens/vitalMenu.ts).
+    - And, in the `vital-demo` package, you can see how to shadow the `TopNav`, `Footer`, and
+      `Utility` tokens from `vitalMenuBase`:
+      [`vital-demo/src/shadow/@bodiless/vital-navigation/Menu.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-demo/src/shadow/%40bodiless/vital-navigation/Menu.ts).
 
 ### Tips
 
