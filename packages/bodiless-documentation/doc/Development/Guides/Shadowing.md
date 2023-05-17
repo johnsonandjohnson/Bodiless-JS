@@ -127,7 +127,6 @@ Example:
 **File `./src/components/Foo/tokens/yourFoo.ts`:**
 
 ```ts
-import { Base } from './Base';
 import { Variant1 } from './Variant1';
 import { Variant2 } from './Variant2';
 //...
@@ -137,7 +136,6 @@ const Default = asFooToken({ /*...*/ });
 //...
 
 export default { // Must be a default export.
-  Base,
   Default,
   Variant1,
   Variant2,
