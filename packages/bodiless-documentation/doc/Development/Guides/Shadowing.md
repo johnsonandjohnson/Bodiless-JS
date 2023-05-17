@@ -87,7 +87,7 @@ repository, there is a
 [`vital-demo`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-demo/src/shadow/%40bodiless)
 package that shadows all the available Vital components and provides examples. To continue using
 `vital-editors` as our example, if you look in
-[`vital-demo/src/shadow/@bodiless/vital-editors`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-demo/src/shadow/%40bodiless/vital-editors),
+[`/packages/vital-demo/src/shadow/@bodiless/vital-editors`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-demo/src/shadow/%40bodiless/vital-editors),
 you can see how to go about shadowing the `EditorPlain` and `RichText` components.
 
 To get into the finer details of the structure required to make a component shadowable, please see
@@ -186,7 +186,7 @@ For example:
     Expand for code snippets from the Vital Footer component...
   </summary>
 
-  **File [`vital-layout/src/components/Footer/tokens/vitalFooter.ts`][]:**
+  **File [`/packages/vital-layout/src/components/Footer/tokens/vitalFooter.ts`][]:**
 
   ```ts
   import { asFooterToken, FooterToken } from '../FooterClean';
@@ -206,14 +206,14 @@ For example:
   export default vitalFooter; // Must be a default export.
   ```
 
-  **File [`vital-layout/src/components/Footer/tokens/index.ts`][]:**
+  **File [`/packages/vital-layout/src/components/Footer/tokens/index.ts`][]:**
 
   ```ts
   import tokens from './vitalFooter';
   export default tokens;
   ```
 
-  **File [`vital-layout/src/components/Footer/index.ts`][]:**
+  **File [`/packages/vital-layout/src/components/Footer/index.ts`][]:**
 
   ```ts
   import type { VitalFooter } from './tokens/vitalFooter';
@@ -223,7 +223,7 @@ For example:
   export type { VitalFooter };
   ```
 
-  **File [`vital-layout/src/base.ts`][]:**
+  **File [`/packages/vital-layout/src/base.ts`][]:**
 
   ```ts
   /**
@@ -237,7 +237,7 @@ For example:
   } from './components/Footer/tokens/vitalFooter';
   ```
 
-  **File [`vital-layout/src/index.ts`][]:**
+  **File [`/packages/vital-layout/src/index.ts`][]:**
 
   ```ts
   export * from './components/Footer';
@@ -393,7 +393,7 @@ export default {
 ```
 
 In the example above, we've created a file — say,
-`packages/our-package/src/shadow/base-package/Foo.ts` — and we're shadowing `Foo`, which utilizes
+`/packages/our-package/src/shadow/base-package/Foo.ts` — and we're shadowing `Foo`, which utilizes
 the `Bar` component. For whatever reason, we've decided we don't want to utilize the `Bar` component
 in our version of `Foo`, so, using `omit`, we've removed `Bar` from each domain where it is used.
 
@@ -425,7 +425,7 @@ shadowed tokens.
 
 For example, take a look at the shadowed Vital Button component within the `vital-demo` package:
 
-[`vital-demo/src/shadow/@bodiless/vital-buttons/Buttons.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-demo/src/shadow/%40bodiless/vital-buttons/Buttons.ts):
+[`/packages/vital-demo/src/shadow/@bodiless/vital-buttons/Buttons.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-demo/src/shadow/%40bodiless/vital-buttons/Buttons.ts):
 
 ```ts
 import { asButtonToken } from '@bodiless/vital-buttons';
@@ -524,10 +524,10 @@ TODO: Add and Refine
 - Ensure that you are shadowing the correct token(s). Some components use specific tokens — not just
   the `Default`.
   - For example, Vital Menu exports a number of tokens:
-    [`vital-navigation/src/components/Menu/tokens/vitalMenu.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-navigation/src/components/Menu/tokens/vitalMenu.ts).
+    [`/packages/vital-navigation/src/components/Menu/tokens/vitalMenu.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-navigation/src/components/Menu/tokens/vitalMenu.ts).
     - And, in the `vital-demo` package, you can see how to shadow the `TopNav`, `Footer`, and
       `Utility` tokens from `vitalMenuBase`:
-      [`vital-demo/src/shadow/@bodiless/vital-navigation/Menu.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-demo/src/shadow/%40bodiless/vital-navigation/Menu.ts).
+      [`/packages/vital-demo/src/shadow/@bodiless/vital-navigation/Menu.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-demo/src/shadow/%40bodiless/vital-navigation/Menu.ts).
 
 ### Tips
 
@@ -537,7 +537,7 @@ TODO: Add and Refine
   01. The token shadow plugin will then pick up the new file to be shadowed.
 - So that you don't need to constantly rebuild the package after each change, run `npm run
   build:watch`; this will rebuild the package on each change.
-- Review [`packages/vital-demo/src/shadow/@bodiless/`][] for examples and patterns of shadowing.
+- Review [`/packages/vital-demo/src/shadow/@bodiless/`][] for examples and patterns of shadowing.
 - As stated in the _gotchas_ above, misspellings/misnamings are a common cause of shadowing issues.
   A good way to verify that you named your shadow file properly is: when you build or run dev,
   within the console output, find the shadow replacement for the file you're expecting to be
@@ -598,9 +598,9 @@ documentation](../../../Development/API/).
 
 <!-- Link Labels -->
 
-[`packages/vital-demo/src/shadow/@bodiless/`]: https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-demo/src/shadow/%40bodiless
-[`vital-layout/src/components/Footer/tokens/vitalFooter.ts`]: https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Footer/tokens/vitalFooter.ts
-[`vital-layout/src/components/Footer/tokens/index.ts`]: https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Footer/tokens/index.ts
-[`vital-layout/src/components/Footer/index.ts`]: https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Footer/index.ts
-[`vital-layout/src/base.ts`]: https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/base.ts
-[`vital-layout/src/index.ts`]: https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/index.ts
+[`/packages/vital-demo/src/shadow/@bodiless/`]: https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-demo/src/shadow/%40bodiless
+[`/packages/vital-layout/src/components/Footer/tokens/vitalFooter.ts`]: https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Footer/tokens/vitalFooter.ts
+[`/packages/vital-layout/src/components/Footer/tokens/index.ts`]: https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Footer/tokens/index.ts
+[`/packages/vital-layout/src/components/Footer/index.ts`]: https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Footer/index.ts
+[`/packages/vital-layout/src/base.ts`]: https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/base.ts
+[`/packages/vital-layout/src/index.ts`]: https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/index.ts
