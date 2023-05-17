@@ -108,10 +108,6 @@ located within a package at `./lib/components/{ComponentName}/tokens`, and this 
 be re-exported from the package by an index file which imports it at the _exact path_ `./tokens`.
 
 You should also export a "base" or un-shadowed version of your token collection to allow downstream
-consumers to extend it. You may do this by exporting the tokens from their original location,
-avoiding conflicts.
-
-You should also export a "base" or un-shadowed version of your token collection to allow downstream
 consumers to extend it. The "base" version must be exported from a file which is never re-exported
 by the package entry point or any other file, in order to prevent a circular dependency. As a
 convention, Bodiless exports the base tokens as a named export from a file named `base.ts`.
