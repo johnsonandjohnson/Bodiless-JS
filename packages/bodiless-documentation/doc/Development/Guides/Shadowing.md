@@ -94,7 +94,7 @@ To get into the finer details of the structure required to make a component shad
 the [Creating a Shadowable Token Collection](#creating-a-shadowable-token-collection) section below,
 where we walk you through the process of structuring your own components to be shadowable.
 
-?> **Note:** The Vital Site template
+?> **Note:** The Vital site template
 ([`/sites/__vital__`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/sites/__vital__))
 comes packaged with the [Vital Design System](/VitalDesignSystem/), as well as the necessary
 `tokenShadowPlugin` (see [Shadowing a Token Collection](#shadowing-a-token-collection) below),
@@ -107,20 +107,15 @@ In order to be _shadowable_, a token collection must be the _default export_ of 
 located within a package at `./src/components/{ComponentName}/tokens`, and this module must itself
 be re-exported from the package by an index file which imports it at the _exact path_ `./tokens`.
 
+!> **IMPORTANT: The `./src/components/{ComponentName}/tokens/index.ts` file should _only_ export a
+token collection.** As shadowing replaces the entire file, any additional exports will be lost if
+not redefined and re-exported from the shadow file. Exporting anything but the shadowable token will
+likely lead to a runtime error.
+
 You should also export a "base" or un-shadowed version of your token collection to allow downstream
 consumers to extend it. The "base" version must be exported from a file which is never re-exported
 by the package entry point or any other file, in order to prevent a circular dependency. As a
 convention, Bodiless exports the base tokens as a named export from a file named `base.ts`.
-
-!> **IMPORTANT: The `base.ts` file should _only_ export a token collection.** As shadowing replaces
-the entire file, any additional exports will be lost if not redefined and re-exported from the
-shadow file. Exporting anything but the shadowable token will likely lead to a runtime error.
-
-?> **Note:** This _double export_ (e.g., `yourFoo` and `yourFooBase`) is required to avoid
-conflicts. We are exporting `yourFoo`, but, in order to extend it, we need to import the original
-object. So, to avoid conflicts, we import the original object from the original file, and re-export
-it as `yourFooBase` — which is what we extend. This is necessary to prevent compilation errors, as
-we could introduce a loop by importing the same object that we are exporting.
 
 Example:
 
@@ -328,22 +323,48 @@ To export a shadowed version of a token collection:
     files into your package root, and it will work.
 
 01. Add the Bodiless `tokenShadowPlugin` to the webpack config used to build your site. Pass it a
-    list of one or more resolvers which are exported from shadowing packages. For example, in your
-    site's `gatsby-node.js`:
+    list of one or more resolvers which are exported from shadowing packages.
+    - If your site is using **Gatsby**, your `gatsby-node.js` file should contain code similar to
+      the following:
 
-    ```js
-    const { addTokenShadowPlugin } = require('@bodiless/webpack');
-    const shadow = require('shadowing-package/shadow');
-    const shadow2 = require('lower-priority-shadowing-package/shadow');
+      ```js
+      const { addTokenShadowPlugin } = require('@bodiless/webpack');
+      const shadow = require('shadowing-package/shadow');
+      const shadow2 = require('lower-priority-shadowing-package/shadow');
 
-    module.exports.onCreateWebpackConfig = ({ actions }) => {
-      actions.setWebpackConfig(
-        // The shadowed tokens will be loaded by the first shadow package
-        // which returns a match.
-        addTokenShadowPlugin({}, { resolvers: [shadow, shadow2] })
-      );
-    };
-    ```
+      module.exports.onCreateWebpackConfig = ({ actions }) => {
+        actions.setWebpackConfig(
+          // The shadowed tokens will be loaded by the first shadow package
+          // which returns a match.
+          addTokenShadowPlugin({}, { resolvers: [shadow, shadow2] })
+        );
+      };
+      ```
+
+    - If your site is using **Next.js**, your `next.config.js` file should contain code similar to
+      the following:
+
+      ```js
+      const NextWebpackConfig = require('@bodiless/next/lib/cjs/Webpack/Config').default;
+      const bodilessNextConfig = require('@bodiless/next/lib/cjs/NextConfig/nextConfig');
+      const { addTokenShadowPlugin } = require('@bodiless/webpack');
+      const shadow = require('shadowing-package/shadow');
+      const shadow2 = require('lower-priority-shadowing-package/shadow');
+
+      module.exports = {
+        ...bodilessNextConfig,
+        webpack: (config, options) => {
+          let nextConfig = NextWebpackConfig(config, {
+            nextWebpack: options
+          });
+          // The shadowed tokens will be loaded by the first shadow package
+          // which returns a match.
+          nextConfig = addTokenShadowPlugin(nextConfig, { resolvers: [shadow, shadow2] });
+
+          return nextConfig;
+        },
+      };
+      ```
 
     - You can provide more than one resolver because you can have multiple packages doing shadowing.
     - When listing your resolvers, note that the resolution order is "first come, first served"
@@ -354,9 +375,11 @@ To export a shadowed version of a token collection:
     - From the code example above, you can see that the token shadow plugin
       ([`addTokenShadowPlugin`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/bodiless-webpack/src/tokenShadowPlugin.ts))
       comes from the `@bodiless/webpack` package.
-    - An example `gatsby-node.js` file using the token shadow plugin can be found in the Vital site
-      template:
-      [`/sites/__vital__/gatsby-node.js`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/sites/__vital__/gatsby-node.js).
+    - For examples of files adding the token shadow plugin to the webpack config, see:
+      - `gatsby-node.js` in the Vital site template:
+        [`/sites/__vital__/gatsby-node.js`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/sites/__vital__/gatsby-node.js).
+      - `next.config.js` in the Vital Next site template:
+        [`/sites/__vital_next__/next.config.js`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/sites/__vital_next__/next.config.js).
 
 ## Extending and Overriding Token Collections via Shadowing
 
@@ -546,7 +569,7 @@ TODO: Add and Refine
 
 - When you add a new shadow file, you need to:
   01. Rebuild your package with `npm run build -- --scope=<your-site>`;
-  01. Restart Gatsby Dev via `npm run start`;
+  01. Restart your site in Dev mode via `npm run start`;
   01. The token shadow plugin will then pick up the new file to be shadowed.
 - So that you don't need to constantly rebuild the package after each change, run `npm run
   build:watch`; this will rebuild the package on each change.
@@ -572,17 +595,7 @@ TODO: Add and Refine
     won't see it in the list of shadow replacements.
 - A good way to confirm that your shadowed component is working is to shadow a behavior and add a
   prop to the DOM.  
-  E.g.:
-  ```ts
-  const SomeToken = asFooToken(yourFooBase.SomeToken, {
-    Behavior: {
-      Wrapper: addProps({ 'data-shadowed-by': 'your-package:YourComponent' }),
-    },
-  });
-  ```
-  - Now, when inspecting your component, if you don't see this data attribute attached to it, then
-    you know that something hasn't been configured correctly, and you're not shadowing.
-  - For more details on how to do this, see: [Testing Shadowed Tokens](#testing-shadowed-tokens).
+  See [Testing Shadowed Tokens](#testing-shadowed-tokens) for details.
 
 ### Dos and Don'ts
 
