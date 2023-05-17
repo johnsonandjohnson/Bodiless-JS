@@ -14,10 +14,6 @@ When discussing shadowing, we may speak in terms of shadowing components or elem
 we're technically talking about is shadowing the token collections _of_ those components or
 elements.
 
-Some additional notes about shadowing:
-
-- TODO: Add any supplementary details here.
-
 ## What Are the Benefits of Shadowing?
 
 As previously described, shadowing is a way to extend or override tokens, allowing you to easily
@@ -89,6 +85,9 @@ package that shadows all the available Vital components and provides examples. T
 `vital-editors` as our example, if you look in
 [`/packages/vital-demo/src/shadow/@bodiless/vital-editors`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-demo/src/shadow/%40bodiless/vital-editors),
 you can see how to go about shadowing the `EditorPlain` and `RichText` components.
+
+The [API documentation](/Development/API/) is a good resource to use to see what token collections
+are shadowable.
 
 To get into the finer details of the structure required to make a component shadowable, please see
 the [Creating a Shadowable Token Collection](#creating-a-shadowable-token-collection) section below,
@@ -498,8 +497,6 @@ know that something hasn't been configured correctly, and you're not shadowing.
 
 ## Important Notes
 
-TODO: Add and Refine
-
 - Many of the code examples above show snippets of TypeScript files under a package's `src`
   directory; note that we recommend writing your own versions of these files in TypeScript under the
   `src` directory, as well. They will then compile to JavaScript under the associated `lib`
@@ -597,19 +594,14 @@ TODO: Add and Refine
   prop to the DOM.  
   See [Testing Shadowed Tokens](#testing-shadowed-tokens) for details.
 
-### Dos and Don'ts
-
-TODO: Add items
-
 ## Additional Documentation on Shadowing
 
-TODO: Rewrite section
+The Bodiless and [Vital Design System](/VitalDesignSystem/) documentation have some step-by-step
+shadowing examples:
 
-The Bodiless and VitalDS documentation has some step-by-step shadowing examples:
-
-- [Shadowing Typography](../../../Development/Guides/BuildingSites/Typography/ShadowGuide)
-- [Shadowing the Rich Text Editor](../VitalEditors/RichTextCustomizing)
-- [Shadowing the Plain Editor](../VitalEditors/PlainEditor#via-shadowing)
+- [Shadowing Typography](./BuildingSites/Typography/ShadowGuide)
+- [Shadowing the Rich Text Editor](/VitalDesignSystem/Components/VitalEditors/RichTextCustomizing)
+- [Shadowing the Plain Editor](/VitalDesignSystem/Components/VitalEditors/PlainEditor#via-shadowing)
 
 All Vital DS tokens can be shadowed. Refer to the component's documentation and specific shadowing
 instructions.
@@ -620,7 +612,7 @@ package that shadows all components and provides examples — it is a good resou
 learning.
 
 In addition, to determine what is possible to shadow, we recommend visiting the [API
-documentation](../../../Development/API/).
+documentation](/Development/API/).
 
 <!-- Link Labels -->
 
