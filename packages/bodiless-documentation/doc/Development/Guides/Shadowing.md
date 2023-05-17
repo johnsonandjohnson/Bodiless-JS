@@ -94,17 +94,17 @@ To get into the finer details of the structure required to make a component shad
 the [Creating a Shadowable Token Collection](#creating-a-shadowable-token-collection) section below,
 where we walk you through the process of structuring your own components to be shadowable.
 
-TODO: Rewrite and relocate this Note block:
-
-?> **Note:** The ability to shadow a design requires the design package to be structured in a
-specific way to allow it be shadowed. The site must use the
-[`tokenShadowPlugin`](../../../../VitalDesignSystem/Components/VitalElements/Shadow#shadowing-a-token-collection).
-A site [created with `new-vds`](../SiteCreation) meets these requirements.
+?> **Note:** The Vital Site template
+([`/sites/__vital__`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/sites/__vital__))
+comes packaged with the [Vital Design System](/VitalDesignSystem/), as well as the necessary
+`tokenShadowPlugin` (see [Shadowing a Token Collection](#shadowing-a-token-collection) below),
+providing a set of shadowable components out of the box. You can create a site using this template
+via the [`new-vds` command](./BuildingSites/SiteCreation).
 
 ## Creating a Shadowable Token Collection
 
 In order to be _shadowable_, a token collection must be the _default export_ of a module which is
-located within a package at `./lib/components/{ComponentName}/tokens`, and this module must itself
+located within a package at `./src/components/{ComponentName}/tokens`, and this module must itself
 be re-exported from the package by an index file which imports it at the _exact path_ `./tokens`.
 
 You should also export a "base" or un-shadowed version of your token collection to allow downstream
@@ -127,9 +127,22 @@ Example:
 **File `./src/components/Foo/tokens/yourFoo.ts`:**
 
 ```ts
+import { Base } from './Base';
+import { Variant1 } from './Variant1';
+import { Variant2 } from './Variant2';
+//...
+
 const Default = asFooToken({ /*...*/ });
 
-export default { Default }; // Must be a default export.
+//...
+
+export default { // Must be a default export.
+  Base,
+  Default,
+  Variant1,
+  Variant2,
+  //...
+};
 ```
 
 **File `./src/components/Foo/tokens/index.ts`:**
@@ -157,6 +170,12 @@ export { default as yourFoo } from './tokens';
  * @see [[yourFoo]]
  */
 export { default as yourFooBase } from './components/Foo/tokens/yourFoo';
+
+// As your package may have multiple shadowable components,
+// make sure to export all your "base" versions in this file.
+export { default as yourBarBase } from './components/Bar/tokens/yourBar';
+export { default as yourBazBase } from './components/Baz/tokens/yourBaz';
+//...
 ```
 
 **File `./src/index.ts`:**
