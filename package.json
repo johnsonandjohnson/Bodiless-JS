@@ -144,6 +144,6 @@
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
   "engines": {
-    "node": ">=16.9"
+    "node": ">=18.16"
   }
 }
