@@ -223,8 +223,8 @@ class Page {
 
   async copyDirectory(origin: string, destination: string): Promise<object> {
     const {basePath} = this;
-    const originPath = path.resolve(basePath, origin).replace(/\/$/, '');
-    const destinationPath = path.resolve(basePath, destination).replace(/\/$/, '');
+    const originPath = path.join(basePath, origin).replace(/\/$/, '');
+    const destinationPath = path.join(basePath, destination).replace(/\/$/, '');
     const isDestinationPathExists = await Page.dirHasFiles(destinationPath);
 
     if (isDestinationPathExists.length) {
