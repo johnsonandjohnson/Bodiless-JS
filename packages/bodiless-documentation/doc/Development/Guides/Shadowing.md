@@ -1,25 +1,25 @@
 # Shadowing Tokens
 
-Bodiless provides a mechanism to extend or override the tokens provided by a package, changing their
-effect wherever they are used on your site, allowing you to easily customize components and elements
-to meet your design requirements. We call this mechanism _token shadowing_. A simplistic definition
-of shadowing is: providing a token that replaces the existing design token. Whether you extend or
-override the token by shadowing is a choice made by the Site Builder. This method is similar to
-[Gatsby Component Shadowing](https://www.gatsbyjs.com/blog/2019-04-29-component-shadowing/
-':target=_blank'), but more restrictive. In particular, only token collections are shadowable using
-this technique, and the package to be shadowed must be structured specifically to enable this
-feature.
+The [Vital Design System](/VitalDesignSystem/) provides a mechanism to extend or override the tokens
+provided by a package, changing their effect wherever they are used on your site, allowing you to
+easily customize components and elements to meet your design requirements. We call this mechanism
+_token shadowing_. A simplistic definition of shadowing is: providing a token collection that
+replaces an existing token collection. This replacement can either be completely replacing the
+original token collection or just extending it. This method is similar to [Gatsby Component
+Shadowing](https://www.gatsbyjs.com/blog/2019-04-29-component-shadowing/ ':target=_blank'), but more
+restrictive. In particular, only token collections are shadowable using this technique, and the
+package to be shadowed must be structured specifically to enable this feature.
 
 When discussing shadowing, we may speak in terms of shadowing components or elements; know that what
-we're technically talking about is shadowing the token collections _of_ those components or
-elements.
+we're technically talking about is shadowing the token collections which apply to those components
+or elements.
 
 ## What Are the Benefits of Shadowing?
 
 As previously described, shadowing is a way to extend or override tokens, allowing you to easily
 customize components and elements.
 
-Let's say you make changes to an H3 element token, shadowing the typography. For our example, we'll
+Let's say you shadow an H3 element token, making changes to the typography. For our example, we'll
 say that you're shadowing the `H3` token in
 [`vitalTypography`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Typography/tokens/vitalTypography.ts).
 That `H3` token is used by [Vital
@@ -64,6 +64,8 @@ shadowing, you would have to first redefine the link, and then use that new link
 menu, and so on. It becomes a chain of updated imports, whereas, with shadowing, you just update the
 typography in one place and it gets automatically applied to everything.
 
+<!-- TODO: Add two code snippets, showcasing the scenario above — chain of imports vs shadowing. -->
+
 ## What Can Be Shadowed?
 
 Having gone over what shadowing is, you may be wondering which token collections can be shadowed. As
@@ -77,8 +79,8 @@ For example, in the `vital-editors` package, if you look within its
 directory, you will see directories for the `EditorPlain`, `FlowContainer`, and `RichText`
 components; `EditorPlain` and `RichText` contain `tokens` directories and are shadowable.
 
-The [Vital Design System](/VitalDesignSystem/) provides many shadowable components, each of which
-has its own API documentation about shadowing its token collection. Also, within the Bodiless
+All the token collections provided by the [Vital Design System](/VitalDesignSystem/) are shadowable,
+each of which has its own API documentation about how to shadow it. Also, within the Bodiless
 repository, there is a
 [`vital-demo`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-demo/src/shadow/%40bodiless)
 package that shadows all the available Vital components and provides examples. To continue using
@@ -296,6 +298,12 @@ To export a shadowed version of a token collection:
     being _shadowed_ (e.g., `yourFoo`) — it becomes a recursive shadowing, and will fail with the
     error: "Cannot read properties of undefined (reading 'Default')."
 
+    **You may be all set:** The next steps discuss setting up a `shadow.js` file to act as a
+    resolver, and adding the `tokenShadowPlugin` to your webpack config; however, if your site is
+    using the Vital site template
+    ([`/sites/__vital__`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/sites/__vital__))
+    or a scaffolding script, then these steps have already been completed for you.
+
 01. Place a file at your package root called `shadow.js`. This should export a single function which
     receives a component name and package name, and returns the _resolved_ module containing the
     shadowed version of the specified token collection.
@@ -319,7 +327,11 @@ To export a shadowed version of a token collection:
     and
     [`vital-demo`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-demo/shadow.js)),
     you can see that there's nothing unique about them. You can copy any one of these `shadow.js`
-    files into your package root, and it will work.
+    files into your package root, and it will work.  
+    It's also worth noting that these pre-existing `shadow.js` files support the standard pattern
+    used by most Vital packages; you can do whatever fulfills the requirements of your project, as
+    long as the `shadow.js` file returns the actual module that contains the shadowed token
+    collection as a default export.
 
 01. Add the Bodiless `tokenShadowPlugin` to the webpack config used to build your site. Pass it a
     list of one or more resolvers which are exported from shadowing packages.
@@ -383,25 +395,42 @@ To export a shadowed version of a token collection:
 ## Extending and Overriding Token Collections via Shadowing
 
 As mentioned, shadowed token collections can be _extended_ or _overridden_, depending on your
-requirements. _Extending_ a token collection is useful when you only need to make a small number of
-changes to it. When extending a token collection, you can even `omit` specific domains from it, if
-you wish to remove or rewrite them. _Overriding_ a token collection allows you to completely
-overwrite it, essentially writing your own version of the token collection from scratch. This is
-useful when you need to make many adjustments to a token collection, and extending it would take
-more effort than simply rewriting it.
+requirements. An extension or override can be made at the token, domain, or slot (component) level.
+_Extending_ is useful when you only need to make a small number of changes to a token/domain/slot.
+When extending a token collection, you can even `omit` specific domains from it, if you wish to
+remove or rewrite them. _Overriding_ allows you to completely overwrite a token/domain/slot,
+essentially writing your own version of it from scratch. This is useful when you need to make many
+adjustments to a token/domain/slot, and extending it would take more effort than simply rewriting
+it.
 
 TODO: Document patterns for extending and overriding
 
-### Using `omit` to Remove Domains
+### Removing Domains
 
 TODO: Fill out section
 
-### Using `omit` to Remove Components
+### Removing Components
 
 There may be instances where there are components within a token collection that you don't wish to
-utilize. Via shadowing, you can use the `omit` function to remove components from a token
-collection. To put it another way, by shadowing a component, you're able to remove sub-components
-from it using the `omit` function.
+utilize. Via shadowing, you're able to remove components from a token collection.
+
+#### Removing Components from Static Tokens
+
+TODO: Fill out section — use `replaceWith(() => null)`
+
+#### Removing Components from Fluid Tokens
+
+For some container-like components ([RTE](/VitalDesignSystem/Components/VitalEditors/RTE_Editor),
+[chameleons](/Components/Chameleon), [Flow
+Containers](/VitalDesignSystem/Components/VitalFlowContainer), etc.), the selection of components is
+_fluid_ and determined by the tokens — unlike clean components, which define a _fixed_ set of
+components — so removing these components from the token will effectively remove them from the
+container. Note that you must remove them from _all_ domains. The presence of a slot in any domain
+of any token which applies to such component will cause a component of that name to be available in
+the container.
+
+The components can be removed from the token using the `omit` function from
+[Lodash](https://lodash.com/docs/#omit ':target=_blank').
 
 ```ts
 import omit from 'lodash/omit';
@@ -504,8 +533,9 @@ know that something hasn't been configured correctly, and you're not shadowing.
   For example:  
   `/packages/some-package/src/components/Foo/tokens/index.ts` →  
   `/packages/some-package/lib/components/Foo/tokens/index.js`
-- Above, we show the contents of the compiled JavaScript files containing the shadowed token
-  collections, but you should write them in TypeScript and compile them to those locations.
+  - For extensive details regarding the conventions and file structure of components and tokens
+    within a package, please see: [Vital Component
+    Template](/VitalDesignSystem/Components/VitalElements/ComponentTemplate).
 - If you are extending a base token collection, be sure to import it using the `tokenCollectionBase`
   version name.
 - Ensure that your token shadow resolver (`shadow.js`) uses [CJS module
@@ -521,16 +551,8 @@ know that something hasn't been configured correctly, and you're not shadowing.
     "./shadow.js"
   ],
   ```
-  And, if you use the `exports` key:
-  ```json
-  //...,
-  "exports": {
-    //...,
-    "./shadow.js": "./shadow.js"
-  }
-  ```
-- The above pattern for organizing your shadowed token collections is not mandatory. You can use
-  whatever logic you like in `shadow.js` to resolve the shadowed token collection.
+- The documented pattern for organizing your shadowed token collections is not mandatory. You can
+  use whatever logic you like in `shadow.js` to resolve the shadowed token collections.
 
 ### Gotchas
 
@@ -544,8 +566,11 @@ know that something hasn't been configured correctly, and you're not shadowing.
   - E.g., if you are shadowing from the `vital-card` package, its `name`, as defined in its
     `package.json` file, is `@bodiless/vital-card`; therefore, your module needs to be placed under
     `./lib/shadow/@bodiless/vital-card` within the package you're working in.
-- If you shadow an element that is a fragment by default, it won't appear.
-  - Let's say the `Wrapper` of the original element is set to a fragment; to get shadowing to work,
+- Remember, if a slot in the [clean
+  component](/VitalDesignSystem/Components/VitalElements/Tokens/#components) is defined as a
+  Fragment, you will have to add an element or component to that slot in order to have something to
+  apply your token. This is typically done with the `startWith`, `replaceWith`, or `on` utilities.
+  - Let's say the `Wrapper` of the original element is set to a Fragment; to get shadowing to work,
     you need to replace that `Wrapper` with a `div` — `Wrapper = replaceWith(Div)` — and then add
     your layout/theme/behavior.
 - If you have multiple packages shadowing a token collection, the first one will take priority and
@@ -553,6 +578,8 @@ know that something hasn't been configured correctly, and you're not shadowing.
 - If, in a Vital token, we have `TokenX = asFooToken(Default, {})`, and your site shadows `Default`
   and uses `TokenX`, you won't get the shadowing token — you have to shadow both `Default` and
   `TokenX`.
+  - This occurs because when that pattern is used in a Vital token and you try to shadow `Default`,
+    you're actually shadowing the whole token collection.
   - This issue is temporary, and we are removing instances of this pattern from the Vital packages.
 - Ensure that you are shadowing the correct token(s). Some components use specific tokens — not just
   the `Default`.
