@@ -10,6 +10,15 @@ const fs = require('fs');
 const glob = require('glob');
 const { addStatoscopePlugin } = require('@bodiless/webpack');
 
+exports.onCreateBabelConfig = args => {
+  const {
+    actions: { setBabelPlugin },
+  } = args;
+  setBabelPlugin({
+    name: 'babel-plugin-preval',
+  });
+};
+
 // Fix sourcemap issue
 // See: https://github.com/gatsbyjs/gatsby/issues/6278#issuecomment-402540404
 exports.onCreateWebpackConfig = ({ stage, actions }) => {

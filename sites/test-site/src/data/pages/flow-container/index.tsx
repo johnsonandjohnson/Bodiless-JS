@@ -19,9 +19,6 @@ import {
   NodeViewer,
 } from '@bodiless/components';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-// @ts-ignore Could not find declaration file.
-import resolvedConfigs from
-  '@bodiless/fclasses/src/tailwindcss/resolveConfig';
 import { withDefaultContent, withNodeKey, withResetButton } from '@bodiless/core';
 import {
   H2 as BaseH2, addClasses, flowHoc, addProps, withDesign, startWith,
@@ -36,6 +33,8 @@ import {
 } from '../../../components/FlowContainer';
 import { withFullWidthConstraint } from '../../../components/FlowContainer/token';
 import withImageVariations from '../../../components/FlowContainer/withImageVariations';
+
+const resolvedConfigs = require('@bodiless/fclasses/src/tailwindcss/resolveConfig');
 
 const FLOW_CONTAINER_PAGE_PATH = 'flowContainer';
 
