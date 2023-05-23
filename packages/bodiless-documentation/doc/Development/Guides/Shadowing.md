@@ -123,11 +123,19 @@ Example:
 **File `./src/components/Foo/tokens/yourFoo.ts`:**
 
 ```ts
-import { Variant1 } from './Variant1';
-import { Variant2 } from './Variant2';
+import { asFooToken } from '../FooClean';
 //...
 
-const Default = asFooToken({ /*...*/ });
+const Default = asFooToken({
+  Components: { /*...*/ },
+  Layout: { /*...*/ },
+  Spacing: { /*...*/ },
+  //...
+});
+
+const Variant1 = asFooToken({ /*...*/ });
+
+const Variant2 = asFooToken({ /*...*/ });
 
 //...
 
@@ -138,6 +146,23 @@ export default { // Must be a default export.
   //...
 };
 ```
+
+<!-- Inlining HTML to add multi-line info block with unordered list. -->
+<div class="warn">
+  <details>
+  <summary>
+    Expand for <strong>notes</strong> regarding <code>yourFoo.ts</code>:
+  </summary>
+
+  - You can define tokens in other files and import them — as long as you re-export them as part of
+    the default export of this `yourFoo.ts` file.
+  - At the top of the example, you can see that we're importing `asFooToken` (a token definition
+    utility) from `FooClean` (a clean component); for information on these items, and how to define
+    them, please see:
+    - [Vital Component Template : Component-Level Files](/VitalDesignSystem/Components/VitalElements/ComponentTemplate#component-level-files)
+    - [Vital Elements : Helper Utilities](/VitalDesignSystem/Components/VitalElements/#helper-utilities)
+
+</div>
 
 **File `./src/components/Foo/tokens/index.ts`:**
 
@@ -403,11 +428,13 @@ essentially writing your own version of it from scratch. This is useful when you
 adjustments to a token/domain/slot, and extending it would take more effort than simply rewriting
 it.
 
-TODO: Document patterns for extending and overriding
+<!-- TODO: Document patterns for extending and overriding -->
+(:construction: _Patterns for extending and overriding to be documented..._)
 
 ### Removing Domains
 
-TODO: Fill out section
+<!-- TODO: Fill out section -->
+(:construction: _To be documented..._)
 
 ### Removing Components
 
@@ -416,7 +443,8 @@ utilize. Via shadowing, you're able to remove components from a token collection
 
 #### Removing Components from Static Tokens
 
-TODO: Fill out section — use `replaceWith(() => null)`
+<!-- TODO: Fill out section — use `replaceWith(() => null)` -->
+(:construction: _To be documented..._)
 
 #### Removing Components from Fluid Tokens
 
