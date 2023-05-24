@@ -5,7 +5,7 @@
 Ensure you have the following installed locally:
 
 - Node.js: [Download](https://nodejs.org/en/download/ ':target=_blank')
-  - We are currently using the LTS version 16.9+.
+  - We are currently using the LTS version 18.16+.
   - We use `npm` (v7+) as a package manager.
     - If you prefer `yarn`, feel free to try it. YMMV.
 
