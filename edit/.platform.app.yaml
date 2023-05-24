@@ -1,5 +1,5 @@
 name: edit
-type: 'nodejs:16'
+type: 'nodejs:18'
 disk: 12288
 resources:
   base_memory: 1024
