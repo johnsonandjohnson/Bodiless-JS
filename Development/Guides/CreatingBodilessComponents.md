@@ -122,7 +122,7 @@ const renderForm = () => {
   return (
     <>
       <ComponentFormTitle>Edit Page Body</ComponentFormTitle>
-      <ComponentFormTextArea field="source" />
+      <ComponentFormTextArea name="source" />
     </>
   );
 };
@@ -293,7 +293,7 @@ const renderForm = () => {
   return (
     <ComponentFormLabel>
       Last modified by
-      <ComponentFormText field="lastModified" />
+      <ComponentFormText name="lastModified" />
     </ComponentFormLabel>
   );
 };
@@ -432,7 +432,7 @@ const Form: FC<Omit<ContextMenuPropsType<Data>, 'children'>> = props => {
     <ContextMenuForm {...props}>
       <ComponentFormLabel>
         URL
-        <ComponentFormText field="url" />
+        <ComponentFormText name="url" />
       </ComponentFormLabel>
     </ContextMenuForm>
   );

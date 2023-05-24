@@ -60,7 +60,8 @@ The Token Shadow Plugin will find this collection and replace the original with 
 
 ```jsx
 // Always use the *Base token.
-import { asTokenGroup, vitalColorBase, ColorMeta } from '@bodiless/vital-elements';
+import { vitalColorBase } from '@bodiless/vital-elements/lib/base';
+import { asTokenGroup, ColorMeta } from '@bodiless/vital-elements';
 
 const OverrideColors = asTokenGroup(ColorMeta)({
   // This will add/spread the existing vitalColorBase collection.
@@ -109,8 +110,9 @@ Now add the following code:
 
 ```jsx
 // Always use the *Base token for shadowing.
+import { vitalLayoutBase } from '@bodiless/vital-layout/lib/base';
 import {
-  vitalLayoutBase, asLayoutToken, vitalFooter, vitalHeader
+  asLayoutToken, vitalFooter, vitalHeader
 } from '@bodiless/vital-layout';
 
 // Recompose the Default token by using the Base component.

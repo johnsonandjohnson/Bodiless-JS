@@ -15,6 +15,9 @@ by an index file which imports it at the _exact path_ `./tokens`.
 
 You should also export a "base" or un-shadowed version of your token collection to allow downstream
 consumers to extend it. You may do this by exporting the tokens from their original location.
+The "base" version must be exported from a file which is never reexported by the package main or any
+other file, in order to prevent cycle dependency.
+As convention, Bodiless exports the base tokens as a named export from a file named base.ts
 
 Example:
 
@@ -38,8 +41,18 @@ export default tokens;
 ```js
 // This version will be shadowable, b/c it is exported from './tokens'.
 export { default as vitalFoo } from './tokens';
-// This version will not be shadowable, b/c it is exported from a different path.
-export { default as vitalFooBase } from './tokens/vitalFoo';
+```
+
+**File `./lib/base.ts`:**
+
+```js
+/**
+ * Use this version of the vital foo tokens when extending or shadowing.
+ * Import the  token directly from base-package/lib/base.
+ * @category Token Collection
+ * @see [[vitalFoo]]
+ */
+export { default as vitalFooBase } from './components/Foo/tokens/vitalFoo';
 ```
 
 **File `./lib/components/index.ts`:**
@@ -60,7 +73,7 @@ To export a shadowed version of a token collection:
 
     ```js
     // Import the base collection.
-    import { vitalFooBase} from 'base-package';
+    import { vitalFooBase} from 'base-package/lib/base';
     // *** NOT: import { vitalFoo } from 'base-package';
 
     // Override one or more of the tokens in the base collection.

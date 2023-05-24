@@ -288,7 +288,7 @@ const Default = {
   Theme: {
     Wrapper: brandElement.TextLink,
   },
-  Editors: {
+  Schema: {
     _: brandElement.EditableLink,
   },
 };

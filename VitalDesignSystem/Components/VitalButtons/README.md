@@ -66,7 +66,7 @@ Mode](/ContentEditorUserGuide/#edit-mode):
 ### Usage
 
 ```jsx
-import { withNodeKey } from '@bodiless/core';
+import { withNodeKey } from '@bodiless/data';
 import { ButtonClean, vitalButtons } from '@bodiless/vital-buttons';
 
 const DefaultButton = as(

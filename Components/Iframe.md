@@ -86,7 +86,7 @@ compose width snippet and compose the custom `EditableWidthIframe` component.
         return (
           <React.Fragment key="width">
             <ComponentFormLabel htmlFor="width">Width</ComponentFormLabel>
-            <ComponentFormText field="width" />
+            <ComponentFormText name="width" />
           </React.Fragment>
         );
       },
