@@ -4,6 +4,7 @@ import { Document } from '@bodiless/next';
 const documentProps = {
   PreBody: null,
   PostHead: null,
+  PostBody: null,
 };
 if (process.env.NODE_ENV === 'production') {
   const id = 'GTM-N3M9LLD';
@@ -15,12 +16,15 @@ if (process.env.NODE_ENV === 'production') {
   })(window,document,'script','${dataLayerName}', '${id}');`;
 
   documentProps.PostHead = (
-    <script
-      key="google-tagmanager-script"
-      dangerouslySetInnerHTML={{
-        __html: script,
-      }}
-    />
+    <>
+      <script
+        key="google-tagmanager-script"
+        dangerouslySetInnerHTML={{
+          __html: script,
+        }}
+      />
+      <link rel="preconnect" href="https://fonts.gstatic.com/" />
+    </>
   );
   documentProps.PreBody = (
     <noscript
@@ -28,6 +32,12 @@ if (process.env.NODE_ENV === 'production') {
       dangerouslySetInnerHTML={{
         __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${id}" height="0" width="0" style="display: none; visibility: hidden" aria-hidden="true"></iframe>`
       }}
+    />
+  );
+  documentProps.PostBody = (
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
     />
   );
 }
