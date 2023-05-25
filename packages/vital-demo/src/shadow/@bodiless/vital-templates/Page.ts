@@ -5,6 +5,7 @@ import { withLanguages } from '@bodiless/i18n';
 import { asFluidToken } from '@bodiless/vital-elements';
 import {
   PDPTemplateClean, vitalPDPTemplate, GenericTemplateClean,
+  GenericTemplateStatic, vitalGenericTemplateStatic
 } from '@bodiless/vital-templates';
 import { vitalSearchGenericTemplate, withSearchMenuProvider, withSearchResult } from '@bodiless/vital-search';
 
@@ -28,6 +29,7 @@ const Default = asFluidToken({
   ...Base,
   Components: {
     ...vitalPageBase.Default.Components,
+    _default: on(GenericTemplateStatic)(vitalGenericTemplateStatic.Default),
     PDP: on(PDPTemplateClean)(vitalPDPTemplate.Default),
     Search: on(GenericTemplateClean)(vitalSearchGenericTemplate.Search),
     ContentListing: on(GenericTemplateClean)(vitalContentListingTemplate.Default),
