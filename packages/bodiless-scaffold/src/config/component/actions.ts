@@ -17,34 +17,39 @@ import fs from 'fs';
 
 const defaultActions: Actions = [
   {
+    type: 'append',
+    path: '{{destinationpath}}/index.ts',
+    templateFile: '../templates/component/index.root.ts.hbs',
+  },
+  {
     type: 'add',
-    path: '{{packageSourcePath}}/components/{{properCase componentName}}/index.ts',
+    path: '{{destinationpath}}/components/{{properCase componentName}}/index.ts',
     templateFile: '../templates/component/index.ts.hbs',
   },
   {
     type: 'add',
-    path: '{{packageSourcePath}}/components/{{properCase componentName}}/tokens/index.ts',
+    path: '{{destinationpath}}/components/{{properCase componentName}}/tokens/index.ts',
     templateFile: '../templates/component/tokens/index.ts.hbs',
   },
   {
     type: 'add',
-    path: '{{packageSourcePath}}/components/{{properCase componentName}}/tokens/{{camelCase libraryName}}{{properCase componentName}}.ts',
+    path: '{{destinationpath}}/components/{{properCase componentName}}/tokens/{{camelCase libraryName}}{{properCase componentName}}.ts',
     templateFile: '../templates/component/tokens/libraryComponent.ts.hbs',
   },
   {
     type: 'add',
-    path: '{{packageSourcePath}}/components/{{properCase componentName}}/__tests__/{{properCase componentName}}.test.tsx',
+    path: '{{destinationpath}}/components/{{properCase componentName}}/__tests__/{{properCase componentName}}.test.tsx',
     templateFile: '../templates/component/tests/Component.test.tsx.hbs',
   },
   {
     type: 'add',
-    path: '{{packageSourcePath}}/components/{{properCase componentName}}'
+    path: '{{destinationpath}}/components/{{properCase componentName}}'
       + '/index.bl-edit.ts',
     templateFile: '../templates/component/index.bl-edit.ts.hbs',
   },
   {
     type: 'add',
-    path: '{{packageSourcePath}}/components/{{properCase componentName}}'
+    path: '{{destinationpath}}/components/{{properCase componentName}}'
        + '/index.static.ts',
     templateFile: '../templates/component/index.static.ts.hbs',
   }
@@ -54,36 +59,43 @@ const actions: Actions = (data) => {
   const actionsToRun = [...defaultActions];
   if (!data) return actionsToRun;
   const {
-    tokensOnly = true,
     shadow = false,
-    packageSourcePath,
+    destinationpath,
+    sourcePackageName,
   } = data;
 
-  if (fs.existsSync(`${packageSourcePath}/base/index.ts`)) {
+  if (fs.existsSync(`${destinationpath}/base/index.ts`)) {
     actionsToRun.push({
       type: 'append',
-      path: '{{packageSourcePath}}/base/index.ts',
+      path: '{{destinationpath}}/base/index.ts',
       templateFile: '../templates/component/index.base.ts.hbs',
     });
   } else {
     actionsToRun.push({
       type: 'add',
-      path: '{{packageSourcePath}}/base/index.ts',
+      path: '{{destinationpath}}/base/index.ts',
       templateFile: '../templates/component/index.base.ts.hbs',
     });
   }
 
-  if (!tokensOnly) {
-    actionsToRun.push({
-      type: 'add',
-      path: '{{packageSourcePath}}/components/{{properCase componentName}}/{{properCase componentName}}Clean.ts',
-      templateFile: '../templates/component/Clean.tsx.hbs',
-    });
+  if (!sourcePackageName) {
+    actionsToRun.push(
+      {
+        type: 'add',
+        path: '{{destinationpath}}/components/{{properCase componentName}}/{{properCase componentName}}Clean.tsx',
+        templateFile: '../templates/component/Clean.tsx.hbs',
+      },
+      {
+        type: 'add',
+        path: '{{destinationpath}}/components/{{properCase componentName}}/types.ts',
+        templateFile: '../templates/component/types.ts.hbs',
+      },
+    );
   }
   if (shadow) {
     actionsToRun.push({
       type: 'add',
-      path: '{{packageSourcePath}}/shadow/{{sourcePackageName}}'
+      path: '{{destinationpath}}/shadow/{{sourcePackageName}}'
         + '/{{properCase componentName}}.ts',
       templateFile: '../templates/shadow/component.ts.hbs',
     });

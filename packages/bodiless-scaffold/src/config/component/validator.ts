@@ -43,10 +43,10 @@ export const componentNameValidator: PromptValidator = (
   if (input.match(/[^_a-zA-Z0-9]/)) {
     return 'Component/Library name must be underscore or alphanumeric.';
   }
-  if (answers && answers.destinationPath) {
-    const componentPath = path.join(answers.destinationPath, input);
+  if (answers && answers.destinationpath) {
+    const componentPath = path.join(answers.destinationpath, 'components', input);
     if (fs.existsSync(componentPath)) {
-      return 'Components directory already exists.';
+      return 'Component directory already exists.';
     }
   }
   return true;

@@ -1,40 +1,40 @@
 import React, { FC, Fragment } from 'react';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { designable, Div } from '@bodiless/fclasses';
+import type { DesignableComponentsProps } from '@bodiless/fclasses';
+import type { {{properCase componentName}}Components } from './types';
 
-type {{properCase componentName}}Props = {
-  // ...
-};
+type {{properCase componentName}}BaseProps = DesignableComponentsProps<{{properCase componentName}}Components>;
 
+/**
+ * The starting components for each slot.
+ */
 const {{camelCase componentName}}Components: {{properCase componentName}}Components = {
   Wrapper: Div,
-  Component1Wrapper: Div,
-  Component1: Fragment,
-  Component2Wrapper: Div,
-  Component2: Fragment,
+  Slot1Wrapper: Div,
+  Slot1: Fragment,
+  Slot2Wrapper: Div,
+  Slot2: Fragment,
 };
 
-const {{properCase componentName}}CleanBase: FC<{{properCase componentName}}Props> = ({ components: C, ...rest }) => (
+const {{properCase componentName}}Base: FC<{{properCase componentName}}BaseProps> = ({ components: C, ...rest }) => (
   <C.Wrapper {...rest}>
-      <C.Component1Wrapper>
-        <C.Component1 />
-      </C.Component1Wrapper>
-      <C.Component2Wrapper>
-        <C.Component2 />
-      </C.Component2Wrapper>
+    <C.Slot1Wrapper>
+      <C.Slot1 />
+    </C.Slot1Wrapper>
+    <C.Slot2Wrapper>
+      <C.Slot2 />
+    </C.Slot2Wrapper>
   </C.Wrapper>
 );
 
-const {{properCase componentName}}Clean = designable({{camelCase componentName}}Components, '{{properCase componentName}}')({{properCase componentName}}CleanBase);
+const {{properCase componentName}}Clean = designable({{camelCase componentName}}Components, '{{properCase componentName}}')({{properCase componentName}}Base);
 
 /**
- * A token modifier that respects the {{properCase componentName}} Components.
+ * A token creator that respects the {{properCase componentName}} slots.
  *
  * @category Token Collection
  */
-const as{{properCase componentName}}Token = asVitalTokenSpec<{{properCase componentName}}Components>();
+export const as{{properCase componentName}}Token = asVitalTokenSpec<{{properCase componentName}}Components>();
 
-const {{camelCase componentName}}Token = as{{properCase componentName}}Token();
-export type {{properCase componentName}}Token = typeof {{camelCase componentName}}Token;
-
-export { {{properCase componentName}}Clean, as{{properCase componentName}}Token };
+export default {{properCase componentName}}Clean;

@@ -23,8 +23,8 @@ import {
 const prompts: Prompts = [
   {
     type: 'input',
-    name: 'packageSourcePath',
-    message: `Path to package source(src) directory [Required],
+    name: 'destinationpath',
+    message: `Path to directory where component should be created [Required],
 e.g. "./", "./src/", "/absolute/path/to/[package name]/src" etc. Default to current directory.
 > `,
     validate: pathValidator,
@@ -33,53 +33,42 @@ e.g. "./", "./src/", "/absolute/path/to/[package name]/src" etc. Default to curr
   {
     type: 'input',
     name: 'componentName',
-    message: 'Name of the component [Required]',
+    message: 'Component name [Required]',
     validate: componentNameValidator,
   },
   {
     type: 'input',
     name: 'libraryName',
-    message: 'Name of the library [Required]',
+    message: 'library name (eg. brand) [Required]',
     validate: libraryNameValidator,
   },
   {
     type: 'input',
     name: 'sourcePackageName',
-    message: 'Source package if extending (e.g. `@bodiless/vital-card`)',
+    message: 'Upstream package to extend (e.g. `@bodiless/vital-card`). Omit if not extending.',
     validate: packageNameValidator,
   },
   {
     type: 'input',
     name: 'sourceLibraryName',
-    message: 'Source library name (eg `vital`) - default `vital`',
+    message: 'Upstream library name (eg `vital`) - default `vital`',
     validate: libraryNameValidator,
     when: ({ sourcePackageName }) => !!sourcePackageName,
     default: 'vital',
   },
   {
     type: 'confirm',
-    name: 'tokensOnly',
-    message: 'Tokens only? otherwise includes a clean component (Y/n)',
-    default: true,
-  },
-  {
-    type: 'confirm',
     name: 'shadow',
-    message: 'Shadow the source component? otherwise just extend it',
-    default: false,
+    message: 'Shadow the upstream token collection? (otherwise just extend it) - default Y',
+    default: true,
     when: ({ sourcePackageName }) => !!sourcePackageName,
   },
-  // {
-  //   type: 'input',
-  //   name: 'shadowPath',
-  //   message: 'Path to shadow directory, e.g. "./src/shadow", ',
-  //   when: ({ shadow }) => shadow,
-  //   validate: pathValidator,
-  // },
   {
     type: 'confirm',
     name: 'static',
-    message: 'Whether or not the component is always static (Y/n)',
+    message: `Is the component is always static and never hydrated?
+(otherwise both static and dynamic versions will be created) - default N`,
+    default: false,
   },
 ];
 
