@@ -1,154 +1,169 @@
 {{#if sourcePackageName}}
-import { as{{properCase componentName}}Token } from '{{sourcePackageName}}';
 import { {{camelCase sourceLibraryName}}{{properCase componentName}}Base } from '{{sourcePackageName}}/lib/base';
+import { as{{properCase componentName}}Token } from '{{sourcePackageName}}';
 
-const Default = as{{properCase componentName}}Token(
+const Default = as{{properCase componentName}}Token({
   ...{{camelCase sourceLibraryName}}{{properCase componentName}}Base.Default,
-  {
-    Core: {
-      // Essential behavior or styling added by this token which are very unlikely to be 
-      // overridden; e.g., accessibility tokens.
-
-      // ...
-    },
-    Analytics: {
-      // Behavior or props related to analytics; e.g., pushing events to a data layer.
-
-      // ...
-    },
-    SEO: {
-      // Behavior or props related to search engine optimization, e.g., adding schema.org markup.
-
-      // ...
-    },
-    Components: {
-      // When the design elements of a complex component are themselves complex components,
-      // it is generally best practice to define tokens which apply to the sub-components as a
-      // whole, and apply them in the Components domain of the enclosing component.
-
-      // ...
-    },
-    Layout: {
-      // Tokens which define the visual structure of a component, and are thus unlikely to be
-      // overridden; e.g., those which define the orientation of a card.
-
-      // ...
-    },
-    Spacing: {
-      // Tokens which sit somewhere between Theme and Layout; e.g., padding, margin,
-      // line-spacing, etc.
-
-      // ...
-    },
-    Theme: {
-      // Tokens which apply styling which is very likely to be overridden; e.g., colors,
-      // typography, sizing such as width and height, etc.
-
-      // ...
-    },
-    Content: {
-      // Tokens which provide default content or other fixed props. Any hardcoded,
-      // translatable strings belong in this domain.
-
-      // ...
-    },
-    Behavior: {
-      // Tokens which define or add behaviors to a component; e.g., the expanding and contracting
-      // of an accordion.
-
-      // ...
-    },
-    Schema: {
-      // Tokens which define how a component's data are organized; e.g., node keys.
-
-      // Component1: withChildNode('component-1'),
-      // Component2: withChildNode('component-2),
-      // ...
-    },
-    Behavior: {
-      // ...
-    },
-    Components: {
-      // ...
-    }
-  }
-);
+  // Core: {
+  //   // Essential behavior or styling added by this token which are very unlikely to be
+  //   // overridden.
+  //   ...{{camelCase sourceLibraryName}}{{properCase componentName}}Base.Default.Core,
+  //   // ...
+  // },
+  // Components: {
+  //   // When the design elements of a complex component are themselves complex components,
+  //   // it is generally best practice to define tokens which apply to the sub-components as a
+  //   // whole, and apply them in the Components domain of the enclosing component.
+  //   ...{{camelCase sourceLibraryName}}{{properCase componentName}}Base.Default.Components,
+  //   // ...
+  // },
+  // A11y: {
+  //   // Behavior or props related to acccessibility; e.g. an `aria-labeledby' prop. 
+  //   ...{{camelCase sourceLibraryName}}{{properCase componentName}}Base.Default.A11y,
+  //   // ...
+  // },
+  // Analytics: {
+  //   // Behavior or props related to analytics; e.g., pushing events to a data layer.
+  //   ...{{camelCase sourceLibraryName}}{{properCase componentName}}Base.Default.Analytics,
+  //   // ...
+  // },
+  // SEO: {
+  //   // Behavior or props related to search engine optimization, e.g., adding schema.org markup.
+  //   ...{{camelCase sourceLibraryName}}{{properCase componentName}}Base.Default.SEO,
+  //   // ...
+  // },
+  // Layout: {
+  //   // Tokens which define the visual structure of a component, and are thus unlikely to be
+  //   // overridden; e.g., those which define the orientation of a card.
+  //   ...{{camelCase sourceLibraryName}}{{properCase componentName}}Base.Default.Layout,
+  //   // ...
+  // },
+  // Spacing: {
+  //   // Tokens which sit somewhere between Theme and Layout; e.g., padding, margin,
+  //   // line-spacing, etc.
+  //   ...{{camelCase sourceLibraryName}}{{properCase componentName}}Base.Default.Spacing,
+  //   // ...
+  // },
+  // Theme: {
+  //   // Tokens which apply styling which is very likely to be overridden; e.g., colors,
+  //   // typography, sizing such as width and height, etc.
+  //   ...{{camelCase sourceLibraryName}}{{properCase componentName}}Base.Default.Theme,
+  //   // ...
+  // },
+  // A11yContent: {
+  //   // Tokens which provide default content related to accessibility.
+  //   ...{{camelCase sourceLibraryName}}{{properCase componentName}}Base.Default.A11yContent,
+  //   // ...
+  // },
+  // Content: {
+  //   // Tokens which provide default content or other fixed props. Any hardcoded,
+  //   // translatable strings belong in this domain.
+  //   ...{{camelCase sourceLibraryName}}{{properCase componentName}}Base.Default.Content,
+  //   // ...
+  // },
+  // Behavior: {
+  //   // Tokens which define or add behaviors to a component; e.g., the expanding and contracting
+  //   // of an accordion.
+  //   ...{{camelCase sourceLibraryName}}{{properCase componentName}}Base.Default.Behavior,
+  //   // ...
+  // },
+  // Schema: {
+  //   // Tokens which define how a component's data are organized; e.g., node keys.
+  //   ...{{camelCase sourceLibraryName}}{{properCase componentName}}Base.Default.Schema,
+  //   // ...
+  // },
+});
 {{else}}
-const Default = {
+import { as{{properCase componentName}}Token } from '../{{properCase componentName}}Clean';
+import type { {{properCase libraryName}}{{properCase componentName}} } from '../types';
+
+const Default = as{{properCase componentName}}Token({
   Core: {
-    // Essential behavior or styling added by this token which are very unlikely to be 
-    // overridden; e.g., accessibility tokens.
-
+    // Essential behavior or styling added by this token which are very unlikely to be
+    // overridden.
     // ...
   },
-  Analytics: {
-    // Behavior or props related to analytics; e.g., pushing events to a data layer.
-
-    // ...
-  },
-  SEO: {
-    // Behavior or props related to search engine optimization, e.g., adding schema.org markup.
-
-    // ...
-  },
-  Components: {
-    // When the design elements of a complex component are themselves complex components,
-    // it is generally best practice to define tokens which apply to the sub-components as a
-    // whole, and apply them in the Components domain of the enclosing component.
-
-    // ...
-  },
-  Layout: {
-    // Tokens which define the visual structure of a component, and are thus unlikely to be
-    // overridden; e.g., those which define the orientation of a card.
-
-    // ...
-  },
-  Spacing: {
-    // Tokens which sit somewhere between Theme and Layout; e.g., padding, margin,
-    // line-spacing, etc.
-
-    // ...
-  },
-  Theme: {
-    // Tokens which apply styling which is very likely to be overridden; e.g., colors,
-    // typography, sizing such as width and height, etc.
-
-    // ...
-  },
-  Content: {
-    // Tokens which provide default content or other fixed props. Any hardcoded,
-    // translatable strings belong in this domain.
-
-    // ...
-  },
-  Behavior: {
-    // Tokens which define or add behaviors to a component; e.g., the expanding and contracting
-    // of an accordion.
-
-    // ...
-  },
-  Schema: {
-    // Tokens which define how a component's data are organized; e.g., node keys.
-
-    // Component1: withChildNode('component-1'),
-    // Component2: withChildNode('component-2),
-    // ...
-  },
-  Behavior: {
-    // ...
-  },
-  Components: {
-    // ...
-  }
-};
-
+  // Components: {
+  //   // When the design elements of a complex component are themselves complex components,
+  //   // it is generally best practice to define tokens which apply to the sub-components as a
+  //   // whole, and apply them in the Components domain of the enclosing component.
+  //   // ...
+  // },
+  // A11y: {
+  //   // Behavior or props related to acccessibility; e.g. an `aria-labeledby' prop. 
+  //   // ...
+  // },
+  // Analytics: {
+  //   // Behavior or props related to analytics; e.g., pushing events to a data layer.
+  //   // ...
+  // },
+  // SEO: {
+  //   // Behavior or props related to search engine optimization, e.g., adding schema.org markup.
+  //   // ...
+  // },
+  // Layout: {
+  //   // Tokens which define the visual structure of a component, and are thus unlikely to be
+  //   // overridden; e.g., those which define the orientation of a card.
+  //   // ...
+  // },
+  // Spacing: {
+  //   // Tokens which sit somewhere between Theme and Layout; e.g., padding, margin,
+  //   // line-spacing, etc.
+  //   // ...
+  // },
+  // Theme: {
+  //   // Tokens which apply styling which is very likely to be overridden; e.g., colors,
+  //   // typography, sizing such as width and height, etc.
+  //   // ...
+  // },
+  // A11yContent: {
+  //   // Tokens which provide default, localized content related to accessibility.
+  //   // ...
+  // },
+  // Content: {
+  //   // Tokens which provide default content or other fixed props. Any hardcoded,
+  //   // translatable strings belong in this domain.
+  //   // ...
+  // },
+  // Behavior: {
+  //   // Tokens which define or add behaviors to a component; e.g., the expanding and contracting
+  //   // of an accordion.
+  //   // ...
+  // },
+  // Schema: {
+  //   // Tokens which define how a component's data are organized; e.g., node keys.
+  //   Slot1: withChildNode('slot-1'),
+  //   Slot2: withChildNode('slot-2),
+  //   // ...
+  // },
+});
 {{/if}}
 
-// Add additional variant token collections here.
+// Add additional variant tokens or variators here.
 // ...
 
-export {
+{{#if sourcePackageName}}
+/**
+ * Tokens for {{properCase componentName}}Clean
+ * This token collection extends {{camelCase sourceLibraryName}}{{properCase componentName}}
+ *
+ * @category Token Collection
+ * @see {{camelCase sourceLibraryName}}{{properCase componentName}}
+ */
+const {{camelCase libraryName}}{{properCase componentName}} = {
+  ...{{camelCase sourceLibraryName}}{{properCase componentName}}Base,
+{{else}}
+/**
+ * Tokens for {{properCase componentName}}Clean
+ *
+ * @category Token Collection
+ * @see [[{{properCase libraryName}}{{properCase componentName}}]]
+ * @see [[{{properCase componentName}}Clean]]
+ */
+const {{camelCase libraryName}}{{properCase componentName}}: {{properCase libraryName}}{{properCase componentName}} = {
+{{/if}}
   Default,
   // ...
 };
+
+export default {{camelCase libraryName}}{{properCase componentName}};

@@ -1,6 +1,35 @@
-{{#if static}}
+{{#unless sourceLibraryName}}
+import type { ComponentType } from 'react';
+import { withoutHydration, /* withoutHydrationInline */ } from '@bodiless/hydration';
+import type { {{properCase componentName}}Props } from './types';
+import {{properCase componentName}}{{#unless static}}Clean{{/unless}} from './{{properCase componentName}}Clean';
+
+/**
+ * This clean component is always static.  That means it is never hydrated
+ * in the browser, and must not contain any client-side interactivity.
+ {{#unless static}}
+ *
+ * If anything inserted into a comonent slot (or any children) requires
+ * interactivity, Use {{properCase componentName}}Clean instead.
+ {{/unless}}
+ */
+const {{properCase componentName}}{{#if static}}Clean{{else}}Static{{/if}}: ComponentType<{{properCase componentName}}Props> = withoutHydration()(
+  {{properCase componentName}}{{#unless static}}Clean{{/unless}}
+);
+// @TODO Use withoutHydrationInline if your component renders inline
+// const {{properCase componentName}}{{#if static}}Clean{{else}}Static{{/if}}: ComponentType<{{properCase componentName}}Props> = withoutHydrationInline()(
+//   {{properCase componentName}}{{#unless static}}Clean{{/unless}}
+// );
+
+export {
+  {{properCase componentName}}Clean,
+  {{#unless static}}
+  {{properCase componentName}}Static,
+  {{/unless}}
+};
+{{/unless}}
+
 export { default as {{camelCase libraryName}}{{properCase componentName}} } from './tokens';
-{{else}}
+{{#unless static}}
 export { default as {{camelCase libraryName}}{{properCase componentName}}Static } from './tokens';
-export { {{properCase componentName}}Static } from './{{properCase componentName}}Clean';
-{{/if}}
+{{/unless}}
