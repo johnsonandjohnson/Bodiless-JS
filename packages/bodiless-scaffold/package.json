@@ -1,5 +1,5 @@
 {
-  "name": "@bodiless/scaffold",
+  "name": "@bodiless/vital-scaffold",
   "version": "1.0.0-rc.37",
   "description": "A scaffold tool to generate Bodiless-JS components and packages",
   "author": "Dewen Li <dli94@kenvue.com>",
@@ -8,7 +8,7 @@
   "main": "./lib/index.js",
   "type": "module",
   "bin": {
-    "scaffold": "./bin/scaffold"
+    "scaffold": "./bin/scaffold.js"
   },
   "directories": {
     "lib": "lib",
@@ -27,7 +27,7 @@
     "access": "public"
   },
   "scripts": {
-    "scaffold": "./bin/scaffold",
+    "scaffold": "./bin/scaffold.js",
     "build": "run-p copy build:lib",
     "copy": "copyfiles -u 1 \"./src/templates/**/*\" \"./lib/\"",
     "build:lib": "tsc --version && tsc -p ./tsconfig.json",
