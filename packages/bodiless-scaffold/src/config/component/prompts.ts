@@ -39,7 +39,7 @@ e.g. "./", "./src/", "/absolute/path/to/[package name]/src" etc. Default to curr
   {
     type: 'input',
     name: 'libraryName',
-    message: 'library name (eg. brand) [Required]',
+    message: 'Library name (eg. myBrand) [Required]',
     validate: libraryNameValidator,
   },
   {

@@ -42,7 +42,6 @@
     "pw:run": "npx playwright test playwright/tests/smoke-deprecated/* --project=chromium --workers 1",
     "playwright:run": "npx playwright test playwright/tests/smoke/* --project=chromium --workers 3",
     "psh:setup-starter": "node ./scripts/psh-setup-starter",
-    "scaffold": "plop --plopfile packages/bodiless-scaffold/lib/config/component.js",
     "serve": "lerna run serve --scope @sites/${APP_SITE_NAME:-test-site} --stream",
     "setup": "npm run bootstrap && npm run build:packages",
     "setup:gatsby-cloud": "npm run bootstrap:gatsby-cloud && npm run build:packages",

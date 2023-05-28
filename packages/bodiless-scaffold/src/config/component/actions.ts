@@ -17,11 +17,6 @@ import fs from 'fs';
 
 const defaultActions: Actions = [
   {
-    type: 'append',
-    path: '{{destinationpath}}/index.ts',
-    templateFile: '../templates/component/index.root.ts.hbs',
-  },
-  {
     type: 'add',
     path: '{{destinationpath}}/components/{{properCase componentName}}/index.ts',
     templateFile: '../templates/component/index.ts.hbs',
@@ -64,19 +59,25 @@ const actions: Actions = (data) => {
     sourcePackageName,
   } = data;
 
-  if (fs.existsSync(`${destinationpath}/base/index.ts`)) {
-    actionsToRun.push({
-      type: 'append',
-      path: '{{destinationpath}}/base/index.ts',
-      templateFile: '../templates/component/index.base.ts.hbs',
-    });
-  } else {
-    actionsToRun.push({
-      type: 'add',
-      path: '{{destinationpath}}/base/index.ts',
-      templateFile: '../templates/component/index.base.ts.hbs',
-    });
+  let rootType = 'add';
+  if (fs.existsSync(`${destinationpath}/index.ts`)) {
+    rootType = 'append';
   }
+  actionsToRun.push({
+    type: rootType,
+    path: '{{destinationpath}}/index.ts',
+    templateFile: '../templates/component/index.root.ts.hbs',
+  });
+
+  let baseType = 'add';
+  if (fs.existsSync(`${destinationpath}/base/index.ts`)) {
+    baseType = 'append';
+  }
+  actionsToRun.push({
+    type: baseType,
+    path: '{{destinationpath}}/base/index.ts',
+    templateFile: '../templates/component/index.base.ts.hbs',
+  });
 
   if (!sourcePackageName) {
     actionsToRun.push(
