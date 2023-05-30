@@ -17,9 +17,3 @@
     upstream: "edit:http"
     cache:
         enabled: false
-"https://{default}/":
-    type: upstream
-    upstream: "static:http"
-    id: 'docs-env-route-id'
-    ssi:
-        enabled: true
