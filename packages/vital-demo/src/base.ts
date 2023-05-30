@@ -1,1 +1,1 @@
-export { default as demoCardBase } from '../components/Card/tokens/demoCard';
+export { default as demoCardBase } from './components/Card/tokens/demoCard';
