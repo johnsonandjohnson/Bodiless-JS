@@ -70,12 +70,12 @@ const actions: Actions = (data) => {
   });
 
   let baseType = 'add';
-  if (fs.existsSync(`${destinationpath}/base/index.ts`)) {
+  if (fs.existsSync(`${destinationpath}/base.ts`)) {
     baseType = 'append';
   }
   actionsToRun.push({
     type: baseType,
-    path: '{{destinationpath}}/base/index.ts',
+    path: '{{destinationpath}}/base.ts',
     templateFile: '../templates/component/index.base.ts.hbs',
   });
 
