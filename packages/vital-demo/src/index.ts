@@ -13,3 +13,5 @@
  */
 
 export * from './styleguide';
+
+export * from './components/Card';

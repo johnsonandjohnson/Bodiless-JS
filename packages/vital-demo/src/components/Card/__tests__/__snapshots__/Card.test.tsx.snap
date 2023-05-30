@@ -1,0 +1,480 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card Tokens Matches snapshot for Category 1`] = `
+<a
+  className="w-full flex flex-col"
+  href="#"
+>
+  <div>
+    <div
+      data-no-hydrate={true}
+      id="f64e1b3016f7c8d0d277ce020d98ee0d"
+      style={
+        Object {
+          "display": "contents",
+        }
+      }
+    >
+      <img
+        alt=""
+        src="test-file-stub"
+        title=""
+      />
+    </div>
+  </div>
+  <div>
+    <h3
+      className="text-vital-primary-header-copy mb-5 font-medium text-m-xl lg:text-xl"
+    >
+      <span
+        data-no-hydrate={true}
+        id="6e5e36380662b0a36aed30babe228408"
+        style={
+          Object {
+            "display": "contents",
+          }
+        }
+      >
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "Card Title",
+            }
+          }
+        />
+      </span>
+    </h3>
+  </div>
+</a>
+`;
+
+exports[`Card Tokens Matches snapshot for Topic 1`] = `
+<a
+  className="w-full flex flex-col"
+  href="#"
+>
+  <div>
+    <div
+      data-no-hydrate={true}
+      id="f64e1b3016f7c8d0d277ce020d98ee0d"
+      style={
+        Object {
+          "display": "contents",
+        }
+      }
+    >
+      <img
+        alt=""
+        src="test-file-stub"
+        title=""
+      />
+    </div>
+  </div>
+  <div>
+    <div
+      className="text-vital-secondary-eyebrow font-extrabold uppercase mb-3 text-m-xs lg:text-xs"
+    >
+      <span
+        data-no-hydrate={true}
+        id="a315e6de1b5f67d75da9c7058677c509"
+        style={
+          Object {
+            "display": "contents",
+          }
+        }
+      >
+        <span
+          className="my-4"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "Card Eyebrow",
+            }
+          }
+        />
+      </span>
+    </div>
+    <h3
+      className="text-vital-primary-header-copy mb-5 font-medium text-m-xl lg:text-xl"
+    >
+      <span
+        data-no-hydrate={true}
+        id="6e5e36380662b0a36aed30babe228408"
+        style={
+          Object {
+            "display": "contents",
+          }
+        }
+      >
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "Card Title",
+            }
+          }
+        />
+      </span>
+    </h3>
+    <div>
+      <a>
+        <span>
+          <span
+            data-no-hydrate={true}
+            id="adfc8145bf1b71ec6355d197fef5660d"
+            style={
+              Object {
+                "display": "contents",
+              }
+            }
+          >
+            <span
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "Call To Action Link",
+                }
+              }
+            />
+          </span>
+        </span>
+      </a>
+    </div>
+  </div>
+</a>
+`;
+
+exports[`Card Tokens Matches snapshot for WithFlexGrowImage 1`] = `
+<a>
+  <div
+    className="flex-grow"
+  >
+    <img />
+  </div>
+  <div>
+    <div />
+    <h3 />
+    <div />
+    <div>
+      <a>
+        <span />
+      </a>
+    </div>
+  </div>
+</a>
+`;
+
+exports[`Card Tokens Matches snapshot for WithFlowContainerPreview 1`] = `
+<a>
+  <div>
+    <img />
+  </div>
+  <div>
+    <div />
+    <h3 />
+    <div />
+    <div>
+      <a>
+        <span />
+      </a>
+    </div>
+  </div>
+</a>
+`;
+
+exports[`Card Tokens Matches snapshot for WithHorizontalContentAtTop 1`] = `
+<a>
+  <div>
+    <img />
+  </div>
+  <div>
+    <div />
+    <h3 />
+    <div
+      className="flex-grow"
+    />
+    <div>
+      <a>
+        <span />
+      </a>
+    </div>
+  </div>
+</a>
+`;
+
+exports[`Card Tokens Matches snapshot for WithHorizontalContentCentered 1`] = `
+<a>
+  <div>
+    <img />
+  </div>
+  <div
+    className="md:content-center md:justify-center md:grow"
+  >
+    <div />
+    <h3 />
+    <div />
+    <div>
+      <a>
+        <span />
+      </a>
+    </div>
+  </div>
+</a>
+`;
+
+exports[`Card Tokens Matches snapshot for WithHorizontalLeftOrientation 1`] = `
+<a
+  className="flex-col md:flex-row w-full flex"
+>
+  <div
+    className="py-0 md:py-0 md:w-1/2 flex flex-col"
+  >
+    <img
+      className="w-full"
+    />
+  </div>
+  <div
+    className="px-4 md:w-1/2 flex flex-col"
+  >
+    <div />
+    <h3 />
+    <div />
+    <div>
+      <a>
+        <span />
+      </a>
+    </div>
+  </div>
+</a>
+`;
+
+exports[`Card Tokens Matches snapshot for WithHorizontalOrientationBase 1`] = `
+<a>
+  <div
+    className="py-0 md:py-0 md:w-1/2 flex flex-col"
+  >
+    <img
+      className="w-full"
+    />
+  </div>
+  <div
+    className="px-4 md:w-1/2 flex flex-col"
+  >
+    <div />
+    <h3 />
+    <div />
+    <div>
+      <a>
+        <span />
+      </a>
+    </div>
+  </div>
+</a>
+`;
+
+exports[`Card Tokens Matches snapshot for WithHorizontalRightOrientation 1`] = `
+<a
+  className="flex-col md:flex-row-reverse w-full flex"
+>
+  <div
+    className="py-0 md:py-0 md:w-1/2 flex flex-col"
+  >
+    <img
+      className="w-full"
+    />
+  </div>
+  <div
+    className="px-4 md:w-1/2 flex flex-col"
+  >
+    <div />
+    <h3 />
+    <div />
+    <div>
+      <a>
+        <span />
+      </a>
+    </div>
+  </div>
+</a>
+`;
+
+exports[`Card Tokens Matches snapshot for WithNoDescription 1`] = `
+<a>
+  <div>
+    <img />
+  </div>
+  <div>
+    <div />
+    <h3 />
+    <div>
+      <a>
+        <span />
+      </a>
+    </div>
+  </div>
+</a>
+`;
+
+exports[`Card Tokens Matches snapshot for WithNoEyebrow 1`] = `
+<a>
+  <div>
+    <img />
+  </div>
+  <div>
+    <h3 />
+    <div />
+    <div>
+      <a>
+        <span />
+      </a>
+    </div>
+  </div>
+</a>
+`;
+
+exports[`Card Tokens Matches snapshot for WithNoTitle 1`] = `
+<a>
+  <div>
+    <img />
+  </div>
+  <div>
+    <div />
+    <div />
+    <div>
+      <a>
+        <span />
+      </a>
+    </div>
+  </div>
+</a>
+`;
+
+exports[`Card Tokens Matches snapshot for WithPrimaryButton 1`] = `
+<a>
+  <div>
+    <img />
+  </div>
+  <div>
+    <div />
+    <h3 />
+    <div />
+    <div>
+      <a
+        className="pl-12 pr-6 py-3.5 group flex-row-reverse text-white bg-vital-primary-interactive hover:opacity-80 leading-tight uppercase focus:outline-none focus:ring-0 rounded transition duration-150 ease-in-out px-6 flex justify-center"
+        href="#"
+        role="button"
+      >
+        <span
+          className="w-6 h-2 vital-arrow group-hover:text-current text-transparent pr-1 inline-block"
+        />
+        <span
+          data-no-hydrate={true}
+          id="123b58b4a9e4407d42b2606d912b6deb"
+          style={
+            Object {
+              "display": "contents",
+            }
+          }
+        >
+          <span
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "Link",
+              }
+            }
+          />
+        </span>
+      </a>
+    </div>
+  </div>
+</a>
+`;
+
+exports[`Card Tokens Matches snapshot for WithPrimaryTextLink 1`] = `
+<a>
+  <div>
+    <img />
+  </div>
+  <div>
+    <div />
+    <h3 />
+    <div />
+    <div>
+      <a
+        className="hover:vital-arrow hover:pr-1 hover:w-6 hover:h-2 text-vital-primary-interactive hover:opacity-70 active:text-vital-primary-interactive-active underline font-bold"
+        href="#"
+      >
+        <span
+          className="text-vital-primary-interactive active:text-vital-primary-interactive-active"
+        />
+      </a>
+    </div>
+  </div>
+</a>
+`;
+
+exports[`Card Tokens Matches snapshot for WithSecondaryButton 1`] = `
+<a>
+  <div>
+    <img />
+  </div>
+  <div>
+    <div />
+    <h3 />
+    <div />
+    <div>
+      <a
+        className="pl-12 pr-6 py-3.5 group flex-row-reverse border-vital-primary-interactive text-vital-primary-interactive hover:opacity-70 active:text-vital-primary-interactive-active border-2 hover:opacity-80 leading-tight uppercase focus:outline-none focus:ring-0 rounded transition duration-150 ease-in-out px-6 flex justify-center"
+        href="#"
+        role="button"
+      >
+        <span
+          className="w-6 h-2 vital-arrow group-hover:text-current text-transparent pr-1 inline-block"
+        />
+        <span
+          data-no-hydrate={true}
+          id="123b58b4a9e4407d42b2606d912b6deb"
+          style={
+            Object {
+              "display": "contents",
+            }
+          }
+        >
+          <span
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "Link",
+              }
+            }
+          />
+        </span>
+      </a>
+    </div>
+  </div>
+</a>
+`;
+
+exports[`Card Tokens Matches snapshot for WithVerticalOrientation 1`] = `
+<a
+  className="w-full flex h-full flex-col"
+>
+  <div
+    className="py-4 md:py-8"
+  >
+    <img
+      className="w-full"
+    />
+  </div>
+  <div
+    className="py-4"
+  >
+    <div />
+    <h3 />
+    <div
+      className="flex-grow"
+    />
+    <div>
+      <a>
+        <span />
+      </a>
+    </div>
+  </div>
+</a>
+`;

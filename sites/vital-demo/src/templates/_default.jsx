@@ -16,8 +16,14 @@ import { Fragment } from 'react';
 import { graphql } from 'gatsby';
 import { as } from '@bodiless/fclasses';
 import { vitalPage } from '@bodiless/vital-templates';
+import { demoCard } from '@bodiless/vital-demo';
 
-const DefaultPage = as(vitalPage.Default)(Fragment);
+console.log('demoCard', demoCard);
+
+const DefaultPage = as(
+  vitalPage.Default,
+  demoCard.Default,
+)(Fragment);
 
 export default DefaultPage;
 

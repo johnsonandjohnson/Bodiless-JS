@@ -16,7 +16,10 @@ import React from 'react';
 import { HOC } from '@bodiless/fclasses';
 import { withoutHydration } from './withoutHydration';
 
-export const staticToken: HOC = Component => props => <Component {...props} />;
+export const staticToken: HOC = Component => props => {
+  console.log('staticToken >>>>>>>>>>>>>>');
+  return <Component {...props} />;
+};
 
 export const staticHOC = staticToken;
 
