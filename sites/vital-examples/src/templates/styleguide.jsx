@@ -12,5 +12,12 @@
  * limitations under the License.
  */
 
-export { default as vitalTypography } from './tokens';
-export { TypographyMeta } from './meta';
+import { as } from '@bodiless/fclasses';
+import { StyleGuideTemplateClean } from '@bodiless/vital-templates';
+import { VitalDemoStyleGuidePage } from 'vital-examples';
+
+const StyleGuidePage = as(VitalDemoStyleGuidePage.Default)(
+  StyleGuideTemplateClean,
+);
+
+export default StyleGuidePage;

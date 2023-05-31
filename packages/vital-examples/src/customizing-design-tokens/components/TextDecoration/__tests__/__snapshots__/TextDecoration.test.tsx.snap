@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextDecoration Matches snapshot for Bold 1`] = `
+<span
+  className="font-black"
+/>
+`;
+
+exports[`TextDecoration Matches snapshot for ExtraBold 1`] = `
+<span
+  className="font-extrabold"
+/>
+`;
+
+exports[`TextDecoration Matches snapshot for Medium 1`] = `
+<span
+  className="font-medium"
+/>
+`;
+
+exports[`TextDecoration Matches snapshot for Normal 1`] = `
+<span
+  className="font-normal"
+/>
+`;
+
+exports[`TextDecoration Matches snapshot for Superscript 1`] = `
+<span
+  className="align-baseline"
+/>
+`;
+
+exports[`TextDecoration Matches snapshot for Underline 1`] = `
+<span
+  className="underline"
+/>
+`;
+
+exports[`TextDecoration Matches snapshot for Uppercase 1`] = `
+<span
+  className="uppercase"
+/>
+`;

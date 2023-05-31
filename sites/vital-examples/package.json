@@ -33,6 +33,7 @@
     "@bodiless/vital-templates": "^1.0.0-rc.38",
     "@bodiless/vital-section": "^1.0.0-rc.38",
     "@bodiless/webpack": "^1.0.0-rc.38",
+    "@bodiless/vital-demo": "^1.0.0-rc.38",
     "autoprefixer": "^10.4.2",
     "docsify-cli": "^4.3.0",
     "dotenv": "^8.2.0",

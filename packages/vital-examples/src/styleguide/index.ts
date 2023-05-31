@@ -12,5 +12,6 @@
  * limitations under the License.
  */
 
-export { default as vitalTypography } from './tokens';
-export { TypographyMeta } from './meta';
+import VitalDemoStyleGuidePage from './Page';
+
+export { VitalDemoStyleGuidePage };

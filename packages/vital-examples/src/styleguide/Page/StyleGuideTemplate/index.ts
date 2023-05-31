@@ -12,5 +12,10 @@
  * limitations under the License.
  */
 
-export { default as vitalTypography } from './tokens';
-export { TypographyMeta } from './meta';
+import { Typography } from './Typography';
+import { _default } from './_default';
+
+export const VitalDemoStyleGuideTemplate = {
+  _default,
+  Typography,
+};
