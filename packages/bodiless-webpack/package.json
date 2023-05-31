@@ -34,6 +34,7 @@
     "@bodiless/cli": "^1.0.0-rc.38",
     "@statoscope/webpack-plugin": "^5.20.1",
     "lodash": "^4.17.19",
+    "memfs": "^3.4.1",
     "webpack": "^5.69.1"
   },
   "devDependencies": {
