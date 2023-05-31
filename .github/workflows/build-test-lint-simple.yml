@@ -3,18 +3,17 @@ env:
   CI: true
   FORCE_COLOR: 1
   NODE_OPTIONS: --max_old_space_size=4096
+
 on:
-  pull_request_target:
-    types: [labeled]
-    branches:
-      - main
-      - 'upgrade/**'
+  workflow_call:
+
 jobs:
   setup:
     name: Setup, Build, Lint and Test
     permissions:
       pull-requests: write
     runs-on: ubuntu-20.04
+    if: ${{ github.event.label.name == 'ready-to-test' }}
     steps:
       - uses: actions/checkout@v3
         with:
