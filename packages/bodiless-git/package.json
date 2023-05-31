@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/git",
-  "version": "1.0.0-rc.37",
+  "version": "1.0.0-rc.38",
   "description": "GIT integration for BodilessJS.",
   "author": "Marco Pagliarulo <mpaglia1@its.jnj.com>",
   "license": "Apache-2.0",
@@ -26,15 +26,15 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/core": "^1.0.0-rc.37",
+    "@bodiless/core": "^1.0.0-rc.38",
     "axios": "^0.21.0",
     "enzyme": "^3.9.0",
-    "informed": "^4.44.0",
-    "lodash": "^4.17.19",
-    "universal-cookie": "^4.0.3",
-    "isomorphic-git": "^1.10.1",
     "find-up": "^4.1.0",
-    "node-cache": "^5.1.2"
+    "informed": "^4.44.0",
+    "isomorphic-git": "^1.10.1",
+    "lodash": "^4.17.19",
+    "node-cache": "^5.1.2",
+    "universal-cookie": "^4.0.3"
   },
   "peerDependencies": {
     "react": "^18.2.0"

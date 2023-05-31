@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/core",
-  "version": "1.0.0-rc.37",
+  "version": "1.0.0-rc.38",
   "description": "Edit context for BodilessJS site editor",
   "author": "Chris Oden <coden@its.jnj.com>",
   "license": "Apache-2.0",
@@ -28,9 +28,9 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.37",
-    "@bodiless/data": "^1.0.0-rc.37",
-    "@bodiless/fclasses": "^1.0.0-rc.37",
+    "@bodiless/cli": "^1.0.0-rc.38",
+    "@bodiless/data": "^1.0.0-rc.38",
+    "@bodiless/fclasses": "^1.0.0-rc.38",
     "@floating-ui/react": "^0.23.1",
     "axios": "^0.21.0",
     "informed": "^4.44.0",
@@ -48,8 +48,8 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "enzyme": "^3.9.0",
     "@types/rc-tooltip": "^3.7.1",
-    "@types/uuid": "^3.4.4"
+    "@types/uuid": "^3.4.4",
+    "enzyme": "^3.9.0"
   }
 }

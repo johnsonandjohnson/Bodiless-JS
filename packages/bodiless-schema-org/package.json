@@ -1,7 +1,7 @@
 {
   "name": "@bodiless/schema-org",
   "sideEffects": false,
-  "version": "1.0.0-rc.37",
+  "version": "1.0.0-rc.38",
   "description": "Provides a Schema.org component that injects metadata into a page.",
   "author": "Lucas Varela <lvarelab@its.jnj.com>",
   "contributors": [
@@ -36,12 +36,12 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.37",
-    "@bodiless/components": "^1.0.0-rc.37",
-    "@bodiless/core": "^1.0.0-rc.37",
-    "@bodiless/data": "^1.0.0-rc.37",
-    "@bodiless/fclasses": "^1.0.0-rc.37",
-    "@bodiless/organisms": "^1.0.0-rc.37",
+    "@bodiless/cli": "^1.0.0-rc.38",
+    "@bodiless/components": "^1.0.0-rc.38",
+    "@bodiless/core": "^1.0.0-rc.38",
+    "@bodiless/data": "^1.0.0-rc.38",
+    "@bodiless/fclasses": "^1.0.0-rc.38",
+    "@bodiless/organisms": "^1.0.0-rc.38",
     "lodash": "^4.17.19"
   },
   "peerDependencies": {
