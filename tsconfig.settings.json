@@ -106,6 +106,8 @@
       "@bodiless/vital-navigation/*": ["vital-navigation/src/*"],
       "@bodiless/vital-search": ["vital-search/src"],
       "@bodiless/vital-search/*": ["vital-search/src/*"],
+      "@bodiless/vital-section": ["vital-section/src"],
+      "@bodiless/vital-section/*": ["vital-section/src/*"],
       "@bodiless/vital-table": ["vital-table/src/"],
       "@bodiless/vital-table/*": ["vital-table/src/*"],        
       "@bodiless/vital-templates": ["vital-templates/src/"],
