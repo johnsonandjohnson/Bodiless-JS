@@ -1,4 +1,4 @@
-# BodilessJS
+# Bodiless JS
 
 BodilessJS is a toolset for building editable websites in a JAMStack. It is based on the idea that, for many sites, a full-blown CMS is unnecessary overhead and introduces more problems than it solves, including:
 
