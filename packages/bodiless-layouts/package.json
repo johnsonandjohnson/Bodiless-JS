@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/layouts",
-  "version": "1.0.0-rc.37",
+  "version": "1.0.0-rc.38",
   "description": "Layout managers for BodilessJS.",
   "author": "Erik Summerfield <esummer3@its.jnj.com>",
   "homepage": "",
@@ -37,10 +37,13 @@
     "react": "^18.2.0"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.37",
-    "@bodiless/core": "^1.0.0-rc.37",
-    "@bodiless/data": "^1.0.0-rc.37",
-    "@bodiless/fclasses": "^1.0.0-rc.37",
+    "@bodiless/cli": "^1.0.0-rc.38",
+    "@bodiless/core": "^1.0.0-rc.38",
+    "@bodiless/data": "^1.0.0-rc.38",
+    "@bodiless/fclasses": "^1.0.0-rc.38",
+    "@dnd-kit/core": "^6.0.8",
+    "@dnd-kit/sortable": "^7.0.1",
+    "@dnd-kit/utilities": "^3.2.1",
     "axios": "^0.21.0",
     "crypto-js": "^4.1.1",
     "html2canvas": "^1.0.0-rc.3",
@@ -50,9 +53,6 @@
     "prop-types": "^15.7.2",
     "rc-tooltip": "^5.1.1",
     "re-resizable": "^4.11.0",
-    "@dnd-kit/core": "^6.0.8",
-    "@dnd-kit/sortable": "^7.0.1",
-    "@dnd-kit/utilities": "^3.2.1",
     "uuid": "^3.3.2"
   },
   "devDependencies": {

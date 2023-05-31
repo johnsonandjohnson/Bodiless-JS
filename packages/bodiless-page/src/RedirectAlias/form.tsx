@@ -157,7 +157,6 @@ const FormBodyBase = () => {
         aliases: initialAliases,
         isValid: true,
       };
-
       setValues(values);
     }, []);
     const { next } = useMultistepApi();
@@ -166,7 +165,7 @@ const FormBodyBase = () => {
       const { values: formValues } = getFormState();
 
       // @ts-ignore
-      const { Edit: { aliases} } = formValues;
+      const { Edit: { aliases = ''} = {} } = formValues;
 
       if (!isTextValid(aliases as string)) {
         setValue('isValid', false);
@@ -189,6 +188,7 @@ const FormBodyBase = () => {
           name="aliases"
           onFocus={() => setValue('isValid', true)}
           placeholder={REDIRECT_ALIASES_PLACEHOLDER}
+          initialValue={initialAliases}
         />
         <ComponentFormIsValid keepState name="isValid" />
         <i>{ !formValues.isValid && INVALIDATED }</i>

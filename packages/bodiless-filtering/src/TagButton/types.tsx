@@ -14,7 +14,7 @@
 
 import { TagType } from '@bodiless/core';
 
-type LegacyTagType = {
+export type LegacyTagType = {
   id?: string | number | symbol | null,
   name?: string
 };

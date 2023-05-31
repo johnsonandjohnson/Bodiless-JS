@@ -23,9 +23,17 @@ import Logger from './logger';
 
 const logger = new Logger('BACKEND');
 
-const getDirectories = (dir: string) => fs
-  .readdirSync(dir)
-  .filter((file) => fs.statSync(`${dir}/${file}`).isDirectory());
+const getDirectories = (dir: string) => {
+  try {
+    return fs
+      .readdirSync(dir)
+      .filter((file) => fs.statSync(`${dir}/${file}`).isDirectory());
+  } catch (error) {
+    //
+  }
+  return [];
+};
+
 // @todo: update to fs.mkdir - once we on node > 10.12.0
 // we can leverage fs.mkdir since it supports { recursive: true }
 function ensureDirectoryExistence(filePath: string): void {
@@ -223,8 +231,8 @@ class Page {
 
   async copyDirectory(origin: string, destination: string): Promise<object> {
     const {basePath} = this;
-    const originPath = path.resolve(basePath, origin).replace(/\/$/, '');
-    const destinationPath = path.resolve(basePath, destination).replace(/\/$/, '');
+    const originPath = path.join(basePath, origin).replace(/\/$/, '');
+    const destinationPath = path.join(basePath, destination).replace(/\/$/, '');
     const isDestinationPathExists = await Page.dirHasFiles(destinationPath);
 
     if (isDestinationPathExists.length) {
@@ -397,12 +405,16 @@ class Page {
 
   directoryExists(newDirectory: PathLike) {
     const readPromise = new Promise((resolve) => {
-      fs.access(newDirectory, err => {
-        if (!err) {
-          resolve('The page cannot be moved. Directory exists');
-        }
-        resolve(this);
-      });
+      try {
+        fs.access(newDirectory, err => {
+          if (!err) {
+            resolve('The page cannot be moved. Directory exists');
+          }
+          resolve(this);
+        });
+      } catch (error) {
+        resolve('The page cannot be moved.');
+      }
     });
     return readPromise;
   }
@@ -429,17 +441,21 @@ class Page {
       const { sep, normalize } = path;
       const dirPath = normalize(this.directory);
       const [, pageRelativeDir] = dirPath.split(`${sep}data${sep}pages${sep}`);
-      if (!pageRelativeDir) {
+      if (!pageRelativeDir || !fs.existsSync(this.directory)) {
         resolve('The page cannot be deleted.');
         return;
       }
 
-      fs.rmdir(this.directory, { recursive: true }, (err) => {
-        if (err) {
-          reject(err);
-        }
-        resolve(this);
-      });
+      try {
+        fs.rmdir(this.directory, { recursive: true }, (err) => {
+          if (err) {
+            reject(err);
+          }
+          resolve(this);
+        });
+      } catch (error) {
+        resolve('The page cannot be deleted.');
+      }
     });
     return readPromise;
   }

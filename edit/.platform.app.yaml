@@ -1,5 +1,5 @@
 name: edit
-type: 'nodejs:16'
+type: 'nodejs:18'
 disk: 12288
 resources:
   base_memory: 1024
@@ -29,3 +29,4 @@ variables:
     APP_VOLUME: /app/volume
     CHOKIDAR_USEPOLLING: true
     APP_SITE_NAME: test-site
+    APPDATA: /app/volume

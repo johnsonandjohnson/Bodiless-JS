@@ -21,6 +21,7 @@ import type { AliasItem } from '@bodiless/page';
 import { hasTrailingSlash } from './nextConfig';
 
 const getStaticPaths = async () => {
+  const isEdit = process.env.NODE_ENV === 'development';
   const pages = await getPages();
   const disablePageList = getDisabledPages();
   const disabledPages = Object.keys(disablePageList).filter(
@@ -49,7 +50,7 @@ const getStaticPaths = async () => {
         }
       }))
     ],
-    fallback: false,
+    fallback: isEdit ? 'blocking' : false,
   };
 };
 

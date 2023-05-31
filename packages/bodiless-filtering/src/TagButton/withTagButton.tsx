@@ -59,7 +59,7 @@ export const tagButtonOptions: TagButtonType = {
 
     const suggestions = getSuggestions();
     const suggestionsTransform = (value: string, suggestions: TagType[]) => (
-      suggestions.filter((tag: TagType) => value && tag.label.search(value) >= 0)
+      suggestions.filter((tag: TagType) => value && tag.label && tag.label.search(value) >= 0)
     );
 
     const context = useEditContext();

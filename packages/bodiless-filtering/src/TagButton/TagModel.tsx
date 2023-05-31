@@ -14,17 +14,20 @@
 
 import isEmpty from 'lodash/isEmpty';
 import { useNode } from '@bodiless/data';
-import { TagsNodeType } from './types';
+import { TagType } from '@bodiless/core';
+import { TagsNodeType, LegacyTagType } from './types';
 
-const legacyDataTransformer = (tag: any) => ({
-  value: tag.value || tag.id,
-  label: tag.label || tag.name
-});
+const legacyDataTransformer = (tag: (LegacyTagType & TagType)) => (
+  Object.assign(tag, {
+    value: tag.value || tag.id,
+    label: tag.label || tag.name
+  })
+);
 
 const useTagsAccessors = () => {
   const { node } = useNode<TagsNodeType>();
   return {
-    getTags: () => node.data.tags || [],
+    getTags: () => (node.data.tags || []).map(legacyDataTransformer),
     tag: isEmpty(node.data.tags) ? { value: '', label: '' } : legacyDataTransformer(node.data.tags[0]),
     nodeId: node.path[node.path.length - 2] === 'default' ? node.path.toString() : node.path[node.path.length - 2],
   };

@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/vital-editors",
-  "version": "1.0.0-rc.37",
+  "version": "1.0.0-rc.38",
   "description": "Editor components for the bodiless vital design system",
   "author": "Chris Odem <coden@its.jnj.com>",
   "license": "Apache-2.0",
@@ -32,20 +32,20 @@
     "react": "^18.2.0"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.37",
-    "@bodiless/components": "^1.0.0-rc.37",
-    "@bodiless/components-ui": "^1.0.0-rc.37",
-    "@bodiless/core": "^1.0.0-rc.37",
-    "@bodiless/data": "^1.0.0-rc.37",
-    "@bodiless/fclasses": "^1.0.0-rc.37",
-    "@bodiless/hydration": "^1.0.0-rc.37",
-    "@bodiless/layouts": "^1.0.0-rc.37",
-    "@bodiless/layouts-ui": "^1.0.0-rc.37",
-    "@bodiless/richtext": "^1.0.0-rc.37",
-    "@bodiless/richtext-ui": "^1.0.0-rc.37",
-    "@bodiless/tokens": "^1.0.0-rc.37",
-    "@bodiless/vital-elements": "^1.0.0-rc.37",
-    "@bodiless/vital-link": "^1.0.0-rc.37",
+    "@bodiless/cli": "^1.0.0-rc.38",
+    "@bodiless/components": "^1.0.0-rc.38",
+    "@bodiless/components-ui": "^1.0.0-rc.38",
+    "@bodiless/core": "^1.0.0-rc.38",
+    "@bodiless/data": "^1.0.0-rc.38",
+    "@bodiless/fclasses": "^1.0.0-rc.38",
+    "@bodiless/hydration": "^1.0.0-rc.38",
+    "@bodiless/layouts": "^1.0.0-rc.38",
+    "@bodiless/layouts-ui": "^1.0.0-rc.38",
+    "@bodiless/richtext": "^1.0.0-rc.38",
+    "@bodiless/richtext-ui": "^1.0.0-rc.38",
+    "@bodiless/tokens": "^1.0.0-rc.38",
+    "@bodiless/vital-elements": "^1.0.0-rc.38",
+    "@bodiless/vital-link": "^1.0.0-rc.38",
     "lodash": "^4.17.19"
   }
 }

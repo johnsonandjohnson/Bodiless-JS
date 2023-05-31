@@ -1,19 +1,13 @@
 {
-  "packages": [
-    "sites/*",
-    "packages/*"
-  ],
+  "packages": ["sites/*", "packages/*"],
   "lerna": "2.0.0",
   "command": {
     "publish": {
       "message": "chore(release): publish %s"
     },
     "version": {
-      "allowBranch": [
-        "main",
-        "release"
-      ]
+      "allowBranch": ["main", "release"]
     }
   },
-  "version": "1.0.0-rc.37"
+  "version": "1.0.0-rc.38"
 }
