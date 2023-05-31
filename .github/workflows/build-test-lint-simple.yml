@@ -77,7 +77,7 @@ jobs:
       - uses: actions-ecosystem/action-remove-labels@v1
         if: always()
         with:
-          labels: ${{ github.event.label.name }}
+          labels: ready-to-test
           fail_on_error: false
   # Generate event file for Attach Unit Test Results helper workflow
   event_file:
