@@ -18,9 +18,6 @@ const Default = asSectionToken({
     Wrapper: 'w-full flex flex-col',
   },
   Schema: {
-    Title: as(withNode, withNodeKey('title')),
-    Description: as(withNode, withNodeKey('description')),
-    Link: as(withNode, withNodeKey('link')),
     Content: as(withNode, withNodeKey('content')),
   },
   Content: {
@@ -47,6 +44,9 @@ const WithLink = asSectionToken({
   Components: {
     Link: on(LinkClean)(vitalLink.Default),
   },
+  Schema: {
+    Link: as(withNode, withNodeKey('link')),
+  },
   Meta: extendMeta(
     flowHoc.meta.term('Sub Type')('With Link'),
   ),
@@ -71,6 +71,9 @@ const WithTitle = asSectionToken({
     TitleWrapper: on(H2)(vitalTypography.H2),
     Title: on(EditorPlainClean)(vitalEditorPlain.Default),
   },
+  Schema: {
+    Title: as(withNode, withNodeKey('title')),
+  },
   Meta: extendMeta(
     flowHoc.meta.term('Sub Type')('With Title'),
   ),
@@ -94,6 +97,9 @@ const WithDescription = asSectionToken({
   Components: {
     DescriptionWrapper: on(P)(vitalTypography.Body),
     Description: on(EditorPlainClean)(vitalEditorPlain.Default),
+  },
+  Schema: {
+    Description: as(withNode, withNodeKey('description')),
   },
   Meta: extendMeta(
     flowHoc.meta.term('Sub Type')('With Description'),

@@ -15,20 +15,30 @@ import { ElementsListClean, elementsList } from '../../ElementsList';
 
 /**
  * Hook to provide the default content for the `EditorPlainClean` Title element.
- * It returns the object where key is the nodeKey expected for the component (`title` in this case)
- * and the value is the data expected by the underlying component.
+ * It returns the object where key is the nodeKey expected, and the value is the data expected
+ * by the underlying component.
+ *
+ * Note that the nodeKey in this case is empty '' since `withDefaultContext` is used in
+ * the same schema node context that is coming from `vitalSectionBase.WithTitle`. See how
+ * in `vitalSectionBase.WithTitle` token we set a component for Title slot along with
+ * the Schema data for it.
  */
 export const useTitleContent = () => ({
-  title: { text: 'Hello Section Title!' },
+  '': { text: 'Hello Section Title!' },
 });
 
 /**
  * Hook to provide the default content for the `EditorPlainClean` Description element.
- * It returns the object where key is the nodeKey expected ('description' in this case)
- * and the value is the data expected by the underlying component.
+ * It returns the object where key is the nodeKey expected, and the value is the data expected
+ * by the underlying component.
+ *
+ * Note that the nodeKey in this case is empty '' since `withDefaultContext` is used in
+ * the same schema node context that is coming from `vitalSectionBase.WithDescription`. See how
+ * in `vitalSectionBase.WithDescription` token we set a component for Description slot along with
+ * the Schema data for it.
  */
 export const useDescriptionContent = () => ({
-  description: { text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'}
+  '': { text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'}
 });
 
 /**
@@ -131,9 +141,17 @@ const WithDescription = asSectionToken({
     /**
      * We use `withDefaultContent` and the `useDescriptionContent` hook to add the default text
      * to the Section Description under the `Content` Domain.
+     *
+     * Note that for the `withDefaultContent` to work we need to provide the Schema for the slot.
+     * In this case the Schema for the Description is coming from `vitalSectionBase.WithDescription`
+     *
+     * When `Schema` and `DefaultContent` for the slot Components are in the same node context,
+     * there will be no need to specify the `nodeKey` for the DefaultContent object. See how
+     * in `vitalSectionBase.WithDescription` token we set a component for Description slot, and
+     * the Schema data for it and then use it to compose this token all with the same node context.
      */
     Description: withDefaultContent(useDescriptionContent),
-  }
+  },
 });
 
 /**
@@ -162,6 +180,14 @@ const WithTitle = asSectionToken({
     /**
      * We use `withDefaultContent` and the `useTitleContent` hook to add the default text
      * to the Section Title under the `Content` Domain.
+     *
+     * Note that for the `withDefaultContent` to work we need to provide the Schema for the slot.
+     * In this case the Schema for the Title is coming from `vitalSectionBase.WithTitle`
+     *
+     * When `Schema` and `DefaultContent` for the slot Components are in the same node context,
+     * there will be no need to specify the `nodeKey` for the DefaultContent object. See how
+     * in `vitalSectionBase.WithTitle` token we set a component for Title slot, and
+     * the Schema data for it and then use it to compose this token all with the same node context.
      */
     Title: withDefaultContent(useTitleContent),
   }

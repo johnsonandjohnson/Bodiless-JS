@@ -157,9 +157,6 @@ const Default = asSectionToken({
     Wrapper: 'w-full flex flex-col',
   },
   Schema: {
-    Title: as(withNode, withNodeKey('title')),
-    Description: as(withNode, withNodeKey('description')),
-    Link: as(withNode, withNodeKey('link')),
     Content: as(withNode, withNodeKey('content')),
   },
   Content: {
@@ -200,6 +197,9 @@ const WithLink = asSectionToken({
   Components: {
     Link: on(LinkClean)(vitalLink.Default),
   },
+  Schema: {
+    Link: as(withNode, withNodeKey('link')),
+  },
   Meta: extendMeta(
     flowHoc.meta.term('Sub Type')('With Link'),
   ),
@@ -229,6 +229,9 @@ const WithSectionLink = asSectionToken({
   Components: {
     Link: on(LinkClean)(vitalLink.Default),
   },
+  Schema: {
+    Link: as(withNode, withNodeKey('link')),
+  },
 });
 ```
 
@@ -248,6 +251,9 @@ const SectionLink = asSectionToken(Default, {
   Components: {
     Link: on(LinkClean)(vitalLink.Default),
   },
+  Schema: {
+    Link: as(withNode, withNodeKey('link')),
+  },
 });
 ```
 
@@ -264,6 +270,9 @@ const WithTitle = asSectionToken({
     TitleWrapper: on(H2)(vitalTypography.H2),
     Title: on(EditorPlainClean)(vitalEditorPlain.Default),
   },
+  Schema: {
+    Title: as(withNode, withNodeKey('title')),
+  },
   Meta: extendMeta(
     flowHoc.meta.term('Sub Type')('With Title'),
   ),
@@ -278,6 +287,9 @@ const WithDescription = asSectionToken({
   Components: {
     DescriptionWrapper: on(P)(vitalTypography.Body),
     Description: on(EditorPlainClean)(vitalEditorPlain.Default),
+  },
+  Schema: {
+    Title: as(withNode, withNodeKey('description')),
   },
   Meta: extendMeta(
     flowHoc.meta.term('Sub Type')('With Description'),
@@ -354,11 +366,16 @@ In a lot of cases you may want to change or build on top of the default vital co
 ```ts
 /**
  * Hook to provide the default content for the `EditorPlainClean` Title element.
- * It returns the object where key is the nodeKey expected for the component (`title` in this case)
- * and the value is the data expected by the underlying component.
+ * It returns the object where key is the nodeKey expected, and the value is the data expected
+ * by the underlying component.
+ *
+ * Note that the nodeKey in this case is empty '' since `withDefaultContext` is used in
+ * the same schema node context that is coming from `vitalSectionBase.WithTitle`. See how
+ * in `vitalSectionBase.WithTitle` token we set a component for Title slot along with
+ * the Schema data for it.
  */
 export const useTitleContent = () => ({
-  title: { text: 'Hello Section Title!' },
+  '': { text: 'Hello Section Title!' },
 });
 
 /**
@@ -384,6 +401,14 @@ const WithSectionTitle = asSectionToken({
     /**
      * We use `withDefaultContent` and the `useTitleContent` hook to add the default text
      * to the Section Title under the `Content` Domain.
+     *
+     * Note that for the `withDefaultContent` to work we need to provide the Schema for the slot.
+     * In this case the Schema for the Title is coming from `vitalSectionBase.WithTitle`
+     *
+     * When `Schema` and `DefaultContent` for the slot Components are in the same node context,
+     * there will be no need to specify the `nodeKey` for the DefaultContent object. See how
+     * in `vitalSectionBase.WithTitle` token we set a component for Title slot, and
+     * the Schema data for it and then use it to compose this token all with the same node context.
      */
     Title: withDefaultContent(useTitleContent),
   }
