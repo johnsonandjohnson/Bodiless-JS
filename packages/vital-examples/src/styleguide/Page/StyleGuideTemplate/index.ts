@@ -12,10 +12,12 @@
  * limitations under the License.
  */
 
+import { Buttons } from './Button';
 import { Typography } from './Typography';
 import { _default } from './_default';
 
 export const VitalDemoStyleGuideTemplate = {
   _default,
+  Buttons,
   Typography,
 };

@@ -12,9 +12,8 @@
  * limitations under the License.
  */
 
-import React, { useMemo } from 'react';
+import React, { FC } from 'react';
 import identity from 'lodash/identity';
-import type { FC } from 'react';
 import { withNode, withDefaultContent, withNodeKey } from '@bodiless/data';
 
 import {
@@ -45,7 +44,7 @@ const StyleGuideExamplesBase: FC<StyleGuideExamplesBaseProps> = props => {
     Wrapper, ItemWrapper, ItemTitle, ItemContent, ...restComponents
   } = components;
 
-  const finalComponents: DesignableComponents = useMemo(() => Object.entries(restComponents).reduce(
+  const finalComponents: DesignableComponents = Object.entries(restComponents).reduce(
     (acc, [key, value]) => ({
       ...acc,
       [key]: flowHoc(
@@ -56,7 +55,7 @@ const StyleGuideExamplesBase: FC<StyleGuideExamplesBaseProps> = props => {
       )(value),
     }),
     {},
-  ), [components, content]);
+  );
 
   const items = Object.entries(finalComponents).map(([name, C]) => (
     <ItemWrapper key={name} id={name}>
