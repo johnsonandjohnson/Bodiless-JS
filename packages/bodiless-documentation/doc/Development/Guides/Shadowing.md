@@ -417,94 +417,6 @@ To export a shadowed version of a token collection:
       - `next.config.js` in the Vital Next site template:
         [`/sites/__vital_next__/next.config.js`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/sites/__vital_next__/next.config.js).
 
-## Extending and Overriding Token Collections via Shadowing
-
-As mentioned, shadowed token collections can be _extended_ or _overridden_, depending on your
-requirements. An extension or override can be made at the token, domain, or slot (component) level.
-_Extending_ is useful when you only need to make a small number of changes to a token/domain/slot.
-When extending a token collection, you can even `omit` specific domains from it, if you wish to
-remove or rewrite them. _Overriding_ allows you to completely overwrite a token/domain/slot,
-essentially writing your own version of it from scratch. This is useful when you need to make many
-adjustments to a token/domain/slot, and extending it would take more effort than simply rewriting
-it.
-
-<!-- TODO: Document patterns for extending and overriding -->
-(:construction: _Patterns for extending and overriding to be documented..._)
-
-### Removing Domains
-
-<!-- TODO: Fill out section -->
-(:construction: _To be documented..._)
-
-### Removing Components
-
-There may be instances where there are components within a token collection that you don't wish to
-utilize. Via shadowing, you're able to remove components from a token collection.
-
-#### Removing Components from Static Tokens
-
-<!-- TODO: Fill out section — use `replaceWith(() => null)` -->
-(:construction: _To be documented..._)
-
-#### Removing Components from Fluid Tokens
-
-For some container-like components ([RTE](/VitalDesignSystem/Components/VitalEditors/RTE_Editor),
-[chameleons](/Components/Chameleon), [Flow
-Containers](/VitalDesignSystem/Components/VitalFlowContainer), etc.), the selection of components is
-_fluid_ and determined by the tokens — unlike clean components, which define a _fixed_ set of
-components — so removing these components from the token will effectively remove them from the
-container. Note that you must remove them from _all_ domains. The presence of a slot in any domain
-of any token which applies to such component will cause a component of that name to be available in
-the container.
-
-The components can be removed from the token using the `omit` function from
-[Lodash](https://lodash.com/docs/#omit ':target=_blank').
-
-```ts
-import omit from 'lodash/omit';
-import { asFooToken } from 'base-package';
-import { fooBase } from 'base-package/lib/base';
-
-const SomeToken = asFooToken({
-  ...fooBase.SomeToken,
-  Layout: {
-    ...omit(fooBase.SomeToken.Layout, 'Bar'),
-  },
-  Schema: {
-    ...omit(fooBase.SomeToken.Schema, 'Bar'),
-  },
-  Theme: {
-    ...omit(fooBase.SomeToken.Theme, 'Bar'),
-  },
-});
-
-export default {
-  ...fooBase,
-  SomeToken,
-};
-```
-
-In the example above, we've created a file — say,
-`/packages/our-package/src/shadow/base-package/Foo.ts` — and we're shadowing `Foo`, which utilizes
-the `Bar` component. For whatever reason, we've decided we don't want to utilize the `Bar` component
-in our version of `Foo`, so, using `omit`, we've removed `Bar` from each domain where it is used.
-
-Looking here—
-
-```js
-  Layout: {
-    ...omit(fooBase.SomeToken.Layout, 'Bar'),
-  },
-```
-
-—we're spreading the `Layout` components — except `Bar` — across the `Layout` domain, for some token
-(literally `SomeToken` in this case) that we're defining for our shadowed version of `Foo`. We use
-this pattern for the `Schema` and `Theme` domains as well, where `Bar` has also been set.
-
-?> **Note:** For a real-world use case of using `omit` to remove components, see [Removing
-Components from Vital Rich Text Editor by
-Shadowing](/VitalDesignSystem/Components/VitalEditors/RichTextCustomizing#removing-components-from-vital-rich-text-editor-by-shadowing).
-
 ## Testing Shadowed Tokens
 
 Before you begin setting up your theme (or whatever else you may be working on), it is a good idea
@@ -564,6 +476,12 @@ know that something hasn't been configured correctly, and you're not shadowing.
   - For extensive details regarding the conventions and file structure of components and tokens
     within a package, please see: [Vital Component
     Template](/VitalDesignSystem/Components/VitalElements/ComponentTemplate).
+- As mentioned, shadowed token collections can be extended or overridden, depending on your
+  requirements. An extension or override can be made at the token, domain, or slot (component)
+  level.
+  - For more information on extending and overriding, see:
+    - [Extending and Composing Tokens](/VitalDesignSystem/Components/VitalElements/ExtendingAndComposingTokens)
+    - [Vital Tokens : Extension and Composition](/VitalDesignSystem/Components/VitalElements/Tokens/#extension-and-composition)
 - If you are extending a base token collection, be sure to import it using the `tokenCollectionBase`
   version name.
 - Ensure that your token shadow resolver (`shadow.js`) uses [CJS module
