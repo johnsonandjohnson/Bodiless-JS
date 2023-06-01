@@ -16,12 +16,13 @@ import { asFluidToken } from '@bodiless/vital-elements';
 import { vitalPage } from '@bodiless/vital-templates';
 import { VitalDemoStyleGuideTemplate } from './StyleGuideTemplate';
 
-const { Typography, _default } = VitalDemoStyleGuideTemplate;
+const { Buttons, Typography, _default } = VitalDemoStyleGuideTemplate;
 
 const Default = asFluidToken({
   ...vitalPage.Default,
   Components: {
     _default,
+    Buttons,
     Typography,
   },
 });
