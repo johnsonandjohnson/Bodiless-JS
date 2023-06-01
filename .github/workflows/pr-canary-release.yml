@@ -24,7 +24,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version: '16.13'
+          node-version: '18.16'
       - name: Build
         run: npm run setup
       - name: Publish Canary Release
