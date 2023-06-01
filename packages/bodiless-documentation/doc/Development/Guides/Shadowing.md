@@ -521,12 +521,6 @@ know that something hasn't been configured correctly, and you're not shadowing.
     your layout/theme/behavior.
 - If you have multiple packages shadowing a token collection, the first one will take priority and
   the rest will be skipped.
-- If, in a Vital token, we have `TokenX = asFooToken(Default, {})`, and your site shadows `Default`
-  and uses `TokenX`, you won't get the shadowing token — you have to shadow both `Default` and
-  `TokenX`.
-  - This occurs because when that pattern is used in a Vital token and you try to shadow `Default`,
-    you're actually shadowing the whole token collection.
-  - This issue is temporary, and we are removing instances of this pattern from the Vital packages.
 - Ensure that you are shadowing the correct token(s). Some components use specific tokens — not just
   the `Default`.
   - For example, Vital Menu exports a number of tokens:
@@ -534,6 +528,51 @@ know that something hasn't been configured correctly, and you're not shadowing.
     - And, in the `vital-demo` package, you can see how to shadow the `TopNav`, `Footer`, and
       `Utility` tokens from `vitalMenuBase`:
       [`/packages/vital-demo/src/shadow/@bodiless/vital-navigation/Menu.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-demo/src/shadow/%40bodiless/vital-navigation/Menu.ts).
+- If, in a Vital token, we have `TokenX = asFooToken(Default, {})`, and your site shadows `Default`
+  and uses `TokenX`, you won't get the shadowing token — you have to shadow both `Default` and
+  `TokenX`.
+  - This occurs because when that pattern is used in a Vital token and you try to shadow `Default`,
+    you're actually shadowing the whole token collection.
+  - To put it more generally: If you shadow any token (e.g., _Token A_) in a collection, and that
+    token is used by another token in the same collection (e.g., _Token B_), then the shadowed
+    version won't automatically be applied in _Token B_; you have to recompose _Token B_ to use the
+    new version of _Token A_. For example:  
+    **Original:**
+    ```js
+    const A = asFooToken({ /**/ });
+    const B = asFooToken({
+      //...
+      Compose: {
+        A,
+      },
+    });
+    ```
+    **Shadow:**
+    ```js
+    const A = asFooTooken({ vitalFooBase.A, /* extend A */ });
+    export default {
+      ...vitalFooBase,
+      A,
+    };
+    ```
+    Then the shadowed version of `vitalFoo.B` will _not_ apply the shadowed `vitalFoo.A`; instead,
+    you have to do the following:
+    ```js
+    const A = asFooToken({ vitalFooBase.A, /* extend A */ });
+    const B = asFooToken({
+      ...vitalFooBase.B,
+      Compose: {
+        ...vitalFooBase.B.Compose,
+        // Apply our shadowed version of A to override the default.
+        A,
+      },
+    });
+    export default {
+      ...vitalFooBase,
+      A,
+      B,
+    };
+    ```
 
 ### Tips
 
