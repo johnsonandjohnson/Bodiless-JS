@@ -39,3 +39,5 @@ playwright-report
 **/doc/api
 test-results/
 playwright-report/
+
+.turbo
