@@ -1,0 +1,2 @@
+# `@bodiless/scaffold`
+

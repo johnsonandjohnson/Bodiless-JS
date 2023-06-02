@@ -3,11 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.39](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.38...v1.0.0-rc.39) (2023-06-01)
+
+### Bug Fixes
+
+- Add package dependecy ([638f5dd](https://github.com/johnsonandjohnson/bodiless-js/commit/638f5dd744f7936ec8ec3b02791695078a4b62f1))
+- Addressing feedback form PR ([bb45365](https://github.com/johnsonandjohnson/bodiless-js/commit/bb453659a73ce2d85b341ee64f67d9f1f61cbef2))
+- Addressing feedback form PR ([9b38eec](https://github.com/johnsonandjohnson/bodiless-js/commit/9b38eec3e59af4d2fa0b884b46e58b3dbfe8d7a1))
+- Addressing feedback form PR ([d9f7ea0](https://github.com/johnsonandjohnson/bodiless-js/commit/d9f7ea0b339c7b12ccdee4e7a7812dba62f4580d))
+- Addressing PR feedback ([e1edfa1](https://github.com/johnsonandjohnson/bodiless-js/commit/e1edfa15d67608f4baf47a3bcdc73c578945b607))
+- Addressing PR feedback ([b94d0f7](https://github.com/johnsonandjohnson/bodiless-js/commit/b94d0f793b0f0cb42ea26dbe3e65270fb9ca0101))
+- **bodiless/cli:** update node version support to v18 ([#2111](https://github.com/johnsonandjohnson/bodiless-js/issues/2111)) ([c23379a](https://github.com/johnsonandjohnson/bodiless-js/commit/c23379a3a740d973ae21122988ce2f9f022f9381))
+- Fix identation on styleguide template ([0857db8](https://github.com/johnsonandjohnson/bodiless-js/commit/0857db8b4c688ad9afc863f2a75f53761e061d3c))
+- Force cast on Text decoration test ([901108d](https://github.com/johnsonandjohnson/bodiless-js/commit/901108d3b279ca201d9280640a912f6d533d4e78))
+- Implementing suggestions from PR feedback ([84939a3](https://github.com/johnsonandjohnson/bodiless-js/commit/84939a3ba74982ffa379fca8f33d2fd8cdc654ae))
+- Implementing suggestions from PR feedback ([b6d3b7b](https://github.com/johnsonandjohnson/bodiless-js/commit/b6d3b7b289d51e469e7fadd0600c3939e4f917ac))
+- Minor code optimization ([22c23ae](https://github.com/johnsonandjohnson/bodiless-js/commit/22c23ae8cfada1b0f6a7f40f94c7187d82452a02))
+- Moving typography styleguide to vital-elements package ([d1eacd4](https://github.com/johnsonandjohnson/bodiless-js/commit/d1eacd4c12ce36b9b42aed4e3f8bde77c4e6f68f))
+- Update tests snapshots ([b31b022](https://github.com/johnsonandjohnson/bodiless-js/commit/b31b0224e083e76f0348570b808246d3e10d2991))
+- **vita-section, vital-examples:** Fix typo ([b05b8bc](https://github.com/johnsonandjohnson/bodiless-js/commit/b05b8bceb03cf1362287d7ed103766f81d93ebc9))
+- **vita-section, vital-examples:** Update docs ([1dcab38](https://github.com/johnsonandjohnson/bodiless-js/commit/1dcab386280c353c79123c847e7e7869a0f0f14b))
+- **vita-section, vital-examples:** Update patterns for the Schema and Default Content ([f5ed423](https://github.com/johnsonandjohnson/bodiless-js/commit/f5ed42313b0ead134d951887ab6a9a933d7e4cf9))
+
+### Features
+
+- **component scaffold:** Component Scaffolder ([#2100](https://github.com/johnsonandjohnson/bodiless-js/issues/2100)) ([f476bf4](https://github.com/johnsonandjohnson/bodiless-js/commit/f476bf4a9683c7674966cd26368c071ef71242c9))
+- **vital-examples:** Fix Lint ([062b776](https://github.com/johnsonandjohnson/bodiless-js/commit/062b776c63ba320d217c2986041219d74ea773ca))
+- **vital-section:** Add examples page, address PR feedback ([7c1aa40](https://github.com/johnsonandjohnson/bodiless-js/commit/7c1aa40412ff0ed59fbb93ad97f39cc7c8d1c85d))
+- **vital-section:** Address PR feedback ([3362a81](https://github.com/johnsonandjohnson/bodiless-js/commit/3362a812da316738554141e27e42778eff6ba651))
+- **vital-section:** Create vital-section package ([74f7c0c](https://github.com/johnsonandjohnson/bodiless-js/commit/74f7c0c5ab27e14f7c7c14adf932c10b1ac7c8b4))
+
 # [1.0.0-rc.38](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.37...v1.0.0-rc.38) (2023-05-31)
 
 ### Bug Fixes
 
-- ****vital**:** Remove dependency on vital-test from starter. ([#2052](https://github.com/johnsonandjohnson/bodiless-js/issues/2052)) ([035171b](https://github.com/johnsonandjohnson/bodiless-js/commit/035171bdd00b279c989fc4f4ac03ae6f402f939a))
+- \***\*vital**:\*\* Remove dependency on vital-test from starter. ([#2052](https://github.com/johnsonandjohnson/bodiless-js/issues/2052)) ([035171b](https://github.com/johnsonandjohnson/bodiless-js/commit/035171bdd00b279c989fc4f4ac03ae6f402f939a))
 - **backend:** page clone bug ([#2086](https://github.com/johnsonandjohnson/bodiless-js/issues/2086)) ([9d8e3ae](https://github.com/johnsonandjohnson/bodiless-js/commit/9d8e3ae7464f6b08aef14f432eb514b378e2b496))
 - **bodiless-next:** Fixing EmptySitemap error in @sites/--minimal-next-- build ([#2079](https://github.com/johnsonandjohnson/bodiless-js/issues/2079)) ([9e95283](https://github.com/johnsonandjohnson/bodiless-js/commit/9e952832127f8a1afb423979ba57f7b1330e37f2))
 - **filtering, page, next:** editing bugs on NextJS ([#2090](https://github.com/johnsonandjohnson/bodiless-js/issues/2090)) ([0ce686b](https://github.com/johnsonandjohnson/bodiless-js/commit/0ce686b469d0ab09cb2ede96a24f91512c68110f))

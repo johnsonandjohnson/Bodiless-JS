@@ -13,3 +13,4 @@
  */
 
 export { default as vitalTypography } from './tokens';
+export { TypographyMeta } from './meta';

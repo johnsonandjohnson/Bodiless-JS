@@ -1,0 +1,11 @@
+import React from 'react';
+import { testTokens } from '@bodiless/vital-elements';
+{{#if sourcePackageName}}
+import { {{properCase componentName}}Clean } from '{{sourcePackageName}}';
+import { {{camelCase libraryName}}{{properCase componentName}} } from '..';
+{{else}}
+import { {{properCase componentName}}Clean, {{camelCase libraryName}}{{properCase componentName}} } from '..';
+{{/if}}
+
+// eslint-disable-next-line jest/valid-describe
+describe('{{properCase componentName}} Tokens', testTokens({{properCase componentName}}Clean, {{camelCase libraryName}}{{properCase componentName}}));

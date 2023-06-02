@@ -3,11 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.39](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.38...v1.0.0-rc.39) (2023-06-01)
+
+**Note:** Version bump only for package @sites/--vital--
+
 # [1.0.0-rc.38](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.37...v1.0.0-rc.38) (2023-05-31)
 
 ### Bug Fixes
 
-- ****vital**:** Remove dependency on vital-test from starter. ([#2052](https://github.com/johnsonandjohnson/bodiless-js/issues/2052)) ([035171b](https://github.com/johnsonandjohnson/bodiless-js/commit/035171bdd00b279c989fc4f4ac03ae6f402f939a))
+- \***\*vital**:\*\* Remove dependency on vital-test from starter. ([#2052](https://github.com/johnsonandjohnson/bodiless-js/issues/2052)) ([035171b](https://github.com/johnsonandjohnson/bodiless-js/commit/035171bdd00b279c989fc4f4ac03ae6f402f939a))
 
 ### Features
 

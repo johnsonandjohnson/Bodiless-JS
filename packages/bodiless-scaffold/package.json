@@ -1,0 +1,43 @@
+{
+  "name": "@bodiless/vital-scaffold",
+  "version": "1.0.0-rc.39",
+  "description": "A scaffold tool to generate Bodiless-JS components and packages",
+  "author": "Dewen Li <dli94@kenvue.com>",
+  "homepage": "",
+  "license": "Apache-2.0",
+  "main": "./lib/index.js",
+  "type": "module",
+  "bin": {
+    "scaffold": "./bin/scaffold.js"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__",
+    "bin": "bin"
+  },
+  "files": [
+    "/bin",
+    "/lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "scaffold": "./bin/scaffold.js",
+    "build": "run-p copy build:lib",
+    "copy": "copyfiles -u 1 \"./src/templates/**/*\" \"./lib/\"",
+    "build:lib": "tsc --version && tsc -p ./tsconfig.json",
+    "build:watch": "npm run build -- --watch"
+  },
+  "dependencies": {
+    "copyfiles": "^2.1.1",
+    "plop": "^3.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^16"
+  }
+}

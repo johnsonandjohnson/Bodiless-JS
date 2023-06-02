@@ -1,0 +1,9 @@
+{
+  "VitalDesignSystem": {
+    "Components": {
+      "VitalSection": {
+        "README.md": "./doc/README.md"
+      }
+    }
+  }
+}

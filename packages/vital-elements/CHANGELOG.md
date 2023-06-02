@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.39](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.38...v1.0.0-rc.39) (2023-06-01)
+
+### Bug Fixes
+
+- Addressing feedback form PR ([d9f7ea0](https://github.com/johnsonandjohnson/bodiless-js/commit/d9f7ea0b339c7b12ccdee4e7a7812dba62f4580d))
+- Fix identation on styleguide template ([0857db8](https://github.com/johnsonandjohnson/bodiless-js/commit/0857db8b4c688ad9afc863f2a75f53761e061d3c))
+- Implementing suggestions from PR feedback ([b6d3b7b](https://github.com/johnsonandjohnson/bodiless-js/commit/b6d3b7b289d51e469e7fadd0600c3939e4f917ac))
+- Moving typography styleguide to vital-elements package ([d1eacd4](https://github.com/johnsonandjohnson/bodiless-js/commit/d1eacd4c12ce36b9b42aed4e3f8bde77c4e6f68f))
+
 # [1.0.0-rc.38](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.37...v1.0.0-rc.38) (2023-05-31)
 
 ### Features

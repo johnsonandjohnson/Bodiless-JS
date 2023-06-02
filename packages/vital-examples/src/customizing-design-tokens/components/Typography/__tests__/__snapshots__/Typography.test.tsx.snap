@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Typography Matches snapshot for Body 1`] = `
+<span
+  className="text-vital-primary-body-copy font-normal mb-6 text-m-base lg:text-base"
+/>
+`;
+
+exports[`Typography Matches snapshot for Eyebrow 1`] = `
+<span
+  className="text-vital-secondary-eyebrow font-extrabold uppercase mb-3 text-m-xs lg:text-xs"
+/>
+`;
+
+exports[`Typography Matches snapshot for EyebrowNoSpacing 1`] = `
+<span
+  className="text-vital-secondary-eyebrow font-extrabold uppercase text-m-xs lg:text-xs"
+/>
+`;
+
+exports[`Typography Matches snapshot for Gradient 1`] = `
+<span
+  className="from-vital-secondary-eyebrow via-vital-primary-interactive to-vital-secondary-eyebrow bg-clip-text text-transparent bg-gradient-to-r text-m-lg lg:text-lg"
+/>
+`;
+
+exports[`Typography Matches snapshot for H1 1`] = `
+<span
+  className="text-vital-primary-header-copy mt-10 mb-5 lg:mb-6 text-m-3xl lg:text-3xl font-normal"
+/>
+`;
+
+exports[`Typography Matches snapshot for H2 1`] = `
+<span
+  className="text-vital-primary-header-copy mb-5 text-m-2xl lg:text-2xl font-extrabold"
+/>
+`;
+
+exports[`Typography Matches snapshot for H3 1`] = `
+<span
+  className="text-vital-primary-header-copy mb-5 font-medium text-m-xl lg:text-xl"
+/>
+`;
+
+exports[`Typography Matches snapshot for H4 1`] = `
+<span
+  className="text-vital-primary-header-copy mb-5.75 lg:mb-9 font-normal text-m-xl lg:text-xl"
+/>
+`;
+
+exports[`Typography Matches snapshot for H5 1`] = `
+<span
+  className="text-vital-primary-header-copy mb-5 lg:mb-4.5 font-medium text-m-base lg:text-base"
+/>
+`;
+
+exports[`Typography Matches snapshot for HeaderLink 1`] = `
+<span
+  className="underline text-vital-primary-interactive hover:opacity-70 active:text-vital-primary-interactive-active"
+/>
+`;
+
+exports[`Typography Matches snapshot for Link 1`] = `
+<span
+  className="text-vital-primary-interactive hover:opacity-70 active:text-vital-primary-interactive-active underline font-bold"
+/>
+`;
+
+exports[`Typography Matches snapshot for Rest 1`] = `
+<span
+  className="text-vital-primary-body-copy font-normal text-m-xs lg:text-xs"
+/>
+`;

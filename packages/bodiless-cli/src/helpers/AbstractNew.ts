@@ -493,8 +493,8 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
   // eslint-disable-next-line class-methods-use-this
   async validate() {
     const v = process.version;
-    if (!v.match(/^v16\./)) {
-      throw new Error(`Unsupported node version: ${v}.  Must be v16.x`);
+    if (!v.match(/^v18\./)) {
+      throw new Error(`Unsupported node version: ${v}.  Must be v18.x`);
     }
   }
 

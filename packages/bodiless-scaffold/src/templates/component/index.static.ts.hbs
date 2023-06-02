@@ -1,0 +1,22 @@
+import {
+  staticTokenCollection,
+  {{#unless sourcePackageName}}
+  StaticBlock as StaticComponent,
+  // Use `StaticInline` if your component renders inline elements.
+  // StaticInline as StaticComponent,
+  {{/unless}}
+} from '@bodiless/hydration';
+
+{{#if static}}
+export const {{camelCase libraryName}}{{properCase componentName}} = staticTokenCollection;
+{{#unless sourcePackageName }}
+export const {{properCase componentName}}Clean = StaticComponent;
+{{/unless}}
+{{else}}
+export { default as {{camelCase libraryName}}{{properCase componentName}} } from './tokens';
+export const {{camelCase libraryName}}{{properCase componentName}}Static = staticTokenCollection;
+{{#unless sourcePackageName }}
+export { default as {{properCase componentName}}Clean } from './{{properCase componentName}}Clean';
+export const {{properCase componentName}}Static = StaticComponent;
+{{/unless}}
+{{/if}}

@@ -223,7 +223,7 @@ export interface VitalCardFlowContainer {
    * Composable token which adds basic card variations.
    * Defined by Fully clickable card with no visible CTA varied over
    *  - Orientation Properties
-   *  - Content Varitions
+   *  - Content Variations
    */
   WithBasicVariations: FluidToken,
   /**
