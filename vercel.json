@@ -1,0 +1,4 @@
+{
+  "buildCommand": "npm run build:packages && npm run build:only $VERCEL_SITENAME",
+  "installCommand": "npm run setup"
+}
