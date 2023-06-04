@@ -456,8 +456,6 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     const name = await this.getArg('name');
     const files = [
       path.join(dest, 'jenkins'),
-      path.join(dest, 'cypress'),
-      path.join(dest, 'cypress.json'),
       path.join(dest, 'playwright'),
       path.join(dest, 'playwright.config.ts'),
       path.join(dest, '.github'),

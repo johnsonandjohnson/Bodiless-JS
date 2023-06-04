@@ -44,10 +44,6 @@ jobs:
         run: npm run check
       - name: Test
         run: npm run test --quiet --colors
-      # Temp using monorepo since standalone is breaking cypress tests.
-      # - name: Cypress tests
-        # run: npm run test:monorepo
-        # run: npm run test:ci
       - name: Install Playwright
         run: npx playwright install --with-deps
       - name: Run Deprecated Playwright Tests
