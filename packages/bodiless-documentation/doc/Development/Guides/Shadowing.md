@@ -64,7 +64,7 @@ shadowing, you would have to first redefine the link, and then use that new link
 menu, and so on. It becomes a chain of updated imports, whereas, with shadowing, you just update the
 typography in one place and it gets automatically applied to everything.
 
-<!-- TODO: Add two code snippets, showcasing the scenario above — chain of imports vs shadowing. -->
+<!-- @TODO: Add two code snippets, showcasing the scenario above — chain of imports vs shadowing. -->
 
 ## What Can Be Shadowed?
 
@@ -95,12 +95,11 @@ To get into the finer details of the structure required to make a component shad
 the [Creating a Shadowable Token Collection](#creating-a-shadowable-token-collection) section below,
 where we walk you through the process of structuring your own components to be shadowable.
 
-?> **Note:** The Vital site template
-([`/sites/__vital__`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/sites/__vital__))
-comes packaged with the [Vital Design System](/VitalDesignSystem/), as well as the necessary
-`tokenShadowPlugin` (see [Shadowing a Token Collection](#shadowing-a-token-collection) below),
-providing a set of shadowable components out of the box. You can create a site using this template
-via the [`new-vds` command](./BuildingSites/SiteCreation).
+?> **Note:** The NextJS and GatsbyJS Vital site templates come packaged with the [Vital Design
+System](/VitalDesignSystem/), as well as the necessary `tokenShadowPlugin` (see [Shadowing a Token
+Collection](#shadowing-a-token-collection) below), providing a set of shadowable components out of
+the box. You can create a site using one of these templates via the `@bodiless/cli new` command (for
+details, see: [Creating a New Site](/About/GettingStarted#creating-a-new-site)).
 
 ## Creating a Shadowable Token Collection
 
@@ -292,19 +291,10 @@ To export a shadowed version of a token collection:
     **File `./src/shadow/base-package/Foo.ts`:**
 
     ```ts
-    import { asFooToken } from 'base-package';
-    // Import the base collection.
-    import { yourFooBase } from 'base-package/lib/base';
-    // *** NOT: import { yourFoo } from 'base-package';
+    import { yourFoo } from '../../../components/Foo';
+    import { shadow } from '@bodiless/vital-elements';
 
-    // Override one or more of the tokens in the base collection.
-    const SomeToken = asFooToken(yourFooBase.SomeToken, { ... });
-
-    // Default export is the overridden token collection.
-    export default {
-      ...yourFooBase,
-      SomeToken,
-    };
+    export default shadow(yourFoo, 'YourPackage');
     ```
 
     !> **IMPORTANT:** In the file path, `./src/shadow/base-package/Foo.ts`, `base-package` needs to
@@ -315,13 +305,6 @@ To export a shadowed version of a token collection:
     `shadow/@bodiless/vital-xxx/`; this is because each of the names of the packages from which it's
     importing the base collections are of the form `@bodiless/vital-xxx` (e.g.,
     `@bodiless/vital-card`), as described in their respective `package.json` files.
-
-    ?> **Note:** When defining your shadowed token collection, use the base token collection (from
-    `base-package/lib/base`), which is the _unshadowed_ token collection. We recommend using the
-    naming convention `yourFooBase` to designate this collection specifically as the special import
-    for shadowing. If you were to import from the entry point of the package — which is what is
-    being _shadowed_ (e.g., `yourFoo`) — it becomes a recursive shadowing, and will fail with the
-    error: "Cannot read properties of undefined (reading 'Default')."
 
     **You may be all set:** The next steps discuss setting up a `shadow.js` file to act as a
     resolver, and adding the `tokenShadowPlugin` to your webpack config; however, if your site is
