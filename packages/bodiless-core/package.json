@@ -36,7 +36,7 @@
     "informed": "^4.44.0",
     "lodash": "^4.17.19",
     "rc-tooltip": "^5.1.1",
-    "react-tag-autocomplete": "^7.0.0-rc.5",
+    "react-tag-autocomplete": "7.0.0-rc.5",
     "resize-observer-polyfill": "^1.5.1",
     "universal-cookie": "^4.0.3",
     "uuid": "^3.3.2"

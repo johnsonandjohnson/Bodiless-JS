@@ -41,7 +41,7 @@
     "@bodiless/richtext": "^1.0.0-rc.39",
     "@bodiless/richtext-ui": "^1.0.0-rc.39",
     "lodash": "^4.17.19",
-    "react-tag-autocomplete": "^7.0.0-rc.5",
+    "react-tag-autocomplete": "7.0.0-rc.5",
     "tailwindcss-aspect-ratio": "^3.0.0",
     "uuid": "^3.3.2"
   },
