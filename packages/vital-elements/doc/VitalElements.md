@@ -134,7 +134,8 @@ The package also includes some helper tokens that are very useful in token compo
 
 ### Shadowing Vital Element Tokens
 
-For more information on shadowing Vital Element tokens, read [Shadow](./Shadow.md).
+For more information on shadowing Vital Element tokens, read [Shadowing
+Tokens](/Development/Guides/Shadowing).
 
 ## Architectural Details
 

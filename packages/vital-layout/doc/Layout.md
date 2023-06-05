@@ -41,7 +41,7 @@ structure of header, footer, etc. here, and leave the details for a later step i
 
 ### Customizing Via Shadowing (*Preferred Method)
 
-Define a Shadowing token collection as defined in [Shadow](../VitalElements/Shadow).
+Define a Shadowing token collection as defined in [Shadowing Tokens](/Development/Guides/Shadowing).
 
 File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-layout/Layout.ts`
 
