@@ -400,53 +400,6 @@ To export a shadowed version of a token collection:
       - `next.config.js` in the Vital Next site template:
         [`/sites/__vital_next__/next.config.js`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/sites/__vital_next__/next.config.js).
 
-## Testing Shadowed Tokens
-
-Before you begin setting up your theme (or whatever else you may be working on), it is a good idea
-to first make sure that your tokens are actually being shadowed.
-
-Once again, the
-[`vital-demo`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-demo)
-package lends itself as a valuable resource; here, you'll find a useful pattern for testing your
-shadowed tokens.
-
-For example, take a look at the shadowed Vital Button component within the `vital-demo` package:
-
-[`/packages/vital-demo/src/shadow/@bodiless/vital-buttons/Buttons.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-demo/src/shadow/%40bodiless/vital-buttons/Buttons.ts):
-
-```ts
-import { asButtonToken } from '@bodiless/vital-buttons';
-import { vitalButtonsBase } from '@bodiless/vital-buttons/lib/base';
-import { addProps } from '@bodiless/fclasses';
-
-const Default = asButtonToken(vitalButtonsBase.Default, {
-  Behavior: {
-    Wrapper: addProps({ 'data-shadowed-by': 'vital-demo:DefaultButtons' }),
-  },
-});
-
-const Primary = asButtonToken(vitalButtonsBase.Primary, {
-  Behavior: {
-    Wrapper: addProps({ 'data-shadowed-by': 'vital-demo:PrimaryButtons' }),
-  },
-});
-
-const Secondary = asButtonToken(vitalButtonsBase.Secondary, {
-  Behavior: {
-    Wrapper: addProps({ 'data-shadowed-by': 'vital-demo:SecondaryButtons' }),
-  },
-});
-```
-
-For each shadowed token that we're defining (`Default`, `Primary`, `Secondary`, etc.), we add a
-prop, `data-shadowed-by`, to the outer token/wrapper — usually, `Wrapper` — of the `Behavior`
-domain. For simplicity's sake, we've set each `data-shadowed-by` prop as the name of the package and
-the token we're shadowing (e.g., `vital-demo:PrimaryButtons`), but you can set them to be whatever
-makes the most sense to you.
-
-Now, when viewing your site, if you don't see this identifier on your shadowed component, then you
-know that something hasn't been configured correctly, and you're not shadowing.
-
 ## Important Notes
 
 - Many of the code examples above show snippets of TypeScript files under a package's `src`
@@ -585,9 +538,6 @@ know that something hasn't been configured correctly, and you're not shadowing.
     - Forgot to create your `shadow.js` file.
   - You won't see an error, because, at build time, we don't know what is being shadowed; you just
     won't see it in the list of shadow replacements.
-- A good way to confirm that your shadowed component is working is to shadow a behavior and add a
-  prop to the DOM.  
-  See [Testing Shadowed Tokens](#testing-shadowed-tokens) for details.
 
 ## Additional Documentation on Shadowing
 
