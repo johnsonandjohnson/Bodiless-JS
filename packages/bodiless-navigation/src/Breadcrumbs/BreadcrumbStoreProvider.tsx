@@ -13,7 +13,6 @@
  */
 
 import React, { ComponentType } from 'react';
-import ReactDOMServer from 'react-dom/server';
 import { useNode, NodeProvider } from '@bodiless/data';
 import { HOC } from '@bodiless/fclasses';
 import type { BreadcrumbStoreType } from './BreadcrumbStore';
@@ -42,19 +41,25 @@ const useBreadcrumbStore = () => React.useContext(BreadcrumbsStoreContext);
  * @param Component
  */
 const asHiddenBreadcrumbSource: HOC = Component => {
-  const AsHiddenBreadcrumbSource = (props: any) => {
-    const store = useBreadcrumbStore();
-    const { node } = useNode();
-    ReactDOMServer.renderToString(
-      <NodeProvider node={node}>
-        <BreadcrumbStoreProvider store={store}>
-          <Component {...props} />
-        </BreadcrumbStoreProvider>
-      </NodeProvider>,
-    );
-    return null;
-  };
-  return AsHiddenBreadcrumbSource;
+  if (typeof window === 'undefined') {
+    const AsHiddenBreadcrumbSource = (props: any) => {
+      const store = useBreadcrumbStore();
+      const { node } = useNode();
+      // eslint-disable-next-line global-require
+      const reactDomServer = require('react-dom/server');
+
+      reactDomServer.renderToPipeableStream(
+        <NodeProvider node={node}>
+          <BreadcrumbStoreProvider store={store}>
+            <Component {...props} />
+          </BreadcrumbStoreProvider>
+        </NodeProvider>,
+      );
+      return null;
+    };
+    return AsHiddenBreadcrumbSource;
+  }
+  return () => null;
 };
 
 export {

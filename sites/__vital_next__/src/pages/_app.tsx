@@ -1,6 +1,6 @@
 import React from 'react';
 import type { AppProps } from 'next/app';
-import { App as NextApp } from '@bodiless/next';
+import NextApp from '@bodiless/next/lib/NextApp';
 import { DM_Sans } from 'next/font/google';
 
 import '../css/style.css';
