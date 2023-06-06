@@ -21,6 +21,9 @@
         "README.md": "./doc/Introduction/README.md"
       },
       "README.md": "./doc/README.md"
+    },
+    "Guides": {
+      "ShadowingTokens.md": "./doc/Guides/ShadowingTokens.md"
     }
   }
 }

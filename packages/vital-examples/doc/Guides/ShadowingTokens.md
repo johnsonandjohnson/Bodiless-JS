@@ -1,6 +1,6 @@
 # Shadowing Tokens
 
-The [Vital Design System](/VitalDesignSystem/) provides a mechanism to extend or override the tokens
+The [Vital Design System](../) provides a mechanism to extend or override the tokens
 provided by a package, changing their effect wherever they are used on your site, allowing you to
 easily customize components and elements to meet your design requirements. We call this mechanism
 _token shadowing_. A simplistic definition of shadowing is: providing a token collection that
@@ -21,18 +21,18 @@ customize components and elements.
 
 Let's say you shadow an H3 element token, making changes to the typography. For our example, we'll
 say that you're shadowing the `H3` token in
-[`vitalTypography`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Typography/tokens/vitalTypography.ts).
-That `H3` token is used by [Vital
-Card](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-card/src/components/Card/tokens/Base.ts)
-and [Vital Rich
-Text](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-editors/src/components/RichText/tokens/vitalRichText.ts),
-and it will be replaced automatically within those components — and _anywhere_ else it is used —
-with your shadow token.
+[`vitalTypography`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Typography/tokens/vitalTypography.ts
+':target=_blank'). That `H3` token is used by [Vital
+Card](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-card/src/components/Card/tokens/Base.ts
+':target=_blank') and [Vital Rich
+Text](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-editors/src/components/RichText/tokens/vitalRichText.ts
+':target=_blank'), and it will be replaced automatically within those components — and _anywhere_
+else it is used — with your shadow token.
 
 To achieve similar results _without_ shadowing, you would have to redefine the component tokens. For
 example, looking at the
-[`vitalRichText`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-editors/src/components/RichText/tokens/vitalRichText.ts)
-tokens, the typography is defined in the `Theme` domain:
+[`vitalRichText`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-editors/src/components/RichText/tokens/vitalRichText.ts
+':target=_blank') tokens, the typography is defined in the `Theme` domain:
 
 ```ts
 const Default = asVitalTokenSpec()({
@@ -75,31 +75,32 @@ for shadowing. Basically, for it to be shadowable, a token collection must be lo
 outside of a `{package-name}/src/components/{ComponentName}/tokens` directory.
 
 For example, in the `vital-editors` package, if you look within its
-[`src/components`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-editors/src/components)
-directory, you will see directories for the `EditorPlain`, `FlowContainer`, and `RichText`
-components; `EditorPlain` and `RichText` contain `tokens` directories and are shadowable.
+[`src/components`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-editors/src/components
+':target=_blank') directory, you will see directories for the `EditorPlain`, `FlowContainer`, and
+`RichText` components; `EditorPlain` and `RichText` contain `tokens` directories and are shadowable.
 
-All the token collections provided by the [Vital Design System](/VitalDesignSystem/) are shadowable,
-each of which has its own API documentation about how to shadow it. Also, within the Bodiless
-repository, there is a
-[`vital-demo`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-demo/src/shadow/%40bodiless)
-package that shadows all the available Vital components and provides examples. To continue using
-`vital-editors` as our example, if you look in
-[`/packages/vital-demo/src/shadow/@bodiless/vital-editors`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-demo/src/shadow/%40bodiless/vital-editors),
-you can see how to go about shadowing the `EditorPlain` and `RichText` components.
+All the token collections provided by the [Vital Design System](../) are shadowable, each of which
+has its own API documentation about how to shadow it. Also, within the Bodiless repository, there is
+a
+[`vital-demo`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-demo/src/shadow/%40bodiless
+':target=_blank') package that shadows all the available Vital components and provides examples. To
+continue using `vital-editors` as our example, if you look in
+[`/packages/vital-demo/src/shadow/@bodiless/vital-editors`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-demo/src/shadow/%40bodiless/vital-editors
+':target=_blank'), you can see how to go about shadowing the `EditorPlain` and `RichText`
+components.
 
-The [API documentation](/Development/API/) is a good resource to use to see what token collections
-are shadowable.
+The [API documentation](../../Development/API/) is a good resource to use to see what token
+collections are shadowable.
 
 To get into the finer details of the structure required to make a component shadowable, please see
 the [Creating a Shadowable Token Collection](#creating-a-shadowable-token-collection) section below,
 where we walk you through the process of structuring your own components to be shadowable.
 
 ?> **Note:** The NextJS and GatsbyJS Vital site templates come packaged with the [Vital Design
-System](/VitalDesignSystem/), as well as the necessary `tokenShadowPlugin` (see [Shadowing a Token
+System](../), as well as the necessary `tokenShadowPlugin` (see [Shadowing a Token
 Collection](#shadowing-a-token-collection) below), providing a set of shadowable components out of
 the box. You can create a site using one of these templates via the `@bodiless/cli new` command (for
-details, see: [Creating a New Site](/About/GettingStarted#creating-a-new-site)).
+details, see: [Creating a New Site](../../About/GettingStarted#creating-a-new-site)).
 
 ## Creating a Shadowable Token Collection
 
@@ -158,8 +159,8 @@ export default { // Must be a default export.
   - At the top of the example, you can see that we're importing `asFooToken` (a token definition
     utility) from `FooClean` (a clean component); for information on these items, and how to define
     them, please see:
-    - [Vital Component Template : Component-Level Files](/VitalDesignSystem/Components/VitalElements/ComponentTemplate#component-level-files)
-    - [Vital Elements : Helper Utilities](/VitalDesignSystem/Components/VitalElements/#helper-utilities)
+    - [Vital Component Template : Component-Level Files](./ComponentTemplate#component-level-files)
+    - [Vital Elements : Helper Utilities](../Components/VitalElements/#helper-utilities)
 
 </div>
 
@@ -300,17 +301,20 @@ To export a shadowed version of a token collection:
     !> **IMPORTANT:** In the file path, `./src/shadow/base-package/Foo.ts`, `base-package` needs to
     **match the name of the package from which you are importing the base collection.** For example,
     if you look in the
-    [`vital-demo`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-demo)
-    package, you'll see that each of the modules defining shadowed token collections are under
-    `shadow/@bodiless/vital-xxx/`; this is because each of the names of the packages from which it's
-    importing the base collections are of the form `@bodiless/vital-xxx` (e.g.,
-    `@bodiless/vital-card`), as described in their respective `package.json` files.
+    [`vital-demo`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-demo
+    ':target=_blank') package, you'll see that each of the modules defining shadowed token
+    collections are under `shadow/@bodiless/vital-xxx/`; this is because each of the names of the
+    packages from which it's importing the base collections are of the form `@bodiless/vital-xxx`
+    (e.g., `@bodiless/vital-card`), as described in their respective `package.json` files.
 
     **You may be all set:** The next steps discuss setting up a `shadow.js` file to act as a
     resolver, and adding the `tokenShadowPlugin` to your webpack config; however, if your site is
-    using the Vital site template
-    ([`/sites/__vital__`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/sites/__vital__))
-    or a scaffolding script, then these steps have already been completed for you.
+    using the Vital
+    ([`/sites/__vital__`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/sites/__vital__
+    ':target=_blank')) or Vital Next
+    ([`/sites/__vital_next__`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/sites/__vital_next__
+    ':target=_blank')) site templates or a scaffolding script, then these steps have already been
+    completed for you.
 
 01. Place a file at your package root called `shadow.js`. This should export a single function which
     receives a component name and package name, and returns the _resolved_ module containing the
@@ -331,11 +335,11 @@ To export a shadowed version of a token collection:
 
     ?> **Note:** If you look at the `shadow.js` files within the Bodiless packages that have them
     (e.g.,
-    [`__vital__`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/__vital__/shadow.js)
-    and
-    [`vital-demo`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-demo/shadow.js)),
-    you can see that there's nothing unique about them. You can copy any one of these `shadow.js`
-    files into your package root, and it will work.  
+    [`__vital__`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/__vital__/shadow.js
+    ':target=_blank') and
+    [`vital-demo`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-demo/shadow.js
+    ':target=_blank')), you can see that there's nothing unique about them. You can copy any one of
+    these `shadow.js` files into your package root, and it will work.  
     It's also worth noting that these pre-existing `shadow.js` files support the standard pattern
     used by most Vital packages; you can do whatever fulfills the requirements of your project, as
     long as the `shadow.js` file returns the actual module that contains the shadowed token
@@ -392,13 +396,15 @@ To export a shadowed version of a token collection:
       - So, if you have the same component being shadowed by multiple packages, it will only be
         resolved by the first one listed (and successfully returned).
     - From the code example above, you can see that the token shadow plugin
-      ([`addTokenShadowPlugin`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/bodiless-webpack/src/tokenShadowPlugin.ts))
-      comes from the `@bodiless/webpack` package.
+      ([`addTokenShadowPlugin`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/bodiless-webpack/src/tokenShadowPlugin.ts
+      ':target=_blank')) comes from the `@bodiless/webpack` package.
     - For examples of files adding the token shadow plugin to the webpack config, see:
       - `gatsby-node.js` in the Vital site template:
-        [`/sites/__vital__/gatsby-node.js`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/sites/__vital__/gatsby-node.js).
+        [`/sites/__vital__/gatsby-node.js`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/sites/__vital__/gatsby-node.js
+        ':target=_blank').
       - `next.config.js` in the Vital Next site template:
-        [`/sites/__vital_next__/next.config.js`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/sites/__vital_next__/next.config.js).
+        [`/sites/__vital_next__/next.config.js`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/sites/__vital_next__/next.config.js
+        ':target=_blank').
 
 ## Important Notes
 
@@ -410,14 +416,13 @@ To export a shadowed version of a token collection:
   `/packages/some-package/src/components/Foo/tokens/index.ts` →  
   `/packages/some-package/lib/components/Foo/tokens/index.js`
   - For extensive details regarding the conventions and file structure of components and tokens
-    within a package, please see: [Vital Component
-    Template](/VitalDesignSystem/Components/VitalElements/ComponentTemplate).
+    within a package, please see: [Vital Component Template](./ComponentTemplate).
 - As mentioned, shadowed token collections can be extended or overridden, depending on your
   requirements. An extension or override can be made at the token, domain, or slot (component)
   level.
   - For more information on extending and overriding, see:
-    - [Extending and Composing Tokens](/VitalDesignSystem/Components/VitalElements/ExtendingAndComposingTokens)
-    - [Vital Tokens : Extension and Composition](/VitalDesignSystem/Components/VitalElements/Tokens/#extension-and-composition)
+    - [Extending and Composing Tokens](./ExtendingAndComposingTokens)
+    - [Vital Tokens : Extension and Composition](./Tokens/#extension-and-composition)
 - If you are extending a base token collection, be sure to import it using the `tokenCollectionBase`
   version name.
 - Ensure that your token shadow resolver (`shadow.js`) uses [CJS module
@@ -448,10 +453,9 @@ To export a shadowed version of a token collection:
   - E.g., if you are shadowing from the `vital-card` package, its `name`, as defined in its
     `package.json` file, is `@bodiless/vital-card`; therefore, your module needs to be placed under
     `./lib/shadow/@bodiless/vital-card` within the package you're working in.
-- Remember, if a slot in the [clean
-  component](/VitalDesignSystem/Components/VitalElements/Tokens/#components) is defined as a
-  Fragment, you will have to add an element or component to that slot in order to have something to
-  apply your token. This is typically done with the `startWith`, `replaceWith`, or `on` utilities.
+- Remember, if a slot in the [clean component](./Tokens/#components) is defined as a Fragment, you
+  will have to add an element or component to that slot in order to have something to apply your
+  token. This is typically done with the `startWith`, `replaceWith`, or `on` utilities.
   - Let's say the `Wrapper` of the original element is set to a Fragment; to get shadowing to work,
     you need to replace that `Wrapper` with a `div` — `Wrapper = replaceWith(Div)` — and then add
     your layout/theme/behavior.
@@ -460,10 +464,10 @@ To export a shadowed version of a token collection:
 - Ensure that you are shadowing the correct token(s). Some components use specific tokens — not just
   the `Default`.
   - For example, Vital Menu exports a number of tokens:
-    [`/packages/vital-navigation/src/components/Menu/tokens/vitalMenu.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-navigation/src/components/Menu/tokens/vitalMenu.ts).
+    [`/packages/vital-navigation/src/components/Menu/tokens/vitalMenu.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-navigation/src/components/Menu/tokens/vitalMenu.ts ':target=_blank').
     - And, in the `vital-demo` package, you can see how to shadow the `TopNav`, `Footer`, and
       `Utility` tokens from `vitalMenuBase`:
-      [`/packages/vital-demo/src/shadow/@bodiless/vital-navigation/Menu.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-demo/src/shadow/%40bodiless/vital-navigation/Menu.ts).
+      [`/packages/vital-demo/src/shadow/@bodiless/vital-navigation/Menu.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-demo/src/shadow/%40bodiless/vital-navigation/Menu.ts ':target=_blank').
 - If, in a Vital token, we have `TokenX = asFooToken(Default, {})`, and your site shadows `Default`
   and uses `TokenX`, you won't get the shadowing token — you have to shadow both `Default` and
   `TokenX`.
@@ -541,23 +545,22 @@ To export a shadowed version of a token collection:
 
 ## Additional Documentation on Shadowing
 
-The Bodiless and [Vital Design System](/VitalDesignSystem/) documentation have some step-by-step
-shadowing examples:
+The Bodiless and [Vital Design System](../) documentation have some step-by-step shadowing examples:
 
-- [Shadowing Typography](./BuildingSites/Typography/ShadowGuide)
-- [Shadowing the Rich Text Editor](/VitalDesignSystem/Components/VitalEditors/RichTextCustomizing)
-- [Shadowing the Plain Editor](/VitalDesignSystem/Components/VitalEditors/PlainEditor#via-shadowing)
+- [Shadowing Typography](../../Development/Guides/BuildingSites/Typography/ShadowGuide)
+- [Shadowing the Rich Text Editor](../Components/VitalEditors/RichTextCustomizing)
+- [Shadowing the Plain Editor](../Components/VitalEditors/PlainEditor#via-shadowing)
 
 All Vital DS tokens can be shadowed. Refer to the component's documentation and specific shadowing
 instructions.
 
 Within the Bodiless repository, there is a
-[`vital-demo`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-demo/src/shadow/%40bodiless)
-package that shadows all components and provides examples — it is a good resource for reference and
-learning.
+[`vital-demo`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-demo/src/shadow/%40bodiless
+':target=_blank') package that shadows all components and provides examples — it is a good resource
+for reference and learning.
 
 In addition, to determine what is possible to shadow, we recommend visiting the [API
-documentation](/Development/API/).
+documentation](../../Development/API/).
 
 <!-- Link Labels -->
 

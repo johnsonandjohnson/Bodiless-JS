@@ -137,7 +137,7 @@ described below.
 
 #### Via Shadowing (*Preferred Method)
 
-Define a Shadowing token collection as defined in [Shadowing Tokens](/Development/Guides/Shadowing).
+Define a Shadowing token collection as defined in [Shadowing Tokens](../../Guides/ShadowingTokens).
 
 File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-meta/MetaHelmet.ts`
 

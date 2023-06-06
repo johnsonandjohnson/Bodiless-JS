@@ -6,14 +6,14 @@ Shadowing](https://www.gatsbyjs.com/blog/2019-04-29-component-shadowing/ ':targe
 more restrictive. A simplistic definition of shadowing is a provided token that replaces the
 existing design token. Whether you extend or override the token by shadowing is a choice made by the
 Site Builder. For more detailed information, feel free to read [Shadowing
-Tokens](/Development/Guides/Shadowing). Every Vital DS component also has its own API documentation
-about shadowing its token.
+Tokens](../../../../VitalDesignSystem/Guides/ShadowingTokens). Every Vital DS component also has its
+own API documentation about shadowing its token.
 
 ?> **Note:** The ability to shadow a design requires the design package to be structured in a
 specific way to allow it be shadowed. The site must use the
-[`tokenShadowPlugin`](/Development/Guides/Shadowing#shadowing-a-token-collection). A site created
-using the `__vital_next__` or `__vital__` site templates meets these requirements (for details, see:
-[Creating a New Site](/About/GettingStarted#creating-a-new-site)).
+[`tokenShadowPlugin`](../../../../VitalDesignSystem/Guides/ShadowingTokens#shadowing-a-token-collection).
+A site created using the `__vital_next__` or `__vital__` site templates meets these requirements
+(for details, see: [Creating a New Site](../../../../About/GettingStarted#creating-a-new-site)).
 
 ## 1. Add Custom Colors to Tailwind
 
