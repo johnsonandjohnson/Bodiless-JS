@@ -1,11 +1,11 @@
 # Shadowing Tokens
 
-The [Vital Design System](../) provides a mechanism to extend or override the tokens
-provided by a package, changing their effect wherever they are used on your site, allowing you to
-easily customize components and elements to meet your design requirements. We call this mechanism
-_token shadowing_. A simplistic definition of shadowing is: providing a token collection that
-replaces an existing token collection. This replacement can either be completely replacing the
-original token collection or just extending it. This method is similar to [Gatsby Component
+The [Vital Design System](../) provides a mechanism to extend or override the tokens provided by a
+package, changing their effect wherever they are used on your site, allowing you to easily customize
+components and elements to meet your design requirements. We call this mechanism _token shadowing_.
+A simplistic definition of shadowing is: providing a token collection that replaces an existing
+token collection. This replacement can either be completely replacing the original token collection
+or just extending it. This method is similar to [Gatsby Component
 Shadowing](https://www.gatsbyjs.com/blog/2019-04-29-component-shadowing/ ':target=_blank'), but more
 restrictive. In particular, only token collections are shadowable using this technique, and the
 package to be shadowed must be structured specifically to enable this feature.
@@ -285,11 +285,11 @@ For example:
 
 To export a shadowed version of a token collection:
 
-01. Add a module to your package which defines the shadowed token collection. You may import the
-    original base token collection to extend it.  
+01. Add a module to your package which imports your token collection and re-exports it using the
+    `shadow` utility function from the `@bodiless/vital-elements` package.  
     For example:
 
-    **File `./src/shadow/base-package/Foo.ts`:**
+    **File `./src/shadow/{base-package}/Foo.ts`:**
 
     ```ts
     import { yourFoo } from '../../../components/Foo';
@@ -298,9 +298,9 @@ To export a shadowed version of a token collection:
     export default shadow(yourFoo, 'YourPackage');
     ```
 
-    !> **IMPORTANT:** In the file path, `./src/shadow/base-package/Foo.ts`, `base-package` needs to
-    **match the name of the package from which you are importing the base collection.** For example,
-    if you look in the
+    !> **IMPORTANT:** In the file path, `./src/shadow/{base-package}/Foo.ts`, `{base-package}` needs
+    to **match the name of the package from which you are importing the base collection.** For
+    example, if you look in the
     [`vital-demo`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-demo
     ':target=_blank') package, you'll see that each of the modules defining shadowed token
     collections are under `shadow/@bodiless/vital-xxx/`; this is because each of the names of the
@@ -448,8 +448,8 @@ To export a shadowed version of a token collection:
     to find.
   - This is a good "first thing" to check, as it is a common source of trouble and an easy fix.
 - Your module that defines your shadowed token collection must be in your package under
-  `./lib/shadow/base-package`, where `base-package` is identical to the _name_ of the package from
-  which you are importing the base collection.
+  `./lib/shadow/{base-package}`, where `{base-package}` is identical to the _name_ of the package
+  from which you are importing the base collection.
   - E.g., if you are shadowing from the `vital-card` package, its `name`, as defined in its
     `package.json` file, is `@bodiless/vital-card`; therefore, your module needs to be placed under
     `./lib/shadow/@bodiless/vital-card` within the package you're working in.
