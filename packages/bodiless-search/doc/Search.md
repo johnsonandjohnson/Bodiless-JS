@@ -121,7 +121,7 @@ The "`SearchClean`" alias given to imported components is a Bodiless convention 
 components. The Site Builder will need to format them before adding to pages.
 
 For guidance on how to add design to clean components, please refer to the [Bodiless Design
-System](/Design/DesignSystem) documentation.
+System](/VitalDesignSystem/) documentation.
 
 Here's a quick example of applying design to `SearchBox` and `SearchResult`:
 

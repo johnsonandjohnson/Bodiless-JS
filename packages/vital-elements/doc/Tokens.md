@@ -8,9 +8,9 @@ the Vital Design System.
 
 ## Prerequisites
 
-- Please read and understand the introduction to the [Bodiless Design System](/Design/DesignSystem),
+- Please read and understand the introduction to the [Vital Design System](/VitalDesignSystem/),
   along with other prerequisites listed there.
-- Work through the [Design Element Concepts Guide](/Development/Guides/DesignElementConcepts).
+- Work through the [Vital Design System Curriculum](/VitalDesignSystem/Curriculum/).
 - Read through the full documentation for the [`@bodiless/fclasses`
   package](/Development/Architecture/FClasses).
 
@@ -38,13 +38,13 @@ are generally suffixed with "...Clean" (e.g.,
 ':target=_blank')).
 
 A clean component in Vital is always "designable" via the [Bodiless Design
-API](../../bodiless/Development/Architecture/FClasses?id=the-design-api). That is, it exposes an API
-which allows tokens to be applied to constituent elements within the component. This is very similar
-to the basic [slots pattern](https://daveceddia.com/pluggable-slots-in-react-components/
-':target=\_blank') in React. The key difference is that, with the Design API, we don't inject the
-actual React nodes which should be rendered in a particular slot; instead, we provide a higher-order
-component (a _token_) which will be applied to the component in that slot. This allows us to _layer_
-styling or behavior for individual elements. More on this below.
+API](/Development/Architecture/FClasses#the-design-api). That is, it exposes an API which allows
+tokens to be applied to constituent elements within the component. This is very similar to the basic
+[slots pattern](https://daveceddia.com/pluggable-slots-in-react-components/ ':target=\_blank') in
+React. The key difference is that, with the Design API, we don't inject the actual React nodes which
+should be rendered in a particular slot; instead, we provide a higher-order component (a _token_)
+which will be applied to the component in that slot. This allows us to _layer_ styling or behavior
+for individual elements. More on this below.
 
 ### Clean Component Design Elements ("Slots")
 
@@ -158,13 +158,13 @@ export default asTokenGroup(meta)({
 });
 ```
 
-`asTokenGroup()` takes a group of `asElementToken()` assignments, and assigns them all the same
+`asTokenGroup()` takes a group of `asSimpleToken` assignments, and assigns them all the same
 data.
 
-`asElementToken()` can be used to define a single token. For example:
+`asSimpleToken` can be used to define a single token. For example:
 
 ```ts
-export const PrimaryTextInteractiveColor = asElementToken('Theme')(
+export const PrimaryTextInteractiveColor = asSimpleToken(
   'text-blue-vital hover:text-blue-vital-light',
 );
 ```
@@ -178,12 +178,12 @@ themselves could be reused in other contexts; the token is _only_ for primary, i
 <!-- Inlining HTML to add multi-line info block with code block. -->
 <div class="warn">
   <strong>Note:</strong> In Vital, tokens are usually expressed using a special format known as
-  the <em>Token Object Notation</em>. The <code>asElementToken</code> utility used above produces
+  the <em>Token Object Notation</em>. The <code>asSimpleToken</code> utility used above produces
   a token in this format:
 
   ```ts
   {
-    Theme: {
+    Core: {
       _: 'text-blue-vital hover:text-blue-vital-light',
     },
   };
@@ -212,7 +212,7 @@ themselves could be reused in other contexts; the token is _only_ for primary, i
 Element-level tokens can be composed out of other element-level tokens, for example:
 
 ```ts
-export const TextLink = asElementToken('Theme')(
+export const TextLink = asSimpleToken(
   withPrimaryTextInteractiveColor,
   'underline',
 );
@@ -235,12 +235,12 @@ composition of utility classes to a token, be sure:
 
 ### Component-Level Tokens
 
-As described in [the Bodiless documentation](), a _component-level token_ composes a collection of
-styles and behaviors onto a _compound component_ — that is, one which renders more than a single
-element (these are the molecules, organisms, and templates in the language of [Atomic
-Design](https://bradfrost.com/blog/post/atomic-web-design/ ':target=_blank')). As described above,
-such components use the Bodiless Design API to allow their constituent elements to receive tokens
-which define their look, feel, and behavior in the context of the enclosing component.
+A _component-level token_ composes a collection of styles and behaviors onto a _compound component_
+— that is, one which renders more than a single element (these are the molecules, organisms, and
+templates in the language of [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/
+':target=_blank')). As described above, such components use the Bodiless Design API to allow their
+constituent elements to receive tokens which define their look, feel, and behavior in the context of
+the enclosing component.
 
 <div class="warn">
   <strong>In this section:</strong>
@@ -298,14 +298,14 @@ export const brandLink = {
 };
 ```
 
-Here we define two "domains" — `Theme` and `Editors` — and specify element-level tokens which should
+Here we define two "domains" — `Theme` and `Schema` — and specify element-level tokens which should
 be applied to the `Wrapper` key of the designable `Link` component.
 
 Note that we reuse element-level tokens (`brandElement.TextLink` and `brandElement.EditableLink`).
 These are defined at the element level because there may be times when you wish to apply that
 styling or behavior to a plain `A` tag.
 
-?> **Note:** Note also the use of the special `_` key in the `Editors` domain. This indicates that
+?> **Note:** Note also the use of the special `_` key in the `Schema` domain. This indicates that
 the associated HOC(s) should be applied to the component as a whole rather than to an individual
 design element within the component.
 
@@ -335,8 +335,8 @@ export const siteLink = {
 };
 ```
 
-Our site-level `Default` token reuses everything from the Vital `Default` token, but overrides the `Theme`
-domain with site-specific styling.
+Our site-level `Default` token reuses everything from the Vital `Default` token, but overrides the
+`Theme` domain with site-specific styling.
 
 As another example, imagine we wanted to reuse the styling of the original link, but in a context
 where we did not want the link to be editable by a Content Editor. We could easily define our
@@ -347,12 +347,12 @@ import omit from 'lodash/omit';
 import { LinkClean } from '@bodiless/vital-link';
 import { brandLink } from '@bodiless/brand';
 
-const NonEditableLink = as(omit(brandLink.Default, 'Editors'))(LinkClean);
+const NonEditableLink = as(omit(brandLink.Default, 'Schema'))(LinkClean);
 ```
 
 #### Domains
 
-In the above example, we defined two _domains_: `Theme` and `Editors`. This choice was based on an
+In the above example, we defined two _domains_: `Theme` and `Schema`. This choice was based on an
 understanding of how the token would likely be reused or extended by downstream consumers. In this
 case, we separated design elements which were very unlikely to be reused (typography and colors),
 from a behavior (editability) which was more likely to be reused, but which might also be extracted.
@@ -367,119 +367,14 @@ set.
 
 The real power of tokens is their ability to be extended or composed to produce new variants of a
 component without altering the base component itself. There are two patterns for doing this —
-_Extension_ and _Composition_ — and it's important to understand the difference.
-
-As an example, let's consider the Vital `Header` component. This exports a `Default` token which
-contains the basic header layout, styling, and behavior; as well as a `WithSticky` token which can
-be composed with the `Default` to produce a sticky version. Using the _Extension_ pattern, you could
-merge these two tokens into a single object:
-
-```ts
-const Sticky = asHeaderToken({
-  ...Default,
-  Theme: {
-    ...Default.Theme,
-    Wrapper: as(Default.Theme.Wrapper, WithSticky.Theme.Wrapper),
-  },
-  Layout: {
-    ...Default.Layout,
-    Wrapper: as(Default.Layout.Wrapper, WithSticky.Layout.Wrapper),
-  },
-});
-```
-
-Vital provides the `extend` utility to make this a bit less verbose:
-
-```ts
-import { extend } from '@bodiless/vital-elements';
-
-const Sticky = extend(Default, WithSticky);
-```
-
-This is exactly equivalent to the above, and would merge all design keys in all domains of both
-tokens. Note, this is quite different from the following:
-
-```ts
-const Sticky = asHeaderToken({
-  ...Default,
-  Theme: {
-    ...Default.Theme,
-    Wrapper: WithSticky.Theme.Wrapper,
-  },
-  Layout: {
-    ...Default.Layout,
-    Wrapper: WithSticky.Layout.Wrapper,
-  },
-});
-```
-
-In that version, using default JavaScript object composition, the `Wrapper` key in both `Theme` and
-`Layout` domains is _replaced_ with the values from `WithSticky`, with the result that any styles
-applied to that key by those domains in the `Default` token will be lost.
-
-Using the above pattern creates a new token which can be used to create a sticky header, but it has
-one disadvantage. What if a downstream consumer of the token wants to reuse that token but omit the
-sticky part? Here, they could simply use the `Default` token by itself — but what if that base token
-weren't available? There is no easy way to extract an enhancement which has been deeply merged into
-another token. For this example, it would be better to use the _composition_ pattern. The simplest
-way to compose two tokens is to apply them both via `as`:
-
-```ts
-const StickyHeader = as(Default, WithSticky)(HeaderClean);
-```
-
-This will work, and is fine for one-time composition, but Vital also provides a mechanism for
-exporting a composed token (rather than a component to which the tokens are applied):
-
-```ts
-const Sticky = asHeaderToken({
-  ...Default,
-  Compose: {
-    WithSticky,
-  },
-});
-```
-
-Now `as(Sticky)` is exactly equivalent to `as(Default, WithSticky)` — and a downstream consumer can
-easily remove (or customize) the sticky part:
-
-```ts
-const NotSticky = asHeaderToken({
-  ...Sticky,
-  Compose: omit(Default.Compose, 'Sticky'),
-});
-```
-
-or
-
-```ts
-const CustomSticky = asHeaderToken({
-  ...Sticky,
-  Compose: {
-    WithSticky: WithCustomSticky,
-  },
-});
-```
-
-The difference between _extension_ and _composition_ is subtle, and deciding which to use is not an
-exact science. As a rule of thumb:
-
-- Use _composition_ when you are adding styling or behavior which creates a variation of the
-  original component which downstream consumers may choose to add, remove, customize, or combine
-  with other variations. In general, export the tokens which produce these variations using the
-  `With...` prefix. The `WithSticky` token above is a good example of when this pattern should be
-  used.
-- Use _extension_ when you are customizing an existing token at the brand or site level, and
-  especially when you want to completely override one or more domains from the original token, as
-  this is not possible with composition. In general, do not export tokens which are meant to extend
-  other tokens; export the fully extended token instead. The `Link` customization described earlier
-  in this article is a good example of when this pattern should be used.
+_Extension_ and _Composition_. See [Extending And Composing Tokens](./ExtendingAndComposing.md)
+for more information. 
 
 #### Nested Components
 
 A Vital component will often have other clean components as design elements. For example, the [Vital
 Layout
-Component](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Layout/LayoutClean.tsx)
+Component](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Layout/LayoutClean.tsx ':target=_blank')
 includes the `HeaderClean` and `FooterClean` components as design keys:
 
 ```tsx

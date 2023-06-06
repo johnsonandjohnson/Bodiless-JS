@@ -53,6 +53,7 @@
     "@bodiless/vital-content-listing": "^1.0.0-rc.39",
     "@bodiless/vital-editors": "^1.0.0-rc.39",
     "@bodiless/vital-elements": "^1.0.0-rc.39",
+    "@bodiless/vital-examples": "^1.0.0-rc.39",
     "@bodiless/vital-flowcontainer": "^1.0.0-rc.39",
     "@bodiless/vital-image": "^1.0.0-rc.39",
     "@bodiless/vital-layout": "^1.0.0-rc.39",

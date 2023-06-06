@@ -1,5 +1,9 @@
 # Intro To Bodiless Concepts: Creating a Gallery Page
 
+?> Note: This documentation assumes you are working with the GatsbyJS flavor of Bodiless.
+   Many of the principles apply to NextJS as well, but some of the specific details will be
+   different.  An updated guide for NextJS is coming soon!
+
 In this step-by-step tutorial you will gain experience with BodilessJS concepts while building a
 simple gallery page on an editable BodilessJS site.
 
@@ -12,8 +16,8 @@ Upon completion of this tutorial, you will end up with code similar to that foun
 ## 0. Prerequisite: Create a Site
 
 To begin, follow the directions to [create a new
-site](../../About/GettingStarted#creating-a-new-site). All the pages created in this tutorial will
-be in this new site.
+site](../../About/GettingStarted#creating-a-new-site). Choose the `__minimal__` template. All the
+pages created in this tutorial will be in this new site.
 
 ## 1. Creating a Page
 
@@ -104,7 +108,7 @@ we'll begin by bringing things in a bit, and creating a [`container <div>`](http
     ```tsx
     import { addClasses, as, Div } from '@bodiless/fclasses';
     ```
-01. Define a couple [Element Tokens](/Design/DesignSystem#element-tokens) for your container:
+01. Define a couple [Element Tokens](/VitalDesignSystem/#element-tokens) for your container:
     ```tsx
     const asPageContainer = addClasses('container mx-auto');
     const asYMargin = addClasses('my-2');
@@ -179,7 +183,7 @@ HTML element (see:
 is rendered with the `<h1>` element and the new classes.
 
 You can read more about this pattern for building out a site's UI in our [Design System
-documentation](../../Design/DesignSystem).
+documentation](../../VitalDesignSystem/).
 
 ## 3. Making the Page Title Editable
 
@@ -627,7 +631,7 @@ No new components have been created. Instead, _design tokens_ which describe the
 These tokens are expressed as React higher-order components. These can be composed onto unstyled
 components to build up a design system. Usually these tokens would be defined elsewhere (most likely
 under you `src/components` directory) and imported as needed. More information about this pattern
-can be found in our [Design System documentation](../../Design/DesignSystem).
+can be found in our [Design System documentation](../../VitalDesignSystem/).
 
 Now we'll use these tokens to define the components which will be available for placement in our
 gallery:

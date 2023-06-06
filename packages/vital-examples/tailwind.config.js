@@ -14,6 +14,7 @@
  */
 import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
+const colors = require('tailwindcss/colors');
 const plugin = require('tailwindcss/plugin');
 
 const resolver = (pkgName) => require.resolve(pkgName);
@@ -39,8 +40,18 @@ const twConfig = {
       },
     },
     extend: {
+      // We are adding back the default tailwind red/blue so that we can use
+      // some default colors in our examples.
+      // This is just to simplify the examples, and would not normally be part
+      // of a site build.
+      // Note that this is necessary bc vital-elements *overrides* rather
+      // than *extending* the default Tailwind palette.
+      colors: {
+        red: colors.red,
+        blue: colors.blue,
+      },
       backgroundImage: {
-        'mobile-wave-top': "url('vital-examples/src/background-images/assets/images/mobilewave.svg')",
+        'mobile-wave-top': "url('@bodiless/vital-examples/src/background-images/assets/images/mobilewave.svg')",
       },
       backgroundSize: {
         'wave-full': '100% 100%',
@@ -51,7 +62,7 @@ const twConfig = {
     plugin(({ addComponents }) => {
       addComponents({
         '.footer-wave': {
-          maskImage: "url('vital-examples/src/background-images/assets/images/desktopwave.svg')",
+          maskImage: "url('@bodiless/vital-examples/src/background-images/assets/images/desktopwave.svg')",
           maskPosition: 'bottom center',
           maskSize: '100%',
         },

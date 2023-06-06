@@ -4,9 +4,9 @@ The site typography consists of updating fonts, colors, font sizes, and basic to
 
 ## Step 1: Setup Fonts
 
-The Vital Site utilizes the [DM Sans](https://fonts.google.com/specimen/DM+Sans) font from the
-Google API. If your designs require a different font, please refer to the [fonts documentation
-guide](/Development/Guides/BuildingSites/Typography/Fonts).
+The Vital Site utilizes the [DM Sans](https://fonts.google.com/specimen/DM+Sans ':target=_blank')
+font from the Google API. If your designs require a different font, please refer to the [fonts
+documentation guide](/Development/Guides/BuildingSites/Typography/Fonts).
 
 ## Step 2: Font Size & Line Heights
 
@@ -19,7 +19,7 @@ Template](./assets/PXtoREMTemplate.xlsx).
 
 ### Option 1: Shadow `vitalFontSize` (*Preferred Solution)
 
-Define a Shadowing token collection as defined in [Shadow](./Shadow).
+Define a Shadowing token collection as defined in [Shadowing Tokens](/Development/Guides/Shadowing).
 
 File to shadow:
 [`vitalFontSize`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/FontSize/tokens/vitalFontSize.ts ':target=_blank')
@@ -59,7 +59,7 @@ The Vital Design System defines the following
 
 ### Option 1: Shadow `vitalColor` (*Preferred Solution)
 
-Define a Shadowing token collection as defined in [Shadow](./Shadow).
+Define a Shadowing token collection as defined in [Shadowing Tokens](/Development/Guides/Shadowing).
 
 File to shadow:
 [`vitalColor`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Color/tokens/vitalColor.ts ':target=_blank')
@@ -97,7 +97,7 @@ recommended way of changing, adding, or redefining tokens at a package/site leve
 
 ### Option 1: Shadowing (*Preferred Solution)
 
-Define a Shadowing token collection as defined in [Shadow](./Shadow).
+Define a Shadowing token collection as defined in [Shadowing Tokens](/Development/Guides/Shadowing).
 
 Files to shadow:
 

@@ -22,7 +22,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json && npm run copy && npm run build:api-doc",
+    "build": "tsc -p ./tsconfig.json && npm run copy",
     "build:watch": "npm run build -- --watch",
     "build:api-doc": "typedoc --out doc/api ./src",
     "copy": "copyfiles -u 1 \"./src/*.css\" \"./lib/\"",

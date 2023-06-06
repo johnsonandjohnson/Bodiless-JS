@@ -44,7 +44,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "npm run copy && npm run build:lib && npm run build:api-doc",
+    "build": "npm run copy && npm run build:lib",
     "build:lib": "tsc -b ./tsconfig.json ./tsconfig.cjs.json",
     "build:watch": "tsc -b ./tsconfig.json ./tsconfig.cjs.json --watch",
     "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api --tsconfig ./tsconfig.json ./src",

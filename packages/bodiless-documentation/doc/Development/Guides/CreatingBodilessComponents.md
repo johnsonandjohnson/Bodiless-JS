@@ -1,5 +1,7 @@
 # Creating Bodiless Components
 
+!> This documentation is out of date and will be refreshed soon. Use at your own risk.
+
 In the previous guides, you have seen how to use built-in Bodiless components to
 build out an editable site. But what if you have pre-built components (or even
 pages) you'd like to make editable? BodilessJS provides a set of utilities which

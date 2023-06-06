@@ -14,7 +14,8 @@
  */
 import { getPackageDocs } from '@bodiless/cli';
 
-export const getDocs = (nameSpace) => getPackageDocs({
+export const getDocs = (nameSpace, depth) => getPackageDocs({
   resolver: p => require.resolve(p),
-  nameSpace
+  nameSpace,
+  depth,
 });

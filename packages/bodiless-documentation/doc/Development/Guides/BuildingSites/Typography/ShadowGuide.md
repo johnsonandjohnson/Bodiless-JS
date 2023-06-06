@@ -40,7 +40,7 @@ const twConfig = {
 };
 ```
 
-For more details about Tailwind, please see our [Tailwind Guide](./TailwindGuide).
+For more details about Tailwind, please see our [Tailwind Guide](../../../../VitalDesignSystem/GuidesTailwindGuide).
 
 ## 2. Change the Footer Background Color by Shadowing
 

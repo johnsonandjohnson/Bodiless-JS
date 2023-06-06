@@ -14,7 +14,7 @@
  */
 
 import { on, as } from '@bodiless/fclasses';
-import { withLanguages } from '@bodiless/i18n';
+// import { withLanguages } from '@bodiless/i18n';
 import { asFluidToken } from '@bodiless/vital-elements';
 import {
   vitalPDPTemplate, vitalGenericTemplate, GenericTemplateClean, PDPTemplateClean,
@@ -22,31 +22,34 @@ import {
 import { vitalPageBase } from '@bodiless/vital-templates/lib/base';
 
 const Default = asFluidToken(vitalPageBase.Default, {
-  Core: {
-    _: withLanguages([
-      {
-        name: 'en',
-        label: 'English',
-        isDefault: true,
-      },
-      {
-        name: 'es',
-        label: 'Español',
-      },
-    ]),
-  },
-  // @todo Restore if you want these special templates on your site.
+  // @TODO Restore to enable multi-lingual support
+  // Core: {
+  //   _: withLanguages([
+  //     {
+  //       name: 'en',
+  //       label: 'English',
+  //       isDefault: true,
+  //     },
+  //     {
+  //       name: 'es',
+  //       label: 'Español',
+  //     },
+  //   ]),
+  // },
+
+  // @TODO Restore if you want these special templates on your site.
   // Components: {
   //   PDP: on(PDPTemplateClean)(vitalPDPTemplate.Default),
   //   // Adds a template for search results.
   //   Search: on(GenericTemplateClean)(vitalSearchGenericTemplate.Search),
   //   ContentListing: on(GenericTemplateClean)(vitalContentListingTemplate.Default),
   // },
-  Compose: {
-    // Adds the search context.
-    // @todo Restore if you want search on your site
-    // WithSearchContext: as(withSearchMenuProvider, withSearchResult),
-  },
+
+  // @TODO Restore if you want search on your site
+  // Compose: {
+  //   // Adds the search context.
+  //   WithSearchContext: as(withSearchMenuProvider, withSearchResult),
+  // },
 });
 
 const vitalPage: typeof vitalPage = {

@@ -2,7 +2,7 @@ const path = require('path');
 const NextWebpackConfig = require('@bodiless/next/lib/cjs/Webpack/Config').default;
 const bodilessNextConfig = require('@bodiless/next/lib/cjs/NextConfig/nextConfig');
 const { addTokenShadowPlugin, addStatoscopePlugin } = require('@bodiless/webpack');
-const shadow = require('vital-examples/shadow');
+const shadow = require('@bodiless/vital-examples/shadow');
 
 module.exports = {
   ...bodilessNextConfig,
@@ -15,7 +15,7 @@ module.exports = {
       const options = {
         enabled: process.env.BODILESS_BUILD_STATS === '1',
         sitePath: process.env.BODILESS_STATS_PATH || path.resolve('./public/generated'),
-        name: 'vital-examples',
+        name: '@bodiless/vital-examples',
         open: process.env.BODILESS_OPEN_STATS === '1' ? 'file' : false,
       };
 

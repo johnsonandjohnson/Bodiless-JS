@@ -33,7 +33,7 @@ The Vital Image Component provides a set of tokens to compose an Image Component
 ?> **API Documentation:** Visit [Vital Image Token
 Collection](/Development/API/@bodiless/vital-image/interfaces/VitalImage).
 
-?> **Image Guidelines:** Visit [Image Guidelines](/Design/ImageGuidelines) for best practices on
+?> **Image Guidelines:** Visit [Image Guidelines](./ImageGuidelines) for best practices on
 images.
 
 ### Default: Gatsby Image Configuration

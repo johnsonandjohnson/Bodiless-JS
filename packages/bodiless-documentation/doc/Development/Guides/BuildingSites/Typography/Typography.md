@@ -14,8 +14,8 @@ For more information on specific details of typography, it is best to review
 If you plan on leveraging other Vital components, we recommend leveraging all or parts of
 `vital-elements`.
 
-For more details on usage and getting started using this package, please follow the [Vital Elements
-Typography Guide](/VitalDesignSystem/Components/VitalElements/SiteTypography).
+For more details on usage and getting started using this package, please follow the [Vital Design
+System Typography Guide](/VitalDesignSystem/Guides/SiteTypography).
 
 ## Developing Your Typography without Leveraging Vital Elements
 
@@ -23,13 +23,12 @@ The following section defines a high-level overview of defining your typography.
 we recommend following patterns seen in the `vital-elements` package.
 
 ?> **Tip:** If you foresee your package being shadowed in the future, we recommend following the
-[template format](../../../../VitalDesignSystem/Components/VitalElements/ComponentTemplate) to allow
-shadowing.
+[template format](/VitalDesignSystem/Guides/ComponentTemplate) to allow shadowing.
 
 ### Font Sizes & Line Heights
 
 If your site is defining custom font sizes and line-heights, these are set within your
-[package/site's `tailwind.config.js`](./TailwindGuide#tailwind-configuration-file). We do recommend
+[package/site's `tailwind.config.js`](../../../../VitalDesignSystem/Guides/TailwindGuide#tailwind-configuration-file). We do recommend
 making a token collection of the font sizes as well, and using the token versus the Tailwind class.
 This allows for quicker changes if it's modified in the future, allows for it to be shadowed, and
 provides better consistency.
@@ -46,7 +45,7 @@ letter-spacing](https://tailwindcss.com/docs/font-size#providing-a-default-lette
 If your site is [defining custom
 colors](https://tailwindcss.com/docs/customizing-colors#adding-additional-colors ':target=_blank'),
 these are set within your [package/site's
-`tailwind.config.js`](./TailwindGuide#tailwind-configuration-file). We do recommend making a token
+`tailwind.config.js`](../../../../VitalDesignSystem/Guides/TailwindGuide#tailwind-configuration-file). We do recommend making a token
 collection of the font sizes as well, and using the token versus the Tailwind class. This allows for
 quicker changes if it's modified in the future, allows for it be shadowed, and provides better
 consistency.

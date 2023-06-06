@@ -24,6 +24,7 @@
     "@bodiless/vital-demo": "^1.0.0-rc.39",
     "@bodiless/vital-editors": "^1.0.0-rc.39",
     "@bodiless/vital-elements": "^1.0.0-rc.39",
+    "@bodiless/vital-examples": "^1.0.0-rc.39",
     "@bodiless/vital-flowcontainer": "^1.0.0-rc.39",
     "@bodiless/vital-image": "^1.0.0-rc.39",
     "@bodiless/vital-layout": "^1.0.0-rc.39",
@@ -49,8 +50,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
-    "react-markdown": "^8.0.0",
-    "vital-examples": "^1.0.0-rc.39"
+    "react-markdown": "^8.0.0"
   },
   "files": [
     "lib"
@@ -73,7 +73,7 @@
     "lint": "next lint",
     "docs": "run-s build:docs serve:docs",
     "prepare": "node ../../scripts/set-missing-symlinks.js @bodiless",
-    "prestart": "run-s build:env-vars",
+    "prestart": "run-s build:env-vars build:docs",
     "search-index": "create-search-index",
     "serve": "next start -p ${APP_PORT:-9000}",
     "serve:docs": "docsify serve ./public/generated/doc",

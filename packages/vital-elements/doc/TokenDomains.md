@@ -1,8 +1,14 @@
 # Token Domains
 
-Vital tokens are expressed in a special format known as the _Token Object Notation_. The keys of
-this object are "domains" — special groupings of designs or HOCs which can be overridden or extended
-separately by downstream consumers.
+Vital tokens are expressed in a special format known as the [_Token Object
+Notation_](./#token-object-notation). The keys of this object are "domains" — special groupings of
+designs or HOCs which can be overridden or extended separately by downstream consumers.
+
+A downside of using Tailwind is that it can result in long lists of classes in your HTML that are
+difficult to parse through. Using domains allows you to separate these long lists of classes into
+groups of shorter lists. This can be especially helpful if you have a bug in a particular domain
+(e.g., `Layout`), as you can focus your debugging attention on that domain and the set of tokens
+within it.
 
 ## Allowed Domains
 
@@ -23,8 +29,7 @@ differently as described below.
 - `Spacing`: Tokens which sit somewhere between `Theme` and `Layout`; e.g., padding, margin,
   line-spacing, etc.
 - `Theme`: Tokens which apply styling which is very likely to be overridden; e.g., colors,
-  typography, sizing such as `width` and `height`, etc. 
-- `Editors`: Tokens which define how a component's data are edited.
+  typography, sizing such as `width` and `height`, etc.
 - `Content`: Tokens which provide default content or other fixed props. Any hardcoded, translatable
   strings belong in this domain.
 - `Behavior`: Tokens which define or add behaviors to a component; e.g., the expanding and
@@ -36,8 +41,7 @@ differently as described below.
 The following special domains have values which are not extended domain objects:
 
 - `Compose`: This special domain allows specifying other named tokens which should be composed with
-  this one. See [Extension and Composition](../Tokens/#extension-and-composition) for more
-  details. For example:
+  this one. For example:
 
   ```ts
   const Sticky = asHeaderToken({
@@ -48,6 +52,10 @@ The following special domains have values which are not extended domain objects:
     },
   });
   ```
+
+  - For more details on the `Compose` domains, see:
+    - [Extending and Composing Tokens : The `Compose` Domain](../ExtendingAndComposingTokens#the-compose-domain)
+    - [Vital Tokens : Extension and Composition](./#extension-and-composition)
 
 - `Flow`: By default, the tokens' HOCs for each domain are composed using the Bodiless `asToken`
   utility. This behavior can be overridden by specifying a different composer here. This is useful
@@ -76,8 +84,9 @@ The following special domains have values which are not extended domain objects:
 
 ## Order of Domains
 
-HOCs defined for each domain are applied in a fixed order (as listed above), regardless of the order
-in which they are specified in an individual token.
+HOCs defined for each domain are applied in a fixed order (as listed above). Regardless of the order
+in which domains are specified in an individual token, they will always be applied in the canonical
+order.
 
 For example, given:
 
@@ -142,12 +151,60 @@ const Example = asLinkToken({
 });
 ```
 
+## How to Determine the Appropriate Domain for a Utility Class
+
+Whenever you use a utility class, you'll need to determine the appropriate domain in which it should
+be placed. The Tailwind documentation is a useful aid in this regard. Visit the [Tailwind
+Documentation](https://tailwindcss.com/docs/installation ':target=_blank'), and take note of the
+table of contents listed in the left sidebar. Using this table of contents, identify the category to
+which the utility class you've written belongs. Then, using the table below, find the associated
+domain.
+
+| Tailwind Category | Domain   |
+| ----------------- | -------- |
+| Layout            | Layout   |
+| Flexbox & Grid    | Layout   |
+| Spacing           | Spacing  |
+| Sizing            | Theme    |
+| Typography        | Theme    |
+| Borders           | Theme    |
+| Effects           | Theme    |
+| Filter            | Theme    |
+| Tables            | Theme    |
+| Transitions       | Behavior |
+| Transforms        | Behavior |
+| Interactivity     | Behavior |
+| SVG               | Theme    |
+| Accessibility     | Behavior |
+
+## Compose vs Extend vs Override
+
+As mentioned, domains can be _extended_ or _overridden_. An extension or override can be made at the
+token, domain, or slot (component) level. _Extending_ is useful when you only need to make a small
+number of changes to a token/domain/slot. _Overriding_ allows you to completely overwrite a
+token/domain/slot, essentially writing your own version of it from scratch. This is useful when you
+need to make many adjustments to a token/domain/slot, and extending it would take more effort than
+simply rewriting it.
+
+Similar to extension is _composition_. Where extension takes an existing token and modifies its
+effect, composition takes several existing tokens and combines them. Use _composition_ when you are
+adding styling or behavior that creates a variation of the original component that downstream
+consumers may choose to add, remove, customize, or combine with other variations. Use _extension_
+when you are customizing an existing token at the brand or site level, and, especially, when you
+want to completely override one or more domains from the original token (as this isn't possible with
+composition).
+
+For further details on composing, extending, and overriding, please see:
+
+- [Extending and Composing Tokens](../ExtendingAndComposingTokens)
+- [Vital Tokens : Extension and Composition](./#extension-and-composition)
+
 ## Additional Considerations and Gotchas
 
 ### Access to Component Data
 
-Note the position of the `Editors` and `Schema` domains which usually provide the data that a
-component renders. They are applied "outside" (after) the styling domains (`Theme`, `Layout`,
-`Spacing`), so that these domains will have access to the data (to allow conditional styling based
-on state). However, they are "inside" (before) the `Compose` and `Condition` domain — so that tokens
-added to the component via `Compose` will not have access to the component's data.
+Note the position of the `Schema` domain, which usually provides the data that a component renders.
+It's applied "outside" (after) the styling domains (`Theme`, `Layout`, `Spacing`), so that these
+domains will have access to the data (to allow conditional styling based on state). However, it's
+"inside" (before) the `Compose` and `Condition` domain — so that tokens added to the component via
+`Compose` will not have access to the component's data.

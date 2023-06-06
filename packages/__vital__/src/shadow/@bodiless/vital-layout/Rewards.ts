@@ -12,31 +12,32 @@
  * limitations under the License.
  */
 
-import {
-  addProps,
-  flowIf,
-  withProps,
-} from '@bodiless/fclasses';
-import { useLanguageContext } from '@bodiless/i18n';
-import { asRewardsToken } from '@bodiless/vital-layout';
 import { vitalRewardsBase } from '@bodiless/vital-layout/lib/base';
+// @TODO Restore to enable multi-lingual support
+// import {
+//   addProps,
+//   flowIf,
+//   withProps,
+// } from '@bodiless/fclasses';
+// import { useLanguageContext } from '@bodiless/i18n';
+// import { asRewardsToken } from '@bodiless/vital-layout';
 
-const isCurrentLanguageEs = () => useLanguageContext().getCurrentLanguage().name === 'es';
+// const isCurrentLanguageEs = () => useLanguageContext().getCurrentLanguage().name === 'es';
 
-const Default = asRewardsToken(vitalRewardsBase.Default, {
-  Content: {
-    Brand: flowIf(isCurrentLanguageEs)(
-      withProps({
-        children: 'Brand ES',
-      }),
-    ),
-  },
-  Behavior: {
-    Wrapper: addProps({ 'data-shadowed-by': '__vital__:Rewards' }),
-  },
-});
+// const Default = asRewardsToken(vitalRewardsBase.Default, {
+//   Content: {
+//     Brand: flowIf(isCurrentLanguageEs)(
+//       withProps({
+//         children: 'Brand ES',
+//       }),
+//     ),
+//   },
+//   Behavior: {
+//     Wrapper: addProps({ 'data-shadowed-by': '__vital__:Rewards' }),
+//   },
+// });
 
 export default {
   ...vitalRewardsBase,
-  Default,
+  // Default,
 };
