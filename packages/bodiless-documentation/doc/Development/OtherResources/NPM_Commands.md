@@ -15,7 +15,6 @@ NPM commands, that are defined in the root `package.json` file and their purpose
 | `fresh`                | Clean everything, remove node_modules and then run `bootstrap` |
 | `lint`                 | Runs an eslint scan of the entire project |
 | `lint:target`          | Runs an eslint scan of a particular file or directory |
-| `lint:change`          | Runs an eslint scan on all files which differ from the main branch. Can be slow. |
 | `new`                  | Creates a new BodilessJS site in the specified directory |
 | `publish:all`          | Creates new package versions and publishes all of them to NPM repo specified in $NPM_REGISTRY environment variable. | 
 | `publish:from-package` | Does not create new package versions. Should be run by automation after running `lerna version` manually to publish updated packages to the NPM repo specified in $NPM_REGISTRY environment variable. }

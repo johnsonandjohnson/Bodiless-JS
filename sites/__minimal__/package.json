@@ -31,7 +31,6 @@
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "gatsby": "^4.11.2",
-    "gatsby-plugin-gatsby-cloud": "4.13.0",
     "postcss": "^8.4.12",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -375,14 +375,13 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
       data.name = `${name}-monorepo`;
       if (!fs.existsSync(templatePackageDir)) {
         delete data.scripts['build:packages'];
-        data.scripts.setup = 'npm run bootstrap';
-        data.scripts['setup:gatsby-cloud'] = 'npm run bootstrap:gatsby-cloud';
+        data.scripts.setup = 'npm install';
         data.scripts.lint = 'eslint --fix  --cache --ext .js,.jsx,.ts,.tsx sites -- ';
         data.scripts.fix = 'eslint --cache --ext .js,.jsx,.ts,.tsx sites -- ';
       }
-      data.scripts.start = `lerna run start --stream --scope ${siteName}`;
-      data.scripts.serve = `lerna run serve --stream --scope ${siteName}`;
-      data.scripts.docs = `lerna run build:docs --stream --scope ${siteName} && docsify serve ./${sitesDir}/${name}/doc`;
+      data.scripts.start = `npm run start --workspace=${siteName}`;
+      data.scripts.serve = `npm run serve --workspace=${siteName}`;
+      data.scripts.docs = `npm run build:docs --workspace=${siteName} && docsify serve ./${sitesDir}/${name}/doc`;
     } else if (type === 'site') {
       data.name = siteName;
       // Find the old dependency on the template package (if any) and delete it.
