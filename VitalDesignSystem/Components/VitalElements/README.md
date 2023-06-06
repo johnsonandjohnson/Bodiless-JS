@@ -1,6 +1,6 @@
 # Vital Elements
 
-Vital Elements is composed of [element tokens](/Design/DesignSystem#element-tokens) to implement
+Vital Elements is composed of [element tokens](/VitalDesignSystem/#element-tokens) to implement
 an opinionated Vital Design System.
 
 It consists of the following types of component element tokens, and they are all in associated
@@ -55,7 +55,8 @@ const Foo = {
 ### Using Vital Element Tokens, but Customizing for Site-Specific Typography
 
 The Site Builder may need to override a specific token, or a specific set of tokens, and the
-following is a how-to guide to apply the [best methodology](./SiteTypography) for doing so.
+following is a how-to guide to apply the [best methodology](../../Guides/SiteTypography) for doing
+so.
 
 ### Helper Utilities
 

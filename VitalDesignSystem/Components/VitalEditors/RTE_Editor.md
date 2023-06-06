@@ -61,7 +61,7 @@ File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-editors/RichTe
 
 #### Via Overriding Specific Existing Styles Using Vital Rich Text Editor
 
-See [Vital Site Typography](../VitalElements/SiteTypography).
+See [Vital Site Typography](../../Guides/SiteTypography).
 
 ## Architectural Details
 

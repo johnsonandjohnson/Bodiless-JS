@@ -30,10 +30,12 @@ for:
 
 The following templates are available:
 
-- `__minimal__`: The bare bones needed to start creating a Bodiless site.
-- `__vital__`: A more full-featured starter based on the Vital Design System.
+- `__minimal_next__`: The bare bones needed to start creating a Bodiless site on NextJS.
+- `__vital_next__`: A more full-featured starter based on the Vital Design System.
   - This is a highly extensible and customizable set of components enabling very rapid creation of
     marketing websites.
+- `__minimal__`: The minimal starter for GatsbyJS.
+- `__vital__`: The vital starter for GatsbyJS.
 
 You can then launch the editor—
 
@@ -56,10 +58,17 @@ npm run serve
 Visit [http://localhost:9000/](http://localhost:9000/ ':target=_blank') in your browser to view the
 site.
 
-To learn the basics of site-building on BodilessJS, see our tutorial: [Intro To Bodiless Concepts:
+If you have created a site using one of the Vital starters, an overview of the structure of the site
+monorepo can be found at [Repository Structure](/VitalDesignSystem/Guides/RepositoryStructure).
+
+## Next Steps
+
+?> To get started with VitalDS, see our [Curriculum](/VitalDesignSystem/Curriculum/).
+
+?> To learn the basics of BodilessJS, see our tutorial: [Intro To Bodiless Concepts:
 Creating a Gallery Page](/Development/Guides/IntroToBodilessConcepts).
 
-### Choosing a Revision
+## Choosing a Revision
 
 When creating a new site, if you'd like to choose a specific revision of the source monorepo on
 which the new site will be based, run the `new` command in _interactive_ mode via the `-i` flag:
@@ -73,7 +82,7 @@ version which isn't a pre-release) will be used.
 
 ## Going Live
 
-A BodilessJS site is not too different from any other Gatsby site, and
+A BodilessJS site is not too different from any other Next or Gatsby site, and
 can easily be hosted on a variety of JAMstack-optimized web platforms.
 You can also host the edit application in the cloud so that content
 editors can make site updates without having to run it locally.
