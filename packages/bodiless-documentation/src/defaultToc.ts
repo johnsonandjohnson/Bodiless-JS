@@ -39,7 +39,6 @@ const toc = {
     Guides: {
       'IntroToBodilessConcepts.md': '',
       'CreatingBodilessComponents.md': '',
-      'Shadowing.md': '',
     },
     'Packages.md': '',
     Architecture: {
