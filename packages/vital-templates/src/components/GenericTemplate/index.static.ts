@@ -12,7 +12,9 @@
  * limitations under the License.
  */
 
-export { default as GenericTemplateClean, asGenericTemplateToken } from './GenericTemplateClean';
-export { default as vitalGenericTemplate } from './tokens';
-export { GenericTemplateStatic, vitalGenericTemplateStatic } from './index.bl-edit';
-export type { GenericTemplateComponents } from './types';
+import {
+  StaticBlock as GenericTemplateStatic,
+  staticTokenCollection as vitalGenericTemplateStatic,
+} from '@bodiless/hydration';
+
+export { GenericTemplateStatic, vitalGenericTemplateStatic };

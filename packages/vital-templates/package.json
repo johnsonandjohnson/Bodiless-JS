@@ -40,6 +40,7 @@
     "@bodiless/fclasses": "^1.0.0-rc.39",
     "@bodiless/ga4": "^1.0.0-rc.39",
     "@bodiless/gatsby-theme-bodiless": "^1.0.0-rc.39",
+    "@bodiless/hydration": "^1.0.0-rc.39",
     "@bodiless/next": "^1.0.0-rc.39",
     "@bodiless/schema-org": "^1.0.0-rc.39",
     "@bodiless/vital-card": "^1.0.0-rc.39",

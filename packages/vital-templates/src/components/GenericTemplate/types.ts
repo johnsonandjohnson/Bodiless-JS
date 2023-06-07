@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
+import { ComponentOrTag, DesignableComponentsProps, DesignableProps } from '@bodiless/fclasses';
 
 export type GenericTemplateComponents = {
   PageWrapper: ComponentOrTag<any>,
@@ -28,3 +28,4 @@ export type GenericTemplateComponents = {
 };
 
 export type BaseGenericTemplateProps = DesignableComponentsProps<GenericTemplateComponents>;
+export type GenericTemplateProps = DesignableProps<GenericTemplateComponents>;

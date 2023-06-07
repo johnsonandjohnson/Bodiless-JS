@@ -12,17 +12,18 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { ComponentType } from 'react';
 import {
   designable,
   Div,
   Fragment,
 } from '@bodiless/fclasses';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
+import { withoutHydration } from '@bodiless/hydration';
 import { LayoutClean } from '@bodiless/vital-layout';
 import { FlowContainerClean } from '@bodiless/vital-flowcontainer';
 import { BreadcrumbsClean } from '@bodiless/vital-navigation';
-import { GenericTemplateComponents, BaseGenericTemplateProps } from './types';
+import { GenericTemplateComponents, BaseGenericTemplateProps, GenericTemplateProps } from './types';
 
 const genericTemplateComponents: GenericTemplateComponents = {
   PageWrapper: LayoutClean,
@@ -64,8 +65,12 @@ const GenericTemplateBase = (props: BaseGenericTemplateProps) => {
 
 const GenericTemplateClean = designable(genericTemplateComponents, 'Generic Template')(GenericTemplateBase);
 
+const GenericTemplateStatic: ComponentType<GenericTemplateProps> = withoutHydration()(
+  GenericTemplateClean
+);
+
 const asGenericTemplateToken = asVitalTokenSpec<GenericTemplateComponents>();
 
-export { asGenericTemplateToken };
+export { asGenericTemplateToken, GenericTemplateStatic };
 
 export default GenericTemplateClean;
