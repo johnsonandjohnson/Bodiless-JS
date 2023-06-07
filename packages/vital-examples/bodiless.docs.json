@@ -2,11 +2,11 @@
   "VitalDesignSystem": {
     "Curriculum": {
       "Lessons": {
-        "ShadowA_SimpleComponent.md": "./doc/Curriculum/Lessons/ShadowASimpleComponent.md",
         "ReusableTokens.md": "./doc/Curriculum/Lessons/ReusableTokens.md",
         "DevelopA_NewComponent.md": "./doc/Curriculum/Lessons/DevelopANewComponent.md",
-        "CustomizeDesignTokens.md": "./doc/Curriculum/Lessons/CustomizeDesignTokens.md",
         "BackgroundImages.md": "./doc/Curriculum/Lessons/BackgroundImages.md",
+        "CustomizeDesignTokens.md": "./doc/Curriculum/Lessons/CustomizeDesignTokens.md",
+        "ShadowA_SimpleComponent.md": "./doc/Curriculum/Lessons/ShadowASimpleComponent.md",
         "README.md": "./doc/Curriculum/Lessons/README.md"
       },
       "Introduction": {
