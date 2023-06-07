@@ -89,9 +89,6 @@ continue using `vital-editors` as our example, if you look in
 ':target=_blank'), you can see how to go about shadowing the `EditorPlain` and `RichText`
 components.
 
-The [API documentation](../../Development/API/) is a good resource to use to see what token
-collections are shadowable.
-
 To get into the finer details of the structure required to make a component shadowable, please see
 the [Creating a Shadowable Token Collection](#creating-a-shadowable-token-collection) section below,
 where we walk you through the process of structuring your own components to be shadowable.
@@ -100,7 +97,10 @@ where we walk you through the process of structuring your own components to be s
 System](../), as well as the necessary `tokenShadowPlugin` (see [Shadowing a Token
 Collection](#shadowing-a-token-collection) below), providing a set of shadowable components out of
 the box. You can create a site using one of these templates via the `@bodiless/cli new` command (for
-details, see: [Creating a New Site](../../About/GettingStarted#creating-a-new-site)).
+details, see: [Creating a New Site](../../About/GettingStarted#creating-a-new-site)). You can
+also use the [component scaffolding tool](./ComponentTemplate.md) to create a shadowable
+component in your own package.
+
 
 ## Creating a Shadowable Token Collection
 
