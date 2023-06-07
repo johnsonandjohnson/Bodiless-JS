@@ -5,7 +5,6 @@ on a variety of platforms.  In this section, we provide step-by-step
 instructions for hosting your production site on  
 
 - [Netlify](./Netlify)
-- [Gatsby Cloud](./GatsbyCloud.md)
 
 We also provide instructions for hosting your edit environments in the cloud on
 

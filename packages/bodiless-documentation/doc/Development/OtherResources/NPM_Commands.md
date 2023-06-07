@@ -22,12 +22,6 @@ NPM commands, that are defined in the root `package.json` file and their purpose
 | `scan:targert`         | Runs a ts-complexity scan of a specific file |
 | `serve`                | Serve a production version of the test site. Must first run `build`.
 | `setup`                | Alias for `bootstrap`
-| `sites:pack`           | Creates local tarballs of all bodiless packages |
-| `sites:clone-local`    | Clones the specified example site (default test-site) to the `/sites` directory |
-| `sites:install`        | Installs local tarballs created by `sites:pack` to the specified site in the `/sites` folder (default is `test-site`) |
-| `sites:update`         | Alias for `sites:pack` + `sites:instaall` |
-| `sites:launch-test`    | Clones the test-site, installs local packages, and starts the development server.  A quick way to simulate running the test site as a standalone site, but using local pacakges. |
 | `start`                | Alias for `build:watch` |
 | `test`                 | Runs all unit tests for the project |
-| `test:watch`           | Run tests in watch mode. Re-runs tests automatically when they change. Useful when developing tests. |
 
