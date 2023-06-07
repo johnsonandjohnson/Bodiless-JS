@@ -44,6 +44,7 @@
       - [Tokens](/VitalDesignSystem/Guides/Tokens/)
         - [Token Domains](/VitalDesignSystem/Guides/Tokens/TokenDomains)
       - [Extending And Composing Tokens](/VitalDesignSystem/Guides/ExtendingAndComposingTokens)
+      - [Shadowing Tokens](/VitalDesignSystem/Guides/ShadowingTokens)
       - [Tailwind Guide](/VitalDesignSystem/Guides/TailwindGuide)
       - [Site Typography](/VitalDesignSystem/Guides/SiteTypography)
       - [Static Replacement](/VitalDesignSystem/Guides/StaticReplacement)

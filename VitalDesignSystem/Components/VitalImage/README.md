@@ -54,7 +54,7 @@ Guide](/Components/Image/ImageConfigurations).
 
 #### Via Shadowing (*Preferred Method)
 
-Define a Shadowing token collection as defined in [Shadow](../VitalElements/Shadow).
+Define a Shadowing token collection as defined in [Shadowing Tokens](../../Guides/ShadowingTokens).
 
 File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-images/Image.ts`
 
@@ -70,7 +70,7 @@ collection](/Development/API/@bodiless/vital-image/interfaces/VitalImageFlowCont
 
 #### Via Shadowing (*Preferred Method)
 
-Define a Shadowing token collection as defined in [Shadowing Vital Tokens](../VitalElements/Shadow).
+Define a Shadowing token collection as defined in [Shadowing Tokens](../../Guides/ShadowingTokens).
 
 File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-images/FlowContainer.ts`
 
