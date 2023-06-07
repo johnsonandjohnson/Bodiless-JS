@@ -1,8 +1,8 @@
 # Vital Component Template
 
 Every component/package in the Vital Design System (or one which extends it) should follow the
-directory structure and conventions described below. This ensures consistency, enables
-[Token Shadowing](/Development/Guides/Shadowing) and [Static Replacement](./StaticReplacement).
+directory structure and conventions described below. This ensures consistency, enables [Token
+Shadowing](./ShadowingTokens) and [Static Replacement](./StaticReplacement).
 
 ## Component Scaffolding
 
@@ -96,8 +96,8 @@ bodiless.docs.json
 This structure is intended to facilitate two build-time webpack optimizations:
 
 - [Static Replacement](./StaticReplacement): Removes unnecessary code from the production bundle.
-- [Token Shadowing](/Development/Guides/Shadowing): Allows a downstream package to define an
-  override of any Vital token collection.
+- [Token Shadowing](./ShadowingTokens): Allows a downstream package to define an override of any
+  Vital token collection.
 
 The files and directories are described in more detail below:
 

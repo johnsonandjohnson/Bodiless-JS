@@ -6,6 +6,7 @@
       "StaticReplacement.md": "./doc/StaticReplacement.md",
       "SiteTypography.md": "./doc/SiteTypography.md",
       "TailwindGuide.md": "./doc/TailwindGuide.md",
+      "ShadowingTokens.md": "",
       "ExtendingAndComposingTokens.md": "./doc/ExtendingAndComposing.md",
       "Tokens": {
         "README.md": "./doc/Tokens.md",
