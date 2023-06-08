@@ -1,3 +1,4 @@
+import React from 'react';
 import { getStaticHtml } from '@bodiless/next/lib/getStaticProps';
 import getStaticPaths from '@bodiless/next/lib/getStaticPaths';
 import PageRenderer from '@bodiless/next/lib/PageRenderer';
