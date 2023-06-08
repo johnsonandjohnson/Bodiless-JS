@@ -249,7 +249,6 @@ export const getStaticHtml = (Component: any) => async ({ params }: getServerSid
     );
     staticProps.props = { html } as any;
   }
-
   return staticProps;
 };
 
