@@ -12,6 +12,11 @@
  * limitations under the License.
  */
 
+import React from 'react';
+import { renderToString } from 'react-dom/server';
+import { RouterContext } from 'next/dist/shared/lib/router-context';
+// @ts-ignore
+import { makePublicRouterInstance } from 'next/dist/client/router';
 import {
   findComponentPath,
   findSubPageTemplateTemplate,
@@ -231,6 +236,21 @@ const getStaticProps = async ({ params }: getServerSideProps) => {
   return {
     props: pageData,
   };
+};
+
+export const getStaticHtml = (Component: any) => async ({ params }: getServerSideProps) => {
+  const staticProps = await getStaticProps({ params });
+
+  if (staticProps.props) {
+    const html = await renderToString(
+      <RouterContext.Provider value={makePublicRouterInstance({ pathname: '/' })}>
+        <Component {...staticProps.props} />
+      </RouterContext.Provider>
+    );
+    staticProps.props = { html } as any;
+  }
+
+  return staticProps;
 };
 
 export default getStaticProps;
