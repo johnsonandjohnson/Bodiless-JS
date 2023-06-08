@@ -61,6 +61,7 @@
     "test:monorepo": "WAIT_ON_TIMEOUT=600000 start-server-and-test sites:launch-monorepo http://localhost:8005 cy:run",
     "test:watch": "jest --watch",
     "test:playwright": "APPLITOOLS_BATCH_ID=`uuidgen` WAIT_ON_TIMEOUT=600000 start-server-and-test sites:launch-vital http://localhost:8005 playwright:run",
+    "version": "git checkout package-lock.json",
     "vital-check": "node ./scripts/vital-check"
   },
   "husky": {
