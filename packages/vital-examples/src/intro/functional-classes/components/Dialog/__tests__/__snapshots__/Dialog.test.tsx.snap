@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dialog Tokens Matches snapshot for Default 1`] = `
+<div
+  className="p-2 border-2 rounded-lg"
+>
+  <h1
+    className="text-lg font-bold"
+  />
+  <p
+    className="italic"
+  />
+</div>
+`;
+
+exports[`Dialog Tokens Matches snapshot for Welcome 1`] = `
+<div
+  className="border-blue-600 p-2 border-2 rounded-lg"
+>
+  <h1
+    className="text-lg font-bold"
+  >
+    Welcome!
+  </h1>
+  <p
+    className="italic"
+  >
+    Thank you for visiting our spacecraft!
+  </p>
+</div>
+`;

@@ -14,7 +14,7 @@
 import { asFooterToken } from '@bodiless/vital-layout';
 import { vitalFooterBase } from '@bodiless/vital-layout/lib/base';
 import { addProps } from '@bodiless/fclasses';
-import { withLanguageNode } from '@bodiless/i18n';
+// import { withLanguageNode } from '@bodiless/i18n';
 
 // Setup the vital package to use the Rewards by default.
 const Default = asFooterToken(vitalFooterBase.Default, {
@@ -22,9 +22,10 @@ const Default = asFooterToken(vitalFooterBase.Default, {
   Behavior: {
     Container: addProps({ 'data-shadowed-by': '__vital__Footer' }),
   },
-  Schema: {
-    _: withLanguageNode,
-  },
+  // @TODO Restore to enable multi-lingual support
+  // Schema: {
+  //   _: withLanguageNode,
+  // },
 });
 
 export default {

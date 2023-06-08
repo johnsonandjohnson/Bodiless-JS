@@ -24,7 +24,7 @@ const prompts: Prompts = [
   {
     type: 'input',
     name: 'destinationpath',
-    message: `Path to directory where component should be created [Required],
+    message: `Path to "src" directory where component should be created [Required],
 e.g. "./", "./src/", "/absolute/path/to/[package name]/src" etc. Default to current directory.
 > `,
     validate: pathValidator,

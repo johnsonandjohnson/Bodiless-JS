@@ -34,6 +34,16 @@ const NodeContext = React.createContext<NodeMap<any>>({
   },
 });
 
+/**
+ * Hook to obtain the current node.
+ *
+ * @param collection
+ * The node collection from which the node should be retrieved.  If omitted,
+ * node will be retrieved from the current collection.
+ *
+ * @returns
+ * An object with a single member, which is the current node.
+ */
 const useNode = <D extends object>(collection?: string) => {
   const map = React.useContext(NodeContext);
   // If no collection is specified, then return a node from the

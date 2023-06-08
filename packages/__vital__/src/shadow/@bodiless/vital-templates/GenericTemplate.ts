@@ -16,13 +16,14 @@ import { useNode } from '@bodiless/data';
 import {
   flowHoc, addProps, Div, flowIf, replaceWith, Fragment
 } from '@bodiless/fclasses';
-import { useLanguageContext } from '@bodiless/i18n';
+// import { useLanguageContext } from '@bodiless/i18n';
 import { asGenericTemplateToken } from '@bodiless/vital-templates';
 import { vitalGenericTemplateBase } from '@bodiless/vital-templates/lib/base';
 
 const isHomePage = () => (
   useNode().node.pagePath === '/'
-  || useNode().node.pagePath === `/${useLanguageContext().getCurrentLanguage().name}/`
+  // @TODO Restore to enable multi-lingual support
+  // || useNode().node.pagePath === `/${useLanguageContext().getCurrentLanguage().name}/`
 );
 
 const WithNoBreadcrumbsOnHomePage = asGenericTemplateToken({

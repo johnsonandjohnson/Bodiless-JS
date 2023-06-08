@@ -13,6 +13,7 @@
  */
 
 import React, { FC } from 'react';
+import flow from 'lodash/flow';
 import { HOC, Injector } from '@bodiless/fclasses';
 import NodeProvider, { useNode } from './NodeProvider';
 import { WithNodeProps } from './NodeTypes';
@@ -63,5 +64,21 @@ const withNodeKey = (
   return WithNodeKey;
 };
 
+/**
+ * Provides a keyed node to a child component.
+ *
+ * @param nodeKeys
+ * The key of the child node, relative to the current node.
+ *
+ * @returns
+ * A function which creates
+ */
+const withChildNode = (
+  nodeKeys: string|Partial<WithNodeProps>|WithNodeKeyFunction = {},
+): HOC => flow(
+  withNode,
+  withNodeKey(nodeKeys),
+) as HOC;
+
 export default withNode;
-export { withNodeKey };
+export { withNodeKey, withChildNode };

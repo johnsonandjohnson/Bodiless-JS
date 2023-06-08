@@ -17,6 +17,7 @@ const toc = {
     'GettingStarted.md': '',
     'CorePrinciples.md': '',
   },
+  VitalDesignSystem: {},
   ContentEditorUserGuide: {
     PageMenu: {
       New: {},
@@ -31,14 +32,12 @@ const toc = {
       Aliases: {},
     },
   },
-  Design: {},
   Components: {},
   Tools: {},
-  Curriculum: {},
+  Design: {},
   Development: {
     Guides: {
       'IntroToBodilessConcepts.md': '',
-      'DesignElementConcepts.md': '',
       'CreatingBodilessComponents.md': '',
     },
     'Packages.md': '',

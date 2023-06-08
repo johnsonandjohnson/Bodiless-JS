@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/richtext",
-  "version": "1.0.0-rc.39",
+  "version": "1.0.0-rc.41",
   "description": "Provide Rich Text Component",
   "author": "Erik Summerfield <esummer3@its.jnj.com>",
   "license": "Apache-2.0",
@@ -31,11 +31,11 @@
     "postinstall": "node bin/apply-patches.js"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.39",
-    "@bodiless/core": "^1.0.0-rc.39",
-    "@bodiless/data": "^1.0.0-rc.39",
-    "@bodiless/fclasses": "^1.0.0-rc.39",
-    "@bodiless/hydration": "^1.0.0-rc.39",
+    "@bodiless/cli": "^1.0.0-rc.41",
+    "@bodiless/core": "^1.0.0-rc.41",
+    "@bodiless/data": "^1.0.0-rc.41",
+    "@bodiless/fclasses": "^1.0.0-rc.41",
+    "@bodiless/hydration": "^1.0.0-rc.41",
     "@emotion/core": "^11.0.0",
     "@emotion/css": "^11.10.5",
     "@emotion/styled": "^11.10.5",

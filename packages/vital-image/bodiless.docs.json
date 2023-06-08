@@ -3,6 +3,7 @@
     "Components": {
       "VitalImage": {
         "README.md": "./doc/README.md",
+        "ImageGuidelines.md": "./doc/ImageGuidelines.md",
         "assets": {
           "HeroSwapImage.jpg": "./doc/assets/HeroSwapImage.jpg"
         }

@@ -14,7 +14,7 @@
 
 import { as } from '@bodiless/fclasses';
 import { StyleGuideTemplateClean } from '@bodiless/vital-templates';
-import { VitalDemoStyleGuidePage } from 'vital-examples';
+import { VitalDemoStyleGuidePage } from '@bodiless/vital-examples';
 
 const StyleGuidePage = as(VitalDemoStyleGuidePage.Default)(
   StyleGuideTemplateClean,

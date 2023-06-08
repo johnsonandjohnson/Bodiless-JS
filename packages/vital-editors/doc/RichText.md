@@ -53,7 +53,7 @@ There are some Editor Tokens available in `vitalRichText`.
 
 #### Via Shadowing (*Preferred Method)
 
-Define a Shadowing token collection as defined in [Shadow](../VitalElements/Shadow).
+Define a Shadowing token collection as defined in [Shadowing Tokens](../../Guides/ShadowingTokens).
 
 File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-editors/RichText.ts`
 
@@ -61,7 +61,7 @@ File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-editors/RichTe
 
 #### Via Overriding Specific Existing Styles Using Vital Rich Text Editor
 
-See [Vital Site Typography](../VitalElements/SiteTypography).
+See [Vital Site Typography](../../Guides/SiteTypography).
 
 ## Architectural Details
 

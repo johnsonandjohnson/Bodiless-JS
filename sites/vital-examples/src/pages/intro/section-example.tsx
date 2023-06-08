@@ -5,7 +5,7 @@ import {
 import { SectionClean } from '@bodiless/vital-section';
 import { vitalTypography } from '@bodiless/vital-elements';
 
-import { exampleSection } from 'vital-examples/lib/intro/section-example';
+import { exampleSection } from '@bodiless/vital-examples/lib/intro/section-example';
 
 const DefaultSection = as(
   exampleSection.Default,
