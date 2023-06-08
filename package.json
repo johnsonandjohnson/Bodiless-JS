@@ -39,8 +39,6 @@
     "publish:major": "lerna version major --conventional-commits",
     "lerna:publish": "lerna publish from-git --yes --dist-tag latest",
     "lerna:canary": "lerna publish --canary --include-merged-tags --preid ks-canary --dist-tag ks-canary --force-publish",
-    "pw:run": "npx playwright test playwright/tests/smoke-deprecated/* --project=chromium --workers 1",
-    "playwright:run": "npx playwright test playwright/tests/smoke/* --project=chromium --workers 3",
     "psh:setup-starter": "node ./scripts/psh-setup-starter",
     "serve": "lerna run serve --scope @sites/${APP_SITE_NAME:-test-site} --stream",
     "setup": "npm run bootstrap && npm run build:packages",
@@ -56,11 +54,11 @@
     "sync:fix": "syncpack fix-mismatches",
     "sync:check": "syncpack list-mismatches",
     "test": "jest",
-    "test:monorepo-pw": "WAIT_ON_TIMEOUT=600000 start-server-and-test sites:launch-monorepo http://localhost:8005 pw:run",
+    "test:monorepo-pw": "WAIT_ON_TIMEOUT=600000 PLAYWRIGHT_SUITE=smoke-deprecated npx playwright test",
     "test:ci": "WAIT_ON_TIMEOUT=600000 start-server-and-test sites:launch-test http://localhost:8005 cy:run",
     "test:monorepo": "WAIT_ON_TIMEOUT=600000 start-server-and-test sites:launch-monorepo http://localhost:8005 cy:run",
     "test:watch": "jest --watch",
-    "test:playwright": "APPLITOOLS_BATCH_ID=`uuidgen` WAIT_ON_TIMEOUT=600000 start-server-and-test sites:launch-vital http://localhost:8005 playwright:run",
+    "test:playwright": "APPLITOOLS_BATCH_ID=`uuidgen` WAIT_ON_TIMEOUT=600000 PLAYWRIGHT_SUITE=smoke-vital npx playwright test",
     "vital-check": "node ./scripts/vital-check"
   },
   "husky": {

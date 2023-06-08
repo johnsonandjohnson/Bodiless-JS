@@ -47,7 +47,7 @@ jobs:
           required_status_checks: |
             strict: true
             checks:
-              - context: 'Setup, Build, Lint and Test'
+              - context: 'on-label / Setup, Build, Lint and Test'
           enforce_admins: true
           restrictions: 'null'
         env:
