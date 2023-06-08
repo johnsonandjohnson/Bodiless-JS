@@ -26,4 +26,4 @@ jobs:
       - name: Publish npm packages
         run: |
           echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
-          npm run lerna:publish
+          npm run publish:from-git
