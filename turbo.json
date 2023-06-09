@@ -1,9 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
-    "setup": {
-      "dependsOn": ["bootstrap"]
-    },
     "build": {
       "outputs": [
         "public/**",

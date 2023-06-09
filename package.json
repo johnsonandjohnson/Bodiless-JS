@@ -2,12 +2,16 @@
   "name": "bodiless-js",
   "description": "Bodiless-JS",
   "version": "1.0.0-rc.23",
+  "workspaces": [
+    "packages/*",
+    "sites/*"
+  ],
   "keywords": [
     "gatsby"
   ],
   "license": "Apache-2.0",
   "scripts": {
-    "build": "cross-env NODE_ENV=production lerna run build --stream --ignore @bodiless/gatsby-starter-bodiless",
+    "build": "cross-env NODE_ENV=production npx -y turbo build",
     "build:only": "cross-env NODE_ENV=production lerna run build --stream --scope",
     "build:packages": "cross-env NODE_ENV=production lerna run build --stream --ignore @sites/*",
     "build:watch": "cross-env NODE_ENV=development lerna run build:watch --parallel",
