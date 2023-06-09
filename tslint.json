@@ -4,7 +4,6 @@
         "no-this-assignment": [true, { "allow-destructuring": true }],
         "max-line-length": false,
         "import-name": false,
-        "max-line-length": false,
         "variable-name": [true, "allow-pascal-case"]
     }
 }

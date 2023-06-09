@@ -16,6 +16,20 @@ import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
 const tailwindcssDir = require('tailwindcss-dir')();
 
+const designTokens = require('./assets/design-tokens.nested.json');
+
+// Parse the JSON Tokens data
+const parsedDesignTokens = JSON.parse(JSON.stringify(designTokens));
+
+/**
+ * Due to the name of the group in JSON being `core/colors` we need to parse an access it this way.
+ */
+const coreColors = parsedDesignTokens['core/colors'];
+/**
+ * @TODO: All semantic colors are wrapped in extra `color` object.
+ */
+const semanticColors = parsedDesignTokens['semantic/colors'].color;
+
 const resolver = (pkgName) => require.resolve(pkgName);
 
 const twConfig = {
@@ -40,6 +54,7 @@ const twConfig = {
       'm-3xl': ['2.25rem', '2.5rem'],
     },
     colors: {
+      ...coreColors,
       transparent: 'transparent',
       'vital-primary': {
         brand: '#CA081B',
@@ -62,6 +77,7 @@ const twConfig = {
         'button-selected': '#000041',
       },
       white: '#FFFFFF',
+      ...semanticColors,
     },
     extend: {
       fontFamily: {
