@@ -29,8 +29,6 @@
     "version:patch": "lerna version patch --conventional-commits --force-publish",
     "version:minor": "lerna version minor --conventional-commits",
     "version:major": "lerna version major --conventional-commits",
-    "pw:run": "npx playwright test playwright/tests/smoke-deprecated/* --project=chromium --workers 1",
-    "playwright:run": "npx playwright test playwright/tests/smoke/* --project=chromium --workers 3",
     "postinstall": "patch-package",
     "serve": "lerna run serve --scope @sites/${APP_SITE_NAME:-test-site} --stream",
     "setup": "npm install && npm run build:packages",
@@ -40,8 +38,8 @@
     "sync:fix": "syncpack fix-mismatches",
     "sync:check": "syncpack list-mismatches",
     "test": "jest",
-    "test:monorepo-pw": "WAIT_ON_TIMEOUT=600000 start-server-and-test sites:launch-monorepo http://localhost:8005 pw:run",
-    "test:playwright": "APPLITOOLS_BATCH_ID=`uuidgen` WAIT_ON_TIMEOUT=600000 start-server-and-test sites:launch-vital http://localhost:8005 playwright:run",
+    "test:monorepo-pw": "WAIT_ON_TIMEOUT=600000 PLAYWRIGHT_SUITE=smoke-deprecated npx playwright test",
+    "test:playwright": "APPLITOOLS_BATCH_ID=`uuidgen` WAIT_ON_TIMEOUT=600000 PLAYWRIGHT_SUITE=smoke-vital npx playwright test",
     "vital-check": "node ./scripts/vital-check"
   },
   "husky": {

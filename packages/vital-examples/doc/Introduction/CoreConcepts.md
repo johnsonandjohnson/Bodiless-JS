@@ -44,8 +44,8 @@ The Design API allows you to _modify_ the sub-components of a complex component 
 
 ## Shadowing
 
-VitalDS makes use of a technique known as [file shadowing](/Development/Guides/Shadowing) to
-simplify the process of overriding or extending core styling or behavior. Although the details are
-different, this is theoretically similar to (and inspired by) [Gatsby Component
+VitalDS makes use of a technique known as [file shadowing](../../Guides/ShadowingTokens) to simplify
+the process of overriding or extending core styling or behavior. Although the details are different,
+this is theoretically similar to (and inspired by) [Gatsby Component
 Shadowing](https://www.gatsbyjs.com/blog/2019-04-29-component-shadowing/ ':target=_blank'), so an
 understanding of the principle will help when you come to implementing it in Vital.

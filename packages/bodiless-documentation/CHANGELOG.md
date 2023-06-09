@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.41](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.40...v1.0.0-rc.41) (2023-06-08)
+
+**Note:** Version bump only for package @bodiless/documentation
+
+# [1.0.0-rc.40](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.39...v1.0.0-rc.40) (2023-06-07)
+
+### Bug Fixes
+
+- **docs:** fixing page build cycle ([#2116](https://github.com/johnsonandjohnson/bodiless-js/issues/2116)) ([0883526](https://github.com/johnsonandjohnson/bodiless-js/commit/08835269722473c2de211325d52db11c1ce0c4aa))
+
 # [1.0.0-rc.39](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.38...v1.0.0-rc.39) (2023-06-01)
 
 **Note:** Version bump only for package @bodiless/documentation

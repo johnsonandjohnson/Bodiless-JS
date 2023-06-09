@@ -19,7 +19,7 @@ Template](./assets/PXtoREMTemplate.xlsx).
 
 ### Option 1: Shadow `vitalFontSize` (*Preferred Solution)
 
-Define a Shadowing token collection as defined in [Shadowing Tokens](/Development/Guides/Shadowing).
+Define a Shadowing token collection as defined in [Shadowing Tokens](./ShadowingTokens).
 
 File to shadow:
 [`vitalFontSize`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/FontSize/tokens/vitalFontSize.ts ':target=_blank')
@@ -59,7 +59,7 @@ The Vital Design System defines the following
 
 ### Option 1: Shadow `vitalColor` (*Preferred Solution)
 
-Define a Shadowing token collection as defined in [Shadowing Tokens](/Development/Guides/Shadowing).
+Define a Shadowing token collection as defined in [Shadowing Tokens](./ShadowingTokens).
 
 File to shadow:
 [`vitalColor`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Color/tokens/vitalColor.ts ':target=_blank')
@@ -97,7 +97,7 @@ recommended way of changing, adding, or redefining tokens at a package/site leve
 
 ### Option 1: Shadowing (*Preferred Solution)
 
-Define a Shadowing token collection as defined in [Shadowing Tokens](/Development/Guides/Shadowing).
+Define a Shadowing token collection as defined in [Shadowing Tokens](./ShadowingTokens).
 
 Files to shadow:
 

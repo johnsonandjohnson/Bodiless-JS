@@ -1,0 +1,37 @@
+name: "Run Playwright tests"
+description: "Runs playwright tests and publishes results"
+inputs:
+  node-test-script:
+    required: true
+    description: "The Playwright test script to run e.g. test:playwright"
+  test-results-name:
+    required: true
+    description: "The name used to identify Playwright test results"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Get installed Playwright version
+      shell: bash
+      run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./package-lock.json').dependencies['@playwright/test'].version)")" >> $GITHUB_ENV
+    - name: Cache Playwright binaries
+      uses: actions/cache@v3
+      id: playwright-cache
+      with:
+        path: |
+          ~/.cache/ms-playwright
+        key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+    - name: Install Playwrght
+      shell: bash
+      if: steps.playwright-cache.outputs.cache-hit != 'true'
+      run: npx playwright install --with-deps
+    - name: Run Playwright Tests
+      shell: bash
+      run: npm run ${{ inputs.node-test-script }}
+    - name: Upload Tests Artifact
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ inputs.test-results-name }}
+        path: playwright-report/
+        retention-days: 30
