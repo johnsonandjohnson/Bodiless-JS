@@ -43,7 +43,7 @@ export const BreadcrumbContextProvider = breadcrumbContext.Provider;
  */
 export const useIsActiveTrail = () => !!useBreadcrumbContext()?.isActive();
 
-const isSSR = () => !(
+const isSSR = !(
   typeof window !== 'undefined'
   && window.document
   && window.document.createElement
@@ -140,7 +140,7 @@ const asBreadcrumbSource: HOC = Component => {
 
   const AsBreadcrumbSource: FC<any> = props => (
     <>
-      {isSSR() && <SSRSource {...props} />}
+      {isSSR && <SSRSource {...props} />}
       <Component {...props} />
     </>
   );
