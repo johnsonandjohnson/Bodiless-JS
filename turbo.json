@@ -11,6 +11,10 @@
       "dependsOn": ["^build"]
     },
     "check": {},
+    "dev": {
+      "persistent": true
+    },
+    "lint": {},
     "start": {
       "persistent": true
     },

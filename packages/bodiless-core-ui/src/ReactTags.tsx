@@ -38,6 +38,7 @@ const ReactTagsField: ComponentType<ReactTagsFieldProps> = props => {
     noOptions: 'react-tags__listbox-no-options',
     option: 'react-tags__listbox-option',
     optionIsActive: 'is-active',
+    highlight: 'react-tags__listbox-option-highlight',
   };
 
   return (

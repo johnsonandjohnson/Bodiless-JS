@@ -111,9 +111,10 @@
     "prepare": "node ../../scripts/set-missing-symlinks.js @bodiless",
     "prestart": "run-s build:env-vars build:docs",
     "docs": "run-s build:docs serve:docs",
+    "start": "gatsby serve",
     "serve": "gatsby serve",
     "serve:docs": "docsify serve ./doc",
-    "start": "run-p -r dev-frontend dev-backend"
+    "dev": "run-p -r dev-frontend dev-backend"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.4.0",
