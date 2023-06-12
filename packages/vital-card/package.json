@@ -25,7 +25,7 @@
     "build": "run-s build:lib copy",
     "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api src",
     "build:lib": "tsc -p ./tsconfig.json",
-    "build:watch": "npm run build -- --watch",
+    "build:watch": "npm run build:lib -- --watch && npm run copy",
     "dev": "npm run build:watch",
     "lint": "tslint ./src/**/*.ts?x",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",

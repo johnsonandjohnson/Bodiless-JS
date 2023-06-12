@@ -17,7 +17,7 @@
     "check": "cross-env NODE_ENV=production npx -y turbo check",
     "clean": "npm run clean --workspaces --if-present && rimraf .eslintcache sites/*/.env.development sites/*/.env.production",
     "copyright": "node ./scripts/add-copyright",
-    "dev": "cross-env NODE_ENV=development npx -y turbo dev --filter=./packages/* --filter=@sites/${APP_SITE_NAME:-test-site}",
+    "dev": "cross-env NODE_ENV=development npx -y turbo dev --concurrency=100 --filter=./packages/* --filter=@sites/test-site",
     "fix": "eslint --fix  --cache --ext .js,.jsx,.ts,.tsx packages sites",
     "fix:target": "eslint --fix  --cache --ext .js,.jsx,.ts,.tsx",
     "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx packages sites playwright --",

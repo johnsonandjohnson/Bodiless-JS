@@ -58,7 +58,8 @@
     "prestart": "npm run build:docs",
     "serve": "gatsby serve",
     "serve:docs": "docsify serve ./doc",
-    "start": "run-p -r dev-frontend dev-backend"
+    "start": "gatsby serve",
+    "dev": "run-p -r dev-frontend dev-backend"
   },
   "devDependencies": {
     "@statoscope/webpack-plugin": "^5.20.1",

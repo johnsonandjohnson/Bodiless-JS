@@ -58,7 +58,8 @@
     "prestart": "run-s build:env-vars build:docs",
     "serve": "gatsby serve",
     "serve:docs": "docsify serve ./doc",
-    "start": "run-p -r dev-frontend dev-backend"
+    "start": "gatsby serve",
+    "dev": "run-p -r dev-frontend dev-backend"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",

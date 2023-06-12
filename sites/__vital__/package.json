@@ -77,7 +77,8 @@
     "search-index": "create-search-index",
     "serve": "gatsby serve",
     "serve:docs": "docsify serve ./doc",
-    "start": "run-p -r dev-frontend dev-backend"
+    "start": "gatsby serve",
+    "dev": "run-p -r dev-frontend dev-backend"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.4.0",
