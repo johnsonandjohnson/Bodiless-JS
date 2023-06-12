@@ -23,11 +23,12 @@ const NC='\u001b[0m';
 const vitalPath = 'packages/__vital__';
 const vitalNextPath = 'packages/__vital_next__';
 
-const commmonIgnore = [
+const commonIgnore = [
   '/CHANGELOG.md',
   '/package.json',
   '/lib',
   '/node_modules',
+  '/.turbo',
 ];
 const vitalIgnore = [
   '/gatsby-ssr.js'
@@ -61,11 +62,11 @@ const calculateHash = (files) => {
   return crypto.createHash('sha256').update(hashes.join('')).digest('hex');
 };
 
-const vitalFiles = scanDirRecursive(vitalPath, vitalPath, [...commmonIgnore, ...vitalIgnore]);
+const vitalFiles = scanDirRecursive(vitalPath, vitalPath, [...commonIgnore, ...vitalIgnore]);
 const vitalHash = calculateHash(vitalFiles);
 
 const vitalNextFiles = scanDirRecursive(
-  vitalNextPath, vitalNextPath, [...commmonIgnore, ...vitalNextIgnore]
+  vitalNextPath, vitalNextPath, [...commonIgnore, ...vitalNextIgnore]
 );
 const vitalNextHash = calculateHash(vitalNextFiles);
 
