@@ -20,6 +20,7 @@ import { VitalGenericTemplatePage } from './vital-generic-template';
 import { VitalButtonsPage } from './vital-buttons';
 import { VitalAccordionPage } from './vital-accordion';
 import { VitalVideoPage } from './vital-video';
+import { VitalSectionPage } from './vital-section';
 
 export {
   VitalPage,
@@ -31,4 +32,5 @@ export {
   VitalButtonsPage,
   VitalAccordionPage,
   VitalVideoPage,
+  VitalSectionPage,
 };
