@@ -249,7 +249,7 @@ component. The keys correspond to the design elements
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:393](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L393)
+[packages/fclasses/src/types.ts:393](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L393)
 
 ___
 
@@ -267,7 +267,7 @@ Type of the [[designable]] HOC.
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:296](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L296)
+[packages/fclasses/src/types.ts:296](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L296)
 
 ___
 
@@ -284,7 +284,7 @@ It is also the base for the `...Components` interface of any designable componen
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:214](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L214)
+[packages/fclasses/src/types.ts:214](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L214)
 
 ___
 
@@ -319,7 +319,7 @@ const Foo: FC<DesignableComponentsProps> = props => {
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:259](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L259)
+[packages/fclasses/src/types.ts:259](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L259)
 
 ___
 
@@ -343,7 +343,7 @@ This is the type of the props for a designable component.
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:236](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L236)
+[packages/fclasses/src/types.ts:236](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L236)
 
 ___
 
@@ -362,7 +362,7 @@ Like a [[Design]], but without the `_final` property.
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:370](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L370)
+[packages/fclasses/src/types.ts:370](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L370)
 
 ___
 
@@ -374,7 +374,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:286](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L286)
+[packages/fclasses/src/types.ts:286](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L286)
 
 ___
 
@@ -386,7 +386,7 @@ This is a HOD that accepts any DesignableComponents
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:279](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L279)
+[packages/fclasses/src/types.ts:279](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L279)
 
 ___
 
@@ -420,7 +420,7 @@ a components prop of type "C".
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:269](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L269)
+[packages/fclasses/src/types.ts:269](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L269)
 
 ___
 
@@ -434,7 +434,7 @@ A single CSS class string or an array of them.
 
 #### Defined in
 
-[packages/fclasses/src/addClasses.tsx:28](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/addClasses.tsx#L28)
+[packages/fclasses/src/addClasses.tsx:28](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/addClasses.tsx#L28)
 
 ___
 
@@ -458,7 +458,7 @@ chain will be traversed and operations performed for each.
 
 #### Defined in
 
-[packages/fclasses/src/addClasses.tsx:39](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/addClasses.tsx#L39)
+[packages/fclasses/src/addClasses.tsx:39](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/addClasses.tsx#L39)
 
 ___
 
@@ -477,7 +477,7 @@ Type of the props created by [[stylable]].
 
 #### Defined in
 
-[packages/fclasses/src/addClasses.tsx:58](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/addClasses.tsx#L58)
+[packages/fclasses/src/addClasses.tsx:58](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/addClasses.tsx#L58)
 
 ___
 
@@ -497,7 +497,7 @@ Type of a component with meta or a JSX element.
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:52](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L52)
+[packages/fclasses/src/types.ts:52](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L52)
 
 ___
 
@@ -515,7 +515,7 @@ Type of component with metadata supplied by one or more tokens.
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:45](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L45)
+[packages/fclasses/src/types.ts:45](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L45)
 
 ___
 
@@ -550,7 +550,7 @@ The condition hook will receive the props of the component as an argument.
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:411](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L411)
+[packages/fclasses/src/types.ts:411](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L411)
 
 ___
 
@@ -570,7 +570,7 @@ The new props are added to the signature of the enhanced component.
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:143](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L143)
+[packages/fclasses/src/types.ts:143](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L143)
 
 ___
 
@@ -642,7 +642,7 @@ of the first composed token
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:189](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L189)
+[packages/fclasses/src/types.ts:189](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L189)
 
 ___
 
@@ -660,7 +660,7 @@ Type of the helper functions provided for generating token metadata.
 
 #### Defined in
 
-[packages/fclasses/src/flowHoc.tsx:137](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/flowHoc.tsx#L137)
+[packages/fclasses/src/flowHoc.tsx:137](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/flowHoc.tsx#L137)
 
 ___
 
@@ -703,7 +703,7 @@ component will be treated. It accepts 3 type parameters:
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:96](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L96)
+[packages/fclasses/src/types.ts:96](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L96)
 
 ___
 
@@ -724,7 +724,7 @@ objects (or undefined) in addition to HOC's.
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:175](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L175)
+[packages/fclasses/src/types.ts:175](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L175)
 
 ___
 
@@ -746,7 +746,7 @@ Tokens may be composed of other tokens using the `flowHoc` utility.
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:128](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L128)
+[packages/fclasses/src/types.ts:128](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L128)
 
 ___
 
@@ -766,7 +766,7 @@ Any required props of the base component become optional in the enhance componen
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:159](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L159)
+[packages/fclasses/src/types.ts:159](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L159)
 
 ___
 
@@ -784,7 +784,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:71](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L71)
+[packages/fclasses/src/types.ts:71](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L71)
 
 ___
 
@@ -810,7 +810,7 @@ without the cast, it would be impossible to infer the prop signature of Foo.
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:66](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L66)
+[packages/fclasses/src/types.ts:66](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L66)
 
 ___
 
@@ -835,7 +835,7 @@ should be assembled.
 
 #### Defined in
 
-[packages/fclasses/src/tailwindcss/getPackageTailwindConfig.ts:41](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/tailwindcss/getPackageTailwindConfig.ts#L41)
+[packages/fclasses/src/tailwindcss/getPackageTailwindConfig.ts:41](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/tailwindcss/getPackageTailwindConfig.ts#L41)
 
 ___
 
@@ -871,7 +871,7 @@ and returns a single, complete token specification.
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:476](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L476)
+[packages/fclasses/src/types.ts:476](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L476)
 
 ___
 
@@ -890,7 +890,7 @@ Type of a token which is composed into another [[TokenSpec]].
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:345](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L345)
+[packages/fclasses/src/types.ts:345](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L345)
 
 ___
 
@@ -909,7 +909,7 @@ Type of a set of domains uses in a [[TokenSpec]]
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:418](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L418)
+[packages/fclasses/src/types.ts:418](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L418)
 
 ___
 
@@ -929,7 +929,7 @@ in a [[TokenSpec]].
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:431](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L431)
+[packages/fclasses/src/types.ts:431](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L431)
 
 ___
 
@@ -957,7 +957,7 @@ Do not use these domain names in a custom domain set.
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:305](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L305)
+[packages/fclasses/src/types.ts:305](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L305)
 
 ___
 
@@ -973,7 +973,7 @@ May be:
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:338](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L338)
+[packages/fclasses/src/types.ts:338](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L338)
 
 ___
 
@@ -993,7 +993,7 @@ Type of a collection of tokens which apply to a specific designable component.
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:359](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L359)
+[packages/fclasses/src/types.ts:359](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L359)
 
 ___
 
@@ -1018,7 +1018,7 @@ be merged onto the component.
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:32](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L32)
+[packages/fclasses/src/types.ts:32](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L32)
 
 ___
 
@@ -1038,7 +1038,7 @@ Properties of tokens.
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:104](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L104)
+[packages/fclasses/src/types.ts:104](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L104)
 
 ___
 
@@ -1067,7 +1067,7 @@ This is a nested object with two levels of keys:
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:457](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L457)
+[packages/fclasses/src/types.ts:457](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L457)
 
 ## Styled HTML Variables
 
@@ -1077,7 +1077,7 @@ This is a nested object with two levels of keys:
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:21](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L21)
+[packages/fclasses/src/StyledHTML.tsx:21](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L21)
 
 ___
 
@@ -1087,7 +1087,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:25](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L25)
+[packages/fclasses/src/StyledHTML.tsx:25](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L25)
 
 ___
 
@@ -1097,7 +1097,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:29](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L29)
+[packages/fclasses/src/StyledHTML.tsx:29](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L29)
 
 ___
 
@@ -1107,7 +1107,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:33](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L33)
+[packages/fclasses/src/StyledHTML.tsx:33](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L33)
 
 ___
 
@@ -1117,7 +1117,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:37](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L37)
+[packages/fclasses/src/StyledHTML.tsx:37](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L37)
 
 ___
 
@@ -1127,7 +1127,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:41](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L41)
+[packages/fclasses/src/StyledHTML.tsx:41](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L41)
 
 ___
 
@@ -1137,7 +1137,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:45](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L45)
+[packages/fclasses/src/StyledHTML.tsx:45](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L45)
 
 ___
 
@@ -1147,7 +1147,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:49](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L49)
+[packages/fclasses/src/StyledHTML.tsx:49](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L49)
 
 ___
 
@@ -1157,7 +1157,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:53](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L53)
+[packages/fclasses/src/StyledHTML.tsx:53](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L53)
 
 ___
 
@@ -1167,7 +1167,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:57](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L57)
+[packages/fclasses/src/StyledHTML.tsx:57](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L57)
 
 ___
 
@@ -1177,7 +1177,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:61](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L61)
+[packages/fclasses/src/StyledHTML.tsx:61](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L61)
 
 ___
 
@@ -1187,7 +1187,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:65](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L65)
+[packages/fclasses/src/StyledHTML.tsx:65](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L65)
 
 ___
 
@@ -1197,7 +1197,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:69](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L69)
+[packages/fclasses/src/StyledHTML.tsx:69](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L69)
 
 ___
 
@@ -1207,7 +1207,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:73](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L73)
+[packages/fclasses/src/StyledHTML.tsx:73](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L73)
 
 ___
 
@@ -1217,7 +1217,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:77](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L77)
+[packages/fclasses/src/StyledHTML.tsx:77](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L77)
 
 ___
 
@@ -1227,7 +1227,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:81](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L81)
+[packages/fclasses/src/StyledHTML.tsx:81](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L81)
 
 ___
 
@@ -1237,7 +1237,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:85](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L85)
+[packages/fclasses/src/StyledHTML.tsx:85](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L85)
 
 ___
 
@@ -1247,7 +1247,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:89](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L89)
+[packages/fclasses/src/StyledHTML.tsx:89](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L89)
 
 ___
 
@@ -1257,7 +1257,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:93](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L93)
+[packages/fclasses/src/StyledHTML.tsx:93](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L93)
 
 ___
 
@@ -1267,7 +1267,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:97](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L97)
+[packages/fclasses/src/StyledHTML.tsx:97](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L97)
 
 ___
 
@@ -1277,7 +1277,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:101](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L101)
+[packages/fclasses/src/StyledHTML.tsx:101](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L101)
 
 ___
 
@@ -1287,7 +1287,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:105](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L105)
+[packages/fclasses/src/StyledHTML.tsx:105](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L105)
 
 ___
 
@@ -1297,7 +1297,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:109](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L109)
+[packages/fclasses/src/StyledHTML.tsx:109](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L109)
 
 ___
 
@@ -1307,7 +1307,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:113](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L113)
+[packages/fclasses/src/StyledHTML.tsx:113](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L113)
 
 ___
 
@@ -1317,7 +1317,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:117](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L117)
+[packages/fclasses/src/StyledHTML.tsx:117](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L117)
 
 ___
 
@@ -1327,7 +1327,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:121](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L121)
+[packages/fclasses/src/StyledHTML.tsx:121](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L121)
 
 ___
 
@@ -1337,7 +1337,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:125](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L125)
+[packages/fclasses/src/StyledHTML.tsx:125](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L125)
 
 ___
 
@@ -1347,7 +1347,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:129](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L129)
+[packages/fclasses/src/StyledHTML.tsx:129](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L129)
 
 ___
 
@@ -1357,7 +1357,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:133](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L133)
+[packages/fclasses/src/StyledHTML.tsx:133](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L133)
 
 ___
 
@@ -1367,7 +1367,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:137](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L137)
+[packages/fclasses/src/StyledHTML.tsx:137](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L137)
 
 ___
 
@@ -1377,7 +1377,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:141](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L141)
+[packages/fclasses/src/StyledHTML.tsx:141](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L141)
 
 ___
 
@@ -1387,7 +1387,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:145](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L145)
+[packages/fclasses/src/StyledHTML.tsx:145](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L145)
 
 ___
 
@@ -1397,7 +1397,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:149](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L149)
+[packages/fclasses/src/StyledHTML.tsx:149](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L149)
 
 ___
 
@@ -1407,7 +1407,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:153](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L153)
+[packages/fclasses/src/StyledHTML.tsx:153](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L153)
 
 ___
 
@@ -1417,7 +1417,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:157](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L157)
+[packages/fclasses/src/StyledHTML.tsx:157](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L157)
 
 ___
 
@@ -1427,7 +1427,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:161](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L161)
+[packages/fclasses/src/StyledHTML.tsx:161](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L161)
 
 ___
 
@@ -1437,7 +1437,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:165](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L165)
+[packages/fclasses/src/StyledHTML.tsx:165](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L165)
 
 ___
 
@@ -1447,7 +1447,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:169](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L169)
+[packages/fclasses/src/StyledHTML.tsx:169](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L169)
 
 ___
 
@@ -1457,7 +1457,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:173](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L173)
+[packages/fclasses/src/StyledHTML.tsx:173](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L173)
 
 ___
 
@@ -1467,7 +1467,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:177](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L177)
+[packages/fclasses/src/StyledHTML.tsx:177](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L177)
 
 ___
 
@@ -1477,7 +1477,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:181](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L181)
+[packages/fclasses/src/StyledHTML.tsx:181](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L181)
 
 ___
 
@@ -1487,7 +1487,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:185](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L185)
+[packages/fclasses/src/StyledHTML.tsx:185](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L185)
 
 ___
 
@@ -1497,7 +1497,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:189](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L189)
+[packages/fclasses/src/StyledHTML.tsx:189](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L189)
 
 ___
 
@@ -1507,7 +1507,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:193](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L193)
+[packages/fclasses/src/StyledHTML.tsx:193](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L193)
 
 ___
 
@@ -1517,7 +1517,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:197](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L197)
+[packages/fclasses/src/StyledHTML.tsx:197](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L197)
 
 ___
 
@@ -1527,7 +1527,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:201](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L201)
+[packages/fclasses/src/StyledHTML.tsx:201](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L201)
 
 ___
 
@@ -1537,7 +1537,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:205](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L205)
+[packages/fclasses/src/StyledHTML.tsx:205](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L205)
 
 ___
 
@@ -1547,7 +1547,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:209](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L209)
+[packages/fclasses/src/StyledHTML.tsx:209](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L209)
 
 ___
 
@@ -1557,7 +1557,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:213](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L213)
+[packages/fclasses/src/StyledHTML.tsx:213](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L213)
 
 ___
 
@@ -1567,7 +1567,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:217](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L217)
+[packages/fclasses/src/StyledHTML.tsx:217](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L217)
 
 ___
 
@@ -1577,7 +1577,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:221](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L221)
+[packages/fclasses/src/StyledHTML.tsx:221](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L221)
 
 ___
 
@@ -1587,7 +1587,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:225](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L225)
+[packages/fclasses/src/StyledHTML.tsx:225](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L225)
 
 ___
 
@@ -1597,7 +1597,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:229](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L229)
+[packages/fclasses/src/StyledHTML.tsx:229](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L229)
 
 ___
 
@@ -1607,7 +1607,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:233](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L233)
+[packages/fclasses/src/StyledHTML.tsx:233](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L233)
 
 ___
 
@@ -1617,7 +1617,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:237](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L237)
+[packages/fclasses/src/StyledHTML.tsx:237](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L237)
 
 ___
 
@@ -1627,7 +1627,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:241](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L241)
+[packages/fclasses/src/StyledHTML.tsx:241](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L241)
 
 ___
 
@@ -1637,7 +1637,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:245](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L245)
+[packages/fclasses/src/StyledHTML.tsx:245](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L245)
 
 ___
 
@@ -1647,7 +1647,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:249](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L249)
+[packages/fclasses/src/StyledHTML.tsx:249](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L249)
 
 ___
 
@@ -1657,7 +1657,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:253](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L253)
+[packages/fclasses/src/StyledHTML.tsx:253](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L253)
 
 ___
 
@@ -1667,7 +1667,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:257](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L257)
+[packages/fclasses/src/StyledHTML.tsx:257](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L257)
 
 ___
 
@@ -1677,7 +1677,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:261](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L261)
+[packages/fclasses/src/StyledHTML.tsx:261](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L261)
 
 ___
 
@@ -1687,7 +1687,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:265](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L265)
+[packages/fclasses/src/StyledHTML.tsx:265](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L265)
 
 ___
 
@@ -1697,7 +1697,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:269](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L269)
+[packages/fclasses/src/StyledHTML.tsx:269](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L269)
 
 ___
 
@@ -1707,7 +1707,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:273](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L273)
+[packages/fclasses/src/StyledHTML.tsx:273](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L273)
 
 ___
 
@@ -1717,7 +1717,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:277](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L277)
+[packages/fclasses/src/StyledHTML.tsx:277](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L277)
 
 ___
 
@@ -1727,7 +1727,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:281](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L281)
+[packages/fclasses/src/StyledHTML.tsx:281](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L281)
 
 ___
 
@@ -1737,7 +1737,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:285](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L285)
+[packages/fclasses/src/StyledHTML.tsx:285](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L285)
 
 ___
 
@@ -1747,7 +1747,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:289](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L289)
+[packages/fclasses/src/StyledHTML.tsx:289](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L289)
 
 ___
 
@@ -1757,7 +1757,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:293](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L293)
+[packages/fclasses/src/StyledHTML.tsx:293](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L293)
 
 ___
 
@@ -1767,7 +1767,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:297](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L297)
+[packages/fclasses/src/StyledHTML.tsx:297](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L297)
 
 ___
 
@@ -1777,7 +1777,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:301](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L301)
+[packages/fclasses/src/StyledHTML.tsx:301](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L301)
 
 ___
 
@@ -1787,7 +1787,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:305](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L305)
+[packages/fclasses/src/StyledHTML.tsx:305](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L305)
 
 ___
 
@@ -1797,7 +1797,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:309](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L309)
+[packages/fclasses/src/StyledHTML.tsx:309](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L309)
 
 ___
 
@@ -1807,7 +1807,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:313](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L313)
+[packages/fclasses/src/StyledHTML.tsx:313](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L313)
 
 ___
 
@@ -1817,7 +1817,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:317](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L317)
+[packages/fclasses/src/StyledHTML.tsx:317](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L317)
 
 ___
 
@@ -1827,7 +1827,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:321](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L321)
+[packages/fclasses/src/StyledHTML.tsx:321](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L321)
 
 ___
 
@@ -1837,7 +1837,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:325](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L325)
+[packages/fclasses/src/StyledHTML.tsx:325](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L325)
 
 ___
 
@@ -1847,7 +1847,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:329](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L329)
+[packages/fclasses/src/StyledHTML.tsx:329](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L329)
 
 ___
 
@@ -1857,7 +1857,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:333](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L333)
+[packages/fclasses/src/StyledHTML.tsx:333](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L333)
 
 ___
 
@@ -1867,7 +1867,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:337](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L337)
+[packages/fclasses/src/StyledHTML.tsx:337](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L337)
 
 ___
 
@@ -1877,7 +1877,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:341](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L341)
+[packages/fclasses/src/StyledHTML.tsx:341](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L341)
 
 ___
 
@@ -1887,7 +1887,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:345](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L345)
+[packages/fclasses/src/StyledHTML.tsx:345](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L345)
 
 ___
 
@@ -1897,7 +1897,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:349](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L349)
+[packages/fclasses/src/StyledHTML.tsx:349](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L349)
 
 ___
 
@@ -1907,7 +1907,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:353](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L353)
+[packages/fclasses/src/StyledHTML.tsx:353](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L353)
 
 ___
 
@@ -1917,7 +1917,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:357](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L357)
+[packages/fclasses/src/StyledHTML.tsx:357](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L357)
 
 ___
 
@@ -1927,7 +1927,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:361](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L361)
+[packages/fclasses/src/StyledHTML.tsx:361](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L361)
 
 ___
 
@@ -1937,7 +1937,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:365](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L365)
+[packages/fclasses/src/StyledHTML.tsx:365](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L365)
 
 ___
 
@@ -1947,7 +1947,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:369](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L369)
+[packages/fclasses/src/StyledHTML.tsx:369](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L369)
 
 ___
 
@@ -1957,7 +1957,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:373](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L373)
+[packages/fclasses/src/StyledHTML.tsx:373](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L373)
 
 ___
 
@@ -1967,7 +1967,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:377](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L377)
+[packages/fclasses/src/StyledHTML.tsx:377](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L377)
 
 ___
 
@@ -1977,7 +1977,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:381](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L381)
+[packages/fclasses/src/StyledHTML.tsx:381](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L381)
 
 ___
 
@@ -1987,7 +1987,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:385](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L385)
+[packages/fclasses/src/StyledHTML.tsx:385](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L385)
 
 ___
 
@@ -1997,7 +1997,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:389](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L389)
+[packages/fclasses/src/StyledHTML.tsx:389](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L389)
 
 ___
 
@@ -2007,7 +2007,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:393](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L393)
+[packages/fclasses/src/StyledHTML.tsx:393](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L393)
 
 ___
 
@@ -2017,7 +2017,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:397](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L397)
+[packages/fclasses/src/StyledHTML.tsx:397](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L397)
 
 ___
 
@@ -2027,7 +2027,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:401](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L401)
+[packages/fclasses/src/StyledHTML.tsx:401](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L401)
 
 ___
 
@@ -2037,7 +2037,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:405](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L405)
+[packages/fclasses/src/StyledHTML.tsx:405](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L405)
 
 ___
 
@@ -2047,7 +2047,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:409](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L409)
+[packages/fclasses/src/StyledHTML.tsx:409](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L409)
 
 ___
 
@@ -2057,7 +2057,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:413](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L413)
+[packages/fclasses/src/StyledHTML.tsx:413](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L413)
 
 ___
 
@@ -2067,7 +2067,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:417](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L417)
+[packages/fclasses/src/StyledHTML.tsx:417](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L417)
 
 ___
 
@@ -2077,7 +2077,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:421](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L421)
+[packages/fclasses/src/StyledHTML.tsx:421](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L421)
 
 ___
 
@@ -2087,7 +2087,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:425](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L425)
+[packages/fclasses/src/StyledHTML.tsx:425](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L425)
 
 ___
 
@@ -2097,7 +2097,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:429](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L429)
+[packages/fclasses/src/StyledHTML.tsx:429](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L429)
 
 ___
 
@@ -2107,7 +2107,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:433](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L433)
+[packages/fclasses/src/StyledHTML.tsx:433](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L433)
 
 ___
 
@@ -2117,7 +2117,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:437](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L437)
+[packages/fclasses/src/StyledHTML.tsx:437](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L437)
 
 ___
 
@@ -2127,7 +2127,7 @@ ___
 
 #### Defined in
 
-[packages/fclasses/src/StyledHTML.tsx:441](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/StyledHTML.tsx#L441)
+[packages/fclasses/src/StyledHTML.tsx:441](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/StyledHTML.tsx#L441)
 
 ## Design API Functions
 
@@ -2173,7 +2173,7 @@ if the key does not exist in the starting components).
 
 #### Defined in
 
-[packages/fclasses/src/Design.tsx:69](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/Design.tsx#L69)
+[packages/fclasses/src/Design.tsx:69](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/Design.tsx#L69)
 
 ___
 
@@ -2206,7 +2206,7 @@ An HOC which yields a designable version of the component to which it is applied
 
 #### Defined in
 
-[packages/fclasses/src/Design.tsx:152](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/Design.tsx#L152)
+[packages/fclasses/src/Design.tsx:152](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/Design.tsx#L152)
 
 ___
 
@@ -2239,7 +2239,7 @@ Alias for extendDomain.
 
 #### Defined in
 
-[packages/fclasses/src/tokenSpec.ts:161](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/tokenSpec.ts#L161)
+[packages/fclasses/src/tokenSpec.ts:161](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/tokenSpec.ts#L161)
 
 ___
 
@@ -2277,7 +2277,7 @@ An HOD which will extend the base design with the supplied designs.
 
 #### Defined in
 
-[packages/fclasses/src/tokenSpec.ts:195](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/tokenSpec.ts#L195)
+[packages/fclasses/src/tokenSpec.ts:195](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/tokenSpec.ts#L195)
 
 ___
 
@@ -2322,7 +2322,7 @@ A function with the same signature as `designable`.
 
 #### Defined in
 
-[packages/fclasses/src/Design.tsx:151](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/Design.tsx#L151)
+[packages/fclasses/src/Design.tsx:151](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/Design.tsx#L151)
 
 ___
 
@@ -2355,7 +2355,7 @@ The combined designs.
 
 #### Defined in
 
-[packages/fclasses/src/tokenSpec.ts:161](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/tokenSpec.ts#L161)
+[packages/fclasses/src/tokenSpec.ts:161](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/tokenSpec.ts#L161)
 
 ___
 
@@ -2386,7 +2386,7 @@ A design.
 
 #### Defined in
 
-[packages/fclasses/src/Design.tsx:265](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/Design.tsx#L265)
+[packages/fclasses/src/Design.tsx:265](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/Design.tsx#L265)
 
 ___
 
@@ -2417,7 +2417,7 @@ An hoc which applies the design.
 
 #### Defined in
 
-[packages/fclasses/src/tokenSpec.ts:116](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/tokenSpec.ts#L116)
+[packages/fclasses/src/tokenSpec.ts:116](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/tokenSpec.ts#L116)
 
 ___
 
@@ -2499,7 +2499,7 @@ apply that design or token to all matching paths.
 
 #### Defined in
 
-[packages/fclasses/src/withDesignAt.ts:92](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/withDesignAt.ts#L92)
+[packages/fclasses/src/withDesignAt.ts:92](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/withDesignAt.ts#L92)
 
 ___
 
@@ -2537,7 +2537,7 @@ all other designes.
 
 #### Defined in
 
-[packages/fclasses/src/Design.tsx:122](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/Design.tsx#L122)
+[packages/fclasses/src/Design.tsx:122](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/Design.tsx#L122)
 
 ___
 
@@ -2592,7 +2592,7 @@ an HTML element will be shown in the markup as an attribute.
 
 #### Defined in
 
-[packages/fclasses/src/withShowDesignKeys.tsx:39](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/withShowDesignKeys.tsx#L39)
+[packages/fclasses/src/withShowDesignKeys.tsx:39](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/withShowDesignKeys.tsx#L39)
 
 ___
 
@@ -2619,7 +2619,7 @@ An HOC which adds the specified classes to a [[stylable]] component.
 
 #### Defined in
 
-[packages/fclasses/src/addClasses.tsx:77](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/addClasses.tsx#L77)
+[packages/fclasses/src/addClasses.tsx:77](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/addClasses.tsx#L77)
 
 ___
 
@@ -2667,7 +2667,7 @@ HOC that can be used for adding classes to a component
 
 #### Defined in
 
-[packages/fclasses/src/addClasses.tsx:75](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/addClasses.tsx#L75)
+[packages/fclasses/src/addClasses.tsx:75](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/addClasses.tsx#L75)
 
 ___
 
@@ -2691,7 +2691,7 @@ HOC which removes the specified classes.
 
 #### Defined in
 
-[packages/fclasses/src/addClasses.tsx:77](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/addClasses.tsx#L77)
+[packages/fclasses/src/addClasses.tsx:77](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/addClasses.tsx#L77)
 
 ___
 
@@ -2733,7 +2733,7 @@ HOC that can be used for removing classes from a component
 
 #### Defined in
 
-[packages/fclasses/src/addClasses.tsx:75](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/addClasses.tsx#L75)
+[packages/fclasses/src/addClasses.tsx:75](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/addClasses.tsx#L75)
 
 ___
 
@@ -2778,7 +2778,7 @@ const BlueDiv = flowHoc(removeClasses('bg-black'), addClasses('bg-blue')(StyledD
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:97](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L97)
+[packages/fclasses/src/types.ts:97](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L97)
 
 ___
 
@@ -2866,7 +2866,7 @@ A component which renders the base component with the added props.
 
 #### Defined in
 
-[packages/fclasses/src/addProps.tsx:69](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/addProps.tsx#L69)
+[packages/fclasses/src/addProps.tsx:69](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/addProps.tsx#L69)
 
 ___
 
@@ -2918,7 +2918,7 @@ A function with the same signature as `addProps`
 
 #### Defined in
 
-[packages/fclasses/src/addProps.tsx:35](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/addProps.tsx#L35)
+[packages/fclasses/src/addProps.tsx:35](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/addProps.tsx#L35)
 
 ___
 
@@ -2961,7 +2961,7 @@ supplied [[Condition]]s evaluate to true.
 
 #### Defined in
 
-[packages/fclasses/src/flowIf.tsx:54](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/flowIf.tsx#L54)
+[packages/fclasses/src/flowIf.tsx:54](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/flowIf.tsx#L54)
 
 ___
 
@@ -3028,7 +3028,7 @@ A composed token.
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:190](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L190)
+[packages/fclasses/src/types.ts:190](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L190)
 
 ___
 
@@ -3059,7 +3059,7 @@ to the target component only if the specified condition evaluates to true.
 
 #### Defined in
 
-[packages/fclasses/src/flowIf.tsx:32](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/flowIf.tsx#L32)
+[packages/fclasses/src/flowIf.tsx:32](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/flowIf.tsx#L32)
 
 ___
 
@@ -3096,7 +3096,7 @@ specified prop.
 
 #### Defined in
 
-[packages/fclasses/src/flowIf.tsx:102](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/flowIf.tsx#L102)
+[packages/fclasses/src/flowIf.tsx:102](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/flowIf.tsx#L102)
 
 ___
 
@@ -3127,7 +3127,7 @@ component will be treated. It accepts 3 type parameters:
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:97](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L97)
+[packages/fclasses/src/types.ts:97](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L97)
 
 ___
 
@@ -3170,7 +3170,7 @@ supplied [[Condition]]s evaluate to false.
 
 #### Defined in
 
-[packages/fclasses/src/flowIf.tsx:86](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/flowIf.tsx#L86)
+[packages/fclasses/src/flowIf.tsx:86](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/flowIf.tsx#L86)
 
 ___
 
@@ -3213,7 +3213,7 @@ supplied [[Condition]]s evaluates to true.
 
 #### Defined in
 
-[packages/fclasses/src/flowIf.tsx:70](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/flowIf.tsx#L70)
+[packages/fclasses/src/flowIf.tsx:70](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/flowIf.tsx#L70)
 
 ___
 
@@ -3251,7 +3251,7 @@ A fragment.
 
 #### Defined in
 
-[packages/fclasses/src/replaceable.tsx:167](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/replaceable.tsx#L167)
+[packages/fclasses/src/replaceable.tsx:167](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/replaceable.tsx#L167)
 
 ___
 
@@ -3301,7 +3301,7 @@ const J = withoutProps<Bar>('X')(F); // expected type error (X not in keyof Bar)
 
 #### Defined in
 
-[packages/fclasses/src/addProps.tsx:94](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/addProps.tsx#L94)
+[packages/fclasses/src/addProps.tsx:94](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/addProps.tsx#L94)
 
 ___
 
@@ -3355,7 +3355,7 @@ remove one when displayed in the browser (eg for responsive design).
 
 #### Defined in
 
-[packages/fclasses/src/replaceable.tsx:181](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/replaceable.tsx#L181)
+[packages/fclasses/src/replaceable.tsx:181](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/replaceable.tsx#L181)
 
 ___
 
@@ -3400,7 +3400,7 @@ An HOC which renders the replacement in place of the target.
 
 #### Defined in
 
-[packages/fclasses/src/replaceable.tsx:143](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/replaceable.tsx#L143)
+[packages/fclasses/src/replaceable.tsx:143](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/replaceable.tsx#L143)
 
 ___
 
@@ -3458,7 +3458,7 @@ startWith
 
 #### Defined in
 
-[packages/fclasses/src/types.ts:97](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/types.ts#L97)
+[packages/fclasses/src/types.ts:97](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/types.ts#L97)
 
 ___
 
@@ -3506,7 +3506,7 @@ HOC which removes the original component and renders the replacement instead.
 
 #### Defined in
 
-[packages/fclasses/src/replaceable.tsx:106](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/replaceable.tsx#L106)
+[packages/fclasses/src/replaceable.tsx:106](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/replaceable.tsx#L106)
 
 ___
 
@@ -3548,7 +3548,7 @@ HOC which attaches the display name.
 
 #### Defined in
 
-[packages/fclasses/src/Design.tsx:44](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/Design.tsx#L44)
+[packages/fclasses/src/Design.tsx:44](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/Design.tsx#L44)
 
 ___
 
@@ -3596,7 +3596,7 @@ An HOC which will strip all but the specified props.
 
 #### Defined in
 
-[packages/fclasses/src/addProps.tsx:82](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/addProps.tsx#L82)
+[packages/fclasses/src/addProps.tsx:82](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/addProps.tsx#L82)
 
 ___
 
@@ -3625,7 +3625,7 @@ Alias for [[addProps]]
 
 #### Defined in
 
-[packages/fclasses/src/addProps.tsx:69](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/addProps.tsx#L69)
+[packages/fclasses/src/addProps.tsx:69](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/addProps.tsx#L69)
 
 ___
 
@@ -3671,7 +3671,7 @@ Alias for [[addPropsIf]]
 
 #### Defined in
 
-[packages/fclasses/src/addProps.tsx:35](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/addProps.tsx#L35)
+[packages/fclasses/src/addProps.tsx:35](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/addProps.tsx#L35)
 
 ___
 
@@ -3700,7 +3700,7 @@ Alias for [[removeProps]]
 
 #### Defined in
 
-[packages/fclasses/src/addProps.tsx:94](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/addProps.tsx#L94)
+[packages/fclasses/src/addProps.tsx:94](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/addProps.tsx#L94)
 
 ___
 
@@ -3759,7 +3759,7 @@ module.exports = buildTailwindConfig({
 
 #### Defined in
 
-[packages/fclasses/src/tailwindcss/buildTailwindConfig.ts:55](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/tailwindcss/buildTailwindConfig.ts#L55)
+[packages/fclasses/src/tailwindcss/buildTailwindConfig.ts:55](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/tailwindcss/buildTailwindConfig.ts#L55)
 
 ___
 
@@ -3809,7 +3809,7 @@ module.exports = getPackageTailwindConfig({
 
 #### Defined in
 
-[packages/fclasses/src/tailwindcss/getPackageTailwindConfig.ts:142](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/tailwindcss/getPackageTailwindConfig.ts#L142)
+[packages/fclasses/src/tailwindcss/getPackageTailwindConfig.ts:142](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/tailwindcss/getPackageTailwindConfig.ts#L142)
 
 ___
 
@@ -3837,7 +3837,7 @@ An HOC which can be applied to a component.
 
 #### Defined in
 
-[packages/fclasses/src/tokenSpec.ts:65](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/tokenSpec.ts#L65)
+[packages/fclasses/src/tokenSpec.ts:65](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/tokenSpec.ts#L65)
 
 ___
 
@@ -3908,7 +3908,7 @@ specification created by merging those partials.  Each parameter may be:
 
 #### Defined in
 
-[packages/fclasses/src/tokenSpec.ts:286](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/tokenSpec.ts#L286)
+[packages/fclasses/src/tokenSpec.ts:286](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/tokenSpec.ts#L286)
 
 ___
 
@@ -3939,7 +3939,7 @@ same key, the value of that key will be composed using `t`.
 
 #### Defined in
 
-[packages/fclasses/src/tokenSpec.ts:161](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/tokenSpec.ts#L161)
+[packages/fclasses/src/tokenSpec.ts:161](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/tokenSpec.ts#L161)
 
 ___
 
@@ -3964,7 +3964,7 @@ A single token meta object which merges the arguments.
 
 #### Defined in
 
-[packages/fclasses/src/flowHoc.tsx:218](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/flowHoc.tsx#L218)
+[packages/fclasses/src/flowHoc.tsx:218](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/flowHoc.tsx#L218)
 
 ___
 
@@ -3986,7 +3986,7 @@ a is TokenSpec<any, any\>
 
 #### Defined in
 
-[packages/fclasses/src/tokenSpec.ts:325](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/tokenSpec.ts#L325)
+[packages/fclasses/src/tokenSpec.ts:325](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/tokenSpec.ts#L325)
 
 ___
 
@@ -4039,7 +4039,7 @@ A function which applies tokens to the clean component.
 
 #### Defined in
 
-[packages/fclasses/src/tokenSpec.ts:223](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/tokenSpec.ts#L223)
+[packages/fclasses/src/tokenSpec.ts:223](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/tokenSpec.ts#L223)
 
 ___
 
@@ -4063,4 +4063,4 @@ An HOC which attaches the supplied metadata as properties of the component.
 
 #### Defined in
 
-[packages/fclasses/src/flowHoc.tsx:64](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c1e93bab5/packages/fclasses/src/flowHoc.tsx#L64)
+[packages/fclasses/src/flowHoc.tsx:64](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6375c3477/packages/fclasses/src/flowHoc.tsx#L64)
