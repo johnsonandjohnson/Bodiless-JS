@@ -24,10 +24,10 @@
     "build": "run-p copy build:lib",
     "build:lib": "tsc -p ./tsconfig.json",
     "build:watch": "npm run build:lib -- --watch",
-    "dev": "npm run build:watch",
     "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api ./src",
     "copy": "copyfiles -u 1 \"./src/**/*.css\" \"./lib/\"",
-    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo",
+    "dev": "npm run build:watch"
   },
   "peerDependencies": {
     "react": "^18.2.0"
