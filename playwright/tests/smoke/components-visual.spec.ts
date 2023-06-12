@@ -77,16 +77,23 @@ const test = baseTest.extend< { eyes: Eyes } >({
     configuration.setBatch(batch);
     configuration.setApiKey(process.env.APPLITOOLS_API_KEY as string);
 
-    // Desktop
+    /**
+     * Default renderers
+     *
+     * Please note if the number of default renderers or all renderers changes, the number of
+     * workers in playwright.config should be updated accordingly.
+     */
     configuration.addBrowser(1920, 1080, BrowserType.CHROME);
-
-    // Mobile
-    configuration.addMobileDevice(IosDeviceName.iPhone_14, ScreenOrientation.PORTRAIT);
     configuration.addDeviceEmulation(AndroidDeviceName.Galaxy_S22, ScreenOrientation.PORTRAIT);
 
-    // Tables
-    configuration.addMobileDevice(IosDeviceName.iPad_9, ScreenOrientation.PORTRAIT);
-    configuration.addDeviceEmulation(DeviceName.Galaxy_Tab_S7, ScreenOrientation.PORTRAIT);
+    if (process.env.PW_INCLUDE_ALL_RENDERERS === 'true') {
+      // Mobile
+      configuration.addMobileDevice(IosDeviceName.iPhone_14, ScreenOrientation.PORTRAIT);
+
+      // Tables
+      configuration.addMobileDevice(IosDeviceName.iPad_9, ScreenOrientation.PORTRAIT);
+      configuration.addDeviceEmulation(DeviceName.Galaxy_Tab_S7, ScreenOrientation.PORTRAIT);
+    }
 
     const eyes: Eyes = new Eyes(runner, configuration);
 

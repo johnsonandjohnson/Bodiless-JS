@@ -18,7 +18,9 @@ const configurators = {
     };
   },
   'smoke-vital': (baseConfig: PlaywrightTestConfig) => {
-    baseConfig.workers = 3;
+    // The number of workers is choosen depending on number of renderers in applitools configuration
+    // in components-visual.spec.ts file
+    baseConfig.workers = process.env.PW_INCLUDE_ALL_RENDERERS === 'true' ? 3 : 5;
     baseConfig.testDir = './playwright/tests/smoke';
     baseConfig.webServer = {
       ...defaultServerConfig,

@@ -6,6 +6,8 @@ env:
 
 on:
   workflow_call:
+  schedule:
+    - cron: "0 3 * * *"
 
 jobs:
   setup:
@@ -14,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event_name == 'schedule' && 'main' || github.event.pull_request.head.sha }}
       - name: Build	
         uses: ./.github/actions/build
       - name: Lint
@@ -22,10 +24,10 @@ jobs:
       - name: Check
         run: npm run check
       - name: Test
-        if: ${{ github.event.label.name == 'ready-to-test' }}
+        if: ${{ github.event_name == 'schedule' || github.event.label.name == 'ready-to-test' }}
         run: npm run test --quiet --colors
       - name: Run deprecated playwright tests
-        if: ${{ github.event.label.name == 'ready-to-test' }}
+        if: ${{ github.event_name == 'schedule' || github.event.label.name == 'ready-to-test' }}
         uses: ./.github/actions/playwright
         with:
           node-test-script: test:monorepo-pw
@@ -33,25 +35,26 @@ jobs:
     
   smoke-vital:
     name: Smoke tests for vital components
-    if: ${{ github.event.label.name == 'ready-to-test' }}
+    if: ${{ github.event_name == 'schedule' || github.event.label.name == 'ready-to-test' }}
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event_name == 'schedule' && 'main' || github.event.pull_request.head.sha }}
       - name: Build
         uses: ./.github/actions/build
       - name: Run vital playwright tests
         env:
           APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
           APPLITOOLS_BATCH_NAME: ${{ github.event.pull_request.title }} (${{ github.event.pull_request.number }})
+          PW_INCLUDE_ALL_RENDERERS: ${{ github.event_name == 'schedule' }}
         uses: ./.github/actions/playwright
         with:
           node-test-script: test:playwright
           test-results-name: Smoke tests for vital components
 
   cleanup:
-    if: always()
+    if: always() && github.event_name != 'schedule'
     runs-on: ubuntu-20.04
     needs: [ setup, smoke-vital ]
     permissions:
@@ -66,7 +69,7 @@ jobs:
   # Generate event file for Attach Unit Test Results helper workflow
   event_file:
     name: "Event File"
-    if: always()
+    if: always() && github.event_name != 'schedule'
     runs-on: ubuntu-latest
     steps:
     - name: Upload
