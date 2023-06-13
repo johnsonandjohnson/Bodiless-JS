@@ -463,6 +463,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
       path.join(dest, 'Dockerfile'),
       path.join(dest, 'UPGRADE.md'),
       path.join(dest, 'CONTRIBUTING.md'),
+      path.join(dest, 'package-lock.json'),
       // remove the starter eslintrcs.  They exist only to disable
       // rules which flag the underscores in the __starter__ template.
       path.join(dest, packagesDir, name, 'eslintrc.js'),
