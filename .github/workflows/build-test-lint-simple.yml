@@ -28,7 +28,7 @@ jobs:
         if: ${{ github.event.label.name == 'ready-to-test' }}
         uses: ./.github/actions/playwright
         with:
-          node-test-script: test:monorepo-pw
+          node-test-script: test:components-functional
           test-results-name: Deprecated tests for editing functionality
     
   smoke-vital:
@@ -47,7 +47,7 @@ jobs:
           APPLITOOLS_BATCH_NAME: ${{ github.event.pull_request.title }} (${{ github.event.pull_request.number }})
         uses: ./.github/actions/playwright
         with:
-          node-test-script: test:playwright
+          node-test-script: test:components-visual
           test-results-name: Smoke tests for vital components
 
   cleanup:

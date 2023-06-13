@@ -3,7 +3,7 @@ description: "Runs playwright tests and publishes results"
 inputs:
   node-test-script:
     required: true
-    description: "The Playwright test script to run e.g. test:playwright"
+    description: "The Playwright test script to run e.g. test:components-visual"
   test-results-name:
     required: true
     description: "The name used to identify Playwright test results"

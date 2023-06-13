@@ -34,13 +34,11 @@
     "postinstall": "./postinstall.sh",
     "setup": "npm install",
     "start": "npx -y turbo run start --filter=@sites/${APP_SITE_NAME:-test-site}",
-    "sites:launch-monorepo": "cd sites/${APP_SITE_DIR_NAME:-test-site} && npm run start",
-    "sites:launch-vital": "cd sites/vital-demo && npm run serve:test",
     "sync:fix": "syncpack fix-mismatches",
     "sync:check": "syncpack list-mismatches",
     "test": "jest",
-    "test:monorepo-pw": "WAIT_ON_TIMEOUT=600000 PLAYWRIGHT_SUITE=smoke-deprecated npx playwright test",
-    "test:playwright": "APPLITOOLS_BATCH_ID=`uuidgen` WAIT_ON_TIMEOUT=600000 PLAYWRIGHT_SUITE=smoke-vital npx playwright test",
+    "test:components-functional": "WAIT_ON_TIMEOUT=600000 PLAYWRIGHT_SUITE=smoke-deprecated npx playwright test",
+    "test:components-visual": "APPLITOOLS_BATCH_ID=`uuidgen` WAIT_ON_TIMEOUT=600000 PLAYWRIGHT_SUITE=smoke-vital npx playwright test",
     "vital-check": "node ./scripts/vital-check"
   },
   "husky": {
