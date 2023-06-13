@@ -12,6 +12,11 @@ In this lesson we will:
 - Shadow Vital text decoration to customize the font weight;
 - Shadow `H1` and `H2` element tokens to use our custom font and its properties.
 
+?> **Note:** For the code files used in this lesson, please see the
+`packages/vital-examples/src/customizing-design-tokens` directory in your local repository or on
+[GitHub](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-examples/src/customizing-design-tokens
+':target=_blank').
+
 ## Assignment
 
 First, we'll need to edit the `tailwind.config.js` file to add the custom variable, colors, font,

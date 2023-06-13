@@ -11,6 +11,11 @@ transition, and we will create a new variation: a larger button, which can be co
 other existing variations. To accomplish this, we will use the best practices for shadowing
 components.
 
+?> **Note:** For the code files used in this lesson, please see the
+`packages/vital-examples/src/shadowing-simple-component` directory in your local repository or on
+[GitHub](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-examples/src/shadowing-simple-component
+':target=_blank').
+
 ## Assignment
 
 ### Creating Our Tokens
