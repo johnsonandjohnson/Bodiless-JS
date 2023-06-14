@@ -36,6 +36,7 @@
     "@bodiless/cli": "^1.0.0-rc.41",
     "@bodiless/data": "^1.0.0-rc.41",
     "@bodiless/fclasses": "^1.0.0-rc.41",
+    "@bodiless/hydration": "^1.0.0-rc.41",
     "@bodiless/i18n": "^1.0.0-rc.41",
     "@bodiless/vital-accordion": "^1.0.0-rc.41",
     "@bodiless/vital-buttons": "^1.0.0-rc.41",
