@@ -63,6 +63,9 @@ const twConfig = {
       backgroundSize: {
         'wave-full': '100% 100%',
       },
+      transitionProperty: {
+        maxHeight: 'max-height',
+      }
     },
   },
   plugins: [

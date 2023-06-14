@@ -23,7 +23,7 @@ const BaseVariation = {
 
 const AccordionVariations = {
   _: identity,
-  FAQSchema: vitalAccordion.WithFAQSchema,
+  FAQSchema: vitalAccordion.WithFAQ,
 };
 
 const BehaviorVariations = {

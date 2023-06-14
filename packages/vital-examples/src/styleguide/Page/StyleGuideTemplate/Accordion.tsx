@@ -23,6 +23,7 @@ import { AccordionClean, vitalAccordion } from '@bodiless/vital-accordion';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { withDefaultContent } from '@bodiless/data';
+import { exampleAccordion } from '../../../how-to-use-domains';
 import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
 const BaseVariation = {
@@ -34,16 +35,18 @@ const BaseVariation = {
 
 const AccordionVariations = {
   Default: '',
+  VideoOnly: exampleAccordion.OnlyVideo,
   FAQ: vitalAccordion.WithFAQ,
+  Animated: exampleAccordion.Animated,
 };
 
 const vitalAccordionVariations = varyDesigns(
   BaseVariation,
   AccordionVariations,
-  {
-    '': '', // vary on itself and produce closed accordion variation
-    Expanded: vitalAccordion.WithInitiallyExpanded,
-  }
+  // {
+  //   '': '', // vary on itself and produce closed accordion variation
+  //   Expanded: vitalAccordion.WithInitiallyExpanded,
+  // }
 );
 
 const vitalAccordionFlowContainer = asFluidToken({
@@ -82,10 +85,14 @@ const data = {
   examples$Default$accordion$body: simplebody,
   examples$DefaultExpanded$accordion$title: { text: 'What is Expanded on Open Accordion?' },
   examples$DefaultExpanded$accordion$body: simplebody,
-  examples$FAQ$accordion$title: { text: 'What is FAQ accordion?' },
-  examples$FAQ$accordion$body: simplebody,
-  examples$FAQExpanded$accordion$title: { text: 'What is Expanded on a FAQ accordion?' },
-  examples$FAQExpanded$accordion$body: simplebody,
+  // examples$FAQ$accordion$title: { text: 'What is FAQ accordion?' },
+  // examples$FAQ$accordion$body: simplebody,
+  // examples$FAQExpanded$accordion$title: { text: 'What is Expanded on a FAQ accordion?' },
+  // examples$FAQExpanded$accordion$body: simplebody,
+  examples$Animated$accordion$title: { text: 'This is an example of a sliding accordion drawer.' },
+  examples$Animated$accordion$body: simplebody,
+  examples$AnimatedExpanded$accordion$title: { text: 'This is an example of an expanded sliding accordion drawer.' },
+  examples$AnimatedExpanded$accordion$body: simplebody,
 };
 
 export const Accordion = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
@@ -98,5 +105,8 @@ export const Accordion = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Defau
       vitalAccordionFlowContainer,
       withDefaultContent(data),
     ),
+  },
+  Spacing: {
+    DescriptionWrapper: 'mb-3',
   },
 });

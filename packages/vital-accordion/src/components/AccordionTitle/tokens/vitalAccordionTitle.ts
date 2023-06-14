@@ -52,7 +52,7 @@ const Default = asAccordionTitleToken(Base, {
   }
 });
 
-const WithFAQSchema = asAccordionTitleToken({
+const WithFAQ = asAccordionTitleToken({
   SEO: {
     Wrapper: asSchemaSource('faq-question'),
   }
@@ -61,5 +61,5 @@ const WithFAQSchema = asAccordionTitleToken({
 export default {
   Base,
   Default,
-  WithFAQSchema,
+  WithFAQ,
 };

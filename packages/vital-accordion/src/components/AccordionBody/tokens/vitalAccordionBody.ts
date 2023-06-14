@@ -21,17 +21,17 @@ import { useIsAccordionContracted, useIsAccordionExpanded } from '../../Accordio
 import { asAccordionBodyToken } from '../AccordionBodyClean';
 
 const Base = asAccordionBodyToken({
-  Core: {
-    Wrapper: as(
-      flowIf(useIsAccordionExpanded)(as('block')),
-      flowIf(useIsAccordionContracted)(as('hidden')),
-    ),
-  },
   Components: {
     Content: on(RichTextClean)(vitalRichText.Default),
   },
   Content: {
     Content: withPlaceholder('Accordion Content'),
+  },
+  Behavior: {
+    Wrapper: as(
+      flowIf(useIsAccordionExpanded)(as('block')),
+      flowIf(useIsAccordionContracted)(as('hidden')),
+    ),
   },
   Schema: {
     Content: withNodeKey('body'),
@@ -44,7 +44,7 @@ const Default = asAccordionBodyToken(Base, {
   },
 });
 
-const WithFAQSchema = asAccordionBodyToken({
+const WithFAQ = asAccordionBodyToken({
   SEO: {
     Content: asSchemaSource('faq-answer'),
   }
@@ -53,5 +53,5 @@ const WithFAQSchema = asAccordionBodyToken({
 export default {
   Base,
   Default,
-  WithFAQSchema,
+  WithFAQ,
 };

@@ -54,11 +54,11 @@ const WithInitiallyExpanded = asAccordionToken({
   Meta: flowHoc.meta.term('Behavior')('Expanded on Open'),
 });
 
-const WithFAQSchema = asAccordionToken({
+const WithFAQ = asAccordionToken({
   SEO: {
     Wrapper: withFAQSchema,
-    Title: vitalAccordionTitle.WithFAQSchema,
-    Body: vitalAccordionBody.WithFAQSchema,
+    Title: vitalAccordionTitle.WithFAQ,
+    Body: vitalAccordionBody.WithFAQ,
   },
   Meta: flowHoc.meta.term('Schema')('With FAQ Schema'),
 });
@@ -74,6 +74,6 @@ export default {
   Base,
   Default,
   WithInitiallyExpanded,
-  WithFAQSchema,
+  WithFAQ,
   WithFlowContainerPreview,
 };

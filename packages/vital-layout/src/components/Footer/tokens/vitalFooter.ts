@@ -53,7 +53,7 @@ const Default = asFooterToken({
     FooterMenu: withNodeKey('footer-menu'),
     _: withNode,
   },
-});
+},);
 
 const WithRewardsExpanding2XL = asFooterToken({
   Components: {

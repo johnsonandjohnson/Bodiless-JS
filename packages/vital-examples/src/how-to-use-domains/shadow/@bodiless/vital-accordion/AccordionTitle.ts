@@ -12,18 +12,6 @@
  * limitations under the License.
  */
 
-import { _default } from './_default';
-import { Accordion } from './Accordion';
-import { Buttons } from './Button';
-import { Card } from './Card';
-import { Typography } from './Typography';
-import { Layout } from './Layout';
+import { exampleAccordionTitle } from '../../../components/AccordionTitle';
 
-export const VitalDemoStyleGuideTemplate = {
-  _default,
-  Accordion,
-  Buttons,
-  Card,
-  Typography,
-  Layout,
-};
+export default exampleAccordionTitle;

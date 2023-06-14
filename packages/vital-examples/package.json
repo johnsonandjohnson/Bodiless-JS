@@ -39,9 +39,11 @@
   },
   "dependencies": {
     "@bodiless/cli": "^1.0.0-rc.41",
+    "@bodiless/components": "^1.0.0-rc.41",
     "@bodiless/core": "^1.0.0-rc.41",
     "@bodiless/data": "^1.0.0-rc.41",
     "@bodiless/fclasses": "^1.0.0-rc.41",
+    "@bodiless/schema-org": "^1.0.0-rc.41",
     "@bodiless/layouts": "^1.0.0-rc.41",
     "@bodiless/layouts-ui": "^1.0.0-rc.41",
     "@bodiless/vital-accordion": "^1.0.0-rc.41",
