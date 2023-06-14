@@ -136,30 +136,8 @@ Now imagine that we've applied this border radius to a number of components on o
 
 By instead encapsulating this styling in its own `Simple` element token as we've done at the beginning of this section, and placing _that_ token on the various components in which we'd like to use it (or even the 'Base' card token from which all other 'Card' components are built if it's decided that all card elements should have this styling) we ensure that if brand guidelines ever shift to alter the value of that border radius, we only need to make a change in one place.
 
-## Practice
-
-<!--
-    Come up with a new task for the reader to perform that is similar in nature to the lesson they
-    just completed, allowing them to practice what they've learned.
--->
-
 ## Resources
 
 * [Adding components in Tailwind](https://tailwindcss.com/docs/plugins#adding-components)
 
 * [Vital Component Template](../../Guides/ComponentTemplate)
-
-## FAQ
-
-<!--
-    If you remember any of the questions you had when completing this task — or can think of any
-    questions a new developer may have — document the Questions and Answers here.
--->
-
-### [ QUESTION 1 ]
-
-<!-- Answer to QUESTION 1 -->
-
-### [ QUESTION 2 ]
-
-<!-- Answer to QUESTION 2 -->
