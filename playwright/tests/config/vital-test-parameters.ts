@@ -17,7 +17,12 @@ import {
   VitalLayoutPage, VitalProductPage, VitalGenericTemplatePage, VitalPage, VitalSectionPage,
 } from '../../pages';
 
-export const visualParameters: VisualParameters[] = [
+/**
+ * All the accessibility violations being ignored are tracked here:
+ * https://github.com/johnsonandjohnson/Bodiless-JS/issues/2130
+ */
+
+export const vitalTestParameters: VitalTestParameters[] = [
   {
     suite: 'Section',
     page: new VitalSectionPage(),
@@ -51,12 +56,14 @@ export const visualParameters: VisualParameters[] = [
      * located by the same coordinates.
      */
     ignoreRegion: new Region(7, 7, 50, 50),
-    switchToItemContent: true
+    switchToItemContent: true,
+    disabledRules: ['aria-allowed-attr', 'frame-title'],
   },
   {
     suite: 'Layout',
     page: new VitalLayoutPage(),
     switchToItemContent: false,
+    disabledRules: ['list'],
   },
   {
     suite: 'Product',
@@ -67,12 +74,14 @@ export const visualParameters: VisualParameters[] = [
     suite: 'Generic Template',
     page: new VitalGenericTemplatePage(),
     switchToItemContent: false,
+    disabledRules: ['list'],
   }
 ];
 
-export type VisualParameters = {
+export type VitalTestParameters = {
   suite: string,
   page: VitalPage,
   ignoreRegion?: Region,
-  switchToItemContent: boolean
+  switchToItemContent: boolean,
+  disabledRules?: string[],
 };

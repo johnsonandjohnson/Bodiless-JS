@@ -16,7 +16,7 @@ import {
   BatchInfo, Configuration, VisualGridRunner, BrowserType, DeviceName, ScreenOrientation, Eyes,
   Target, IosDeviceName, AndroidDeviceName, Region, CheckSettingsAutomation
 } from '@applitools/eyes-playwright';
-import { VisualParameters, visualParameters } from '../config/visual-parameters';
+import { VitalTestParameters, vitalTestParameters } from '../config/vital-test-parameters';
 import { VitalPage } from '../../pages/vital-page';
 
 const test = baseTest.extend< { eyes: Eyes } >({
@@ -62,7 +62,7 @@ const test = baseTest.extend< { eyes: Eyes } >({
 
 test.describe.configure({ mode: 'parallel' });
 
-const runVisualTest = (data: VisualParameters[]) => {
+const runVisualTest = (data: VitalTestParameters[]) => {
   data.forEach((param) => {
     test.describe(param.suite, () => {
       const vitalPage: VitalPage = param.page;
@@ -91,4 +91,4 @@ const runVisualTest = (data: VisualParameters[]) => {
   });
 };
 
-runVisualTest(visualParameters);
+runVisualTest(vitalTestParameters);
