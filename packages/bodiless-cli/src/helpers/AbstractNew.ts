@@ -463,7 +463,6 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
       path.join(dest, 'Dockerfile'),
       path.join(dest, 'UPGRADE.md'),
       path.join(dest, 'CONTRIBUTING.md'),
-      path.join(dest, 'package-lock.json'),
       // remove the starter eslintrcs.  They exist only to disable
       // rules which flag the underscores in the __starter__ template.
       path.join(dest, packagesDir, name, 'eslintrc.js'),
@@ -496,6 +495,28 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     }
   }
 
+  async updateLockFile() {
+    const dest = await this.getArg('dest');
+    const lockFilename = path.join(dest, 'package-lock.json');
+    try {
+      const lockFile = await fs.readFile(lockFilename, 'utf8');
+      const lockData = JSON.parse(lockFile);
+      const removed = Object.keys(lockData.packages).filter(
+        key => {
+          if (lockData?.packages[key]?.link || !!key.match(/^(packages|sites)\//)) {
+            delete lockData.packages[key];
+            return true;
+          }
+          return false;
+        }
+      );
+      console.log('Package keys removed: ', removed);
+      await fs.writeFile(lockFilename, JSON.stringify(lockData, undefined, 2));
+    } catch (error: any) {
+      throw new Error(`Failed to update package-lock: ${lockFilename}.  ${error.message}`);
+    }
+  }
+
   async clean() {
     await this.cleanSites('site');
     await this.cleanSites('package');
@@ -506,6 +527,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     await this.updatePshConfig();
     await this.updateTsConfig();
     await this.moveReadMe();
+    await this.updateLockFile();
     await this.replaceTemplatePackageName();
   }
 
