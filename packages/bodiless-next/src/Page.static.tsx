@@ -40,7 +40,7 @@ const Page: FC<PropsWithChildren<PageProps>> = ({ children, ui, ...rest }) => {
     slug,
     subPageTemplate,
     template,
-  } = pageContext;
+  } = pageContext as any;
 
   const pageData = {
     pagePath: slug,
