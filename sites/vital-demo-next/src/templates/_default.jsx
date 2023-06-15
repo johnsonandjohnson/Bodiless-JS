@@ -12,6 +12,8 @@
  * limitations under the License.
  */
 
+'use client';
+
 import { Fragment } from 'react';
 import { as } from '@bodiless/fclasses';
 import { vitalPage } from '@bodiless/vital-templates';

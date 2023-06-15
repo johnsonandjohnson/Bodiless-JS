@@ -12,7 +12,8 @@
  * limitations under the License.
  */
 module.exports = {
-  extends: [
-    'plugin:@next/next/recommended',
-  ],
-}
+  extends: ['plugin:@next/next/recommended'],
+  rules: {
+    'react/react-in-jsx-scope': 'off',
+  },
+};

@@ -12,10 +12,14 @@
  * limitations under the License.
  */
 
+'use client';
+
 import { StyleGuideTemplateClean } from '@bodiless/vital-templates';
 import { as } from '@bodiless/fclasses';
 import { VitalDemoStyleGuidePage } from '@bodiless/vital-demo';
 
-const StyleGuidePage = as(VitalDemoStyleGuidePage.Default)(StyleGuideTemplateClean);
+const StyleGuidePage = as(VitalDemoStyleGuidePage.Default)(
+  StyleGuideTemplateClean,
+);
 
 export default StyleGuidePage;

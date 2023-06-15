@@ -143,8 +143,6 @@ export const getPageData = async (params: {
 
   const { slug = [''] } = params;
 
-  console.log('R', redirects);
-
   const slugString = `/${slug.join('/')}`;
 
   const realSlug = hasTrailingSlash()

@@ -45,7 +45,9 @@ import ShowDesignKeys from './ShowDesignKeys';
 import StaticPage from './Page.static';
 import GoogleFonts from './GoogleFonts';
 import ManifestMeta from './ManifestMeta';
-import CanonicalURL from './CanonicalUrl';
+// NOTE: this component uses next/router, which is not available in the App Router.
+// It uses it to add a meta link tag. That can also be achieved with generateMetadata().
+// import CanonicalURL from './CanonicalUrl';
 
 const defaultUI: FinalUI = {
   ContextWrapper,
@@ -91,7 +93,7 @@ const EditPage: FC<PropsWithChildren<PageProps>> = observer(({ children, ui, ...
     <NextNodeProvider {...rest}>
       <GoogleFonts />
       <ManifestMeta />
-      <CanonicalURL />
+      {/* <CanonicalURL /> */}
       <ShowDesignKeys>
         <PageDataProvider pageData={pageData}>
           <GitContextProvider gitInfo={gitInfo}>
