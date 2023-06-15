@@ -15,12 +15,10 @@
 import React, { CSSProperties, ComponentType as CT } from 'react';
 import omit from 'lodash/omit';
 import NextPluginImage, {
-  ImageProps as NextPluginImageProps, StaticImageData
+  ImageProps as NextPluginImageProps,
+  StaticImageData,
 } from 'next/image';
-import {
-  ifEditable,
-  withActivatorWrapper,
-} from '@bodiless/core';
+import { ifEditable, withActivatorWrapper } from '@bodiless/core';
 import {
   addClasses,
   DesignableComponentsProps,
@@ -44,24 +42,25 @@ export interface BodilessImageComponents extends DesignableComponents {
   /**
    * Next Image
    */
-  NextImage: CT<NextPluginImageProps>,
+  NextImage: CT<NextPluginImageProps>;
   /**
    * Plain Image
    */
-  Image: CT<any>,
+  Image: CT<any>;
 }
 
 export type NextImageData = ImageData & {
   preset: NextImagePresets;
   base64: string;
-  imgStyle?: React.CSSProperties
+  imgStyle?: React.CSSProperties;
 };
 
-export type NextImageProps = NextPluginImageProps
-& NextImageData & DesignableComponentsProps<BodilessImageComponents>;
+export type NextImageProps = NextPluginImageProps &
+NextImageData &
+DesignableComponentsProps<BodilessImageComponents>;
 
-export type BodilessNextImageProps = NextPluginImageProps
-& DesignableComponentsProps<BodilessImageComponents>;
+export type BodilessNextImageProps = NextPluginImageProps &
+DesignableComponentsProps<BodilessImageComponents>;
 
 const asDesignableNextImage = (ImageComponent: CT<any>) => {
   const startComponents: BodilessImageComponents = {
@@ -78,20 +77,17 @@ const asDesignableNextImage = (ImageComponent: CT<any>) => {
       base64 = '',
       width = 0,
       height = 0,
-      imgStyle= {},
-      loading='lazy',
+      imgStyle = {},
+      loading = 'lazy',
       ...rest
     } = props;
 
-    const {
-      NextImage,
-      Image
-    } = components;
+    const { NextImage, Image } = components;
     type objectFit = CSSProperties['objectFit'];
 
     const style = {
       objectFit: 'fill' as objectFit,
-      ...imgStyle
+      ...imgStyle,
     };
 
     const priority = loading === 'eager';
@@ -103,9 +99,7 @@ const asDesignableNextImage = (ImageComponent: CT<any>) => {
           alt={alt}
           style={style}
           loading={loading}
-          {
-            ...omit(rest, 'canonicalPreset', '_nodeKey')
-          }
+          {...omit(rest, 'canonicalPreset', '_nodeKey')}
         />
       );
     }
@@ -119,9 +113,11 @@ const asDesignableNextImage = (ImageComponent: CT<any>) => {
             style={style}
             priority={priority}
             loading={loading}
-            {
-              ...omit(rest, 'canonicalPreset', '_nodeKey')
-            }
+            {...omit(rest, 'canonicalPreset', '_nodeKey')}
+            // if we aren't hydrating the image component blur
+            // placeholder can't be removed
+            blurDataURL={undefined}
+            placeholder="empty"
           />
         );
       }
@@ -132,18 +128,16 @@ const asDesignableNextImage = (ImageComponent: CT<any>) => {
           alt={alt}
           style={style}
           loading={loading}
-          {
-            ...omit(rest, 'canonicalPreset', '_nodeKey')
-          }
+          {...omit(rest, 'canonicalPreset', '_nodeKey')}
         />
       );
     }
 
     type PresetProps = {
-      useBlur: boolean
-      layoutStyle?: CSSProperties
-      sizes?: any,
-      fill?: boolean
+      useBlur: boolean;
+      layoutStyle?: CSSProperties;
+      sizes?: any;
+      fill?: boolean;
     };
 
     const presetProps: PresetProps = {
@@ -190,21 +184,25 @@ const asDesignableNextImage = (ImageComponent: CT<any>) => {
       imageProps.height = height as number;
     }
 
-    imageProps.placeholder= presetProps.useBlur ? 'blur' : 'empty';
-    imageProps.blurDataURL= presetProps.useBlur ? base64 : undefined;
+    imageProps.placeholder = presetProps.useBlur ? 'blur' : 'empty';
+    imageProps.blurDataURL = presetProps.useBlur ? base64 : undefined;
 
     return (
       <NextImage
         {...imageProps}
         style={{
           ...presetProps.layoutStyle,
-          ...style
+          ...style,
         }}
         sizes={presetProps.sizes || undefined}
         fill={presetProps.fill || undefined}
         priority={priority}
         loading={loading}
         {...omit(rest, 'canonicalPreset', '_nodeKey')}
+        // if we aren't hydrating the image component blur
+        // placeholder can't be removed
+        placeholder="empty"
+        blurDataURL={undefined}
       />
     );
   };
@@ -235,8 +233,6 @@ const asNextImage = flowHoc(
  *
  * it can be useful for cases when Next Image is not enabled for the image
  */
-export const withoutNextImageProps = withoutProps([
-  'preset',
-]);
+export const withoutNextImageProps = withoutProps(['preset']);
 
 export default asNextImage;
