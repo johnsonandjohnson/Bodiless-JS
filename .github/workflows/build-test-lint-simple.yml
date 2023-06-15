@@ -79,7 +79,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ setup, smoke-vital ]
     permissions:
-      actions: read
       checks: write
       pull-requests: write
     steps:
