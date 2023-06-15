@@ -21,20 +21,25 @@ import NextNodeProvider from './NextNodeProvider.bl-edit';
 import ShowDesignKeys from './ShowDesignKeys';
 import GoogleFonts from './GoogleFonts';
 import ManifestMeta from './ManifestMeta';
-import CanonicalURL from './CanonicalUrl';
+// import CanonicalURL from './CanonicalUrl';
 
 const defaultUI: Omit<FinalUI, 'PageEditor'> = {
   ContextWrapper,
 };
 
-const getUI = (ui: UI = {}): Omit<FinalUI, 'PageEditor'> => ({ ...defaultUI, ...ui });
+const getUI = (ui: UI = {}): Omit<FinalUI, 'PageEditor'> => ({
+  ...defaultUI,
+  ...ui,
+});
 
 const Page: FC<PropsWithChildren<PageProps>> = ({ children, ui, ...rest }) => {
   const { ContextWrapper: Wrapper } = getUI(ui);
   const { pageContext } = rest;
   const {
     // @ts-ignore non-existing subPageTemplate, and template, types in pageContext.
-    slug, subPageTemplate, template,
+    slug,
+    subPageTemplate,
+    template,
   } = pageContext;
 
   const pageData = {
@@ -47,12 +52,10 @@ const Page: FC<PropsWithChildren<PageProps>> = ({ children, ui, ...rest }) => {
       <PageDataProvider pageData={pageData}>
         <GoogleFonts />
         <ManifestMeta />
-        <CanonicalURL />
+        {/* <CanonicalURL /> */}
         <ShowDesignKeys>
           <StaticPage>
-            <Wrapper>
-              {children}
-            </Wrapper>
+            <Wrapper>{children}</Wrapper>
           </StaticPage>
         </ShowDesignKeys>
       </PageDataProvider>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Document } from '@bodiless/next';
 
-const documentProps = {
+const documentProps: any = {
   PreBody: null,
   PostHead: null,
 };
@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === 'production') {
     <noscript
       key="google-tagmanager-noscript"
       dangerouslySetInnerHTML={{
-        __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${id}" height="0" width="0" style="display: none; visibility: hidden" aria-hidden="true"></iframe>`
+        __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${id}" height="0" width="0" style="display: none; visibility: hidden" aria-hidden="true"></iframe>`,
       }}
     />
   );
