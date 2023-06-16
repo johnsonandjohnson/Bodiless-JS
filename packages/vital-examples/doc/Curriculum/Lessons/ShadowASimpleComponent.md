@@ -11,10 +11,32 @@ transition, and we will create a new variation: a larger button, which can be co
 other existing variations. To accomplish this, we will use the best practices for shadowing
 components.
 
-?> **Note:** For the code files used in this lesson, please see the
-`packages/vital-examples/src/shadowing-simple-component` directory in your local repository or on
-[GitHub](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-examples/src/shadowing-simple-component
-':target=_blank').
+<!-- Inlining HTML to add multi-line info block with unordered list and codeblock. -->
+<div class="warn">
+  <strong>Note:</strong> For the code files used in this lesson, please see the following (either
+  locally or on GitHub):
+
+  - `packages/vital-examples/src/shadowing-simple-component`
+    ([GitHub](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-examples/src/shadowing-simple-component
+    ':target=_blank'))
+  - `packages/vital-examples/src/styleguide/Page/StyleGuideTemplate/Button.tsx`
+    ([GitHub](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-examples/src/styleguide/Page/StyleGuideTemplate/Button.tsx
+    ':target=_blank'))
+    - This is the
+      [template](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/sites/vital-examples/src/data/pages/shadow-simple-component/template.json
+      ':target=_blank') code for the page referenced below.
+
+  To see the "Buttons" page in action, build and run the Vital Examples site—
+
+  ```shell
+  cd sites/vital-examples
+  npm run build
+  npm run start
+  ```
+
+  —and go to <http://localhost:8000/shadow-simple-component/>.
+
+</div>
 
 ## Assignment
 

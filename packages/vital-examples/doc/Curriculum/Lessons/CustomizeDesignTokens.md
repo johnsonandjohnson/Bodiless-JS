@@ -12,10 +12,32 @@ In this lesson we will:
 - Shadow Vital text decoration to customize the font weight;
 - Shadow `H1` and `H2` element tokens to use our custom font and its properties.
 
-?> **Note:** For the code files used in this lesson, please see the
-`packages/vital-examples/src/customizing-design-tokens` directory in your local repository or on
-[GitHub](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-examples/src/customizing-design-tokens
-':target=_blank').
+<!-- Inlining HTML to add multi-line info block with unordered list and codeblock. -->
+<div class="warn">
+  <strong>Note:</strong> For the code files used in this lesson, please see the following (either
+  locally or on GitHub):
+
+  - `packages/vital-examples/src/customizing-design-tokens`
+    ([GitHub](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-examples/src/customizing-design-tokens
+    ':target=_blank'))
+  - `packages/vital-examples/src/styleguide/Page/StyleGuideTemplate/` `Typography.tsx`
+    ([GitHub](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-examples/src/styleguide/Page/StyleGuideTemplate/Typography.tsx
+    ':target=_blank'))
+    - This is the
+      [template](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/sites/vital-examples/src/data/pages/customizing-design-tokens/template.json
+      ':target=_blank') code for the page referenced below.
+
+  To see the "Typography" page in action, build and run the Vital Examples site—
+
+  ```shell
+  cd sites/vital-examples
+  npm run build
+  npm run start
+  ```
+
+  —and go to <http://localhost:8000/customizing-design-tokens/>.
+
+</div>
 
 ## Assignment
 
