@@ -4,6 +4,10 @@
     "esbenp.prettier-vscode",
     "msjsdiag.debugger-for-chrome",
     "PKief.material-icon-theme",
-    "eamodio.gitlens"
+    "eamodio.gitlens",
+    "streetsidesoftware.code-spell-checker",
+    "davidanson.vscode-markdownlint",
+    "stkb.rewrap",
+    "shardulm94.trailing-spaces",
   ]
 }
