@@ -124,15 +124,6 @@ And in the event that this token has more widespread applications (e.g., a token
 radius to an element), we can
 -->
 
-## Practice
-
-:construction: _In progress..._
-
-<!-- @TODO:
-    Come up with a new task for the reader to perform that is similar in nature to the lesson they
-    just completed, allowing them to practice what they've learned.
--->
-
 ## Resources
 
 - [Adding components | Tailwind CSS](https://tailwindcss.com/docs/plugins#adding-components
@@ -140,18 +131,3 @@ radius to an element), we can
 - [SVGR Playground](https://react-svgr.com/playground/ ':target=_blank') - For converting SVGs to
   React components.
 - [Using Tailwind for Background Images](../../Guides/TailwindGuide#using-tailwind-for-background-images)
-
-<!-- @TODO:
-## FAQ
-
-    If you remember any of the questions you had when completing this task — or can think of any
-    questions a new developer may have — document the Questions and Answers here.
-
-### [ QUESTION 1 ]
-
-     Answer to QUESTION 1
-
-### [ QUESTION 2 ]
-
-     Answer to QUESTION 2
--->
