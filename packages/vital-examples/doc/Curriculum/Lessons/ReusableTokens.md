@@ -2,22 +2,59 @@
 
 ## Overview
 
-In this lesson we will be creating two reusable styling tokens and applying them to elements of our 'Default' and 'Hero' Vital card variants.
+In this lesson, we will be creating two reusable styling tokens and applying them to elements of our
+`Default` and `Hero` Vital card variants.
 
-One will apply a simple bottom right border radius, and the other will apply a more complex set of custom CSS rules to be applied to the 'Image' slot of the 'Hero' card.
+One will apply a simple bottom-right border radius, and the other will apply a more complex set of
+custom CSS rules to be applied to the `Image` slot of the `Hero` card.
 
-The purpose of this lesson is to better understand the preferred method of creating reusable tokens, and the reasons why this pattern is encouraged when repeating styling choices across multiple components in a site.
+The purpose of this lesson is to better understand the preferred method of creating reusable tokens,
+and the reasons why this pattern is encouraged when repeating styling choices across multiple
+components in a site.
+
+<!-- Inlining HTML to add multi-line info block with unordered list and codeblock. -->
+<div class="warn">
+  <strong>Note:</strong> For the code files used in this lesson, please see the following (either
+  locally or on GitHub):
+
+  - `packages/vital-examples/src/reusable-tokens`
+    ([GitHub](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-examples/src/reusable-tokens
+    ':target=_blank'))
+  - `packages/vital-examples/src/styleguide/Page/StyleGuideTemplate/Card.tsx`
+    ([GitHub](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-examples/src/styleguide/Page/StyleGuideTemplate/Card.tsx
+    ':target=_blank'))
+    - This is the
+      [template](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/sites/vital-examples/src/data/pages/reusable-tokens/template.json
+      ':target=_blank') code for the page referenced below.
+
+  To see the "Example Cards" page in action, build and run the Vital Examples site—
+
+  ```shell
+  cd sites/vital-examples
+  npm run build
+  npm run start
+  ```
+
+  —and go to <http://localhost:8000/reusable-tokens/>.
+
+</div>
 
 ## Assignment
 
-### Creating a new CSS rule in Tailwind for our image border radius
+### Creating a New CSS Rule in Tailwind for Our Image Border Radius
 
-To begin, we'll use the `addComponents` function provided by Tailwind to first create a collection of CSS rules containing the corner radius styling to be applied to the 'Hero' card.
+To begin, we'll use the `addComponents` function provided by Tailwind to first create a collection
+of CSS rules containing the corner radius styling to be applied to the `Hero` card.
 
-?> **Note:** In most cases, the default utility classes provided by Tailwind will be enough to meet your styling needs, but in cases such as this where we are attempting to apply a more complex set of styling rules to a component, we can construct those CSS rules directly in our Tailwind configuration file as shown below:
+?> **Note:** In most cases, the default utility classes provided by Tailwind will be enough to meet
+your styling needs, but in cases such as this, where we are attempting to apply a more complex set
+of styling rules to a component, we can construct those CSS rules directly in our Tailwind
+configuration file as shown below:
 
 ```js
-plugin(({ addComponents }) => {
+const twConfig = {
+  plugins: [
+    plugin(({ addComponents }) => {
       addComponents({
         '.card-corner': {
           width: 'calc(100% - 60px)',
@@ -39,82 +76,60 @@ plugin(({ addComponents }) => {
           float: 'none',
           'border-radius': '0 0 0 400px',
         },
+        // ...
       });
     }),
+  ],
+};
 ```
 
-Next, we will create both a 'Card' and 'Radius' component folder inside of our example package `reusable-tokens`.
+Next, we will create both a `Card` and `Radius` component folder inside of our example package,
+`reusable-tokens`.
 
-The 'Card' component folder will contain the 'Default' and 'Hero' card tokens in an `exampleCard.ts` token collection file, and the 'Radius' component folder will contain the corner radius styling tokens in an `exampleRadius.ts` token collection file.
+The `Card` component folder will contain the `Default` and `Hero` card tokens in an `exampleCard.ts`
+token collection file, and the `Radius` component folder will contain the corner radius styling
+tokens in an `exampleRadius.ts` token collection file.
 
-Please reference the [Vital Component Template Documentation](../../Guides/ComponentTemplate) to ensure that you are following the proper naming conventions and file structure when creating a new component folder.
+Please reference the [Vital Component Template documentation](../../Guides/ComponentTemplate) to
+ensure that you are following the proper naming conventions and file structure when creating a new
+component folder.
 
-### Creating Our Reusable 'Radius' tokens
+### Creating Our Reusable 'Radius' Tokens
 
-In our `exampleRadius.ts` token collection file we will create two tokens that will be used to apply two different types of border radius styles to our card components.
+In our `exampleRadius.ts` token collection file, we will create two tokens that will be used to
+apply two different types of `border-radius` styles to our card components.
 
-```js
+[exampleRadius.ts](https://raw.githubusercontent.com/johnsonandjohnson/Bodiless-JS/main/packages/vital-examples/src/reusable-tokens/components/Radius/tokens/exampleRadius.ts
+':include :type=code :fragment=radius-tokens')
 
-const Simple = asElementToken({
-  Theme: {
-    _: 'rounded-br-[40px]',
-  },
-});
+Although we are applying these tokens to card elements in this lesson, they've been written in a way
+that will allow us to apply them to essentially any component/slot that we want.
 
-const Fancy = asElementToken({
-  Theme: {
-    _: 'card-corner md:card-corner-md lg:card-corner-lg',
-  },
-});
+As we will be shadowing both the `Default` and `Hero` Vital card variants, let's create two separate
+card tokens inside of our `exampleCard.ts` token collection file and apply our previously-created
+radius tokens there:
 
-```
+[exampleCard.ts](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-examples/src/reusable-tokens/components/Card/tokens/exampleCard.ts
+':include :type=code :fragment=card-tokens')
 
-Although we are applying these tokens to card elements in this lesson, they've been written in a way that will allow us to apply them to essentially any component/slot that we want.
+It would also be entirely acceptable to apply the `'rounded-br-[40px]'` class from our `Simple`
+element token directly to the `Theme` domain of our `Default` card token as follows:
 
-As we will be shadowing both the 'Default' and 'Hero' Vital card variants, let's create two separate card tokens inside of our `exampleCard.ts` token collection file and apply our previously-created radius tokens there:
-
-```js
-
-const Default = asCardToken(vitalCardBase.Basic, {
-  Theme: {
-    ContentWrapper: exampleRadius.Simple,
-  },
-});
-
-const Hero = asCardToken({
-  ...vitalCardBase.Hero,
-  Theme: {
-    ...vitalCardBase.Hero.Theme,
-/* Note the use of 'as' here. This is a composition utility provided 
-* by BodilessJS that converts a list of tokens into an HOC. When applying
-* multiple tokens to a component, 'as' must be used to properly combine them.
-*
-* In the 'Default' token example above, you'll notice that because only one * token is being applied to the 'ContentWrapper' slot, 'as' is not needed.
-*/
-    Image: as(vitalCardBase.Hero.Theme.Image, exampleRadius.Fancy),
-  },
-});
-
-```
-
-It would also be entirely acceptable to apply the `"rounded-br-[40px]` class from our `Simple` element token directly to the `Theme` domain of our 'Default' card token as follows:
-
-```js
-
+```ts
 const Default = asCardToken(vitalCardBase.Default, {
   Theme: {
     ContentWrapper: 'rounded-br-[40px]',
   },
 });
-
 ```
 
-But what happens if the brand requires that this bit of styling be applied to a number of other elements across the site? In this case, let's also apply this same utility class to the 'Hero' card's `ContentWrapper` slot.
+But what happens if the brand requires that this bit of styling be applied to a number of other
+elements across the site? In this case, let's also apply this same utility class to the `Hero`
+card's `ContentWrapper` slot.
 
-In order to achieve this we can apply that class directly to the 'Hero' token as follows:
+In order to achieve this, we can apply that class directly to the `Hero` token as follows:
 
-```js
-
+```ts
 const Hero = asCardToken({
   ...vitalCardBase.Hero,
   Spacing: {
@@ -125,19 +140,25 @@ const Hero = asCardToken({
     Image: as(vitalCardBase.Hero.Theme.Image, exampleRadius.Fancy),
   },
 });
-
 ```
 
-Though this will achieve the desired result, consider a future scenario where the brand guidelines have changed, and this border radius value is decreased to '20px.'
+Though this will achieve the desired result, consider a future scenario where the brand guidelines
+have changed, and this `border-radius` value is decreased to `20px`.
 
-Because we've duplicated this code in two places, we'll now need to change the value of both instances of this utility class from '40px' to '20px'.
+Because we've duplicated this code in two places, we'll now need to change the value of both
+instances of this utility class from `40px` to `20px`.
 
-Now imagine that we've applied this border radius to a number of components on our site. You can probably begin to see how tedious it might be track down all instances and make this change.
+Now imagine that we've applied this `border-radius` to a number of components on our site. You can
+probably begin to see how tedious it might be to track down all instances and make this change.
 
-By instead encapsulating this styling in its own `Simple` element token as we've done at the beginning of this section, and placing _that_ token on the various components in which we'd like to use it (or even the 'Base' card token from which all other 'Card' components are built if it's decided that all card elements should have this styling) we ensure that if brand guidelines ever shift to alter the value of that border radius, we only need to make a change in one place.
+By, instead, encapsulating this styling in its own `Simple` element token, as we've done at the
+beginning of this section, and placing _that_ token on the various components in which we'd like to
+use it (or even the `Base` card token from which all other `Card` components are built, if it's
+decided that all card elements should have this styling), we ensure that if brand guidelines ever
+shift to alter the value of that `border-radius`, we only need to make a change in one place.
 
 ## Resources
 
-* [Adding components in Tailwind](https://tailwindcss.com/docs/plugins#adding-components)
-
-* [Vital Component Template](../../Guides/ComponentTemplate)
+- [Adding components | Tailwind CSS](https://tailwindcss.com/docs/plugins#adding-components
+  ':target=_blank')
+- [Vital Component Template](../../Guides/ComponentTemplate)
