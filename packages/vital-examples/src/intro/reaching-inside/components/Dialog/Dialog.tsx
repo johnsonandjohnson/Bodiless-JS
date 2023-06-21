@@ -31,7 +31,7 @@ const dialogComponents: DialogComponents = {
 };
 
 /**
- * The actual clean compnoent base is defined next.
+ * The actual clean component base is defined next.
  *
  * Note that it will receive a `components` prop which contains all the
  * starting elements defined above, already modified by any Vital tokens
@@ -59,8 +59,8 @@ const DialogCleanBase: FC<DialogBaseProps> = ({ components: C, ...rest }) => (
  * the starting component in each slot, and pass the resulting sub-component
  * through to the `DialogCleanBase` in the `components` prop.
  *
- * The second paramter to `designable` is a string which will be used
- * to identify slots in the rendered parkup.  This makes it easier
+ * The second parameter to `designable` is a string which will be used
+ * to identify slots in the rendered markup.  This makes it easier
  * to understand which slot to target in order to modify a particular
  * DOM element.
  */

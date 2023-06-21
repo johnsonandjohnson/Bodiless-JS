@@ -23,7 +23,7 @@ import { useChameleonContext } from './withChameleonContext';
  * Use this function when you want to separate the form controlling the chameleon
  * state from the component on which the chameleon acts (for example, if you want
  * to add controls to a component edit form, but actually act on the component
- * to which the edit form was added), eg:
+ * to which the edit form was added), e.g.:
  *
  * ```
  * flowRight(

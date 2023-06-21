@@ -24,7 +24,7 @@ import withNode from './withNode';
  * props to the target component:
  * - `componentData`: The `data` property from the node.
  * - `setComponentData`: A function which calls the `setData` method
- *    on the node,
+ *    on the node.
  *
  * @param defaultData
  * A default value for `componentData` when the node's `data` property is empty.

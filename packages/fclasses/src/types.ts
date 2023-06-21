@@ -159,7 +159,7 @@ export type Enhancer<A, B = {}> = HOC<B, A>;
 export type Injector<R, B = {}> = HOC<B & Partial<R>, {}, R>;
 
 /**
- * Type of the filter function which should be passed to `withTokenFilter`
+ * Type of the filter function which should be passed to `withTokenFilter`.
  *
  * @see withTokenFilter
  * @hidden
@@ -167,7 +167,7 @@ export type Injector<R, B = {}> = HOC<B & Partial<R>, {}, R>;
 export type TokenFilterTest = (token: HOCWithMeta) => boolean;
 
 /**
- * Type of the parameters to flowHoc  Overloaded to accept metadata
+ * Type of the parameters to `flowHoc`. Overloaded to accept metadata
  * objects (or undefined) in addition to HOCs.
  *
  * @category HOC Utility
@@ -229,7 +229,7 @@ export type HocDesign<C extends DesignableComponents = DesignableComponents> = {
  * This is the type of the props for a designable component.
  *
  * @param C
- * The components or "sots" accepted by this designable component.
+ * The components or "slots" accepted by this designable component.
  *
  * @category Design API
  */
@@ -238,10 +238,10 @@ export type DesignableProps<C extends DesignableComponents = DesignableComponent
 };
 
 /**
- * TYpe of the props of a base component which can be made designable.
+ * Type of the props of a base component which can be made designable.
  *
  * @param C
- * The components or "sots" accepted by this designable component.
+ * The components or "slots" accepted by this designable component.
  *
  *
  * @example
@@ -272,14 +272,14 @@ export type HOD<
 > = (design?:Design<C, D>) => Design<C, D>;
 
 /**
- * This is a HOD that accepts any DesignableComponents
+ * This is a HOD that accepts any `DesignableComponents`.
  *
  * @category Design API
  */
 export type FluidHOD = HOD<DesignableComponents>;
 
 /**
- * [[Design]] that accepts any DesignableComponents
+ * [[Design]] that accepts any `DesignableComponents`.
  *
  * @category Design API
  */
@@ -307,30 +307,30 @@ export type ReservedDomains<
   D extends object,
 > = {
   /**
-     * A list of other tokens which should be applied.
-     */
+   * A list of other tokens which should be applied.
+   */
   Compose?: {
     [key: string]: ComposedToken<C, D>,
   },
   /**
-     * If specified, the entire token will be wrapped in a flow toggle using
-     * this condition hook. Note, the condition is applied to the whole token,
-     * so it will not have access to any contexts or content nodes provided by
-     * the token itself.
-     */
+   * If specified, the entire token will be wrapped in a flow toggle using
+   * this condition hook. Note, the condition is applied to the whole token,
+   * so it will not have access to any contexts or content nodes provided by
+   * the token itself.
+   */
   Flow?: FlowHoc | undefined,
   /**
-     * Metadata which should be attached to this token (and to any components
-     * to which the token is applied).
-     */
+   * Metadata which should be attached to this token (and to any components
+   * to which the token is applied).
+   */
   Meta?: TokenMeta,
 };
 
 /**
  * Type of an argument to `as` and/or the value of a key in an Extended Design.
  * May be:
- * - A token specified in token object notation
- * - A token specified as an HOC
+ * - A token specified in token object notation;
+ * - A token specified as an HOC;
  * - A token specified as a string of classes.
  *
  * @category Token API
@@ -376,8 +376,8 @@ export type FinalDesign<
 
 /**
    * A Design is a keyed set of tokens which can apply to a designable
-   * component. The keys correspond to the design elements
-   * - includes a special key which contains tokens to be applied to the
+   * component. The keys correspond to the design elements.
+   * - Includes a special key which contains tokens to be applied to the
    *   component as a whole.
    * - Allows each value to be specified as a VitalDS extended token definition.
    *
@@ -411,7 +411,7 @@ export type Design<
 export type Condition<P = any> = (props: P) => boolean;
 
 /**
- * Type of a set of domains uses in a [[TokenSpec]]
+ * Type of a set of domains uses in a [[TokenSpec]].
  *
  * @category Token API
  */
@@ -467,7 +467,7 @@ export type TokenSpec<
  *
  * @param specs
  * A list of partial token specifications.  These may be objects, in which case
- * their keys should be a subset of the alloed domains.  They may also be strings
+ * their keys should be a subset of the allowed domains.  They may also be strings
  * or HOCs, which will be converted to partial token specifications, applying
  * the classes or HOC to the `_` key of the `Core` domain.
  *

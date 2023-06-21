@@ -27,7 +27,7 @@ import { useExtendHandler, useClickOutside } from './hooks';
  *
  * Only adds the extension when in edit mode.
  *
- * @param event The name of the event whose handler is to be extended
+ * @param event The name of the event whose handler is to be extended.
  * @param useExtender Custom hook returning the handler to add. Will be invoked
  *        during render and receive the original props of the component.
  *
@@ -69,7 +69,7 @@ export type ClickOutsideProps = {
 };
 
 /**
- * Utility HOC to add onClickOutside handler to the original component.
+ * Utility HOC to add `onClickOutside` handler to the original component.
  * A callback will be executed on both click outside as well as on the `esc` keypress.
  *
  * @return An HOC which will add the handler.
