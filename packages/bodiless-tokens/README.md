@@ -10,7 +10,7 @@ better understand the general patterns at work.
 
 At a high level, this API expresses *Design Tokens* as React higher-order
 components, and provides utilities which allow you to apply them to both simple
-elements and compound components. In most cases, the design token HOC's leverage
+elements and compound components. In most cases, the design token HOCs leverage
 "atomic" or "functional" CSS, defining units of design as collections of utility
 classes.
 
@@ -76,7 +76,7 @@ const withComposedToken = flowHoc(
 However, there are a few key differences:
 
 - Metadata (static properties) attached to a component are prppagated through
-  the chain of HOC's.
+  the chain of HOCs.
 - If you are using Typescript, the type of the parameters is constrained to be an
   HOC (or an object specifying metadata, see below).
 - There is an optional overload to accept a "TokenMeta" object which consists of
@@ -507,7 +507,7 @@ const StandardCard = withDesign({
 
 We can also use the `startWith()` HOC, instead of replacing the whole component, it will only replace the base component but still use any hoc that might have wrapped it.
 
-As with FClasses, HOC's created via `withDesign()` are themselves reusable, so
+As with FClasses, HOCs created via `withDesign()` are themselves reusable, so
 we can write:
 
 ``` js
@@ -519,7 +519,7 @@ const StandardPinkCard = asStandardCard(PinkCard);
 const StandardRedCard = asStandardCard(RedCard);
 ```
 
-And, also as with FClasses, the HOC's can be composed:
+And, also as with FClasses, the HOCs can be composed:
 
 ``` js
 const StandardPinkAndGreenCard = flowRight(

@@ -193,13 +193,13 @@ export const extendDesignable = (transformDesign: TransformDesign = identity) =>
 
 /**
  * Makes a component "designable". A designable component defines a set of constituent
- * sub-components which can be modified by applying one or more HOC's.  You specify the
- * HOC's to apply to each sub-component via the `withDesign` HOC.
+ * sub-components which can be modified by applying one or more HOCs.  You specify the
+ * HOCs to apply to each sub-component via the `withDesign` HOC.
  *
  * @param startComponents
  * An object defining the set of constituent subcomponents. Each key
  *   is a string which identifies the component. Each value is the component itself, which
- *   will be modified by any HOC's provided by withDesign.
+ *   will be modified by any HOCs provided by withDesign.
  *
  * @return
  * An HOC which yields a designable version of the component to which it is applied.

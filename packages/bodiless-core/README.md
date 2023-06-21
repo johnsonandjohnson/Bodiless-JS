@@ -193,7 +193,7 @@ const ComponentWithMenuOption = flowRight(
 )(AnyComponent)
 ```
 
-Finally, you will want to be sure that none of the above HOC's are applied when not in edit mode.
+Finally, you will want to be sure that none of the above HOCs are applied when not in edit mode.
 For this, `ifEditable` comes in handy:
 ```
 const ComponentWithMenuOption = ifEditable(
@@ -202,7 +202,7 @@ const ComponentWithMenuOption = ifEditable(
   withActivatorWrapper('div'),
 )(AnyComponent)
 ```
-Note that the order of these HOC's is important.
+Note that the order of these HOCs is important.
 
 ## Context Menu Options
 

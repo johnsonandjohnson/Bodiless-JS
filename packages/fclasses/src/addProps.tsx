@@ -148,7 +148,7 @@ export const withPropsIf = addPropsIf;
 /**
  * A React `Fragment` which ensures that all invalid props are removed.
  * This is useful in conjunction with [[replaceWith]], [[startWith]]
- * or [[remove]], so that any props added by otehr HOC's will be discarded.
+ * or [[remove]], so that any props added by otehr HOCs will be discarded.
  *
  * @example
  * ```

@@ -168,7 +168,7 @@ export type TokenFilterTest = (token: HOCWithMeta) => boolean;
 
 /**
  * Type of the parameters to flowHoc  Overloaded to accept metadata
- * objects (or undefined) in addition to HOC's.
+ * objects (or undefined) in addition to HOCs.
  *
  * @category HOC Utility
  */

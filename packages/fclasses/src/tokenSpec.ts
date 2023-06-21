@@ -51,7 +51,7 @@ function getHocForDomain<C extends DesignableComponents, D extends object = any>
 
 /**
  * Converts a list of token into an HOC which can be applied to
- * a component. Tokens to apply may be expressed in token object notation, as HOC's
+ * a component. Tokens to apply may be expressed in token object notation, as HOCs
  * or as className strings.
  *
  * @param specs
@@ -232,9 +232,9 @@ const on = (
 /**
  * Used to create a token specification.
  *
- * A token specification is an object which organizes Token HOC's into "domains" which
+ * A token specification is an object which organizes Token HOCs into "domains" which
  * can then be selectively overridden. With the exception of certain [[ReservedDomains]],
- * each domain is a [[Design]], defining a set of HOC's which should be applied to
+ * each domain is a [[Design]], defining a set of HOCs which should be applied to
  * the individual design keys (or slots) in the target component.
  *
  * Normally, each component will use this create its own `as...Token` function in order
@@ -254,7 +254,7 @@ const on = (
  *   allowed domains.  Keys will be re-ordered to match the canonoical order, and missing keys
  *   will be supplied.
  * - a string, which will be treated as a set of classes to be applied to the `_` key of the
- *   `Core` domain.  The `_` key in a design applies HOC's or classes to the component as a
+ *   `Core` domain.  The `_` key in a design applies HOCs or classes to the component as a
  *   whole rather than one of its slots.
  * - a function, which will be treated as an HOC to be applied to the `_` key of the `Core`
  *   domain.

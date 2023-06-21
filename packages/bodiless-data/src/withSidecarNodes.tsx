@@ -73,8 +73,8 @@ const endSidecarNodes: HOC = Component => {
 
 /**
  * `withSidecarNodes` allows you to establish a `ContentNode` sub-hierarchiy which should
- * be used by a series of one or more HOC's. Any nodes created by the HOC's enclosed in this
- * wrapper will not affect the hierarchy for subsequent HOC's *outside* the wrapper. For
+ * be used by a series of one or more HOCs. Any nodes created by the HOCs enclosed in this
+ * wrapper will not affect the hierarchy for subsequent HOCs *outside* the wrapper. For
  * example:
  * ```js
  * flowRight(
@@ -90,7 +90,7 @@ const endSidecarNodes: HOC = Component => {
  * This is useful, for example, if you want to apply an enhancement HOC which uses its own
  * content node(s) without affecting the node paths of other children of the wrapped component.
  *
- * @param hocs A list of HOC's to be applied using the parallel node hierarchy.  These will
+ * @param hocs A list of HOCs to be applied using the parallel node hierarchy.  These will
  *             be composed using lodash `flowRight`
  *
  * @return an HOC which can wrap any Component using the Bodiless `ContentNode` system.

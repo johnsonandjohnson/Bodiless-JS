@@ -40,7 +40,7 @@ import { useChameleonContext } from './withChameleonContext';
  * Note the use of `withTitle` here.  Only design elements with title metadata will be considered
  * valid chameleon states.
  *
- * @return The wrapped component enhanced by the appropriate HOC's from the design.
+ * @return The wrapped component enhanced by the appropriate HOCs from the design.
  */
 const applyChameleon: HOC = Component => {
   const Chameleon: FC<any> = props => {

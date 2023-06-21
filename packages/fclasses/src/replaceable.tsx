@@ -118,7 +118,7 @@ export const startWith = (ReplacementComponent: ComponentType<any>): HOC => Comp
 };
 /**
  * Returns a HOC which replaces the component to which it is applied with another.
- * Unlike `startWith`, this replaces the component along with any hoc's which
+ * Unlike `startWith`, this replaces the component along with any HOCs which
  * had previously been applied.
  *
  * @param Replacement
