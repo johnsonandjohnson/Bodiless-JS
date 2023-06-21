@@ -275,7 +275,7 @@ const SpecialGreenCallout = flow(
 )(Callout);
 ```
 
-The higher order components are reusable, so for example:
+The higher-order components are reusable, so for example:
 
 ```
 const withRedCalloutBorder = flow(
@@ -351,7 +351,7 @@ This is useful when you don't have access to the original, unstyled variant of t
 
 ## The Design API
 
-The Design API provides a mechanism for applying higher order components (including those
+The Design API provides a mechanism for applying higher-order components (including those
 provided by the FClasses API) to individual elements within a compound component.
 
 ### Exposing the Design API

@@ -71,7 +71,7 @@ export type Tag<T = HTMLElement> = ComponentOrTag<HTMLProps<T>>;
 export type PP<P, A, R> = Omit<P & A, keyof R> & Partial<R>;
 
 /**
- * Type of a higher order component.
+ * Type of a higher-order component.
  *
  * This is a generic type which allows you to specify how the props of the target
  * component will be treated. It accepts 3 type parameters:
@@ -261,7 +261,7 @@ export type DesignableComponentsProps<C extends DesignableComponents = Designabl
 };
 
 /**
- * This is the type of a  Higher order design which can be applied to a component which accepts
+ * This is the type of a higher-order design which can be applied to a component which accepts
  * a components prop of type "C".
  *
  * @category Design API

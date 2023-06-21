@@ -123,7 +123,7 @@ const withTitles = withDesign({
 
 And let's add some padding to the sublist items to make the list more legible.
 We use the bodiless [FClasses](..) package and [TailwindCSS]() for this, but it
-could be done with almost any CSS-in-JS library which uses higher order
+could be done with almost any CSS-in-JS library which uses higher-order
 components for styling.
 
 ```ts

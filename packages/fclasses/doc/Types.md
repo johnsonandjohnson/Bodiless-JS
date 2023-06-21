@@ -1,11 +1,11 @@
-# Tokens and Higher Order Components in Typescript
+# Tokens and Higher-Order Components in Typescript
 
-The Bodiless design system expresses tokens as React higher order components,
+The Bodiless design system expresses tokens as React higher-order components,
 which can be a bit tricky to type correctly. Fortunately, Bodiless exposes
 a number of utility types which simplify the process.
 
 Before proceeding, you should have a solid understanding of
-[higher order components in React](https://reactjs.org/docs/higher-order-components.html)
+[higher-order components in React](https://reactjs.org/docs/higher-order-components.html)
 as well as the basics of how to type them traditionally.
 [This excellent article by James Ravenscroft](https://medium.com/@jrwebdev/react-higher-order-component-patterns-in-typescript-42278f7590fb)
 is a good introduction to the latter. You should also have read and be familiar
@@ -14,9 +14,9 @@ with the BodilessJS documentation on
 
 ## A few terms to begin with:
 
-- **Higher Order Component** A function which takes one component and returns
+- **Higher-Order Component** A function which takes one component and returns
   a new one.
-- **Token** A unit of design or behavior, expressed as a higher order component.
+- **Token** A unit of design or behavior, expressed as a higher-order component.
 - **Base Component** The component to which a token or HOC applies.
 - **Enhanced Component** The component returned by a token or HOC.
 - **Enhancer** A token or HOC which introduces new props in the enhanced
