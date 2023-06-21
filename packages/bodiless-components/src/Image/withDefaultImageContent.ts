@@ -20,7 +20,7 @@ import identity from 'lodash/identity';
 import type { AsBodilessImage, Data } from './Image';
 
 /**
- * Adds default content to an asEditableImage hoc
+ * Adds default content to an asEditableImage HOC
  */
 const withDefaultImageContent = (
   asEditableImage: AsBodilessImage,

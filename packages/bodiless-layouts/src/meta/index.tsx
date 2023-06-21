@@ -29,7 +29,7 @@ function customizer(objValue:any, srcValue:any) {
 }
 const asPassThough = (Component:CTWM) => Component;
 /**
- * Creates an HOC use it to attach meta data in an hoc.
+ * Creates an HOC use it to attach meta data in an HOC.
  * @param Component The component to wrap.
  */
 const withOutMeta:HOC = Component => props => <Component {...props} />;
@@ -104,16 +104,16 @@ const withTerm = (cat: string) => (term: string):HOC => Component => (
   withMeta({ categories: { [cat]: [term] } })(Component)
 );
 /**
- * preserveMeta returns takes an hoc and returns another one that will apply the hoc but preserve
+ * preserveMeta returns takes an HOC and returns another one that will apply the HOC but preserve
  * theMeta data from the component.
- * @param hoc the hoc to wrap.
+ * @param hoc the HOC to wrap.
  */
 const perserveMeta = (hoc: HOC): HOC => Component => (
   withMeta(Component)(hoc(Component) as ComponentType<any>)
 );
 
 /**
- * withFacet is expect to be passed to an on function and takes a term and and hoc (using curring)
+ * withFacet is expect to be passed to an on function and takes a term and and HOC (using curring)
  *  and returns a Variant that can be used in the on function
  * @param cat Category that the Component will be apart
  * @param term the Term in the Category associated with the Component

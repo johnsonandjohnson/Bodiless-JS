@@ -109,7 +109,7 @@ function as(
  * The design to apply.
  *
  * @returns
- * An hoc which applies the design.
+ * An HOC which applies the design.
  *
  * @category Design API
  */

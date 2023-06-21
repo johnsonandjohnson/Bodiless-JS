@@ -142,7 +142,7 @@ export const getLanguagesWithDefaultValues = (languages: Languages = []): Langua
 };
 
 /**
- * withLanguageProvider is a hoc that wrapps a component into a context provider
+ * withLanguageProvider is a HOC that wrapps a component into a context provider
  * which provides a list of sites' languages and allows to get and set the current (active)
  * language.
  *

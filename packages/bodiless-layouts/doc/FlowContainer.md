@@ -133,7 +133,7 @@ const SiteFlowContainer = withDesign(design)(FlowContainer);
 ```
 
 Use the `startWith` HOC to declare the base component and 
-then use any other hoc that will add to this specific version.
+then use any other HOC that will add to this specific version.
 
 > Note that we import the flow container from `@bodiless/layouts-ui`, not
 > directly from `@bodiless/layouts`.  All Bodiless components which

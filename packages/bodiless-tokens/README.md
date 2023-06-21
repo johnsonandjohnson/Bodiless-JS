@@ -505,7 +505,7 @@ const StandardCard = withDesign({
 })(BasicCard);
 ```
 
-We can also use the `startWith()` HOC, instead of replacing the whole component, it will only replace the base component but still use any hoc that might have wrapped it.
+We can also use the `startWith()` HOC, instead of replacing the whole component, it will only replace the base component but still use any HOC that might have wrapped it.
 
 As with FClasses, HOCs created via `withDesign()` are themselves reusable, so
 we can write:

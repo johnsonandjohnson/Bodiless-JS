@@ -95,7 +95,7 @@ activated. It should return any menu options this component wishes to provide
 > callback even if the menu options it returns change.
 
 It is actually unusual to invoke the provider directly in this manner. Instead,
-use the `withMenuOptions` hoc to attach options to your component. First you
+use the `withMenuOptions` HOC to attach options to your component. First you
 define a custom hook which will create your `getMenuOptions()` callback. This
 hook will be invoked when the component is rendered, and will receive its props
 as an argument:

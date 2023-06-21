@@ -62,7 +62,7 @@ export const withLocalContextMenu = addProps(() => {
 });
 
 /**
- * Utility hoc to add resize detector to the original component.
+ * Utility HOC to add resize detector to the original component.
  * Optionally a callback can be provided by the component.
  * If the callback is not provided, as default the component is rendered at resize.
  *

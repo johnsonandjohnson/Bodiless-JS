@@ -101,7 +101,7 @@ const useIsEmptyEditor = () => {
 const useIsEditableAndEmpty = () => useEditToggle() && useIsEmptyEditor();
 
 /**
- * hoc that can be applied to Editable based component
+ * HOC that can be applied to Editable based component
  * adds styles to slate wrapper in order to solve a placeholder problem
  * described in https://github.com/johnsonandjohnson/Bodiless-JS/issues/481
  */

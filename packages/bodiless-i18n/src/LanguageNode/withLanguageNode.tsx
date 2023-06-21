@@ -14,7 +14,7 @@ type NodeProps = {
 };
 
 /**
- * withLanguageNode is a hoc that allows the wrapped component to handle its data
+ * withLanguageNode is a HOC that allows the wrapped component to handle its data
  * in multilingual manner.
  *
  * @category Language Node API

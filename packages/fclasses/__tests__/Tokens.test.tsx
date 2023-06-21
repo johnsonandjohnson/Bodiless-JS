@@ -66,7 +66,7 @@ describe('flowHoc', () => {
 
   describe('HOC order', () => {
     const Base = () => <></>;
-    it('Applies hocs left to right', () => {
+    it('Applies HOCs left to right', () => {
       const asTest = flowHoc(
         addProp('foo'),
         addProp('foo', 'bar'),
@@ -76,7 +76,7 @@ describe('flowHoc', () => {
       expect(wrapper.find(Base).prop('foo')).toBe('bar');
     });
 
-    it('Applies hocs left to right including nested tokens', () => {
+    it('Applies HOCs left to right including nested tokens', () => {
       const asFoo = flowHoc(
         addProp('foo'),
       );

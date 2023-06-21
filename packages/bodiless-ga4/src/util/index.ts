@@ -47,7 +47,7 @@ export const renderDataLayerScript = (Component : ComponentType) => {
 
 /**
 *
- * Utility hoc to add a reusable global GA4/DataLayer data to a helmet
+ * Utility HOC to add a reusable global GA4/DataLayer data to a helmet
  * component.
  *
  * @param hocs array
@@ -63,7 +63,7 @@ export const withGlobalGA4 = (...hocs: HOC[]) => flowRight(
 
 /**
 *
- * Utility hoc to add a reusable global GA4/DataLayer form and data to a helmet
+ * Utility HOC to add a reusable global GA4/DataLayer form and data to a helmet
  * component.
  *
  * @param hocs array

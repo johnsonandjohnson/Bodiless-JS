@@ -22,7 +22,7 @@ import { HOC } from '@bodiless/fclasses';
 import { useExtendHandler, useClickOutside } from './hooks';
 
 /**
- * Utility hoc to add an event handler which extends any handler passed to
+ * Utility HOC to add an event handler which extends any handler passed to
  * the original component.
  *
  * Only adds the extension when in edit mode.
@@ -69,7 +69,7 @@ export type ClickOutsideProps = {
 };
 
 /**
- * Utility hoc to add onClickOutside handler to the original component.
+ * Utility HOC to add onClickOutside handler to the original component.
  * A callback will be executed on both click outside as well as on the `esc` keypress.
  *
  * @return An HOC which will add the handler.
