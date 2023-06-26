@@ -1,79 +1,5 @@
 id: homepage
 title: Vital Design System
-slices:
-  - id: ks-content-block-16KxcciP1h
-    data:
-      content:
-        type: doc
-        content:
-          - type: heading
-            attrs:
-              level: 3
-            content:
-              - text: Recommended action items for Design
-                type: text
-          - type: bulletList
-            content:
-              - type: listItem
-                content:
-                  - type: paragraph
-                    content:
-                      - text: Set up site structure / navigation
-                        type: text
-              - type: listItem
-                content:
-                  - type: paragraph
-                    content:
-                      - text: Add component pages
-                        type: text
-              - type: listItem
-                content:
-                  - type: paragraph
-                    content:
-                      - text: Connect Figma assets
-                        type: text
-              - type: listItem
-                content:
-                  - type: paragraph
-                    content:
-                      - text: 'Style the site (colors, typography, landing pages)'
-                        type: text
-          - type: paragraph
-            content:
-              - text: "For more guidance and how-to's:"
-                type: text
-                marks:
-                  - type: bold
-          - type: bulletList
-            content:
-              - type: listItem
-                content:
-                  - type: paragraph
-                    content:
-                      - text: Knapsack Starter Kit & Sandbox
-                        type: text
-                        marks:
-                          - type: link
-                            attrs:
-                              href: >-
-                                https://app.knapsack.cloud/site/kenvue-sandbox/latest
-                              class: null
-                              target: _blank
-              - type: listItem
-                content:
-                  - type: paragraph
-                    content:
-                      - text: Platform documentation
-                        type: text
-                        marks:
-                          - type: link
-                            attrs:
-                              href: 'https://help.knapsack.cloud/'
-                              class: null
-                              target: _blank
-                      - text: ' (or click ? in the bottom right)'
-                        type: text
-    blockId: text-editor
 settings:
   pageHeader:
     size: medium
@@ -87,3 +13,5 @@ settings:
       type: value
       colorValue: '#FFFFFF'
 description: Powering Kenvue's global consumer digital experiences
+blockIds:
+  - 16KxcciP1h

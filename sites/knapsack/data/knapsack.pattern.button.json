@@ -13,43 +13,8 @@
       "spec": {
         "isInferred": true
       },
-      "demosById": {
-        "main": {
-          "id": "main",
-          "title": "Base Button",
-          "type": "data",
-          "data": {
-            "props": {
-              "Default": true
-            },
-            "slots": {},
-            "extras": {
-              "buttontext": {
-                "text": "Button Text"
-              }
-            }
-          }
-        },
-        "SjJMO5dEv_": {
-          "id": "SjJMO5dEv_",
-          "title": "Primary Button",
-          "description": "A description",
-          "type": "data",
-          "data": {
-            "props": {
-              "Primary": true
-            },
-            "slots": {},
-            "extras": {
-              "buttontext": {
-                "text": "Primary Button"
-              }
-            }
-          }
-        }
-      },
-      "demos": ["main", "SjJMO5dEv_"],
-      "slices": []
+      "demoIds": ["emcQ03KyQf", "SjJMO5dEv_"],
+      "blockIds": []
     }
   ],
   "tabs": [
@@ -62,7 +27,7 @@
     {
       "id": "overview",
       "title": "Overview",
-      "slices": []
+      "blockIds": []
     }
   ]
 }

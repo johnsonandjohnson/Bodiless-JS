@@ -26,6 +26,7 @@ import { Buttons } from './Buttons';
 import { _default } from './_default';
 import { Video } from './Video';
 import { Accordion } from './Accordion';
+import { Section } from './Section';
 
 export const VitalDemoStyleGuideTemplate = {
   _default,
@@ -44,4 +45,5 @@ export const VitalDemoStyleGuideTemplate = {
   List,
   Accordion,
   Buttons,
+  Section,
 };

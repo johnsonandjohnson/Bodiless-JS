@@ -13,52 +13,8 @@
       "spec": {
         "isInferred": true
       },
-      "demosById": {
-        "main": {
-          "id": "main",
-          "title": "Bold Text",
-          "type": "data",
-          "data": {
-            "props": {
-              "FontDecoration": {
-                "Bold": true
-              }
-            },
-            "slots": {}
-          }
-        },
-        "rkXoktYQkZ": {
-          "id": "rkXoktYQkZ",
-          "title": "Uppercase",
-          "description": "A description",
-          "type": "data",
-          "data": {
-            "props": {
-              "FontDecoration": {
-                "Uppercase": true
-              }
-            },
-            "slots": {}
-          }
-        },
-        "0ojvo89F67": {
-          "id": "0ojvo89F67",
-          "title": "Bold Uppercased",
-          "description": "A description",
-          "type": "data",
-          "data": {
-            "props": {
-              "FontDecoration": {
-                "Bold": true,
-                "Uppercase": true
-              }
-            },
-            "slots": {}
-          }
-        }
-      },
-      "demos": ["main", "rkXoktYQkZ", "0ojvo89F67"],
-      "slices": []
+      "demoIds": ["hq4QhlF7Ga", "rkXoktYQkZ", "0ojvo89F67"],
+      "blockIds": []
     }
   ],
   "tabs": [

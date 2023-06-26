@@ -1,0 +1,68 @@
+byId:
+  accordion:
+    id: accordion
+    name: Accordion
+    parentId: components
+    path: /pattern/accordion
+  button:
+    id: button
+    name: Button
+    parentId: components
+    path: /pattern/button
+  card:
+    id: card
+    name: Card
+    parentId: components
+    path: /pattern/card
+  color:
+    id: color
+    name: Colors
+    parentId: components
+    path: /pattern/color
+  components:
+    id: components
+    name: Components
+    parentId: root
+    path: ''
+  docs:
+    id: docs
+    name: Docs
+    parentId: root
+    path: ''
+  font-size:
+    id: font-size
+    name: Font Size
+    parentId: components
+    path: /pattern/font-size
+  generic-template:
+    id: generic-template
+    name: Generic Template
+    parentId: components
+    path: /pattern/generic-template
+  intro:
+    id: intro
+    name: Intro
+    parentId: docs
+    path: /pages/intro
+  text-decoration:
+    id: text-decoration
+    name: Elements
+    parentId: components
+    path: /pattern/text-decoration
+  typography:
+    id: typography
+    name: Typography
+    parentId: components
+    path: /pattern/typography
+order:
+  - components
+  - docs
+  - intro
+  - card
+  - text-decoration
+  - font-size
+  - color
+  - typography
+  - generic-template
+  - accordion
+  - button

@@ -38,12 +38,12 @@ colors).
 ### **Guide**
 
 - [Shadowing Typography: Step by Step](./Typography/ShadowGuide)
-- [Overview of steps to setup a Site's Typography](../../../VitalDesignSystem/Components/VitalElements/SiteTypography)
+- [Overview of steps to setup a Site's Typography](/VitalDesignSystem/Guides/SiteTypography)
 
 ### **Resources**
 
 - [Typography Overview](./Typography/Typography)
-- [Best Practices for Using Tailwind with Bodiless](./TailwindGuide)
+- [Best Practices for Using Tailwind with Bodiless](../../../VitalDesignSystem/Guides/TailwindGuide)
 - [Best Practices Using Custom Fonts](./Typography/Fonts)
 
 <!-- tabs:end -->
@@ -84,10 +84,10 @@ requirements for your site, you may want to extend these tokens.
 
 ### **Resources**
 
-- [Vital Image](/VitalDesignSystem/Components/VitalImage/)
+- [Vital Image](../../../VitalDesignSystem/Components/VitalImage/)
 - [Bodiless Image](../../../Components/Image/)
-- [Gatsby Image Configuration](../../../Design/GatsbyTheme?id=gatsby-image)
-- [Imagery Guidelines](../../../Design/ImageGuidelines)
+- [Gatsby Image Configuration](../../../Development/GatsbyTheme?id=gatsby-image)
+- [Imagery Guidelines](../../../VitalDesignSystem/Components/VitalImage/ImageGuidelines)
 
 <!-- tabs:end -->
 

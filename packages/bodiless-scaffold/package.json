@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/vital-scaffold",
-  "version": "1.0.0-rc.37",
+  "version": "1.0.0-rc.42",
   "description": "A scaffold tool to generate Bodiless-JS components and packages",
   "author": "Dewen Li <dli94@kenvue.com>",
   "homepage": "",

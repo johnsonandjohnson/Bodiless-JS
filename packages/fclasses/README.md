@@ -1,11 +1,15 @@
 # FClasses Design API
 
+!> Warning this document is outdated.  It will be refreshed soon. In the meantime, for an
+   introduction to FClasses and the VitalDS, visit our [Curriculum](/VitalDesignSystem/Curriculum/)
+   section.
+
 ## Introduction
 
 The Bodiless FClasses Design API is designed to facilitate the implementation of
 a *Design System* in a React application. Before diving into the technical
 details below, it might make sense to read our
-[high level overview of Design Systems in Bodiless](../../Design/DesignSystem) to
+[high level overview of Design Systems in Bodiless](../../VitalDesignSystem/) to
 better understand the general patterns at work.
 
 At a high level, this API expresses *Design Tokens* as React higher-order
@@ -17,7 +21,7 @@ classes.
 A compound component using this API will expose a styling API (a `design` prop) which
 describes the UI elements of which it is composed. Consumers then supply a
 list of higher-order components which should be applied to each element to modify
-its appearence or behavior. The framework allows nested wrapping of components
+its appearance or behavior. The framework allows nested wrapping of components
 to selectively extend or override individual elements. It also provides a tool
 for adding and removing classes to/from individual elements.
 

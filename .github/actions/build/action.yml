@@ -1,0 +1,38 @@
+name: "Build"
+description: "Installs NodeJS and builds the project"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.16
+        cache: 'npm'
+    - name: Print Git Version
+      shell: bash
+      run: git --version
+    - name: Setup git user
+      shell: bash
+      run: |
+        git config --global user.name "$(git --no-pager log --format=format:'%an' -n 1)"
+        git config --global user.email "$(git --no-pager log --format=format:'%ae' -n 1)"
+    - name: Git Info
+      shell: bash
+      run: |
+        git log  --pretty=oneline | head -n 10
+        git config --get user.name
+        git config --get user.email
+    - name: Cache build
+      id: cache-build
+      uses: actions/cache@v3
+      with:
+        path: |
+          ./node_modules
+          ./packages
+          ./sites
+        key: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}-${{ hashFiles('packages/**/src') }}
+    - name: Build
+      if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
+      shell: bash
+      run: npm run setup

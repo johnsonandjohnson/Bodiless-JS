@@ -13,74 +13,8 @@
       "spec": {
         "isInferred": true
       },
-      "demosById": {
-        "main": {
-          "id": "main",
-          "title": "Base Accordion",
-          "type": "data",
-          "data": {
-            "props": {
-              "Default": true
-            },
-            "slots": {
-              "Body": [
-                {
-                  "patternId": "text-decoration",
-                  "templateId": "bodiless-6GKNPvcRI7",
-                  "demoId": "rkXoktYQkZ"
-                }
-              ],
-              "Title": []
-            },
-            "extras": {
-              "accordion$title": {
-                "text": "Accordion Title"
-              },
-              "accordion$body": [
-                {
-                  "type": "paragraph",
-                  "children": [
-                    {
-                      "text": "Some Accordion Conntent"
-                    }
-                  ]
-                }
-              ]
-            }
-          }
-        },
-        "Tb6vk8upkF": {
-          "id": "Tb6vk8upkF",
-          "title": "Accordion Expanded",
-          "description": "A description",
-          "type": "data",
-          "data": {
-            "props": {
-              "WithInitiallyExpanded": true,
-              "Base": false,
-              "Default": true
-            },
-            "slots": {},
-            "extras": {
-              "accordion$title": {
-                "text": "Accordion Title"
-              },
-              "accordion$body": [
-                {
-                  "type": "paragraph",
-                  "children": [
-                    {
-                      "text": "Some Accordion Conntent"
-                    }
-                  ]
-                }
-              ]
-            }
-          }
-        }
-      },
-      "demos": ["main", "Tb6vk8upkF"],
-      "slices": []
+      "demoIds": ["ZN0BmRl_69", "Tb6vk8upkF"],
+      "blockIds": []
     }
   ],
   "tabs": [
@@ -93,7 +27,7 @@
     {
       "id": "overview",
       "title": "Overview",
-      "slices": []
+      "blockIds": []
     }
   ]
 }

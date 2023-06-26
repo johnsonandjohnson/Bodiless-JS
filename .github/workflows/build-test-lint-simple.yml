@@ -6,86 +6,88 @@ env:
 
 on:
   workflow_call:
+  schedule:
+    - cron: "0 3 * * *"
 
 jobs:
   setup:
     name: Setup, Build, Lint and Test
-    permissions:
-      pull-requests: write
     runs-on: ubuntu-20.04
-    if: ${{ github.event.label.name == 'ready-to-test' }}
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
-      # install a specific version of Node using
-      # https://github.com/actions/setup-node
-      - name: Use Node.js v18.16
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18.16
-          cache: 'npm'
-      - name: Print Git Version
-        run: git --version
-      - name: Setup git user
-        run: |
-          git config --global user.name "$(git --no-pager log --format=format:'%an' -n 1)"
-          git config --global user.email "$(git --no-pager log --format=format:'%ae' -n 1)"
-      - name: Git Info
-        run: |
-          git log  --pretty=oneline | head -n 10
-          git config --get user.name
-          git config --get user.email
-      - name: Build
-        run: npm run setup
+          ref: ${{ github.event_name == 'schedule' && 'main' || github.event.pull_request.head.sha }}
+      - name: Build	
+        uses: ./.github/actions/build
       - name: Lint
         run: npm run lint
       - name: Check
         run: npm run check
       - name: Test
+        if: ${{ github.event_name == 'schedule' || github.event.label.name == 'ready-to-test' }}
         run: npm run test --quiet --colors
-      # Temp using monorepo since standalone is breaking cypress tests.
-      # - name: Cypress tests
-        # run: npm run test:monorepo
-        # run: npm run test:ci
-      - name: Install Playwright
-        run: npx playwright install --with-deps
-      - name: Run Deprecated Playwright Tests
-        run: |
-          npm run test:monorepo-pw
-      - name: Upload Tests Artifact
-        if: always()
-        uses: actions/upload-artifact@v2
+      - name: Run deprecated playwright tests
+        if: ${{ github.event_name == 'schedule' || github.event.label.name == 'ready-to-test' }}
+        uses: ./.github/actions/playwright
         with:
-          name: deprecated-playwright-report
-          path: playwright-report/
-          retention-days: 30
-      - name: Run Playwright Tests
+          node-test-script: test:monorepo-pw
+          test-results-name: Deprecated tests for editing functionality
+    
+  smoke-vital:
+    name: Smoke tests for vital components
+    if: ${{ github.event_name == 'schedule' || github.event.label.name == 'ready-to-test' }}
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event_name == 'schedule' && 'main' || github.event.pull_request.head.sha }}
+      - name: Build
+        uses: ./.github/actions/build
+      - name: Run vital playwright tests
         env:
           APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
-        run: |
-          export APPLITOOLS_BATCH_NAME="${{ github.event.pull_request.title }} (${{ github.event.pull_request.number }})"
-          npm run test:playwright
-      - name: Upload Tests Artifact
+          APPLITOOLS_BATCH_NAME: ${{ github.event_name == 'schedule' && 'Regression Test Run' || format('{0} ({1})', github.event.pull_request.title, github.event.pull_request.number) }}
+          PW_INCLUDE_ALL_RENDERERS: ${{ github.event_name == 'schedule' }}
+        uses: ./.github/actions/playwright
+        with:
+          node-test-script: test:playwright
+          test-results-name: Smoke tests for vital components
+      - name: Upload Accessibility results
         if: always()
         uses: actions/upload-artifact@v2
         with:
-          name: playwright-report
-          path: playwright-report/
+          name: Accessibility
+          path: accessibility-reports/
           retention-days: 30
+
+  cleanup:
+    if: always() && github.event_name != 'schedule'
+    runs-on: ubuntu-20.04
+    needs: [ setup, smoke-vital ]
+    permissions:
+      pull-requests: write
+    steps:
       - uses: actions-ecosystem/action-remove-labels@v1
         if: always()
         with:
           labels: ${{ github.event.label.name }}
           fail_on_error: false
-  # Generate event file for Attach Unit Test Results helper workflow
-  event_file:
-    name: "Event File"
-    if: always()
+
+  test-results:
+    name: Test Results
+    if: always() && github.event.label.name == 'ready-to-test'
     runs-on: ubuntu-latest
+    needs: [ setup, smoke-vital ]
+    permissions:
+      checks: write
+      pull-requests: write
     steps:
-    - name: Upload
-      uses: actions/upload-artifact@v2
-      with:
-        name: Event File
-        path: ${{ github.event_path }}
+      - name: Download file
+        uses: actions/download-artifact@v3
+        with:
+          path: playwright-report/
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        with:
+          check_name: 'Playwright Test Results'
+          files: "playwright-report/**/*.xml"

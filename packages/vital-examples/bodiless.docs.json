@@ -1,7 +1,29 @@
 {
-  "Components": {
-    "Link": {
-      "README.md": "./doc/Link.md"
+  "VitalDesignSystem": {
+    "Curriculum": {
+      "Lessons": {
+        "ReusableTokens.md": "./doc/Curriculum/Lessons/ReusableTokens.md",
+        "DevelopA_NewComponent.md": "./doc/Curriculum/Lessons/DevelopANewComponent.md",
+        "BackgroundImages.md": "./doc/Curriculum/Lessons/BackgroundImages.md",
+        "CustomizeDesignTokens.md": "./doc/Curriculum/Lessons/CustomizeDesignTokens.md",
+        "ShadowA_SimpleComponent.md": "./doc/Curriculum/Lessons/ShadowASimpleComponent.md",
+        "README.md": "./doc/Curriculum/Lessons/README.md"
+      },
+      "Introduction": {
+        "WhyVital.md": "./doc/Introduction/WhyVital.md",
+        "WorkingWithContent.md": "./doc/Introduction/WorkingWithContent.md",
+        "FunctionalClasses.md": "./doc/Introduction/FunctionalClasses.md",
+        "AnatomyOfA_Token.md": "./doc/Introduction/AnatomyOfAToken.md",
+        "ReachingInside.md": "./doc/Introduction/ReachingInside.md",
+        "ComposingFromOutside.md": "./doc/Introduction/ComposingFromOutside.md",
+        "ComponentsAndTokens.md": "./doc/Introduction/ComponentsAndTokens.md",
+        "CoreConcepts.md": "./doc/Introduction/CoreConcepts.md",
+        "README.md": "./doc/Introduction/README.md"
+      },
+      "README.md": "./doc/README.md"
+    },
+    "Guides": {
+      "ShadowingTokens.md": "./doc/Guides/ShadowingTokens.md"
     }
   }
 }

@@ -191,7 +191,7 @@ export class KnapsackBodilessRenderer extends Base implements Renderer {
               pattern: slotPattern,
               template: slotTemplate,
               demo:
-                  slotItem.demo || slotTemplate?.demosById?.[slotItem.demoId],
+                  slotItem.demo || this.patterns.demosById[slotItem.demoId],
               patternManifest,
               isForCodeBlock,
             });

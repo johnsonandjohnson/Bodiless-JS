@@ -16,7 +16,13 @@ export default () => (
     <section className="py-2">
       <Ul>
         <Li>
-          <Link href="/intro/composing-from-without">Composing From Without</Link>
+          <Link href="/intro/composing-from-outside">Composing From Outside</Link>
+        </Li>
+        <Li>
+          <Link href="/intro/reaching-inside">Reaching Inside</Link>
+        </Li>
+        <Li>
+          <Link href="/intro/functional-classes">Functional Classes</Link>
         </Li>
         <Li>
           <Link href="/intro/section-example">Section Example</Link>

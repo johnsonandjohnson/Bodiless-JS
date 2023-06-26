@@ -11,63 +11,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Locator, Page, test as baseTest } from '@playwright/test';
+import { Locator, test as baseTest } from '@playwright/test';
 import {
   BatchInfo, Configuration, VisualGridRunner, BrowserType, DeviceName, ScreenOrientation, Eyes,
   Target, IosDeviceName, AndroidDeviceName, Region, CheckSettingsAutomation
 } from '@applitools/eyes-playwright';
-import {
-  VitalCardsPage, VitalTypographyPage, VitalButtonsPage, VitalAccordionPage, VitalVideoPage,
-  VitalLayoutPage, VitalProductPage, VitalGenericTemplatePage, VitalPage
-} from '../../pages';
-
-const variations: VisualParameters[] = [
-  {
-    suite: 'Cards',
-    page: new VitalCardsPage()
-  },
-  {
-    suite: 'Typography',
-    page: new VitalTypographyPage()
-  },
-  {
-    suite: 'Buttons',
-    page: new VitalButtonsPage()
-  },
-  {
-    suite: 'Accordions',
-    page: new VitalAccordionPage()
-  },
-  {
-    suite: 'Video',
-    page: new VitalVideoPage(),
-    /**
-     * Animated YouTube icon, it's not affected by resizing on different devices and so always
-     * located by the same coordinates.
-     */
-    ignoreRegion: new Region(7, 7, 50, 50)
-  }
-];
-
-const compositions: VisualParameters[] = [
-  {
-    suite: 'Layout',
-    page: new VitalLayoutPage()
-  },
-  {
-    suite: 'Product',
-    page: new VitalProductPage()
-  },
-  {
-    suite: 'Generic Template',
-    page: new VitalGenericTemplatePage()
-  }
-];
+import { VitalTestParameters, vitalTestParameters } from '../config/vital-test-parameters';
+import { VitalPage } from '../../pages/vital-page';
 
 const test = baseTest.extend< { eyes: Eyes } >({
   eyes: async ({ page }, use) => {
-    const runner: VisualGridRunner = new VisualGridRunner({ testConcurrency: 5 });
-
     const configuration: Configuration = new Configuration();
 
     const batch: BatchInfo = new BatchInfo({
@@ -77,17 +30,26 @@ const test = baseTest.extend< { eyes: Eyes } >({
     configuration.setBatch(batch);
     configuration.setApiKey(process.env.APPLITOOLS_API_KEY as string);
 
-    // Desktop
+    /**
+     * Default renderers
+     *
+     * Please note if the number of default renderers or all renderers changes, the number of
+     * workers in playwright.config should be updated accordingly.
+     */
     configuration.addBrowser(1920, 1080, BrowserType.CHROME);
-
-    // Mobile
-    configuration.addMobileDevice(IosDeviceName.iPhone_14, ScreenOrientation.PORTRAIT);
     configuration.addDeviceEmulation(AndroidDeviceName.Galaxy_S22, ScreenOrientation.PORTRAIT);
 
-    // Tables
-    configuration.addMobileDevice(IosDeviceName.iPad_9, ScreenOrientation.PORTRAIT);
-    configuration.addDeviceEmulation(DeviceName.Galaxy_Tab_S7, ScreenOrientation.PORTRAIT);
+    if (process.env.PW_INCLUDE_ALL_RENDERERS === 'true') {
+      // Mobile
+      configuration.addMobileDevice(IosDeviceName.iPhone_14, ScreenOrientation.PORTRAIT);
 
+      // Tables
+      configuration.addMobileDevice(IosDeviceName.iPad_9, ScreenOrientation.PORTRAIT);
+      configuration.addDeviceEmulation(DeviceName.Galaxy_Tab_S7, ScreenOrientation.PORTRAIT);
+    }
+
+    const testConcurrency: number = configuration.getBrowsersInfo().length;
+    const runner: VisualGridRunner = new VisualGridRunner({ testConcurrency });
     const eyes: Eyes = new Eyes(runner, configuration);
 
     await eyes.open(page, 'Bodiless JS', test.info().title);
@@ -100,8 +62,7 @@ const test = baseTest.extend< { eyes: Eyes } >({
 
 test.describe.configure({ mode: 'parallel' });
 
-const runVisualTest = (data: VisualParameters[],
-  elementFinder: (page: Page, elementId: string) => Locator) => {
+const runVisualTest = (data: VitalTestParameters[]) => {
   data.forEach((param) => {
     test.describe(param.suite, () => {
       const vitalPage: VitalPage = param.page;
@@ -112,7 +73,10 @@ const runVisualTest = (data: VisualParameters[],
         test(`${param.suite} - ${element.name??elementId}`, async ({ page, eyes }) => {
           await vitalPage.open(page);
 
-          const element: Locator = elementFinder(page, elementId);
+          let element: Locator = page.getByTestId(elementId);
+          if (param.switchToItemContent) {
+            element = element.locator('[data-layer-region="StyleGuideExamples:ItemContent"]');
+          }
 
           const settings: CheckSettingsAutomation = Target.region(element).strict().fully();
           if (param.ignoreRegion) {
@@ -127,13 +91,4 @@ const runVisualTest = (data: VisualParameters[],
   });
 };
 
-runVisualTest(variations, (page: Page, elementId: string) => page.getByTestId(elementId)
-  .locator('[data-layer-region="StyleGuideExamples:ItemContent"]'));
-
-runVisualTest(compositions, (page: Page, elementId: string) => page.getByTestId(elementId));
-
-type VisualParameters = {
-  suite: string,
-  page: VitalPage,
-  ignoreRegion?: Region
-};
+runVisualTest(vitalTestParameters);

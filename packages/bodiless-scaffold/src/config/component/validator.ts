@@ -40,8 +40,11 @@ export const pathValidator: PromptValidator = inputPath => {
 export const componentNameValidator: PromptValidator = (
   input, answers
 ) => {
+  if (!input) {
+    return 'Component name is required.';
+  }
   if (input.match(/[^_a-zA-Z0-9]/)) {
-    return 'Component/Library name must be underscore or alphanumeric.';
+    return `Component name must be underscore or alphanumeric. You entered: "${input}"`;
   }
   if (answers && answers.destinationpath) {
     const componentPath = path.join(answers.destinationpath, 'components', input);
@@ -55,8 +58,11 @@ export const componentNameValidator: PromptValidator = (
 export const libraryNameValidator: PromptValidator = (
   input
 ) => {
+  if (!input) {
+    return 'Library name is required.';
+  }
   if (input.match(/[^_a-zA-Z0-9]/)) {
-    return 'Component/Library name must be underscore or alphanumeric.';
+    return `Library name must be underscore or alphanumeric. You entered: "${input}"`;
   }
   return true;
 };

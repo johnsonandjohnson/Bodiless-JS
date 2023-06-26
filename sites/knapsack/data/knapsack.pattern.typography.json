@@ -13,37 +13,8 @@
       "spec": {
         "isInferred": true
       },
-      "demosById": {
-        "main": {
-          "id": "main",
-          "title": "Body Text",
-          "type": "data",
-          "data": {
-            "props": {
-              "Typography": {
-                "Body": true
-              }
-            },
-            "slots": {}
-          }
-        },
-        "bLZ89peK6T": {
-          "id": "bLZ89peK6T",
-          "title": "Link",
-          "description": "A description",
-          "type": "data",
-          "data": {
-            "props": {
-              "Typography": {
-                "Link": true
-              }
-            },
-            "slots": {}
-          }
-        }
-      },
-      "demos": ["main", "bLZ89peK6T"],
-      "slices": []
+      "demoIds": ["n7PYyApmLa", "bLZ89peK6T"],
+      "blockIds": []
     }
   ],
   "tabs": [
@@ -56,7 +27,7 @@
     {
       "id": "overview",
       "title": "Overview",
-      "slices": []
+      "blockIds": []
     }
   ]
 }

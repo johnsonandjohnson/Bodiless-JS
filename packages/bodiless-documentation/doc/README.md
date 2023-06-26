@@ -1,6 +1,16 @@
-# BodilessJS
+# BodilessJS and VitalDS
 
-BodilessJS is a toolset for building editable websites in a JAMStack. It is based on the idea that, for many sites, a full-blown CMS is unnecessary overhead and introduces more problems than it solves, including:
+BodilessJS is a toolset for building editable websites in a JAMStack. VitalDS is a UI library
+designed to maximize reuse and extensibility. Both were developed to address two key problems in
+supporing a large ecosystem of consumer websites:
+
+- How to maximize reuse of a core component library while still allowing for massive differentiation
+- How to bring the simplicity and determinism of code-based workflows to content sites, while still
+  providing a first-class user experience.
+
+For more information about VitalDs, See [Vital Design System](https://johnsonandjohnson.github.io/Bodiless-JS/#/VitalDesignSystem/).
+
+BodilessJS is based on the idea that, for many sites, a full-blown CMS is unnecessary overhead and introduces more problems than it solves, including:
 
 - Complex workflows, especially when changes to "content" and "presentation" are linked
 - Complex editorial interfaces, especially when "presentation" is treated as "content"

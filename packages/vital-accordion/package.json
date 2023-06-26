@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/vital-accordion",
-  "version": "1.0.0-rc.38",
+  "version": "1.0.0-rc.42",
   "description": "Clean, designable Accordion component for VitalDS based projects",
   "author": "Lucas Varela <lvarelab@its.jnj.com>",
   "license": "Apache-2.0",
@@ -22,23 +22,24 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json && npm run copy && npm run build:api-doc",
-    "build:watch": "npm run build -- --watch",
+    "build": "tsc -p ./tsconfig.json && npm run copy",
+    "build:lib": "tsc -p ./tsconfig.json",
+    "build:watch": "npm run build:lib -- --watch",
     "build:api-doc": "typedoc --out doc/api ./src",
     "copy": "copyfiles -u 1 \"./src/*.css\" \"./lib/\"",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo",
     "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx ./src"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.38",
-    "@bodiless/components": "^1.0.0-rc.38",
-    "@bodiless/core": "^1.0.0-rc.38",
-    "@bodiless/data": "^1.0.0-rc.38",
-    "@bodiless/fclasses": "^1.0.0-rc.38",
-    "@bodiless/layouts": "^1.0.0-rc.38",
-    "@bodiless/schema-org": "^1.0.0-rc.38",
-    "@bodiless/vital-editors": "^1.0.0-rc.38",
-    "@bodiless/vital-elements": "^1.0.0-rc.38",
+    "@bodiless/cli": "^1.0.0-rc.42",
+    "@bodiless/components": "^1.0.0-rc.42",
+    "@bodiless/core": "^1.0.0-rc.42",
+    "@bodiless/data": "^1.0.0-rc.42",
+    "@bodiless/fclasses": "^1.0.0-rc.42",
+    "@bodiless/layouts": "^1.0.0-rc.42",
+    "@bodiless/schema-org": "^1.0.0-rc.42",
+    "@bodiless/vital-editors": "^1.0.0-rc.42",
+    "@bodiless/vital-elements": "^1.0.0-rc.42",
     "lodash": "^4.17.19"
   },
   "peerDependencies": {

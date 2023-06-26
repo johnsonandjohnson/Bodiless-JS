@@ -14,6 +14,7 @@
  */
 import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
+const colors = require('tailwindcss/colors');
 const plugin = require('tailwindcss/plugin');
 
 const resolver = (pkgName) => require.resolve(pkgName);
@@ -21,6 +22,13 @@ const resolver = (pkgName) => require.resolve(pkgName);
 const twConfig = {
   content: ['./lib/**/!(*.d).{ts,js,jsx,tsx}'],
   theme: {
+    screens: {
+      sm: '576px', // => @media (min-width: 576px) { ... }
+      md: '768px', // => @media (min-width: 768px) { ... }
+      lg: '992px', // => @media (min-width: 992px) { ... }
+      xl: '1200px', // => @media (min-width: 1200px) { ... }
+      xxl: '1400px', // => @media (min-width: 1400px) { ... }
+    },
     colors: {
       'vital-primary': {
         brand: '#CD8987',
@@ -39,19 +47,32 @@ const twConfig = {
       },
     },
     extend: {
+      // We are adding back the default tailwind red/blue so that we can use
+      // some default colors in our examples.
+      // This is just to simplify the examples, and would not normally be part
+      // of a site build.
+      // Note that this is necessary bc vital-elements *overrides* rather
+      // than *extending* the default Tailwind palette.
+      colors: {
+        red: colors.red,
+        blue: colors.blue,
+      },
       backgroundImage: {
-        'mobile-wave-top': "url('vital-examples/src/background-images/assets/images/mobilewave.svg')",
+        'mobile-wave-top': "url('@bodiless/vital-examples/src/background-images/assets/images/mobilewave.svg')",
       },
       backgroundSize: {
         'wave-full': '100% 100%',
       },
+      transitionProperty: {
+        maxHeight: 'max-height',
+      }
     },
   },
   plugins: [
     plugin(({ addComponents }) => {
       addComponents({
         '.footer-wave': {
-          maskImage: "url('vital-examples/src/background-images/assets/images/desktopwave.svg')",
+          maskImage: "url('@bodiless/vital-examples/src/background-images/assets/images/desktopwave.svg')",
           maskPosition: 'bottom center',
           maskSize: '100%',
         },

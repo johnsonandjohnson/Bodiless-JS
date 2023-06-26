@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/data",
-  "version": "1.0.0-rc.38",
+  "version": "1.0.0-rc.42",
   "description": "Data for BodilessJS.",
   "author": "Marco Pagliarulo <mpaglia1@its.jnj.com>",
   "license": "Apache-2.0",
@@ -26,7 +26,7 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/fclasses": "^1.0.0-rc.38",
+    "@bodiless/fclasses": "^1.0.0-rc.42",
     "enzyme": "^3.9.0",
     "lodash": "^4.17.19"
   },

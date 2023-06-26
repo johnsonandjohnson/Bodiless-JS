@@ -13,38 +13,8 @@
       "spec": {
         "isInferred": true
       },
-      "demosById": {
-        "main": {
-          "id": "main",
-          "title": "Background Primary",
-          "type": "data",
-          "data": {
-            "props": {
-              "Color": {
-                "BgPrimaryBrand": true
-              }
-            },
-            "slots": {}
-          }
-        },
-        "MecoUEAtY3": {
-          "id": "MecoUEAtY3",
-          "title": "Text Primary",
-          "description": "A description",
-          "type": "data",
-          "data": {
-            "props": {
-              "Color": {
-                "TextPrimaryBodyCopy": false,
-                "TextPrimaryInteractive": true
-              }
-            },
-            "slots": {}
-          }
-        }
-      },
-      "demos": ["main", "MecoUEAtY3"],
-      "slices": []
+      "demoIds": ["Db_LHeS9Hs", "MecoUEAtY3"],
+      "blockIds": []
     }
   ],
   "tabs": [

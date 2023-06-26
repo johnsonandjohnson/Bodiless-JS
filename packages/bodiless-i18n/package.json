@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/i18n",
-  "version": "1.0.0-rc.38",
+  "version": "1.0.0-rc.42",
   "description": "Library to provide multilingual support for Bodiless",
   "author": "Konstantin Mishur <kmishur@its.jnj.com>",
   "license": "Apache-2.0",
@@ -20,16 +20,16 @@
     "access": "public"
   },
   "scripts": {
-    "build": "npm run build:lib && npm run build:api-doc",
+    "build": "npm run build:lib",
     "build:lib": "tsc -p ./tsconfig.json",
     "build:watch": "npm run build:lib -- --watch",
     "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api src",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.38",
-    "@bodiless/data": "^1.0.0-rc.38",
-    "@bodiless/fclasses": "^1.0.0-rc.38",
+    "@bodiless/cli": "^1.0.0-rc.42",
+    "@bodiless/data": "^1.0.0-rc.42",
+    "@bodiless/fclasses": "^1.0.0-rc.42",
     "lodash": "^4.17.19",
     "typedoc": "^0.24.4",
     "typescript": "^4.0.0"

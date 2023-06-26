@@ -1,7 +1,7 @@
 {
   "name": "@bodiless/vital-section",
   "sideEffects": false,
-  "version": "1.0.0-rc.38",
+  "version": "1.0.0-rc.42",
   "description": "Section component that allows to group and structure elements.",
   "author": "Ivan Rudiuk <IRudiu01@kenvue.com>",
   "license": "Apache-2.0",
@@ -22,7 +22,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "npm run build:lib && npm run build:api-doc",
+    "build": "npm run build:lib",
     "build:lib": "tsc -p ./tsconfig.json",
     "build:watch": "npm run build:lib -- --watch",
     "build:api-doc": "typedoc --out doc/api ./src",
@@ -32,14 +32,14 @@
     "react": "^18.2.0"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.38",
-    "@bodiless/data": "^1.0.0-rc.38",
-    "@bodiless/fclasses": "^1.0.0-rc.38",
-    "@bodiless/hydration": "^1.0.0-rc.38",
-    "@bodiless/components": "^1.0.0-rc.38",
-    "@bodiless/vital-editors": "^1.0.0-rc.38",
-    "@bodiless/vital-elements": "^1.0.0-rc.38",
-    "@bodiless/vital-link": "^1.0.0-rc.38",
+    "@bodiless/cli": "^1.0.0-rc.42",
+    "@bodiless/components": "^1.0.0-rc.42",
+    "@bodiless/data": "^1.0.0-rc.42",
+    "@bodiless/fclasses": "^1.0.0-rc.42",
+    "@bodiless/hydration": "^1.0.0-rc.42",
+    "@bodiless/vital-editors": "^1.0.0-rc.42",
+    "@bodiless/vital-elements": "^1.0.0-rc.42",
+    "@bodiless/vital-link": "^1.0.0-rc.42",
     "tailwindcss": "^3.0.23"
   }
 }

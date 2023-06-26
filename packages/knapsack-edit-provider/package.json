@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/knapsack-edit-provider",
-  "version": "1.0.0-rc.38",
+  "version": "1.0.0-rc.42",
   "description": "",
   "license": "Apache-2.0",
   "main": "lib/index.js",
@@ -18,10 +18,10 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@bodiless/fclasses": "^1.0.0-rc.38",
-    "@bodiless/core": "^1.0.0-rc.38",
-    "@bodiless/core-ui": "^1.0.0-rc.38",
-    "@knapsack/types": "^3.108.10",
+    "@bodiless/core": "^1.0.0-rc.42",
+    "@bodiless/core-ui": "^1.0.0-rc.42",
+    "@bodiless/fclasses": "^1.0.0-rc.42",
+    "@knapsack/types": "^4.1.4",
     "react": "^18.2.0"
   },
   "devDependencies": {

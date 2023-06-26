@@ -13,24 +13,8 @@
       "spec": {
         "isInferred": true
       },
-      "demosById": {
-        "main": {
-          "id": "main",
-          "title": "Generic Template",
-          "type": "data",
-          "data": {
-            "props": {
-              "Generic": true
-            },
-            "slots": {
-              "BottomContent": [],
-              "TopContent": []
-            }
-          }
-        }
-      },
-      "demos": ["main"],
-      "slices": []
+      "demoIds": ["v_y6sXWJz3"],
+      "blockIds": []
     }
   ],
   "tabs": [

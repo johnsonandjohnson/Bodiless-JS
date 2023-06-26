@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/layouts",
-  "version": "1.0.0-rc.38",
+  "version": "1.0.0-rc.42",
   "description": "Layout managers for BodilessJS.",
   "author": "Erik Summerfield <esummer3@its.jnj.com>",
   "homepage": "",
@@ -27,7 +27,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "run-p build:lib && npm run build:api-doc",
+    "build": "run-p build:lib",
     "build:lib": "tsc -p ./tsconfig.json",
     "build:watch": "npm run build:lib -- --watch",
     "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api ./src",
@@ -37,10 +37,10 @@
     "react": "^18.2.0"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.38",
-    "@bodiless/core": "^1.0.0-rc.38",
-    "@bodiless/data": "^1.0.0-rc.38",
-    "@bodiless/fclasses": "^1.0.0-rc.38",
+    "@bodiless/cli": "^1.0.0-rc.42",
+    "@bodiless/core": "^1.0.0-rc.42",
+    "@bodiless/data": "^1.0.0-rc.42",
+    "@bodiless/fclasses": "^1.0.0-rc.42",
     "@dnd-kit/core": "^6.0.8",
     "@dnd-kit/sortable": "^7.0.1",
     "@dnd-kit/utilities": "^3.2.1",

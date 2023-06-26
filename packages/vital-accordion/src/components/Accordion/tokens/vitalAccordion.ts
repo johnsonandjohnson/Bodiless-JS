@@ -55,11 +55,11 @@ const WithInitiallyExpanded = asAccordionToken({
   Meta: flowHoc.meta.term('Behavior')('Expanded on Open'),
 });
 
-const WithFAQSchema = asAccordionToken({
+const WithFAQ = asAccordionToken({
   SEO: {
     Wrapper: withFAQSchema,
-    Title: vitalAccordionTitle.WithFAQSchema,
-    Body: vitalAccordionBody.WithFAQSchema,
+    Title: vitalAccordionTitle.WithFAQ,
+    Body: vitalAccordionBody.WithFAQ,
   },
   Meta: flowHoc.meta.term('Schema')('With FAQ Schema'),
 });
@@ -75,7 +75,7 @@ interface VitalAccordion extends TokenCollection<AccordionComponents, {}> {
   Base: AccordionToken,
   Default: AccordionToken,
   WithInitiallyExpanded: AccordionToken,
-  WithFAQSchema: AccordionToken,
+  WithFAQ: AccordionToken,
   WithFlowContainerPreview: AccordionToken,
 }
 
@@ -83,7 +83,7 @@ const vitalAccordion: VitalAccordion = {
   Base,
   Default,
   WithInitiallyExpanded,
-  WithFAQSchema,
+  WithFAQ,
   WithFlowContainerPreview,
 };
 

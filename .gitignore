@@ -3,8 +3,7 @@ node_modules
 
 # Temporary files
 .DS_Store
-*.swp
-*.swo
+.swp
 .eslintcache
 *.tsbuildinfo
 # jetbrains files:

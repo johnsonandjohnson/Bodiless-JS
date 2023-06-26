@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/vital-search",
-  "version": "1.0.0-rc.38",
+  "version": "1.0.0-rc.42",
   "description": "Provide search VitalDS components and tokens for site builders.",
   "author": "Dewen Li <dli94@its.jnj.com>",
   "license": "UNLICENSED",
@@ -25,7 +25,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
+    "build": "tsc -p ./tsconfig.json",
     "build:required": "npm run build",
     "build:watch": "npm run build -- --watch",
     "build:api-doc": "typedoc --out doc/api ./src",
@@ -36,14 +36,14 @@
     "react": "^18.2.0"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.38",
-    "@bodiless/core": "^1.0.0-rc.38",
-    "@bodiless/fclasses": "^1.0.0-rc.38",
-    "@bodiless/ga4": "^1.0.0-rc.38",
-    "@bodiless/search": "^1.0.0-rc.38",
-    "@bodiless/vital-elements": "^1.0.0-rc.38",
-    "@bodiless/vital-layout": "^1.0.0-rc.38",
-    "@bodiless/vital-templates": "^1.0.0-rc.38",
+    "@bodiless/cli": "^1.0.0-rc.42",
+    "@bodiless/core": "^1.0.0-rc.42",
+    "@bodiless/fclasses": "^1.0.0-rc.42",
+    "@bodiless/ga4": "^1.0.0-rc.42",
+    "@bodiless/search": "^1.0.0-rc.42",
+    "@bodiless/vital-elements": "^1.0.0-rc.42",
+    "@bodiless/vital-layout": "^1.0.0-rc.42",
+    "@bodiless/vital-templates": "^1.0.0-rc.42",
     "lodash": "^4.17.19"
   }
 }
