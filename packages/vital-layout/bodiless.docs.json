@@ -3,11 +3,11 @@
     "Components": {
       "VitalLayout": {
         "README.md": "./doc/README.md",
-        "Logo.md": "./doc/Logo.md",
-        "Footer.md": "./doc/Footer.md",
-        "Header.md": "./doc/Header.md",
+        "Layout.md": "./doc/Layout.md",
         "Helmet.md": "./doc/Helmet.md",
-        "Layout.md": "./doc/Layout.md"
+        "Header.md": "./doc/Header.md",
+        "Footer.md": "./doc/Footer.md",
+        "Logo.md": "./doc/Logo.md"
       }
     }
   }
