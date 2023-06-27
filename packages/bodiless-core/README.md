@@ -108,7 +108,7 @@ const useMenuOptions = (props) => {
 };
 ```
 
-Then, pass that along with a unique name to `withMenuOptions` to create an HOC
+Then, pass that along with a unique name to `withMenuOptions` to create a HOC
 which will add the options to your component.
 
 ```

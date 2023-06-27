@@ -97,8 +97,8 @@ You can apply `asBodilessLink` to any component which accepts the same props as 
 ## Customize Link Behavior
 
 The `asBodilessLink` function, like any other `asBodiless...` function, accepts a node key, a
-default value, and a `useOverrides` hook; and returns an HOC which makes a link editable. You can
-use the `useOverrides` hook to customize the link editor. In particular, you can define a custom
+default value, and a `useOverrides` hook; and returns a HOC which makes a link editable. You can use
+the `useOverrides` hook to customize the link editor. In particular, you can define a custom
 function which will be used to normalize the `href` attribute when the link is saved or displayed.
 By default, `asBodilessLink` performs some basic normalization.  Here's an example of how to disable
 it:

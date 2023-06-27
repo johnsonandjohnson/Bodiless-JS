@@ -280,7 +280,7 @@ const withSubListDesigns = (depth: number) => (withDesign$: HOC) => withSubListD
   Numbered: withDesign$,
 });
 ```
-> Note that while in the previous example, we passed an HOC to
+> Note that while in the previous example, we passed a HOC to
 > `withSubListDesign`, here we pass a *design*. In fact, passing the HOC above
 > was shorthand, and we could instead have used exactly the same syntax as here:
 > ```ts
