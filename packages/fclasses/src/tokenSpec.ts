@@ -109,7 +109,7 @@ function as(
  * The design to apply.
  *
  * @returns
- * An HOC which applies the design.
+ * A HOC which applies the design.
  *
  * @category Design API
  */
@@ -188,7 +188,7 @@ const extendDomain = extendDesign;
  * List of designs or HODs which will be used as extensions.
  *
  * @returns
- * An HOD which will extend the base design with the supplied designs.
+ * A HOD which will extend the base design with the supplied designs.
  *
  * @category Design API
  */
@@ -256,7 +256,7 @@ const on = (
  * - a string, which will be treated as a set of classes to be applied to the `_` key of the
  *   `Core` domain.  The `_` key in a design applies HOCs or classes to the component as a
  *   whole rather than one of its slots.
- * - a function, which will be treated as an HOC to be applied to the `_` key of the `Core`
+ * - a function, which will be treated as a HOC to be applied to the `_` key of the `Core`
  *   domain.
  *
  * @example

@@ -29,27 +29,27 @@ function customizer(objValue:any, srcValue:any) {
 }
 const asPassThough = (Component:CTWM) => Component;
 /**
- * Creates an HOC use it to attach meta data in an HOC.
+ * Creates a HOC. Use it to attach metadata in a HOC.
  * @param Component The component to wrap.
  */
 const withOutMeta:HOC = Component => props => <Component {...props} />;
 /**
- * withMeta creates an HOC that will add meta data to a React Component
- * @param meta the data to be side loaded in to the component
+ * withMeta creates a HOC that will add metadata to a React Component.
+ * @param meta the data to be sideloaded into the component
  */
 const withMeta = (meta:Object): HOC => Component => {
   const newMeta = mergeWith({}, Component, meta, customizer);
   return Object.assign(withOutMeta(Component), newMeta) as ComponentWithMeta<any>;
 };
 /**
- * with Title returns an HOC that sideloads a title to a component
+ * withTitle returns a HOC that sideloads a title to a component.
  * @param title The title to be added
  */
 const withTitle = (title: string): HOC => Component => (
   withMeta({ title })(Component)
 );
 /**
- * withAppendTitle returns an HOC that appends to the sideload title of the component
+ * withAppendTitle returns a HOC that appends to the sideload title of the component.
  * Note it appends to the title with a space.
  * @param title The title to be appended
  */
@@ -61,14 +61,14 @@ const withAppendTitle = (newTitle: string): HOC => Component => {
   return withTitle(newTitle)(Component);
 };
 /**
- * withDisplayName returns an HOC that sideloads a displayName to a component
+ * withDisplayName returns a HOC that sideloads a `displayName` to a component.
  * @param displayName The displayName to be added
  */
 const withDisplayName = (displayName: string): HOC => Component => (
   withMeta({ displayName })(Component)
 );
 /**
- * withAppendDisplayName returns a HOC that appends a name to the sideloaded DisplayName
+ * withAppendDisplayName returns a HOC that appends a name to the sideloaded `DisplayName`.
  * @param newDisplayName the Display name to append
  */
 const withAppendDisplayName = (newDisplayName: string): HOC => Component => {
@@ -79,14 +79,14 @@ const withAppendDisplayName = (newDisplayName: string): HOC => Component => {
   return withDisplayName(newDisplayName)(Component);
 };
 /**
- * withDesc returns an HOC that sideloads the provided description to the component.
+ * withDesc returns a HOC that sideloads the provided description to the component.
  * @param description the description to add
  */
 const withDesc = (description: string): HOC => Component => (
   withMeta({ description })(Component)
 );
 /**
- * withAppendDesc returns an HOC that appends a description to the component sideload description.
+ * withAppendDesc returns a HOC that appends a description to the component sideload description.
  * @param newDescription the description to be appended
  */
 const withAppendDesc = (newDescription: string): HOC => Component => {
@@ -95,7 +95,7 @@ const withAppendDesc = (newDescription: string): HOC => Component => {
   return withDesc(description$)(Component);
 };
 /**
- * withTerm returns a function that then takes a term and that returns an HOC that side loads
+ * withTerm returns a function that then takes a term and that returns a HOC that sideloads
  * the category and term on to the component.
  * @param cat that category to use in adding a term
  * @param term the term to add
@@ -104,8 +104,8 @@ const withTerm = (cat: string) => (term: string):HOC => Component => (
   withMeta({ categories: { [cat]: [term] } })(Component)
 );
 /**
- * preserveMeta returns takes an HOC and returns another one that will apply the HOC but preserve
- * theMeta data from the component.
+ * perserveMeta takes a HOC and returns another one that will apply the HOC but preserve the
+ * metadata from the component.
  * @param hoc the HOC to wrap.
  */
 const perserveMeta = (hoc: HOC): HOC => Component => (
@@ -113,11 +113,11 @@ const perserveMeta = (hoc: HOC): HOC => Component => (
 );
 
 /**
- * withFacet is expect to be passed to an on function and takes a term and and HOC (using curring)
- *  and returns a Variant that can be used in the on function
+ * withFacet is expected to be passed to an on function and takes a term and and a HOC (using
+ * currying), and returns a Variant that can be used in the on function.
  * @param cat Category that the Component will be apart
  * @param term the Term in the Category associated with the Component
- * @param hocs the HOC to apply to the Component
+ * @param hocs the HOCs to apply to the Component
  */
 const withFacet = (cat: string) => (term: string) => (...hocs: HOC[]) => flowHoc(
   perserveMeta(flow(...hocs)),

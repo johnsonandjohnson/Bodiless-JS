@@ -202,7 +202,7 @@ export const extendDesignable = (transformDesign: TransformDesign = identity) =>
  *   will be modified by any HOCs provided by withDesign.
  *
  * @return
- * An HOC which yields a designable version of the component to which it is applied.
+ * A HOC which yields a designable version of the component to which it is applied.
  *
  * @category Design API
  */

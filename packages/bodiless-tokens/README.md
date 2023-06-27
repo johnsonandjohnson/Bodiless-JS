@@ -75,9 +75,9 @@ const withComposedToken = flowHoc(
 
 However, there are a few key differences:
 
-- Metadata (static properties) attached to a component are prppagated through
+- Metadata (static properties) attached to a component are propagated through
   the chain of HOCs.
-- If you are using Typescript, the type of the parameters is constrained to be an
+- If you are using TypeScript, the type of the parameters is constrained to be a
   HOC (or an object specifying metadata, see below).
 - There is an optional overload to accept a "TokenMeta" object which consists of
   metadata which should be attached to the token.

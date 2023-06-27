@@ -330,7 +330,7 @@ export type ReservedDomains<
  * Type of an argument to `as` and/or the value of a key in an Extended Design.
  * May be:
  * - A token specified in token object notation;
- * - A token specified as an HOC;
+ * - A token specified as a HOC;
  * - A token specified as a string of classes.
  *
  * @category Token API

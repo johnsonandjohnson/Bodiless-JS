@@ -21,7 +21,7 @@ import { flowHoc } from './flowHoc';
 
 /**
  * @hidden
- * Creates an HOC which applies a specified design to the wrapped component.
+ * Creates a HOC which applies a specified design to the wrapped component.
  *
  * A design is a keyed set of HOCs which should be applied to constituent elements
  * of the wrapped component. The wrapped component itself should accept a components
