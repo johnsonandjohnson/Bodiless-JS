@@ -119,7 +119,7 @@ export type TokenProps = {
 };
 
 /**
- * Type of a "Token", which is an HOC with optional metadata and filtering.
+ * Type of a "Token", which is a HOC with optional metadata and filtering.
  *
  * Tokens may be composed of other tokens using the `flowHoc` utility.
  *

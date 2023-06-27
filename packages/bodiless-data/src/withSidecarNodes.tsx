@@ -21,7 +21,7 @@ import type { NodeMap } from './NodeProvider';
 const SidecarNodeContext = createContext<NodeMap<any>[]>([]);
 
 /**
- * `startSidecarNodes` is an HOC which records the current ContentNode so that
+ * `startSidecarNodes` is a HOC which records the current ContentNode so that
  * it can later be restored.
  *
  * @see `withSidecarNodes`
@@ -43,7 +43,7 @@ const startSidecarNodes: HOC = Component => {
 };
 
 /**
- * `endSidecarNodes` is an HOC which restores the ContentNode preserved
+ * `endSidecarNodes` is a HOC which restores the ContentNode preserved
  * by `startSidecarNodes`.
  *
  * @see `withSidecarNodes`
@@ -93,7 +93,7 @@ const endSidecarNodes: HOC = Component => {
  * @param hocs A list of HOCs to be applied using the parallel node hierarchy.  These will
  *             be composed using lodash `flowRight`
  *
- * @return an HOC which can wrap any Component using the Bodiless `ContentNode` system.
+ * @return A HOC which can wrap any Component using the Bodiless `ContentNode` system.
  */
 const withSidecarNodes = (...hocs: HOC[]) => flowRight(
   startSidecarNodes,

@@ -31,7 +31,7 @@ import { useExtendHandler, useClickOutside } from './hooks';
  * @param useExtender Custom hook returning the handler to add. Will be invoked
  *        during render and receive the original props of the component.
  *
- * @return An HOC which will add the handler.
+ * @return A HOC which will add the handler.
  */
 export const withExtendHandler = <P extends object>(
   event: string,
@@ -47,11 +47,11 @@ export const withExtendHandler = <P extends object>(
   };
 
 /*
- * Creates an HOC which strips all but the specified props.
+ * Creates a HOC which strips all but the specified props.
  *
  * @param keys A list of the prop-names to keep.
  *
- * @return An HOC which will strip all but the specified props.
+ * @return A HOC which will strip all but the specified props.
  */
 export const withOnlyProps = <Q extends object>(...keys: string[]) => (
   <P extends object>(Component: CT<P> | string) => {
@@ -72,7 +72,7 @@ export type ClickOutsideProps = {
  * Utility HOC to add `onClickOutside` handler to the original component.
  * A callback will be executed on both click outside as well as on the `esc` keypress.
  *
- * @return An HOC which will add the handler.
+ * @return A HOC which will add the handler.
  */
 export const withClickOutside = <P extends object>(Component: CT<P> | string) => {
   const WithClickOutside = (props: P & ClickOutsideProps) => {

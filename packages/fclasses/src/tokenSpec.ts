@@ -27,7 +27,7 @@ import { addClasses } from './addClasses';
 import { withHocDesign } from './withHocDesign';
 
 /**
- * Converts a domain into an HOC which applies the extended design defined
+ * Converts a domain into a HOC which applies the extended design defined
  * by that domain.  Properly handles special domain names ('Flow',
  * 'Compose' and 'Meta').
  *
@@ -50,7 +50,7 @@ function getHocForDomain<C extends DesignableComponents, D extends object = any>
 }
 
 /**
- * Converts a list of token into an HOC which can be applied to
+ * Converts a list of token into a HOC which can be applied to
  * a component. Tokens to apply may be expressed in token object notation, as HOCs
  * or as className strings.
  *
@@ -58,7 +58,7 @@ function getHocForDomain<C extends DesignableComponents, D extends object = any>
  * A list of token to be composed.
  *
  * @returns
- * An HOC which can be applied to a component.
+ * A HOC which can be applied to a component.
  *
  * @category Token API
  */

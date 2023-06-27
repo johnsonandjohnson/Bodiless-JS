@@ -31,7 +31,7 @@ import { withTransformer } from './Transformer';
 import { as, extendDesign } from './tokenSpec';
 
 /**
- * Creates an HOC that will attach a displayName to an object.
+ * Creates a HOC that will attach a displayName to an object.
  *
  * @param name
  * The displayName to add.
@@ -114,7 +114,7 @@ export const applyDesign = <C extends DesignableComponents> (
  * The design to apply
  *
  * @return
- * An HOC which applies the speciried design to the wrapped component after
+ * A HOC which applies the speciried design to the wrapped component after
  * all other designes.
  *
  * @category Design API

@@ -53,7 +53,7 @@ export const renderDataLayerScript = (Component : ComponentType) => {
  * @param hocs array
  *   An array of HOCs to act on the helmet component before it renders.
  *
- * @return An HOC which will add the the DataLayer properties.
+ * @return A HOC which will add the the DataLayer properties.
  */
 export const withGlobalGA4 = (...hocs: HOC[]) => flowRight(
   asBodilessHelmet('datalayer'),
@@ -69,7 +69,7 @@ export const withGlobalGA4 = (...hocs: HOC[]) => flowRight(
  * @param hocs array
  *   An array of HOCs to act on the helmet component before it renders.
  *
- * @return An HOC which will add the the DataLayer properties.
+ * @return A HOC which will add the the DataLayer properties.
  */
 export const withGlobalGA4Form = (...hocs: HOC[]) => flowRight(
   withMetaForm(useMenuOptions, gtmFormHeader),

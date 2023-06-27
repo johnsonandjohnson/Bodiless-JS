@@ -47,7 +47,7 @@ export const addPropsIf = <B extends object>(
     };
 
 /**
- * Creates an HOC that injects the specified props to the base component.
+ * Creates a HOC that injects the specified props to the base component.
  *
  * Any props passed to the resulting component will take precedence
  * over those specified here.
@@ -71,11 +71,11 @@ export const addProps = <B extends object, I extends NotAFunction>(
 ) => addPropsIf<B>(() => true)<I>(propsToAdd);
 
 /**
- * Creates an HOC which strips all but the specified props.
+ * Creates a HOC which strips all but the specified props.
  *
  * @param keys A list of the prop-names to keep.
  *
- * @return An HOC which will strip all but the specified props.
+ * @return A HOC which will strip all but the specified props.
  *
  * @category HOC Utility
  */
@@ -106,7 +106,7 @@ export const withoutProps = <A extends object>(
  * ...keys The names of the props to remove.
  *
  * @return
- * An HOC which accepts a component and returns another which accepts the
+ * A HOC which accepts a component and returns another which accepts the
  * specified props and removes them before rendering.
  *
  * Note this expects a type parameter specifying the props which will be
