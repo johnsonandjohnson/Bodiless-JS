@@ -45,7 +45,7 @@
     "@bodiless/schema-org": "^1.0.0-rc.42",
     "@bodiless/vital-link": "^1.0.0-rc.42",
     "@bodiless/vital-buttons": "^1.0.0-rc.42",
-    "@bodiless/vital-section": "^0.0.0",
+    "@bodiless/vital-section": "^1.0.0-rc.42",
     "contentful": "^9.3.3",
     "contentful-management": "^10.30.0",
     "lodash": "^4.17.19",
