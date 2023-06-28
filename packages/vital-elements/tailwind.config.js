@@ -15,7 +15,6 @@
 import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
 const tailwindcssDir = require('tailwindcss-dir')();
-
 const designTokens = require('./assets/design-tokens.nested.json');
 
 // Parse the JSON Tokens data
@@ -25,10 +24,20 @@ const parsedDesignTokens = JSON.parse(JSON.stringify(designTokens));
  * Due to the name of the group in JSON being `core/colors` we need to parse an access it this way.
  */
 const coreColors = parsedDesignTokens['core/colors'];
+const coreSpacing = parsedDesignTokens['core/spacing'];
 /**
- * @TODO: All semantic colors are wrapped in extra `color` object.
+ * Note that the `coreBorder.style` tokens do not have a corresponding key in the Tailwind config.
+ * `borderStyle` is only a valid key for the TW variants and plugins. The default TW values for
+ * borderStyle match the provided tokens.
  */
-const semanticColors = parsedDesignTokens['semantic/colors'].color;
+const coreBorder = parsedDesignTokens['core/border'];
+/**
+ * @TODO: `coreTypography` tokens include `text-decoration` and `text-transform` tokens which are
+ * not intended to be extended or modified in the Tailwind config and do not have corresponding
+ * keys in the Tailwind config. The default TW config covers these tokens and provides the same
+ * Default classes like `capitalize` or `uppercase`.
+ */
+const coreTypography = parsedDesignTokens['core/typography'];
 
 const resolver = (pkgName) => require.resolve(pkgName);
 
@@ -83,10 +92,31 @@ const twConfig = {
        */
       colors: {
         ...coreColors,
-        ...semanticColors,
       },
       fontFamily: {
         DMSans: ['DM Sans', 'sans-serif'],
+        ...coreTypography['font-family'],
+      },
+      fontWeights: {
+        ...coreTypography.font,
+      },
+      leading: {
+        ...coreTypography.leading,
+      },
+      textSizes: {
+        ...coreTypography.text,
+      },
+      spacing: {
+        /**
+         * Note that `coreSpacing` is wrapped in extra `spacing` key, so unwrapping it here.
+         */
+        ...coreSpacing.spacing,
+      },
+      borderWidth: {
+        ...coreBorder.width,
+      },
+      borderRadius: {
+        ...coreBorder.rounded,
       },
       margin: {
         4.5: '1.125rem',

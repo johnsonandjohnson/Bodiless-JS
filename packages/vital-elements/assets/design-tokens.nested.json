@@ -1,5 +1,58 @@
 {
+  "core/border": {
+    "rounded": {
+      "default": "4px",
+      "full": "50%",
+      "lg": "8px",
+      "none": "0px",
+      "pill": "9999px",
+      "sm": "2px",
+      "xl": "12px"
+    },
+    "style": {
+      "dashed": "dashed",
+      "solid": "solid"
+    },
+    "width": {
+      "1": "1px",
+      "2": "2px",
+      "3": "3px"
+    }
+  },
   "core/colors": {
+    "error": {
+      "100": "#FDEBEB",
+      "200": "#FACDCD",
+      "300": "#FAAAAA",
+      "400": "#FD7E7E",
+      "500": "#FF4646",
+      "600": "#EC0000",
+      "700": "#CA001B",
+      "800": "#A60000",
+      "900": "#860000"
+    },
+    "informational": {
+      "100": "#E5F0FE",
+      "200": "#BFDBFC",
+      "300": "#95C2FB",
+      "400": "#68A7F8",
+      "500": "#428BF1",
+      "600": "#2C73DF",
+      "700": "#285EBA",
+      "800": "#214D99",
+      "900": "#1A3E7A"
+    },
+    "neutral": {
+      "100": "#ffffff",
+      "200": "#F7F7F7",
+      "300": "#ECECEC",
+      "400": "#D2D1D2",
+      "500": "#B4B4B5",
+      "600": "#999999",
+      "700": "#5B5B5B",
+      "800": "#282828",
+      "900": "#000000"
+    },
     "primary": {
       "100": "#E1F3F0",
       "200": "#B5E1DA",
@@ -10,28 +63,6 @@
       "700": "#016E5E",
       "800": "#015B4D",
       "900": "#00483E"
-    },
-    "secondary": {
-      "100": "#FDEBEB",
-      "200": "#FACDCD",
-      "300": "#FCA9A9",
-      "400": "#FE7D7D",
-      "500": "#FF6B6B",
-      "600": "#C25151",
-      "700": "#A14444",
-      "800": "#843838",
-      "900": "#6A2C2C"
-    },
-    "tertiary": {
-      "100": "#F2EDF9",
-      "200": "#E0D2F3",
-      "300": "#D3BDF2",
-      "400": "#B794E9",
-      "500": "#A375E2",
-      "600": "#8F58DC",
-      "700": "#7B3AD6",
-      "800": "#6628BD",
-      "900": "#512098"
     },
     "quaternary": {
       "100": "#FFEDC6",
@@ -55,16 +86,16 @@
       "800": "#55503F",
       "900": "#443F31"
     },
-    "error": {
+    "secondary": {
       "100": "#FDEBEB",
       "200": "#FACDCD",
-      "300": "#FAAAAA",
-      "400": "#FD7E7E",
-      "500": "#FF4646",
-      "600": "#EC0000",
-      "700": "#CA001B",
-      "800": "#A60000",
-      "900": "#860000"
+      "300": "#FCA9A9",
+      "400": "#FE7D7D",
+      "500": "#FF6B6B",
+      "600": "#C25151",
+      "700": "#A14444",
+      "800": "#843838",
+      "900": "#6A2C2C"
     },
     "success": {
       "100": "#E0F5D9",
@@ -77,6 +108,17 @@
       "800": "#085D1B",
       "900": "#054A14"
     },
+    "tertiary": {
+      "100": "#F2EDF9",
+      "200": "#E0D2F3",
+      "300": "#D3BDF2",
+      "400": "#B794E9",
+      "500": "#A375E2",
+      "600": "#8F58DC",
+      "700": "#7B3AD6",
+      "800": "#6628BD",
+      "900": "#512098"
+    },
     "warning": {
       "100": "#FCF1CF",
       "200": "#F7DE8B",
@@ -87,125 +129,63 @@
       "700": "#A68000",
       "800": "#916F00",
       "900": "#7D6000"
-    },
-    "informational": {
-      "100": "#E5F0FE",
-      "200": "#BFDBFC",
-      "300": "#95C2FB",
-      "400": "#68A7F8",
-      "500": "#428BF1",
-      "600": "#2C73DF",
-      "700": "#285EBA",
-      "800": "#214D99",
-      "900": "#1A3E7A"
-    },
-    "neutral": {
-      "100": "#ffffff",
-      "200": "#F7F7F7",
-      "300": "#ECECEC",
-      "400": "#D2D1D2",
-      "500": "#B4B4B5",
-      "600": "#999999",
-      "700": "#5B5B5B",
-      "800": "#282828",
-      "900": "#000000"
     }
   },
-  "semantic/colors": {
-    "color": {
-      "background": {
-        "page": "#ffffff",
-        "card": "#ffffff",
-        "product-card": "#ffffff",
-        "secondary-card": "#F2EDF9",
-        "hero": {
-          "light": "#ffffff",
-          "dark": "#282828"
-        },
-        "footer": {
-          "light": "#D2D1D2",
-          "dark": "#282828"
-        }
-      },
-      "text": {
-        "title": {
-          "dark": "#000000",
-          "light": "#ffffff"
-        },
-        "body": {
-          "dark": "#5B5B5B",
-          "light": "#ffffff"
-        },
-        "eyebrow": "#5B5B5B"
-      },
-      "interactive": {
-        "default": "#019881",
-        "hover": "#018571",
-        "focus": "#018571",
-        "pressed": "#016E5E",
-        "disabled": "#D2D1D2",
-        "background": {
-          "hover": "#E1F3F0",
-          "focus": "#E1F3F0",
-          "pressed": "#B5E1DA"
-        }
-      },
-      "border": {
-        "light": "#F7F7F7",
-        "dark": "#999999"
-      },
-      "icon": {
-        "light": "#ffffff",
-        "dark": "#282828"
-      },
-      "signal": {
-        "error": "#CA001B",
-        "warning": "#F1C73D",
-        "success": "#6CC24A",
-        "informational": "#428BF1"
-      }
+  "core/spacing": {
+    "spacing": {
+      "huge": "40px",
+      "lg": "20px",
+      "md": "16px",
+      "sm": "12px",
+      "x-huge": "48px",
+      "x-lg": "24px",
+      "x-sm": "8px",
+      "xx-huge": "64px",
+      "xx-lg": "28px",
+      "xx-sm": "4px",
+      "xxx-huge": "80px",
+      "xxx-lg": "32px"
     }
   },
-  "components/buttons": {
-    "color": {
-      "background": {
-        "primary": {
-          "default": "#019881",
-          "hover": "#018571",
-          "focus": "#018571",
-          "pressed": "#016E5E",
-          "disabled": "#D2D1D2"
-        },
-        "secondary": {
-          "hover": "#E1F3F0",
-          "focus": "#E1F3F0",
-          "pressed": "#B5E1DA"
-        }
-      },
-      "button": {
-        "text": {
-          "primary": {
-            "default": "#ffffff"
-          },
-          "secondary": {
-            "default": "#019881",
-            "hover": "#018571",
-            "focus": "#018571",
-            "pressed": "#016E5E",
-            "disabled": "#D2D1D2"
-          }
-        }
-      }
+  "core/typography": {
+    "font": {
+      "bold": "700",
+      "book": "400",
+      "extrabold": "800",
+      "extralight": "200",
+      "light": "300",
+      "medium": "500",
+      "normal": "400",
+      "semibold": "600",
+      "thin": "100"
     },
-    "background": {
-      "product-card": "#ffffff"
+    "font-family": {
+      "1": "DM Sans",
+      "2": "DM Sans"
+    },
+    "leading": {
+      "5": "120%",
+      "6": "150%"
+    },
+    "text": {
+      "2xl": "1.728rem",
+      "3xl": "2.074rem",
+      "4xl": "2.488rem",
+      "base": "1rem",
+      "lg": "1.2rem",
+      "sm": "0.833rem",
+      "xl": "1.44rem",
+      "xs": "0.694rem"
+    },
+    "text-decoration": {
+      "no-underline": "none",
+      "underline": "underline"
+    },
+    "text-transform": {
+      "capitalize": "capitalize",
+      "lowercase": "lowercase",
+      "normal-case": "none",
+      "uppercase": "uppercase"
     }
-  },
-  "$metadata": {
-    "tokenSetOrder": [
-      "core/colors",
-      "semantic/colors",
-      "components/buttons"
-    ]
   }
 }
