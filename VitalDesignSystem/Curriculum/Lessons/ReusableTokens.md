@@ -86,7 +86,7 @@ const Hero = asCardToken({
   Theme: {
     ...vitalCardBase.Hero.Theme,
 /* Note the use of 'as' here. This is a composition utility provided 
-* by BodilessJS that converts a list of tokens into an HOC. When applying
+* by BodilessJS that converts a list of tokens into a HOC. When applying
 * multiple tokens to a component, 'as' must be used to properly combine them.
 *
 * In the 'Default' token example above, you'll notice that because only one * token is being applied to the 'ContentWrapper' slot, 'as' is not needed.

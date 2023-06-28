@@ -128,7 +128,7 @@ following differences:
 
 - The value of each key can by any of the following:
   - A normal Bodiless token HOC (as in a normal design object).
-  - A token specification object (which will be converted to an HOC by being wrapped in `as`).
+  - A token specification object (which will be converted to a HOC by being wrapped in `as`).
   - A string (which will be interpreted as a set of CSS classes to be added to the component via
    `addClasses`).
 - There is a special `_` key which defines tokens/HOCs which should be applied to the component as a

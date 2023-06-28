@@ -445,7 +445,7 @@ Then you can place the custom component on a page
 <CustomBVComponent />
 ```
 
-# BazaarVoice HOC's
+# BazaarVoice HOCs
 
 ## asBodilessBV
 

@@ -105,7 +105,7 @@ states.  What if you want to apply some styling to the component in its default 
 For example, what if we wanted the "Call for availability" message to be red?
 
 To support this, a design applied to a chameleon has a special
-`_default` key which allows you to apply HOC's to the component when in its
+`_default` key which allows you to apply HOCs to the component when in its
 default state:
 
 ```js
@@ -208,7 +208,7 @@ Here we've decomposed `asBodilessChameleon` into three constituent parts:
   > }
   > ```
 - `applyChameleon` uses the chameleon state established by
-  `withChameleonContext` to apply the appropriate HOC's from a design to the
+  `withChameleonContext` to apply the appropriate HOCs from a design to the
   underlying components.
 
 First, We create a wrapper component (`VisibilityToggleWrapper`) which

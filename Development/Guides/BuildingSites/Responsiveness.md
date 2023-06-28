@@ -63,7 +63,7 @@ BodilessJS provides the following tools to work with these breakpoints:
   ':target=_blank'): Accepts the site's breakpoints from `resolveConfig()` and will listen on the
   window's resize event.
 - [`withResponsiveVariants`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/bodiless-components/src/withResponsiveVariants.tsx
-  ':target=_blank'): Generates an HOC which makes the underlying component designable at different
+  ':target=_blank'): Generates a HOC which makes the underlying component designable at different
   breakpoints. This allows responsive rendering or swapping a component entirely depending on
   viewport size.
 
