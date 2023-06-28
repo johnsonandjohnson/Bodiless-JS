@@ -65,17 +65,17 @@ export const getTreeFromDir = (startDir:string) => (
 
 /**
  * PrePendPath take a path and returns a treeHO that will walk though a passed in Tree
- * and prepend the path to every docuement in the tree.
+ * and prepend the path to every document in the tree.
  * @param prePend
  */
 export const prependPath = (prePend:string) => (tree:Tree):Tree => (
   Object.keys(tree).reduce(
     (acc:Tree, key:string) => {
       if (typeof tree[key] === 'string') {
-        return { [key]: path.join(prePend, tree[key] as string), ...acc } as Tree;
+        return { ...acc, [key]: path.join(prePend, tree[key] as string) } as Tree;
       }
       const subTree = prependPath(prePend)(tree[key] as Tree);
-      return { [key]: subTree, ...acc } as Tree;
+      return { ...acc, [key]: subTree } as Tree;
     },
     {} as Tree,
   )
@@ -134,7 +134,7 @@ export const withTreeFromFile = (filePath:string):Promise<TreeHO> => {
 };
 
 /**
- * getSipmlePaths returns a simple list of paths gathered from a nested tree.
+ * getSimplePaths returns a simple list of paths gathered from a nested tree.
  * @param tree
  */
 export const getSimplePaths = (tree: Tree): string[] => {
