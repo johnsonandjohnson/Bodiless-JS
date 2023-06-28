@@ -11,7 +11,7 @@ module.exports = configureKnapsack({
   data: './data',
   version,
   designTokens: {
-    createCodeSnippet: (token) => `$${token.name}`,
+    // createCodeSnippet: (token) => `$${token.name}`,
     /**
      * @TODO:
      *

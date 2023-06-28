@@ -54,7 +54,6 @@ const twConfig = {
       'm-3xl': ['2.25rem', '2.5rem'],
     },
     colors: {
-      ...coreColors,
       transparent: 'transparent',
       'vital-primary': {
         brand: '#CA081B',
@@ -77,9 +76,15 @@ const twConfig = {
         'button-selected': '#000041',
       },
       white: '#FFFFFF',
-      ...semanticColors,
     },
     extend: {
+      /**
+       * Vital 2.0 Colors coming from Figma Tokens. Colors above will be deprecated.
+       */
+      colors: {
+        ...coreColors,
+        ...semanticColors,
+      },
       fontFamily: {
         DMSans: ['DM Sans', 'sans-serif'],
       },

@@ -44,4 +44,14 @@ export default asTokenGroup(ColorMeta)({
   TextButtonSelected: 'text-vital-secondary-button-selected',
   BgButtonSelected: 'bg-vital-secondary-button-selected',
   BorderButtonSelected: 'border-vital-secondary-button-selected',
+  /**
+   * Vital 2.0 Colors coming from Figma Tokens. Colors above will be deprecated.
+   */
+  BackgroundPrimaryDefault: 'primary-500',
+  BackgroundCard: 'neutral-100',
+  TextLightEyebraw: 'neutral-600',
+  TextLightHeader: 'neutral-900',
+  TextLightBody: 'neutral-900',
+  BorderLight: 'neutral-400',
+  IconDark: 'neutral-600',
 });
