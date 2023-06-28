@@ -44,7 +44,7 @@ const extendOverrides = <P extends object, D extends object>(
 
 /**
  * @private
- * Default hoc used to replace link when toggled off.
+ * Default HOC used to replace link when toggled off.
  */
 const defaultAsOff: HOC = flowHoc(
   ifEditable(replaceWith(SafeSpan)),

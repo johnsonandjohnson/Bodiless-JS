@@ -31,7 +31,7 @@ import { ifToggledOn } from '../withFlowToggle';
 import type { BodilessOptions, AsBodiless } from '../Types/AsBodilessTypes';
 
 /**
- * Given an event name and a wrapper component, provides an HOC which will wrap the base component
+ * Given an event name and a wrapper component, provides a HOC which will wrap the base component
  * the wrapper, passing the event prop to the wrapper, and all other props to the base component.
  *
  * @param event The event name.
@@ -54,7 +54,7 @@ export const withActivatorWrapper = (event: string, Wrapper: ComponentOrTag<any>
 /**
  * Makes a component "Bodiless" by connecting it to the Bodiless-jS data flow and giving it
  * a form which can be used to edit its props. Returns a standard `asBodiless...` function,
- * which takes `nodeKey` and `defaultData` parameters, and returns an HOC which yields an editable
+ * which takes `nodeKey` and `defaultData` parameters, and returns a HOC which yields an editable
  * version of the base component.
  *
  * @param options An object describing how this component should be made editable.
@@ -62,7 +62,7 @@ export const withActivatorWrapper = (event: string, Wrapper: ComponentOrTag<any>
 // eslint-disable-next-line max-len
 const asBodilessComponent = <P extends object, D extends object>(options: BodilessOptions<P, D>): AsBodiless<P, D> => (
   /**
-   * Creates an HOC that will make a component "Bodilesss".
+   * Creates a HOC that will make a component "Bodilesss".
    *
    * @param nodeKey The nodeKey identifying where the components data will be stored.
    * @param defaultData An object representing the initial/default data. Supercedes any default
@@ -71,7 +71,7 @@ const asBodilessComponent = <P extends object, D extends object>(options: Bodile
    * be invoked in the render context of the wrapped component and passed the
    * component's props.
    *
-   * @return An HOC which will make the wrapped component "bodiless".
+   * @return A HOC which will make the wrapped component "bodiless".
    */
   (
     nodeKeys?,

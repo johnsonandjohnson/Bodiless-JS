@@ -56,7 +56,7 @@ export const asBaseEditableImagePlain: AsBodilessImage = (
 );
 
 /**
- * util function to build a hoc for rendering a non-responsive image.
+ * util function to build a HOC for rendering a non-responsive image.
  */
 export const asEditableImagePlain: AsBodilessImage = (
   nodeKey?, placeholder?, useOverrides?,
@@ -67,7 +67,7 @@ export const asEditableImagePlain: AsBodilessImage = (
 );
 
 /**
- * util function to build a hoc for rendering a responsive image.
+ * util function to build a HOC for rendering a responsive image.
  */
 const asEditableImage = withGatsbyImagePreset(GatsbyImagePresets.FluidWithWebp)(asBaseEditableImagePlain);
 

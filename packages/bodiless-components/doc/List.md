@@ -121,10 +121,10 @@ const withTitles = withDesign({
 });
 ```
 
-And let's add some padding to the sublist items to make the list more legible.
-We use the bodiless [FClasses](..) package and [TailwindCSS]() for this, but it
-could be done with almost any CSS-in-JS library which uses higher order
-components for styling.
+And let's add some padding to the sublist items to make the list more legible. We use the bodiless
+[FClasses](../Development/Architecture/FClasses) package and [TailwindCSS](https://tailwindcss.com/
+':target=_blank') for this, but it could be done with almost any CSS-in-JS library which uses
+higher-order components for styling.
 
 ```ts
 import { addClasses, stylable } from '@bodiless/fclasses';
@@ -280,7 +280,7 @@ const withSubListDesigns = (depth: number) => (withDesign$: HOC) => withSubListD
   Numbered: withDesign$,
 });
 ```
-> Note that while in the previous example, we passed an HOC to
+> Note that while in the previous example, we passed a HOC to
 > `withSubListDesign`, here we pass a *design*. In fact, passing the HOC above
 > was shorthand, and we could instead have used exactly the same syntax as here:
 > ```ts

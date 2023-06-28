@@ -126,7 +126,7 @@ const useMenuOptions = (props: TokenSelectorProps & { tokenPaneTitle?: string })
 };
 
 /**
- * Creates an HOC which enhances a component by supplying a UI for selecting
+ * Creates a HOC which enhances a component by supplying a UI for selecting
  * tokens to apply to that component.
  *
  * The component so enhanced is given an 'availableTokens' prop which is an

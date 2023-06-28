@@ -317,7 +317,7 @@ import { LinkClean, brandLink } from '@bodiless/brand';
 const DefaultLink = as(brandLink.Default)(LinkClean);
 ```
 
-Defining and exporting our token as an object rather than an HOC allows an individual brand or site
+Defining and exporting our token as an object rather than a HOC allows an individual brand or site
 to customize part of the token's behavior while retaining the rest. For example, let's imagine that
 our site's design system calls for links to be purple and not underlined. We could retain the edit
 behavior of the brand link and change its styling:

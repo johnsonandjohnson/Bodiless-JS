@@ -23,7 +23,7 @@ import { useChameleonContext } from './withChameleonContext';
  * Use this function when you want to separate the form controlling the chameleon
  * state from the component on which the chameleon acts (for example, if you want
  * to add controls to a component edit form, but actually act on the component
- * to which the edit form was added), eg:
+ * to which the edit form was added), e.g.:
  *
  * ```
  * flowRight(
@@ -40,7 +40,7 @@ import { useChameleonContext } from './withChameleonContext';
  * Note the use of `withTitle` here.  Only design elements with title metadata will be considered
  * valid chameleon states.
  *
- * @return The wrapped component enhanced by the appropriate HOC's from the design.
+ * @return The wrapped component enhanced by the appropriate HOCs from the design.
  */
 const applyChameleon: HOC = Component => {
   const Chameleon: FC<any> = props => {

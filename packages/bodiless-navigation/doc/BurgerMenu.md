@@ -7,12 +7,12 @@ There are several burger-menu specific HOCs provided by `@bodiless/navigation` t
  - `asBurgerMenu` - Helper, which allows specifying which submenu types are configured by default for the Burger Menu. Transforms selected submenus into accordions.
  - `asBurgerMenuToggler` - HOC that adds an ability to toggle Burger Menu visibility on click. It extends the Component's default onClick handler if it exists. Note that the Component has to be inside a BurgerMenuContext.
  - `withBurgerMenuWrapper` - HOC that wraps the supplied Component in the burger menu chrome.
- - `withBurgerMenuProvider` - An HOC that wraps component with the `BurgerMenuContext` and creates two state variables: `isVisible` and `toggle()`.
+ - `withBurgerMenuProvider` - A HOC that wraps component with the `BurgerMenuContext` and creates two state variables: `isVisible` and `toggle()`.
  - `useBurgerMenuContext` - Hook, which can be used to access `BurgerMenuContext`.
  - `useIsBurgerMenuVisible` - Hook, which can be used to determine if a submenu is visible.
  - `useIsBurgerMenuHidden` - Hook, which can be used to determine if a submenu is hidden.
  - `useIsBurgerTransitionCompleted` - Hook which returns `true` if burger menu transitions are completed. It is almost identical to `useIsBurgerMenuHidden`, but waits untill the Burger Menu animations are completed before returning `true`. Usefull to avoid playing animations on initial component render.
- - `asSlideLeft` - An HOC that adds styles and transitions needed for a slide-in animation for the Burger menu.
+ - `asSlideLeft` - A HOC that adds styles and transitions needed for a slide-in animation for the Burger menu.
 
 ### Burger Menu Structure
 The Burger menu, as well as Bodiless Menu, is based on the List API. Burger menu is, in most cases, an extension of the site top menu. `withBurgerMenuWrapper` is used to wrap top-menu schema in the burger menu chrome.

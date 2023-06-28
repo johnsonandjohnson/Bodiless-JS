@@ -123,7 +123,7 @@ describe('withDesign', () => {
     expect(wrapper.find('#bar').last().props().className).toBe('innerB');
     const Test1 = withDesign(outer)(Test);
     const wrapper1 = mount(<Test1 />);
-    // have to use last() because each hoc adds a component that is found
+    // have to use last() because each HOC adds a component that is found
     expect(wrapper1.find('#foo').last().props().className).toBe('outerC innerA');
     expect(wrapper1.find('#bar').last().props().className).toBe('outerD innerB');
     expect(wrapper1.find('#baz').last().props().className).toBe('outerE');
@@ -264,7 +264,7 @@ describe('withShowDesignKeys', () => {
       expect(wrapper.find('section#inner')).toHaveLength(1);
     });
 
-    it('Replaces a component without altering a prior hoc', () => {
+    it('Replaces a component without altering a prior HOC', () => {
       const Test = withDesign({
         Component: flow(
           (C: any) => (props: any) => <C {...props} foo="bar" />,
@@ -303,7 +303,7 @@ describe('replaceWith', () => {
     expect(wrapper.find('span#test')).toHaveLength(1);
   });
 
-  it('erases previous hocs', () => {
+  it('erases previous HOCs', () => {
     const TestBase = withDesign({
       Component: (C: any) => (props: any) => <C {...props} foo="bar" />,
     })(TestDesignable);

@@ -298,7 +298,7 @@ const withFilterDefaultSelection = <P extends object>(Component: ComponentOrTag<
 };
 
 /**
- * Creates an HOC which allows a content editor to specify a set of default
+ * Creates a HOC which allows a content editor to specify a set of default
  * filter selections which will be applied whenever a filterable content
  * listing is displayed.
  *

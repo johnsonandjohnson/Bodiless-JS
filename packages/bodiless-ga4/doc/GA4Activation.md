@@ -11,7 +11,7 @@ GA4 documentation](https://support.google.com/analytics/answer/9304153 ':target=
 ## Step 1: Confirm Google Tag Manager ID and Connect Tag Manager to GA4
 
 Using the following documentation, create a GA4 Configuration tag:
-[Google Analytics 4 tags](.https://support.google.com/tagmanager/answer/9442095 ':target=_blank')
+[Google Analytics 4 tags](https://support.google.com/tagmanager/answer/9442095 ':target=_blank').
 
 Once obtained, proceed to Step 2.
 
@@ -57,7 +57,8 @@ Visit the `/sites/SITENAME/src/data/site` folder and update the following three 
     If you wish to use another plugin and/or set custom options, this is the recommended place to
     set it.
 
-    GTM and data layer functionality is enabled by adding the following to the site's `gatsby-config.js` file and replacing the `GTM-XXXXXXX` from Step 1:
+    GTM and data layer functionality is enabled by adding the following to the site's
+    `gatsby-config.js` file and replacing the `GTM-XXXXXXX` from Step 1:
 
     ```js
     {

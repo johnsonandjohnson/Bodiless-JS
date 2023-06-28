@@ -19,7 +19,7 @@ export const useLangDirProps = () => {
 };
 
 /**
- * withLangDirProps hoc adds lang and dir attributes on a tag where applied.
+ * withLangDirProps HOC adds lang and dir attributes on a tag where applied.
  *
  * @params useLanguageSelectorProps hook
  * @see useLangDirProps
