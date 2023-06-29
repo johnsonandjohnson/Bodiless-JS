@@ -109,7 +109,7 @@ As we will be shadowing both the `Default` and `Hero` Vital card variants, let's
 card tokens inside of our `exampleCard.ts` token collection file and apply our previously-created
 radius tokens there:
 
-[exampleCard.ts](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-examples/src/reusable-tokens/components/Card/tokens/exampleCard.ts
+[exampleCard.ts](https://raw.githubusercontent.com/johnsonandjohnson/Bodiless-JS/main/packages/vital-examples/src/reusable-tokens/components/Card/tokens/exampleCard.ts
 ':include :type=code :fragment=card-tokens')
 
 It would also be entirely acceptable to apply the `'rounded-br-[40px]'` class from our `Simple`
