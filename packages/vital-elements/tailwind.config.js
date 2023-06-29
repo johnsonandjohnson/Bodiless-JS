@@ -25,6 +25,7 @@ const parsedDesignTokens = JSON.parse(JSON.stringify(designTokens));
  */
 const coreColors = parsedDesignTokens['core/colors'];
 const coreSpacing = parsedDesignTokens['core/spacing'];
+const coreOpacity = parsedDesignTokens['core/opacity'];
 /**
  * Note that the `coreBorder.style` tokens do not have a corresponding key in the Tailwind config.
  * `borderStyle` is only a valid key for the TW variants and plugins. The default TW values for
@@ -117,6 +118,9 @@ const twConfig = {
       },
       borderRadius: {
         ...coreBorder.rounded,
+      },
+      opacity: {
+        ...coreOpacity,
       },
       margin: {
         4.5: '1.125rem',

@@ -206,6 +206,33 @@ const Gradient = asElementToken({
   Meta: TypographyMeta,
 });
 
+/**
+ * Vital 2.0 Colors coming from Figma Tokens. Colors above will be deprecated.
+ */
+const BodyBold = asElementToken({
+  Theme: {
+    _: 'text-base leading-6 font-bold font-2'
+  }
+});
+
+const BodyRegular = asElementToken({
+  Theme: {
+    _: 'text-base leading-6 font-normal font-2'
+  }
+});
+
+const BodyInlineLink = asElementToken({
+  Theme: {
+    _: 'text-base leading-6 font-bold font-2 underline'
+  }
+});
+
+const TextCrumbsReviewsRegular = asElementToken({
+  Theme: {
+    _: 'text-sm leading-6 font-normal font-2'
+  }
+});
+
 export default {
   Link,
   H1,
@@ -219,4 +246,11 @@ export default {
   EyebrowNoSpacing,
   Rest,
   Gradient,
+  /**
+   * Vital 2.0 Colors coming from Figma Tokens. Colors above will be deprecated.
+   */
+  BodyBold,
+  BodyRegular,
+  BodyInlineLink,
+  TextCrumbsReviewsRegular,
 };
