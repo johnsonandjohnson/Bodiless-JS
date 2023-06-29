@@ -17,14 +17,14 @@ import {
 } from './vitalPDPContent';
 import { AddIcon, RemoveIcon } from '../../../assets';
 
-const vitalAccordion = asAccordionToken({
+const vitalProductAccordion = asAccordionToken({
   ...vitalAccordion.Default,
   Components: {
     ...vitalAccordion.Default.Components,
     Title: as(
       vitalAccordionTitle.Default,
       // We have to replace accordion icons since the original ones have
-      // `fill` hardcaded into the path of inner svg components
+      // `fill` hardcoded into the path of inner svg components
       // making it hard to overwrite with css classes.
       withDesign({
         Icon: 'fill-interactive-primary-active',
@@ -46,7 +46,7 @@ const vitalAccordion = asAccordionToken({
   },
 });
 
-const vitalFAQAccordion = asAccordionToken(vitalAccordion, {
+const vitalFAQAccordion = asAccordionToken(vitalProductAccordion, {
   Theme: {
     Title: withDesign({
       Wrapper: as(
@@ -73,7 +73,7 @@ const AccordionVariations = {
 const vitalAccordionFlowContainer = asFluidToken({
   Components: {
     ...varyDesigns(
-      { '': on(AccordionClean)(vitalAccordion) },
+      { '': on(AccordionClean)(vitalProductAccordion) },
       AccordionVariations,
     )
   },

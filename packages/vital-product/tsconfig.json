@@ -6,7 +6,10 @@
     "baseUrl": ".",
     "preserveSymlinks": false
   },
-  "include": ["src"],
+  "include": [
+    "src",
+    "../../@types/*"
+  ],
   "exclude": [
     "lib",
     "src/scripts/*.*",

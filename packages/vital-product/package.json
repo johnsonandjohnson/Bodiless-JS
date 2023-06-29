@@ -1,26 +1,37 @@
 {
   "name": "@bodiless/vital-product",
-  "version": "0.0.0",
+  "sideEffects": false,
+  "version": "1.0.0-rc.42",
   "description": "",
+  "author": "",
+  "license": "Apache-2.0",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
-  "sideEffects": false,
+  "files": [
+    "/lib",
+    "/bodiless.docs.json",
+    "/getDocs.js",
+    "/tailwind.config.js",
+    "/doc"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "bin": {
     "content-model": "./bin/content-model",
     "fetch-products": "./bin/fetch-products"
   },
-  "files": [
-    "/lib"
-  ],
   "scripts": {
     "build": "run-p build:lib",
     "build:lib": "tsc -b  ./tsconfig.cjs.json ./tsconfig.json",
     "build:watch": "npm run build:lib -- --watch",
     "fetch": "node ./src/scripts/fetch-products.ts",
-    "dev": "npm run build:watch"
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
   },
-  "author": "",
-  "license": "UNLICENSED",
   "peerDependencies": {
     "react": "^18.2.0"
   },

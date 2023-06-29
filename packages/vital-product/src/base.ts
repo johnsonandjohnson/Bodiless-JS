@@ -1,5 +1,5 @@
 /**
- * Copyright © 2022 Johnson & Johnson
+ * Copyright © 2023 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,6 +12,11 @@
  * limitations under the License.
  */
 
-import vitalPDPTemplate from './vitalPDPTemplate';
+/**
+ * Use this version of the vital product PDP tokens when extending or shadowing.
+ * Import the token directly from @bodiless/vital-product/lib/base.
+ * @category Token Collection
+ * @see [[vitalPDPTemplate]]
+ */
+export { default as vitalPDPTemplateBase } from './components/PDPTemplate/tokens/vitalPDPTemplate';
 
-export default vitalPDPTemplate;
