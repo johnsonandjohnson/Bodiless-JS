@@ -30,7 +30,7 @@ const emptyValue: TagsNodeType = {
   tags: [],
 };
 
-// Composed hoc which creates editable version of the component.
+// Composed HOC which creates editable version of the component.
 // Note - the order is important. In particular:
 // - the node data handlers must be outermost
 // - anything relying on the context (activator, indicator) must be

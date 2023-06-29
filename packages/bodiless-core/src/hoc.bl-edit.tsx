@@ -26,14 +26,14 @@ import { withClickOutside, withExtendHandler, withOnlyProps } from './hoc.static
 import type { resizeDetectorProps, ClickOutsideProps } from './hoc.static';
 
 /**
- * Creates an HOC which provides the base component event handler which activates the current
+ * Creates a HOC which provides the base component event handler which activates the current
  * context.
  *
  * @param event
  * The event which should trigger the context activation.
  *
  * @returns
- * An HOC which injects the event handler.
+ * A HOC which injects the event handler.
  */
 export const withContextActivator = (
   event: string = 'onClick',
@@ -62,11 +62,11 @@ export const withLocalContextMenu = addProps(() => {
 });
 
 /**
- * Utility hoc to add resize detector to the original component.
+ * Utility HOC to add resize detector to the original component.
  * Optionally a callback can be provided by the component.
  * If the callback is not provided, as default the component is rendered at resize.
  *
- * @return An HOC which will detect resize.
+ * @return A HOC which will detect resize.
  */
 export const withResizeDetector = <P extends object>(Component: CT<P> | string) => {
   const WithResizeDetector = (props: P & resizeDetectorProps) => {

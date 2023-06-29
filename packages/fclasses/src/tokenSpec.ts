@@ -27,7 +27,7 @@ import { addClasses } from './addClasses';
 import { withHocDesign } from './withHocDesign';
 
 /**
- * Converts a domain into an HOC which applies the extended design defined
+ * Converts a domain into a HOC which applies the extended design defined
  * by that domain.  Properly handles special domain names ('Flow',
  * 'Compose' and 'Meta').
  *
@@ -50,15 +50,15 @@ function getHocForDomain<C extends DesignableComponents, D extends object = any>
 }
 
 /**
- * Converts a list of token into an HOC which can be applied to
- * a component. Tokens to apply may be expressed in token object notation, as HOC's
+ * Converts a list of token into a HOC which can be applied to
+ * a component. Tokens to apply may be expressed in token object notation, as HOCs
  * or as className strings.
  *
  * @param specs
  * A list of token to be composed.
  *
  * @returns
- * An HOC which can be applied to a component.
+ * A HOC which can be applied to a component.
  *
  * @category Token API
  */
@@ -68,7 +68,7 @@ function as(
 ): HOC<any, any, any> {
   const args = args$.filter(Boolean);
 
-  // Ensure that all token specs have been passed through `asTokenSpec`
+  // Ensure that all token specs have been passed through `asTokenSpec`.
   args.forEach(a => {
     if (typeof a !== 'function' && typeof a !== 'string' && !a![$TokenSpec]) {
       // @todo add some debugging info here - token domains names, token meta if any, etc.
@@ -109,7 +109,7 @@ function as(
  * The design to apply.
  *
  * @returns
- * An hoc which applies the design.
+ * A HOC which applies the design.
  *
  * @category Design API
  */
@@ -153,7 +153,7 @@ const tokenMergeCustomizer = (...args: any) => {
 };
 
 /**
- * Alias for extendDomain.
+ * Alias for `extendDomain`.
  *
  * @see `extendDomain`
  * @category Design API
@@ -185,10 +185,10 @@ const extendDomain = extendDesign;
  * list will be converted to designs by invoking them on an empty design.
  *
  * @param dx
- * List of designs or HODs which will be used as extensons
+ * List of designs or HODs which will be used as extensions.
  *
  * @returns
- * An HOD which will extend the base design with the supplied designs.
+ * A HOD which will extend the base design with the supplied designs.
  *
  * @category Design API
  */
@@ -232,9 +232,9 @@ const on = (
 /**
  * Used to create a token specification.
  *
- * A token specification is an object which organizes Token HOC's into "domains" which
+ * A token specification is an object which organizes Token HOCs into "domains" which
  * can then be selectively overridden. With the exception of certain [[ReservedDomains]],
- * each domain is a [[Design]], defining a set of HOC's which should be applied to
+ * each domain is a [[Design]], defining a set of HOCs which should be applied to
  * the individual design keys (or slots) in the target component.
  *
  * Normally, each component will use this create its own `as...Token` function in order
@@ -248,15 +248,15 @@ const on = (
  * in this parameter.
  *
  * @returns
- * Function which receives a set of partial token speciications and returns a normalized token
+ * Function which receives a set of partial token specifications and returns a normalized token
  * specification created by merging those partials.  Each parameter may be:
  * - a partial tokens specification object, in which case the keys must belong to the set of
- *   allowed domains.  Keys will be re-ordered to match the canonoical order, and missing keys
+ *   allowed domains.  Keys will be re-ordered to match the canonical order, and missing keys
  *   will be supplied.
  * - a string, which will be treated as a set of classes to be applied to the `_` key of the
- *   `Core` domain.  The `_` key in a design applies HOC's or classes to the component as a
+ *   `Core` domain.  The `_` key in a design applies HOCs or classes to the component as a
  *   whole rather than one of its slots.
- * - a function, which will be treated as an HOC to be applied to the `_` key of the `Core`
+ * - a function, which will be treated as a HOC to be applied to the `_` key of the `Core`
  *   domain.
  *
  * @example
@@ -271,9 +271,9 @@ const on = (
  *   C extends DesignableComponents
  * >() => asTokenSpec<C, DefaultDomains>(domains);
  * ```
- * And use it to create an `as...Token` utiity which restricts domains.
+ * And use it to create an `as...Token` utility which restricts domains.
  * ```
- * type FooComponens = {
+ * type FooComponents = {
  *   Wrapper: ComponentOrTag<any>,
  *   Title: ComponentOrTag<any>,
  *   Body: ComponentOrTag<any>,
@@ -315,7 +315,7 @@ export {
 };
 
 /**
- * Type guard to ensure that a Token is a TokenSpec.
+ * Type guard to ensure that a `Token` is a `TokenSpec`.
  *
  * @param a
  * The Token to test.

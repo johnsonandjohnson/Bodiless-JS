@@ -58,7 +58,7 @@ const TokenEditorClean = designable<TokenEditorComponents>(
 /**
  * @private
  *
- * Creates an HOC which wraps the target component with the node belonging to
+ * Creates a HOC which wraps the target component with the node belonging to
  * the first item in the flow container whose data is located at the specified
  * node key.
  *

@@ -4,7 +4,7 @@
 
  - `withBreadcrumbStore` - HOC that adds breadcrumb store and renders breadcrumbs.
  - `asBreadcrumbs` - HOC that adds breadcrumb props retrieved from breadcrumb store.
- - `AsBreadcrumb` - Creates an HOC which specifies that a wrapped component is a breadcrumb. The HOC will read link and title from the specified nodekeys and will push link and title to the breadcrumb store. Once the wrapped component is unmounted, the corresponding link and title are deleted from the breadcrumb store.
+ - `AsBreadcrumb` - Creates a HOC which specifies that a wrapped component is a breadcrumb. The HOC will read link and title from the specified nodekeys and will push link and title to the breadcrumb store. Once the wrapped component is unmounted, the corresponding link and title are deleted from the breadcrumb store.
  - `withEditableFinalTrail` - Enables rendering of the final trail for a Breadcrumb component with a provided Editors. Uses `withDefaultMenuTitleEditors` by default.
  - `withEditableStartingTrail` - Enables rendering of the starting trail for a Breadcrumb component with a provided Editors. Uses `withDefaultMenuTitleEditors` by default, pre-configured with a link to the home page.
  - `withBreadcrumbItemToken` - Applies supplied tokenDefs to the `StartingTrail`, `FinalTrail`, and `Title` all breadcrumb items.

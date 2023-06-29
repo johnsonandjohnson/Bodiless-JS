@@ -43,7 +43,7 @@ const useNodeKeyHash = () => {
 };
 
 /**
- * Creates an HOC which sets the target component for a token editor.
+ * Creates a HOC which sets the target component for a token editor.
  * This is the component to which the tokens in the editor will apply.
  *
  * @param def
@@ -53,7 +53,7 @@ const useNodeKeyHash = () => {
  * Optional design to apply to the token panel for this component.
  *
  * @returns
- * An HOC which adds the specifie component
+ * A HOC which adds the specifie component
  */
 const withTokenEditorComponent = (
   def: TokenEditorComponentDef,
@@ -95,7 +95,7 @@ const withTokenEditorComponent = (
 };
 
 /**
- * Creates an HOC which can be used to add a token editor to a flow container.
+ * Creates a HOC which can be used to add a token editor to a flow container.
  *
  * @param def
  * The definition of the component to be added.

@@ -55,14 +55,14 @@ export type BreadcrumbSettings = {
 };
 
 /**
- * Creates an HOC which specifies that a wrapped component is a breadcrumb. The HOC
+ * Creates a HOC which specifies that a wrapped component is a breadcrumb. The HOC
  * will read link and title from the specified nodekeys and will push link and title
  * to the breadcrumb store. Once the wrapped component is unmounted, the corresponding link
  * and title are deleted from the breadcrumb store
  *
  * @param settings The title and link nodekeys defining where to locate the link and title nodes.
  *
- * @return An HOC which defines the wrapped component as a breadcrumb.
+ * @return A HOC which defines the wrapped component as a breadcrumb.
  */
 const asBreadcrumb = ({
   linkNodeKey,

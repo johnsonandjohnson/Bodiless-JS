@@ -31,7 +31,7 @@ import { withTransformer } from './Transformer';
 import { as, extendDesign } from './tokenSpec';
 
 /**
- * Creates an HOC that will attach a displayName to an object.
+ * Creates a HOC that will attach a displayName to an object.
  *
  * @param name
  * The displayName to add.
@@ -114,7 +114,7 @@ export const applyDesign = <C extends DesignableComponents> (
  * The design to apply
  *
  * @return
- * An HOC which applies the speciried design to the wrapped component after
+ * A HOC which applies the speciried design to the wrapped component after
  * all other designes.
  *
  * @category Design API
@@ -193,16 +193,16 @@ export const extendDesignable = (transformDesign: TransformDesign = identity) =>
 
 /**
  * Makes a component "designable". A designable component defines a set of constituent
- * sub-components which can be modified by applying one or more HOC's.  You specify the
- * HOC's to apply to each sub-component via the `withDesign` HOC.
+ * sub-components which can be modified by applying one or more HOCs.  You specify the
+ * HOCs to apply to each sub-component via the `withDesign` HOC.
  *
  * @param startComponents
  * An object defining the set of constituent subcomponents. Each key
  *   is a string which identifies the component. Each value is the component itself, which
- *   will be modified by any HOC's provided by withDesign.
+ *   will be modified by any HOCs provided by withDesign.
  *
  * @return
- * An HOC which yields a designable version of the component to which it is applied.
+ * A HOC which yields a designable version of the component to which it is applied.
  *
  * @category Design API
  */

@@ -19,7 +19,7 @@ import NodeProvider, { useNode } from '../NodeProvider';
 import ContentfulNode from './ContentfulNode';
 
 /**
- * Creates an HOC which provides default content to the wrapped component.
+ * Creates a HOC which provides default content to the wrapped component.
  *
  * The default content is an object (or a function returning an object) keyed
  * by the relative node key at which the wrapped component or its children are
@@ -33,7 +33,7 @@ import ContentfulNode from './ContentfulNode';
  * An object or function returning an object containing default content keyed by node key.
  *
  * @returns
- * An HOC providing default content to the wrapped component.
+ * A HOC providing default content to the wrapped component.
  */
 const withDefaultContent = <P extends object, D extends object>(
   content: D | ((props: P) => D),

@@ -24,7 +24,7 @@ import { HOC, DesignableComponentsProps, extendDesignable } from '@bodiless/fcla
  * @param designKey - A Design key to reach the Parent. 'Parent' by default.
  * @param componentName - Optional component namespace for design key data attribute.
  *
- * @return An HOC which will wrap the given Child component with provided Parent.
+ * @return A HOC which will wrap the given Child component with provided Parent.
  *
  * @example Example of adding 'div' as a parent to 'span'.
  * Then customizing the div leveraging the design API.
