@@ -1,4 +1,5 @@
 {
+  "extends": "../../tsconfig.settings.json",
   "compilerOptions": {
     "target": "ES6",
     "outDir": "./lib/cjs/scripts",
