@@ -4,6 +4,16 @@ byId:
     name: Accordion
     parentId: components
     path: /pattern/accordion
+  border-radius:
+    id: border-radius
+    name: Border Radius
+    parentId: vital-2.0
+    path: /pattern/border-radius
+  border-width:
+    id: border-width
+    name: Border Width
+    parentId: vital-2.0
+    path: /pattern/border-width
   button:
     id: button
     name: Button
@@ -19,6 +29,11 @@ byId:
     name: Colors
     parentId: components
     path: /pattern/color
+  colors:
+    id: colors
+    name: Colors
+    parentId: vital-2.0
+    path: /pattern/colors
   components:
     id: components
     name: Components
@@ -44,6 +59,11 @@ byId:
     name: Intro
     parentId: docs
     path: /pages/intro
+  spacings:
+    id: spacings
+    name: Spacings
+    parentId: vital-2.0
+    path: /pattern/spacings
   text-decoration:
     id: text-decoration
     name: Elements
@@ -54,6 +74,16 @@ byId:
     name: Typography
     parentId: components
     path: /pattern/typography
+  vital-2.0:
+    id: vital-2.0
+    name: Vital 2.0
+    parentId: root
+    path: /pages/vital-2.0
+  vital-2.0-typography:
+    id: vital-2.0-typography
+    name: Vital 2.0 Typography
+    parentId: vital-2.0
+    path: /pattern/vital-2.0-typography
 order:
   - components
   - docs
@@ -66,3 +96,9 @@ order:
   - generic-template
   - accordion
   - button
+  - vital-2.0
+  - colors
+  - spacings
+  - border-radius
+  - border-width
+  - vital-2.0-typography

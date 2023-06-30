@@ -14,4 +14,4 @@
 
 export { default as vitalTypography, vital2Typography } from './tokens';
 export { TypographyMeta } from './meta';
-export { knapsackTypographySpec } from './Typography.knapsackSpec';
+export { knapsackTypographySpec, knapsackVitalTypographySpec } from './Typography.knapsackSpec';

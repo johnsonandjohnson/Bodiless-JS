@@ -73,6 +73,166 @@ blocks:
               type: bulletList
           type: doc
       id: 16KxcciP1h
+    GZ5wEpB1od:
+      blockType: text-editor
+      data:
+        content:
+          content:
+            - type: paragraph
+          type: doc
+      id: GZ5wEpB1od
+      size: null
+    KymKRTLXS-:
+      blockType: design-tokens
+      data:
+        demoId: table-list
+        groupIds:
+          - spacing
+        tokenType: ''
+      id: KymKRTLXS-
+      size: null
+    POi6al8Wi4:
+      blockType: design-tokens
+      data:
+        demoId: table-list
+        groupIds:
+          - border.rounded
+        tokenType: ''
+      id: POi6al8Wi4
+      size: null
+    PoOIw5aqQw:
+      blockType: text-editor
+      data:
+        content:
+          content:
+            - attrs:
+                level: 3
+              content:
+                - text: 'Things to Note:'
+                  type: text
+              type: heading
+            - content:
+                - content:
+                    - content:
+                        - text: 'We already have '
+                          type: text
+                        - marks:
+                            - type: code
+                          text: Typography
+                          type: text
+                        - text: "\_pattern under `Components` page, so naming this pattern "
+                          type: text
+                        - marks:
+                            - type: code
+                          text: Vital 2.0 Typography
+                          type: text
+                        - marks:
+                            - type: code
+                          type: hardBreak
+                        - text: .
+                          type: text
+                      type: paragraph
+                  type: listItem
+                - content:
+                    - content:
+                        - marks:
+                            - type: code
+                          text: H1
+                          type: text
+                        - text: "\_through "
+                          type: text
+                        - marks:
+                            - type: code
+                          text: H3
+                          type: text
+                        - text: "\_are not user or correctly defined."
+                          type: text
+                      type: paragraph
+                  type: listItem
+                - content:
+                    - content:
+                        - text: "Links have no hover styles in tokens JSON files:\_"
+                          type: text
+                        - marks:
+                            - attrs:
+                                class: null
+                                href: https://github.com/dxp-prototype/vital-design-tokens/tree/tokens.json
+                                target: _blank
+                              type: link
+                          text: https://github.com/dxp-prototype/vital-design-tokens/tree/tokens.json
+                          type: text
+                      type: paragraph
+                  type: listItem
+              type: bulletList
+          type: doc
+      id: PoOIw5aqQw
+      size: null
+    VHpTEsTfb_:
+      blockType: text-editor
+      data:
+        content:
+          content:
+            - content:
+                - text: 'These are the tokens that are coming from the Figma Token Studio Plugin and flow into the '
+                  type: text
+                - marks:
+                    - type: code
+                  text: '@bodiless/vital-elements'
+                  type: text
+                - text: ' Tailwind config. Since these are the Core tokens that live in TW config, there is no '
+                  type: text
+                - marks:
+                    - type: code
+                  text: tokenGroup
+                  type: text
+                - text: "\_available for these tokens and they are meant to be used as TW classes directly in other tokens or in components."
+                  type: text
+              type: paragraph
+          type: doc
+      id: VHpTEsTfb_
+      size: null
+    g3yHb4rxkp:
+      blockType: design-tokens
+      data:
+        demoId: table-list
+        groupIds:
+          - border.width
+        tokenType: ''
+      id: g3yHb4rxkp
+      size: null
+    gdspW656kz:
+      blockType: design-tokens
+      data:
+        demoId: color-swatch
+        groupIds:
+          - colors
+        tokenType: ''
+      id: gdspW656kz
+      size: null
+    oopKLyODYY:
+      blockType: text-editor
+      data:
+        content:
+          content:
+            - content:
+                - text: 'These are the tokens that are coming from the Figma Token Studio Plugin and flow into the '
+                  type: text
+                - marks:
+                    - type: code
+                  text: '@bodiless/vital-elements'
+                  type: text
+                - text: ' Tailwind config. Since these are the Core tokens that live in TW config, there is no '
+                  type: text
+                - marks:
+                    - type: code
+                  text: tokenGroup
+                  type: text
+                - text: "\_available for these tokens and they are meant to be used as TW classes directly in other tokens or in components."
+                  type: text
+              type: paragraph
+          type: doc
+      id: oopKLyODYY
+      size: null
     z6oyLDb-mS:
       blockType: text-editor
       data:
@@ -84,11 +244,69 @@ blocks:
               type: paragraph
           type: doc
       id: z6oyLDb-mS
+    zJHnx-3BWr:
+      blockType: text-editor
+      data:
+        content:
+          content:
+            - attrs:
+                level: 2
+              content:
+                - text: All White Label Colors
+                  type: text
+              type: heading
+            - type: horizontalRule
+            - content:
+                - text: >-
+                    This is just a preview of every single White Label color. For more information on color groups
+                    please visit Tokens section.
+                  type: text
+              type: paragraph
+            - type: paragraph
+          type: doc
+      id: zJHnx-3BWr
+      size: null
+    zN-UuZp0pQ:
+      blockType: text-editor
+      data:
+        content:
+          content:
+            - content:
+                - text: 'These are the tokens that are coming from the Figma Token Studio Plugin and flow into the '
+                  type: text
+                - marks:
+                    - type: code
+                  text: '@bodiless/vital-elements'
+                  type: text
+                - text: ' Tailwind config. Since these are the Core tokens that live in TW config, there is no '
+                  type: text
+                - marks:
+                    - type: code
+                  text: tokenGroup
+                  type: text
+                - text: "\_available for these tokens and they are meant to be used as TW classes directly in other tokens or in components."
+                  type: text
+              type: paragraph
+          type: doc
+      id: zN-UuZp0pQ
+      size: null
   settings:
     tokens:
       rootFontSize: 16px
 demos:
   byId:
+    07HJPaXqRQ:
+      data:
+        props:
+          Typography:
+            Link: true
+        slots: {}
+      description: Currently design tokens JSON files have no defined hover styles for white label links.
+      id: 07HJPaXqRQ
+      patternId: vital-2.0-typography
+      templateId: bodiless-DWA30IXBoC
+      title: Link
+      type: data
     0ojvo89F67:
       data:
         props:
@@ -101,6 +319,18 @@ demos:
       patternId: text-decoration
       templateId: bodiless-6GKNPvcRI7
       title: Bold Uppercased
+      type: data
+    1BsFIzVo30:
+      data:
+        props:
+          Typography:
+            H4: true
+        slots: {}
+      description: Note that the Design does not account for H1-H3 and the correct refined Vital 2.0 heading styles start at H4.
+      id: 1BsFIzVo30
+      patternId: vital-2.0-typography
+      templateId: bodiless-DWA30IXBoC
+      title: H4
       type: data
     5El4ojBTcF:
       data:
