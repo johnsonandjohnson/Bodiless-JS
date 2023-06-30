@@ -1,0 +1,50 @@
+{
+  "name": "@sites/knapsack",
+  "private": true,
+  "version": "1.0.0-rc.42",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/Bodiless-JS",
+    "directory": "sites/knapsack"
+  },
+  "scripts": {
+    "build": "npm run ks:build",
+    "clean": "rm -rf ./lib",
+    "ks:build": "knapsack build",
+    "prepare": "node ../../scripts/set-missing-symlinks.js @bodiless",
+    "start": "knapsack start",
+    "serve": "NODE_ENV=production knapsack serve",
+    "test": "knapsack test"
+  },
+  "dependencies": {
+    "@bodiless/core": "^1.0.0-rc.42",
+    "@bodiless/data": "^1.0.0-rc.42",
+    "@bodiless/fclasses": "^1.0.0-rc.42",
+    "@bodiless/gatsby-theme-bodiless": "^1.0.0-rc.42",
+    "@bodiless/knapsack-edit-provider": "^1.0.0-rc.42",
+    "@bodiless/knapsack-renderer": "^1.0.0-rc.42",
+    "@bodiless/vital-accordion": "^1.0.0-rc.42",
+    "@bodiless/vital-buttons": "^1.0.0-rc.42",
+    "@bodiless/vital-card": "^1.0.0-rc.42",
+    "@bodiless/vital-elements": "^1.0.0-rc.42",
+    "@bodiless/vital-layout": "^1.0.0-rc.42",
+    "@bodiless/vital-link": "^1.0.0-rc.42",
+    "@bodiless/vital-templates": "^1.0.0-rc.42",
+    "@knapsack/app": "^4.1.4",
+    "@types/react": "^18.2.0",
+    "crypto-browserify": "^3.12.0",
+    "css-loader": "^6.5.1",
+    "esm": "^3.2.25",
+    "glob": "^7.1.6",
+    "path-browserify": "^1.0.1",
+    "postcss-loader": "^6.2.1",
+    "react": "^18.2.0",
+    "stream-browserify": "^3.0.0",
+    "style-loader": "^3.3.1",
+    "typescript": "^4.0.0",
+    "webpack": "^5.69.1"
+  },
+  "files": [
+    "/lib"
+  ]
+}

@@ -20,7 +20,7 @@ import {
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { LinkComponents, LinkBaseProps } from './types';
 
-const linkComponents: LinkComponents = {
+export const linkComponents: LinkComponents = {
   Wrapper: A,
   Icon: Fragment,
   Body: Span,

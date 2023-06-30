@@ -12,8 +12,13 @@
  * limitations under the License.
  */
 
-import { extendMeta, flowHoc, replaceWith } from '@bodiless/fclasses';
-import { asCardToken } from '../CardClean';
+import {
+  extendMeta,
+  flowHoc,
+  replaceWith,
+  TokenCollection,
+} from '@bodiless/fclasses';
+import { asCardToken, CardComponents } from '../CardClean';
 import type { CardToken } from '../CardClean';
 import Base, {
   WithFlowContainerPreview,
@@ -185,7 +190,8 @@ export interface VitalCard extends
   VitalCardCategory,
   VitalCardTopic,
   VitalCardProduct,
-  VitalCardCore
+  VitalCardCore,
+  TokenCollection<CardComponents, {}>
 {}
 
 /**

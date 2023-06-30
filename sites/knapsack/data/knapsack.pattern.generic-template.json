@@ -1,0 +1,27 @@
+{
+  "id": "generic-template",
+  "title": "Generic Template",
+  "description": "",
+  "statuses": {},
+  "templates": [
+    {
+      "id": "bodiless-6GKNPvcDI9",
+      "title": "Template",
+      "path": "@bodiless/vital-templates",
+      "alias": "knapsackGenericTemplateSpec",
+      "templateLanguageId": "bodiless",
+      "spec": {
+        "isInferred": true
+      },
+      "demoIds": ["v_y6sXWJz3"],
+      "blockIds": []
+    }
+  ],
+  "tabs": [
+    {
+      "type": "template",
+      "id": "bodiless-6GKNPvcDI9"
+    }
+  ],
+  "subPages": []
+}

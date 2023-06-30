@@ -34,7 +34,7 @@ function mergeMeta(objValue:any, srcValue:any) {
 }
 
 /**
- * Enhances an HOC so as to reserve metadata attached to the component it wraps.
+ * Enhances a HOC so as to reserve metadata attached to the component it wraps.
  */
 const preserveMeta = (hoc: HOC): HOC => <P extends object, Q extends object = P>(
   Component: ComponentOrTag<P>,
@@ -51,13 +51,13 @@ const preserveMeta = (hoc: HOC): HOC => <P extends object, Q extends object = P>
 };
 
 /**
- * Creates an HOC which attaches metadata to a component.
+ * Creates a HOC which attaches metadata to a component.
  *
  * @param meta
  * The metadata to attach.
  *
  * @returns
- * An HOC which attaches the supplied metadata as properties of the component.
+ * A HOC which attaches the supplied metadata as properties of the component.
  *
  * @category Token API
  */

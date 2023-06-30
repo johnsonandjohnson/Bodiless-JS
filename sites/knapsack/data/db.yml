@@ -1,0 +1,268 @@
+blocks:
+  byId:
+    16KxcciP1h:
+      blockType: text-editor
+      data:
+        content:
+          content:
+            - attrs:
+                level: 3
+              content:
+                - text: Recommended action items for Design
+                  type: text
+              type: heading
+            - content:
+                - content:
+                    - content:
+                        - text: Set up site structure / navigation
+                          type: text
+                      type: paragraph
+                  type: listItem
+                - content:
+                    - content:
+                        - text: Add component pages
+                          type: text
+                      type: paragraph
+                  type: listItem
+                - content:
+                    - content:
+                        - text: Connect Figma assets
+                          type: text
+                      type: paragraph
+                  type: listItem
+                - content:
+                    - content:
+                        - text: Style the site (colors, typography, landing pages)
+                          type: text
+                      type: paragraph
+                  type: listItem
+              type: bulletList
+            - content:
+                - marks:
+                    - type: bold
+                  text: "For more guidance and how-to's:"
+                  type: text
+              type: paragraph
+            - content:
+                - content:
+                    - content:
+                        - marks:
+                            - attrs:
+                                class: null
+                                href: https://app.knapsack.cloud/site/kenvue-sandbox/latest
+                                target: _blank
+                              type: link
+                          text: Knapsack Starter Kit & Sandbox
+                          type: text
+                      type: paragraph
+                  type: listItem
+                - content:
+                    - content:
+                        - marks:
+                            - attrs:
+                                class: null
+                                href: https://help.knapsack.cloud/
+                                target: _blank
+                              type: link
+                          text: Platform documentation
+                          type: text
+                        - text: ' (or click ? in the bottom right)'
+                          type: text
+                      type: paragraph
+                  type: listItem
+              type: bulletList
+          type: doc
+      id: 16KxcciP1h
+    z6oyLDb-mS:
+      blockType: text-editor
+      data:
+        content:
+          content:
+            - content:
+                - text: This is our card!
+                  type: text
+              type: paragraph
+          type: doc
+      id: z6oyLDb-mS
+  settings:
+    tokens:
+      rootFontSize: 16px
+demos:
+  byId:
+    0ojvo89F67:
+      data:
+        props:
+          FontDecoration:
+            Bold: true
+            Uppercase: true
+        slots: {}
+      description: A description
+      id: 0ojvo89F67
+      title: Bold Uppercased
+      type: data
+    5El4ojBTcF:
+      data:
+        props:
+          FontSize:
+            Base: true
+            L: false
+            XXL: false
+        slots: {}
+      id: 5El4ojBTcF
+      title: Base Text
+      type: data
+    8oblO5r52L:
+      data:
+        props:
+          FontSize:
+            XXL: true
+        slots: {}
+      description: A description
+      id: 8oblO5r52L
+      title: XXL Text
+      type: data
+    Db_LHeS9Hs:
+      data:
+        props:
+          Color:
+            BgPrimaryBrand: true
+        slots: {}
+      id: Db_LHeS9Hs
+      title: Background Primary
+      type: data
+    MecoUEAtY3:
+      data:
+        props:
+          Color:
+            TextPrimaryBodyCopy: false
+            TextPrimaryInteractive: true
+        slots: {}
+      description: A description
+      id: MecoUEAtY3
+      title: Text Primary
+      type: data
+    SjJMO5dEv_:
+      data:
+        extras:
+          buttontext:
+            text: Primary Button
+        props:
+          Primary: true
+        slots: {}
+      description: A description
+      id: SjJMO5dEv_
+      title: Primary Button
+      type: data
+    Tb6vk8upkF:
+      data:
+        extras:
+          accordion$body:
+            - children:
+                - text: Some Accordion Conntent
+              type: paragraph
+          accordion$title:
+            text: Accordion Title
+        props:
+          Base: false
+          Default: true
+          WithInitiallyExpanded: true
+        slots: {}
+      description: A description
+      id: Tb6vk8upkF
+      title: Accordion Expanded
+      type: data
+    ZN0BmRl_69:
+      data:
+        extras:
+          accordion$body:
+            - children:
+                - text: Some Accordion Conntent
+              type: paragraph
+          accordion$title:
+            text: Accordion Title
+        props:
+          Default: true
+        slots:
+          Body:
+            - demoId: rkXoktYQkZ
+              patternId: text-decoration
+              templateId: bodiless-6GKNPvcRI7
+          Title: []
+      id: ZN0BmRl_69
+      title: Base Accordion
+      type: data
+    bLZ89peK6T:
+      data:
+        props:
+          Typography:
+            Link: true
+        slots: {}
+      description: A description
+      id: bLZ89peK6T
+      title: Link
+      type: data
+    emcQ03KyQf:
+      data:
+        extras:
+          buttontext:
+            text: Button Text
+        props:
+          Default: true
+        slots: {}
+      id: emcQ03KyQf
+      title: Base Button
+      type: data
+    hq4QhlF7Ga:
+      data:
+        props:
+          FontDecoration:
+            Bold: true
+        slots: {}
+      id: hq4QhlF7Ga
+      title: Bold Text
+      type: data
+    n7PYyApmLa:
+      data:
+        props:
+          Typography:
+            Body: true
+        slots: {}
+      id: n7PYyApmLa
+      title: Body Text
+      type: data
+    rkXoktYQkZ:
+      data:
+        props:
+          FontDecoration:
+            Uppercase: true
+        slots: {}
+      description: A description
+      id: rkXoktYQkZ
+      title: Uppercase
+      type: data
+    v_y6sXWJz3:
+      data:
+        props:
+          Generic: true
+        slots:
+          BottomContent: []
+          TopContent: []
+      id: v_y6sXWJz3
+      title: Generic Template
+      type: data
+    wAphvQRJOn:
+      data:
+        extras:
+          title:
+            text: Here is a title to edit
+        props:
+          Default: true
+        slots: {}
+      description: A description
+      id: wAphvQRJOn
+      title: New Variation
+      type: data
+  settings: {}
+settings:
+  logoUrl: https://knapsack.imgix.net/site/vital-ds/kvue-ae799a87-pt1dzyvvlf.png
+  title: Vital DS

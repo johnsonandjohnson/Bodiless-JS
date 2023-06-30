@@ -1,0 +1,27 @@
+{
+  "id": "color",
+  "title": "Colors",
+  "description": "",
+  "statuses": {},
+  "templates": [
+    {
+      "id": "bodiless-6GKNPvcRI9",
+      "title": "Template",
+      "path": "@bodiless/vital-elements",
+      "alias": "knapsackColorSpec",
+      "templateLanguageId": "bodiless",
+      "spec": {
+        "isInferred": true
+      },
+      "demoIds": ["Db_LHeS9Hs", "MecoUEAtY3"],
+      "blockIds": []
+    }
+  ],
+  "tabs": [
+    {
+      "type": "template",
+      "id": "bodiless-6GKNPvcRI9"
+    }
+  ],
+  "subPages": []
+}

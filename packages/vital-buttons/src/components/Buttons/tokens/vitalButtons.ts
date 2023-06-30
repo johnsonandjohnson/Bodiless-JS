@@ -21,13 +21,14 @@ import {
   Button,
   addProps,
   flowHoc,
+  TokenCollection,
 } from '@bodiless/fclasses';
 import { withPlaceholder } from '@bodiless/components';
 import { vitalColor } from '@bodiless/vital-elements';
 import { vitalEditorPlain, EditorPlainClean } from '@bodiless/vital-editors';
 import { asEditableLink, vitalLink } from '@bodiless/vital-link';
 import { withNodeKey } from '@bodiless/data';
-import { asButtonToken } from '../ButtonClean';
+import { ButtonComponent, ButtonToken, asButtonToken } from '../ButtonClean';
 import { WhereToBuy, WhereToBuyWithoutIcon } from './vitalWTB';
 
 const ButtonThemeStyle = as(
@@ -142,7 +143,19 @@ const Default = asButtonToken({
   ...Base,
 });
 
-export default {
+interface VitalButtons extends TokenCollection<ButtonComponent, {}> {
+  Default: ButtonToken,
+  Primary: ButtonToken,
+  PrimarySelected: ButtonToken,
+  Secondary: ButtonToken,
+  SecondarySelected: ButtonToken,
+  WithDisabled: ButtonToken,
+  WithArrow: ButtonToken,
+  WhereToBuy: ButtonToken,
+  WhereToBuyWithoutIcon: ButtonToken,
+}
+
+const vitalButtons: VitalButtons = {
   Default,
   Primary,
   PrimarySelected,
@@ -153,3 +166,5 @@ export default {
   WhereToBuy,
   WhereToBuyWithoutIcon,
 };
+
+export default vitalButtons;

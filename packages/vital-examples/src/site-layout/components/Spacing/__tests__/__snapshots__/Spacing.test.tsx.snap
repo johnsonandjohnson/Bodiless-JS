@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Spacing Matches snapshot for Gutter 1`] = `
+<div
+  className="p-1 md:p-2 lg:p-3"
+/>
+`;
+
+exports[`Spacing Matches snapshot for GutterBottom 1`] = `
+<div
+  className="mb-4"
+/>
+`;
+
+exports[`Spacing Matches snapshot for GutterOffset 1`] = `
+<div
+  className="-mx-1 md:-mx-2 lg:-mx-3"
+/>
+`;
+
+exports[`Spacing Matches snapshot for GutterTop 1`] = `
+<div
+  className="mt-4"
+/>
+`;
+
+exports[`Spacing Matches snapshot for GuttonLeft 1`] = `
+<div
+  className="ml-4"
+/>
+`;
+
+exports[`Spacing Matches snapshot for GuttonRight 1`] = `
+<div
+  className="mr-4"
+/>
+`;
+
+exports[`Spacing Matches snapshot for WithSiteMargin 1`] = `
+<div
+  className="mx-2 xl:mx-6 xxl:px-20"
+/>
+`;
+
+exports[`Spacing Matches snapshot for WithSiteXLConstraint 1`] = `
+<div
+  className="xxl:container xxl:mx-auto"
+/>
+`;

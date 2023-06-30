@@ -14,3 +14,4 @@
 
 export { default as vitalTextDecoration } from './tokens';
 export { TextDecorationMeta } from './meta';
+export { knapsackTextDecorationSpec } from './TextDecoration.knapsackSpec';

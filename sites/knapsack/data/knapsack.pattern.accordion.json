@@ -1,0 +1,33 @@
+{
+  "id": "accordion",
+  "title": "Accordion",
+  "description": "",
+  "statuses": {},
+  "templates": [
+    {
+      "id": "bodiless-6GKNPvcRI0",
+      "title": "Template",
+      "path": "@bodiless/vital-accordion",
+      "alias": "knapsackAccordionSpec",
+      "templateLanguageId": "bodiless",
+      "spec": {
+        "isInferred": true
+      },
+      "demoIds": ["ZN0BmRl_69", "Tb6vk8upkF"],
+      "blockIds": []
+    }
+  ],
+  "tabs": [
+    {
+      "type": "template",
+      "id": "bodiless-6GKNPvcRI0"
+    }
+  ],
+  "subPages": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "blockIds": []
+    }
+  ]
+}

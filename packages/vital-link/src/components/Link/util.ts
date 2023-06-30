@@ -16,7 +16,7 @@ import { asBodilessLink } from '@bodiless/components-ui';
 import type { AsBodilessLink } from '@bodiless/components';
 
 /**
- * Produces an HOC which creates an editable link.
+ * Produces a HOC which creates an editable link.
  *
  * @see asBodilessLink.
  */

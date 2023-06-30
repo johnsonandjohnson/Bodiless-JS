@@ -35,4 +35,5 @@ export {
   vitalCardStatic,
 };
 
+export { knapsackCardSpec } from './Card.knapsackSpec';
 export type { CardComponents, VitalCard };

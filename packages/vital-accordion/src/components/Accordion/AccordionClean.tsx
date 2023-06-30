@@ -21,7 +21,7 @@ import { AccordionBodyClean } from '../AccordionBody';
 import { AccordionProvider } from './AccordionContext';
 import { AccordionComponents, AccordionBaseProps, AccordionProviderProps } from './types';
 
-const AccordionComponentsStart: AccordionComponents = {
+export const AccordionComponentsStart: AccordionComponents = {
   Wrapper: Div,
   TitleWrapper: Fragment,
   Title: AccordionTitleClean,
@@ -82,5 +82,9 @@ const AccordionClean = designable(AccordionComponentsStart, 'Accordion')(Accordi
 export const AccordionBodyPreview = () => <span className="bl-text-gray-800">Accordion Body</span>;
 
 export const asAccordionToken = asVitalTokenSpec<AccordionComponents>();
+
+// These are used in definig the VitalAccordion interface.
+const accordionToken = asAccordionToken();
+export type AccordionToken = typeof accordionToken;
 
 export default AccordionClean;

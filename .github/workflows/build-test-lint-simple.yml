@@ -6,6 +6,8 @@ env:
 
 on:
   workflow_call:
+  schedule:
+    - cron: "0 3 * * *"
 
 jobs:
   setup:
@@ -14,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event_name == 'schedule' && 'main' || github.event.pull_request.head.sha }}
       - name: Build	
         uses: ./.github/actions/build
       - name: Lint
@@ -22,10 +24,10 @@ jobs:
       - name: Check
         run: npm run check
       - name: Test
-        if: ${{ github.event.label.name == 'ready-to-test' }}
+        if: ${{ github.event_name == 'schedule' || github.event.label.name == 'ready-to-test' }}
         run: npm run test --quiet --colors
       - name: Run deprecated playwright tests
-        if: ${{ github.event.label.name == 'ready-to-test' }}
+        if: ${{ github.event_name == 'schedule' || github.event.label.name == 'ready-to-test' }}
         uses: ./.github/actions/playwright
         with:
           node-test-script: test:components-functional
@@ -33,25 +35,33 @@ jobs:
     
   smoke-vital:
     name: Smoke tests for vital components
-    if: ${{ github.event.label.name == 'ready-to-test' }}
+    if: ${{ github.event_name == 'schedule' || github.event.label.name == 'ready-to-test' }}
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event_name == 'schedule' && 'main' || github.event.pull_request.head.sha }}
       - name: Build
         uses: ./.github/actions/build
       - name: Run vital playwright tests
         env:
           APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
-          APPLITOOLS_BATCH_NAME: ${{ github.event.pull_request.title }} (${{ github.event.pull_request.number }})
+          APPLITOOLS_BATCH_NAME: ${{ github.event_name == 'schedule' && 'Regression Test Run' || format('{0} ({1})', github.event.pull_request.title, github.event.pull_request.number) }}
+          PW_INCLUDE_ALL_RENDERERS: ${{ github.event_name == 'schedule' }}
         uses: ./.github/actions/playwright
         with:
           node-test-script: test:components-visual
           test-results-name: Smoke tests for vital components
+      - name: Upload Accessibility results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Accessibility
+          path: accessibility-reports/
+          retention-days: 30
 
   cleanup:
-    if: always()
+    if: always() && github.event_name != 'schedule'
     runs-on: ubuntu-20.04
     needs: [ setup, smoke-vital ]
     permissions:
@@ -63,14 +73,21 @@ jobs:
           labels: ${{ github.event.label.name }}
           fail_on_error: false
 
-  # Generate event file for Attach Unit Test Results helper workflow
-  event_file:
-    name: "Event File"
-    if: always()
+  test-results:
+    name: Test Results
+    if: always() && github.event.label.name == 'ready-to-test'
     runs-on: ubuntu-latest
+    needs: [ setup, smoke-vital ]
+    permissions:
+      checks: write
+      pull-requests: write
     steps:
-    - name: Upload
-      uses: actions/upload-artifact@v2
-      with:
-        name: Event File
-        path: ${{ github.event_path }}
+      - name: Download file
+        uses: actions/download-artifact@v3
+        with:
+          path: playwright-report/
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        with:
+          check_name: 'Playwright Test Results'
+          files: "playwright-report/**/*.xml"

@@ -1,0 +1,17 @@
+id: homepage
+title: Vital Design System
+settings:
+  pageHeader:
+    size: medium
+    textColorTitle:
+      type: value
+      colorValue: '#FFFFFF'
+    backgroundColor:
+      type: value
+      colorValue: '#019881'
+    textColorDescription:
+      type: value
+      colorValue: '#FFFFFF'
+description: Powering Kenvue's global consumer digital experiences
+blockIds:
+  - 16KxcciP1h

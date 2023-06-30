@@ -34,7 +34,7 @@ const BaseVariation = {
 
 const AccordionVariations = {
   Default: '',
-  FAQ: vitalAccordion.WithFAQSchema,
+  FAQ: vitalAccordion.WithFAQ,
 };
 
 const vitalAccordionVariations = varyDesigns(

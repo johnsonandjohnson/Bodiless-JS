@@ -1,0 +1,26 @@
+name: Build Knapsack Vital-DS
+env:
+  CI: true
+  FORCE_COLOR: 1
+
+on:
+  push:
+    branches:
+      - master # Note: temporary until PR merged into main
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Use Node.js v16.9
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.9
+      - name: Setup
+        run: npm run setup
+      - name: Build Knapsack
+        run: npm run build --prefix ./sites/knapsack

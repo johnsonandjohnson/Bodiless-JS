@@ -1,5 +1,5 @@
 /**
- * Copyright © 2022 Johnson & Johnson
+ * Copyright © 2023 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,10 +11,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { TokenCollection } from '@bodiless/fclasses';
 
-export * from './components/Typography';
-export * from './components/Color';
-export * from './components/FontSize';
-export * from './components/Spacing';
-export * from './components/TextDecoration';
-export * from './util';
+import { KnapsackDemoTextClean } from '../KnapsackDemoElement';
+import type { VitalDesignSpec } from '../../util';
+import vitalColor from './tokens';
+
+const colorTokens = vitalColor as unknown as TokenCollection<any, any>;
+
+export const knapsackColorSpec: VitalDesignSpec = {
+  tokens: colorTokens,
+  tokensExportName: 'vitalColor',
+  component: KnapsackDemoTextClean,
+  componentExportName: 'KnapsackDemoTextClean',
+  slots: {},
+};

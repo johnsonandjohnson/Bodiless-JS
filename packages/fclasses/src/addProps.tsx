@@ -26,7 +26,7 @@ type NotAFunction = { [key: string]: any, bind?: never, call?: never };
  * A custom React hook which will be invoked to determine whether the props should be added.
  *
  * @returns
- * A function with the same signature as `addProps`
+ * A function with the same signature as `addProps`.
  *
  * @see addProps
  *
@@ -47,14 +47,14 @@ export const addPropsIf = <B extends object>(
     };
 
 /**
- * Creates an HOC that injects the specified props to the base component.
+ * Creates a HOC that injects the specified props to the base component.
  *
  * Any props passed to the resulting component will take precedence
  * over those specified here.
  *
  * @param propsToAdd
  * Object containing props and values which will be passed to the base component,
- * or a function which recevies the original props and returns such an object.
+ * or a function which receives the original props and returns such an object.
  *
  * @return
  * A component which renders the base component with the added props.
@@ -71,11 +71,11 @@ export const addProps = <B extends object, I extends NotAFunction>(
 ) => addPropsIf<B>(() => true)<I>(propsToAdd);
 
 /**
- * Creates an HOC which strips all but the specified props.
+ * Creates a HOC which strips all but the specified props.
  *
  * @param keys A list of the prop-names to keep.
  *
- * @return An HOC which will strip all but the specified props.
+ * @return A HOC which will strip all but the specified props.
  *
  * @category HOC Utility
  */
@@ -87,7 +87,7 @@ export const withOnlyProps = <Q extends object>(...keys: string[]) => (
 );
 
 /**
- * Alias for [[removeProps]]
+ * Alias for [[removeProps]].
  *
  * @category HOC Utility
  */
@@ -106,11 +106,11 @@ export const withoutProps = <A extends object>(
  * ...keys The names of the props to remove.
  *
  * @return
- * An HOC which accepts a component and returns another which accepts the
+ * A HOC which accepts a component and returns another which accepts the
  * specified props and removes them before rendering.
  *
  * Note this expects a type parameter specifying the props which will be
- * removed. For example
+ * removed. For example:
  * ```
  * type Foo = {
  *   A: string,
@@ -132,14 +132,14 @@ export const withoutProps = <A extends object>(
 export const removeProps = withoutProps;
 
 /**
- * Alias for [[addProps]]
+ * Alias for [[addProps]].
  *
  * @category HOC Utility
  */
 export const withProps = addProps;
 
 /**
- * Alias for [[addPropsIf]]
+ * Alias for [[addPropsIf]].
  *
  * @category HOC Utility
  */
@@ -148,7 +148,7 @@ export const withPropsIf = addPropsIf;
 /**
  * A React `Fragment` which ensures that all invalid props are removed.
  * This is useful in conjunction with [[replaceWith]], [[startWith]]
- * or [[remove]], so that any props added by otehr HOC's will be discarded.
+ * or [[remove]], so that any props added by other HOCs will be discarded.
  *
  * @example
  * ```

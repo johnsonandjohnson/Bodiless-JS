@@ -17,15 +17,17 @@ import {
   flowIf,
   Fragment,
   replaceWith,
+  TokenCollection,
 } from '@bodiless/fclasses';
 import { vitalLayout } from '@bodiless/vital-layout';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
 import { withNode, withNodeKey, useNode } from '@bodiless/data';
 import { vitalSpacing } from '@bodiless/vital-elements';
 import { vitalBreadcrumbs } from '@bodiless/vital-navigation';
-import { asGenericTemplateToken } from '../GenericTemplateClean';
+import { asGenericTemplateToken, GenericTemplateToken } from '../GenericTemplateClean';
 import { TemplateNodeKeys } from '../../TemplatesNodeKeys';
 import { vitalHero } from '../../Hero';
+import { GenericTemplateComponents } from '../types';
 
 const isHomePage = () => useNode().node.pagePath === '/';
 
@@ -84,8 +86,16 @@ const Generic = asGenericTemplateToken({
   },
 });
 
-export default {
+interface VitalGenericTemplate extends TokenCollection<GenericTemplateComponents, {}> {
+  Default: GenericTemplateToken,
+  Generic: GenericTemplateToken,
+  WithNoBreadcrumbsOnHomePage: GenericTemplateToken,
+}
+
+const vitalGenericTemplate: VitalGenericTemplate = {
   Default,
   Generic,
   WithNoBreadcrumbsOnHomePage,
 };
+
+export default vitalGenericTemplate;

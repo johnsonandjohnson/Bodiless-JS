@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.42](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.41...v1.0.0-rc.42) (2023-06-15)
+
+### Bug Fixes
+
+- Addressing typography feedbacks ([bcb15bd](https://github.com/johnsonandjohnson/bodiless-js/commit/bcb15bd4cab75118ba85f6723cc3ffb50263247e))
+- Allow checks write for reusable workflow ([#2133](https://github.com/johnsonandjohnson/bodiless-js/issues/2133)) ([1036621](https://github.com/johnsonandjohnson/bodiless-js/commit/1036621913db9d73e301e6b1648b537aedd8f59c))
+- **chore:** Fix tests ([258c7da](https://github.com/johnsonandjohnson/bodiless-js/commit/258c7da25a324958047b3f55c6ff3bd2f56ebe1f))
+- **knapsack-renderer:** Fix imports and type issues ([02a2825](https://github.com/johnsonandjohnson/bodiless-js/commit/02a282548a12934f276844c99d06245ccc928338))
+- **knapsack:** Fix import name ([58daa0a](https://github.com/johnsonandjohnson/bodiless-js/commit/58daa0a4fbed21165701c7101cd07e20ae12181b))
+- **knapsack:** Fix knapsack package versions ([8f4b6f0](https://github.com/johnsonandjohnson/bodiless-js/commit/8f4b6f018d2bc603ba597e53a68c939cf4e9f3eb))
+- **package-lock:** Fixing broken lock file ([#2123](https://github.com/johnsonandjohnson/bodiless-js/issues/2123)) ([220b63e](https://github.com/johnsonandjohnson/bodiless-js/commit/220b63e22b33eee47a6cae9cf78fcae1366f76a8))
+- Preserve package-lock when doing a pre-release ([#2134](https://github.com/johnsonandjohnson/bodiless-js/issues/2134)) ([f3fa092](https://github.com/johnsonandjohnson/bodiless-js/commit/f3fa092b1254e8b8019da13fa91dbe5a6e285e0e))
+
+### Features
+
+- **chore:** Add knapsack specs for Car, Elements, Accordions and templates. Reorganized code to keep specs close to components ([6be4f75](https://github.com/johnsonandjohnson/bodiless-js/commit/6be4f754d6e787b0cde6f13d7f8b24447dd43b44))
+- **chore:** address PR fedback ([d29d72c](https://github.com/johnsonandjohnson/bodiless-js/commit/d29d72c2708be412770ac07d3c198f7c999fa262))
+- **chore:** address PR feedback ([3797395](https://github.com/johnsonandjohnson/bodiless-js/commit/37973957fb551fe54b0f2e0a546ecc18e7d8418e))
+- **chore:** Fix Lock File ([698d8c3](https://github.com/johnsonandjohnson/bodiless-js/commit/698d8c39147fd0723bca7e4dc96d6aba3f84d4b4))
+- **chore:** Generalize KnapsackSpec type and move it to elements ([c14f1e6](https://github.com/johnsonandjohnson/bodiless-js/commit/c14f1e6c5361aa0b7fbfdcd4a419d9980f859b4e))
+- **chore:** Run setup to update lock file ([62b5934](https://github.com/johnsonandjohnson/bodiless-js/commit/62b593477967336726be7a522e3deb2a97a0f5b6))
+- **chore:** Update Knapsack ([10bf110](https://github.com/johnsonandjohnson/bodiless-js/commit/10bf1106182f92f1fbdb30ad1366326a2960fc0d))
+- clean up commands for heroku deploy ([9080ed1](https://github.com/johnsonandjohnson/bodiless-js/commit/9080ed15b2c7a0c4e8b01bd9951700a89fe60a27))
+- **knapsack-renderer, vital-card, vital-elements:** Fix type issues, update knapsack packages ([37935b2](https://github.com/johnsonandjohnson/bodiless-js/commit/37935b27fdd36f94979c22539a355cc7eab9bb0f))
+- **knapsack:** Add repo root ([fbfff26](https://github.com/johnsonandjohnson/bodiless-js/commit/fbfff26b21bf8a98ba5552c805b2e2e671a090f3))
+- **knapsack:** Add todo comments ([250f93e](https://github.com/johnsonandjohnson/bodiless-js/commit/250f93eb2c4b01a78b48cc535be9cc4d6bff07c0))
+- **knapsack:** new site ID vital-ds ([d29a745](https://github.com/johnsonandjohnson/bodiless-js/commit/d29a74506dcc1415c6d5daa22b39b3f7f691db0a))
+- **knapsack:** Update site deps ([4544a01](https://github.com/johnsonandjohnson/bodiless-js/commit/4544a013740af90f099847f0174befc2d0a31900))
+- **vital-card:** Code Cleanup ([58342c6](https://github.com/johnsonandjohnson/bodiless-js/commit/58342c6476e666807a2f52aa94e331f5750655be))
+
 # [1.0.0-rc.41](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.40...v1.0.0-rc.41) (2023-06-08)
 
 ### Bug Fixes

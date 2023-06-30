@@ -1,0 +1,27 @@
+{
+  "id": "text-decoration",
+  "title": "Text Decoration",
+  "description": "",
+  "statuses": {},
+  "templates": [
+    {
+      "id": "bodiless-6GKNPvcRI7",
+      "title": "Template",
+      "path": "@bodiless/vital-elements",
+      "alias": "knapsackTextDecorationSpec",
+      "templateLanguageId": "bodiless",
+      "spec": {
+        "isInferred": true
+      },
+      "demoIds": ["hq4QhlF7Ga", "rkXoktYQkZ", "0ojvo89F67"],
+      "blockIds": []
+    }
+  ],
+  "tabs": [
+    {
+      "type": "template",
+      "id": "bodiless-6GKNPvcRI7"
+    }
+  ],
+  "subPages": []
+}

@@ -12,12 +12,16 @@
  * limitations under the License.
  */
 
-import { LinkClean as ButtonClean } from '@bodiless/vital-link';
+import { LinkClean as ButtonClean, linkComponents as buttonComponentsStart } from '@bodiless/vital-link';
 import type { LinkComponents as ButtonComponent, LinkBaseProps as ButtonBaseProps } from '@bodiless/vital-link';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
 
 export const asButtonToken = asVitalTokenSpec<ButtonComponent>();
 
-export default ButtonClean;
+// These are used in definig the VitalAccordion interface.
+const buttonToken = asButtonToken();
+type ButtonToken = typeof buttonToken;
 
-export type { ButtonComponent, ButtonBaseProps};
+export default ButtonClean;
+export { buttonComponentsStart };
+export type { ButtonComponent, ButtonBaseProps, ButtonToken };

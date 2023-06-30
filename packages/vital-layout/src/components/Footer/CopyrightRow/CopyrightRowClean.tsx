@@ -24,6 +24,7 @@ const copyrightRowComponents: CopyrightRowComponents = {
   Wrapper: Div,
   CopyrightWrapper: Div,
   DisclaimerWrapper: Fragment,
+  SocialDisclaimer: Fragment,
   Disclaimer: RichTextClean,
   Copyright: RichTextClean,
   SocialLinksWrapper: Div,
@@ -35,12 +36,14 @@ const CopyrightRowCleanBase: FC<CopyrightRowProps> = ({ components: C, ...rest }
     <C.CopyrightWrapper>
       <C.Copyright />
     </C.CopyrightWrapper>
-    <C.SocialLinksWrapper>
-      <C.SocialLinks />
-    </C.SocialLinksWrapper>
-    <C.DisclaimerWrapper>
-      <C.Disclaimer />
-    </C.DisclaimerWrapper>
+    <C.SocialDisclaimer>
+      <C.SocialLinksWrapper>
+        <C.SocialLinks />
+      </C.SocialLinksWrapper>
+      <C.DisclaimerWrapper>
+        <C.Disclaimer />
+      </C.DisclaimerWrapper>
+    </C.SocialDisclaimer>
   </C.Wrapper>
 );
 

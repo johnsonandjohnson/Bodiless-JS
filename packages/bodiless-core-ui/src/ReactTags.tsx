@@ -13,9 +13,12 @@
  */
 
 import React, { ComponentType } from 'react';
-import { ReactTagsField as ReactTagsFieldClean, ReactTagsFieldProps } from '@bodiless/core';
+import {
+  ReactTagsField as ReactTagsFieldClean,
+  ReactTagsFieldProps,
+} from '@bodiless/core';
 
-const ReactTagsField: ComponentType<ReactTagsFieldProps> = props => {
+const ReactTagsField: ComponentType<ReactTagsFieldProps> = (props) => {
   const classes = {
     root: `
         bl-flex bl-relative bl-flex-col-reverse bl-rounded-sm bl-text-xs
@@ -32,21 +35,18 @@ const ReactTagsField: ComponentType<ReactTagsFieldProps> = props => {
     tagList: 'bl-max-w-xl-grid-1 bl-inline',
     tagListItem: 'bl-inline-block',
     tagName: 'bl-text-gray-900',
-    comboBox: 'bl-inline-block bl-py-grid-1 bl-px-grid-0 bl-mb-grid-1 bl-max-w-full bl-min-w-xl-grid-1',
+    comboBox:
+      'bl-inline-block bl-py-grid-1 bl-px-grid-0 bl-mb-grid-1 bl-max-w-full bl-min-w-xl-grid-1',
     input: 'bl-text-gray-900 bl-react-tags__search-input',
-    listBox: 'bl-text-gray-900 bl-absolute bl-top-full bl-w-full bl-left-grid-0 bl-z-10 bl-react-tags__listbox',
+    listBox:
+      'bl-text-gray-900 bl-absolute bl-top-full bl-w-full bl-left-grid-0 bl-z-10 bl-react-tags__listbox',
     noOptions: 'react-tags__listbox-no-options',
     option: 'react-tags__listbox-option',
     optionIsActive: 'is-active',
     highlight: 'react-tags__listbox-option-highlight',
   };
 
-  return (
-    <ReactTagsFieldClean
-      classNames={classes}
-      {...props}
-    />
-  );
+  return <ReactTagsFieldClean classNames={classes} {...props} />;
 };
 
 export default ReactTagsField;

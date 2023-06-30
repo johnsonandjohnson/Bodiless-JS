@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/cli",
-  "version": "1.0.0-rc.41",
+  "version": "1.0.0-rc.42",
   "description": "A cli tool for Bodiless-JS",
   "author": "Chris Oden <coden@its.jnj.com>",
   "homepage": "",
@@ -35,8 +35,7 @@
     "dev": "npm run build:watch",
     "new": "./bin/bodiless new",
     "postpack": "rimraf oclif.manifest.json",
-    "prepack": "rimraf lib && npm run build && oclif-dev manifest && oclif-dev readme",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "prepack": "rimraf lib && npm run build && oclif-dev manifest && oclif-dev readme"
   },
   "dependencies": {
     "@oclif/command": "^1",

@@ -14,14 +14,15 @@
 
 import { withNode, withNodeKey } from '@bodiless/data';
 import {
-  addProps, as, flowHoc, replaceWith
+  addProps, as, flowHoc, replaceWith, TokenCollection
 } from '@bodiless/fclasses';
 import { withFAQSchema } from '@bodiless/schema-org';
 import { vitalColor } from '@bodiless/vital-elements';
 import { ifComponentSelector } from '@bodiless/layouts';
 import { vitalAccordionBody } from '../../AccordionBody';
 import { vitalAccordionTitle } from '../../AccordionTitle';
-import { asAccordionToken, AccordionBodyPreview } from '../AccordionClean';
+import { asAccordionToken, AccordionBodyPreview, AccordionToken } from '../AccordionClean';
+import { AccordionComponents } from '../types';
 
 const Base = asAccordionToken({
   Components: {
@@ -54,11 +55,11 @@ const WithInitiallyExpanded = asAccordionToken({
   Meta: flowHoc.meta.term('Behavior')('Expanded on Open'),
 });
 
-const WithFAQSchema = asAccordionToken({
+const WithFAQ = asAccordionToken({
   SEO: {
     Wrapper: withFAQSchema,
-    Title: vitalAccordionTitle.WithFAQSchema,
-    Body: vitalAccordionBody.WithFAQSchema,
+    Title: vitalAccordionTitle.WithFAQ,
+    Body: vitalAccordionBody.WithFAQ,
   },
   Meta: flowHoc.meta.term('Schema')('With FAQ Schema'),
 });
@@ -70,10 +71,20 @@ const WithFlowContainerPreview = asAccordionToken({
   },
 });
 
-export default {
+interface VitalAccordion extends TokenCollection<AccordionComponents, {}> {
+  Base: AccordionToken,
+  Default: AccordionToken,
+  WithInitiallyExpanded: AccordionToken,
+  WithFAQ: AccordionToken,
+  WithFlowContainerPreview: AccordionToken,
+}
+
+const vitalAccordion: VitalAccordion = {
   Base,
   Default,
   WithInitiallyExpanded,
-  WithFAQSchema,
+  WithFAQ,
   WithFlowContainerPreview,
 };
+
+export default vitalAccordion;

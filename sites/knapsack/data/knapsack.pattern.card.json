@@ -1,0 +1,37 @@
+{
+  "id": "card",
+  "tabs": [
+    {
+      "id": "bodiless-Kmd8Nb3inj",
+      "type": "template"
+    },
+    {
+      "id": "overview",
+      "type": "subPage"
+    }
+  ],
+  "title": "Card",
+  "statuses": {},
+  "subPages": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "blockIds": ["z6oyLDb-mS"]
+    }
+  ],
+  "templates": [
+    {
+      "id": "bodiless-Kmd8Nb3inj",
+      "path": "@bodiless/vital-card",
+      "spec": {
+        "isInferred": true
+      },
+      "alias": "knapsackCardSpec",
+      "title": "Vital Card",
+      "templateLanguageId": "bodiless",
+      "demoIds": ["wAphvQRJOn"],
+      "blockIds": []
+    }
+  ],
+  "description": "The card component is a versatile container element used to group and display related information."
+}

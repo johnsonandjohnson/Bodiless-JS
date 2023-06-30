@@ -86,7 +86,7 @@ const Hero = asCardToken({
   Theme: {
     ...vitalCardBase.Hero.Theme,
 /* Note the use of 'as' here. This is a composition utility provided 
-* by BodilessJS that converts a list of tokens into an HOC. When applying
+* by BodilessJS that converts a list of tokens into a HOC. When applying
 * multiple tokens to a component, 'as' must be used to properly combine them.
 *
 * In the 'Default' token example above, you'll notice that because only one * token is being applied to the 'ContentWrapper' slot, 'as' is not needed.
@@ -136,30 +136,8 @@ Now imagine that we've applied this border radius to a number of components on o
 
 By instead encapsulating this styling in its own `Simple` element token as we've done at the beginning of this section, and placing _that_ token on the various components in which we'd like to use it (or even the 'Base' card token from which all other 'Card' components are built if it's decided that all card elements should have this styling) we ensure that if brand guidelines ever shift to alter the value of that border radius, we only need to make a change in one place.
 
-## Practice
-
-<!--
-    Come up with a new task for the reader to perform that is similar in nature to the lesson they
-    just completed, allowing them to practice what they've learned.
--->
-
 ## Resources
 
 * [Adding components in Tailwind](https://tailwindcss.com/docs/plugins#adding-components)
 
 * [Vital Component Template](../../Guides/ComponentTemplate)
-
-## FAQ
-
-<!--
-    If you remember any of the questions you had when completing this task — or can think of any
-    questions a new developer may have — document the Questions and Answers here.
--->
-
-### [ QUESTION 1 ]
-
-<!-- Answer to QUESTION 1 -->
-
-### [ QUESTION 2 ]
-
-<!-- Answer to QUESTION 2 -->

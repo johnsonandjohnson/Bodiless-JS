@@ -14,4 +14,5 @@
 
 export { default as GenericTemplateClean, asGenericTemplateToken } from './GenericTemplateClean';
 export { default as vitalGenericTemplate } from './tokens';
+export { knapsackGenericTemplateSpec } from './GenericTemplate.knapsackSpec';
 export type { GenericTemplateComponents } from './types';

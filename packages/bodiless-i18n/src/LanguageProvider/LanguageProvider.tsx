@@ -42,14 +42,14 @@ export const LanguageContext = createContext<LanguageContextType>({
 LanguageContext.displayName = 'LanguageContext';
 
 /**
- * Hook which can be used to use language contet
+ * Hook which can be used to use language content.
  *
  * @category Language Provider
  */
 export const useLanguageContext = () => useContext(LanguageContext);
 
 /**
- * getCurrentLanguage$ is a helper function that filters the list of languages and
+ * `getCurrentLanguage$` is a helper function that filters the list of languages and
  * defines which one is current.
  *
  * @param languages - list of language objects.
@@ -57,7 +57,7 @@ export const useLanguageContext = () => useContext(LanguageContext);
  * @returns current language object.
  *
  * @example will return true for all home pages of root and each language top
-   path/folder.
+ * path/folder.
  * ```js
  * const isHomePage = () => (
  *   useNode().node.pagePath === '/'
@@ -72,8 +72,9 @@ export const getCurrentLanguage$ = (languages: Languages): Language => (
 );
 
 /**
- * setCurrentLanguage$ is a helper function that sets isCurrent option to true
- * for the selected language, and set isCurrent: false for all other languages in the list.
+ * `setCurrentLanguage$` is a helper function that sets `isCurrent` option to
+ * true for the selected language, and sets `isCurrent: false` for all other
+ * languages in the list.
  *
  * @param langName - string
  * @param languages - list of language objects
@@ -99,8 +100,8 @@ export const setCurrentLanguage$ = (langName: string, languages: Languages): Lan
 };
 
 /**
- * getLanguagesWithDefaultValues is a helper function which ensures that all languages
- * in the passed list get all necessary default values.
+ * `getLanguagesWithDefaultValues` is a helper function which ensures that all
+ * languages in the passed list get all necessary default values.
  *
  * @param languages - list of language objects
  *
@@ -142,7 +143,7 @@ export const getLanguagesWithDefaultValues = (languages: Languages = []): Langua
 };
 
 /**
- * withLanguageProvider is a hoc that wrapps a component into a context provider
+ * `withLanguageProvider` is a HOC that wraps a component into a context provider
  * which provides a list of sites' languages and allows to get and set the current (active)
  * language.
  *

@@ -14,7 +14,8 @@
 
 import cheerio from 'cheerio';
 // TODO: needs further investigation on why import is leading to TS errors in jest run.
-import type { AnyNode as CheerioNode } from 'cheerio';
+// @ts-ignore cheerio has no exported member 'Node'.
+import type { Node as CheerioNode } from 'cheerio';
 import fs from 'fs';
 import glob from 'glob';
 import mime from 'mime';

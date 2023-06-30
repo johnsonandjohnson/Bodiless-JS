@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.42](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.41...v1.0.0-rc.42) (2023-06-15)
+
+### Bug Fixes
+
+- Addressing typography feedbacks ([bcb15bd](https://github.com/johnsonandjohnson/bodiless-js/commit/bcb15bd4cab75118ba85f6723cc3ffb50263247e))
+
+### Features
+
+- **chore:** Update Knapsack ([10bf110](https://github.com/johnsonandjohnson/bodiless-js/commit/10bf1106182f92f1fbdb30ad1366326a2960fc0d))
+
 # [1.0.0-rc.41](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.40...v1.0.0-rc.41) (2023-06-08)
 
 **Note:** Version bump only for package @bodiless/vital-examples

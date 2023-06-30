@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/curator",
-  "version": "1.0.0-rc.41",
+  "version": "1.0.0-rc.42",
   "description": "Provides integration with Curator.io",
   "author": "Carlos Eduardo Teixeira <cteixei4@its.jnj.com>",
   "license": "Apache-2.0",
@@ -30,10 +30,10 @@
     "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.41",
-    "@bodiless/components": "^1.0.0-rc.41",
-    "@bodiless/core": "^1.0.0-rc.41",
-    "@bodiless/fclasses": "^1.0.0-rc.41",
+    "@bodiless/cli": "^1.0.0-rc.42",
+    "@bodiless/components": "^1.0.0-rc.42",
+    "@bodiless/core": "^1.0.0-rc.42",
+    "@bodiless/fclasses": "^1.0.0-rc.42",
     "lodash": "^4.17.19"
   },
   "devDependencies": {

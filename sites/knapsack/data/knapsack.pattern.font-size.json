@@ -1,0 +1,27 @@
+{
+  "id": "font-size",
+  "title": "Font Size",
+  "description": "",
+  "statuses": {},
+  "templates": [
+    {
+      "id": "bodiless-6GKNPvcRI8",
+      "title": "Template",
+      "path": "@bodiless/vital-elements",
+      "alias": "knapsackFontSizeSpec",
+      "templateLanguageId": "bodiless",
+      "spec": {
+        "isInferred": true
+      },
+      "demoIds": ["5El4ojBTcF", "8oblO5r52L"],
+      "blockIds": []
+    }
+  ],
+  "tabs": [
+    {
+      "type": "template",
+      "id": "bodiless-6GKNPvcRI8"
+    }
+  ],
+  "subPages": []
+}

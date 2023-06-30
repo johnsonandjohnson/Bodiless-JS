@@ -10,6 +10,7 @@ on:
 jobs:
   on-label:
     permissions:
+      checks: write
       pull-requests: write
     uses: johnsonandjohnson/Bodiless-JS/.github/workflows/build-test-lint-simple.yml@main
     secrets: inherit

@@ -42,7 +42,8 @@ Using the `addComponents` function provided by Tailwind, we can create a new cla
 
 NOTE: In most instances, the utility classes provided out of the box by Tailwind will be enough to satisfy all of your styling needs. However, in cases such as this one where our footer wave must be implemented through the use of an image mask (a CSS property for which no default Tailwind utility class exists), we can construct a CSS rule directly in our Tailwind configuration file.
 
-@TODO for JONES: use the technique you discovered to embed actual code snippets here rather than inlining them
+<!-- @TODO for JONES: use the technique you discovered to embed actual code snippets here rather than inlining them
+-->
 
 ```js
 plugin(({ addComponents }) => {
@@ -71,35 +72,9 @@ On the `Wrapper` slot, we will apply our `.footer-wave` CSS rule, and on the `Co
 
  And in the event that this token has more widespread applications (i.e., a token that adds a border radius to an element), we can
 
-## Practice
-
-@TODO
-
-<!--
-    Come up with a new task for the reader to perform that is similar in nature to the lesson they
-    just completed, allowing them to practice what they've learned.
--->
-
 ## Resources
 
 - [Adding components in Tailwind](https://tailwindcss.com/docs/plugins#adding-components)
 - [SVGR - For converting SVGs to React components](https://react-svgr.com/playground/)
 - [Using Tailwind for Background Images](https://johnsonandjohnson.github.io/Bodiless-JS/#/VitalDesignSystem/Guides/TailwindGuide?id=using-tailwind-for-background-images)
 -
-
-## FAQ
-
-@TODO
-
-<!--
-    If you remember any of the questions you had when completing this task — or can think of any
-    questions a new developer may have — document the Questions and Answers here.
--->
-
-### [ QUESTION 1 ]
-
-<!-- Answer to QUESTION 1 -->
-
-### [ QUESTION 2 ]
-
-<!-- Answer to QUESTION 2 -->

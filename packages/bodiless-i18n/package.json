@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/i18n",
-  "version": "1.0.0-rc.41",
+  "version": "1.0.0-rc.42",
   "description": "Library to provide multilingual support for Bodiless",
   "author": "Konstantin Mishur <kmishur@its.jnj.com>",
   "license": "Apache-2.0",
@@ -28,9 +28,9 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.41",
-    "@bodiless/data": "^1.0.0-rc.41",
-    "@bodiless/fclasses": "^1.0.0-rc.41",
+    "@bodiless/cli": "^1.0.0-rc.42",
+    "@bodiless/data": "^1.0.0-rc.42",
+    "@bodiless/fclasses": "^1.0.0-rc.42",
     "lodash": "^4.17.19",
     "typedoc": "^0.24.4",
     "typescript": "^4.0.0"

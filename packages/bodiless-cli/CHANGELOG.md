@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.42](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.41...v1.0.0-rc.42) (2023-06-15)
+
+### Bug Fixes
+
+- **chore:** Fix tests ([258c7da](https://github.com/johnsonandjohnson/bodiless-js/commit/258c7da25a324958047b3f55c6ff3bd2f56ebe1f))
+
 # [1.0.0-rc.41](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.40...v1.0.0-rc.41) (2023-06-08)
 
 **Note:** Version bump only for package @bodiless/cli

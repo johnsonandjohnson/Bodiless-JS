@@ -17,7 +17,7 @@ import { SpacingMeta } from '../meta';
 
 /*
  * Tailwind's container is specifically not used due to its feature it set's max-width
- * to min-width of breakpoint.  So instead rely on ContainerWrapper to margin percent
+ * to min-width of breakpoint. So, instead, rely on ContainerWrapper to margin percent
  * to contain content (WithSiteMargin) until we get to xl and then constrain by
  * max-width (WithSiteXLConstraint).
  */

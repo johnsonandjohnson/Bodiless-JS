@@ -99,7 +99,7 @@ export interface CardComponents extends DesignableComponents {
   CTAText: ComponentType<StylableProps>,
 }
 
-const cardComponentStart: CardComponents = {
+export const cardComponentStart: CardComponents = {
   Wrapper: A,
   ImageWrapper: Div,
   Image: Img,

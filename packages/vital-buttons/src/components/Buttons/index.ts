@@ -16,3 +16,4 @@ export { default as vitalButtons } from './tokens';
 export * from './index.bl-edit';
 export { default as ButtonClean, asButtonToken } from './ButtonClean';
 export type { ButtonComponent, ButtonBaseProps} from './ButtonClean';
+export { knapsackButtonSpec } from './Button.knapsackSpec';

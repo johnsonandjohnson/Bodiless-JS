@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.42](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.41...v1.0.0-rc.42) (2023-06-15)
+
+### Features
+
+- **chore:** Add knapsack specs for Car, Elements, Accordions and templates. Reorganized code to keep specs close to components ([6be4f75](https://github.com/johnsonandjohnson/bodiless-js/commit/6be4f754d6e787b0cde6f13d7f8b24447dd43b44))
+- **chore:** address PR fedback ([d29d72c](https://github.com/johnsonandjohnson/bodiless-js/commit/d29d72c2708be412770ac07d3c198f7c999fa262))
+- **chore:** Generalize KnapsackSpec type and move it to elements ([c14f1e6](https://github.com/johnsonandjohnson/bodiless-js/commit/c14f1e6c5361aa0b7fbfdcd4a419d9980f859b4e))
+- **knapsack-renderer, vital-card, vital-elements:** Fix type issues, update knapsack packages ([37935b2](https://github.com/johnsonandjohnson/bodiless-js/commit/37935b27fdd36f94979c22539a355cc7eab9bb0f))
+- **knapsack:** Update site deps ([4544a01](https://github.com/johnsonandjohnson/bodiless-js/commit/4544a013740af90f099847f0174befc2d0a31900))
+
 # [1.0.0-rc.41](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.40...v1.0.0-rc.41) (2023-06-08)
 
 **Note:** Version bump only for package @bodiless/vital-elements

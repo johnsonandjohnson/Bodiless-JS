@@ -1,7 +1,7 @@
 {
   "name": "bodiless-js",
   "description": "Bodiless-JS",
-  "version": "1.0.0-rc.23",
+  "version": "1.0.0-rc.37",
   "workspaces": [
     "packages/*",
     "sites/*"
@@ -36,9 +36,10 @@
     "start": "npx -y turbo run start --filter=@sites/${APP_SITE_NAME:-test-site}",
     "sync:fix": "syncpack fix-mismatches",
     "sync:check": "syncpack list-mismatches",
-    "test": "jest",
+    "test": "npx -y turbo test",
     "test:components-functional": "WAIT_ON_TIMEOUT=600000 PLAYWRIGHT_SUITE=smoke-deprecated npx playwright test",
     "test:components-visual": "APPLITOOLS_BATCH_ID=`uuidgen` WAIT_ON_TIMEOUT=600000 PLAYWRIGHT_SUITE=smoke-vital npx playwright test",
+    "version": "git checkout package-lock.json",
     "vital-check": "node ./scripts/vital-check"
   },
   "husky": {
@@ -61,6 +62,8 @@
     "@babel/plugin-transform-modules-commonjs": "7.5.0",
     "@babel/runtime": "^7.4.2",
     "@applitools/eyes-playwright": "^1.13.0",
+    "@axe-core/playwright": "^4.7.3",
+    "axe-html-reporter": "2.2.3",
     "@playwright/test": "^1.30.0",
     "@types/enzyme": "^3.9.1",
     "@types/jest": "^24.0.18",

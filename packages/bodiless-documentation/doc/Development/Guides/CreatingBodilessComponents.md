@@ -310,7 +310,7 @@ const submitValueHandler = (values: any) => ({
 });
 ```
 
-Finally, we compose a series of core Bodiless HOC's (using Lodash `flowRight`) to
+Finally, we compose a series of core Bodiless HOCs (using Lodash `flowRight`) to
 fully integrate our component and its custom form:
 
 ```ts
@@ -340,11 +340,11 @@ Let's take this step by step:
   }),
 ```
 
-These three HOC's provide integration to
+These three HOCs provide integration to
 [the BodilessJS data flow](../Architecture/Data). They
 ensure that the component is given a place to store its data, and
 define the "empty" value for that data. They add two props--`componentData`
-and `setComponentData`--which are used by the HOC's further down the
+and `setComponentData`--which are used by the HOCs further down the
 chain.
 
 ```ts
@@ -355,7 +355,7 @@ chain.
 
 Bodiless components may behave differently when a site is editable than when it is
 built statically.  To facilitate different compositions for different modes,
-BodilessJS provides `ifEditable` and `ifReadOnly` meta-HOC's, which can be
+BodilessJS provides `ifEditable` and `ifReadOnly` meta-HOCs, which can be
 used to control what enhancements are added in each mode.  Since a component
 on a static site never alters its content, we here strip the `setComponentData`
 prop.

@@ -14,6 +14,7 @@
 
 export { default as AccordionClean, asAccordionToken } from './AccordionClean';
 export { default as vitalAccordion } from './tokens';
+export { knapsackAccordionSpec } from './Accordion.knapsackSpec';
 export {
   AccordionProvider,
   useAccordionContext,

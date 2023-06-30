@@ -1,0 +1,33 @@
+{
+  "id": "typography",
+  "title": "Typography",
+  "description": "",
+  "statuses": {},
+  "templates": [
+    {
+      "id": "bodiless-6GKNPvcRI9",
+      "title": "Template",
+      "path": "@bodiless/vital-elements",
+      "alias": "knapsackTypographySpec",
+      "templateLanguageId": "bodiless",
+      "spec": {
+        "isInferred": true
+      },
+      "demoIds": ["n7PYyApmLa", "bLZ89peK6T"],
+      "blockIds": []
+    }
+  ],
+  "tabs": [
+    {
+      "type": "template",
+      "id": "bodiless-6GKNPvcRI9"
+    }
+  ],
+  "subPages": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "blockIds": []
+    }
+  ]
+}
