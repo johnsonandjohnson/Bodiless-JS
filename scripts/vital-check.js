@@ -15,7 +15,6 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
-const { log } = require('console');
 
 const RED='\u001b[31m';
 const GREEN='\u001b[32m';
