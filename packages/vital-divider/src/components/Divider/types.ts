@@ -6,10 +6,7 @@ import type { DefaultDomains } from '@bodiless/vital-elements';
  */
 export type DividerComponents = {
   Wrapper: ComponentOrTag<any>,
-  Slot1Wrapper: ComponentOrTag<any>,
-  Slot1: ComponentOrTag<any>,
-  Slot2Wrapper: ComponentOrTag<any>,
-  Slot2: ComponentOrTag<any>,
+  Divider : ComponentOrTag<any>,
 };
 
 /**
