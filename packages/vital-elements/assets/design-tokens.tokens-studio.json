@@ -1,6 +1,6 @@
 {
   "vital-ds": {
-    "core/colors": {
+    "colors": {
       "primary": {
         "100": {
           "value": "#E1F3F0",

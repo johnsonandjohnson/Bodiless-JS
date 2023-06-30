@@ -21,24 +21,28 @@ const designTokens = require('./assets/design-tokens.nested.json');
 const parsedDesignTokens = JSON.parse(JSON.stringify(designTokens));
 
 /**
- * Due to the name of the group in JSON being `core/colors` we need to parse an access it this way.
- */
-const coreColors = parsedDesignTokens['core/colors'];
-const coreSpacing = parsedDesignTokens['core/spacing'];
-const coreOpacity = parsedDesignTokens['core/opacity'];
-/**
- * Note that the `coreBorder.style` tokens do not have a corresponding key in the Tailwind config.
+ * The `design-tokens.nested.json` file should only contain all Core tokens.
+ * These core tokens are then used to extend the corresponding Tailwind config sections.
+ *
+ * @TODO: Note that the `border.style` tokens do not have a corresponding key in the Tailwind config.
  * `borderStyle` is only a valid key for the TW variants and plugins. The default TW values for
  * borderStyle match the provided tokens.
- */
-const coreBorder = parsedDesignTokens['core/border'];
-/**
- * @TODO: `coreTypography` tokens include `text-decoration` and `text-transform` tokens which are
+ *
+ * @TODO: `typography` tokens include `text-decoration` and `text-transform` tokens which are
  * not intended to be extended or modified in the Tailwind config and do not have corresponding
  * keys in the Tailwind config. The default TW config covers these tokens and provides the same
  * Default classes like `capitalize` or `uppercase`.
+ *
+ * @TODO: Also note that currently the `design-tokens.nested.json` is manually adjusted to
+ * the more favourable format to resolve certain issues with resolving Figma Plugin aliases.
+ * Thehere is a script being worked on to format tokens automatically.
+ *
+ * @TODO: The `border-width` and `border-style` tokens in JSON are combined under the same key.
+ * Tailwind treats it as two separate styles with different config key. In manually updated JSON
+ * it is split into two different token "section" like `border.width` and `boder.style`
+ * to avoid TW config issues.
  */
-const coreTypography = parsedDesignTokens['core/typography'];
+const { colors, spacing, typography, opacity, border } = parsedDesignTokens;
 
 const resolver = (pkgName) => require.resolve(pkgName);
 
@@ -89,38 +93,35 @@ const twConfig = {
     },
     extend: {
       /**
-       * Vital 2.0 Colors coming from Figma Tokens. Colors above will be deprecated.
+       * Vital 2.0 Tokens coming from Figma plugin.
        */
       colors: {
-        ...coreColors,
+        ...colors,
       },
       fontFamily: {
         DMSans: ['DM Sans', 'sans-serif'],
-        ...coreTypography['font-family'],
+        ...typography['font-family'],
       },
       fontWeights: {
-        ...coreTypography.font,
+        ...typography.font,
       },
       leading: {
-        ...coreTypography.leading,
+        ...typography.leading,
       },
       textSizes: {
-        ...coreTypography.text,
+        ...typography.text,
       },
       spacing: {
-        /**
-         * Note that `coreSpacing` is wrapped in extra `spacing` key, so unwrapping it here.
-         */
-        ...coreSpacing.spacing,
+        ...spacing,
       },
       borderWidth: {
-        ...coreBorder.width,
+        ...border.width,
       },
       borderRadius: {
-        ...coreBorder.rounded,
+        ...border.rounded,
       },
       opacity: {
-        ...coreOpacity,
+        ...opacity,
       },
       margin: {
         4.5: '1.125rem',
