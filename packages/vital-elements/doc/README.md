@@ -21,7 +21,7 @@ To get the most out of this document, you should have a basic familiarity with:
 * Atomic Design, Design Systems and Design Tokens
 * "Functional" or "Atomic" CSS
 * Fundamental principles of functional programming
-* React Higher Order Components.
+* React Higher-Order Components.
 
 There are many excellent web resources on these topics, and we encourage you to
 read a few articles if any of these concepts are foreign to you.

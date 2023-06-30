@@ -231,7 +231,7 @@ const asNextImage = flowHoc(
 );
 
 /**
- * hoc to remove props configured for NextImage in image data
+ * HOC to remove props configured for NextImage in image data
  *
  * it can be useful for cases when Next Image is not enabled for the image
  */

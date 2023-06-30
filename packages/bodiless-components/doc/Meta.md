@@ -104,7 +104,7 @@ of each page.
 For example, to add an editable meta description field:
 
 01. Import `withMeta` from `@bodiless/components`.
-01. Create an HOC `withMetaPageDescription`, with meta field name `description`, form field label
+01. Create a HOC `withMetaPageDescription`, with meta field name `description`, form field label
     `Description`, and placeholder text.  
     For example:
     ```js

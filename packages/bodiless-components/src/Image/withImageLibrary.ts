@@ -23,7 +23,7 @@ import { withContentLibrary, ComponentSelector } from '@bodiless/layouts';
 import path from 'path';
 import type { AsBodilessImage } from './Image';
 
-// Adds image library to an asEditableImage hoc.
+// Adds image library to an `asEditableImage` HOC.
 const withImageLibrary = (
   asEditableImage: AsBodilessImage,
   Selector = ComponentSelector,

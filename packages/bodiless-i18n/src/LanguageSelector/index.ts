@@ -45,7 +45,7 @@ export const useLanguageSelectorProps = () => {
 };
 
 /**
- * asLanguageSelector is a hoc which, when applied to a link,
+ * asLanguageSelector is a HOC which, when applied to a link,
  * turns it into a language toggler.
  *
  * @params useLanguageSelectorProps hook

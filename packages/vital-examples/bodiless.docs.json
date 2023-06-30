@@ -1,26 +1,26 @@
 {
   "VitalDesignSystem": {
     "Curriculum": {
-      "Lessons": {
-        "ReusableTokens.md": "./doc/Curriculum/Lessons/ReusableTokens.md",
-        "DevelopA_NewComponent.md": "./doc/Curriculum/Lessons/DevelopANewComponent.md",
-        "BackgroundImages.md": "./doc/Curriculum/Lessons/BackgroundImages.md",
-        "CustomizeDesignTokens.md": "./doc/Curriculum/Lessons/CustomizeDesignTokens.md",
-        "ShadowA_SimpleComponent.md": "./doc/Curriculum/Lessons/ShadowASimpleComponent.md",
-        "README.md": "./doc/Curriculum/Lessons/README.md"
-      },
+      "README.md": "./doc/README.md",
       "Introduction": {
-        "WhyVital.md": "./doc/Introduction/WhyVital.md",
-        "WorkingWithContent.md": "./doc/Introduction/WorkingWithContent.md",
-        "FunctionalClasses.md": "./doc/Introduction/FunctionalClasses.md",
-        "AnatomyOfA_Token.md": "./doc/Introduction/AnatomyOfAToken.md",
-        "ReachingInside.md": "./doc/Introduction/ReachingInside.md",
-        "ComposingFromOutside.md": "./doc/Introduction/ComposingFromOutside.md",
-        "ComponentsAndTokens.md": "./doc/Introduction/ComponentsAndTokens.md",
+        "README.md": "./doc/Introduction/README.md",
         "CoreConcepts.md": "./doc/Introduction/CoreConcepts.md",
-        "README.md": "./doc/Introduction/README.md"
+        "ComponentsAndTokens.md": "./doc/Introduction/ComponentsAndTokens.md",
+        "ComposingFromOutside.md": "./doc/Introduction/ComposingFromOutside.md",
+        "ReachingInside.md": "./doc/Introduction/ReachingInside.md",
+        "AnatomyOfA_Token.md": "./doc/Introduction/AnatomyOfAToken.md",
+        "FunctionalClasses.md": "./doc/Introduction/FunctionalClasses.md",
+        "WorkingWithContent.md": "./doc/Introduction/WorkingWithContent.md",
+        "WhyVital.md": "./doc/Introduction/WhyVital.md"
       },
-      "README.md": "./doc/README.md"
+      "Lessons": {
+        "README.md": "./doc/Curriculum/Lessons/README.md",
+        "ShadowA_SimpleComponent.md": "./doc/Curriculum/Lessons/ShadowASimpleComponent.md",
+        "CustomizeDesignTokens.md": "./doc/Curriculum/Lessons/CustomizeDesignTokens.md",
+        "BackgroundImages.md": "./doc/Curriculum/Lessons/BackgroundImages.md",
+        "DevelopA_NewComponent.md": "./doc/Curriculum/Lessons/DevelopANewComponent.md",
+        "ReusableTokens.md": "./doc/Curriculum/Lessons/ReusableTokens.md"
+      }
     },
     "Guides": {
       "ShadowingTokens.md": "./doc/Guides/ShadowingTokens.md"

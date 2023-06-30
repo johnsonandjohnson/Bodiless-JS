@@ -69,7 +69,7 @@ const AccordionTitleBase: FC<PropsWithChildren<AccordionTitleBaseProps>> = ({
 };
 
 /**
- * An HOC that handles toggling the current accordion when pressing Enter or Space on the keyboard.
+ * A HOC that handles toggling the current accordion when pressing Enter or Space on the keyboard.
  * On Edit, the keyboard won't toggle the accordion, but this will prevent the user from placing
  * a carriage return (Enter) in the title, forcing it to be one line.
  */

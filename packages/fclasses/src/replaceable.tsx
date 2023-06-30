@@ -73,7 +73,7 @@ export const replaceable: HOC = Component => {
 };
 
 /**
- * Creates an HOC which replaces a base component with a specified replacement.
+ * Creates a HOC which replaces a base component with a specified replacement.
  * Unlike [[replaceWith]], this function replaces the base component but leaves
  * any previously applied tokens intact.
  *
@@ -118,14 +118,14 @@ export const startWith = (ReplacementComponent: ComponentType<any>): HOC => Comp
 };
 /**
  * Returns a HOC which replaces the component to which it is applied with another.
- * Unlike `startWith`, this replaces the component along with any hoc's which
+ * Unlike `startWith`, this replaces the component along with any HOCs which
  * had previously been applied.
  *
  * @param Replacement
  * The component or tag to use as a replacement.
  *
  * @returns
- * An HOC which renders the replacement in place of the target.
+ * A HOC which renders the replacement in place of the target.
  *
  * @see `startWith`
  *

@@ -157,7 +157,7 @@ describe('Sidecar Node Use Cases', () => {
 });
 
 describe('withSidecarNodes', () => {
-  it('Preserves the original nodeKey when an HOC is applied outside.', () => {
+  it('Preserves the original nodeKey when a HOC is applied outside.', () => {
     const Test = flowRight(
       withSidecarNodes(
         withFoo('foo'),

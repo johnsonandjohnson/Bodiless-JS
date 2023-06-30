@@ -95,7 +95,7 @@ activated. It should return any menu options this component wishes to provide
 > callback even if the menu options it returns change.
 
 It is actually unusual to invoke the provider directly in this manner. Instead,
-use the `withMenuOptions` hoc to attach options to your component. First you
+use the `withMenuOptions` HOC to attach options to your component. First you
 define a custom hook which will create your `getMenuOptions()` callback. This
 hook will be invoked when the component is rendered, and will receive its props
 as an argument:
@@ -108,7 +108,7 @@ const useMenuOptions = (props) => {
 };
 ```
 
-Then, pass that along with a unique name to `withMenuOptions` to create an HOC
+Then, pass that along with a unique name to `withMenuOptions` to create a HOC
 which will add the options to your component.
 
 ```
@@ -193,7 +193,7 @@ const ComponentWithMenuOption = flowRight(
 )(AnyComponent)
 ```
 
-Finally, you will want to be sure that none of the above HOC's are applied when not in edit mode.
+Finally, you will want to be sure that none of the above HOCs are applied when not in edit mode.
 For this, `ifEditable` comes in handy:
 ```
 const ComponentWithMenuOption = ifEditable(
@@ -202,7 +202,7 @@ const ComponentWithMenuOption = ifEditable(
   withActivatorWrapper('div'),
 )(AnyComponent)
 ```
-Note that the order of these HOC's is important.
+Note that the order of these HOCs is important.
 
 ## Context Menu Options
 
