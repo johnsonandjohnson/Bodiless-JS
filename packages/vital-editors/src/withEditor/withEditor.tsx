@@ -34,7 +34,7 @@ export type WithEditor = (
 /**
  * Use `withEditor` to make a given text element editable.
  *
- * Creates an "asBodiless" HOC factory which returns an HOC adding
+ * Creates an "asBodiless" HOC factory which returns a HOC adding
  * specified editor as a designable child of the target component.  The design key
  * of the child is 'Editor'.
  *
@@ -68,7 +68,7 @@ const withEditor = (Editor:CT<any>): WithEditor => (
 // ********** EditorPlain
 
 /**
- * Bodiless HOC factory creates an HOC which adds a VitalDS Plain Text
+ * Bodiless HOC factory creates a HOC which adds a VitalDS Plain Text
  * editor as a designable child of the target component.
  *
  * @see withEditor
@@ -76,7 +76,7 @@ const withEditor = (Editor:CT<any>): WithEditor => (
 const withEditorPlain = withEditor(as(vitalEditorPlain.Default)(EditorPlainClean));
 
 /**
- * Bodiless HOC factory creates an HOC which adds a Clean Plain Text
+ * Bodiless HOC factory creates a HOC which adds a Clean Plain Text
  * editor (basically a Bodiless "Editable" as a designable child of the
  * target component.
  *
@@ -85,7 +85,7 @@ const withEditorPlain = withEditor(as(vitalEditorPlain.Default)(EditorPlainClean
 const withEditorPlainClean = withEditor(EditorPlainClean);
 
 /**
- * Bodiless HOC factory creates an HOC which adds a Clean Rich Text
+ * Bodiless HOC factory creates a HOC which adds a Clean Rich Text
  * editor (basically a Bodiless "RichText" as a designable child of the
  * target component.
  *
@@ -94,7 +94,7 @@ const withEditorPlainClean = withEditor(EditorPlainClean);
 const withEditorRichClean = withEditor(RichTextClean);
 
 /**
- * Bodiless HOC factory creates an HOC which adds a VitalDS Full Rich Text
+ * Bodiless HOC factory creates a HOC which adds a VitalDS Full Rich Text
  * editor as a designable child of the target component.
  *
  * @see withEditor

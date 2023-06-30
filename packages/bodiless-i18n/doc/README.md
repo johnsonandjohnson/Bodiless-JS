@@ -112,7 +112,7 @@ export default {
 ### 4. Set global components to store data per language
 
 On all global components (anything saving to global site collection) that you
-want to save multilingual data. Add an HOC
+want to save multilingual data. Add a HOC
 [`withLanguageNode`](../../../Development/API/@bodiless/i18n/README?id=withlanguagenode)
 to the component's Schema domain. The best way is to shadow the component. It is
 suggested to shadow the top level components (such as Header & Footer and then

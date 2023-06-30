@@ -29,12 +29,12 @@ export const createMenuOptionGroup = (
 ):TMenuOption[] => [baseOption];
 
 /**
- * Uses the provided options to create an HOC which adds an edit button provider
+ * Uses the provided options to create a HOC which adds an edit button provider
  * to the wrapped component.
  *
  * @param options The options defining the edit button.
  *
- * @return An HOC which will add an edit button for the wrapped component.
+ * @return A HOC which will add an edit button for the wrapped component.
  */
 const withEditButton = identity;
 

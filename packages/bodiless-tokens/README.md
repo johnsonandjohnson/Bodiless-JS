@@ -10,7 +10,7 @@ better understand the general patterns at work.
 
 At a high level, this API expresses *Design Tokens* as React higher-order
 components, and provides utilities which allow you to apply them to both simple
-elements and compound components. In most cases, the design token HOC's leverage
+elements and compound components. In most cases, the design token HOCs leverage
 "atomic" or "functional" CSS, defining units of design as collections of utility
 classes.
 
@@ -75,9 +75,9 @@ const withComposedToken = flowHoc(
 
 However, there are a few key differences:
 
-- Metadata (static properties) attached to a component are prppagated through
-  the chain of HOC's.
-- If you are using Typescript, the type of the parameters is constrained to be an
+- Metadata (static properties) attached to a component are propagated through
+  the chain of HOCs.
+- If you are using TypeScript, the type of the parameters is constrained to be a
   HOC (or an object specifying metadata, see below).
 - There is an optional overload to accept a "TokenMeta" object which consists of
   metadata which should be attached to the token.
@@ -269,7 +269,7 @@ const SpecialGreenCallout = flow(
 )(Callout);
 ```
 
-The higher order components are reusable, so for example:
+The higher-order components are reusable, so for example:
 
 ```
 const withRedCalloutBorder = flow(
@@ -345,7 +345,7 @@ This is usefule when you don't have access to the original, unstyled variant of 
 
 ## The Design API
 
-The Design API provides a mechanism for applying higher order components (including those
+The Design API provides a mechanism for applying higher-order components (including those
 provided by the FClasses API) to individual elements within a compound component.
 
 ### Exposing the Design API
@@ -505,9 +505,9 @@ const StandardCard = withDesign({
 })(BasicCard);
 ```
 
-We can also use the `startWith()` HOC, instead of replacing the whole component, it will only replace the base component but still use any hoc that might have wrapped it.
+We can also use the `startWith()` HOC, instead of replacing the whole component, it will only replace the base component but still use any HOC that might have wrapped it.
 
-As with FClasses, HOC's created via `withDesign()` are themselves reusable, so
+As with FClasses, HOCs created via `withDesign()` are themselves reusable, so
 we can write:
 
 ``` js
@@ -519,7 +519,7 @@ const StandardPinkCard = asStandardCard(PinkCard);
 const StandardRedCard = asStandardCard(RedCard);
 ```
 
-And, also as with FClasses, the HOC's can be composed:
+And, also as with FClasses, the HOCs can be composed:
 
 ``` js
 const StandardPinkAndGreenCard = flowRight(

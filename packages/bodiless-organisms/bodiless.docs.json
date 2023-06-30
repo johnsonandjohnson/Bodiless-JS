@@ -1,8 +1,8 @@
 {
   "Components": {
-    "SingleAccordion.md": "./doc/SingleAccordion.md",
-    "FilterByGroup.md": "./doc/FilterByGroup.md",
     "Embed.md": "./doc/Embed.md",
+    "FilterByGroup.md": "./doc/FilterByGroup.md",
+    "SingleAccordion.md": "./doc/SingleAccordion.md",
     "SocialShare.md": "./doc/SocialShare.md",
     "assets": {
       "CategoryContextMenu.jpg": "./doc/assets/CategoryContextMenu.jpg",

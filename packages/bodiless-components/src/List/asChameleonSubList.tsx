@@ -100,7 +100,7 @@ const withSubListDesign = (depth: number) => (
  * sublist types which can be swapped (eg for different bullet styles).
  *
  * @param Depth The number of nested sublists to attach.
- * @return An function accepting a sublist definition and returning an HOC which adds the sublists.
+ * @return An function accepting a sublist definition and returning a HOC which adds the sublists.
  */
 const withSubLists = (
   depth: number,

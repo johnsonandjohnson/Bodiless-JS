@@ -148,7 +148,7 @@ const setDefaultOptionScope = (options: TMenuOption[], global: boolean) => optio
 }));
 
 /**
- * Using supplied options, returns an HOC which adds one or more menu options (buttons).
+ * Using supplied options, returns a HOC which adds one or more menu options (buttons).
  * This simply wraps the supplied component with a `PageContextProvider`.
  *
  * Note that, unlike `PageContextProvider` itself, this function takes a custom hook
@@ -161,7 +161,7 @@ const setDefaultOptionScope = (options: TMenuOption[], global: boolean) => optio
  *
  * @param def The definition of the menu options to be provided.
  *
- * @return An HOC which will cause the component it enhances to contribute the specified
+ * @return A HOC which will cause the component it enhances to contribute the specified
  *         menu options when placed.
  */
 export const withMenuOptions = <P extends object>(

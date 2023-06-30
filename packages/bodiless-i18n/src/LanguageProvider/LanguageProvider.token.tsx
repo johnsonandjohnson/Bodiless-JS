@@ -7,8 +7,8 @@ import { withLanguageProvider, setCurrentLanguage$ } from './LanguageProvider';
 import type { PropsWithLanguages, Languages } from './LanguageProvider';
 
 /**
- * withCurrentLanguageFromHostPrefix hoc defines the current language
- * by reading the host prefix, e.g. 'es' in https://es.example.com
+ * `withCurrentLanguageFromHostPrefix` HOC defines the current language
+ * by reading the host prefix, e.g., 'es' in https://es.example.com.
  *
  * @category Language Provider
  */
@@ -28,8 +28,8 @@ export const withCurrentLanguageFromHostPrefix: HOC = Component => (props: any) 
 };
 
 /**
- * withCurrentLanguageFromPath defines the current language
- * by reading the first section in the path, eg 'es' in https://example.com/es/some-page
+ * `withCurrentLanguageFromPath` defines the current language
+ * by reading the first section in the path, e.g., 'es' in https://example.com/es/some-page.
  *
  * @category Language Provider
  */
@@ -48,8 +48,8 @@ export const withCurrentLanguageFromPath: HOC = Component => (props: any) => {
 };
 
 /**
- * withLanguages hoc adds language provider to the component and implements default
- * mechanism of detecting which language is active (by firsh path section).
+ * `withLanguages` HOC adds language provider to the component and implements default
+ * mechanism of detecting which language is active (by first path section).
  * Should be applied on page wrapper component in order to provide necessary language info for
  * all nested components.
  *
