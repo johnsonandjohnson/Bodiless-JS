@@ -39,9 +39,22 @@ By building the `vital-section` package, we will cover:
 
 ## Assignment
 
-To develop a new `vital-section` package it is important to keep the `vital-*` package structure in
-mind. Please refer to the [Vital Component Template documentation](../../Guides/ComponentTemplate)
-to follow the right structure and naming conventions.
+To develop a new\* `vital-section` package, it is important to keep the `vital-*` package structure
+in mind. Please refer to the [Vital Component Template
+documentation](../../Guides/ComponentTemplate) to follow the correct structure and naming
+conventions.
+
+?> **Note:** We recommend using the [Component
+Scaffolder](../../Guides/ComponentTemplate#component-scaffolding) to auto-generate the file
+structure for new components.
+
+While we'll be walking through the creation of the Vital Section component, as `vital-section` is an
+existing package, if you wish to follow along, we suggest trying the [practice exercise](#practice),
+and creating a Vital Article component (in a `vital-article` package) in tandem with this lesson.
+
+———  
+\*The `vital-section` package already exists and comes bundled with the Vital Design System; this
+lesson explains what it _would_ be like to create this package from scratch.
 
 ### Creating a Clean Component
 
@@ -461,6 +474,65 @@ Now that you have learned how to develop a new clean Vital component, it's time 
 skills. Create a new `vital-article` package and incorporate tokens to add custom functionality to a
 component of your choosing. Apply the concepts and techniques you have learned in this task to build
 a personalized component with enhanced features.
+
+<!-- Inlining HTML to add multi-line info block with disclosure widget. -->
+<div class="warn">
+  <strong>Note:</strong> We recommend using the <em>Component Scaffolder</em> to create the
+  structure of your new component for you, and then following the instructions in this lesson to
+  build it.
+  <br><br>
+  <details>
+  <summary>
+    Expand for details on using the Component Scaffolder...
+  </summary>
+
+  To use the [Component Scaffolder](../../Guides/ComponentTemplate#component-scaffolding) to get the
+  component built in this lesson started, run the following command from a local directory:
+
+  ```shell
+  npx @bodiless/vital-scaffold@next
+  ```
+
+  Follow the prompts to create the new component. The tool will generate the file structure based on
+  the answers provided and populate it with the necessary files.
+
+  Assuming your current working directory is the project root:
+
+  01. **Path to `src` directory where component should be created [Required]:**
+      `./packages/vital-article/src/`
+  01. **Component name [Required]:** `article`
+  01. **Library name [Required]:** `vital`
+  01. **Upstream package to extend:** _Leave blank_
+  01. **Is the component always static and never hydrated?:** `N`
+
+  ```shell
+  $ mkdir -p packages/vital-article/src/
+  $ npx @bodiless/vital-scaffold@next
+  ? Path to "src" directory where component should be created [Required],
+  e.g. "./", "./src/", "/absolute/path/to/[package name]/src" etc. Default to current directory.
+  >  ./packages/vital-article/src/
+  ? Component name [Required] article
+  ? Library name (eg. myBrand) [Required] vital
+  ? Upstream package to extend (e.g. `@bodiless/vital-card`). Omit if not extending.
+  ? Is the component is always static and never hydrated?
+  (otherwise both static and dynamic versions will be created) - default N No
+  ✔  ++ /packages/vital-article/src/components/Article/index.ts
+  ✔  ++ /packages/vital-article/src/components/Article/tokens/index.ts
+  ✔  ++ /packages/vital-article/src/components/Article/tokens/vitalArticle.ts
+  ✔  ++ /packages/vital-article/src/components/Article/__tests__/Article.test.tsx
+  ✔  ++ /packages/vital-article/src/components/Article/index.bl-edit.ts
+  ✔  ++ /packages/vital-article/src/components/Article/index.static.ts
+  ✔  ++ /packages/vital-article/src/index.ts
+  ✔  ++ /packages/vital-article/src/base.ts
+  ✔  ++ /packages/vital-article/src/components/Article/ArticleClean.tsx
+  ✔  ++ /packages/vital-article/src/components/Article/types.ts
+  ```
+
+  **Note:** As shown above, you first need to create the `packages/vital-article/src/` directory,
+  otherwise you will receive an error that the path is not writeable.
+
+  </details>
+</div>
 
 The `ArticleClean` component may have the following structure:
 
