@@ -1,0 +1,12 @@
+{
+  "VitalDesignSystem": {
+    "Components": {
+      "VitalCard": {
+        "README.md": "./doc/README.md",
+        "assets": {
+          
+        }
+      }
+    }
+  }
+}
