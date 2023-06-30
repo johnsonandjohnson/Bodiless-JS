@@ -127,7 +127,9 @@
       "@bodiless/fclasses": ["fclasses/src"],
       "@bodiless/fclasses/*": ["fclasses/src/*"],
       "@bodiless/gatsby-theme-bodiless": ["gatsby-theme-bodiless/src"],
-      "@bodiless/gatsby-theme-bodiless/*": ["gatsby-theme-bodiless/src/*"]
+      "@bodiless/gatsby-theme-bodiless/*": ["gatsby-theme-bodiless/src/*"],
+      "@bodiless/vital-divider": ["vital-divider/src/"],
+      "@bodiless/vital-divider/*": ["vital-divider/src/*"]
     }
   }
 }
