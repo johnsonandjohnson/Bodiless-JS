@@ -1,4 +1,4 @@
-import React, { FC, Fragment } from 'react';
+import React, { FC } from 'react';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { designable, Div, Hr } from '@bodiless/fclasses';
 import type { DesignableComponentsProps } from '@bodiless/fclasses';
