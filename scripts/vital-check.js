@@ -15,6 +15,7 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
+const { log } = require('console');
 
 const RED='\u001b[31m';
 const GREEN='\u001b[32m';
@@ -22,6 +23,8 @@ const NC='\u001b[0m';
 
 const vitalPath = 'packages/__vital__';
 const vitalNextPath = 'packages/__vital_next__';
+const vitalPrefix = '__vital__';
+const vitalNextPrefix = '__vital_next__';
 
 const commonIgnore = [
   '/CHANGELOG.md',
@@ -53,11 +56,15 @@ const scanDirRecursive = (baseDir, dir, ignore) => {
   return paths;
 };
 
-const calculateHash = (files) => {
+const calculateHash = (files, packagePrefix = null) => {
   const hashes = [];
   files.forEach(file => {
     const hash = execSync(`git show HEAD:${file}`).toString();
-    hashes.push(hash);
+    if (!packagePrefix) {
+      hashes.push(hash);
+    } else {
+      hashes.push(hash.replaceAll(packagePrefix, 'PREFIX'));
+    }
   });
   return crypto.createHash('sha256').update(hashes.join('')).digest('hex');
 };
@@ -76,10 +83,10 @@ const vitalNextRelativeFiles = vitalNextFiles.map(file => file.replace(vitalNext
 if (vitalHash !== vitalNextHash) {
   const differences = [];
   const vitalMoreFiles = vitalRelativeFiles.filter(
-    file => !vitalNextRelativeFiles.includes(file)
+    file => !vitalNextRelativeFiles.includes(file.replace(vitalPrefix, vitalNextPrefix))
   );
   const vitalNextMoreFiles = vitalNextRelativeFiles.filter(
-    file => !vitalRelativeFiles.includes(file)
+    file => !vitalRelativeFiles.includes(file.replace(vitalNextPrefix, vitalPrefix))
   );
 
   // Log file missing from --vital-next--
@@ -99,14 +106,19 @@ if (vitalHash !== vitalNextHash) {
   commonFiles.forEach(file => {
     const vitalFile = path.join(vitalPath, file);
     const vitalNextFile = path.join(vitalNextPath, file);
-    const vitalHash = calculateHash([vitalFile]);
-    const vitalNextHash = calculateHash([vitalNextFile]);
+    const vitalHash = calculateHash([vitalFile], vitalPrefix);
+    const vitalNextHash = calculateHash([vitalNextFile], vitalNextPrefix);
     if (vitalHash !== vitalNextHash) {
       differences.push(
         `\t${RED}${vitalFile} differs by ${vitalNextFile}${NC}`
       );
     }
   });
+
+  if (differences.length === 0) {
+    console.error(`${GREEN}The packages __vital__ and __vital_next__ have the same code structure.${NC}`);
+    process.exit(0);
+  }
 
   console.error(`${RED}The packages __vital__ and __vital_next__ differ in these files:${NC}\n`);
   differences.forEach(difference => console.error(difference));
