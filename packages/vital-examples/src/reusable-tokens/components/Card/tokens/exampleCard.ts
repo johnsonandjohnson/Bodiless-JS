@@ -3,7 +3,6 @@ import { asCardToken } from '@bodiless/vital-card';
 import { vitalCardBase } from '@bodiless/vital-card/lib/base';
 import { exampleRadius } from '../../Radius';
 
-/// [card-tokens]
 /*
  * Here we extend the `Default` card token using the merge pattern by
  * supplying multiple arguments to `asCardToken`. Our radius token will be
@@ -24,6 +23,7 @@ const Default = asCardToken(vitalCardBase.Default, {
   },
 });
 
+/// [hero-card-token]
 /*
  * Here we extend the Vital `Hero` card token using the override pattern.
  * In this case, we use the spread operator to pull in all tokens applied to
@@ -58,7 +58,7 @@ const Hero = asCardToken({
     Image: as(vitalCardBase.Hero.Theme.Image, exampleRadius.Fancy),
     //     ^^
     // Note the use of `as` here. This is a composition utility provided by
-    // BodilessJS that converts a list of tokens into an HOC. When applying
+    // BodilessJS that converts a list of tokens into a HOC. When applying
     // multiple tokens to a component, `as` must be used to properly combine
     // them.
     // In the `Default` token example above, you'll notice that because only
@@ -66,7 +66,7 @@ const Hero = asCardToken({
     // needed.
   },
 });
-/// [card-tokens]
+/// [hero-card-token]
 
 export default {
   ...vitalCardBase,

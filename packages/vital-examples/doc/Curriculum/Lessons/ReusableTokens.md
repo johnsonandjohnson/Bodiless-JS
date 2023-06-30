@@ -41,15 +41,51 @@ components in a site.
 
 ## Assignment
 
-### Creating a New CSS Rule in Tailwind for Our Image Border Radius
+### Creating a Simple 'Radius' Token
 
-To begin, we'll use the `addComponents` function provided by Tailwind to first create a collection
-of CSS rules containing the corner radius styling to be applied to the `Hero` card.
+To begin, we will create both a `Card` and `Radius` component folder inside of our example package,
+`reusable-tokens`.
+
+The `Card` component folder will contain the `Default` and `Hero` card tokens in an `exampleCard.ts`
+token collection file, and the `Radius` component folder will contain the corner radius styling
+tokens in an `exampleRadius.ts` token collection file.
+
+Please reference the [Vital Component Template documentation](../../Guides/ComponentTemplate) to
+ensure that you are following the proper naming conventions and file structure when creating a new
+component folder. You should have some familiarity with the naming conventions and file structure
+after completing the previous lesson: [Develop a New Component](./DevelopA_NewComponent).
+
+In our `exampleRadius.ts` token collection file, we will create two tokens that will be used to
+apply two different types of `border-radius` styles to our card components. First, let's create our
+`Simple` token:
+
+[exampleRadius.ts](https://raw.githubusercontent.com/johnsonandjohnson/Bodiless-JS/main/packages/vital-examples/src/reusable-tokens/components/Radius/tokens/exampleRadius.ts
+':include :type=code :fragment=simple-token')
+
+Although we are applying these tokens to card elements in this lesson, they've been written in a way
+that will allow us to apply them to essentially any component/slot that we want.
+
+As we will be shadowing both the `Default` and `Hero` Vital card variants, we'll create two separate
+card tokens inside of our `exampleCard.ts` token collection file. First, let's create our `Default`
+card token, applying our `Simple` radius token to it:
+
+```ts
+const Default = asCardToken(vitalCardBase.Default, {
+  Theme: {
+    ContentWrapper: exampleRadius.Simple,
+  },
+});
+```
+
+### Creating a Fancy 'Radius' Token
+
+Here, we'll use the `addComponents` function provided by Tailwind to first create a collection of
+CSS rules containing the corner radius styling to be applied to the `Hero` card.
 
 ?> **Note:** In most cases, the default utility classes provided by Tailwind will be enough to meet
 your styling needs, but in cases such as this, where we are attempting to apply a more complex set
 of styling rules to a component, we can construct those CSS rules directly in our Tailwind
-configuration file as shown below:
+configuration file (`tailwind.config.js`) as shown below:
 
 ```js
 const twConfig = {
@@ -83,34 +119,29 @@ const twConfig = {
 };
 ```
 
-Next, we will create both a `Card` and `Radius` component folder inside of our example package,
-`reusable-tokens`.
-
-The `Card` component folder will contain the `Default` and `Hero` card tokens in an `exampleCard.ts`
-token collection file, and the `Radius` component folder will contain the corner radius styling
-tokens in an `exampleRadius.ts` token collection file.
-
-Please reference the [Vital Component Template documentation](../../Guides/ComponentTemplate) to
-ensure that you are following the proper naming conventions and file structure when creating a new
-component folder.
-
-### Creating Our Reusable 'Radius' Tokens
-
-In our `exampleRadius.ts` token collection file, we will create two tokens that will be used to
-apply two different types of `border-radius` styles to our card components.
+Returning to our `exampleRadius.ts` token collection file, let's create a `Fancy` token, which will
+be used to apply a different `border-radius` style to our card components:
 
 [exampleRadius.ts](https://raw.githubusercontent.com/johnsonandjohnson/Bodiless-JS/main/packages/vital-examples/src/reusable-tokens/components/Radius/tokens/exampleRadius.ts
-':include :type=code :fragment=radius-tokens')
+':include :type=code :fragment=fancy-token')
 
-Although we are applying these tokens to card elements in this lesson, they've been written in a way
-that will allow us to apply them to essentially any component/slot that we want.
-
-As we will be shadowing both the `Default` and `Hero` Vital card variants, let's create two separate
-card tokens inside of our `exampleCard.ts` token collection file and apply our previously-created
-radius tokens there:
+Now, in our `exampleCard.ts` token collection file, let's create our `Hero` card token and apply our
+`Fancy` radius token to it:
 
 [exampleCard.ts](https://raw.githubusercontent.com/johnsonandjohnson/Bodiless-JS/main/packages/vital-examples/src/reusable-tokens/components/Card/tokens/exampleCard.ts
-':include :type=code :fragment=card-tokens')
+':include :type=code :fragment=hero-card-token')
+
+### The Benefits of Tokens
+
+Let's take a look at the `Default` token we made earlier:
+
+```ts
+const Default = asCardToken(vitalCardBase.Default, {
+  Theme: {
+    ContentWrapper: exampleRadius.Simple,
+  },
+});
+```
 
 It would also be entirely acceptable to apply the `'rounded-br-[40px]'` class from our `Simple`
 element token directly to the `Theme` domain of our `Default` card token as follows:
