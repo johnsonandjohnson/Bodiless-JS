@@ -24,7 +24,7 @@ const parsedDesignTokens = JSON.parse(JSON.stringify(designTokens));
  * The `design-tokens.nested.json` file should only contain all Core tokens.
  * These core tokens are then used to extend the corresponding Tailwind config sections.
  *
- * @TODO: Note that the `border.style` tokens do not have a corresponding key in the Tailwind config.
+ * @TODO: The `border.style` tokens do not have a corresponding key in the Tailwind config.
  * `borderStyle` is only a valid key for the TW variants and plugins. The default TW values for
  * borderStyle match the provided tokens.
  *
@@ -42,7 +42,13 @@ const parsedDesignTokens = JSON.parse(JSON.stringify(designTokens));
  * it is split into two different token "section" like `border.width` and `boder.style`
  * to avoid TW config issues.
  */
-const { colors, spacing, typography, opacity, border } = parsedDesignTokens;
+const {
+  colors,
+  spacing,
+  typography,
+  opacity,
+  border,
+} = parsedDesignTokens;
 
 const resolver = (pkgName) => require.resolve(pkgName);
 
