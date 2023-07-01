@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 import { expect, test } from '@playwright/test';
-import { VitalButtonsPage, VitalButtonType } from '../../pages/vital-button';
+import { VitalButtonsPage, VitalButtonType } from '../../pages/vital-buttons';
 
 test.describe.configure({ mode: 'parallel' });
 
