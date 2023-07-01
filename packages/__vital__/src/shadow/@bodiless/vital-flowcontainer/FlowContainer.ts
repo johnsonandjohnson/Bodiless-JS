@@ -23,7 +23,7 @@ import { vitalListFlowContainer } from '@bodiless/vital-list';
 import { vitalCardFlowContainer } from '@bodiless/vital-card';
 import { vitalTableFlowContainer } from '@bodiless/vital-table';
 import { vitalAccordionFlowContainer } from '@bodiless/vital-accordion';
-import { vitalButtonFlowContainer } from '@bodiless/vital-buttons';
+import { vitalButtonFlowContainer } from '@bodiless/vital-button';
 
 /**
  * A Composable token that collects all the different Vital DS components.

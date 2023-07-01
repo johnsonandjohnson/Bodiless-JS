@@ -12,19 +12,19 @@
  * limitations under the License.
  */
 import { expect, test } from '@playwright/test';
-import { VitalButtonsPage, VitalButtonType } from '../../pages/vital-buttons';
+import { VitalButtonsPage, VitalButtonType } from '../../pages/vital-button';
 
 test.describe.configure({ mode: 'parallel' });
 
 test.describe('Vital Buttons', () => {
   const buttonsPage: VitalButtonsPage = new VitalButtonsPage();
 
-  test.beforeEach(async ({page}) => { await buttonsPage.open(page); });
+  test.beforeEach(async ({ page }) => { await buttonsPage.open(page); });
 
   buttonsPage.vitalButtons.forEach((btn) => {
     switch (btn.type) {
       case VitalButtonType.DISABLED: {
-        test(`Should try to click on ${btn.id} disable button`, async ({page, baseURL}) => {
+        test(`Should try to click on ${btn.id} disable button`, async ({ page, baseURL }) => {
           await buttonsPage.locateTarget(page.getByTestId(btn.id)).click({ force: true });
 
           expect(page.url()).toBe(baseURL + buttonsPage.relativeUrl);
@@ -32,7 +32,7 @@ test.describe('Vital Buttons', () => {
         break;
       }
       case VitalButtonType.EXTERNAL: {
-        test(`Should click on ${btn.id} external button`, async ({page, context}) => {
+        test(`Should click on ${btn.id} external button`, async ({ page, context }) => {
           const [externalPage] = await Promise.all([
             context.waitForEvent('page'),
             buttonsPage.locateTarget(page.getByTestId(btn.id)).click(),
@@ -45,7 +45,7 @@ test.describe('Vital Buttons', () => {
         break;
       }
       case VitalButtonType.DEFAULT: {
-        test(`Should click on ${btn.id} default button`, async ({page, baseURL}) => {
+        test(`Should click on ${btn.id} default button`, async ({ page, baseURL }) => {
           await buttonsPage.locateTarget(page.getByTestId(btn.id)).click();
 
           expect(page.url()).toBe(`${baseURL}${buttonsPage.relativeUrl}#`);
@@ -53,7 +53,7 @@ test.describe('Vital Buttons', () => {
         break;
       }
       case VitalButtonType.PDF: {
-        test(`Should click on ${btn.id} PDF button`, async ({page}) => {
+        test(`Should click on ${btn.id} PDF button`, async ({ page }) => {
           const [download] = await Promise.all([
             page.waitForEvent('download'),
             buttonsPage.locateTarget(page.getByTestId(btn.id)).click()

@@ -1,6 +1,6 @@
 import { as } from '@bodiless/fclasses';
-import { asButtonToken } from '@bodiless/vital-buttons';
-import { vitalButtonsBase } from '@bodiless/vital-buttons/src/base';
+import { asButtonToken } from '@bodiless/vital-button';
+import { vitalButtonsBase } from '@bodiless/vital-button/src/base';
 import {
   vitalColor,
   vitalFontSize,

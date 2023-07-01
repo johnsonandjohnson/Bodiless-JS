@@ -8,7 +8,6 @@ In this lesson we will learn how to shadow a button component to apply custom st
 In our case, we will override the `vitalButtonsBase.Primary` to add a hover transition, and we will crate a new variation, a larger button, which can be combined with all other existings variations.
 To accomplish this, we will use the best practices for shadowing components.
 
-
 ## Assignment
 
 ### Creating our tokens
@@ -27,9 +26,10 @@ Since we are shadowing vital elements, we should import the base version of the 
 
 ```ts
 ...
-import { vitalButtonsBase } from '@bodiless/vital-buttons/src/base';
+import { vitalButtonsBase } from '@bodiless/vital-button/src/base';
 ...
 ```
+
 And once we have the base all the base variations from the vital package, we can spread `vitalButtonsBase.Primary` to preserve the domains that we don't want to change.
 As we're going to add a transition to our button, we're going to use the Theme domain once again, spreading this domain from `vitalButtonsBase.Primary` to preserve the button's settings and prevent unintentional modifications.
 
@@ -54,6 +54,7 @@ const WithPrimary = asButtonToken({
 });
 ...
 ```
+
 Here we rely on the `asButtonToken` function to help us with the tokens convention. This function extends from [asVitalTokenSpec](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/util/tokenSpec.ts#L48) to create the token definition utility for te [ButtonClean](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-buttons/src/components/Buttons/ButtonClean.tsx) component.
 
 **PS:** As you can notice, we use a mix of `vital-elements` tokens and tailwind classes to compose our token.
@@ -73,6 +74,7 @@ const WithBigButton = asButtonToken({
   },
 });
 ```
+
 After we're done with the tokens, we should export these tokens alongside the ones from vital buttons.
 
 ```ts
@@ -83,7 +85,6 @@ export default {
   WithBigButton,
 };
 ```
-
 
 ### Shadowing
 

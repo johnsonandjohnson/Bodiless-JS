@@ -20,7 +20,7 @@ import {
   varyDesigns,
   addProps,
 } from '@bodiless/fclasses';
-import { ButtonClean } from '@bodiless/vital-buttons';
+import { ButtonClean } from '@bodiless/vital-button';
 import { asFluidToken, vitalTypography } from '@bodiless/vital-elements';
 import {
   asStyleGuideTemplateToken,

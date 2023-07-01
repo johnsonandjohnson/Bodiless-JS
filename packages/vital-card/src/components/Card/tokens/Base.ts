@@ -25,7 +25,7 @@ import { vitalTypography, asFluidToken } from '@bodiless/vital-elements';
 import {
   EditorPlainClean, vitalEditorPlain, RichTextClean, vitalRichText,
 } from '@bodiless/vital-editors';
-import { ButtonClean, vitalButtons } from '@bodiless/vital-buttons';
+import { ButtonClean, vitalButtons } from '@bodiless/vital-button';
 import { LinkClean, vitalLink } from '@bodiless/vital-link';
 import { asCardToken, CardDescriptionPreview } from '../CardClean';
 import type { CardToken } from '../CardClean';

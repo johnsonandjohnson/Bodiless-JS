@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import vitalButtons from './vitalButtons';
+import vitalButtons from './vitalButton';
 
 export default vitalButtons;

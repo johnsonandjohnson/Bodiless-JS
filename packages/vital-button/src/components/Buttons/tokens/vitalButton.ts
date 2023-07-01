@@ -15,9 +15,7 @@
 import {
   as,
   on,
-  replaceWith,
   startWith,
-  Span,
   Button,
   addProps,
   flowHoc,
@@ -26,28 +24,34 @@ import {
 import { withPlaceholder } from '@bodiless/components';
 import { vitalColor } from '@bodiless/vital-elements';
 import { vitalEditorPlain, EditorPlainClean } from '@bodiless/vital-editors';
-import { asEditableLink, vitalLink } from '@bodiless/vital-link';
+import { asEditableLink } from '@bodiless/vital-link';
 import { withNodeKey } from '@bodiless/data';
 import { ButtonComponent, ButtonToken, asButtonToken } from '../ButtonClean';
 import { WhereToBuy, WhereToBuyWithoutIcon } from './vitalWTB';
 
 const ButtonThemeStyle = as(
-  'rounded transition duration-150 ease-in-out',
+  'rounded-lg transition duration-400 ease-in-out',
   'focus:outline-none focus:ring-0',
   'leading-tight uppercase',
-  'hover:opacity-80',
 );
 
-const Base = asButtonToken({
+// const SecondaryButtonThemeStyle = as(
+//   'focus:outline-none focus:ring-0',
+//   'leading-tight uppercase',
+//   'hover:opacity-80',
+// );
+
+const Default = asButtonToken({
   Layout: {
     Wrapper: 'flex group justify-center',
   },
   Theme: {
-    _: as(vitalLink.WithDownloadStyles, vitalLink.WithExternalStyles),
+    // NOTE: Deprecated temporarily.
+    // _: as(vitalLink.WithDownloadStyles, vitalLink.WithExternalStyles),
     Wrapper: ButtonThemeStyle,
   },
   Spacing: {
-    Wrapper: 'px-6 py-3.5',
+    Wrapper: 'px-6 py-4',
   },
   Components: {
     Body: on(EditorPlainClean)(vitalEditorPlain.Default),
@@ -65,25 +69,26 @@ const Base = asButtonToken({
   Meta: flowHoc.meta.term('Type')('Buttons'),
 });
 
-const WithArrow = asButtonToken({
-  Layout: {
-    Wrapper: 'flex-row-reverse',
-    Icon: 'inline-block',
-  },
-  Components: {
-    Icon: replaceWith(Span),
-  },
-  Theme: {
-    Icon: 'w-6 h-2 vital-arrow group-hover:text-current text-transparent',
-  },
-  Spacing: {
-    Icon: 'pr-1',
-    Wrapper: 'pl-12 pr-6 py-3.5 group',
-  },
-  Meta: flowHoc.meta.term('Style')('With Hover Arrow'),
-});
+// NOTE: Deprecated temporarily.
+// const WithArrow = asButtonToken({
+//   Layout: {
+//     Wrapper: 'flex-row-reverse',
+//     Icon: 'inline-block',
+//   },
+//   Components: {
+//     Icon: replaceWith(Span),
+//   },
+//   Theme: {
+//     Icon: 'w-6 h-2 vital-arrow group-hover:text-current text-transparent',
+//   },
+//   Spacing: {
+//     Icon: 'pr-1',
+//     Wrapper: 'pl-12 pr-6 py-3.5 group',
+//   },
+//   Meta: flowHoc.meta.term('Style')('With Hover Arrow'),
+// });
 
-const Primary = asButtonToken(Base, {
+const Primary = asButtonToken(Default, {
   Theme: {
     Wrapper: as(
       vitalColor.BgPrimaryInteractive,
@@ -93,36 +98,55 @@ const Primary = asButtonToken(Base, {
   Meta: flowHoc.meta.term('Style')('Primary'),
 });
 
-const Secondary = asButtonToken(Base, {
+const Secondary = asButtonToken(Default, {
   Theme: {
     Wrapper: as(
       'border-2',
       vitalColor.TextPrimaryInteractive,
       vitalColor.BorderPrimaryInteractive,
+      vitalColor.SecondaryButtonInteractive,
     ),
   },
   Meta: flowHoc.meta.term('Style')('Secondary'),
 });
 
-const PrimarySelected = asButtonToken(Base, {
+const Tertiary = asButtonToken(Default, {
   Theme: {
     Wrapper: as(
-      vitalColor.BgButtonSelected,
+      vitalColor.TextPrimaryInteractive,
+    ),
+  },
+  Meta: flowHoc.meta.term('Style')('Tertiary'),
+});
+
+const PrimarySelected = asButtonToken(Default, {
+  Theme: {
+    Wrapper: as(
+      vitalColor.BgButtonPrimarySelected,
       vitalColor.TextWhite,
     ),
   },
   Meta: flowHoc.meta.term('Style')('Primary Selected'),
 });
 
-const SecondarySelected = asButtonToken(Base, {
+const SecondarySelected = asButtonToken(Default, {
   Theme: {
     Wrapper: as(
       'border-2',
-      vitalColor.TextButtonSelected,
-      vitalColor.BorderButtonSelected,
+      vitalColor.TextSecondaryButtonSelected,
+      vitalColor.BorderSecondaryButton,
+      vitalColor.BgSecondaryButtonInteractive,
     ),
   },
   Meta: flowHoc.meta.term('Style')('Secondary Selected'),
+});
+const TertiarySelected = asButtonToken(Default, {
+  Theme: {
+    Wrapper: as(
+      vitalColor.TextButtonSelected,
+    ),
+  },
+  Meta: flowHoc.meta.term('Style')('Tertiary Selected'),
 });
 
 const WithDisabled = asButtonToken({
@@ -133,14 +157,7 @@ const WithDisabled = asButtonToken({
   Behavior: {
     Wrapper: addProps({ disabled: 'true' }),
   },
-  Theme: {
-    Wrapper: 'opacity-50 hover:opacity-50',
-  },
   Meta: flowHoc.meta.term('Style')('Disabled'),
-});
-
-const Default = asButtonToken({
-  ...Base,
 });
 
 interface VitalButtons extends TokenCollection<ButtonComponent, {}> {
@@ -149,8 +166,10 @@ interface VitalButtons extends TokenCollection<ButtonComponent, {}> {
   PrimarySelected: ButtonToken,
   Secondary: ButtonToken,
   SecondarySelected: ButtonToken,
+  Tertiary: ButtonToken,
+  TertiarySelected: ButtonToken,
   WithDisabled: ButtonToken,
-  WithArrow: ButtonToken,
+  // WithArrow: ButtonToken,
   WhereToBuy: ButtonToken,
   WhereToBuyWithoutIcon: ButtonToken,
 }
@@ -161,8 +180,10 @@ const vitalButtons: VitalButtons = {
   PrimarySelected,
   Secondary,
   SecondarySelected,
+  Tertiary,
+  TertiarySelected,
   WithDisabled,
-  WithArrow,
+  // WithArrow,
   WhereToBuy,
   WhereToBuyWithoutIcon,
 };

@@ -18,7 +18,7 @@
  * @category Token Collection
  * @see [[vitalButtons]]
  */
-export { default as vitalButtonsBase } from './components/Buttons/tokens/vitalButtons';
+export { default as vitalButtonsBase } from './components/Buttons/tokens/vitalButton';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.

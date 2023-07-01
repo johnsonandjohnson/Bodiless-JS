@@ -30,7 +30,7 @@ import {
   as,
   flowHoc,
 } from '@bodiless/fclasses';
-import { vitalButtons } from '@bodiless/vital-buttons';
+import { vitalButtons } from '@bodiless/vital-button';
 import { vitalLogo } from '../../Logo';
 import { asHeaderToken } from '../HeaderClean';
 import type { HeaderToken } from '../HeaderClean';
