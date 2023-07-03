@@ -29,6 +29,7 @@
   "dependencies": {
     "@bodiless/components": "^1.0.0-rc.42",
     "@bodiless/fclasses": "^1.0.0-rc.42",
+    "@bodiless/hydration": "^1.0.0-rc.42",
     "@bodiless/layouts": "^1.0.0-rc.42",
     "@bodiless/layouts-ui": "^1.0.0-rc.42",
     "@bodiless/ui": "^1.0.0-rc.42",

@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,16 +12,16 @@
  * limitations under the License.
  */
 
-import Image, { asBodilessImage, withImageLibrary } from './Image';
-import { truncateFileName } from './FileUpload.bl-edit';
-import { useChameleonSelectorForm } from './useChameleonSelectorForm';
+import { staticFunction, staticTokenCollection } from '@bodiless/hydration';
+
+const truncateFileName = (file: string) => file;
+
+const fileUploadUI = staticTokenCollection;
+
+const withUI = staticFunction;
 
 export {
-  asBodilessImage,
-  Image,
+  fileUploadUI,
+  withUI,
   truncateFileName,
-  useChameleonSelectorForm,
-  withImageLibrary,
 };
-
-export * from './Link';
