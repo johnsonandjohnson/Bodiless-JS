@@ -41,6 +41,7 @@
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
+    "@root/walk": "1.1.0",
     "dotenv": "^8.2.0",
     "find-git-root": "1.0.4",
     "find-up": "^4.1.0",
@@ -53,7 +54,8 @@
     "replace-in-file": "^6.2.0",
     "semver": "^7.3.5",
     "tar": "^6.1.11",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "walkdir": "^0.4.1"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1",
