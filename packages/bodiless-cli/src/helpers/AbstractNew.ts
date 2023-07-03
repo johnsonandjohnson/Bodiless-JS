@@ -375,6 +375,10 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
       data.name = `${name}-monorepo`;
       if (!fs.existsSync(templatePackageDir)) {
         delete data.scripts['build:packages'];
+        delete data.scripts['vital-check'];
+        delete data.scripts['test:pw-functional'];
+        delete data.scripts['test:playwright'];
+        delete data.scripts.copyright;
         data.scripts.setup = 'npm install';
         data.scripts.lint = 'eslint --fix  --cache --ext .js,.jsx,.ts,.tsx sites -- ';
         data.scripts.fix = 'eslint --cache --ext .js,.jsx,.ts,.tsx sites -- ';
@@ -495,6 +499,13 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     }
   }
 
+  /**
+   * Update the new site package-lock.json to remove any references to
+   * local packages. This is necessary because the package-lock
+   * file is copied from bodiless monorepo to the new site.
+   * It contains references to local packages which will not exist
+   * in the new site.
+   */
   async updateLockFile() {
     const dest = await this.getArg('dest');
     const lockFilename = path.join(dest, 'package-lock.json');

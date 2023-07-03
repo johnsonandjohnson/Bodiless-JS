@@ -1,4 +1,6 @@
 {
-  "buildCommand": "npm run build:packages && npm run build:only $VERCEL_SITENAME",
-  "installCommand": "npm run setup"
+  "root": "./sites/$VERCEL_SITEDIR",
+  "buildCommand": "cd ../.. && npm run build:packages && npm run build:only $VERCEL_SITENAME",
+  "outputDirectory": "./publish",
+  "installCommand": "npm install"
 }
