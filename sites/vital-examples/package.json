@@ -72,7 +72,6 @@
     "dev-frontend": "node --stack-size=3200 ./node_modules/.bin/next dev -p ${APP_PORT:-8000}",
     "lint": "next lint",
     "docs": "run-s build:docs serve:docs",
-    "prepare": "node ../../scripts/set-missing-symlinks.js @bodiless",
     "prestart": "run-s build:env-vars build:docs",
     "search-index": "create-search-index",
     "serve": "next start -p ${APP_PORT:-9000}",

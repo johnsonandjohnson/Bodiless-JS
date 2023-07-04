@@ -108,7 +108,6 @@
     "clean": "gatsby clean",
     "dev-backend": "bodiless-backend",
     "dev-frontend": "gatsby develop -p 8005",
-    "prepare": "node ../../scripts/set-missing-symlinks.js @bodiless",
     "prestart": "run-s build:env-vars build:docs",
     "docs": "run-s build:docs serve:docs",
     "start": "gatsby serve",

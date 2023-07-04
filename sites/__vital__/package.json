@@ -72,7 +72,6 @@
     "dev-backend": "bodiless-backend",
     "dev-frontend": "gatsby develop",
     "docs": "run-s build:docs serve:docs",
-    "prepare": "node ../../scripts/set-missing-symlinks.js @bodiless",
     "prestart": "run-s build:env-vars build:docs",
     "search-index": "create-search-index",
     "serve": "gatsby serve",
