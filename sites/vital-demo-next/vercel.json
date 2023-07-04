@@ -1,5 +1,5 @@
 {
-  "buildCommand": "cd ../.. && npm run build:packages && npm run build:only $VERCEL_SITENAME",
+  "buildCommand": "npm run build",
   "outputDirectory": "./publish",
   "installCommand": "cd ../.. && npm install"
 }
