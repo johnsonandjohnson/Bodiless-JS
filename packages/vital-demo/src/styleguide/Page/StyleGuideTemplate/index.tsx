@@ -27,6 +27,7 @@ import { _default } from './_default';
 import { Video } from './Video';
 import { Accordion } from './Accordion';
 import { Section } from './Section';
+import { Divider } from './Divider';
 
 export const VitalDemoStyleGuideTemplate = {
   _default,
@@ -46,4 +47,5 @@ export const VitalDemoStyleGuideTemplate = {
   Accordion,
   Buttons,
   Section,
+  Divider
 };
