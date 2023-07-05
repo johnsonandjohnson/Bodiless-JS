@@ -2,7 +2,10 @@
   "id": "button",
   "title": "Button",
   "description": "",
-  "statuses": {},
+  "statuses": {
+    "KIRz-iaKhz": "needsReview",
+    "main": "needsDev"
+  },
   "templates": [
     {
       "id": "bodiless-6GKNPvcRI1",
@@ -27,14 +30,32 @@
   ],
   "tabs": [
     {
-      "type": "template",
-      "id": "bodiless-6GKNPvcRI1"
+      "id": "usW6SQbbJ4",
+      "type": "subPage"
+    },
+    {
+      "id": "NuG0iCr_YX",
+      "type": "subPage"
+    },
+    {
+      "id": "bodiless-6GKNPvcRI1",
+      "type": "template"
     }
   ],
   "subPages": [
     {
       "id": "overview",
       "title": "Overview",
+      "blockIds": []
+    },
+    {
+      "id": "usW6SQbbJ4",
+      "title": "Guidelines",
+      "blockIds": []
+    },
+    {
+      "id": "NuG0iCr_YX",
+      "title": "Figma",
       "blockIds": []
     }
   ]

@@ -73,6 +73,147 @@ blocks:
               type: bulletList
           type: doc
       id: 16KxcciP1h
+      size: medium
+    1W4iQSJbBE:
+      blockType: text-editor
+      data:
+        content:
+          content:
+            - content:
+                - text: 'These are the tokens that are coming from the Figma Token Studio Plugin and flow into the '
+                  type: text
+                - marks:
+                    - type: code
+                  text: '@bodiless/vital-elements'
+                  type: text
+                - text: ' Tailwind config. Since these are the Core tokens that live in TW config, there is no '
+                  type: text
+                - marks:
+                    - type: code
+                  text: tokenGroup
+                  type: text
+                - text: "\_available for these tokens and they are meant to be used as TW classes directly in other tokens or in components."
+                  type: text
+              type: paragraph
+          type: doc
+      id: 1W4iQSJbBE
+      size: null
+    8YpJ0Lb-Md:
+      blockType: design-tokens
+      data:
+        demoId: color-swatch
+        groupIds:
+          - colors
+        tokenType: ''
+      id: 8YpJ0Lb-Md
+      size: null
+    8iGjzJTqba:
+      blockType: design-tokens
+      data:
+        demoId: table-list
+        groupIds:
+          - spacing
+        tokenType: ''
+      id: 8iGjzJTqba
+      size: null
+    A37SRJgPry:
+      blockType: text-editor
+      data:
+        content:
+          content:
+            - attrs:
+                level: 3
+              content:
+                - text: 'Things to Note:'
+                  type: text
+              type: heading
+            - content:
+                - content:
+                    - content:
+                        - text: 'We already have '
+                          type: text
+                        - marks:
+                            - type: code
+                          text: Typography
+                          type: text
+                        - text: "\_pattern under `Components` page, so naming this pattern "
+                          type: text
+                        - marks:
+                            - type: code
+                          text: Vital 2.0 Typography
+                          type: text
+                        - marks:
+                            - type: code
+                          type: hardBreak
+                        - text: .
+                          type: text
+                      type: paragraph
+                  type: listItem
+                - content:
+                    - content:
+                        - marks:
+                            - type: code
+                          text: H1
+                          type: text
+                        - text: "\_through "
+                          type: text
+                        - marks:
+                            - type: code
+                          text: H3
+                          type: text
+                        - text: "\_are not user or correctly defined."
+                          type: text
+                      type: paragraph
+                  type: listItem
+                - content:
+                    - content:
+                        - text: "Links have no hover styles in tokens JSON files:\_"
+                          type: text
+                        - marks:
+                            - attrs:
+                                class: null
+                                href: https://github.com/dxp-prototype/vital-design-tokens/tree/tokens.json
+                                target: _blank
+                              type: link
+                          text: https://github.com/dxp-prototype/vital-design-tokens/tree/tokens.json
+                          type: text
+                      type: paragraph
+                  type: listItem
+              type: bulletList
+          type: doc
+      id: A37SRJgPry
+      size: null
+    BeDAoEJLR0:
+      blockType: text-editor
+      data:
+        content:
+          content:
+            - attrs:
+                level: 1
+              content:
+                - text: All Design Tokens
+                  type: text
+              type: heading
+            - content:
+                - text: These tokens were generated from Figma styles using Tokens Studio for Figma.
+                  type: text
+              type: paragraph
+          type: doc
+      id: BeDAoEJLR0
+      size: null
+    C7tIO0VxXC:
+      blockType: pattern-list-block
+      id: C7tIO0VxXC
+      size: null
+    CBFAjrJd8A:
+      blockType: figma-block
+      id: CBFAjrJd8A
+      size: null
+    EJg1Jn9cvh:
+      blockType: pattern-status-table-block
+      id: EJg1Jn9cvh
+      size: null
+      spacing: medium
     GZ5wEpB1od:
       blockType: text-editor
       data:
@@ -82,6 +223,108 @@ blocks:
           type: doc
       id: GZ5wEpB1od
       size: null
+    Gt72mwJs0m:
+      blockType: text-editor
+      data:
+        content:
+          content:
+            - attrs:
+                level: 2
+              content:
+                - text: All White Label Colors
+                  type: text
+              type: heading
+            - type: horizontalRule
+            - content:
+                - text: >-
+                    This is just a preview of every single White Label color. For more information on color groups
+                    please visit Tokens section.
+                  type: text
+              type: paragraph
+          type: doc
+      id: Gt72mwJs0m
+      size: null
+    K3axZJtuZ5:
+      blockType: text-editor
+      data:
+        content:
+          content:
+            - attrs:
+                level: 1
+              content:
+                - text: Available Components
+                  type: text
+              type: heading
+          type: doc
+      id: K3axZJtuZ5
+      size: null
+    KYM1112U4w:
+      blockType: text-editor
+      data:
+        content:
+          content:
+            - attrs:
+                level: 3
+              content:
+                - text: 'Things to Note:'
+                  type: text
+              type: heading
+            - content:
+                - content:
+                    - content:
+                        - text: 'We already have '
+                          type: text
+                        - marks:
+                            - type: code
+                          text: Typography
+                          type: text
+                        - text: "\_pattern under `Components` page, so naming this pattern "
+                          type: text
+                        - marks:
+                            - type: code
+                          text: Vital 2.0 Typography
+                          type: text
+                        - marks:
+                            - type: code
+                          type: hardBreak
+                        - text: .
+                          type: text
+                      type: paragraph
+                  type: listItem
+                - content:
+                    - content:
+                        - marks:
+                            - type: code
+                          text: H1
+                          type: text
+                        - text: "\_through "
+                          type: text
+                        - marks:
+                            - type: code
+                          text: H3
+                          type: text
+                        - text: "\_are not user or correctly defined."
+                          type: text
+                      type: paragraph
+                  type: listItem
+                - content:
+                    - content:
+                        - text: "Links have no hover styles in tokens JSON files:\_"
+                          type: text
+                        - marks:
+                            - attrs:
+                                class: null
+                                href: https://github.com/dxp-prototype/vital-design-tokens/tree/tokens.json
+                                target: _blank
+                              type: link
+                          text: https://github.com/dxp-prototype/vital-design-tokens/tree/tokens.json
+                          type: text
+                      type: paragraph
+                  type: listItem
+              type: bulletList
+          type: doc
+      id: KYM1112U4w
+      size: null
     KymKRTLXS-:
       blockType: design-tokens
       data:
@@ -90,6 +333,10 @@ blocks:
           - spacing
         tokenType: ''
       id: KymKRTLXS-
+      size: null
+    OujmOy7hzr:
+      blockType: figma-block
+      id: OujmOy7hzr
       size: null
     POi6al8Wi4:
       blockType: design-tokens
@@ -167,6 +414,45 @@ blocks:
           type: doc
       id: PoOIw5aqQw
       size: null
+    QtBNxD6K7h:
+      blockType: text-editor
+      data:
+        content:
+          content:
+            - content:
+                - text: 'These are the tokens that are coming from the Figma Token Studio Plugin and flow into the '
+                  type: text
+                - marks:
+                    - type: code
+                  text: '@bodiless/vital-elements'
+                  type: text
+                - text: ' Tailwind config. Since these are the Core tokens that live in TW config, there is no '
+                  type: text
+                - marks:
+                    - type: code
+                  text: tokenGroup
+                  type: text
+                - text: "\_available for these tokens and they are meant to be used as TW classes directly in other tokens or in components."
+                  type: text
+              type: paragraph
+          type: doc
+      id: QtBNxD6K7h
+      size: null
+    Qw4hs0k3cT:
+      blockType: text-editor
+      data:
+        content:
+          content:
+            - attrs:
+                level: 1
+              content:
+                - text: Component Status
+                  type: text
+              type: heading
+          type: doc
+      id: Qw4hs0k3cT
+      size: null
+      spacing: null
     VHpTEsTfb_:
       blockType: text-editor
       data:
@@ -191,6 +477,60 @@ blocks:
           type: doc
       id: VHpTEsTfb_
       size: null
+    YERMVVc13Z:
+      blockType: design-tokens
+      data:
+        demoId: table-list
+        groupIds: []
+        tokenType: ''
+      id: YERMVVc13Z
+      size: null
+    a_qa2kuWcU:
+      blockType: text-editor
+      data:
+        content:
+          content:
+            - content:
+                - text: 'These are the tokens that are coming from the Figma Token Studio Plugin and flow into the '
+                  type: text
+                - marks:
+                    - type: code
+                  text: '@bodiless/vital-elements'
+                  type: text
+                - text: ' Tailwind config. Since these are the Core tokens that live in TW config, there is no '
+                  type: text
+                - marks:
+                    - type: code
+                  text: tokenGroup
+                  type: text
+                - text: "\_available for these tokens and they are meant to be used as TW classes directly in other tokens or in components."
+                  type: text
+              type: paragraph
+          type: doc
+      id: a_qa2kuWcU
+      size: null
+    ad25zPbIAj:
+      blockType: figma-block
+      id: ad25zPbIAj
+      size: null
+    dInImL59tD:
+      blockType: design-tokens
+      data:
+        demoId: table-list
+        groupIds:
+          - border.rounded
+        tokenType: ''
+      id: dInImL59tD
+      size: null
+    fplR43RORT:
+      blockType: design-tokens
+      data:
+        demoId: table-list
+        groupIds:
+          - border.width
+        tokenType: ''
+      id: fplR43RORT
+      size: null
     g3yHb4rxkp:
       blockType: design-tokens
       data:
@@ -208,6 +548,85 @@ blocks:
           - colors
         tokenType: ''
       id: gdspW656kz
+      size: null
+    h7dovr5LkE:
+      blockType: figma-block
+      id: h7dovr5LkE
+      size: null
+    j0L7cNXKaa:
+      blockType: text-editor
+      data:
+        content:
+          content:
+            - attrs:
+                level: 3
+              content:
+                - text: 'Things to Note:'
+                  type: text
+              type: heading
+            - content:
+                - content:
+                    - content:
+                        - text: 'We already have '
+                          type: text
+                        - marks:
+                            - type: code
+                          text: Typography
+                          type: text
+                        - text: "\_pattern under `Components` page, so naming this pattern "
+                          type: text
+                        - marks:
+                            - type: code
+                          text: Vital 2.0 Typography
+                          type: text
+                        - marks:
+                            - type: code
+                          type: hardBreak
+                        - text: .
+                          type: text
+                      type: paragraph
+                  type: listItem
+                - content:
+                    - content:
+                        - marks:
+                            - type: code
+                          text: H1
+                          type: text
+                        - text: "\_through "
+                          type: text
+                        - marks:
+                            - type: code
+                          text: H3
+                          type: text
+                        - text: "\_are not user or correctly defined."
+                          type: text
+                      type: paragraph
+                  type: listItem
+                - content:
+                    - content:
+                        - text: "Links have no hover styles in tokens JSON files:\_"
+                          type: text
+                        - marks:
+                            - attrs:
+                                class: null
+                                href: https://github.com/dxp-prototype/vital-design-tokens/tree/tokens.json
+                                target: _blank
+                              type: link
+                          text: https://github.com/dxp-prototype/vital-design-tokens/tree/tokens.json
+                          type: text
+                      type: paragraph
+                  type: listItem
+              type: bulletList
+          type: doc
+      id: j0L7cNXKaa
+      size: null
+    k2Y8dJdKsx:
+      blockType: figma-block
+      id: k2Y8dJdKsx
+      size: null
+    o6tW8v1Jz1:
+      blockType: figma-block
+      id: o6tW8v1Jz1
       size: null
     oopKLyODYY:
       blockType: text-editor
@@ -238,10 +657,7 @@ blocks:
       data:
         content:
           content:
-            - content:
-                - text: This is our card!
-                  type: text
-              type: paragraph
+            - type: paragraph
           type: doc
       id: z6oyLDb-mS
     zJHnx-3BWr:
@@ -265,30 +681,6 @@ blocks:
             - type: paragraph
           type: doc
       id: zJHnx-3BWr
-      size: null
-    zN-UuZp0pQ:
-      blockType: text-editor
-      data:
-        content:
-          content:
-            - content:
-                - text: 'These are the tokens that are coming from the Figma Token Studio Plugin and flow into the '
-                  type: text
-                - marks:
-                    - type: code
-                  text: '@bodiless/vital-elements'
-                  type: text
-                - text: ' Tailwind config. Since these are the Core tokens that live in TW config, there is no '
-                  type: text
-                - marks:
-                    - type: code
-                  text: tokenGroup
-                  type: text
-                - text: "\_available for these tokens and they are meant to be used as TW classes directly in other tokens or in components."
-                  type: text
-              type: paragraph
-          type: doc
-      id: zN-UuZp0pQ
       size: null
   settings:
     tokens:
@@ -584,19 +976,50 @@ settings:
   logoUrl: https://knapsack.imgix.net/site/vital-ds/kvue-ae799a87-pt1dzyvvlf.png
   theme:
     appearance:
+      customFonts:
+        - family: DM Sans
+          src:
+            - format: woff2
+              path: https://fonts.gstatic.com/s/dmsans/v13/rP2Hp2ywxg089UriCZOIHTWEBlw.woff2
+              type: url
+          style: normal
+          weight: '400'
       navigation:
-        primaryNav: {}
-        secondaryNav: {}
-        tabs: {}
+        primaryNav:
+          accentColor:
+            tokenName: colors.neutral.900
+            type: design-token
+          backgroundColor:
+            tokenName: colors.primary.500
+            type: design-token
+          fontFamily: DM Sans
+          hoverColor:
+            tokenName: colors.secondary.200
+            type: design-token
+          textColor:
+            tokenName: colors.neutral.100
+            type: design-token
+        secondaryNav:
+          fontFamily: DM Sans
+        tabs:
+          fontFamily: DM Sans
       pageElements:
-        bodyText: {}
-        headingLarge: {}
-        headingMedium: {}
-        headingSmall: {}
-        headingXLarge: {}
-        headingXSmall: {}
+        bodyText:
+          fontFamily: DM Sans
+        headingLarge:
+          fontFamily: DM Sans
+        headingMedium:
+          fontFamily: DM Sans
+        headingSmall:
+          fontFamily: DM Sans
+        headingXLarge:
+          fontFamily: DM Sans
+        headingXSmall:
+          fontFamily: DM Sans
         link: {}
-        pageDescription: {}
-        pageTitle: {}
+        pageDescription:
+          fontFamily: DM Sans
+        pageTitle:
+          fontFamily: DM Sans
     version: 10
   title: Vital DS
