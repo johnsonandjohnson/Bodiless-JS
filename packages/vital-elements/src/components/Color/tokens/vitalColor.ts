@@ -60,32 +60,43 @@ export default asTokenGroup(ColorMeta)({
    */
 
   // Background Color Tokens
-  BackgroundBase: 'neutral-100',
-  BackgroundLayer1: 'neutral-100',
-  BackgroundLayer2: 'quintenary-200',
-  BackgroundLayer3: 'tertiary-100',
-  BackgroundLayer4: 'quintenary-100',
-  BackgroundLayer5: 'secondary-200',
-  BackgroundLayer6: 'primary-100',
-  BackgroundInverse: 'neutral-900',
+  BackgroundBase: 'bg-neutral-100',
+  BackgroundLayer1: 'bg-neutral-100',
+  BackgroundLayer2: 'bg-quintenary-200',
+  BackgroundLayer3: 'bg-tertiary-100',
+  BackgroundLayer4: 'bg-quintenary-100',
+  BackgroundLayer5: 'bg-secondary-200',
+  BackgroundLayer6: 'bg-primary-100',
+  BackgroundInverse: 'bg-neutral-900',
 
   // Text Color Tokens
-  TextDark1: 'neutral-900',
-  TextDark2: 'neutral-700',
-  TextDark3: 'neutral-600',
-  TextLight1: 'neutral-100',
-  TextLight2: 'neutral-100',
-  TextLight3: 'neutral-300',
+  TextDark1: 'text-neutral-900',
+  TextDark2: 'text-neutral-700',
+  TextDark3: 'text-neutral-600',
+  TextLight1: 'text-neutral-100',
+  TextLight2: 'text-neutral-100',
+  TextLight3: 'text-neutral-300',
 
-  // Interactive Color Tokens
-  InteractiveDarkDefault: 'primary-500',
-  InteractiveDarkHover: 'primary-600',
-  InteractiveDarkFocus: 'primary-600',
-  InteractiveDarkPressed: 'primary-800',
-  InteractiveDarkDisabled: 'neutral-600',
-  InteractiveDarkBackgroundHover: 'primary-100',
-  InteractiveDarkBackgroundFocused: 'primary-100',
-  InteractiveDarkBackgroundPressed: 'primary-200',
+  // Interactive Color Tokens for text
+  InteractiveDarkTextDefault: 'text-primary-500',
+  InteractiveDarkTextHover: 'hover:text-primary-600',
+  InteractiveDarkTextFocus: 'focus:text-primary-600',
+  InteractiveDarkTextPressed: 'active:text-primary-800',
+  InteractiveDarkTextDisabled: 'text-neutral-600',
+
+  // Interactive Color Tokens for background
+  InteractiveDarkBackgroundDefault: 'bg-primary-500',
+  InteractiveDarkBackgroundHover: 'hover:bg-primary-100',
+  InteractiveDarkBackgroundFocus: 'focus:bg-primary-100',
+  InteractiveDarkBackgroundPressed: 'active:bg-primary-200',
+  InteractiveDarkBackgroundDisabled: 'bg-neutral-600',
+
+  // Interactive Color Tokens for border
+  InteractiveDarkBorderDefault: 'border-primary-500',
+  InteractiveDarkBorderHover: 'hover:border-primary-600',
+  InteractiveDarkBorderFocus: 'focus:border-primary-600',
+  InteractiveDarkBorderPressed: 'active:border-primary-800',
+  InteractiveDarkBorderDisabled: 'border-neutral-600',
 
   // Border Color Tokens
   BorderLight: 'neutral-200',

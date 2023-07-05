@@ -22,24 +22,12 @@ import {
   TokenCollection,
 } from '@bodiless/fclasses';
 import { withPlaceholder } from '@bodiless/components';
-import { vitalColor } from '@bodiless/vital-elements';
 import { vitalEditorPlain, EditorPlainClean } from '@bodiless/vital-editors';
 import { asEditableLink } from '@bodiless/vital-link';
 import { withNodeKey } from '@bodiless/data';
 import { ButtonComponent, ButtonToken, asButtonToken } from '../ButtonClean';
 import { WhereToBuy, WhereToBuyWithoutIcon } from './vitalWTB';
-
-const ButtonThemeStyle = as(
-  'rounded-lg transition duration-400 ease-in-out',
-  'focus:outline-none focus:ring-0',
-  'leading-tight uppercase',
-);
-
-// const SecondaryButtonThemeStyle = as(
-//   'focus:outline-none focus:ring-0',
-//   'leading-tight uppercase',
-//   'hover:opacity-80',
-// );
+import vitalButtonTokens from '../../ButtonTokens';
 
 const Default = asButtonToken({
   Layout: {
@@ -48,16 +36,16 @@ const Default = asButtonToken({
   Theme: {
     // NOTE: Deprecated temporarily.
     // _: as(vitalLink.WithDownloadStyles, vitalLink.WithExternalStyles),
-    Wrapper: ButtonThemeStyle,
+    Wrapper: vitalButtonTokens.BorderRadiusButton,
   },
   Spacing: {
-    Wrapper: 'px-6 py-4',
+    Wrapper: vitalButtonTokens.BorderPaddingButton,
   },
   Components: {
     Body: on(EditorPlainClean)(vitalEditorPlain.Default),
   },
   Content: {
-    Body: withPlaceholder('Link'),
+    Body: withPlaceholder('Button'),
   },
   Schema: {
     _: asEditableLink(),
@@ -91,9 +79,13 @@ const Default = asButtonToken({
 const Primary = asButtonToken(Default, {
   Theme: {
     Wrapper: as(
-      vitalColor.BgPrimaryInteractive,
-      vitalColor.TextWhite,
+      vitalButtonTokens.ColorButtonPrimaryBackgroundDefault,
+      vitalButtonTokens.ColorButtonPrimaryBackgroundHover,
+      vitalButtonTokens.ColorButtonPrimaryBackgroundFocus,
+      vitalButtonTokens.ShadowButtonFocus,
+      vitalButtonTokens.ColorButtonPrimaryBackgroundPressed,
     ),
+    Body: vitalButtonTokens.ColorButtonPrimaryTextDefault,
   },
   Meta: flowHoc.meta.term('Style')('Primary'),
 });
@@ -101,10 +93,20 @@ const Primary = asButtonToken(Default, {
 const Secondary = asButtonToken(Default, {
   Theme: {
     Wrapper: as(
-      'border-2',
-      vitalColor.TextPrimaryInteractive,
-      vitalColor.BorderPrimaryInteractive,
-      vitalColor.SecondaryButtonInteractive,
+      vitalButtonTokens.BorderButtonSecondaryDefault,
+      vitalButtonTokens.BorderButtonSecondaryHover,
+      vitalButtonTokens.BorderButtonSecondaryFocus,
+      vitalButtonTokens.ShadowButtonFocus,
+      vitalButtonTokens.BorderButtonSecondaryPressed,
+      vitalButtonTokens.ColorButtonSecondaryBackgroundHover,
+      vitalButtonTokens.ColorButtonSecondaryBackgroundFocus,
+      vitalButtonTokens.ColorButtonSecondaryBackgroundPressed,
+    ),
+    Body: as(
+      vitalButtonTokens.ColorButtonSecondaryTextDefault,
+      vitalButtonTokens.ColorButtonSecondaryTextHover,
+      vitalButtonTokens.ColorButtonSecondaryTextFocus,
+      vitalButtonTokens.ColorButtonSecondaryTextPressed,
     ),
   },
   Meta: flowHoc.meta.term('Style')('Secondary'),
@@ -112,41 +114,16 @@ const Secondary = asButtonToken(Default, {
 
 const Tertiary = asButtonToken(Default, {
   Theme: {
-    Wrapper: as(
-      vitalColor.TextPrimaryInteractive,
+    Wrapper: vitalButtonTokens.ColorButtonTertiaryBackgroundFocus,
+    Body: as(
+      vitalButtonTokens.ColorButtonTertiaryTextDefault,
+      vitalButtonTokens.ColorButtonTertiaryTextHover,
+      vitalButtonTokens.ColorButtonTertiaryTextFocus,
+      vitalButtonTokens.ShadowButtonFocus,
+      vitalButtonTokens.ColorButtonTertiaryTextPressed,
     ),
   },
   Meta: flowHoc.meta.term('Style')('Tertiary'),
-});
-
-const PrimarySelected = asButtonToken(Default, {
-  Theme: {
-    Wrapper: as(
-      vitalColor.BgButtonPrimarySelected,
-      vitalColor.TextWhite,
-    ),
-  },
-  Meta: flowHoc.meta.term('Style')('Primary Selected'),
-});
-
-const SecondarySelected = asButtonToken(Default, {
-  Theme: {
-    Wrapper: as(
-      'border-2',
-      vitalColor.TextSecondaryButtonSelected,
-      vitalColor.BorderSecondaryButton,
-      vitalColor.BgSecondaryButtonInteractive,
-    ),
-  },
-  Meta: flowHoc.meta.term('Style')('Secondary Selected'),
-});
-const TertiarySelected = asButtonToken(Default, {
-  Theme: {
-    Wrapper: as(
-      vitalColor.TextButtonSelected,
-    ),
-  },
-  Meta: flowHoc.meta.term('Style')('Tertiary Selected'),
 });
 
 const WithDisabled = asButtonToken({
@@ -160,15 +137,43 @@ const WithDisabled = asButtonToken({
   Meta: flowHoc.meta.term('Style')('Disabled'),
 });
 
+const PrimaryDisabled = asButtonToken(
+  WithDisabled,
+  {
+    Theme: {
+      Wrapper: vitalButtonTokens.ColorButtonPrimaryBackgroundDisabled,
+      Body: vitalButtonTokens.ColorButtonPrimaryTextDefault,
+    },
+  }
+);
+
+const SecondaryDisabled = asButtonToken(
+  WithDisabled,
+  {
+    Theme: {
+      Wrapper: vitalButtonTokens.BorderButtonSecondaryDisabled,
+      Body: vitalButtonTokens.ColorButtonSecondaryTextDisabled,
+    }
+  }
+);
+
+const TertiaryDisabled = asButtonToken(
+  WithDisabled,
+  {
+    Theme: {
+      Body: vitalButtonTokens.ColorButtonTertiaryTextDisabled,
+    }
+  }
+);
+
 interface VitalButton extends TokenCollection<ButtonComponent, {}> {
   Default: ButtonToken,
   Primary: ButtonToken,
-  PrimarySelected: ButtonToken,
   Secondary: ButtonToken,
-  SecondarySelected: ButtonToken,
   Tertiary: ButtonToken,
-  TertiarySelected: ButtonToken,
-  WithDisabled: ButtonToken,
+  PrimaryDisabled: ButtonToken,
+  SecondaryDisabled: ButtonToken,
+  TertiaryDisabled: ButtonToken,
   // WithArrow: ButtonToken,
   WhereToBuy: ButtonToken,
   WhereToBuyWithoutIcon: ButtonToken,
@@ -177,12 +182,11 @@ interface VitalButton extends TokenCollection<ButtonComponent, {}> {
 const vitalButton: VitalButton = {
   Default,
   Primary,
-  PrimarySelected,
   Secondary,
-  SecondarySelected,
   Tertiary,
-  TertiarySelected,
-  WithDisabled,
+  PrimaryDisabled,
+  SecondaryDisabled,
+  TertiaryDisabled,
   // WithArrow,
   WhereToBuy,
   WhereToBuyWithoutIcon,

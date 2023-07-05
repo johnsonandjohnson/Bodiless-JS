@@ -1,5 +1,5 @@
 import { as } from '@bodiless/fclasses';
-import { asTokenGroup, vitalColor, vital2Typography } from '@bodiless/vital-elements';
+import { asTokenGroup, vitalColor } from '@bodiless/vital-elements';
 
 export const ButtonMeta = {
   categories: {
@@ -15,36 +15,40 @@ export const ButtonMeta = {
  * the collection name or discuss the options we have for changing the token names (in JSON file?).
  */
 const vitalButtonTokens = asTokenGroup(ButtonMeta)({
-  ColorButtonPrimaryBackgroundDefault: vitalColor.InteractiveDarkDefault,
-  ColorButtonPrimaryBackgroundHover: vitalColor.InteractiveDarkHover,
-  ColorButtonPrimaryBackgroundFocus: vitalColor.InteractiveDarkFocus,
-  ColorButtonPrimaryBackgroundPressed: vitalColor.InteractiveDarkPressed,
-  ColorButtonPrimaryBackgroundDisabled: vitalColor.InteractiveDarkDisabled,
+  // Primary
+  ColorButtonPrimaryBackgroundDefault: vitalColor.InteractiveDarkBackgroundDefault,
+  ColorButtonPrimaryBackgroundHover: vitalColor.InteractiveDarkBackgroundHover,
+  ColorButtonPrimaryBackgroundFocus: vitalColor.InteractiveDarkBackgroundFocus,
+  ColorButtonPrimaryBackgroundPressed: vitalColor.InteractiveDarkBackgroundPressed,
+  ColorButtonPrimaryBackgroundDisabled: vitalColor.InteractiveDarkBackgroundDisabled,
   ColorButtonPrimaryTextDefault: vitalColor.TextLight1,
-  ColorButtonSecondaryBackgroundHover: vitalColor.InteractiveDarkHover,
-  ColorButtonSecondaryBackgroundFocus: vitalColor.InteractiveDarkFocus,
-  ColorButtonSecondaryBackgroundPressed: vitalColor.InteractiveDarkPressed,
-  ColorButtonSecondaryTextDefault: vitalColor.InteractiveDarkDefault,
-  ColorButtonSecondaryTextHover: vitalColor.InteractiveDarkHover,
-  ColorButtonSecondaryTextFocus: vitalColor.InteractiveDarkFocus,
-  ColorButtonSecondaryTextPressed: vitalColor.InteractiveDarkPressed,
-  ColorButtonSecondaryTextDisable: vitalColor.InteractiveDarkDisabled,
-  ColorButtonTertiaryTextDefault: vitalColor.InteractiveDarkDefault,
-  ColorButtonTertiaryTextHover: vitalColor.InteractiveDarkHover,
-  ColorButtonTertiaryTextFocus: vitalColor.InteractiveDarkFocus,
-  ColorButtonTertiaryTextPressed: vitalColor.InteractiveDarkPressed,
-  ColorButtonTertiaryTextDisable: vitalColor.InteractiveDarkDisabled,
-  ColorButtonTertiaryBackgroundFocus: vitalColor.InteractiveDarkBackgroundFocused,
+  // Secondary
+  ColorButtonSecondaryBackgroundHover: vitalColor.InteractiveDarkBackgroundHover,
+  ColorButtonSecondaryBackgroundFocus: vitalColor.InteractiveDarkBackgroundFocus,
+  ColorButtonSecondaryBackgroundPressed: vitalColor.InteractiveDarkBackgroundPressed,
+  ColorButtonSecondaryTextDefault: vitalColor.InteractiveDarkTextDefault,
+  ColorButtonSecondaryTextHover: vitalColor.InteractiveDarkTextHover,
+  ColorButtonSecondaryTextFocus: vitalColor.InteractiveDarkTextFocus,
+  ColorButtonSecondaryTextPressed: vitalColor.InteractiveDarkTextPressed,
+  ColorButtonSecondaryTextDisabled: vitalColor.InteractiveDarkTextDisabled,
+  BorderButtonSecondaryDefault: as(vitalColor.InteractiveDarkBorderDefault, 'border-solid border-1'),
+  BorderButtonSecondaryHover: as(vitalColor.InteractiveDarkBorderHover, 'border-solid border-1'),
+  BorderButtonSecondaryFocus: as(vitalColor.InteractiveDarkBorderFocus, 'border-solid border-1'),
+  BorderButtonSecondaryPressed: as(vitalColor.InteractiveDarkBorderPressed, 'border-solid border-1'),
+  BorderButtonSecondaryDisabled: as(vitalColor.InteractiveDarkBorderDisabled, 'border-solid border-1'),
+  // Tertiary
+  ColorButtonTertiaryTextDefault: vitalColor.InteractiveDarkTextDefault,
+  ColorButtonTertiaryTextHover: vitalColor.InteractiveDarkTextHover,
+  ColorButtonTertiaryTextFocus: vitalColor.InteractiveDarkTextFocus,
+  ColorButtonTertiaryTextPressed: vitalColor.InteractiveDarkTextPressed,
+  ColorButtonTertiaryTextDisabled: vitalColor.InteractiveDarkTextDisabled,
+  ColorButtonTertiaryBackgroundFocus: vitalColor.InteractiveDarkBackgroundFocus,
   BorderRadiusButton: 'rounded-lg',
-  BorderPaddingButton: 'pt-md pb-x-lg',
-  BorderButtonSecondaryDefault: as(vitalColor.InteractiveDarkDefault, 'border-solid border-1'),
-  BorderButtonSecondaryHover: as(vitalColor.InteractiveDarkBackgroundHover, 'border-solid border-1'),
-  BorderButtonSecondaryFocus: as(vitalColor.InteractiveDarkBackgroundFocused, 'border-solid border-1'),
-  BorderButtonSecondaryPressed: as(vitalColor.InteractiveDarkBackgroundPressed, 'border-solid border-1'),
-  BorderButtonSecondaryDisabled: as(vitalColor.InteractiveDarkDisabled, 'border-solid border-1'),
+  BorderPaddingButton: 'px-x-lg py-md',
   // TODO Needs work shouldn't have defined
-  ShadowButtonFocus: 'drop-shadow-button',
-  TextButtonDefault: vital2Typography.BodyBold,
+  ShadowButtonFocus: 'focus:drop-shadow-button',
+  // TextButtonDefault: vital2Typography.BodyBold,
+  TextButtonDefault: 'text-base leading-6 font-bold font-2',
 });
 
 export default vitalButtonTokens;

@@ -18,12 +18,11 @@ import {
   replaceWith,
   on,
   varyDesigns,
-  addProps
 } from '@bodiless/fclasses';
 import { ButtonClean, vitalButton } from '@bodiless/vital-button';
-import { asFluidToken, vitalTypography } from '@bodiless/vital-elements';
+import { asFluidToken } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
-import { LinkClean, vitalLink } from '@bodiless/vital-link';
+// import { LinkClean, vitalLink } from '@bodiless/vital-link';
 import { withDefaultContent } from '@bodiless/data';
 import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
@@ -36,19 +35,17 @@ const Default = on(ButtonClean)(
   withDefaultContent(label),
 );
 
-// Generate the Button Varations
 const ButtonStyleVariations = varyDesigns(
   {
     Primary: vitalButton.Primary,
+    PrimaryDisabled: vitalButton.PrimaryDisabled,
     Secondary: vitalButton.Secondary,
-    PrimarySelected: vitalButton.PrimarySelected,
-    SecondarySelected: vitalButton.SecondarySelected,
-    Tertiary: vitalButton.TertiarySelected,
-    TertiarySelected: vitalButton.TertiarySelected,
+    SecondaryDisabled: vitalButton.SecondaryDisabled,
+    Tertiary: vitalButton.Tertiary,
+    TertiaryDisabled: vitalButton.TertiaryDisabled,
   },
   {
     '': '', // vary on itself and produce default button variation
-    AsDisabled: vitalButton.WithDisabled,
     // WithArrow: vitalButton.WithArrow,
   },
   {
@@ -56,29 +53,29 @@ const ButtonStyleVariations = varyDesigns(
   },
 );
 
-// Generate the Link Varations
-const LinkVariations = varyDesigns(
-  {
-    Default: vitalLink.Default,
-    Primary: vitalLink.PrimaryLink,
-  },
-  {
-    '': '', // vary on itself and produce plain link variation
-    External: vitalLink.Default,
-    PDF: vitalLink.Default,
-  },
-  {
-    Link: on(LinkClean)(
-      vitalTypography.Link,
-      addProps({ children: 'Lorem Ipsum' }),
-    ),
-  },
-);
+// SAVING FOR FUTURE // Generate the Link Varations
+// const LinkVariations = varyDesigns(
+//   {
+//     Default: vitalLink.Default,
+//     Primary: vitalLink.PrimaryLink,
+//   },
+//   {
+//     '': '', // vary on itself and produce plain link variation
+//     External: vitalLink.Default,
+//     PDF: vitalLink.Default,
+//   },
+//   {
+//     Link: on(LinkClean)(
+//       vitalTypography.Link,
+//       addProps({ children: 'Lorem Ipsum' }),
+//     ),
+//   },
+// );
 
 const DemoFlowContainer = asFluidToken({
   Components: {
-    ...LinkVariations,
-    Default,
+    // ...LinkVariations,
+    // Default,
     ...ButtonStyleVariations,
   },
 });
@@ -86,16 +83,16 @@ const DemoFlowContainer = asFluidToken({
 const StyleGuideColumns = asFluidToken({
   ...vitalStyleGuideExamples.Default,
   Layout: {
-    Wrapper: 'flex flex-wrap gap-20',
+    Wrapper: 'flex flex-wrap gap-28',
   },
 });
 
-const data = {
-  examples$DefaultPDFLink: { href: '/files/pages/styleguide/buttons/test.pdf' },
-  examples$DefaultExternalLink: { href: 'https://www.example.com/' },
-  examples$PrimaryPDFLink: { href: '/files/pages/styleguide/buttons/test.pdf' },
-  examples$PrimaryExternalLink: { href: 'https://www.example.com/' },
-};
+// const data = {
+//   examples$DefaultPDFLink: { href: '/files/pages/styleguide/buttons/test.pdf' },
+//   examples$DefaultExternalLink: { href: 'https://www.example.com/' },
+//   examples$PrimaryPDFLink: { href: '/files/pages/styleguide/buttons/test.pdf' },
+//   examples$PrimaryExternalLink: { href: 'https://www.example.com/' },
+// };
 
 export const Buttons = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
   Meta: flowHoc.meta.term('Token')('Buttons'),
@@ -105,7 +102,7 @@ export const Buttons = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default
     Examples: on(StyleGuideExamplesClean)(
       StyleGuideColumns,
       DemoFlowContainer,
-      withDefaultContent(data),
+      // withDefaultContent(data),
     ),
   },
 });

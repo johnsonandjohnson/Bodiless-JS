@@ -34,15 +34,9 @@ const Secondary = asButtonToken(vitalButtonBase.Secondary, {
   },
 });
 
-const PrimarySelected = asButtonToken(vitalButtonBase.PrimarySelected, {
+const Tertiary = asButtonToken(vitalButtonBase.Tertiary, {
   Behavior: {
-    Wrapper: addProps({ 'data-shadowed-by': 'vital-demo:PrimarySelectedButton' }),
-  },
-});
-
-const SecondarySelected = asButtonToken(vitalButtonBase.SecondarySelected, {
-  Behavior: {
-    Wrapper: addProps({ 'data-shadowed-by': 'vital-demo:SecondarySelectedButton' }),
+    Wrapper: addProps({ 'data-shadowed-by': 'vital-demo:TertiaryButton' }),
   },
 });
 
@@ -51,6 +45,5 @@ export default {
   Default,
   Primary,
   Secondary,
-  PrimarySelected,
-  SecondarySelected,
+  Tertiary,
 };
