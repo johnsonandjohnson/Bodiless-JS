@@ -11,6 +11,8 @@
     "build": "npm run ks:build",
     "clean": "rm -rf ./lib",
     "ks:build": "knapsack build",
+    "ks:build-tokens": "knapsack build:tokens",
+    "prepare": "node ../../scripts/set-missing-symlinks.js @bodiless",
     "start": "knapsack start",
     "serve": "NODE_ENV=production knapsack serve",
     "test": "knapsack test"
@@ -29,7 +31,7 @@
     "@bodiless/vital-layout": "^1.0.0-rc.42",
     "@bodiless/vital-link": "^1.0.0-rc.42",
     "@bodiless/vital-templates": "^1.0.0-rc.42",
-    "@knapsack/app": "^4.1.4",
+    "@knapsack/app": "^4.4.0",
     "@types/react": "^18.2.0",
     "crypto-browserify": "^3.12.0",
     "css-loader": "^6.5.1",

@@ -1,0 +1,37 @@
+{
+  "id": "vital-2.0-typography",
+  "title": "Vital 2.0 Typography",
+  "description": "A list of all White Label default typography tokens. Note that the Design does not account for H1-H3 and the correct refined Vital 2.0 heading styles start at H4.",
+  "statuses": {},
+  "templates": [
+    {
+      "id": "bodiless-DWA30IXBoC",
+      "title": "Examples",
+      "path": "@bodiless/vital-elements",
+      "alias": "knapsackVitalTypographySpec",
+      "templateLanguageId": "bodiless",
+      "spec": {
+        "isInferred": true
+      },
+      "demoIds": ["1BsFIzVo30", "07HJPaXqRQ"],
+      "blockIds": []
+    }
+  ],
+  "tabs": [
+    {
+      "type": "subPage",
+      "id": "overview"
+    },
+    {
+      "type": "template",
+      "id": "bodiless-DWA30IXBoC"
+    }
+  ],
+  "subPages": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "blockIds": ["PoOIw5aqQw"]
+    }
+  ]
+}

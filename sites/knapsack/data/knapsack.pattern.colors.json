@@ -1,0 +1,20 @@
+{
+  "id": "colors",
+  "title": "Colors",
+  "description": "",
+  "statuses": {},
+  "templates": [],
+  "tabs": [
+    {
+      "type": "subPage",
+      "id": "overview"
+    }
+  ],
+  "subPages": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "blockIds": ["zJHnx-3BWr", "gdspW656kz"]
+    }
+  ]
+}
