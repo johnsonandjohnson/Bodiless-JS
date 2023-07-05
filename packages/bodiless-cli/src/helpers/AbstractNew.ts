@@ -226,9 +226,9 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     const conf4 = {
       ...commonOptions,
       files: [
-        `${cwd}/**/*.js`,
-        `${cwd}/**/*.sh`,
-        `${cwd}/**/*.yaml`,
+        `${cwd}/edit/ecosystem.config.js`,
+        `${cwd}/postinstall.sh`,
+        `${cwd}/edit/.platform.app.yaml`,
       ].filter(f => fs.existsSync(f)),
       from: 'test-site',
       to: newName,
