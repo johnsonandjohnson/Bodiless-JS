@@ -19,7 +19,7 @@ import {
   replaceWith,
   H3,
 } from '@bodiless/fclasses';
-import { dividerDivider,DividerClean } from '@bodiless/vital-divider';
+import { vitalDividers ,DividerClean } from '@bodiless/vital-divider';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { vitalTypography } from '@bodiless/vital-elements';
 
@@ -28,7 +28,11 @@ const C = {
 };
 
 const DefaultDivider = as(
-  dividerDivider.Default,
+  vitalDividers.Default,
+)(DividerClean);
+
+const PrimaryDivider = as(
+  vitalDividers.Primary
 )(DividerClean);
 
 /* @todo
@@ -39,12 +43,13 @@ const Examples = (props: any) => (
   <>
     <C.H3>Plain Divider</C.H3>
     <DefaultDivider />
-    <hr className="my-4" />
+    <C.H3>Primary Divider</C.H3>
+    <PrimaryDivider />
   </>
 );
 
 export const Divider = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
-  Meta: flowHoc.meta.term('Token')('Images'),
+  Meta: flowHoc.meta.term('Token')('Dividers'),
   Content: {
     Title: replaceWith(() => <>Divider</>),
     Examples: replaceWith(Examples),

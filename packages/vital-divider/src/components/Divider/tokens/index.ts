@@ -1,3 +1,3 @@
-import tokens from './dividerDivider';
+import vitalDividers from './vitalDivider';
 
-export default tokens;
+export default vitalDividers;

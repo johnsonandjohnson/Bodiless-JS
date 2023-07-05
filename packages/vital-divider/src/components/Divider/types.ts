@@ -25,11 +25,12 @@ export type DividerToken = TokenSpec<DividerComponents, DefaultDomains>;
  * @category Token Collection
  * @see [[DividerClean]]
  */
-export interface DividerDivider {
+export interface VitalDividers {
   /**
    * Default styling and behavior.
    */
   Default: DividerToken;
+  Primary: DividerToken
 
   // Document other tokens here.
 };
