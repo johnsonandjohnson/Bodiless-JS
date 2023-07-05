@@ -77,6 +77,13 @@ export default asTokenGroup(ColorMeta)({
   TextLight2: 'text-neutral-100',
   TextLight3: 'text-neutral-300',
 
+  // Interactive Color Tokens
+  InteractiveDarkDefault: 'primary-500',
+  InteractiveDarkHover: 'hoverprimary-600',
+  InteractiveDarkFocus: 'focus:primary-600',
+  InteractiveDarkPressed: 'activeprimary-800',
+  InteractiveDarkDisabled: 'neutral-600',
+
   // Interactive Color Tokens for text
   InteractiveDarkTextDefault: 'text-primary-500',
   InteractiveDarkTextHover: 'hover:text-primary-600',
