@@ -384,6 +384,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
         data.scripts.fix = 'eslint --cache --ext .js,.jsx,.ts,.tsx sites -- ';
       }
       data.scripts.start = `npm run start --workspace=${siteName}`;
+      data.scripts.dev = `cross-env NODE_ENV=development npx -y turbo dev --filter=./packages/* --filter=@sites/${siteName}`;
       data.scripts.serve = `npm run serve --workspace=${siteName}`;
       data.scripts.docs = `npm run build:docs --workspace=${siteName} && docsify serve ./${sitesDir}/${name}/doc`;
     } else if (type === 'site') {
