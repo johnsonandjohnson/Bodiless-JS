@@ -78,7 +78,7 @@ const Primary = asDividerToken(Default, {
  * Tokens for DividerClean
  *
  * @category Token Collection
- * @see [[DividerDivider]]
+ * @see [[VitalDividers]]
  * @see [[DividerClean]]
  */
 const vitalDividers: VitalDividers = {
