@@ -1,1 +1,1 @@
-export { default as dividerDividerBase } from './components/Divider/tokens/dividerDivider';
+export { default as dividerDividerBase } from './components/Divider/tokens/vitalDivider';

@@ -18,4 +18,4 @@ const DividerClean: ComponentType<DividerProps> = withoutHydration()(
 export {
   DividerClean,
 };
-export { default as dividerDivider } from './tokens';
+export { default as vitalDividers } from './tokens';

@@ -1,5 +1,8 @@
 import { asDividerToken } from '../DividerClean';
-import type { DividerDivider } from '../types';
+import type { VitalDividers } from '../types';
+import { vitalColor } from '@bodiless/vital-elements';
+import { as } from '@bodiless/fclasses';
+
 
 const Default = asDividerToken({
   Core: {
@@ -62,6 +65,12 @@ const Default = asDividerToken({
   // },
 });
 
+const Primary = asDividerToken(Default, {
+  Theme: {
+    Divider: as(vitalColor.BorderPrimaryInteractive)
+  }
+});
+
 // Add additional variant tokens or variators here.
 // ...
 
@@ -72,9 +81,9 @@ const Default = asDividerToken({
  * @see [[DividerDivider]]
  * @see [[DividerClean]]
  */
-const dividerDivider: DividerDivider = {
+const vitalDividers: VitalDividers = {
   Default,
-  // ...
+  Primary
 };
 
-export default dividerDivider;
+export default vitalDividers;
