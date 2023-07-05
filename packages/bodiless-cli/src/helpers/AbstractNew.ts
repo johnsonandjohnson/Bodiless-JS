@@ -402,6 +402,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
       data.scripts.dev = `cross-env NODE_ENV=development npx -y turbo dev --filter=./packages/* --filter=${siteName}`;
       data.scripts.serve = `npm run serve --workspace=${siteName}`;
       data.scripts.docs = `npm run build:docs --workspace=${siteName} && docsify serve ./${sitesDir}/${name}/doc`;
+      data.husky.hooks['pre-push'] = 'npm run sync:check && npm run lint && npm run check';
     } else if (type === 'site') {
       data.name = siteName;
       // Find the old dependency on the template package (if any) and delete it.
