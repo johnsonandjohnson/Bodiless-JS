@@ -1,0 +1,20 @@
+{
+  "id": "border-radius",
+  "title": "Border Radius",
+  "description": "A list of all White Label default border-radius styles for cards, sections, images, and other elements.",
+  "statuses": {},
+  "templates": [],
+  "tabs": [
+    {
+      "type": "subPage",
+      "id": "overview"
+    }
+  ],
+  "subPages": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "blockIds": ["VHpTEsTfb_", "POi6al8Wi4"]
+    }
+  ]
+}
