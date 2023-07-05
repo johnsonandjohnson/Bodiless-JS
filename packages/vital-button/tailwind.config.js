@@ -31,6 +31,9 @@ const twConfig = {
         current: 'currentColor',
         transparent: 'transparent',
       },
+      dropShadow: {
+        button: '0 0 4px #68a7f8',
+      },
     },
   },
   plugins: [
