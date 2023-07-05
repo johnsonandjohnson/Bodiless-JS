@@ -222,7 +222,22 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
       from: new RegExp(jsTemplateName, 'g'),
       to: newName,
     };
-    return Promise.all([replaceInFile(conf2), replaceInFile(conf3)]);
+    // Replace default site name from scripts
+    const conf4 = {
+      ...commonOptions,
+      files: [
+        `${cwd}/**/*.js`,
+        `${cwd}/**/*.sh`,
+        `${cwd}/**/*.yaml`,
+      ].filter(f => fs.existsSync(f)),
+      from: 'test-site',
+      to: newName,
+    };
+    return Promise.all([
+      replaceInFile(conf2),
+      replaceInFile(conf3),
+      replaceInFile(conf4),
+    ]);
   }
 
   async cloneSourceRepo(): Promise<string> {
@@ -384,7 +399,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
         data.scripts.fix = 'eslint --cache --ext .js,.jsx,.ts,.tsx sites -- ';
       }
       data.scripts.start = `npm run start --workspace=${siteName}`;
-      data.scripts.dev = `cross-env NODE_ENV=development npx -y turbo dev --filter=./packages/* --filter=@sites/${siteName}`;
+      data.scripts.dev = `cross-env NODE_ENV=development npx -y turbo dev --filter=./packages/* --filter=${siteName}`;
       data.scripts.serve = `npm run serve --workspace=${siteName}`;
       data.scripts.docs = `npm run build:docs --workspace=${siteName} && docsify serve ./${sitesDir}/${name}/doc`;
     } else if (type === 'site') {
@@ -468,10 +483,11 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
       path.join(dest, 'Dockerfile'),
       path.join(dest, 'UPGRADE.md'),
       path.join(dest, 'CONTRIBUTING.md'),
+      path.join(dest, 'CHANGELOG.md'),
       // remove the starter eslintrcs.  They exist only to disable
       // rules which flag the underscores in the __starter__ template.
-      path.join(dest, packagesDir, name, 'eslintrc.js'),
-      path.join(dest, sitesDir, name, 'eslintrc.js'),
+      path.join(dest, packagesDir, name, '.eslintrc.js'),
+      path.join(dest, sitesDir, name, '.eslintrc.js'),
     ];
     return Promise.all(files.map(f => fs.remove(f)));
   }
