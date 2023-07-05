@@ -30,7 +30,7 @@ import {
   as,
   flowHoc,
 } from '@bodiless/fclasses';
-import { vitalButtons } from '@bodiless/vital-button';
+import { vitalButton } from '@bodiless/vital-button';
 import { vitalLogo } from '../../Logo';
 import { asHeaderToken } from '../HeaderClean';
 import type { HeaderToken } from '../HeaderClean';
@@ -49,7 +49,7 @@ const Default = asHeaderToken({
       // components into the menu? Maybe, move the components to another package...
     ),
     // UtilityMenu: vitalMenu.Utility,
-    WhereToBuy: vitalButtons.WhereToBuy,
+    WhereToBuy: vitalButton.WhereToBuy,
   },
   Layout: {
     Container: 'flex justify-between items-center',

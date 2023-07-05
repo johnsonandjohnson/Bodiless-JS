@@ -15,7 +15,7 @@ import type { VitalDesignSpec } from '@bodiless/vital-elements';
 
 import ButtonClean, { buttonComponentsStart } from './ButtonClean';
 import type { ButtonComponent } from './ButtonClean';
-import vitalButtons from './tokens';
+import vitalButton from './tokens';
 
 // @TODO: Move to a shared Knapsack package where `VitalDesignSpec` will be.
 // Currently `@bodiless/knapsack-renderer` can't be used since it's build target is CommonJs
@@ -30,8 +30,8 @@ export const toKnapsackSlots = (obj: Record<string, any>, baseComponentName: str
 );
 
 export const knapsackButtonSpec: VitalDesignSpec<ButtonComponent> = {
-  tokens: vitalButtons,
-  tokensExportName: 'vitalButtons',
+  tokens: vitalButton,
+  tokensExportName: 'vitalButton',
   component: ButtonClean,
   componentExportName: 'ButtonClean',
   slots: toKnapsackSlots(

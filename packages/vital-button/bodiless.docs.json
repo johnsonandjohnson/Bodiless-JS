@@ -1,7 +1,7 @@
 {
   "VitalDesignSystem": {
     "Components": {
-      "VitalButtons": {
+      "VitalButton": {
         "README.md": "./doc/README.md",
         "assets": {
           "AddVitalButtonComponent.jpg": "./doc/assets/AddVitalButtonComponent.jpg",

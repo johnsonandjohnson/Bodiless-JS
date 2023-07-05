@@ -20,7 +20,7 @@ import {
   varyDesigns,
   addProps
 } from '@bodiless/fclasses';
-import { ButtonClean, vitalButtons } from '@bodiless/vital-button';
+import { ButtonClean, vitalButton } from '@bodiless/vital-button';
 import { asFluidToken, vitalTypography } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { LinkClean, vitalLink } from '@bodiless/vital-link';
@@ -32,24 +32,24 @@ const label = {
 };
 
 const Default = on(ButtonClean)(
-  vitalButtons.Default,
+  vitalButton.Default,
   withDefaultContent(label),
 );
 
 // Generate the Button Varations
 const ButtonStyleVariations = varyDesigns(
   {
-    Primary: vitalButtons.Primary,
-    Secondary: vitalButtons.Secondary,
-    PrimarySelected: vitalButtons.PrimarySelected,
-    SecondarySelected: vitalButtons.SecondarySelected,
-    Tertiary: vitalButtons.TertiarySelected,
-    TertiarySelected: vitalButtons.TertiarySelected,
+    Primary: vitalButton.Primary,
+    Secondary: vitalButton.Secondary,
+    PrimarySelected: vitalButton.PrimarySelected,
+    SecondarySelected: vitalButton.SecondarySelected,
+    Tertiary: vitalButton.TertiarySelected,
+    TertiarySelected: vitalButton.TertiarySelected,
   },
   {
     '': '', // vary on itself and produce default button variation
-    AsDisabled: vitalButtons.WithDisabled,
-    // WithArrow: vitalButtons.WithArrow,
+    AsDisabled: vitalButton.WithDisabled,
+    // WithArrow: vitalButton.WithArrow,
   },
   {
     '': Default

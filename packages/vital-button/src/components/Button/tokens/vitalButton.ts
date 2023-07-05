@@ -66,7 +66,7 @@ const Default = asButtonToken({
   A11y: {
     Wrapper: addProps({ role: 'button' }),
   },
-  Meta: flowHoc.meta.term('Type')('Buttons'),
+  Meta: flowHoc.meta.term('Type')('Button'),
 });
 
 // NOTE: Deprecated temporarily.
@@ -160,7 +160,7 @@ const WithDisabled = asButtonToken({
   Meta: flowHoc.meta.term('Style')('Disabled'),
 });
 
-interface VitalButtons extends TokenCollection<ButtonComponent, {}> {
+interface VitalButton extends TokenCollection<ButtonComponent, {}> {
   Default: ButtonToken,
   Primary: ButtonToken,
   PrimarySelected: ButtonToken,
@@ -174,7 +174,7 @@ interface VitalButtons extends TokenCollection<ButtonComponent, {}> {
   WhereToBuyWithoutIcon: ButtonToken,
 }
 
-const vitalButtons: VitalButtons = {
+const vitalButton: VitalButton = {
   Default,
   Primary,
   PrimarySelected,
@@ -188,4 +188,4 @@ const vitalButtons: VitalButtons = {
   WhereToBuyWithoutIcon,
 };
 
-export default vitalButtons;
+export default vitalButton;

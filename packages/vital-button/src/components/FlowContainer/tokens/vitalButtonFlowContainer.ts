@@ -15,20 +15,20 @@
 import { asFluidToken } from '@bodiless/vital-elements';
 import { on, varyDesigns, flowHoc } from '@bodiless/fclasses';
 import {
-  asButtonToken, ButtonClean, vitalButtons,
-} from '../../Buttons';
+  asButtonToken, ButtonClean, vitalButton,
+} from '../../Button';
 
 const BaseVariation = {
-  Button: on(ButtonClean)(vitalButtons.Default),
+  Button: on(ButtonClean)(vitalButton.Default),
 };
 
 const ColorVariations = {
-  Primary: vitalButtons.Primary,
-  Secondary: vitalButtons.Secondary,
+  Primary: vitalButton.Primary,
+  Secondary: vitalButton.Secondary,
 };
 
 const ButtonStyles = {
-  WithArrow: vitalButtons.WithArrow,
+  WithArrow: vitalButton.WithArrow,
   WithOutArrow: asButtonToken({
     Meta: flowHoc.meta.term('Style')('Without Hover Arrow'),
   }),

@@ -272,7 +272,7 @@ site requirements and/or you can add additional components.
 ### **Resources**
 
 - [Accordion](/Components/SingleAccordion)
-- [Buttons](/VitalDesignSystem/Components/VitalButtons/)
+- [Button](/VitalDesignSystem/Components/VitalButton/)
 - [List/CompoundList](/VitalDesignSystem/Components/VitalList)
 - [Link](/VitalDesignSystem/Components/VitalLink)
 - [Table](/VitalDesignSystem/Components/VitalTable)

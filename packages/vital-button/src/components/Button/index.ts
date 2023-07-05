@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export { default as vitalButtons } from './tokens';
+export { default as vitalButton } from './tokens';
 
 export * from './index.bl-edit';
 export { default as ButtonClean, asButtonToken } from './ButtonClean';

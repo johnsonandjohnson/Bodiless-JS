@@ -12,5 +12,5 @@
  * limitations under the License.
  */
 
-export * from './components/Buttons';
+export * from './components/Button';
 export * from './components/FlowContainer';

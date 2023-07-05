@@ -67,10 +67,10 @@ Mode](/ContentEditorUserGuide/#edit-mode):
 
 ```jsx
 import { withNodeKey } from '@bodiless/data';
-import { ButtonClean, vitalButtons } from '@bodiless/vital-button';
+import { ButtonClean, vitalButton } from '@bodiless/vital-button';
 
 const DefaultButton = as(
-  vitalButtons.Default,
+  vitalButton.Default,
   withNodeKey('defaultbutton'),
 )(ButtonClean);
 ```
@@ -81,4 +81,4 @@ const DefaultButton = as(
 
 Define a Shadowing token collection as defined in [Shadowing Tokens](../../Guides/ShadowingTokens).
 
-File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-button/Buttons.ts`
+File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-button/Button.ts`

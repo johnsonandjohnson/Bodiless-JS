@@ -130,6 +130,58 @@ exports[`Buttons Matches snapshot for SecondarySelected 1`] = `
 </a>
 `;
 
+exports[`Buttons Matches snapshot for Tertiary 1`] = `
+<a
+  className="text-vital-primary-interactive hover:opacity-70 active:text-vital-primary-interactive-active leading-tight uppercase focus:outline-none focus:ring-0 rounded-lg transition duration-400 ease-in-out px-6 py-4 flex group justify-center"
+  href="#"
+  role="button"
+>
+  <span
+    data-no-hydrate={true}
+    id="123b58b4a9e4407d42b2606d912b6deb"
+    style={
+      Object {
+        "display": "contents",
+      }
+    }
+  >
+    <span
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "Link",
+        }
+      }
+    />
+  </span>
+</a>
+`;
+
+exports[`Buttons Matches snapshot for TertiarySelected 1`] = `
+<a
+  className="text-vital-secondary-button-selected leading-tight uppercase focus:outline-none focus:ring-0 rounded-lg transition duration-400 ease-in-out px-6 py-4 flex group justify-center"
+  href="#"
+  role="button"
+>
+  <span
+    data-no-hydrate={true}
+    id="123b58b4a9e4407d42b2606d912b6deb"
+    style={
+      Object {
+        "display": "contents",
+      }
+    }
+  >
+    <span
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "Link",
+        }
+      }
+    />
+  </span>
+</a>
+`;
+
 exports[`Buttons Matches snapshot for WhereToBuy 1`] = `
 <a
   className="rounded text-m-base lg:text-base uppercase font-bold text-vital-primary-footer-copy bg-vital-primary-interactive mx-auto p-3 w-full flex justify-center items-center max-w-64 h-12 lg:w-full"
