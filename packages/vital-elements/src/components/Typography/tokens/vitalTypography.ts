@@ -206,19 +206,12 @@ const Gradient = asElementToken({
   Meta: TypographyMeta,
 });
 
-export const TypographydMeta = {
-  categories: {
-    Type: ['Element'],
-    Group: ['Typography'],
-  },
-};
-
 /**
  * Vital 2.0 Colors coming from Figma Tokens. Tokens above will be deprecated.
  * @TODO: What should be the name for these token groups with vital 2.0 semantic tokens?
  * Eventually it will just replace the vitalTypography.
  */
-export const vital2Typography = asTokenGroup(TypographydMeta)({
+export const vital2Typography = asTokenGroup(TypographyMeta)({
   H1: 'text-4xl leading-5 font-normal font-2',
   H2: 'text-3xl leading-5 font-normal font-2',
   H3: 'text-2xl leading-5 font-normal font-2',

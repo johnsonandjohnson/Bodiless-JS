@@ -98,7 +98,7 @@ export const Buttons = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default
   Meta: flowHoc.meta.term('Token')('Buttons'),
   Content: {
     Title: replaceWith(() => <>Buttons</>),
-    Description: replaceWith(() => <>The following are examples of Vital Links & Buttons.</>),
+    Description: replaceWith(() => <>The following are examples of Vital Buttons.</>),
     Examples: on(StyleGuideExamplesClean)(
       StyleGuideColumns,
       DemoFlowContainer,

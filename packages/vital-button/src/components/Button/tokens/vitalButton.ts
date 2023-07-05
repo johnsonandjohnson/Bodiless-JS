@@ -36,7 +36,11 @@ const Default = asButtonToken({
   Theme: {
     // NOTE: Deprecated temporarily.
     // _: as(vitalLink.WithDownloadStyles, vitalLink.WithExternalStyles),
-    Wrapper: vitalButtonTokens.BorderRadiusButton,
+    Wrapper: as(
+      vitalButtonTokens.BorderRadiusButton,
+      vitalButtonTokens.ShadowButtonFocus,
+    ),
+    Body: vitalButtonTokens.TextButtonDefault,
   },
   Spacing: {
     Wrapper: vitalButtonTokens.BorderPaddingButton,
@@ -82,7 +86,6 @@ const Primary = asButtonToken(Default, {
       vitalButtonTokens.ColorButtonPrimaryBackgroundDefault,
       vitalButtonTokens.ColorButtonPrimaryBackgroundHover,
       vitalButtonTokens.ColorButtonPrimaryBackgroundFocus,
-      vitalButtonTokens.ShadowButtonFocus,
       vitalButtonTokens.ColorButtonPrimaryBackgroundPressed,
     ),
     Body: vitalButtonTokens.ColorButtonPrimaryTextDefault,
@@ -96,7 +99,6 @@ const Secondary = asButtonToken(Default, {
       vitalButtonTokens.BorderButtonSecondaryDefault,
       vitalButtonTokens.BorderButtonSecondaryHover,
       vitalButtonTokens.BorderButtonSecondaryFocus,
-      vitalButtonTokens.ShadowButtonFocus,
       vitalButtonTokens.BorderButtonSecondaryPressed,
       vitalButtonTokens.ColorButtonSecondaryBackgroundHover,
       vitalButtonTokens.ColorButtonSecondaryBackgroundFocus,
@@ -119,7 +121,6 @@ const Tertiary = asButtonToken(Default, {
       vitalButtonTokens.ColorButtonTertiaryTextDefault,
       vitalButtonTokens.ColorButtonTertiaryTextHover,
       vitalButtonTokens.ColorButtonTertiaryTextFocus,
-      vitalButtonTokens.ShadowButtonFocus,
       vitalButtonTokens.ColorButtonTertiaryTextPressed,
     ),
   },

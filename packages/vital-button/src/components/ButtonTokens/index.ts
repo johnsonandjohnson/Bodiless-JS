@@ -15,11 +15,19 @@ export const ButtonMeta = {
  * the collection name or discuss the options we have for changing the token names (in JSON file?).
  */
 const vitalButtonTokens = asTokenGroup(ButtonMeta)({
+  // All button styles
+  BorderRadiusButton: 'rounded-lg',
+  BorderPaddingButton: 'px-x-lg py-md',
+  // TODO Needs work shouldn't have defined
+  ShadowButtonFocus: 'focus:drop-shadow-button',
+  // TODO Throws TypeError: Cannot read properties of undefined (reading 'BodyBold')
+  // TextButtonDefault: vital2Typography.BodyBold,
+  TextButtonDefault: 'text-base leading-6 font-bold font-2',
   // Primary
   ColorButtonPrimaryBackgroundDefault: vitalColor.InteractiveDarkBackgroundDefault,
-  ColorButtonPrimaryBackgroundHover: vitalColor.InteractiveDarkBackgroundHover,
-  ColorButtonPrimaryBackgroundFocus: vitalColor.InteractiveDarkBackgroundFocus,
-  ColorButtonPrimaryBackgroundPressed: vitalColor.InteractiveDarkBackgroundPressed,
+  ColorButtonPrimaryBackgroundHover: vitalColor.InteractiveDarkBackgroundHover, // look wrong
+  ColorButtonPrimaryBackgroundFocus: vitalColor.InteractiveDarkBackgroundFocus, // look wrong
+  ColorButtonPrimaryBackgroundPressed: vitalColor.InteractiveDarkBackgroundPressed, // look wrong
   ColorButtonPrimaryBackgroundDisabled: vitalColor.InteractiveDarkBackgroundDisabled,
   ColorButtonPrimaryTextDefault: vitalColor.TextLight1,
   // Secondary
@@ -43,12 +51,6 @@ const vitalButtonTokens = asTokenGroup(ButtonMeta)({
   ColorButtonTertiaryTextPressed: vitalColor.InteractiveDarkTextPressed,
   ColorButtonTertiaryTextDisabled: vitalColor.InteractiveDarkTextDisabled,
   ColorButtonTertiaryBackgroundFocus: vitalColor.InteractiveDarkBackgroundFocus,
-  BorderRadiusButton: 'rounded-lg',
-  BorderPaddingButton: 'px-x-lg py-md',
-  // TODO Needs work shouldn't have defined
-  ShadowButtonFocus: 'focus:drop-shadow-button',
-  // TextButtonDefault: vital2Typography.BodyBold,
-  TextButtonDefault: 'text-base leading-6 font-bold font-2',
 });
 
 export default vitalButtonTokens;
