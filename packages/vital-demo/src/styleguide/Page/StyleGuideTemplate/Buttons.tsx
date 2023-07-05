@@ -35,18 +35,26 @@ const Default = on(ButtonClean)(
   withDefaultContent(label),
 );
 
-const ButtonStyleVariations = varyDesigns(
+const DisabledButtonStyleVariations = varyDesigns(
   {
-    Primary: vitalButton.Primary,
     PrimaryDisabled: vitalButton.PrimaryDisabled,
-    Secondary: vitalButton.Secondary,
     SecondaryDisabled: vitalButton.SecondaryDisabled,
-    Tertiary: vitalButton.Tertiary,
     TertiaryDisabled: vitalButton.TertiaryDisabled,
   },
   {
+    '': Default
+  },
+);
+
+const ButtonStyleVariations = varyDesigns(
+  {
+    Primary: vitalButton.Primary,
+    Secondary: vitalButton.Secondary,
+    Tertiary: vitalButton.Tertiary,
+  },
+  {
     '': '', // vary on itself and produce default button variation
-    // WithArrow: vitalButton.WithArrow,
+    WithArrow: vitalButton.WithArrow,
   },
   {
     '': Default
@@ -77,6 +85,7 @@ const DemoFlowContainer = asFluidToken({
     // ...LinkVariations,
     // Default,
     ...ButtonStyleVariations,
+    ...DisabledButtonStyleVariations,
   },
 });
 

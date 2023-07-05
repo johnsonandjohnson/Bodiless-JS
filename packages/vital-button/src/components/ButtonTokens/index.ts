@@ -25,9 +25,9 @@ const vitalButtonTokens = asTokenGroup(ButtonMeta)({
   TextButtonDefault: 'text-base leading-6 font-bold font-2',
   // Primary
   ColorButtonPrimaryBackgroundDefault: vitalColor.InteractiveDarkBackgroundDefault,
-  ColorButtonPrimaryBackgroundHover: vitalColor.InteractiveDarkBackgroundHover, // look wrong
-  ColorButtonPrimaryBackgroundFocus: vitalColor.InteractiveDarkBackgroundFocus, // look wrong
-  ColorButtonPrimaryBackgroundPressed: vitalColor.InteractiveDarkBackgroundPressed, // look wrong
+  ColorButtonPrimaryBackgroundHover: vitalColor.InteractiveDarkBackgroundHover,
+  ColorButtonPrimaryBackgroundFocus: vitalColor.InteractiveDarkBackgroundFocus,
+  ColorButtonPrimaryBackgroundPressed: vitalColor.InteractiveDarkBackgroundPressed,
   ColorButtonPrimaryBackgroundDisabled: vitalColor.InteractiveDarkBackgroundDisabled,
   ColorButtonPrimaryTextDefault: vitalColor.TextLight1,
   // Secondary

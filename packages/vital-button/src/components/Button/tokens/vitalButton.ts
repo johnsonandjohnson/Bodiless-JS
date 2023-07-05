@@ -20,6 +20,8 @@ import {
   addProps,
   flowHoc,
   TokenCollection,
+  replaceWith,
+  Span,
 } from '@bodiless/fclasses';
 import { withPlaceholder } from '@bodiless/components';
 import { vitalEditorPlain, EditorPlainClean } from '@bodiless/vital-editors';
@@ -61,24 +63,23 @@ const Default = asButtonToken({
   Meta: flowHoc.meta.term('Type')('Button'),
 });
 
-// NOTE: Deprecated temporarily.
-// const WithArrow = asButtonToken({
-//   Layout: {
-//     Wrapper: 'flex-row-reverse',
-//     Icon: 'inline-block',
-//   },
-//   Components: {
-//     Icon: replaceWith(Span),
-//   },
-//   Theme: {
-//     Icon: 'w-6 h-2 vital-arrow group-hover:text-current text-transparent',
-//   },
-//   Spacing: {
-//     Icon: 'pr-1',
-//     Wrapper: 'pl-12 pr-6 py-3.5 group',
-//   },
-//   Meta: flowHoc.meta.term('Style')('With Hover Arrow'),
-// });
+const WithArrow = asButtonToken({
+  Layout: {
+    Wrapper: 'flex-row-reverse',
+    Icon: 'inline-block',
+  },
+  Components: {
+    Icon: replaceWith(Span),
+  },
+  Theme: {
+    Icon: 'w-6 h-6 vital-arrow group-hover:text-current text-transparent',
+  },
+  Spacing: {
+    Icon: 'pr-1',
+    Wrapper: 'pl-12 pr-6 py-3.5 group',
+  },
+  Meta: flowHoc.meta.term('Style')('With Hover Arrow'),
+});
 
 const Primary = asButtonToken(Default, {
   Theme: {
@@ -175,7 +176,7 @@ interface VitalButton extends TokenCollection<ButtonComponent, {}> {
   PrimaryDisabled: ButtonToken,
   SecondaryDisabled: ButtonToken,
   TertiaryDisabled: ButtonToken,
-  // WithArrow: ButtonToken,
+  WithArrow: ButtonToken,
   WithDisabled: ButtonToken,
   WhereToBuy: ButtonToken,
   WhereToBuyWithoutIcon: ButtonToken,
@@ -189,7 +190,7 @@ const vitalButton: VitalButton = {
   PrimaryDisabled,
   SecondaryDisabled,
   TertiaryDisabled,
-  // WithArrow,
+  WithArrow,
   WithDisabled,
   WhereToBuy,
   WhereToBuyWithoutIcon,

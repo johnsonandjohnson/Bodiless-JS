@@ -1,12 +1,12 @@
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg xmlns="http://www.w3.org/2000/svg">
-<metadata>Copyright (C) 2022 by original authors @ fontello.com</metadata>
+<metadata>Copyright (C) 2023 by original authors @ fontello.com</metadata>
 <defs>
 <font id="buttonicons" horiz-adv-x="1000" >
 <font-face font-family="buttonicons" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
 <missing-glyph horiz-adv-x="1000" />
-<glyph glyph-name="arrow-next-idle_2x" unicode="&#xe800;" d="M892 774c0-27 68-113 149-194l151-149-589-13c-500-11-589-19-589-54 0-36 91-44 602-54l603-14-165-162c-159-160-189-211-135-244 30-18 416 341 465 430 24 44-8 84-197 276-227 227-295 268-295 178z" horiz-adv-x="1405" />
+<glyph glyph-name="arrow-right" unicode="&#xe800;" d="M301-57c-13 13-12 33 0 45l371 363-371 361c-12 12-13 32 0 45 12 13 32 13 45 1l394-384c7-6 10-15 10-23 0-9-3-17-10-23l-394-386c-13-12-33-12-45 1z" horiz-adv-x="1000" />
 </font>
 </defs>
 </svg>

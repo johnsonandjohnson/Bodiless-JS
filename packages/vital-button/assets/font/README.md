@@ -14,7 +14,7 @@ To add additional icons and update the font:
 
 | IMAGE                 | NAME                 | CODE    |
 | --------------------- | -------------------- | ------- |
-| `ARROW NEXT idle.svg` | `arrow-next-idle_2x` | `E800`  |
+| `ARROW RIGHT.svg` | `arrow-right` | `E800`  |
 
 **Note:** If you get a warning about unsupported SVGs, you can ignore it if they don't affect your
 icon. Otherwise, make sure you export them via the [Fontello

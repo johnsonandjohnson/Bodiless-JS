@@ -49,7 +49,7 @@ const ButtonStyleVariations = varyDesigns(
   {
     '': '', // vary on itself and produce default button variation
     AsDisabled: exampleButtons.WithDisabled,
-    // WithArrow: exampleButtons.WithArrow,
+    WithArrow: exampleButtons.WithArrow,
     WithBigButton: exampleButtons.WithBigButton,
   },
   {
