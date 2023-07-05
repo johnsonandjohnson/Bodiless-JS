@@ -45,8 +45,6 @@ const ButtonStyleVariations = varyDesigns(
   {
     Primary: exampleButtons.Primary,
     Secondary: exampleButtons.Secondary,
-    PrimarySelected: exampleButtons.PrimarySelected,
-    SecondarySelected: exampleButtons.SecondarySelected,
   },
   {
     '': '', // vary on itself and produce default button variation

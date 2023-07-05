@@ -176,6 +176,7 @@ interface VitalButton extends TokenCollection<ButtonComponent, {}> {
   SecondaryDisabled: ButtonToken,
   TertiaryDisabled: ButtonToken,
   // WithArrow: ButtonToken,
+  WithDisabled: ButtonToken,
   WhereToBuy: ButtonToken,
   WhereToBuyWithoutIcon: ButtonToken,
 }
@@ -189,6 +190,7 @@ const vitalButton: VitalButton = {
   SecondaryDisabled,
   TertiaryDisabled,
   // WithArrow,
+  WithDisabled,
   WhereToBuy,
   WhereToBuyWithoutIcon,
 };
