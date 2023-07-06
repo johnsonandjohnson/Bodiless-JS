@@ -1,0 +1,20 @@
+{
+  "id": "header",
+  "tabs": [
+    {
+      "id": "overview",
+      "type": "subPage"
+    }
+  ],
+  "title": "Header",
+  "statuses": {},
+  "subPages": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "blockIds": []
+    }
+  ],
+  "templates": [],
+  "description": ""
+}

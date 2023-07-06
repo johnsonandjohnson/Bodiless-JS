@@ -1,0 +1,29 @@
+{
+  "id": "content-dividers",
+  "tabs": [
+    {
+      "id": "overview",
+      "type": "subPage"
+    },
+    {
+      "id": "iNMvaveDjS",
+      "type": "subPage"
+    }
+  ],
+  "title": "Content Dividers",
+  "statuses": {},
+  "subPages": [
+    {
+      "id": "overview",
+      "title": "Guidelines",
+      "blockIds": []
+    },
+    {
+      "id": "iNMvaveDjS",
+      "title": "Figma",
+      "blockIds": []
+    }
+  ],
+  "templates": [],
+  "description": ""
+}
