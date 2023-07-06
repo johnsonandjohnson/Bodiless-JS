@@ -18,7 +18,7 @@ import { ContentNodePath, withDefaultContent } from '@bodiless/data';
 import { getImageContentFrom } from '@bodiless/gatsby-theme-bodiless';
 
 /**
-* Util function generating an HOC which adds default content from
+* Util function generating a HOC which adds default content from
 * the specified node path.
 *
 * @param nodePath

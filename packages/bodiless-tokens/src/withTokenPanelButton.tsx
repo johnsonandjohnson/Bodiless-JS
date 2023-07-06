@@ -25,7 +25,7 @@ export type TokenPanelButtonDefinition = {
 };
 
 /**
- * Creates an HOC which adds a toolbar or context menu button to a component. This will
+ * Creates a HOC which adds a toolbar or context menu button to a component. This will
  * bring up a token panel which will allow editing tokens for any component in the active
  * context trail which has beenwrapped by `withTokenPanelPane`.
  *

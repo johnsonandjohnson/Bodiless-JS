@@ -17,14 +17,14 @@ import { FlowHoc, Condition } from './types';
 import { flowHoc } from './flowHoc';
 
 /**
- * Applies a set of HOC's if a condition is true.
+ * Applies a set of HOCs if a condition is true.
  *
  * @param useCondition
- * A custom react hook which returns true if the HOC's should be applied.  Will receive
+ * A custom react hook which returns true if the HOCs should be applied.  Will receive
  * the components props as an argument.
  *
  * @returns
- * A function which accepts a list of HOC's and returns a new HOC which will be applied
+ * A function which accepts a list of HOCs and returns a new HOC which will be applied
  * to the target component only if the specified condition evaluates to true.
  *
  * @category HOC Utility

@@ -85,7 +85,7 @@ describe('withTerm', () => {
   });
 });
 describe('perserveMeta', () => {
-  it('if a hoc is wrapped in perserve meta the meta from before the hoc will be applied', () => {
+  it('if a HOC is wrapped in perserve meta the meta from before the HOC will be applied', () => {
     const Comp = withTitle('title')(React.Fragment);
     const Hoc = (Component:React.ComponentType) => () => <Component />;
     const perservedHOC = perserveMeta(Hoc as HOC);
@@ -108,7 +108,7 @@ describe('withFacet', () => {
     const hoc = withFacet('cat')('term')();
     expect(hoc(C).description).toBe('title\ncat: term\n');
   });
-  it('should apply any hoc passed in and respect meta data added before it.', () => {
+  it('should apply any HOC passed in and respect meta data added before it.', () => {
     const C = withTitle('title')(React.Fragment);
     const newHoc = <P extends object> (Component:React.ComponentType<P>) => {
       const B = (props:P) => <Component {...props} />;

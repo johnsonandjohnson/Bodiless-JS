@@ -21,8 +21,9 @@ const H2 = asElementToken({
 });
 
 /**
- * Here we export the a object that spread vitalTypographyBase and place our tokens at the bottom
- * of the object so they will override the tokens from the vital typography.
+ * Here we export the object that spread `vitalTypographyBase`, and place our
+ * tokens at the bottom of the object so they will override the tokens from
+ * the Vital typography.
  */
 export default {
   ...vitalTypographyBase,

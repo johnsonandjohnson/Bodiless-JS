@@ -28,7 +28,7 @@ describe('replaceable', () => {
     const wrapper2 = mount(<Sub />);
     expect(wrapper2.text()).toBe('replacement');
   });
-  it('should replace a component and still keep hocs', () => {
+  it('should replace a component and still keep HOCs', () => {
     type Props = {
       text?: string,
     };

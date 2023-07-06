@@ -282,7 +282,7 @@ You can use a `no-search` HOC around anything you don't want indexed.
 
 **Example:**
 
-Build an HOC component that can be used to wrap any content/components:
+Build a HOC component that can be used to wrap any content/components:
 
 ```tsx
 type Props = DesignableComponentsProps<NoSearchComponents> & HTMLProps<HTMLElement>;

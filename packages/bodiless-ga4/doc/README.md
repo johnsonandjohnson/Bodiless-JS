@@ -13,7 +13,6 @@ For more information, please see:
 
 The GA4 package provides some utilities to support pushing `DataLayer` objects to the head:
 
-- `withDataLayerItem`: An HOC that will read/store its value in `nodeKey` and render on the GTM
-  form.
-- `withDefaultDataLayer`: An HOC that adds the default data layer to a Component.
-- `withDataLayerScript`: An HOC that renders the data layer script.
+- `withDataLayerItem`: A HOC that will read/store its value in `nodeKey` and render on the GTM form.
+- `withDefaultDataLayer`: A HOC that adds the default data layer to a Component.
+- `withDataLayerScript`: A HOC that renders the data layer script.

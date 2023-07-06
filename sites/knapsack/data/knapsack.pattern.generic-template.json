@@ -6,7 +6,7 @@
   "templates": [
     {
       "id": "bodiless-6GKNPvcDI9",
-      "title": "Template",
+      "title": "Code",
       "path": "@bodiless/vital-templates",
       "alias": "knapsackGenericTemplateSpec",
       "templateLanguageId": "bodiless",

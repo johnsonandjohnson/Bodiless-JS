@@ -318,8 +318,8 @@ content$component.json
 
 The examples above can be refactored to make them more composable.
 
-Instead of defining our `ComponentWithData` as a Component, we can abstract that functionality
-to an HOC (a very common pattern in BodilessJS).
+Instead of defining our `ComponentWithData` as a Component, we can abstract that functionality to a
+HOC (a very common pattern in BodilessJS).
 
 ```tsx
 const asComponentWithData = BaseComponent => {

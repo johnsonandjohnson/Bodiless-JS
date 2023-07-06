@@ -20,11 +20,11 @@ import withNode from './withNode';
 
 // @TODO: Combine withNode and withNodeDataHandlers and fix types
 /**
- * Creates an HOC which reads data from the current content node and injects two
+ * Creates a HOC which reads data from the current content node and injects two
  * props to the target component:
  * - `componentData`: The `data` property from the node.
  * - `setComponentData`: A function which calls the `setData` method
- *    on the node,
+ *    on the node.
  *
  * @param defaultData
  * A default value for `componentData` when the node's `data` property is empty.

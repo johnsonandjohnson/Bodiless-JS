@@ -138,7 +138,7 @@ const withPlaceholder = <P extends object> (
   };
 
 /**
- * asEditable takes a nodeKey and a placeholder, and returns an HOC which injects
+ * asEditable takes a nodeKey and a placeholder, and returns a HOC which injects
  * an editable span as a child of the wrapped component.  The original children
  * of the wrapped component will become children of the editable span.  In addition,
  * `nodeKey`, `nodeCollection` and `placeholder` props passed to the enhanced

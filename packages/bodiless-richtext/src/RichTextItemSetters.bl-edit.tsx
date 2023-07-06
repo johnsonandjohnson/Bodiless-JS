@@ -33,7 +33,7 @@ type CTWM = ComponentOrTag<any>;
 
 const withOutMeta = <P extends Object> (Component:CTWM) => (props:P) => (<Component {...props} />);
 /**
- * withMeta creates an HOC that will add meta data to a React Component
+ * withMeta creates a HOC that will add meta data to a React Component
  * @param meta the data to be side loaded in to the component
  */
 const withMeta = (meta:Object) => (Component:CTWM) => {

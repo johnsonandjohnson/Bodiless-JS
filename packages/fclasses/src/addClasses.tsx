@@ -120,7 +120,7 @@ const addClassesIf = modifyClassesIf('add');
  * A string or array of classes to add.
  *
  * @returns
- * An HOC which adds the specified classes to a [[stylable]] component.
+ * A HOC which adds the specified classes to a [[stylable]] component.
  *
  * @category FClasses API
  */

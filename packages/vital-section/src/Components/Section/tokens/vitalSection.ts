@@ -10,8 +10,8 @@ import {
 import { asSectionToken } from '../SectionClean';
 
 /**
- * A Default token for the Section Component. This token registers nodes and node keys
- * and sets minimal layout styles.
+ * A `Default` token for the Section component.
+ * This token registers nodes and node keys and sets minimal layout styles.
  */
 const Default = asSectionToken({
   Layout: {
@@ -28,17 +28,17 @@ const Default = asSectionToken({
 });
 
 /**
- * A token that adds a Link to the Section Component.
+ * A token that adds a `Link` to the Section component.
  * Note that this token does not add any default link text.
  *
- * Note that the name of this token *starts with* `With...`. That means that the token is meant
- * to be layered on top of other tokens and not used by itself. The big difference here is that
- * this token *does not extend* the Default token. It is very limited in what this token can do.
+ * Note that the name of this token _starts with_ `With...`. That means that the token is meant to
+ * be layered on top of other tokens and not used by itself. The big difference here is that this
+ * token _does not extend_ the `Default` token. It is very limited in what this token can do.
  *
- * Think of it as an Adjective, something that reflects behaviour or additional functionality.
+ * Think of it as an adjective, something that reflects behavior or additional functionality.
  *
- * This is the preffered Token pattern since it encourages composition
- * and results in a better overall code structure as well as simplifying testing.
+ * This is the preferred token pattern, since it encourages composition and results in a better
+ * overall code structure, as well as simplifies testing.
  */
 const WithLink = asSectionToken({
   Components: {
@@ -53,18 +53,18 @@ const WithLink = asSectionToken({
 });
 
 /**
- * A token that adds a Title to the Section Component.
- * The Title is an `EditorPlainClean` with `vitalEditorPlain.Default` token.
+ * A token that adds a `Title` to the Section component.
+ * The `Title` is an `EditorPlainClean` component with a `vitalEditorPlain.Default` token.
  * `TitleWrapper` is the actual `H2` tag.
  *
- * Note that the name of this token *starts with* `With...`. That means that the token is meant
- * to be layered on top of other tokens and not used by itself. The big difference here is that
- * this token *does not extend* the Default token. It is very limited in what this token can do.
+ * Note that the name of this token _starts with_ `With...`. That means that the token is meant to
+ * be layered on top of other tokens and not used by itself. The big difference here is that this
+ * token _does not extend_ the `Default` token. It is very limited in what this token can do.
  *
- * Think of it as an Adjective, something that reflects behaviour or additional functionality.
+ * Think of it as an adjective, something that reflects behavior or additional functionality.
  *
- * This is the preffered Token pattern since it encourages composition
- * and results in a better overall code structure as well as simplifying testing.
+ * This is the preferred token pattern, since it encourages composition and results in a better
+ * overall code structure, as well as simplifies testing.
  */
 const WithTitle = asSectionToken({
   Components: {
@@ -80,18 +80,18 @@ const WithTitle = asSectionToken({
 });
 
 /**
- * A token that adds a Description to the Section Component.
- * The Description is an `EditorPlainClean` with `vitalEditorPlain.Default` token.
+ * A token that adds a `Description` to the Section component.
+ * The `Description` is an `EditorPlainClean` component with a `vitalEditorPlain.Default` token.
  * `DescriptionWrapper` is the `P` tag.
  *
- * Note that the name of this token *starts with* `With...`. That means that the token is meant
- * to be layered on top of other tokens and not used by itself. The big difference here is that
- * this token *does not extend* the Default token. It is very limited in what this token can do.
+ * Note that the name of this token _starts with_ `With...`. That means that the token is meant to
+ * be layered on top of other tokens and not used by itself. The big difference here is that this
+ * token _does not extend_ the `Default` token. It is very limited in what this token can do.
  *
- * Think of it as an Adjective, something that reflects behaviour or additional functionality.
+ * Think of it as an adjective, something that reflects behavior or additional functionality.
  *
- * This is the preffered Token pattern since it encourages composition
- * and results in a better overall code structure as well as simplifying testing.
+ * This is the preferred token pattern, since it encourages composition and results in a better
+ * overall code structure, as well as simplifies testing.
  */
 const WithDescription = asSectionToken({
   Components: {
@@ -107,7 +107,7 @@ const WithDescription = asSectionToken({
 });
 
 /**
- * Export all tokens as a single object that is exported from package as `vitalSection`.
+ * Export all tokens as a single object that is exported from the package as `vitalSection`.
  */
 export default {
   Default,
