@@ -30,7 +30,7 @@ jobs:
         if: ${{ github.event_name == 'schedule' || github.event.label.name == 'ready-to-test' }}
         uses: ./.github/actions/playwright
         with:
-          node-test-script: test:components-functional
+          node-test-script: test:pw-functional
           test-results-name: Deprecated tests for editing functionality
     
   smoke-vital:
