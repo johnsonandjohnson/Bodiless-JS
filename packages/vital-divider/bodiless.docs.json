@@ -1,7 +1,7 @@
 {
   "VitalDesignSystem": {
     "Components": {
-      "VitalCard": {
+      "VitalDivider": {
         "README.md": "./doc/README.md",
         "assets": {
           

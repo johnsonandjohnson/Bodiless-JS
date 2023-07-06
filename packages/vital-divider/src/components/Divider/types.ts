@@ -30,6 +30,10 @@ export interface VitalDividers {
    * Default styling and behavior.
    */
   Default: DividerToken;
+
+  /**
+   * Primary styling and behavior.
+   */
   Primary: DividerToken
 
   // Document other tokens here.

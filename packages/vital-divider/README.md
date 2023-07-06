@@ -1,5 +1,5 @@
 # `@bodiless/vital-divider`
 
-For documentation on the Vital Card package, please see:
+For documentation on the Vital Divider package, please see:
 
 - TBD
