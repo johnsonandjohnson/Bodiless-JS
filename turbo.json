@@ -21,6 +21,7 @@
     },
     "serve": {
       "persistent": true
-    }
+    },
+    "test": {}
   }
 }
