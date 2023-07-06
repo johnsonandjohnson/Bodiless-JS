@@ -36,7 +36,7 @@
     "start": "npx -y turbo run start --filter=@sites/${APP_SITE_NAME:-test-site}",
     "sync:fix": "syncpack fix-mismatches",
     "sync:check": "syncpack list-mismatches",
-    "test": "npx -y turbo test",
+    "test": "jest",
     "test:pw-functional": "WAIT_ON_TIMEOUT=600000 PLAYWRIGHT_SUITE=smoke-deprecated npx playwright test",
     "test:playwright": "APPLITOOLS_BATCH_ID=`uuidgen` WAIT_ON_TIMEOUT=600000 PLAYWRIGHT_SUITE=smoke-vital npx playwright test",
     "version": "git checkout package-lock.json",
