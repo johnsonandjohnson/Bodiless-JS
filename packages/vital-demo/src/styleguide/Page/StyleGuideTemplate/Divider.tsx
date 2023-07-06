@@ -15,43 +15,26 @@
 import React from 'react';
 import {
   flowHoc,
-  as,
   replaceWith,
-  H3,
+  on
 } from '@bodiless/fclasses';
 import { vitalDividers ,DividerClean } from '@bodiless/vital-divider';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
-import { vitalTypography } from '@bodiless/vital-elements';
+import { asFluidToken } from '@bodiless/vital-elements';
+import { StyleGuideExamplesClean } from '../../Examples';
 
-const C = {
-  H3: as(vitalTypography.H3)(H3),
-};
-
-const DefaultDivider = as(
-  vitalDividers.Default,
-)(DividerClean);
-
-const PrimaryDivider = as(
-  vitalDividers.Primary
-)(DividerClean);
-
-/* @todo
- * Rendered only the two types of images available in flow container as separate components.
- * To do is provide all variations we want tested individually.
- */
-const Examples = (props: any) => (
-  <>
-    <C.H3>Plain Divider</C.H3>
-    <DefaultDivider />
-    <C.H3>Primary Divider</C.H3>
-    <PrimaryDivider />
-  </>
-);
+const DemoFlowContainer =
+  asFluidToken({
+    Components: {
+      Default: on(DividerClean)(vitalDividers.Default),
+      PrimaryDivider: on(DividerClean)(vitalDividers.Primary),
+    },
+  });
 
 export const Divider = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
   Meta: flowHoc.meta.term('Token')('Dividers'),
   Content: {
     Title: replaceWith(() => <>Divider</>),
-    Examples: replaceWith(Examples),
+    Examples: on(StyleGuideExamplesClean)( DemoFlowContainer ),
   },
 });
