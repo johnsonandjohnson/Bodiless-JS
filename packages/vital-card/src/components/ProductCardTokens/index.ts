@@ -1,5 +1,5 @@
 import { as } from '@bodiless/fclasses';
-import { asTokenGroup, vitalColor, vital2Typography } from '@bodiless/vital-elements';
+import { asTokenGroup, vitalColor, vitalTypography } from '@bodiless/vital-elements';
 
 export const ProductCardMeta = {
   categories: {
@@ -23,10 +23,10 @@ const vitalProductCard = asTokenGroup(ProductCardMeta)({
   ColorProductCardScrollDotActive: vitalColor.InteractiveDarkDefault,
   ColorProductCardScrollDotInactive: 'neutral-400',
   SpacingProductCardPadding: 'p-md',
-  TextProductCardTitle: vital2Typography.H4,
-  TextProductCardEyebrow: vital2Typography.Eyebrow,
-  TextProductCardDescription: vital2Typography.BodyRegular,
-  TextProductCardReview: vital2Typography.CrumbsReviewsRegular,
+  TextProductCardTitle: vitalTypography.H4V2,
+  TextProductCardEyebrow: vitalTypography.EyebrowV2,
+  TextProductCardDescription: vitalTypography.BodyRegular,
+  TextProductCardReview: vitalTypography.CrumbsReviewsRegular,
 });
 
 export default vitalProductCard;
