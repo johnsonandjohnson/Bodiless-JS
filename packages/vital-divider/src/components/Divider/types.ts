@@ -1,6 +1,5 @@
-import type { ComponentOrTag, DesignableProps, TokenSpec } from '@bodiless/fclasses';
+import type { ComponentOrTag, DesignableProps, TokenSpec, TokenCollection } from '@bodiless/fclasses';
 import type { DefaultDomains } from '@bodiless/vital-elements';
-
 /**
  * Type representing the "slots" exposed by the DividerClean component.
  */
@@ -25,7 +24,7 @@ export type DividerToken = TokenSpec<DividerComponents, DefaultDomains>;
  * @category Token Collection
  * @see [[DividerClean]]
  */
-export interface VitalDividers {
+export interface VitalDividersBase {
   /**
    * Default styling and behavior.
    */
@@ -38,3 +37,8 @@ export interface VitalDividers {
 
   // Document other tokens here.
 };
+
+export interface VitalDividers extends
+  VitalDividersBase,
+  TokenCollection<DividerComponents, {}>
+{}

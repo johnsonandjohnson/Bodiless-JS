@@ -9,7 +9,7 @@ type DividerBaseProps = DesignableComponentsProps<DividerComponents>;
 /**
  * The starting components for each slot.
  */
-const dividerComponents: DividerComponents = {
+export const dividerComponents: DividerComponents = {
   Wrapper: Div,
   Divider: Hr,
 };
