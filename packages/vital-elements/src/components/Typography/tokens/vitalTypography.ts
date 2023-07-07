@@ -208,7 +208,7 @@ const Gradient = asElementToken({
 });
 
 /**
-* Vital Tyo
+* Vital Typography
 * @todo: All V 2.0 tokens are exported as part of vitalTypography, New Tokens from version 2
 * are suffixed with 'V2' where conflict exists with version 1. As soon as V1 tokens are deprecated,
 * vitalTypographyV2 can be moved here. 'V2' suffix must be removed.
