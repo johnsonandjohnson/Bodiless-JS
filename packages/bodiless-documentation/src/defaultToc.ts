@@ -44,7 +44,6 @@ const toc = {
     Architecture: {
       'Data.md': '',
       'Context.md': '',
-      'FClasses.md': '',
       'Documentation.md': '',
     },
     Release: {},
