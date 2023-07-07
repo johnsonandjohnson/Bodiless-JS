@@ -27,9 +27,11 @@ const DemoFlowContainer =
   asFluidToken({
     Components: {
       Default: on(DividerClean)(vitalDividers.Default),
-      PrimaryDivider: on(DividerClean)(vitalDividers.Primary),
+      BorderDividerLight: on(DividerClean)(vitalDividers.BorderDividerLight),
+      BorderDividerDark: on(DividerClean)(vitalDividers.BorderDividerDark),
+      SpacingDividerPadding: on(DividerClean)(vitalDividers.SpacingDividerPadding),
     },
-  });
+});
 
 export const Divider = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
   Meta: flowHoc.meta.term('Token')('Dividers'),

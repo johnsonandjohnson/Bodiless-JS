@@ -65,11 +65,25 @@ const Default = asDividerToken({
   // },
 });
 
-const Primary = asDividerToken(Default, {
+
+const BorderDividerLight = asDividerToken(Default, {
   Theme: {
-    Divider: as(vitalColor.BorderPrimaryInteractive)
+    Divider: as(vitalColor.BorderLight, 'border-solid border-1')
   }
 });
+
+const BorderDividerDark = asDividerToken(Default, {
+  Theme: {
+    Divider: as(vitalColor.BorderDark, 'border-solid border-1')
+  }
+});
+
+const SpacingDividerPadding = asDividerToken(Default, {
+  Theme: {
+    Divider: as('p-x-sm')
+  }
+});
+
 
 // Add additional variant tokens or variators here.
 // ...
@@ -83,7 +97,9 @@ const Primary = asDividerToken(Default, {
  */
 const vitalDividers: VitalDividers = {
   Default,
-  Primary
+  BorderDividerLight,
+  BorderDividerDark,
+  SpacingDividerPadding
 };
 
 export default vitalDividers;
