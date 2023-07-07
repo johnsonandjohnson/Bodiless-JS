@@ -12,8 +12,8 @@ import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { SectionComponents, SectionBaseProps } from './types';
 
 /**
- * The `sectionComponents` is basically a map of SectionClean component slots to HTML Elements.
- * This HTML elements will be used in place of SectionClean component slots in the layout.
+ * The `sectionComponents` is basically a map of `SectionClean` component slots to HTML Elements.
+ * These HTML elements will be used in place of `SectionClean` component slots in the layout.
  */
 const sectionComponents: SectionComponents = {
   Wrapper: Section,
@@ -28,8 +28,8 @@ const sectionComponents: SectionComponents = {
 };
 
 /**
- * Base component for the `SectionClean`. It defines the inner components DOM structure.
- * The `components` prop is coming from `designable` HOC below and has its type as
+ * Base component for `SectionClean`. It defines the inner components' DOM structure.
+ * The `components` prop is coming from the `designable` HOC below and has its type as
  * `DesignableComponentsProps<SectionComponents>`.
  */
 const SectionBase: FC<SectionBaseProps> = ({ components, ...rest }) => {
@@ -43,13 +43,13 @@ const SectionBase: FC<SectionBaseProps> = ({ components, ...rest }) => {
     /**
      * Renaming the link because of this error:
      *
-     * `The href attribute is required for an anchor to be keyboard accessible.
-     *  Provide a valid, navigable address as the href value. If you cannot provide an href,
-     *  but still need the element to resemble a link, use a button and change it
-     *  withappropriate styles.
+     * > The href attribute is required for an anchor to be keyboard accessible.
+     * > Provide a valid, navigable address as the href value. If you cannot provide an href,
+     * > but still need the element to resemble a link, use a button and change it
+     * > with appropriate styles.
      *
-     *  Learn more:
-     *  https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md
+     * > Learn more:
+     * > https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md
      */
     Link: SectionLink,
     ContentWrapper,
@@ -58,11 +58,11 @@ const SectionBase: FC<SectionBaseProps> = ({ components, ...rest }) => {
 
   return (
     /**
-     * Note that we spread the rest of the arguments into the Wrapper component.
-     * This is the important step to do, otherwise we may loose attributes.
+     * Note that we spread the rest of the arguments into the `Wrapper` component.
+     * This is the important step to do, otherwise we may lose attributes.
      *
-     * For example, the `{...rest}` ensures that if we add a custom ID to <Section id="..." />,
-     * it will flow to the Wrapper component and not get lost.
+     * For example, the `{...rest}` ensures that if we add a custom ID to `<Section id="..." />`,
+     * it will flow to the `Wrapper` component and not get lost.
      *
      * While the outermost element is recommended to receive the rest of the props,
      * it is not mandatory, and other slots may receive it based on your needs.
@@ -85,20 +85,20 @@ const SectionBase: FC<SectionBaseProps> = ({ components, ...rest }) => {
 };
 
 /**
- * Define SectionClean by wrapping `SectionBase` with `designable` HOC that provides the
- * `components` prop and add Node to the Component so that it is capable of handling it's own data.
+ * Define `SectionClean` by wrapping `SectionBase` with the `designable` HOC that provides the
+ * `components` prop, and add Node to the component so that it is capable of handling its own data.
  */
 const SectionClean = as(
   /**
-   * The second argument `section` is a namespace for the inner components.
-   * For example `Wrapper` component will be marked as `Section:Wrapper`.
+   * The second argument, 'Section', is a namespace for the inner components.
+   * For example, the `Wrapper` component will be marked as `Section:Wrapper`.
    */
   designable(sectionComponents, 'Section'),
   withNode,
 )(SectionBase);
 
 /**
- * A token modifier that respects the Section Components. Use to create component tokens.
+ * A token modifier that respects the Section components. Use to create component tokens.
  *
  * @category Token Collection
  */

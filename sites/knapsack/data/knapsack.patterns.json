@@ -2,32 +2,94 @@
   "statusSets": [
     {
       "id": "main",
-      "title": "Status",
+      "title": "Design",
       "statuses": [
         {
           "id": "draft",
-          "title": "Draft",
-          "color": "#9b9b9b"
+          "color": "#9b9b9b",
+          "title": "Planned"
         },
         {
           "id": "needsDesign",
-          "title": "Needs Design",
-          "color": "#FC0"
+          "color": "#ff7b58",
+          "title": "Needs Design"
         },
         {
           "id": "needsDev",
-          "title": "Needs Development",
-          "color": "#FC0"
+          "color": "#88b4ff",
+          "title": "In Progress"
         },
         {
           "id": "needsReview",
-          "title": "Needs Review",
-          "color": "#FC0"
+          "color": "#f5ee47",
+          "title": "Needs Review"
         },
         {
           "id": "ready",
-          "title": "Ready",
-          "color": "#2ECC40"
+          "color": "#2ECC40",
+          "title": "Ready"
+        }
+      ]
+    },
+    {
+      "id": "KIRz-iaKhz",
+      "title": "Code",
+      "statuses": [
+        {
+          "id": "draft",
+          "color": "#9b9b9b",
+          "title": "Planned"
+        },
+        {
+          "id": "needsDesign",
+          "color": "#ff7b58",
+          "title": "Needs Design"
+        },
+        {
+          "id": "needsDev",
+          "color": "#88b4ff",
+          "title": "In Progress"
+        },
+        {
+          "id": "needsReview",
+          "color": "#f5ee47",
+          "title": "Needs Review"
+        },
+        {
+          "id": "ready",
+          "color": "#2ECC40",
+          "title": "Ready"
+        }
+      ]
+    },
+    {
+      "id": "-MIZQESo3e",
+      "title": "Guidelines",
+      "statuses": [
+        {
+          "id": "draft",
+          "color": "#9b9b9b",
+          "title": "Planned"
+        },
+        {
+          "id": "needsDesign",
+          "color": "#ff7b58",
+          "title": "Needs Design"
+        },
+        {
+          "id": "needsDev",
+          "color": "#88b4ff",
+          "title": "In Progress"
+        },
+        {
+          "id": "needsReview",
+          "color": "#f5ee47",
+          "title": "Needs Review"
+        },
+        {
+          "id": "ready",
+          "color": "#2ECC40",
+          "title": "Ready"
         }
       ]
     }

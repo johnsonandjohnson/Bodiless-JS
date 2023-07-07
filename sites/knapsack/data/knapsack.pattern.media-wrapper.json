@@ -1,0 +1,31 @@
+{
+  "id": "media-wrapper",
+  "tabs": [
+    {
+      "id": "overview",
+      "type": "subPage"
+    },
+    {
+      "id": "BopG1YAfJr",
+      "type": "subPage"
+    }
+  ],
+  "title": "Media Wrapper",
+  "statuses": {
+    "main": "needsDev"
+  },
+  "subPages": [
+    {
+      "id": "overview",
+      "title": "Guidelines",
+      "blockIds": []
+    },
+    {
+      "id": "BopG1YAfJr",
+      "title": "Figma",
+      "blockIds": []
+    }
+  ],
+  "templates": [],
+  "description": ""
+}
