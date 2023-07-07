@@ -108,12 +108,11 @@
     "clean": "gatsby clean",
     "dev-backend": "bodiless-backend",
     "dev-frontend": "gatsby develop -p 8005",
-    "prestart": "run-s build:env-vars build:docs",
     "docs": "run-s build:docs serve:docs",
     "start": "gatsby serve",
     "serve": "gatsby serve",
     "serve:docs": "docsify serve ./doc",
-    "dev": "run-p -r dev-frontend dev-backend"
+    "dev": "run-s build:env-vars build:docs && run-p -r dev-frontend dev-backend"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.4.0",
