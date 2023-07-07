@@ -17,7 +17,7 @@ import { DividerClean, vitalDividers } from './index';
 
 export const knapsackDividerSpec: VitalDesignSpec<DividerComponents> = {
   tokens: vitalDividers,
-  tokensExportName: 'vitalDivider',
+  tokensExportName: 'vitalDividers',
   component: DividerClean,
   componentExportName: 'DividerClean',
   slots: {},
