@@ -1,5 +1,5 @@
 import { as } from '@bodiless/fclasses';
-import { asTokenGroup, vitalColor } from '@bodiless/vital-elements';
+import { asTokenGroup, vitalColor, vitalTypography } from '@bodiless/vital-elements';
 
 export const ButtonMeta = {
   categories: {
@@ -20,9 +20,7 @@ const vitalButtonTokens = asTokenGroup(ButtonMeta)({
   BorderPaddingButton: 'px-x-lg py-md',
   // TODO Needs work shouldn't have defined
   ShadowButtonFocus: 'focus:drop-shadow-button',
-  // TODO Throws TypeError: Cannot read properties of undefined (reading 'BodyBold')
-  // TextButtonDefault: vital2Typography.BodyBold,
-  TextButtonDefault: 'text-base leading-6 font-bold font-2',
+  TextButtonDefault: vitalTypography.BodyBold,
   // Primary
   ColorButtonPrimaryBackgroundDefault: vitalColor.InteractiveDarkBackgroundDefault,
   ColorButtonPrimaryBackgroundHover: vitalColor.InteractiveDarkBackgroundHover,
