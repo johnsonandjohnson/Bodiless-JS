@@ -12,31 +12,13 @@
  * limitations under the License.
  */
 import type { VitalDesignSpec } from '@bodiless/vital-elements';
-
 import { DividerComponents } from './types';
-import DividerClean, { dividerComponents } from './DividerClean';
-import vitalDividers from './tokens';
+import { DividerClean, vitalDividers } from './index';
 
-// @TODO: Move to a shared Knapsack package where `VitalDesignSpec` will be.
-// Currently `@bodiless/knapsack-renderer` can't be used since it's build target is CommonJs
-export const toKnapsackSlots = (obj: Record<string, any>, baseComponentName: string = '', allowedPatternIds: string[] = []) => Object.entries(obj).reduce(
-  (obj, [k]) => Object.assign(obj, {
-    [k]: {
-      title: `${baseComponentName}${k.replace(/([A-Z][a-z])/g, ' $1').replace(/(\d)/g, ' $1')}`,
-      description: `${baseComponentName}${k.replace(/([A-Z][a-z])/g, ' $1').replace(/(\d)/g, ' $1')} Component.`,
-      allowedPatternIds,
-    }
-  }), {}
-);
-
-export const knapsackCardSpec: VitalDesignSpec<DividerComponents> = {
+export const knapsackDividerSpec: VitalDesignSpec<DividerComponents> = {
   tokens: vitalDividers,
   tokensExportName: 'vitalDivider',
   component: DividerClean,
   componentExportName: 'DividerClean',
-  slots: toKnapsackSlots(
-    dividerComponents,
-    'Divider',
-    ['font-size', 'text-decoration', 'typography', 'color', 'button']
-  ),
+  slots: {},
 };
