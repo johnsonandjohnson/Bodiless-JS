@@ -15,4 +15,3 @@
 import vitalTypography from './vitalTypography';
 
 export default vitalTypography;
-export { vital2Typography } from './vitalTypography';

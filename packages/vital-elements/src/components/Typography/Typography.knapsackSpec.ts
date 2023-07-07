@@ -14,7 +14,7 @@
 
 import { KnapsackDemoTextClean } from '../KnapsackDemoElement';
 import vitalTypography from './tokens';
-import { vital2Typography } from './tokens/vitalTypography';
+import vitalTypographyV2 from './tokens/vitalTypographyV2';
 
 import type { VitalDesignSpec } from '../../util';
 
@@ -27,8 +27,8 @@ export const knapsackTypographySpec: VitalDesignSpec = {
 };
 
 export const knapsackVitalTypographySpec: VitalDesignSpec = {
-  tokens: vital2Typography as any,
-  tokensExportName: 'vital2Typography',
+  tokens: vitalTypographyV2 as any,
+  tokensExportName: 'vitalTypographyV2',
   component: KnapsackDemoTextClean,
   componentExportName: 'ElementClean',
   slots: {},
