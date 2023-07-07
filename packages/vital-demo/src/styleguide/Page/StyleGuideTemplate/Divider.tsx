@@ -18,7 +18,7 @@ import {
   replaceWith,
   on
 } from '@bodiless/fclasses';
-import { vitalDividers ,DividerClean } from '@bodiless/vital-divider';
+import { vitalDividers, DividerClean } from '@bodiless/vital-divider';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { StyleGuideExamplesClean } from '../../Examples';

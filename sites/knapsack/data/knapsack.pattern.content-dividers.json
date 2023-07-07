@@ -8,6 +8,10 @@
     {
       "id": "iNMvaveDjS",
       "type": "subPage"
+    },
+    {
+      "type": "template",
+      "id": "bodiless-esxD6Gxc4_"
     }
   ],
   "title": "Content Dividers",
@@ -24,6 +28,19 @@
       "blockIds": []
     }
   ],
-  "templates": [],
+  "templates": [
+    {
+      "id": "bodiless-esxD6Gxc4_",
+      "title": "Code",
+      "path": "@bodiless/vital-divider",
+      "alias": "knapsackDividerSpec",
+      "templateLanguageId": "bodiless",
+      "spec": {
+        "isInferred": true
+      },
+      "demoIds": ["DHKJSv4YoB"],
+      "blockIds": []
+    }
+  ],
   "description": ""
 }
