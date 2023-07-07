@@ -104,6 +104,12 @@ In lieu of adding a new slot to the Vital component, there are two other options
 01. Creating a new clean component and adding a new brand-specific slot;
 01. Creating a new slot in the body of a token using `withAppendChild`.
 
+?> **Note:** For the code files used in this lesson, please see the
+`packages/vital-examples/src/no-slot-in-white-label-component` directory in your local repository or
+on
+[GitHub](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-examples/src/no-slot-in-white-label-component
+':target=_blank').
+
 ## Assignment
 
 ### Option 1: Creating a New Clean Component and Adding a New Brand-Specific Slot
