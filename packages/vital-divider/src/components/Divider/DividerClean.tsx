@@ -16,7 +16,7 @@ export const dividerComponents: DividerComponents = {
 
 const DividerBase: FC<DividerBaseProps> = ({ components: C, ...rest }) => (
   <C.Wrapper {...rest}>
-    <C.Divider></C.Divider>
+    <C.Divider />
   </C.Wrapper>
 );
 
