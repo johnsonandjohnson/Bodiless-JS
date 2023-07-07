@@ -54,7 +54,7 @@ const ButtonStyleVariations = varyDesigns(
   },
   {
     '': '', // vary on itself and produce default button variation
-    WithArrow: vitalButton.WithArrow,
+    // WithArrow: vitalButton.WithArrow,
   },
   {
     '': Default

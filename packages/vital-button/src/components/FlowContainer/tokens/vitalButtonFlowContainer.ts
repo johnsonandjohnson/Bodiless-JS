@@ -28,7 +28,7 @@ const ColorVariations = {
 };
 
 const ButtonStyles = {
-  WithArrow: vitalButton.WithArrow,
+  // WithArrow: vitalButton.WithArrow,
   WithOutArrow: asButtonToken({
     Meta: flowHoc.meta.term('Style')('Without Hover Arrow'),
   }),
