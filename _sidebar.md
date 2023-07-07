@@ -160,7 +160,6 @@
       - [Windows](/Development/OtherResources/Windows)
     - [Troubleshooting](/Development/Troubleshooting/)
     - [Web Platforms](/Development/WebPlatforms/)
-      - [Gatsby Cloud](/Development/WebPlatforms/GatsbyCloud)
       - [Netlify](/Development/WebPlatforms/Netlify)
       - [Platform.sh](/Development/WebPlatforms/Platform.sh)
     - [FClasses](/Development/FClasses/)
