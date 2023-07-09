@@ -4,6 +4,16 @@ byId:
     name: Accordion
     parentId: components
     path: /pattern/accordion
+  border-radius-ggj4enk3_j:
+    id: border-radius-ggj4enk3_j
+    name: Border Radius
+    parentId: design-tokens
+    path: /pages/border-radius-ggj4enk3_j
+  border-width-tvwyocj-8k:
+    id: border-width-tvwyocj-8k
+    name: Border Width
+    parentId: design-tokens
+    path: /pages/border-width-tvwyocj-8k
   button:
     id: button
     name: Button
@@ -14,16 +24,41 @@ byId:
     name: Card
     parentId: components
     path: /pattern/card
+  carousel:
+    id: carousel
+    name: Carousel
+    parentId: components
+    path: /pattern/carousel
   color:
     id: color
     name: Colors
     parentId: components
     path: /pattern/color
+  colors-4rlzdwbgds:
+    id: colors-4rlzdwbgds
+    name: Colors
+    parentId: design-tokens
+    path: /pages/colors-4rlzdwbgds
   components:
     id: components
     name: Components
     parentId: root
     path: ''
+  components-overview:
+    id: components-overview
+    name: Components Overview
+    parentId: components
+    path: /pages/components-overview
+  content-dividers:
+    id: content-dividers
+    name: Content Dividers
+    parentId: components
+    path: /pattern/content-dividers
+  design-tokens:
+    id: design-tokens
+    name: Design Tokens
+    parentId: root
+    path: /pages/design-tokens
   docs:
     id: docs
     name: Docs
@@ -32,37 +67,104 @@ byId:
   font-size:
     id: font-size
     name: Font Size
-    parentId: components
+    parentId: text-styling
     path: /pattern/font-size
+  footer:
+    id: footer
+    name: Footer
+    parentId: components
+    path: /pattern/footer
   generic-template:
     id: generic-template
     name: Generic Template
-    parentId: components
+    parentId: templates-2jovel0oc4
     path: /pattern/generic-template
+  header:
+    id: header
+    name: Header
+    parentId: components
+    path: /pattern/header
   intro:
     id: intro
     name: Intro
     parentId: docs
     path: /pages/intro
+  logos:
+    id: logos
+    name: Logos
+    parentId: design-tokens
+    path: /pages/logos
+  media-wrapper:
+    id: media-wrapper
+    name: Media Wrapper
+    parentId: components
+    path: /pattern/media-wrapper
+  menu:
+    id: menu
+    name: Menu
+    parentId: components
+    path: /pattern/menu
+  section:
+    id: section
+    name: Section
+    parentId: components
+    path: /pattern/section
+  spacing:
+    id: spacing
+    name: Spacing
+    parentId: design-tokens
+    path: /pages/spacing
+  templates-2jovel0oc4:
+    id: templates-2jovel0oc4
+    name: Templates
+    parentId: root
+    path: /pages/templates-2jovel0oc4
   text-decoration:
     id: text-decoration
     name: Elements
-    parentId: components
+    parentId: text-styling
     path: /pattern/text-decoration
+  text-styling:
+    id: text-styling
+    name: Text Styling
+    parentId: design-tokens
+    path: ''
   typography:
     id: typography
     name: Typography
-    parentId: components
+    parentId: text-styling
     path: /pattern/typography
+  vital-2.0-typography:
+    id: vital-2.0-typography
+    name: Vital 2.0 Typography
+    parentId: text-styling
+    path: /pattern/vital-2.0-typography
 order:
-  - components
   - docs
   - intro
-  - card
+  - design-tokens
+  - colors-4rlzdwbgds
+  - text-styling
+  - vital-2.0-typography
+  - typography
   - text-decoration
   - font-size
-  - color
-  - typography
-  - generic-template
+  - spacing
+  - border-radius-ggj4enk3_j
+  - border-width-tvwyocj-8k
+  - logos
+  - components
+  - components-overview
   - accordion
   - button
+  - card
+  - color
+  - content-dividers
+  - media-wrapper
+  - carousel
+  - section
+  - header
+  - footer
+  - menu
+  - templates-2jovel0oc4
+  - generic-template

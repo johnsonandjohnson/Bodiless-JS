@@ -14,3 +14,4 @@
 
 export * from './components/Card';
 export * from './components/FlowContainer';
+export * from './components/ProductCardTokens';

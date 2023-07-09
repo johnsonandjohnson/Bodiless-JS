@@ -2,11 +2,14 @@
   "id": "color",
   "title": "Colors",
   "description": "",
-  "statuses": {},
+  "statuses": {
+    "KIRz-iaKhz": "ready",
+    "main": "needsDev"
+  },
   "templates": [
     {
       "id": "bodiless-6GKNPvcRI9",
-      "title": "Template",
+      "title": "Code",
       "path": "@bodiless/vital-elements",
       "alias": "knapsackColorSpec",
       "templateLanguageId": "bodiless",
@@ -19,9 +22,28 @@
   ],
   "tabs": [
     {
-      "type": "template",
-      "id": "bodiless-6GKNPvcRI9"
+      "id": "Y6qA9ezQ5z",
+      "type": "subPage"
+    },
+    {
+      "id": "2iqjHoPmWa",
+      "type": "subPage"
+    },
+    {
+      "id": "bodiless-6GKNPvcRI9",
+      "type": "template"
     }
   ],
-  "subPages": []
+  "subPages": [
+    {
+      "id": "Y6qA9ezQ5z",
+      "title": "Guidelines",
+      "blockIds": []
+    },
+    {
+      "id": "2iqjHoPmWa",
+      "title": "Figma",
+      "blockIds": ["h7dovr5LkE"]
+    }
+  ]
 }

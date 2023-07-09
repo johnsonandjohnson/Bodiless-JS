@@ -11,18 +11,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { TokenCollection } from '@bodiless/fclasses';
 
 import { KnapsackDemoTextClean } from '../KnapsackDemoElement';
 import vitalTypography from './tokens';
+import vitalTypographyV2 from './tokens/vitalTypographyV2';
 
 import type { VitalDesignSpec } from '../../util';
 
-const typographyTokens = vitalTypography as unknown as TokenCollection<any, any>;
-
 export const knapsackTypographySpec: VitalDesignSpec = {
-  tokens: typographyTokens,
+  tokens: vitalTypography as any,
   tokensExportName: 'vitalTypography',
+  component: KnapsackDemoTextClean,
+  componentExportName: 'ElementClean',
+  slots: {},
+};
+
+export const knapsackVitalTypographySpec: VitalDesignSpec = {
+  tokens: vitalTypographyV2 as any,
+  tokensExportName: 'vitalTypographyV2',
   component: KnapsackDemoTextClean,
   componentExportName: 'ElementClean',
   slots: {},

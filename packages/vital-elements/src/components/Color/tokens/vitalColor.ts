@@ -44,4 +44,50 @@ export default asTokenGroup(ColorMeta)({
   TextButtonSelected: 'text-vital-secondary-button-selected',
   BgButtonSelected: 'bg-vital-secondary-button-selected',
   BorderButtonSelected: 'border-vital-secondary-button-selected',
+
+  /**
+   * Vital 2.0 Colors coming from Figma Tokens. Colors above will be deprecated.
+   */
+
+  // Background Color Tokens
+  BackgroundBase: 'neutral-100',
+  BackgroundLayer1: 'neutral-100',
+  BackgroundLayer2: 'quintenary-200',
+  BackgroundLayer3: 'tertiary-100',
+  BackgroundLayer4: 'quintenary-100',
+  BackgroundLayer5: 'secondary-200',
+  BackgroundLayer6: 'primary-100',
+  BackgroundInverse: 'neutral-900',
+
+  // Text Color Tokens
+  TextDark1: 'neutral-900',
+  TextDark2: 'neutral-700',
+  TextDark3: 'neutral-600',
+  TextLight1: 'neutral-100',
+  TextLight2: 'neutral-100',
+  TextLight3: 'neutral-300',
+
+  // Interactive Color Tokens
+  InteractiveDarkDefault: 'primary-500',
+  InteractiveDarkHover: 'primary-600',
+  InteractiveDarkFocus: 'primary-600',
+  InteractiveDarkPressed: 'primary-800',
+  InteractiveDarkDisabled: 'neutral-600',
+  InteractiveDarkBackgroundHover: 'primary-100',
+  InteractiveDarkBackgroundFocused: 'primary-100',
+  InteractiveDarkBackgroundPressed: 'primary-200',
+
+  // Border Color Tokens
+  BorderLight: 'neutral-200',
+  BorderDark: 'neutral-600',
+
+  // Icon Color Tokens
+  IconLight: 'neutral-100',
+  IconDark: 'neutral-800',
+
+  // Signal Color Tokens
+  SignalError: 'error-700',
+  SignalWarning: 'warning-300',
+  SignalSuccess: 'success-400',
+  SignalInformational: 'informational-500',
 });

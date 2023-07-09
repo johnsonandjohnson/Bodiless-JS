@@ -3,8 +3,10 @@
     "Guides": {
       "TokensAndTypescript.md": "./doc/Types.md"
     },
-    "Architecture": {
-      "FClasses.md": "./README.md"
+    "FClasses": {
+      "README.md": "./README.md",
+      "AddClassesAPI.md": "./doc/AddClasses.md",
+      "DesignAPI.md": "./doc/Design.md"
     }
   }
 }

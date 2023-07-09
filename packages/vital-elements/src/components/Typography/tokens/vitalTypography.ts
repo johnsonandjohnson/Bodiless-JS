@@ -18,6 +18,7 @@ import { vitalColor } from '../../Color';
 import { vitalFontSize } from '../../FontSize';
 import { vitalTextDecoration } from '../../TextDecoration';
 import { TypographyMeta } from '../meta';
+import vitalTypographyV2 from './vitalTypographyV2';
 
 const Link = asElementToken({
   Theme: {
@@ -206,7 +207,15 @@ const Gradient = asElementToken({
   Meta: TypographyMeta,
 });
 
+/**
+* Vital Typography
+* @todo: All V 2.0 tokens are exported as part of vitalTypography, New Tokens from version 2
+* are suffixed with 'V2' where conflict exists with version 1. As soon as V1 tokens are deprecated,
+* vitalTypographyV2 can be moved here. 'V2' suffix must be removed.
+* Eventually it will just replace the vitalTypography.
+*/
 export default {
+  ...vitalTypographyV2,
   Link,
   H1,
   H2,

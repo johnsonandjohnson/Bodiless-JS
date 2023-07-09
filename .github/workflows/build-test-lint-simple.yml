@@ -30,7 +30,7 @@ jobs:
         if: ${{ github.event_name == 'schedule' || github.event.label.name == 'ready-to-test' }}
         uses: ./.github/actions/playwright
         with:
-          node-test-script: test:monorepo-pw
+          node-test-script: test:pw-functional
           test-results-name: Deprecated tests for editing functionality
     
   smoke-vital:
@@ -50,7 +50,7 @@ jobs:
           PW_INCLUDE_ALL_RENDERERS: ${{ github.event_name == 'schedule' }}
         uses: ./.github/actions/playwright
         with:
-          node-test-script: test:playwright
+          node-test-script: test:components-visual
           test-results-name: Smoke tests for vital components
       - name: Upload Accessibility results
         if: always()

@@ -2,11 +2,13 @@
   "id": "text-decoration",
   "title": "Text Decoration",
   "description": "",
-  "statuses": {},
+  "statuses": {
+    "KIRz-iaKhz": "ready"
+  },
   "templates": [
     {
       "id": "bodiless-6GKNPvcRI7",
-      "title": "Template",
+      "title": "Code",
       "path": "@bodiless/vital-elements",
       "alias": "knapsackTextDecorationSpec",
       "templateLanguageId": "bodiless",
@@ -19,9 +21,28 @@
   ],
   "tabs": [
     {
-      "type": "template",
-      "id": "bodiless-6GKNPvcRI7"
+      "id": "b8_qIhLnsX",
+      "type": "subPage"
+    },
+    {
+      "id": "iZiv6xr8tB",
+      "type": "subPage"
+    },
+    {
+      "id": "bodiless-6GKNPvcRI7",
+      "type": "template"
     }
   ],
-  "subPages": []
+  "subPages": [
+    {
+      "id": "b8_qIhLnsX",
+      "title": "Guidelines",
+      "blockIds": []
+    },
+    {
+      "id": "iZiv6xr8tB",
+      "title": "Figma",
+      "blockIds": ["o6tW8v1Jz1"]
+    }
+  ]
 }

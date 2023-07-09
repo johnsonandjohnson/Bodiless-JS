@@ -1,0 +1,20 @@
+{
+  "id": "carousel",
+  "tabs": [
+    {
+      "id": "overview",
+      "type": "subPage"
+    }
+  ],
+  "title": "Carousel",
+  "statuses": {},
+  "subPages": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "blockIds": []
+    }
+  ],
+  "templates": [],
+  "description": ""
+}

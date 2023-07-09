@@ -30,8 +30,6 @@ test-report.xml
 /starters
 
 # Test tools
-/cypress/videos
-/cypress/screenshots
 /sites-test
 playwright-report
 
@@ -39,3 +37,5 @@ playwright-report
 **/doc/api
 test-results/
 playwright-report/
+
+.turbo
