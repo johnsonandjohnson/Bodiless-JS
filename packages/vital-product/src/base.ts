@@ -17,6 +17,5 @@
  * Import the token directly from @bodiless/vital-product/lib/base.
  * @category Token Collection
  * @see [[vitalPDPTemplate]]
- */
+*/
 export { default as vitalPDPTemplateBase } from './components/PDPTemplate/tokens/vitalPDPTemplate';
-
