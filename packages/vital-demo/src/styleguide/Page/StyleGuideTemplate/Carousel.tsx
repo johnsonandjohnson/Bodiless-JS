@@ -17,8 +17,8 @@ import {
   flowHoc,
   replaceWith,
   on,
-  // as,
-  // varyDesigns,
+  as,
+  varyDesigns,
 } from '@bodiless/fclasses';
 import {
   VitalCarouselClean,
@@ -29,46 +29,36 @@ import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vi
 import { withDefaultContent } from '@bodiless/data';
 import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
-// const BaseVariation = {
-//   // using '' means it won't add any string to name key of the variations
-//   '': on(VitalCarouselClean)(
-//     vitalCarousel.Default,
-//     vitalCarousel.WithImageSlide,
-//   ),
-// };
+const BaseVariation = {
+  // using '' means it won't add any string to name key of the variations
+  '': on(VitalCarouselClean)(
+    vitalCarousel.Default,
+    vitalCarousel.WithImageSlide,
+  ),
+};
 
 const CarouselVariations = {
-  Default: on(VitalCarouselClean)(
-    vitalCarousel.Default,
-    vitalCarousel.WithImageSlide,
-  ),
-  NavButtons: on(VitalCarouselClean)(
-    vitalCarousel.Default,
-    vitalCarousel.WithImageSlide,
+  Default: '',
+  NavButtons: vitalCarousel.WithNavigationButtons,
+  InfiniteLoop: as(
+    vitalCarousel.WithInfinitiveLoop,
     vitalCarousel.WithNavigationButtons,
   ),
-  InfiniteLoop: on(VitalCarouselClean)(
-    vitalCarousel.Default,
+  AutoPlay: as(
     vitalCarousel.WithImageSlide,
-    vitalCarousel.WithInfinitiveLoop,
-    vitalCarousel.WithNavigationButtons
-  ),
-  AutoPlay: on(VitalCarouselClean)(
-    vitalCarousel.Default,
-    vitalCarousel.WithImageSlide,
+    vitalCarousel.WithNavigationButtons,
     vitalCarousel.WithAutoPlay
   ),
 };
 
-// const vitalCarouselVariations = varyDesigns(
-//   BaseVariation,
-//   CarouselVariations,
-// );
+const vitalCarouselVariations = varyDesigns(
+  BaseVariation,
+  CarouselVariations,
+);
 
 const vitalCarouselFlowContainer = asFluidToken({
   Components: {
-    ...CarouselVariations,
-    // ...vitalCarouselVariations
+    ...vitalCarouselVariations
   },
 });
 
