@@ -23,20 +23,16 @@ import {
 import {
   VitalCarouselClean,
   vitalCarousel,
-  CAROUSEL_NODE_KEY,
-  withEditor,
 } from '@bodiless/vital-carousel';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
-import { withDefaultContent, withNode } from '@bodiless/data';
+import { withDefaultContent } from '@bodiless/data';
 import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
 const CardVariations = {
   '': on(VitalCarouselClean)(
-    withEditor(CAROUSEL_NODE_KEY),
-    withNode,
-    vitalCarousel.WithCardSlide,
     vitalCarousel.Default,
+    vitalCarousel.WithCardSlide,
     vitalCarousel.WithCarouselDots
   ),
 };

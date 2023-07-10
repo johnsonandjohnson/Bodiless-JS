@@ -8,7 +8,7 @@ import {
   Ul, Li, Img, addProps, as, replaceWith, stylable, flowHoc,
   addPropsIf, withDesign, addClasses, on, removeClasses,
 } from '@bodiless/fclasses';
-import { ButtonBack, ButtonNext } from 'pure-react-carousel';
+import { ButtonBack, ButtonNext, Slide } from 'pure-react-carousel';
 import { vitalImage } from '@bodiless/vital-image';
 import { vitalCard, CardClean } from '@bodiless/vital-card';
 import vitalCarouselTokens from '../../CarouselTokens';
@@ -17,6 +17,7 @@ import type { VitalCarousel } from '../types';
 import { useIsCarouselItemActive } from '../utils/hooks';
 import withCarouselItemTabIndex from '../utils/withCarouselItemTabIndex';
 import CarouselDot from '../utils/CarouselDot';
+import withTotalSlides from '../utils/withTotalSlides';
 // TODO is there better way to get this css file than 6 relative links back??
 import '../../../../../../node_modules/pure-react-carousel/dist/react-carousel.es.css';
 import { CAROUSEL_NODE_KEY } from '../utils/constants';
@@ -245,7 +246,23 @@ const asAccessibleCarousel = asVitalCarouselToken({
 });
 
 const Default = asVitalCarouselToken(
+  {
+    Components: {
+      Wrapper: as(
+        withTotalSlides(CAROUSEL_NODE_KEY),
+      ),
+      Slider: flowHoc(
+        asBodilessList(CAROUSEL_NODE_KEY, undefined, () => ({ groupLabel: 'Slide' })),
+        withDesign({
+          Item: replaceWith(Slide),
+        }),
+      ),
+    }
+  },
   asAccessibleCarousel,
+  WithNoAutoPlayIfEditable,
+  WithNoDragIfEditable,
+  WithIntrinsicHeight,
 );
 
 const WithImageSlide = asVitalCarouselToken({
