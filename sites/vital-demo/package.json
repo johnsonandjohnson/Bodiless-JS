@@ -80,14 +80,14 @@
     "build:stats": "BODILESS_BUILD_STATS=1 npm run build",
     "check": "tsc -p ./tsconfig.check.json",
     "clean": "gatsby clean",
+    "dev": "npm run predev && run-p -r dev-frontend dev-backend",
     "dev-backend": "bodiless-backend",
     "dev-frontend": "gatsby develop",
     "docs": "run-s build:docs serve:docs",
-    "prestart": "run-s build:env-vars",
+    "predev": "run-s build:env-vars",
     "serve": "gatsby serve",
     "serve:docs": "docsify serve ./doc",
     "start": "gatsby serve",
-    "dev": "run-p -r dev-frontend dev-backend",
     "serve:test": "npm run build && gatsby serve -p 8005"
   },
   "devDependencies": {

@@ -53,13 +53,13 @@
     "build:stats": "BODILESS_BUILD_STATS=1 npm run build",
     "check": "tsc -p ./tsconfig.check.json",
     "clean": "gatsby clean",
+    "dev": "npm run predev && run-p -r dev-frontend dev-backend",
     "dev-backend": "bodiless-backend",
     "dev-frontend": "gatsby develop",
     "prestart": "npm run build:docs",
     "serve": "gatsby serve",
     "serve:docs": "docsify serve ./doc",
-    "start": "gatsby serve",
-    "dev": "run-p -r dev-frontend dev-backend"
+    "start": "gatsby serve"
   },
   "devDependencies": {
     "@statoscope/webpack-plugin": "^5.20.1",
