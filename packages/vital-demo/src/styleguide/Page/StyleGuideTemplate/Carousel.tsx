@@ -45,7 +45,6 @@ const CarouselVariations = {
     vitalCarousel.WithNavigationButtons,
   ),
   AutoPlay: as(
-    vitalCarousel.WithImageSlide,
     vitalCarousel.WithNavigationButtons,
     vitalCarousel.WithAutoPlay
   ),
@@ -64,17 +63,17 @@ const vitalCarouselFlowContainer = asFluidToken({
 
 // Setup Default Data
 const image1 = {
-  src: 'https://placehold.co/1400x300/ff0000/FFF',
+  src: '/images/pages/styleguide/carousel/193cfc9be3b995831c6af2fea6650e60/red1400x300.svg',
   alt: 'red',
   title: 'red'
 };
 const image2 = {
-  src: 'https://placehold.co/1400x300/00ff00/FFF',
+  src: '/images/pages/styleguide/carousel/193cfc9be3b995831c6af2fea6650e60/green1400x300.svg',
   alt: 'green',
   title: 'green'
 };
 const image3 = {
-  src: 'https://placehold.co/1400x300/0000ff/FFF',
+  src: '/images/pages/styleguide/carousel/193cfc9be3b995831c6af2fea6650e60/blue1400x300.svg',
   alt: 'blue',
   title: 'blue'
 };

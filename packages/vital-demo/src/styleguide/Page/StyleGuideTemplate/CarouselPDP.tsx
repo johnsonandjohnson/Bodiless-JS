@@ -69,17 +69,17 @@ const vitalCarouselFlowContainer = asFluidToken({
 
 // Setup Default Data
 const squareimage1 = {
-  src: 'https://placehold.co/800x800/ff0000/FFF',
+  src: '/images/pages/styleguide/carousel/193cfc9be3b995831c6af2fea6650e60/red800x800.svg',
   alt: 'red',
   title: 'red'
 };
 const squareimage2 = {
-  src: 'https://placehold.co/800x800/00ff00/FFF',
+  src: '/images/pages/styleguide/carousel/193cfc9be3b995831c6af2fea6650e60/green800x800.svg',
   alt: 'green',
   title: 'green'
 };
 const squareimage3 = {
-  src: 'https://placehold.co/800x800/0000ff/FFF',
+  src: '/images/pages/styleguide/carousel/193cfc9be3b995831c6af2fea6650e60/blue800x800.svg',
   alt: 'blue',
   title: 'blue'
 };
