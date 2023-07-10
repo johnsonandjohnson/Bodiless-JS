@@ -1,0 +1,27 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "build": {
+      "outputs": [
+        "public/**",
+        "lib/**",
+        ".env.production",
+        ".env.development"
+      ],
+      "dependsOn": ["^build"]
+    },
+    "check": {},
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "lint": {},
+    "start": {
+      "persistent": true
+    },
+    "serve": {
+      "persistent": true
+    },
+    "test": {}
+  }
+}

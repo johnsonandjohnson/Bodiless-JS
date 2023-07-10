@@ -14,7 +14,7 @@ const configurators = {
     baseConfig.testDir = './playwright/tests/smoke-deprecated';
     baseConfig.webServer = {
       ...defaultServerConfig,
-      command: 'cd sites/test-site && npm run start',
+      command: 'cd sites/test-site && npm run dev',
     };
   },
   'smoke-vital': (baseConfig: PlaywrightTestConfig) => {

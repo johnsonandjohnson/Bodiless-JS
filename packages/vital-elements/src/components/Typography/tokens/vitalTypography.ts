@@ -13,11 +13,12 @@
  */
 
 import { as } from '@bodiless/fclasses';
-import { asElementToken, asTokenGroup } from '../../../util';
+import { asElementToken } from '../../../util';
 import { vitalColor } from '../../Color';
 import { vitalFontSize } from '../../FontSize';
 import { vitalTextDecoration } from '../../TextDecoration';
 import { TypographyMeta } from '../meta';
+import vitalTypographyV2 from './vitalTypographyV2';
 
 const Link = asElementToken({
   Theme: {
@@ -206,36 +207,15 @@ const Gradient = asElementToken({
   Meta: TypographyMeta,
 });
 
-export const TypographydMeta = {
-  categories: {
-    Type: ['Element'],
-    Group: ['Typography'],
-  },
-};
-
 /**
- * Vital 2.0 Colors coming from Figma Tokens. Tokens above will be deprecated.
- * @TODO: What should be the name for these token groups with vital 2.0 semantic tokens?
- * Eventually it will just replace the vitalTypography.
- */
-export const vital2Typography = asTokenGroup(TypographydMeta)({
-  H1: 'text-4xl leading-5 font-normal font-2',
-  H2: 'text-3xl leading-5 font-normal font-2',
-  H3: 'text-2xl leading-5 font-normal font-2',
-  H4: 'text-xl leading-5 font-normal font-2',
-  H5: 'text-lg leading-5 font-normal font-2',
-  BodyRegular: 'text-base leading-6 font-normal font-2',
-  BodyBold: 'text-base leading-6 font-bold font-2',
-  BodyInlineLink: 'text-base leading-6 font-bold font-2 underline',
-  BodyLargeRegular: 'text-lg leading-6 font-normal font-2',
-  BodyLargeBold: 'text-lg leading-6 font-bold font-2',
-  BodyLargeInlineLink: 'text-lg leading-6 font-bold font-2 underline',
-  Eyebrow: 'text-sm leading-6 font-bold font-2 uppercase',
-  Link: 'text-base leading-6 font-bold font-2 uppercase',
-  CrumbsReviewsRegular: 'text-sm leading-6 font-normal font-2',
-});
-
+* Vital Typography
+* @todo: All V 2.0 tokens are exported as part of vitalTypography, New Tokens from version 2
+* are suffixed with 'V2' where conflict exists with version 1. As soon as V1 tokens are deprecated,
+* vitalTypographyV2 can be moved here. 'V2' suffix must be removed.
+* Eventually it will just replace the vitalTypography.
+*/
 export default {
+  ...vitalTypographyV2,
   Link,
   H1,
   H2,
