@@ -8,7 +8,7 @@
   "sideEffects": false,
   "typings": "lib/index.d.ts",
   "bin": {
-    "create-vital-index": "./bin/create-search-index"
+    "create-search-index": "./bin/create-search-index"
   },
   "files": [
     "/lib",
