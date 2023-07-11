@@ -49,7 +49,7 @@
     "build:stats": "BODILESS_BUILD_STATS=1 npm run build",
     "check": "tsc -p ./tsconfig.check.json",
     "clean": "rimraf .next next-env.d.ts",
-    "dev": "npm run predev && run-p -r dev-frontend dev-backend",
+    "dev": "run-p -r dev-frontend dev-backend",
     "dev-backend": "bodiless-backend",
     "dev-frontend": "next dev -p ${APP_PORT:-8000}",
     "lint": "next lint",

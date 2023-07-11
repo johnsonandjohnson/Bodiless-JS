@@ -106,7 +106,7 @@
     "build:stats": "BODILESS_BUILD_STATS=1 npm run build",
     "check": "tsc -p ./tsconfig.check.json",
     "clean": "gatsby clean",
-    "dev": "npm run predev && run-p -r dev-frontend dev-backend",
+    "dev": "run-p -r dev-frontend dev-backend",
     "dev-backend": "bodiless-backend",
     "dev-frontend": "gatsby develop -p 8005",
     "docs": "run-s build:docs serve:docs",
