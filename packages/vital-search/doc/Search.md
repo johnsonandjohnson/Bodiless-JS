@@ -49,5 +49,5 @@ make the following changes.
    - add the following scripts
      ```
      "build": "npm-run-all build:env-vars build:lib build_search",
-     "build:search": "create-search-index",
+     "build:search": "create-vital-search-index",
      ```

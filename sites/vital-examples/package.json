@@ -64,7 +64,7 @@
     "build:docs": "bl-docs-build",
     "build:env-vars": "bodiless generate-env-vars",
     "build:lib": "next build",
-    "build:search": "create-search-index",
+    "build:search": "npm run search-index",
     "build:stats": "BODILESS_BUILD_STATS=1 npm run build",
     "check": "tsc -p ./tsconfig.check.json",
     "clean": "rimraf .next next-env.d.ts",
@@ -74,7 +74,7 @@
     "lint": "next lint",
     "docs": "run-s build:docs serve:docs",
     "predev": "run-s build:env-vars build:docs",
-    "search-index": "create-search-index",
+    "search-index": "create-vital-search-index",
     "serve": "next start -p ${APP_PORT:-9000}",
     "serve:docs": "docsify serve ./public/generated/doc",
     "start": "next start -p ${APP_PORT:-9000}"
