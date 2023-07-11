@@ -29,6 +29,7 @@ export const useProductDescriptionContent = () => ({
 
 export const useProductImageContent = () => {
   const product = usePDPContext();
+  if (!product?.images) return {};
   return {
     image: {
       src: `https:${product?.images[0]?.file.url}`,
