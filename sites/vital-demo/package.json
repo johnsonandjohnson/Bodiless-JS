@@ -83,11 +83,11 @@
     "dev-backend": "bodiless-backend",
     "dev-frontend": "gatsby develop",
     "docs": "run-s build:docs serve:docs",
-    "prepare": "node ../../scripts/set-missing-symlinks.js @bodiless",
     "prestart": "run-s build:env-vars",
     "serve": "gatsby serve",
     "serve:docs": "docsify serve ./doc",
-    "start": "run-p -r dev-frontend dev-backend",
+    "start": "gatsby serve",
+    "dev": "run-p -r dev-frontend dev-backend",
     "serve:test": "npm run build && gatsby serve -p 8005"
   },
   "devDependencies": {

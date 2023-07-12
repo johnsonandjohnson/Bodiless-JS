@@ -28,6 +28,7 @@
     "build": "tsc -p ./tsconfig.json",
     "build:required": "npm run build",
     "build:watch": "npm run build -- --watch",
+    "dev": "npm run build:watch",
     "build:api-doc": "typedoc --out doc/api ./src",
     "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx ./src",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"

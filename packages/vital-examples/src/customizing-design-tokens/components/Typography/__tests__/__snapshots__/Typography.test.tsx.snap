@@ -6,6 +6,48 @@ exports[`Typography Matches snapshot for Body 1`] = `
 />
 `;
 
+exports[`Typography Matches snapshot for BodyBold 1`] = `
+<span
+  className="text-base leading-6 font-bold font-2"
+/>
+`;
+
+exports[`Typography Matches snapshot for BodyInlineLink 1`] = `
+<span
+  className="text-base leading-6 font-bold font-2 underline"
+/>
+`;
+
+exports[`Typography Matches snapshot for BodyLargeBold 1`] = `
+<span
+  className="text-lg leading-6 font-bold font-2"
+/>
+`;
+
+exports[`Typography Matches snapshot for BodyLargeInlineLink 1`] = `
+<span
+  className="text-lg leading-6 font-bold font-2 underline"
+/>
+`;
+
+exports[`Typography Matches snapshot for BodyLargeRegular 1`] = `
+<span
+  className="text-lg leading-6 font-normal font-2"
+/>
+`;
+
+exports[`Typography Matches snapshot for BodyRegular 1`] = `
+<span
+  className="text-base leading-6 font-normal font-2"
+/>
+`;
+
+exports[`Typography Matches snapshot for CrumbsReviewsRegular 1`] = `
+<span
+  className="text-sm leading-6 font-normal font-2"
+/>
+`;
+
 exports[`Typography Matches snapshot for Eyebrow 1`] = `
 <span
   className="text-vital-secondary-eyebrow font-extrabold uppercase mb-3 text-m-xs lg:text-xs"
@@ -15,6 +57,12 @@ exports[`Typography Matches snapshot for Eyebrow 1`] = `
 exports[`Typography Matches snapshot for EyebrowNoSpacing 1`] = `
 <span
   className="text-vital-secondary-eyebrow font-extrabold uppercase text-m-xs lg:text-xs"
+/>
+`;
+
+exports[`Typography Matches snapshot for EyebrowV2 1`] = `
+<span
+  className="text-sm leading-6 font-bold font-2 uppercase"
 />
 `;
 
@@ -30,9 +78,21 @@ exports[`Typography Matches snapshot for H1 1`] = `
 />
 `;
 
+exports[`Typography Matches snapshot for H1V2 1`] = `
+<span
+  className="text-4xl leading-5 font-normal font-2"
+/>
+`;
+
 exports[`Typography Matches snapshot for H2 1`] = `
 <span
   className="text-vital-primary-header-copy mb-5 text-m-2xl lg:text-2xl font-extrabold"
+/>
+`;
+
+exports[`Typography Matches snapshot for H2V2 1`] = `
+<span
+  className="text-3xl leading-5 font-normal font-2"
 />
 `;
 
@@ -42,15 +102,33 @@ exports[`Typography Matches snapshot for H3 1`] = `
 />
 `;
 
+exports[`Typography Matches snapshot for H3V2 1`] = `
+<span
+  className="text-2xl leading-5 font-normal font-2"
+/>
+`;
+
 exports[`Typography Matches snapshot for H4 1`] = `
 <span
   className="text-vital-primary-header-copy mb-5.75 lg:mb-9 font-normal text-m-xl lg:text-xl"
 />
 `;
 
+exports[`Typography Matches snapshot for H4V2 1`] = `
+<span
+  className="text-xl leading-5 font-normal font-2"
+/>
+`;
+
 exports[`Typography Matches snapshot for H5 1`] = `
 <span
   className="text-vital-primary-header-copy mb-5 lg:mb-4.5 font-medium text-m-base lg:text-base"
+/>
+`;
+
+exports[`Typography Matches snapshot for H5V2 1`] = `
+<span
+  className="text-lg leading-5 font-normal font-2"
 />
 `;
 
@@ -63,6 +141,12 @@ exports[`Typography Matches snapshot for HeaderLink 1`] = `
 exports[`Typography Matches snapshot for Link 1`] = `
 <span
   className="text-vital-primary-interactive hover:opacity-70 active:text-vital-primary-interactive-active underline font-bold"
+/>
+`;
+
+exports[`Typography Matches snapshot for LinkV2 1`] = `
+<span
+  className="text-base leading-6 font-bold font-2 uppercase"
 />
 `;
 

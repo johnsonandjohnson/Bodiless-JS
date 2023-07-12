@@ -31,7 +31,6 @@
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "gatsby": "^4.11.2",
-    "gatsby-plugin-gatsby-cloud": "4.13.0",
     "postcss": "^8.4.12",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -59,7 +58,8 @@
     "prestart": "npm run build:docs",
     "serve": "gatsby serve",
     "serve:docs": "docsify serve ./doc",
-    "start": "run-p -r dev-frontend dev-backend"
+    "start": "gatsby serve",
+    "dev": "run-p -r dev-frontend dev-backend"
   },
   "devDependencies": {
     "@statoscope/webpack-plugin": "^5.20.1",
