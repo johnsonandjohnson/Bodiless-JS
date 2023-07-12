@@ -13,6 +13,7 @@
  */
 
 /* eslint-disable global-require */
+
 declare global {
   // eslint-disable-next-line
   var BODILESS_GATSBY_LOGS: string[];
@@ -22,7 +23,6 @@ const LOG_FILE = 'gatsby_error.log';
 
 /**
  * flush logs to a file and clear global object
- *
  * @param message that will be prepended to the logs
  */
 const flush = (message: string) => {
