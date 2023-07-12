@@ -1,0 +1,37 @@
+name: bodiless-js
+services:
+  node:
+    type: node:18
+    build:
+      - npm run clean
+      - npm run setup
+    globals:
+      npm: latest
+      rimraf: latest
+      gatsby: latest
+    overrides:
+      ports:
+        - '8006:8006'
+        - '8005:8005'
+        - '9000:9000'
+        - '8020:8020' #knapsack
+        - '3999:3999' #knapsack
+    scanner: false
+tooling:
+  npm:
+    service: node
+  npx:
+    service: node
+  build:
+    service: node
+    cmd:
+      - npm run clean
+      - npm run setup
+  start-vital-demo:
+    service: node
+    cmd: npm start
+    env:
+      APP_SITE_NAME: vital-demo
+proxy:
+  node:
+    - vital-demo.sites.bodiless-js.lndo.site:8000
