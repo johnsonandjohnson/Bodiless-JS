@@ -19,7 +19,7 @@ npm run setup
 
 ```shell-session
 cd sites/test-site
-npm run start
+npm run dev
 ```
 
 This will build all packages in _watch mode_, and then start `gatsby develop` on the Test Site. You

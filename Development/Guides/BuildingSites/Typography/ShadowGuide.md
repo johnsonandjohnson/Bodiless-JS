@@ -91,9 +91,9 @@ Let's review the code we added:
   <strong>IMPORTANT:</strong> Please read the following on limitations:
 
   01. When you **add a new file to be shadowed**, you must stop the site in edit mode and restart it
-      via `npm run start`. The plugin will then pick up the new file to be shadowed.
+      via `npm run dev`. The plugin will then pick up the new file to be shadowed.
   01. When you make a **change to the Tailwind config**, you must stop the site in edit mode and
-      restart it via `npm run start`. This will allow the Tailwind config to be rebuilt.
+      restart it via `npm run dev`. This will allow the Tailwind config to be rebuilt.
   01. So that you don't need to constantly rebuild the package after each change, run `npm run
       build:watch`; this will rebuild the package on each change.
 
