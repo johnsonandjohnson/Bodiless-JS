@@ -21,7 +21,7 @@ npm run bootstrap
 Then, start the development server for either site:
 ```
 cd examples/test-site # or cd examples/starter
-npm run start
+npm run dev
 ```
 
 You can also build and serve the static version of either site
@@ -57,7 +57,7 @@ Finally, run scripts from your site normally:
 ```
 cd foo
 npm install
-npm run start
+npm run dev
 ...
 npm run build
 ...

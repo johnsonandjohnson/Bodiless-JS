@@ -12,7 +12,6 @@
     "clean": "rm -rf ./lib",
     "ks:build": "knapsack build",
     "ks:build-tokens": "knapsack build:tokens",
-    "prepare": "node ../../scripts/set-missing-symlinks.js @bodiless",
     "start": "knapsack start",
     "serve": "NODE_ENV=production knapsack serve",
     "test": "knapsack test"

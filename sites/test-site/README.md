@@ -8,7 +8,7 @@ As part of the installation process, you may want to configure specific environm
 
 * `npm run build:env-vars` - To regenerate env variables only.
 * `npm run build` - It will regenerate env vars as part of the `build` script.
-* `npm run start` - It will regenerate env vars as part of the `start` script.
+* `npm run dev` - It will regenerate env vars as part of the `start` script.
 
 ## Usage
 

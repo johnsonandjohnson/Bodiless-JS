@@ -49,14 +49,14 @@
     "build:stats": "BODILESS_BUILD_STATS=1 npm run build",
     "check": "tsc -p ./tsconfig.check.json",
     "clean": "rimraf .next next-env.d.ts",
+    "dev": "run-p -r dev-frontend dev-backend",
     "dev-backend": "bodiless-backend",
     "dev-frontend": "next dev -p ${APP_PORT:-8000}",
     "lint": "next lint",
-    "prestart": "npm run build:docs",
+    "predev": "npm run build:docs",
     "serve": "next start -p ${APP_PORT:-9000}",
     "serve:docs": "docsify serve ./public/generated/doc",
-    "start": "next start -p ${APP_PORT:-9000}",
-    "dev": "run-p -r dev-frontend dev-backend"
+    "start": "next start -p ${APP_PORT:-9000}"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.4.0",

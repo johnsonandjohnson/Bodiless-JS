@@ -71,8 +71,7 @@
     "dev-frontend": "node --stack-size=3200 ../../node_modules/.bin/next dev -p ${APP_PORT:-8000}",
     "lint": "next lint",
     "docs": "run-s build:docs serve:docs",
-    "predev": "run-s build:env-vars",
-    "prestart": "run-s build:env-vars build:docs",
+    "predev": "run-s build:env-vars build:docs",
     "serve": "next start -p ${APP_PORT:-9000}",
     "start": "next start -p ${APP_PORT:-9000}",
     "serve:docs": "docsify serve ./public/generated/doc"
