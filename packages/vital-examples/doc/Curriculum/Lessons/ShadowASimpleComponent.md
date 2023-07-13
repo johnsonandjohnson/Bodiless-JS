@@ -31,7 +31,7 @@ components.
   ```shell
   cd sites/vital-examples
   npm run build
-  npm run start
+  npm run dev
   ```
 
   —and go to <http://localhost:8000/shadow-simple-component/>.
