@@ -36,7 +36,6 @@
     "@bodiless/vital-link": "^1.0.0-rc.42",
     "@bodiless/vital-list": "^1.0.0-rc.42",
     "@bodiless/vital-navigation": "^1.0.0-rc.42",
-    "@bodiless/vital-search": "^1.0.0-rc.42",
     "@bodiless/vital-templates": "^1.0.0-rc.42",
     "@bodiless/vital-youtube": "^1.0.0-rc.42",
     "@bodiless/webpack": "^1.0.0-rc.42",
@@ -72,11 +71,10 @@
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
   "scripts": {
-    "build": "npm-run-all build:env-vars build:lib build:search",
+    "build": "npm-run-all build:env-vars build:lib",
     "build:docs": "bl-docs-build",
     "build:env-vars": "bodiless generate-env-vars",
     "build:lib": "bl-clear-logs && gatsby build && bl-validate-logs",
-    "build:search": "create-search-index",
     "build:stats": "BODILESS_BUILD_STATS=1 npm run build",
     "check": "tsc -p ./tsconfig.check.json",
     "clean": "gatsby clean",

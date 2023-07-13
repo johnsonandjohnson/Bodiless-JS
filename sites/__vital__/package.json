@@ -74,7 +74,6 @@
     "dev-frontend": "gatsby develop",
     "docs": "run-s build:docs serve:docs",
     "predev": "run-s build:env-vars build:docs",
-    "search-index": "create-search-index",
     "serve": "gatsby serve",
     "serve:docs": "docsify serve ./doc",
     "start": "gatsby serve"
