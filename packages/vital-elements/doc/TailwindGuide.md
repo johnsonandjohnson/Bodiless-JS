@@ -120,7 +120,7 @@ easy to translate `rem` to `px`.
 ## Making Changes with Tailwind
 
 Each time a site builder makes a change in `tailwind.config.js`, they will need to rerun the build
-process. This can be done with either `npm run start` or `npm run build`, and it will generate CSS
+process. This can be done with either `npm run dev` or `npm run build`, and it will generate CSS
 that is automatically included for the site and its packages.
 
 !> **IMPORTANT:** For Tailwind config changes to be visible, you must restart or rebuild to see the

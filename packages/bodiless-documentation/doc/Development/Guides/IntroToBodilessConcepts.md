@@ -67,7 +67,7 @@ A few things to note:
 01. A page query incorporating two fragments (also defined in `gatsby-theme-bodiless`) ensures that
     Bodiless is able to find and load content for the page.
 
-Now start the development server (`npm run start`) and navigate to
+Now start the development server (`npm run dev`) and navigate to
 [`localhost:8000/my-first-page`](http://localhost:8000/my-first-page ':target=_blank'). This is just
 a basic Gatsby page — nothing remarkable yet (except Gatsby itself, of course!).
 

@@ -32,7 +32,7 @@ In this lesson we will:
   ```shell
   cd sites/vital-examples
   npm run build
-  npm run start
+  npm run dev
   ```
 
   —and go to <http://localhost:8000/customizing-design-tokens/>.

@@ -30,7 +30,7 @@ By building the `vital-section` package, we will cover:
   ```shell
   cd sites/vital-examples
   npm run build
-  npm run start
+  npm run dev
   ```
 
   —and go to <http://localhost:8000/intro/section-example/>.

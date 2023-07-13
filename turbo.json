@@ -3,10 +3,12 @@
   "pipeline": {
     "build": {
       "outputs": [
-        "public/**",
+        "dist/**",
+        ".next/**",
         "lib/**",
-        ".env.production",
-        ".env.development"
+        "cjs/**",
+        "index*",
+        "!.next/cache/**"
       ],
       "dependsOn": ["^build"]
     },

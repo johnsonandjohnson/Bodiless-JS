@@ -327,7 +327,7 @@ default_deploy () {
 # Default implementation of finalize psh deploy hook.
 default_finalize_deploy () {
   npm ci
-  npm run prestart
+  npm run predev
 }
 
 # Final step after p.sh deploy hook.
