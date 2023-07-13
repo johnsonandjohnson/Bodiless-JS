@@ -33,6 +33,21 @@ runs:
           ./sites
         key: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}-${{ hashFiles('packages/**/src') }}
     - name: Build
-      if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
+      # Temporarily removed cache hit check
+      # Error URL:
+      # https://github.com/johnsonandjohnson/Bodiless-JS/actions/runs/5519549014/jobs/10069524147?pr=2142
+      # Log:
+      # [WebServer] Killed
+      # [WebServer] npm[WebServer]  [WebServer] ERR! Lifecycle script `dev-frontend` failed with error:[WebServer]  
+      # [WebServer] npm[WebServer]  [WebServer] ERR! Error: command failed 
+      # [WebServer] npm[WebServer]  ERR!   in workspace: @sites/test-site@1.0.0-rc.42 
+      # [WebServer] npm ERR![WebServer]  [WebServer]   at location: /home/runner/work/Bodiless-JS/Bodiless-JS/sites/test-site 
+      # [WebServer] ERROR: "dev-frontend" exited with 1.
+      # [WebServer] npm[WebServer]  ERR! Lifecycle script `dev` failed with error: 
+      # [WebServer] npm[WebServer]  [WebServer] ERR! Error: command failed 
+      # [WebServer] npm[WebServer]  ERR!   in workspace: @sites/test-site@1.0.0-rc.42 
+      # [WebServer] npm ERR! [WebServer]   at location: /home/runner/work/Bodiless-JS/Bodiless-JS/sites/test-site[WebServer]  
+      # Error: Process from config.webServer was not able to start. Exit code: 1
+      # if: ${{ steps.cache-build.outputs.cache-hit != 'true' }}
       shell: bash
       run: npm run setup
