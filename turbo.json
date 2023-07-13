@@ -7,6 +7,7 @@
         ".next/**",
         "lib/**",
         "cjs/**",
+        "index*",
         "!.next/cache/**"
       ],
       "dependsOn": ["^build"]
