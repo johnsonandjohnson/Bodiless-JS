@@ -64,6 +64,7 @@
         - [Background Images](/VitalDesignSystem/Curriculum/Lessons/BackgroundImages)
         - [Develop A New Component](/VitalDesignSystem/Curriculum/Lessons/DevelopA_NewComponent)
         - [Reusable Tokens](/VitalDesignSystem/Curriculum/Lessons/ReusableTokens)
+        - [Component Slots](/VitalDesignSystem/Curriculum/Lessons/ComponentSlots)
   - [Content Editor User Guide](/ContentEditorUserGuide/)
     - [Page Menu](/ContentEditorUserGuide/PageMenu/)
       - [New](/ContentEditorUserGuide/PageMenu/New/)
