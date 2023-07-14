@@ -19,7 +19,8 @@
         "CustomizeDesignTokens.md": "./doc/Curriculum/Lessons/CustomizeDesignTokens.md",
         "BackgroundImages.md": "./doc/Curriculum/Lessons/BackgroundImages.md",
         "DevelopA_NewComponent.md": "./doc/Curriculum/Lessons/DevelopANewComponent.md",
-        "ReusableTokens.md": "./doc/Curriculum/Lessons/ReusableTokens.md"
+        "ReusableTokens.md": "./doc/Curriculum/Lessons/ReusableTokens.md",
+        "ComponentSlots.md": "./doc/Curriculum/Lessons/ComponentSlots.md"
       }
     },
     "Guides": {

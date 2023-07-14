@@ -35,7 +35,6 @@ const ReactTagsField: ComponentType<ReactTagsFieldProps> = (props) => {
     tagList: 'bl-max-w-xl-grid-1 bl-inline',
     tagListItem: 'bl-inline-block',
     tagName: 'bl-text-gray-900',
-    highlight: '', // todo: determine the correct value for this
     comboBox:
       'bl-inline-block bl-py-grid-1 bl-px-grid-0 bl-mb-grid-1 bl-max-w-full bl-min-w-xl-grid-1',
     input: 'bl-text-gray-900 bl-react-tags__search-input',
@@ -44,6 +43,7 @@ const ReactTagsField: ComponentType<ReactTagsFieldProps> = (props) => {
     noOptions: 'react-tags__listbox-no-options',
     option: 'react-tags__listbox-option',
     optionIsActive: 'is-active',
+    highlight: 'react-tags__listbox-option-highlight',
   };
 
   return <ReactTagsFieldClean classNames={classes} {...props} />;

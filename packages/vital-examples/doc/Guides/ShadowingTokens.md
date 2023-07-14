@@ -518,7 +518,7 @@ To export a shadowed version of a token collection:
 
 - When you add a new shadow file, you need to:
   01. Rebuild your package with `npm run build -- --scope=<your-site>`;
-  01. Restart your site in Dev mode via `npm run start`;
+  01. Restart your site in Dev mode via `npm run dev`;
   01. The token shadow plugin will then pick up the new file to be shadowed.
 - So that you don't need to constantly rebuild the package after each change, run `npm run
   build:watch`; this will rebuild the package on each change.

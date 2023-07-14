@@ -32,6 +32,7 @@
     "bl": "./bin/bodiless",
     "build": "tsc --version && tsc -p ./tsconfig.json ",
     "build:watch": "npm run build -- --watch",
+    "dev": "npm run build:watch",
     "new": "./bin/bodiless new",
     "postpack": "rimraf oclif.manifest.json",
     "prepack": "rimraf lib && npm run build && oclif-dev manifest && oclif-dev readme"

@@ -222,7 +222,22 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
       from: new RegExp(jsTemplateName, 'g'),
       to: newName,
     };
-    return Promise.all([replaceInFile(conf2), replaceInFile(conf3)]);
+    // Replace default site name from scripts
+    const conf4 = {
+      ...commonOptions,
+      files: [
+        `${cwd}/edit/ecosystem.config.js`,
+        `${cwd}/postinstall.sh`,
+        `${cwd}/edit/.platform.app.yaml`,
+      ].filter(f => fs.existsSync(f)),
+      from: 'test-site',
+      to: newName,
+    };
+    return Promise.all([
+      replaceInFile(conf2),
+      replaceInFile(conf3),
+      replaceInFile(conf4),
+    ]);
   }
 
   async cloneSourceRepo(): Promise<string> {
@@ -375,14 +390,19 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
       data.name = `${name}-monorepo`;
       if (!fs.existsSync(templatePackageDir)) {
         delete data.scripts['build:packages'];
-        data.scripts.setup = 'npm run bootstrap';
-        data.scripts['setup:gatsby-cloud'] = 'npm run bootstrap:gatsby-cloud';
-        data.scripts.lint = 'eslint --fix  --cache --ext .js,.jsx,.ts,.tsx sites -- ';
+        data.scripts.setup = 'npm install';
         data.scripts.fix = 'eslint --cache --ext .js,.jsx,.ts,.tsx sites -- ';
       }
-      data.scripts.start = `lerna run start --stream --scope ${siteName}`;
-      data.scripts.serve = `lerna run serve --stream --scope ${siteName}`;
-      data.scripts.docs = `lerna run build:docs --stream --scope ${siteName} && docsify serve ./${sitesDir}/${name}/doc`;
+      delete data.scripts['vital-check'];
+      delete data.scripts['test:pw-functional'];
+      delete data.scripts['test:playwright'];
+      delete data.scripts.copyright;
+      data.scripts.lint = 'eslint --fix  --cache --ext .js,.jsx,.ts,.tsx sites -- ';
+      data.scripts.start = `npm run start --workspace=${siteName}`;
+      data.scripts.dev = `cross-env NODE_ENV=development npx -y turbo dev --filter=./packages/* --filter=${siteName}`;
+      data.scripts.serve = `npm run serve --workspace=${siteName}`;
+      data.scripts.docs = `npm run build:docs --workspace=${siteName} && docsify serve ./${sitesDir}/${name}/doc`;
+      data.husky.hooks['pre-push'] = 'npm run sync:check && npm run lint && npm run check';
     } else if (type === 'site') {
       data.name = siteName;
       // Find the old dependency on the template package (if any) and delete it.
@@ -456,8 +476,6 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     const name = await this.getArg('name');
     const files = [
       path.join(dest, 'jenkins'),
-      path.join(dest, 'cypress'),
-      path.join(dest, 'cypress.json'),
       path.join(dest, 'playwright'),
       path.join(dest, 'playwright.config.ts'),
       path.join(dest, '.github'),
@@ -466,10 +484,11 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
       path.join(dest, 'Dockerfile'),
       path.join(dest, 'UPGRADE.md'),
       path.join(dest, 'CONTRIBUTING.md'),
+      path.join(dest, 'CHANGELOG.md'),
       // remove the starter eslintrcs.  They exist only to disable
       // rules which flag the underscores in the __starter__ template.
-      path.join(dest, packagesDir, name, 'eslintrc.js'),
-      path.join(dest, sitesDir, name, 'eslintrc.js'),
+      path.join(dest, packagesDir, name, '.eslintrc.js'),
+      path.join(dest, sitesDir, name, '.eslintrc.js'),
     ];
     return Promise.all(files.map(f => fs.remove(f)));
   }
@@ -498,6 +517,35 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     }
   }
 
+  /**
+   * Update the new site package-lock.json to remove any references to
+   * local packages. This is necessary because the package-lock
+   * file is copied from bodiless monorepo to the new site.
+   * It contains references to local packages which will not exist
+   * in the new site.
+   */
+  async updateLockFile() {
+    const dest = await this.getArg('dest');
+    const lockFilename = path.join(dest, 'package-lock.json');
+    try {
+      const lockFile = await fs.readFile(lockFilename, 'utf8');
+      const lockData = JSON.parse(lockFile);
+      const removed = Object.keys(lockData.packages).filter(
+        key => {
+          if (lockData?.packages[key]?.link || !!key.match(/^(packages|sites)\//)) {
+            delete lockData.packages[key];
+            return true;
+          }
+          return false;
+        }
+      );
+      console.log('Package keys removed: ', removed);
+      await fs.writeFile(lockFilename, JSON.stringify(lockData, undefined, 2));
+    } catch (error: any) {
+      throw new Error(`Failed to update package-lock: ${lockFilename}.  ${error.message}`);
+    }
+  }
+
   async clean() {
     await this.cleanSites('site');
     await this.cleanSites('package');
@@ -508,6 +556,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     await this.updatePshConfig();
     await this.updateTsConfig();
     await this.moveReadMe();
+    await this.updateLockFile();
     await this.replaceTemplatePackageName();
   }
 
