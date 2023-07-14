@@ -17,6 +17,8 @@ export {
   withoutHydrationInline,
   isStaticClientSide,
 } from './withoutHydration';
+export * from './Islands';
+
 export {
   StaticBlock,
   StaticInline,
