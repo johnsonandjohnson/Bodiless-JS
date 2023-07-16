@@ -6,8 +6,8 @@ const documentProps = {
   PostHead: null,
 };
 if (process.env.NODE_ENV === 'production') {
-  const id = 'GTM-N3M9LLD';
-  const dataLayerName = 'globalDataLayer';
+  const id = 'GTM-WSPHT2V';
+  const dataLayerName = 'dataLayer';
   const script = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
