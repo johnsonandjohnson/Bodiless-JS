@@ -76,41 +76,7 @@ export default asTokenGroup(ColorMeta)({
   TextLight1: 'text-neutral-100',
   TextLight2: 'text-neutral-100',
   TextLight3: 'text-neutral-300',
-
-  // Interactive Color Tokens
-  SemanticColorInteractiveLightThemeIdle: 'SemanticColorInteractiveLightThemeIdle',
-  SemanticColorInteractiveLightThemeHover: 'hover:SemanticColorInteractiveLightThemeHover',
-  SemanticColorInteractiveLightThemeFocus: 'focus:SemanticColorInteractiveLightThemeFocus',
-  SemanticColorInteractiveLightThemePressed: 'active:SemanticColorInteractiveLightThemePressed',
-  SemanticColorInteractiveLightThemeDisabled: 'SemanticColorInteractiveLightThemeDisabled',
-
-  // Interactive Color Tokens for text
-  ColorButtonPrimaryTextLightThemeText: 'text-ColorButtonPrimaryTextLightThemeText',
-  SemanticColorSecondaryTextLightThemeDefault: 'text-SemanticColorInteractiveLightThemeIdle',
-  SemanticColorSecondaryTextLightThemeHover: 'hover:text-SemanticColorInteractiveLightThemeHover',
-  SemanticColorSecondaryTextLightThemeFocus: 'focus:text-SemanticColorInteractiveLightThemeFocus',
-  SemanticColorSecondaryTextLightThemePressed: 'active:text-SemanticColorInteractiveLightThemePressed',
-  SemanticColorSecondaryTextLightThemeDisabled: 'text-SemanticColorInteractiveLightThemeDisabled',
-  SemanticColorTertiaryTextLightThemeIdle: 'text-SemanticColorInteractiveLightThemeIdle',
-  SemanticColorTertiaryTextLightThemeHover: 'hover:text-SemanticColorInteractiveLightThemeHover',
-  SemanticColorTertiaryTextLightThemeFocus: 'focus:text-SemanticColorInteractiveLightThemeFocus',
-  SemanticColorTertiaryTextLightThemePressed: 'active:text-SemanticColorInteractiveLightThemePressed',
-  SemanticColorTertiaryTextLightThemeDisabled: 'text-SemanticColorInteractiveLightThemeDisabled',
-
-  // Interactive Color Tokens for background
-  SemanticColorPrimaryBackgroundLightThemeIdle: 'bg-SemanticColorInteractiveLightThemeIdle',
-  SemanticColorPrimaryBackgroundLightThemeHover: 'hover:bg-SemanticColorInteractiveLightThemeHover',
-  SemanticColorPrimaryBackgroundLightThemeFocus: 'focus:bg-SemanticColorInteractiveLightThemeFocus',
-  SemanticColorPrimaryBackgroundLightThemePressed: 'active:bg-SemanticColorInteractiveLightThemePressed',
-  SemanticColorPrimaryBackgroundLightThemeDisabled: 'bg-SemanticColorInteractiveLightThemeDisabled',
-
-  // Interactive Color Tokens for border
-  SemanticColorSecondaryBorderLightThemeDefault: 'border-SemanticColorSecondaryBorderLightThemeDefault',
-  SemanticColorSecondaryBorderLightThemeHover: 'hover:border-SemanticColorSecondaryBorderLightThemeHover',
-  SemanticColorSecondaryBorderLightThemeFocus: 'focus:border-SemanticColorSecondaryBorderLightThemeFocus',
-  SemanticColorSecondaryBorderLightThemePressed: 'active:border-SemanticColorSecondaryBorderLightThemePressed',
-  SemanticColorSecondaryBorderLightThemeDisabled: 'border-SemanticColorSecondaryBorderLightThemeDisabled',
-
+  
   // Border Color Tokens
   BorderLight: 'neutral-200',
   BorderDark: 'neutral-600',

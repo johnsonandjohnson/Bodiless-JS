@@ -109,7 +109,7 @@ const twConfig = {
        */
       colors: {
         // ...colors,
-        ColorButtonPrimaryTextLightThemeText: '#ffffff',
+        SemanticColorDarkThemeBaseText: '#000000',
         SemanticColorInteractiveLightThemeIdle: '#019881',
         SemanticColorInteractiveLightThemeHover: '#017A67',
         SemanticColorInteractiveLightThemeFocus: '#017A67',
