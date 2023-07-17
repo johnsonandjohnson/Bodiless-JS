@@ -7,7 +7,8 @@
   },
   "include": [
     "src",
-    "../../@types/*"
+    "../../@types/*",
+    "src/components/ButtonElement/tokens/index.ts"
   ],
   "exclude": [
     "lib",

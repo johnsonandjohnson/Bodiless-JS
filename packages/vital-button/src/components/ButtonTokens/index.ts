@@ -14,41 +14,39 @@ export const ButtonMeta = {
  * It feels redundant to have `vitalProductCard.BorderProductCard` etc. We should either change
  * the collection name or discuss the options we have for changing the token names (in JSON file?).
  */
-const vitalButtonTokens = asTokenGroup(ButtonMeta)({
+const vitalButtonElement = asTokenGroup(ButtonMeta)({
   // All button styles
-  BorderRadiusButton: 'rounded-lg',
+  ButtonPrimaryBorderRadius: 'rounded-8',
   BorderPaddingButton: 'px-x-lg py-md',
   // TODO Needs work shouldn't have defined
   ShadowButtonFocus: 'focus:drop-shadow-button',
   TextButtonDefault: vitalTypography.BodyBold,
   // Primary
-  ColorButtonPrimaryBackgroundDefault: vitalColor.InteractiveDarkBackgroundDefault,
-  ColorButtonPrimaryBackgroundHover: vitalColor.InteractiveDarkBackgroundHover,
-  ColorButtonPrimaryBackgroundFocus: vitalColor.InteractiveDarkBackgroundFocus,
-  ColorButtonPrimaryBackgroundPressed: vitalColor.InteractiveDarkBackgroundPressed,
-  ColorButtonPrimaryBackgroundDisabled: vitalColor.InteractiveDarkBackgroundDisabled,
-  ColorButtonPrimaryTextDefault: vitalColor.TextLight1,
+  ButtonPrimaryBackgroundLightThemeIdle: vitalColor.SemanticColorPrimaryBackgroundLightThemeIdle,
+  ButtonPrimaryBackgroundLightThemeHover: vitalColor.SemanticColorPrimaryBackgroundLightThemeHover,
+  ButtonPrimaryBackgroundLightThemeFocus: vitalColor.SemanticColorPrimaryBackgroundLightThemeFocus,
+  // eslint-disable-next-line max-len
+  ButtonPrimaryBackgroundLightThemePressed: vitalColor.SemanticColorPrimaryBackgroundLightThemePressed,
+  // eslint-disable-next-line max-len
+  ButtonPrimaryBackgroundLightThemeDisabled: vitalColor.SemanticColorPrimaryBackgroundLightThemeDisabled,
+  ButtonPrimaryTextLightThemeText: vitalColor.ColorButtonPrimaryTextLightThemeText,
   // Secondary
-  ColorButtonSecondaryBackgroundHover: vitalColor.InteractiveDarkBackgroundHover,
-  ColorButtonSecondaryBackgroundFocus: vitalColor.InteractiveDarkBackgroundFocus,
-  ColorButtonSecondaryBackgroundPressed: vitalColor.InteractiveDarkBackgroundPressed,
-  ColorButtonSecondaryTextDefault: vitalColor.InteractiveDarkTextDefault,
-  ColorButtonSecondaryTextHover: vitalColor.InteractiveDarkTextHover,
-  ColorButtonSecondaryTextFocus: vitalColor.InteractiveDarkTextFocus,
-  ColorButtonSecondaryTextPressed: vitalColor.InteractiveDarkTextPressed,
-  ColorButtonSecondaryTextDisabled: vitalColor.InteractiveDarkTextDisabled,
-  BorderButtonSecondaryDefault: as(vitalColor.InteractiveDarkBorderDefault, 'border-solid border-1'),
-  BorderButtonSecondaryHover: as(vitalColor.InteractiveDarkBorderHover, 'border-solid border-1'),
-  BorderButtonSecondaryFocus: as(vitalColor.InteractiveDarkBorderFocus, 'border-solid border-1'),
-  BorderButtonSecondaryPressed: as(vitalColor.InteractiveDarkBorderPressed, 'border-solid border-1'),
-  BorderButtonSecondaryDisabled: as(vitalColor.InteractiveDarkBorderDisabled, 'border-solid border-1'),
+  ButtonSecondaryTextLightThemeDefault: vitalColor.SemanticColorSecondaryTextLightThemeDefault,
+  ButtonSecondaryTextLightThemeHover: vitalColor.SemanticColorSecondaryTextLightThemeHover,
+  ButtonSecondaryTextLightThemeFocus: vitalColor.SemanticColorSecondaryTextLightThemeFocus,
+  ButtonSecondaryTextLightThemePressed: vitalColor.SemanticColorSecondaryTextLightThemePressed,
+  ButtonSecondaryTextLightThemeDisabled: vitalColor.SemanticColorSecondaryTextLightThemeDisabled,
+  ButtonSecondaryBorderLightThemeDefault: as(vitalColor.SemanticColorSecondaryBorderLightThemeDefault, 'border-solid border-1'),
+  ButtonSecondaryBorderLightThemeHover: as(vitalColor.SemanticColorSecondaryBorderLightThemeHover, 'border-solid border-1'),
+  ButtonSecondaryBorderLightThemeFocus: as(vitalColor.SemanticColorSecondaryBorderLightThemeFocus, 'border-solid border-1'),
+  ButtonSecondaryBorderLightThemePressed: as(vitalColor.SemanticColorSecondaryBorderLightThemePressed, 'border-solid border-1'),
+  ButtonSecondaryBorderLightThemeDisabled: as(vitalColor.SemanticColorSecondaryBorderLightThemeDisabled, 'border-solid border-1'),
   // Tertiary
-  ColorButtonTertiaryTextDefault: vitalColor.InteractiveDarkTextDefault,
-  ColorButtonTertiaryTextHover: vitalColor.InteractiveDarkTextHover,
-  ColorButtonTertiaryTextFocus: vitalColor.InteractiveDarkTextFocus,
-  ColorButtonTertiaryTextPressed: vitalColor.InteractiveDarkTextPressed,
-  ColorButtonTertiaryTextDisabled: vitalColor.InteractiveDarkTextDisabled,
-  ColorButtonTertiaryBackgroundFocus: vitalColor.InteractiveDarkBackgroundFocus,
+  ButtonTertiaryTextLightThemeDefault: vitalColor.SemanticColorTertiaryTextLightThemeIdle,
+  ButtonTertiaryTextLightThemeHover: vitalColor.SemanticColorTertiaryTextLightThemeHover,
+  ButtonTertiaryTextLightThemeFocus: vitalColor.SemanticColorTertiaryTextLightThemeFocus,
+  ButtonTertiaryTextLightThemePressed: vitalColor.SemanticColorTertiaryTextLightThemePressed,
+  ButtonTertiaryTextLightThemeDisabled: vitalColor.SemanticColorTertiaryTextLightThemeDisabled,
 });
 
-export default vitalButtonTokens;
+export default vitalButtonElement;

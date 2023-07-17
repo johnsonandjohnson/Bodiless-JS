@@ -31,13 +31,13 @@ import vitalButtonTokens from '../../ButtonTokens';
 
 const Default = asButtonToken({
   Layout: {
-    Wrapper: 'flex group justify-center',
+    Wrapper: 'group justify-center',
   },
   Theme: {
     // NOTE: Deprecated temporarily.
     // _: as(vitalLink.WithDownloadStyles, vitalLink.WithExternalStyles),
     Wrapper: as(
-      vitalButtonTokens.BorderRadiusButton,
+      vitalButtonTokens.ButtonPrimaryBorderRadius,
       vitalButtonTokens.ShadowButtonFocus,
     ),
     Body: vitalButtonTokens.TextButtonDefault,
@@ -83,12 +83,13 @@ const Default = asButtonToken({
 const Primary = asButtonToken(Default, {
   Theme: {
     Wrapper: as(
-      vitalButtonTokens.ColorButtonPrimaryBackgroundDefault,
-      vitalButtonTokens.ColorButtonPrimaryBackgroundHover,
-      vitalButtonTokens.ColorButtonPrimaryBackgroundFocus,
-      vitalButtonTokens.ColorButtonPrimaryBackgroundPressed,
+      vitalButtonTokens.ButtonPrimaryBackgroundLightThemeIdle,
+      vitalButtonTokens.ButtonPrimaryBackgroundLightThemeHover,
+      vitalButtonTokens.ButtonPrimaryBackgroundLightThemeFocus,
+      vitalButtonTokens.ButtonPrimaryBackgroundLightThemePressed,
+      vitalButtonTokens.ButtonPrimaryBackgroundLightThemeDisabled,
     ),
-    Body: vitalButtonTokens.ColorButtonPrimaryTextDefault,
+    Body: vitalButtonTokens.ButtonPrimaryTextLightThemeText,
   },
   Meta: flowHoc.meta.term('Style')('Primary'),
 });
@@ -96,19 +97,16 @@ const Primary = asButtonToken(Default, {
 const Secondary = asButtonToken(Default, {
   Theme: {
     Wrapper: as(
-      vitalButtonTokens.BorderButtonSecondaryDefault,
-      vitalButtonTokens.BorderButtonSecondaryHover,
-      vitalButtonTokens.BorderButtonSecondaryFocus,
-      vitalButtonTokens.BorderButtonSecondaryPressed,
-      vitalButtonTokens.ColorButtonSecondaryBackgroundHover,
-      vitalButtonTokens.ColorButtonSecondaryBackgroundFocus,
-      vitalButtonTokens.ColorButtonSecondaryBackgroundPressed,
+      vitalButtonTokens.ButtonSecondaryBorderLightThemeDefault,
+      vitalButtonTokens.ButtonSecondaryBorderLightThemeHover,
+      vitalButtonTokens.ButtonSecondaryBorderLightThemeFocus,
+      vitalButtonTokens.ButtonSecondaryBorderLightThemePressed,
     ),
     Body: as(
-      vitalButtonTokens.ColorButtonSecondaryTextDefault,
-      vitalButtonTokens.ColorButtonSecondaryTextHover,
-      vitalButtonTokens.ColorButtonSecondaryTextFocus,
-      vitalButtonTokens.ColorButtonSecondaryTextPressed,
+      vitalButtonTokens.ButtonSecondaryTextLightThemeDefault,
+      vitalButtonTokens.ButtonSecondaryTextLightThemeHover,
+      vitalButtonTokens.ButtonSecondaryTextLightThemeFocus,
+      vitalButtonTokens.ButtonSecondaryTextLightThemePressed,
     ),
   },
   Meta: flowHoc.meta.term('Style')('Secondary'),
@@ -116,12 +114,12 @@ const Secondary = asButtonToken(Default, {
 
 const Tertiary = asButtonToken(Default, {
   Theme: {
-    Wrapper: vitalButtonTokens.ColorButtonTertiaryBackgroundFocus,
+    // Wrapper: vitalButtonTokens.ColorButtonTertiaryBackgroundFocus,
     Body: as(
-      vitalButtonTokens.ColorButtonTertiaryTextDefault,
-      vitalButtonTokens.ColorButtonTertiaryTextHover,
-      vitalButtonTokens.ColorButtonTertiaryTextFocus,
-      vitalButtonTokens.ColorButtonTertiaryTextPressed,
+      vitalButtonTokens.ButtonTertiaryTextLightThemeDefault,
+      vitalButtonTokens.ButtonTertiaryTextLightThemeHover,
+      vitalButtonTokens.ButtonTertiaryTextLightThemeFocus,
+      vitalButtonTokens.ButtonTertiaryTextLightThemePressed,
     ),
   },
   Meta: flowHoc.meta.term('Style')('Tertiary'),
@@ -142,8 +140,8 @@ const PrimaryDisabled = asButtonToken(
   WithDisabled,
   {
     Theme: {
-      Wrapper: vitalButtonTokens.ColorButtonPrimaryBackgroundDisabled,
-      Body: vitalButtonTokens.ColorButtonPrimaryTextDefault,
+      Wrapper: vitalButtonTokens.ButtonPrimaryBackgroundLightThemeDisabled,
+      Body: vitalButtonTokens.ButtonPrimaryTextLightThemeText,
     },
   }
 );
@@ -152,8 +150,8 @@ const SecondaryDisabled = asButtonToken(
   WithDisabled,
   {
     Theme: {
-      Wrapper: vitalButtonTokens.BorderButtonSecondaryDisabled,
-      Body: vitalButtonTokens.ColorButtonSecondaryTextDisabled,
+      Wrapper: vitalButtonTokens.ButtonSecondaryBorderLightThemeDisabled,
+      Body: vitalButtonTokens.ButtonSecondaryTextLightThemeDisabled,
     }
   }
 );
@@ -162,7 +160,7 @@ const TertiaryDisabled = asButtonToken(
   WithDisabled,
   {
     Theme: {
-      Body: vitalButtonTokens.ColorButtonTertiaryTextDisabled,
+      Body: vitalButtonTokens.ButtonTertiaryTextLightThemeDisabled,
     }
   }
 );

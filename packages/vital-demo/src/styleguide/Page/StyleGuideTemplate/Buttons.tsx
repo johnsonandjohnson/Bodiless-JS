@@ -27,7 +27,7 @@ import { withDefaultContent } from '@bodiless/data';
 import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
 const label = {
-  buttontext: { text: 'Button' },
+  buttontext: { text: 'BUTTON' },
 };
 
 const Default = on(ButtonClean)(
@@ -93,6 +93,7 @@ const StyleGuideColumns = asFluidToken({
   ...vitalStyleGuideExamples.Default,
   Layout: {
     Wrapper: 'flex flex-wrap gap-28',
+    ItemContent: 'flex',
   },
 });
 

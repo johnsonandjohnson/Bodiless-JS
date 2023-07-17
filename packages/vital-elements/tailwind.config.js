@@ -43,7 +43,7 @@ const parsedDesignTokens = JSON.parse(JSON.stringify(designTokens));
  * to avoid TW config issues.
  */
 const {
-  colors,
+  // colors,
   spacing,
   typography,
   opacity,
@@ -108,7 +108,13 @@ const twConfig = {
        * Vital 2.0 Tokens coming from Figma plugin.
        */
       colors: {
-        ...colors,
+        // ...colors,
+        ColorButtonPrimaryTextLightThemeText: '#ffffff',
+        SemanticColorInteractiveLightThemeIdle: '#019881',
+        SemanticColorInteractiveLightThemeHover: '#017A67',
+        SemanticColorInteractiveLightThemeFocus: '#017A67',
+        SemanticColorInteractiveLightThemePressed: '#015B4D',
+        SemanticColorInteractiveLightThemeDisabled: '#999999',
       },
       fontFamily: {
         DMSans: ['DM Sans', 'sans-serif'],
