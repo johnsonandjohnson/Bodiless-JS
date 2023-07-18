@@ -1,0 +1,46 @@
+name: bodiless-js
+services:
+  node:
+    type: node:18
+    #build:
+      #- npm run clean
+      # - npm run setup
+    globals:
+      npm: latest
+      rimraf: latest
+    overrides:
+      environment:
+        APP_GATSBY_HOST: 0.0.0.0
+        # HOSTNAME: bodiless-js # @todo not working anyway https://github.com/lando/lando/issues/1511
+      ports:
+        - '9000:9000' # nextjs fe:serve port 
+        - '8000:8000' # nextjs fe:dev port
+        - '8020:8020' #knapsack
+        - '3999:3999' #knapsack
+    scanner: false
+tooling:
+  git-cleanup:
+    service: node
+    dir: /app
+    cmd:
+      - git add -A
+      - git stash
+      - git clean -fxd
+      - git stash pop
+  npm:
+    service: node
+  npx:
+    service: node
+  build:
+    service: node
+    cmd:
+      - npm run clean
+      - npm run setup
+  start-vital-demo-next:
+    service: node
+    cmd: npm run dev
+    dir: /app/sites/vital-demo-next
+proxy:
+  node:
+    - vital-demo-next.sites.bodiless-js.lndo.site:8000 # vital-ne
+    - serve-vital-demo-next.sites.bodiless-js.lndo.site:9000 # vital-next serer

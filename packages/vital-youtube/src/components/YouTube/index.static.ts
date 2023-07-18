@@ -1,5 +1,15 @@
+import { withNodeKey } from '@bodiless/data';
+import { asYouTubeToken } from './YouTubeClean';
+
 export {
-  staticTokenCollection as vitalYouTube,
   StaticBlock as YouTubeClean
 } from '@bodiless/hydration';
-export { asYouTubeToken } from './YouTubeClean';
+
+export const vitalYouTube = new Proxy({}, {
+  get: () => asYouTubeToken({
+    Schema: {
+      _: withNodeKey('youtube'),
+    },
+  })
+});
+export { asYouTubeToken };
