@@ -58,3 +58,11 @@ export { default as vitalSeparatorBase } from './components/Separator/tokens/vit
  * @see [[vitalSubMenu]]
  */
 export { default as vitalSubMenuBase } from './components/SubMenu/tokens/vitalSubMenu';
+
+/**
+ * Use this version of the vital card tokens when extending or shadowing.
+ * Import the  token directly from @bodiless/vital-navigation/lib/base.
+ * @category Token Collection
+ * @see [[vitalMenuToggler]]
+ */
+export { default as vitalMenuTogglerBase } from './components/MenuToggler/tokens/vitalMenuToggler';

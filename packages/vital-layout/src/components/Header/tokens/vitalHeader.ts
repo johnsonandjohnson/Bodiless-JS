@@ -13,9 +13,6 @@
  */
 
 import {
-  withChild,
-} from '@bodiless/core';
-import {
   withNode,
   withNodeKey,
 } from '@bodiless/data';
@@ -24,30 +21,22 @@ import { vitalColor, vitalSpacing } from '@bodiless/vital-elements';
 import {
   vitalBurgerMenu,
   vitalMenu,
-  asBurgerMenuToggler,
+  vitalMenuToggler
 } from '@bodiless/vital-navigation';
 import {
   as,
-  flowHoc,
 } from '@bodiless/fclasses';
 import { vitalButtons } from '@bodiless/vital-buttons';
 import { vitalLogo } from '../../Logo';
 import { asHeaderToken } from '../HeaderClean';
 import type { HeaderToken } from '../HeaderClean';
-import BurgerIcon from '../assets/BurgerIcon';
 
 const Default = asHeaderToken({
-  Core: {
-    MenuToggler: asBurgerMenuToggler,
-  },
   Components: {
     Logo: vitalLogo.Default,
+    MenuToggler: vitalMenuToggler.Default,
     Menu: vitalMenu.TopNav,
-    BurgerMenu: flowHoc(
-      as(vitalBurgerMenu.Default),
-      // @TODO: Is there a better way to inject WhereToBuy and (future) LanguageButton
-      // components into the menu? Maybe, move the components to another package...
-    ),
+    BurgerMenu: vitalBurgerMenu.Default,
     // UtilityMenu: vitalMenu.Utility,
     WhereToBuy: vitalButtons.WhereToBuy,
   },
@@ -55,7 +44,6 @@ const Default = asHeaderToken({
     Container: 'flex justify-between items-center',
     MenuContainer: 'hidden xl:flex justify-between items-center flex-grow',
     ActionMenuContainer: 'flex items-center',
-    MenuToggler: 'flex justify-center items-center',
     MenuTogglerWrapper: 'flex xl:hidden',
   },
   Spacing: {
@@ -68,16 +56,11 @@ const Default = asHeaderToken({
     MenuTogglerWrapper: 'my-4',
   },
   Theme: {
-    // @todo perhaps this should be an element spcing token ike "LargeIconSize".
-    MenuToggler: 'w-6 h-6',
     Wrapper: vitalColor.BgPrimaryPage,
   },
   Schema: {
     Logo: withNodeKey({ nodeKey: 'Logo' }),
     _: withNode,
-  },
-  Content: {
-    MenuToggler: withChild(BurgerIcon),
   },
 });
 

@@ -16,6 +16,8 @@ import { as, on, Token } from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { WithGA4DesignKeys } from '@bodiless/ga4';
+import { withBurgerMenuProvider } from '@bodiless/navigation';
+import { withIslandsHydrator } from '@bodiless/hydration';
 import { asBodilessPage } from '../asBodilessPage';
 import { GenericTemplateClean, vitalGenericTemplate } from '../../GenericTemplate';
 
@@ -34,6 +36,13 @@ const Default = asFluidToken({
         }),
       ),
     ),
+  },
+  Island: {
+    _: as(
+      withIslandsHydrator({}),
+      withBurgerMenuProvider,
+      asBodilessPage,
+    )
   },
   Components: {
     _default: on(GenericTemplateClean)(vitalGenericTemplate.Default),
