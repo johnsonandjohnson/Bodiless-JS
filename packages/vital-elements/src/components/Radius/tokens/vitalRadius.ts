@@ -13,7 +13,7 @@
  */
 
 import { asTokenGroup } from '../../../util';
-import { SpacingMeta } from '../meta';
+import { RadiusMeta } from '../meta';
 
 /*
  * Tailwind's container is specifically not used due to its feature it set's max-width
@@ -21,23 +21,6 @@ import { SpacingMeta } from '../meta';
  * to contain content (WithSiteMargin) until we get to xl and then constrain by
  * max-width (WithSiteXLConstraint).
  */
-export default asTokenGroup(SpacingMeta)({
-  WithSiteMargin: 'mx-site-percent md:mx-md-site-percent 2xl:px-40',
-  WithSiteXLConstraint: '2xl:container 2xl:mx-auto',
-  Gutter: 'p-1 md:p-2 lg:p-3',
-  GutterOffset: '-mx-1 md:-mx-2 lg:-mx-3',
-  GutterTop: 'mt-4',
-  GutterBottom: 'mb-4',
-  GuttonLeft: 'ml-4',
-  GuttonRight: 'mr-4',
-  PaddingXSmall: 'm-8px md:16px',
-  PaddingSmall: 'm-16px md:20px',
-  PaddingMedium: 'm-20px md:24px',
-  PaddingLarge: 'm-24px md:36px',
-  PaddingXLarge: 'm-36px md:48px',
-  MarginXSmall: 'm-36px md:48px',
-  MarginSmall: 'm-36px md:48px',
-  MarginMedium: 'm-36px md:48px',
-  MarginLarge: 'm-36px md:48px',
-  MarginXLarge: 'm-36px md:48px',
+export default asTokenGroup(RadiusMeta)({
+  BorderRadiusRouded8: 'rounded-8px',
 });

@@ -16,37 +16,37 @@ export const ButtonMeta = {
  */
 const vitalButtonElement = asTokenGroup(ButtonMeta)({
   // All button styles
-  ButtonPrimaryBorderRadius: 'rounded-8',
+  ButtonPrimaryBorderRadius: 'rounded-8px',
   BorderPaddingButton: 'px-x-lg py-md',
   // TODO Needs work shouldn't have defined
   ShadowButtonFocus: 'focus:drop-shadow-button',
   TextButtonDefault: vitalTypography.BodyBold,
   // Primary
-  ButtonPrimaryBackgroundLightThemeIdle: vitalColor.SemanticColorPrimaryBackgroundLightThemeIdle,
-  ButtonPrimaryBackgroundLightThemeHover: vitalColor.SemanticColorPrimaryBackgroundLightThemeHover,
-  ButtonPrimaryBackgroundLightThemeFocus: vitalColor.SemanticColorPrimaryBackgroundLightThemeFocus,
+  ButtonPrimaryBackgroundLightThemeIdle: vitalColor.ColorPrimaryBackgroundLightThemeIdle,
+  ButtonPrimaryBackgroundLightThemeHover: vitalColor.ColorPrimaryBackgroundLightThemeHover,
+  ButtonPrimaryBackgroundLightThemeFocus: vitalColor.ColorPrimaryBackgroundLightThemeFocus,
   // eslint-disable-next-line max-len
-  ButtonPrimaryBackgroundLightThemePressed: vitalColor.SemanticColorPrimaryBackgroundLightThemePressed,
+  ButtonPrimaryBackgroundLightThemePressed: vitalColor.ColorPrimaryBackgroundLightThemePressed,
   // eslint-disable-next-line max-len
-  ButtonPrimaryBackgroundLightThemeDisabled: vitalColor.SemanticColorPrimaryBackgroundLightThemeDisabled,
+  ButtonPrimaryBackgroundLightThemeDisabled: vitalColor.ColorPrimaryBackgroundLightThemeDisabled,
   ButtonPrimaryTextLightThemeText: vitalColor.ColorButtonPrimaryTextLightThemeText,
   // Secondary
-  ButtonSecondaryTextLightThemeDefault: vitalColor.SemanticColorSecondaryTextLightThemeDefault,
-  ButtonSecondaryTextLightThemeHover: vitalColor.SemanticColorSecondaryTextLightThemeHover,
-  ButtonSecondaryTextLightThemeFocus: vitalColor.SemanticColorSecondaryTextLightThemeFocus,
-  ButtonSecondaryTextLightThemePressed: vitalColor.SemanticColorSecondaryTextLightThemePressed,
-  ButtonSecondaryTextLightThemeDisabled: vitalColor.SemanticColorSecondaryTextLightThemeDisabled,
-  ButtonSecondaryBorderLightThemeDefault: as(vitalColor.SemanticColorSecondaryBorderLightThemeDefault, 'border-solid border-1'),
-  ButtonSecondaryBorderLightThemeHover: as(vitalColor.SemanticColorSecondaryBorderLightThemeHover, 'border-solid border-1'),
-  ButtonSecondaryBorderLightThemeFocus: as(vitalColor.SemanticColorSecondaryBorderLightThemeFocus, 'border-solid border-1'),
-  ButtonSecondaryBorderLightThemePressed: as(vitalColor.SemanticColorSecondaryBorderLightThemePressed, 'border-solid border-1'),
-  ButtonSecondaryBorderLightThemeDisabled: as(vitalColor.SemanticColorSecondaryBorderLightThemeDisabled, 'border-solid border-1'),
+  ButtonSecondaryTextLightThemeDefault: vitalColor.ColorSecondaryTextLightThemeDefault,
+  ButtonSecondaryTextLightThemeHover: vitalColor.ColorSecondaryTextLightThemeHover,
+  ButtonSecondaryTextLightThemeFocus: vitalColor.ColorSecondaryTextLightThemeFocus,
+  ButtonSecondaryTextLightThemePressed: vitalColor.ColorSecondaryTextLightThemePressed,
+  ButtonSecondaryTextLightThemeDisabled: vitalColor.ColorSecondaryTextLightThemeDisabled,
+  ButtonSecondaryBorderLightThemeDefault: as(vitalColor.ColorSecondaryBorderLightThemeDefault, 'border-solid border-1'),
+  ButtonSecondaryBorderLightThemeHover: as(vitalColor.ColorSecondaryBorderLightThemeHover, 'border-solid border-1'),
+  ButtonSecondaryBorderLightThemeFocus: as(vitalColor.ColorSecondaryBorderLightThemeFocus, 'border-solid border-1'),
+  ButtonSecondaryBorderLightThemePressed: as(vitalColor.ColorSecondaryBorderLightThemePressed, 'border-solid border-1'),
+  ButtonSecondaryBorderLightThemeDisabled: as(vitalColor.ColorSecondaryBorderLightThemeDisabled, 'border-solid border-1'),
   // Tertiary
-  ButtonTertiaryTextLightThemeDefault: vitalColor.SemanticColorTertiaryTextLightThemeIdle,
-  ButtonTertiaryTextLightThemeHover: vitalColor.SemanticColorTertiaryTextLightThemeHover,
-  ButtonTertiaryTextLightThemeFocus: vitalColor.SemanticColorTertiaryTextLightThemeFocus,
-  ButtonTertiaryTextLightThemePressed: vitalColor.SemanticColorTertiaryTextLightThemePressed,
-  ButtonTertiaryTextLightThemeDisabled: vitalColor.SemanticColorTertiaryTextLightThemeDisabled,
+  ButtonTertiaryTextLightThemeDefault: vitalColor.ColorTertiaryTextLightThemeIdle,
+  ButtonTertiaryTextLightThemeHover: vitalColor.ColorTertiaryTextLightThemeHover,
+  ButtonTertiaryTextLightThemeFocus: vitalColor.ColorTertiaryTextLightThemeFocus,
+  ButtonTertiaryTextLightThemePressed: vitalColor.ColorTertiaryTextLightThemePressed,
+  ButtonTertiaryTextLightThemeDisabled: vitalColor.ColorTertiaryTextLightThemeDisabled,
 });
 
 export default vitalButtonElement;
