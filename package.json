@@ -14,6 +14,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production npx -y turbo build",
     "build:only": "npx -y turbo run build --filter",
+    "build:watch": "npx -y turbo run build:watch",
     "build:packages": "npx -y turbo build --filter=./packages/*",
     "check": "cross-env NODE_ENV=production npx -y turbo check",
     "clean": "npm run clean --workspaces --if-present && rimraf .eslintcache sites/*/.env.development sites/*/.env.production",
