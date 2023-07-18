@@ -20,9 +20,10 @@ import { ColorMeta } from '../meta';
 const vitalSemanticBrand = asTokenGroup(ColorMeta)({
   SemanticColorTextDarkThemeBase: 'ColorKenvueNeutralsWhite',
   SemanticColorInteractiveLightThemeIdle: 'ColorKenvueGreenGreen',
+  // Technically these should be hover/focus/active but later we have to insert in hover-text, hover-background
   SemanticColorInteractiveLightThemeHover: 'ColorKenvueGreenShade80',
-  SemanticColorInteractiveLightThemeFocus: 'focus:ColorKenvueGreenShade80',
-  SemanticColorInteractiveLightThemePressed: 'active:ColorKenvueGreenShade60',
+  SemanticColorInteractiveLightThemeFocus: 'ColorKenvueGreenShade80',
+  SemanticColorInteractiveLightThemePressed: 'ColorKenvueGreenShade60',
   SemanticColorInteractiveLightThemeDisabled: 'ColorKenvueNeutralsGray',
 });
 
