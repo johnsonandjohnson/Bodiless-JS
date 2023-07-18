@@ -109,12 +109,11 @@ const twConfig = {
        */
       colors: {
         // ...colors,
-        ColorButtonPrimaryTextLightThemeText: '#ffffff',
-        SemanticColorInteractiveLightThemeIdle: '#019881',
-        SemanticColorInteractiveLightThemeHover: '#017A67',
-        SemanticColorInteractiveLightThemeFocus: '#017A67',
-        SemanticColorInteractiveLightThemePressed: '#015B4D',
-        SemanticColorInteractiveLightThemeDisabled: '#999999',
+        ColorKenvueNeutralsWhite: '#ffffff',
+        ColorKenvueGreenGreen: '#019881',
+        ColorKenvueGreenShade80: '#017A67',
+        ColorKenvueGreenShade60: '#015B4D',
+        ColorKenvueNeutralsGray: '#999999',
       },
       fontFamily: {
         DMSans: ['DM Sans', 'sans-serif'],

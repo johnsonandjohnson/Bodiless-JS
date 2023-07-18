@@ -15,6 +15,17 @@
 import { asTokenGroup } from '../../../util';
 import { ColorMeta } from '../meta';
 
+// Semantic Theme to Brand
+// Not sure where this would live.. but a brand would have to change all of these.
+const vitalSemanticBrand = asTokenGroup(ColorMeta)({
+  SemanticColorTextDarkThemeBase: 'ColorKenvueNeutralsWhite',
+  SemanticColorInteractiveLightThemeIdle: 'ColorKenvueGreenGreen',
+  SemanticColorInteractiveLightThemeHover: 'ColorKenvueGreenShade80',
+  SemanticColorInteractiveLightThemeFocus: 'focus:ColorKenvueGreenShade80',
+  SemanticColorInteractiveLightThemePressed: 'active:ColorKenvueGreenShade60',
+  SemanticColorInteractiveLightThemeDisabled: 'ColorKenvueNeutralsGray',
+});
+
 export default asTokenGroup(ColorMeta)({
   BgPrimaryBrand: 'bg-vital-primary-brand',
   TextPrimaryBrand: 'text-vital-primary-brand',
@@ -77,39 +88,35 @@ export default asTokenGroup(ColorMeta)({
   TextLight2: 'text-neutral-100',
   TextLight3: 'text-neutral-300',
 
-  // Interactive Color Tokens
-  SemanticColorInteractiveLightThemeIdle: 'SemanticColorInteractiveLightThemeIdle',
-  SemanticColorInteractiveLightThemeHover: 'hover:SemanticColorInteractiveLightThemeHover',
-  SemanticColorInteractiveLightThemeFocus: 'focus:SemanticColorInteractiveLightThemeFocus',
-  SemanticColorInteractiveLightThemePressed: 'active:SemanticColorInteractiveLightThemePressed',
-  SemanticColorInteractiveLightThemeDisabled: 'SemanticColorInteractiveLightThemeDisabled',
+  // Semantic Component to Semantic Theme
+  // Not sure we can preface a token color with text/border/ but pretending we can.
+  ColorButtonPrimaryTextDarkThemeText: 'text' + vitalSemanticBrand.SemanticColorTextDarkThemeBase,
 
   // Interactive Color Tokens for text
-  ColorButtonPrimaryTextLightThemeText: 'text-ColorButtonPrimaryTextLightThemeText',
-  SemanticColorSecondaryTextLightThemeDefault: 'text-SemanticColorInteractiveLightThemeIdle',
-  SemanticColorSecondaryTextLightThemeHover: 'hover:text-SemanticColorInteractiveLightThemeHover',
-  SemanticColorSecondaryTextLightThemeFocus: 'focus:text-SemanticColorInteractiveLightThemeFocus',
-  SemanticColorSecondaryTextLightThemePressed: 'active:text-SemanticColorInteractiveLightThemePressed',
-  SemanticColorSecondaryTextLightThemeDisabled: 'text-SemanticColorInteractiveLightThemeDisabled',
-  SemanticColorTertiaryTextLightThemeIdle: 'text-SemanticColorInteractiveLightThemeIdle',
-  SemanticColorTertiaryTextLightThemeHover: 'hover:text-SemanticColorInteractiveLightThemeHover',
-  SemanticColorTertiaryTextLightThemeFocus: 'focus:text-SemanticColorInteractiveLightThemeFocus',
-  SemanticColorTertiaryTextLightThemePressed: 'active:text-SemanticColorInteractiveLightThemePressed',
-  SemanticColorTertiaryTextLightThemeDisabled: 'text-SemanticColorInteractiveLightThemeDisabled',
+  SemanticColorSecondaryTextLightThemeDefault: 'text' + vitalSemanticBrand.SemanticColorInteractiveLightThemeIdle,
+  SemanticColorSecondaryTextLightThemeHover: 'hover:text' + vitalSemanticBrand.SemanticColorInteractiveLightThemeIdle,
+  SemanticColorSecondaryTextLightThemeFocus: 'focus:text' + vitalSemanticBrand.SemanticColorInteractiveLightThemeFocus,
+  SemanticColorSecondaryTextLightThemePressed: 'active:text' + vitalSemanticBrand.SemanticColorInteractiveLightThemePressed,
+  SemanticColorSecondaryTextLightThemeDisabled: 'text' + vitalSemanticBrand.SemanticColorInteractiveLightThemeDisabled,
+  SemanticColorTertiaryTextLightThemeIdle: 'text' + vitalSemanticBrand.SemanticColorInteractiveLightThemeIdle,
+  SemanticColorTertiaryTextLightThemeHover: 'hover:text' + vitalSemanticBrand.SemanticColorInteractiveLightThemeHover,
+  SemanticColorTertiaryTextLightThemeFocus: 'focus:text' + vitalSemanticBrand.SemanticColorInteractiveLightThemeFocus,
+  SemanticColorTertiaryTextLightThemePressed: 'active:text' + vitalSemanticBrand.SemanticColorInteractiveLightThemePressed,
+  SemanticColorTertiaryTextLightThemeDisabled: 'text' + vitalSemanticBrand.SemanticColorInteractiveLightThemeDisabled,
 
   // Interactive Color Tokens for background
-  SemanticColorPrimaryBackgroundLightThemeIdle: 'bg-SemanticColorInteractiveLightThemeIdle',
-  SemanticColorPrimaryBackgroundLightThemeHover: 'hover:bg-SemanticColorInteractiveLightThemeHover',
-  SemanticColorPrimaryBackgroundLightThemeFocus: 'focus:bg-SemanticColorInteractiveLightThemeFocus',
-  SemanticColorPrimaryBackgroundLightThemePressed: 'active:bg-SemanticColorInteractiveLightThemePressed',
-  SemanticColorPrimaryBackgroundLightThemeDisabled: 'bg-SemanticColorInteractiveLightThemeDisabled',
+  SemanticColorPrimaryBackgroundLightThemeIdle: 'background' + vitalSemanticBrand.SemanticColorInteractiveLightThemeIdle,
+  SemanticColorPrimaryBackgroundLightThemeHover: 'background' + vitalSemanticBrand.SemanticColorInteractiveLightThemeHover,
+  SemanticColorPrimaryBackgroundLightThemeFocus: 'background' + vitalSemanticBrand.SemanticColorInteractiveLightThemeFocus,
+  SemanticColorPrimaryBackgroundLightThemePressed: 'background' + vitalSemanticBrand.SemanticColorInteractiveLightThemePressed,
+  SemanticColorPrimaryBackgroundLightThemeDisabled: 'background' + vitalSemanticBrand.SemanticColorInteractiveLightThemeDisabled,
 
   // Interactive Color Tokens for border
-  SemanticColorSecondaryBorderLightThemeDefault: 'border-SemanticColorSecondaryBorderLightThemeDefault',
-  SemanticColorSecondaryBorderLightThemeHover: 'hover:border-SemanticColorSecondaryBorderLightThemeHover',
-  SemanticColorSecondaryBorderLightThemeFocus: 'focus:border-SemanticColorSecondaryBorderLightThemeFocus',
-  SemanticColorSecondaryBorderLightThemePressed: 'active:border-SemanticColorSecondaryBorderLightThemePressed',
-  SemanticColorSecondaryBorderLightThemeDisabled: 'border-SemanticColorSecondaryBorderLightThemeDisabled',
+  SemanticColorSecondaryBorderLightThemeDefault: 'border' + vitalSemanticBrand.SemanticColorInteractiveLightThemeIdle,
+  SemanticColorSecondaryBorderLightThemeHover: 'hover:border' + vitalSemanticBrand.SemanticColorInteractiveLightThemeHover,
+  SemanticColorSecondaryBorderLightThemeFocus: 'focus:border' + vitalSemanticBrand.SemanticColorInteractiveLightThemeFocus,
+  SemanticColorSecondaryBorderLightThemePressed: 'active:border' + vitalSemanticBrand.SemanticColorInteractiveLightThemePressed,
+  SemanticColorSecondaryBorderLightThemeDisabled: 'border'+ vitalSemanticBrand.SemanticColorInteractiveLightThemeDisabled,
 
   // Border Color Tokens
   BorderLight: 'neutral-200',

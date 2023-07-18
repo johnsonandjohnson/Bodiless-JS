@@ -29,7 +29,7 @@ const vitalButtonElement = asTokenGroup(ButtonMeta)({
   ButtonPrimaryBackgroundLightThemePressed: vitalColor.SemanticColorPrimaryBackgroundLightThemePressed,
   // eslint-disable-next-line max-len
   ButtonPrimaryBackgroundLightThemeDisabled: vitalColor.SemanticColorPrimaryBackgroundLightThemeDisabled,
-  ButtonPrimaryTextLightThemeText: vitalColor.ColorButtonPrimaryTextLightThemeText,
+  ButtonPrimaryTextLightThemeText: vitalColor.ColorButtonPrimaryTextDarkThemeText,
   // Secondary
   ButtonSecondaryTextLightThemeDefault: vitalColor.SemanticColorSecondaryTextLightThemeDefault,
   ButtonSecondaryTextLightThemeHover: vitalColor.SemanticColorSecondaryTextLightThemeHover,
