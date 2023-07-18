@@ -20,7 +20,7 @@ import {
   Fragment,
 } from '@bodiless/fclasses';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
-import { EditorPlainClean, RichTextClean } from '@bodiless/vital-editors';
+import { EditorPlainClean } from '@bodiless/vital-editors';
 import { LayoutClean } from '@bodiless/vital-layout';
 import { FlowContainerClean } from '@bodiless/vital-flowcontainer';
 import { BreadcrumbsClean } from '@bodiless/vital-navigation';
@@ -42,7 +42,7 @@ const pdpTemplateComponents: PDPTemplateComponents = {
   ProductImage: Img,
   ProductDetailWrapper: Div,
   ProductDescriptionWrapper: Div,
-  ProductDescription: RichTextClean,
+  ProductDescription: FlowContainerClean,
   ProductTitleWrapper: Div,
   ProductTitle: EditorPlainClean,
   ProductRatingsWrapper: Fragment,

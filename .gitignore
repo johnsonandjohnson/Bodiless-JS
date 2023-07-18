@@ -39,3 +39,4 @@ test-results/
 playwright-report/
 
 .turbo
+.vercel
