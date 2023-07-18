@@ -18,7 +18,6 @@
     "@bodiless/documentation": "^1.0.0-rc.42",
     "@bodiless/fclasses": "^1.0.0-rc.42",
     "@bodiless/next": "^1.0.0-rc.42",
-    "@bodiless/search": "^1.0.0-rc.42",
     "@bodiless/ui": "^1.0.0-rc.42",
     "@bodiless/vital-button": "^1.0.0-rc.42",
     "@bodiless/vital-demo": "^1.0.0-rc.42",
@@ -60,24 +59,22 @@
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
   "scripts": {
-    "build": "npm-run-all build:env-vars build:lib build:search",
+    "build": "npm-run-all build:env-vars build:lib",
     "build:docs": "bl-docs-build",
     "build:env-vars": "bodiless generate-env-vars",
     "build:lib": "next build",
-    "build:search": "create-search-index",
     "build:stats": "BODILESS_BUILD_STATS=1 npm run build",
     "check": "tsc -p ./tsconfig.check.json",
     "clean": "rimraf .next next-env.d.ts",
+    "dev": "run-p -r dev-frontend dev-backend",
     "dev-backend": "bodiless-backend",
     "dev-frontend": "node --stack-size=3200 ./node_modules/.bin/next dev -p ${APP_PORT:-8000}",
     "lint": "next lint",
     "docs": "run-s build:docs serve:docs",
-    "prepare": "node ../../scripts/set-missing-symlinks.js @bodiless",
-    "prestart": "run-s build:env-vars build:docs",
-    "search-index": "create-search-index",
+    "predev": "run-s build:env-vars build:docs",
     "serve": "next start -p ${APP_PORT:-9000}",
     "serve:docs": "docsify serve ./public/generated/doc",
-    "start": "run-p -r dev-frontend dev-backend"
+    "start": "next start -p ${APP_PORT:-9000}"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.4.0",

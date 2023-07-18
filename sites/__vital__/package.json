@@ -69,15 +69,14 @@
     "build:stats": "BODILESS_BUILD_STATS=1 npm run build",
     "check": "tsc -p ./tsconfig.check.json",
     "clean": "gatsby clean",
+    "dev": "run-p -r dev-frontend dev-backend",
     "dev-backend": "bodiless-backend",
     "dev-frontend": "gatsby develop",
     "docs": "run-s build:docs serve:docs",
-    "prepare": "node ../../scripts/set-missing-symlinks.js @bodiless",
-    "prestart": "run-s build:env-vars build:docs",
-    "search-index": "create-search-index",
+    "predev": "run-s build:env-vars build:docs",
     "serve": "gatsby serve",
     "serve:docs": "docsify serve ./doc",
-    "start": "run-p -r dev-frontend dev-backend"
+    "start": "gatsby serve"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.4.0",

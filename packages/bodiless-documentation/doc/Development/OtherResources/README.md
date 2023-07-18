@@ -31,7 +31,8 @@ Note that we make use of a few ESnext features in this project, including:
 If you have errors on setup or start or build, perform the following:
 
 ```bash
-npm run fresh
+git clean -fxd
+npm install
 ``` 
 
 ## Tests

@@ -36,7 +36,6 @@
     "@bodiless/vital-link": "^1.0.0-rc.42",
     "@bodiless/vital-list": "^1.0.0-rc.42",
     "@bodiless/vital-navigation": "^1.0.0-rc.42",
-    "@bodiless/vital-search": "^1.0.0-rc.42",
     "@bodiless/vital-templates": "^1.0.0-rc.42",
     "@bodiless/vital-youtube": "^1.0.0-rc.42",
     "@bodiless/webpack": "^1.0.0-rc.42",
@@ -69,24 +68,23 @@
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
   "scripts": {
-    "build": "npm-run-all build:env-vars build:lib build:search",
+    "build": "npm-run-all build:env-vars build:lib",
     "build:docs": "bl-docs-build",
     "build:env-vars": "bodiless generate-env-vars",
     "build:lib": "next build",
-    "build:search": "create-search-index",
     "build:stats": "BODILESS_BUILD_STATS=1 npm run build",
     "check": "tsc -p ./tsconfig.check.json",
     "clean": "rimraf .next next-env.d.ts",
+    "dev": "run-p -r dev-frontend dev-backend",
     "dev-backend": "bodiless-backend",
-    "dev-frontend": "node --stack-size=3200 ./node_modules/.bin/next dev -p ${APP_PORT:-8000}",
+    "dev-frontend": "node --stack-size=3200 ../../node_modules/.bin/next dev -p ${APP_PORT:-8000}",
     "docs": "run-s build:docs serve:docs",
     "lint": "next lint",
-    "prepare": "node ../../scripts/set-missing-symlinks.js @bodiless",
-    "prestart": "run-s build:env-vars build:docs",
+    "predev": "run-s build:env-vars build:docs",
     "serve": "next start -p ${APP_PORT:-9000}",
     "serve:docs": "docsify serve ./public/generated/doc",
-    "start": "run-p -r dev-frontend dev-backend",
-    "serve:test": "npm run build && next start -p 8005"
+    "serve:test": "npm run build && next start -p 8005",
+    "start": "npm run serve"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.4.0",

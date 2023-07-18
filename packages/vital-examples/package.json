@@ -30,6 +30,7 @@
     "build": "run-p build:lib copy",
     "build:lib": "tsc -p ./tsconfig.json",
     "build:watch": "npm run build:lib -- --watch",
+    "dev": "npm run build:watch",
     "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api ./src",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo",
     "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
@@ -58,7 +59,6 @@
     "@bodiless/vital-link": "^1.0.0-rc.42",
     "@bodiless/vital-list": "^1.0.0-rc.42",
     "@bodiless/vital-navigation": "^1.0.0-rc.42",
-    "@bodiless/vital-search": "^1.0.0-rc.42",
     "@bodiless/vital-section": "^1.0.0-rc.42",
     "@bodiless/vital-table": "^1.0.0-rc.42",
     "@bodiless/vital-templates": "^1.0.0-rc.42",
