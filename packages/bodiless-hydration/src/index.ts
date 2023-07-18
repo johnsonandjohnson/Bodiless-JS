@@ -15,8 +15,13 @@
 export {
   withoutHydration,
   withoutHydrationInline,
-  isStaticClientSide,
 } from './withoutHydration';
+export {
+  isStaticClientSide
+} from './utils';
+
+export { default as loadable } from './loadable/index.gatsby';
+
 export * from './Islands';
 
 export {

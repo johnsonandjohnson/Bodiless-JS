@@ -10,6 +10,7 @@ import React, {
 import { useNode, NodeProvider } from '@bodiless/data';
 import { createPortal /* hydrateRoot */ } from 'react-dom';
 import { HOC, ComponentWithMeta } from '@bodiless/fclasses';
+import { withoutHydration } from '../withoutHydration';
 
 type Islands = {
   [key: string]: ComponentWithMeta
@@ -116,9 +117,10 @@ class IslandsHydrator extends Component<IslandsHydratorProps> {
 }
 
 const withIslandsHydrator = (Islands: Islands) : HOC => Component => {
+  const WithoutHydrationComponent = withoutHydration()(Component);
   const WithIslandsHydrator = (props: any) => (
     <IslandsHydrator Islands={Islands}>
-      <Component {...props} />
+      <WithoutHydrationComponent {...props} />
     </IslandsHydrator>
   );
   return WithIslandsHydrator;

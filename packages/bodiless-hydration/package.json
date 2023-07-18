@@ -8,7 +8,9 @@
   "sideEffects": false,
   "typings": "lib/index.d.ts",
   "files": [
-    "/lib"
+    "/lib",
+    "WebpackIslandLoader.js",
+    "AutoDiscoverIslands.js"
   ],
   "repository": {
     "type": "git",
@@ -29,12 +31,20 @@
     "@bodiless/data": "^1.0.0-rc.42",
     "@bodiless/fclasses": "^1.0.0-rc.42",
     "crypto-js": "^4.1.1",
-    "lodash": "^4.17.19"
+    "lodash": "^4.17.19",
+    "fast-glob": "^3.2.5",
+    "@loadable/component": "^5.15.3",
+    "next": "^13.3.4"
   },
   "devDependencies": {
     "@types/crypto-js": "4.1.1",
     "cheerio": "1.0.0-rc.3",
-    "enzyme": "^3.9.0"
+    "enzyme": "^3.9.0",
+    "@babel/parser": "^7.22.0",
+    "@babel/traverse": "^7.22.1",
+    "@babel/generator": "^7.22.0",
+    "@babel/types": "^7.22.0",
+    "@types/loadable__component": "^5.13.4"
   },
   "peerDependencies": {
     "react": "^18.2.0",

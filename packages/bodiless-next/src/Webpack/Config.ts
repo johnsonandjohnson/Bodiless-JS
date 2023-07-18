@@ -153,6 +153,26 @@ const prevalTailwindConfigLoader = (config: any) => (
   }
 );
 
+const islandLoader = (config: any) => (
+  {
+    ...config,
+    module: {
+      ...config.module,
+      rules: [
+        ...config.module.rules,
+        {
+          test: /\.js$/,
+          use: [
+            {
+              loader: require.resolve('@bodiless/hydration/WebpackIslandLoader')
+            },
+          ],
+        },
+      ]
+    }
+  }
+);
+
 /**
  *
  * Helper function which removes NextJS error loader for global css.
@@ -257,6 +277,11 @@ const bodilessWepackConfig = (config: any, options: BodilessNextConfigWithNext) 
   const devJS = nextWebpack.dev && !nextWebpack.isServer;
   // eslint-disable-next-line no-param-reassign
   config = prevalTailwindConfigLoader(config);
+
+  if (buildJS) {
+    // eslint-disable-next-line no-param-reassign
+    config = islandLoader(config);
+  }
 
   if (nextWebpack.isServer && nextWebpack.nextRuntime === 'nodejs') {
     generateRobotsTxt(options.robotstxt);
