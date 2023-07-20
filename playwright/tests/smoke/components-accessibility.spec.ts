@@ -76,8 +76,7 @@ test.describe('Accessibility', () => {
     expect(results.violations[0].nodes.length).toEqual(1);
   });
 
-  // Temporarily disable test for Video page to unblock executions on vital-demo-next
-  test.skip('Should have \'aria-allowed-attr\' and \'frame-title\' violation on Video page', async ({ page }) => {
+  test('Should have \'aria-allowed-attr\' and \'frame-title\' violation on Video page', async ({ page }) => {
     await new VitalVideoPage().open(page);
     const results = await analyze(page, (cfg) => cfg.withRules(['aria-allowed-attr', 'frame-title']));
     expect(results.violations.length).toEqual(2);
