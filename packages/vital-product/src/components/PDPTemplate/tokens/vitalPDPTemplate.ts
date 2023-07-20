@@ -105,11 +105,11 @@ const Default = asPDPTemplateToken({
     ContentWrapper: 'flex flex-wrap',
     ProductImageWrapper: 'flex justify-center w-full lg:w-1/2',
     ProductDetailWrapper: 'w-full lg:w-1/2 lg:grow',
-    JumpLinksWrapper: 'w-full lg:w-screen',
+    JumpLinksWrapper: 'w-full',
   },
   Spacing: {
     ...vitalGenericTemplate.Default.Spacing,
-    JumpLinksWrapper: 'lg:px-36 py-2 mt-10 lg:-ml-36',
+    JumpLinksWrapper: 'py-2 mt-10',
     ProductImageWrapper: 'lg:pr-2',
     ProductDetailWrapper: 'lg:pl-2 pt-4 lg:pt-0',
     ProductTitleWrapper: 'mb-4',
