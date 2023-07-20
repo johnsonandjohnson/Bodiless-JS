@@ -30,11 +30,16 @@ export default asTokenGroup(SpacingMeta)({
   GutterBottom: 'mb-4',
   GuttonLeft: 'ml-4',
   GuttonRight: 'mr-4',
-  PaddingXSmall: 'm-8px md:16px',
-  PaddingSmall: 'm-16px md:20px',
-  PaddingMedium: 'm-20px md:24px',
-  PaddingLarge: 'm-24px md:36px',
-  PaddingXLarge: 'm-36px md:48px',
+
+  /**
+   * Vital 2.0 Colors coming from Figma Tokens. Colors above will be deprecated.
+   */
+
+  PaddingXSmall: 'p-8px md:p-16px',
+  PaddingSmall: 'p-16px md:p-20px',
+  PaddingMedium: 'p-20px md:p-24px',
+  PaddingLarge: 'p-24px md:p-36px',
+  PaddingXLarge: 'p-36px md:p-48px',
   MarginXSmall: 'm-36px md:48px',
   MarginSmall: 'm-36px md:48px',
   MarginMedium: 'm-36px md:48px',
