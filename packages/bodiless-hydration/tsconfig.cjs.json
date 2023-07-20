@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.settings.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "rootDir": "src",
+    "outDir": "./lib/cjs",
+    "baseUrl": ".",
+    "allowJs": false
+  },
+  "include": [
+    "./src/Islands/Webpack",
+  ],
+  "exclude": [
+    "lib",
+    "node_modules",
+    "__tests__/**/*.*",
+    "src/**/__tests__/**/*.*"
+   ]
+}

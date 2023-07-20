@@ -16,6 +16,7 @@ import webpack from 'webpack';
 import { dirname, join, resolve } from 'path';
 import { existsSync, readFileSync } from 'fs';
 import { addStaticReplacementPlugin } from '@bodiless/webpack';
+import { islandsLoader } from '@bodiless/hydration/lib/cjs/Islands/Webpack';
 import { sync as globSync} from 'glob';
 import generateSitemapXml from './Sitemapxml';
 import generateRobotsTxt from './Robotstxt';
@@ -153,26 +154,6 @@ const prevalTailwindConfigLoader = (config: any) => (
   }
 );
 
-const islandLoader = (config: any) => (
-  {
-    ...config,
-    module: {
-      ...config.module,
-      rules: [
-        ...config.module.rules,
-        {
-          test: /\.js$/,
-          use: [
-            {
-              loader: require.resolve('@bodiless/hydration/WebpackIslandLoader')
-            },
-          ],
-        },
-      ]
-    }
-  }
-);
-
 /**
  *
  * Helper function which removes NextJS error loader for global css.
@@ -280,7 +261,7 @@ const bodilessWepackConfig = (config: any, options: BodilessNextConfigWithNext) 
 
   if (buildJS) {
     // eslint-disable-next-line no-param-reassign
-    config = islandLoader(config);
+    config = islandsLoader(config);
   }
 
   if (nextWebpack.isServer && nextWebpack.nextRuntime === 'nodejs') {
