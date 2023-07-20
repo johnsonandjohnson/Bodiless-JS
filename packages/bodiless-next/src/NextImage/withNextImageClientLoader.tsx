@@ -25,17 +25,19 @@ const withNextImageClientLoader = (Component: ComponentOrTag<any>) => (
 ) => {
   const isEdit = process.env.NODE_ENV === 'development';
   const script = `(function(){
-    const imgs = document.getElementsByTagName('img');
-    const removeImageBg = function(e) {
-      const t = e.target; if (void 0==t||void 0==t.style)return;
-      t.style.backgroundImage=null;t.style.backgroundSize=null;
-      t.style.backgroundPosition=null;t.style.backgroundRepeat=null;
-    };
-    for(let i = 0; i < imgs.length; i++) {
-      if(void 0===imgs[i].dataset.nimg)return;
-      if(imgs[i].loading==='eager') { removeImageBg({target: imgs[i]});}
-      else {imgs[i].addEventListener('load', removeImageBg, {once: true});}
-    }
+    document.addEventListener('DOMContentLoaded', function() {
+      const imgs = document.getElementsByTagName('img');
+      const removeImageBg = function(e) {
+        const t = e.target; if (void 0==t||void 0==t.style)return;
+        t.style.backgroundImage=null;t.style.backgroundSize=null;
+        t.style.backgroundPosition=null;t.style.backgroundRepeat=null;
+      };
+      for(let i = 0; i < imgs.length; i++) {
+        if(void 0===imgs[i].dataset.nimg)return;
+        if(imgs[i].loading==='eager') { removeImageBg({target: imgs[i]});}
+        else {imgs[i].addEventListener('load', removeImageBg, {once: true});}
+      }
+    });
   })();`;
   return isEdit ? <Component {...props} /> : (
     <>
