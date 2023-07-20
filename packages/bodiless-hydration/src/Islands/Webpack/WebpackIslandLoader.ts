@@ -26,13 +26,13 @@ const IslandLoader = (source: string) => {
 
   let foundIslandsFile = false;
 
-  const islandsFilePath = resolve('./node_modules/islands.js');
+  const islandsFilePath = resolve('./.next/cache/islands.js');
   foundIslandsFile = false;
 
   if (existsSync(islandsFilePath)) {
     foundIslandsFile = true;
   } else {
-    AutoDiscoverIslands('./node_modules');
+    foundIslandsFile = AutoDiscoverIslands('./.next/cache');
   }
 
   traverse(ast, {
@@ -54,6 +54,9 @@ const IslandLoader = (source: string) => {
       CallExpression(path) {
         // Look for usage of asFluidToken.
         if (path.node.callee.type === 'Identifier' && path.node.callee.name === 'asFluidToken') {
+          // Remove any token provided to asFluidToken which is not an Object defined in place;
+          // eslint-disable-next-line no-param-reassign
+          path.node.arguments = path.node.arguments.filter(node => node.type === 'ObjectExpression');
           // Traverse inside asFluidToken.
           traverse(path.node, {
             ObjectExpression(path) {
@@ -73,6 +76,7 @@ const IslandLoader = (source: string) => {
                         }
                       },
                     }, path.scope);
+                    console.log(path.node.key.name);
                     path.remove();
                   }
                 },
@@ -137,8 +141,10 @@ const IslandLoader = (source: string) => {
   });
 
   const { code } = generate(ast);
-  console.log(code);
+  console.log(code)
   console.log('[Island Loader] withIslandsHydrator discovered, the token has been altered.');
+  console.log(' ↳ New Code generated');
+  console.log(code);
 
   return code;
 };

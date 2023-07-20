@@ -46,7 +46,7 @@ const findIslands = (scopedPackages: string[]) => {
 };
 
 const generateImports = (islands: string[]) => {
-  let imports = 'import { loadable } from \'@bodiless/hydration\';\n';
+  let imports = 'const { loadable } = require(\'@bodiless/hydration\');\n';
   const exports: string[] = [];
 
   islands.forEach(file => {
@@ -63,16 +63,21 @@ const generateImports = (islands: string[]) => {
 };
 
 const AutoDiscoverIslands = (dest: string) => {
-  const scopedPackages = getScopedPackages();
+  try {
+    const scopedPackages = getScopedPackages();
 
-  const islands = findIslands(scopedPackages);
-  const imports = generateImports(islands);
+    const islands = findIslands(scopedPackages);
+    const imports = generateImports(islands);
 
-  if (imports) {
-    if (!existsSync(dest)) {
-      mkdirSync(dest, { recursive: true});
+    if (imports) {
+      if (!existsSync(dest)) {
+        mkdirSync(dest, { recursive: true});
+      }
+      writeFileSync(`${dest}/islands.js`, imports);
     }
-    writeFileSync(`${dest}/islands.js`, imports);
+    return true;
+  } catch (e) {
+    return false;
   }
 };
 export default AutoDiscoverIslands;

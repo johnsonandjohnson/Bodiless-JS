@@ -23,6 +23,7 @@ import { AccordionClean, vitalAccordion } from '@bodiless/vital-accordion';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { withDefaultContent } from '@bodiless/data';
+import { componentsWithIsland } from '@bodiless/hydration';
 import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
 const BaseVariation = {
@@ -37,7 +38,7 @@ const AccordionVariations = {
   FAQ: vitalAccordion.WithFAQ,
 };
 
-const vitalAccordionVariations = varyDesigns(
+export const vitalAccordionVariations = varyDesigns(
   BaseVariation,
   AccordionVariations,
   {
@@ -48,7 +49,7 @@ const vitalAccordionVariations = varyDesigns(
 
 const vitalAccordionFlowContainer = asFluidToken({
   Components: {
-    ...vitalAccordionVariations,
+    ...componentsWithIsland(vitalAccordionVariations, 'StyleGuideAccordion'),
   },
 });
 

@@ -9,36 +9,26 @@ import { vitalPDPTemplate, PDPTemplateClean } from '@bodiless/vital-product';
 import { withBurgerMenuProvider } from '@bodiless/navigation';
 import { withIslandsHydrator } from '@bodiless/hydration';
 
+const WithLanguage = withLanguages([
+  {
+    name: 'en',
+    label: 'English',
+    isDefault: true,
+  },
+  {
+    name: 'es',
+    label: 'Español',
+  },
+]);
+
 const Default = asFluidToken(vitalPageBase.Default, {
   Core: {
-    _: as(
-      withLanguages([
-        {
-          name: 'en',
-          label: 'English',
-          isDefault: true,
-        },
-        {
-          name: 'es',
-          label: 'Español',
-        },
-      ]),
-    )
+    _: as(WithLanguage)
   },
   Island: {
     _: as(
       withIslandsHydrator({}),
-      withLanguages([
-        {
-          name: 'en',
-          label: 'English',
-          isDefault: true,
-        },
-        {
-          name: 'es',
-          label: 'Español',
-        },
-      ]),
+      WithLanguage,
       withBurgerMenuProvider,
     )
   },

@@ -11,6 +11,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export { default as withIsland } from './withIsland';
-export { default as withIslandsHydrator } from './IslandsHydrator';
-export * from './componentsWithIsland';
+import { as } from '@bodiless/fclasses';
+import { withIsland } from './withIsland';
+
+type Components = {
+  [key: string]: any;
+};
+
+const componentsWithIsland = (components: Components, prefix: string = '') => {
+  const newComponents: Components = {};
+  Object.keys(components).forEach((componentName: string) => {
+    newComponents[`${prefix}${componentName}`] = as(
+      withIsland(`${prefix}.${componentName}`),
+      components[componentName]
+    );
+  });
+
+  return newComponents;
+};
+
+export {
+  componentsWithIsland
+};
