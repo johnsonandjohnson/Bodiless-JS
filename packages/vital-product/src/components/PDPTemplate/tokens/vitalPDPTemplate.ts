@@ -67,7 +67,8 @@ const vitalProductButtons = {
   })
 };
 
-const Default = asPDPTemplateToken(vitalGenericTemplate.Default, {
+const Default = asPDPTemplateToken({
+  ...vitalGenericTemplate.Default,
   Core: {
     PageWrapper: withPDPContextProvider,
     ProductTitle: withAutoSuperscript('®™©', 'align-baseline'),
@@ -81,7 +82,7 @@ const Default = asPDPTemplateToken(vitalGenericTemplate.Default, {
     ),
   },
   Components: {
-    // ...vitalGenericTemplate.Default.Components,
+    ...vitalGenericTemplate.Default.Components,
     PageWrapper: vitalLayout.Default,
     TopContent: replaceWith(Fragment),
     ProductImage: vitalImage.Plain,
@@ -103,9 +104,8 @@ const Default = asPDPTemplateToken(vitalGenericTemplate.Default, {
   Layout: {
     ContentWrapper: 'flex flex-wrap',
     ProductImageWrapper: 'flex justify-center w-full lg:w-1/2',
-    // ProductImageWrapper: 'w-full lg:w-1/2',
     ProductDetailWrapper: 'w-full lg:w-1/2 lg:grow',
-    // JumpLinksWrapper: 'w-full lg:w-screen'
+    JumpLinksWrapper: 'w-full lg:w-screen',
   },
   Spacing: {
     ...vitalGenericTemplate.Default.Spacing,
@@ -128,6 +128,7 @@ const Default = asPDPTemplateToken(vitalGenericTemplate.Default, {
     ProductEyebrowWrapper: omit(vitalTypography.Eyebrow, 'Spacing'),
   },
   Schema: {
+    ...vitalGenericTemplate.Default.Schema,
     ProductImage: withNodeKey(TemplateNodeKeys.Image),
     ProductDescription: withNodeKey(TemplateNodeKeys.Description),
     ProductTitle: withNodeKey(TemplateNodeKeys.Title),
