@@ -20,7 +20,7 @@ const vitalProductCard = asTokenGroup(ProductCardMeta)({
   ColorProductCardTextReview: vitalColor.TextDark1,
   ColorProductCardTextDescription: vitalColor.TextDark2,
   ColorProductCardTextEyebrow: vitalColor.TextDark1,
-  ColorProductCardScrollDotActive: vitalColor.InteractiveDarkDefault,
+  ColorProductCardScrollDotActive: vitalColor.ColorInteractiveLightThemeIdle,
   ColorProductCardScrollDotInactive: 'neutral-400',
   SpacingProductCardPadding: 'p-md',
   TextProductCardTitle: vitalTypography.H4V2,
