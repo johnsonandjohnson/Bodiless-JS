@@ -19,11 +19,11 @@ import {
  * the auto-complete for the `ButtonClean` component.
  */
 const WithPrimary = asButtonToken({
-  ...vitalButtonBase.Primary,
+  ...vitalButtonBase.WithPrimaryStyle,
   Theme: {
     // Spreading `Theme` here prevents unwanted changes,
     // keeping all tokens other than the wrappers.
-    ...vitalButtonBase.Primary.Theme,
+    ...vitalButtonBase.WithPrimaryStyle.Theme,
     Wrapper: as(
       // vital-elements tokens
       vitalColor.BgPrimaryBrand,
@@ -49,9 +49,9 @@ const WithPrimary = asButtonToken({
  * the auto-complete for the `ButtonClean` component.
  */
 const WithBigButton = asButtonToken({
-  ...vitalButtonBase.Default,
+  ...vitalButtonBase.Plain,
   Spacing: {
-    ...vitalButtonBase.Default.Spacing,
+    ...vitalButtonBase.Plain.Spacing,
     Wrapper: 'px-12 py-6',
   },
 });

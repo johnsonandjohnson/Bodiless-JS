@@ -29,7 +29,7 @@ import { ButtonComponent, ButtonToken, asButtonToken } from '../ButtonClean';
 import { WhereToBuy, WhereToBuyWithoutIcon } from './vitalWTB';
 import vitalButtonTokens from '../../ButtonTokens';
 
-const Default = asButtonToken({
+const Plain = asButtonToken({
   Layout: {
     Wrapper: 'group justify-center',
   },
@@ -80,7 +80,9 @@ const Default = asButtonToken({
 //   Meta: flowHoc.meta.term('Style')('With Hover Arrow'),
 // });
 
-const Primary = asButtonToken(Default, {
+// Prefix button tokens with 'With' + remove extension of Default
+
+const WithPrimaryStyle = asButtonToken(Plain, {
   Theme: {
     Wrapper: as(
       vitalButtonTokens.ButtonPrimaryBackgroundLightThemeIdle,
@@ -94,7 +96,7 @@ const Primary = asButtonToken(Default, {
   Meta: flowHoc.meta.term('Style')('Primary'),
 });
 
-const Secondary = asButtonToken(Default, {
+const WithSecondaryStyle = asButtonToken(Plain, {
   Theme: {
     Wrapper: as(
       vitalButtonTokens.ButtonSecondaryBorderLightThemeDefault,
@@ -112,7 +114,7 @@ const Secondary = asButtonToken(Default, {
   Meta: flowHoc.meta.term('Style')('Secondary'),
 });
 
-const Tertiary = asButtonToken(Default, {
+const WithTertiaryStyle = asButtonToken(Plain, {
   Theme: {
     // Wrapper: vitalButtonTokens.ColorButtonTertiaryBackgroundFocus,
     Body: as(
@@ -166,10 +168,10 @@ const TertiaryDisabled = asButtonToken(
 );
 
 interface VitalButton extends TokenCollection<ButtonComponent, {}> {
-  Default: ButtonToken,
-  Primary: ButtonToken,
-  Secondary: ButtonToken,
-  Tertiary: ButtonToken,
+  Plain: ButtonToken,
+  WithPrimaryStyle: ButtonToken,
+  WithSecondaryStyle: ButtonToken,
+  WithTertiaryStyle: ButtonToken,
   PrimaryDisabled: ButtonToken,
   SecondaryDisabled: ButtonToken,
   TertiaryDisabled: ButtonToken,
@@ -180,10 +182,13 @@ interface VitalButton extends TokenCollection<ButtonComponent, {}> {
 }
 
 const vitalButton: VitalButton = {
-  Default,
-  Primary,
-  Secondary,
-  Tertiary,
+  Plain,
+  // Primary,
+  // Secondary,
+  // Tertiary,
+  WithPrimaryStyle,
+  WithSecondaryStyle,
+  WithTertiaryStyle,
   PrimaryDisabled,
   SecondaryDisabled,
   TertiaryDisabled,

@@ -43,8 +43,8 @@ const Default = on(ButtonClean)(withDefaultContent(label));
 // Generate the Button Varations
 const ButtonStyleVariations = varyDesigns(
   {
-    Primary: exampleButtons.Primary,
-    Secondary: exampleButtons.Secondary,
+    Primary: exampleButtons.WithPrimaryStyle,
+    Secondary: exampleButtons.WithSecondaryStyle,
   },
   {
     '': '', // vary on itself and produce default button variation

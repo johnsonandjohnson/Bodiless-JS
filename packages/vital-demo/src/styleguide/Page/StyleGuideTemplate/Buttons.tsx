@@ -31,7 +31,7 @@ const label = {
 };
 
 const Default = on(ButtonClean)(
-  vitalButton.Default,
+  vitalButton.Plain,
   withDefaultContent(label),
 );
 
@@ -48,9 +48,9 @@ const DisabledButtonStyleVariations = varyDesigns(
 
 const ButtonStyleVariations = varyDesigns(
   {
-    Primary: vitalButton.Primary,
-    Secondary: vitalButton.Secondary,
-    Tertiary: vitalButton.Tertiary,
+    Primary: vitalButton.WithPrimaryStyle,
+    Secondary: vitalButton.WithSecondaryStyle,
+    Tertiary: vitalButton.WithTertiaryStyle,
   },
   {
     '': '', // vary on itself and produce default button variation
