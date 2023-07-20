@@ -22,8 +22,10 @@ jobs:
           node-version: 18.16
       - name: Setup
         run: npm run setup
+      - name: Site build
+        run: npm run build -- --filter=@sites/test-site
       - name: Build docs
-        run: npm run build:docs --workspaces
+        run: npm run build:docs --workspace=@sites/test-site
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
