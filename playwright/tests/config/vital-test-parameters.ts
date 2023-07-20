@@ -48,18 +48,17 @@ export const vitalTestParameters: VitalTestParameters[] = [
     page: new VitalAccordionPage(),
     switchToItemContent: true,
   },
-  // Temporarily disable tests for Video page to unblock executions on vital-demo-next
-  // {
-  //   suite: 'Video',
-  //   page: new VitalVideoPage(),
-  //   /**
-  //    * Animated YouTube icon, it's not affected by resizing on different devices and so always
-  //    * located by the same coordinates.
-  //    */
-  //   ignoreRegion: new Region(7, 7, 50, 50),
-  //   switchToItemContent: true,
-  //   disabledRules: ['aria-allowed-attr', 'frame-title'],
-  // },
+  {
+    suite: 'Video',
+    page: new VitalVideoPage(),
+    /**
+     * Animated YouTube icon, it's not affected by resizing on different devices and so always
+     * located by the same coordinates.
+     */
+    ignoreRegion: new Region(7, 7, 50, 50),
+    switchToItemContent: true,
+    disabledRules: ['aria-allowed-attr', 'frame-title'],
+  },
   {
     suite: 'Layout',
     page: new VitalLayoutPage(),
