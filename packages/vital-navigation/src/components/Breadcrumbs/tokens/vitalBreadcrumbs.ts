@@ -44,7 +44,8 @@ const Base = asBreadcrumbsToken({
     }),
   },
   A11y: {
-    Wrapper: 'space-x-2 divide-x-2 divide-black-300'
+    // Divider is styles via CSS for accessiblity
+    Wrapper: 'divide-x-2 divide-black-300'
   },
   Schema: {
     _: flowHoc(
@@ -58,7 +59,7 @@ const Base = asBreadcrumbsToken({
     Wrapper: 'inline-flex',
   },
   Spacing: {
-    Wrapper: 'my-3',
+    Wrapper: 'space-x-2  my-3',
     Item: 'ps-2',
   },
   Theme: {
@@ -75,11 +76,9 @@ const Base = asBreadcrumbsToken({
 /**
   * Token which produces the Default Vital Breadcrumbs.
   */
-const Default = asBreadcrumbsToken(
-  {
-    ...Base,
-  },
-);
+const Default = asBreadcrumbsToken({
+  ...Base,
+});
 
 /**
   * Breadcrumbs Token Definition Object.
