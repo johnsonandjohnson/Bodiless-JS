@@ -99,7 +99,7 @@ const WithCarouselDots = asVitalCarouselToken(
     },
     Layout: {
       Slider: as(
-        'w-screen',
+        'w-screen md:w-full',
         withDesign({
           // Controls Responspivenes Behavior.
           // A setting of at mobile of w-5/6 gives peek of next slide.

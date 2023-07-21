@@ -21,32 +21,34 @@ const twConfig = {
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        ScrollIndicatorActive: '#019881',
+        ScrollIndicatorInActive: '#BFBFBF',
+      }
+    },
   },
   plugins: [
-    plugin(({ addBase }) => {
+    plugin(({ addBase, theme }) => {
       addBase({
         '.scrollbar': {
           overflowY: 'auto',
-          scrollbarColor: '#019881 #BFBFBF',
-          scrollbarWidth: 'thin',
         },
         '.scrollbar::-webkit-scrollbar': {
           height: '8px',
-          width: '2px',
           'border-radius': '10px',
         },
         '.scrollbar::-webkit-scrollbar-thumb': {
-          backgroundColor: '#019881',
+          backgroundColor: theme('colors.ScrollIndicatorActive'),
           'border-radius': '10px',
         },
         '.scrollbar::-webkit-scrollbar-track': {
-          backgroundColor: '#BFBFBF',
+          backgroundColor: theme('colors.ScrollIndicatorInActive'),
           'border-radius': '10px',
         },
       });
     }),
-    plugin(({ addUtilities }) => {
+    plugin(({ addUtilities, theme }) => {
       addUtilities(
         {
           '.scroll-snap-slider': {
@@ -58,23 +60,11 @@ const twConfig = {
           '.scroll-snap-slider.-draggable.-dragging': {
             cursor: 'grabbing',
           },
-          // '.scroll-snap-slider .scroll-snap-slide': {
-          //   'scroll-snap-align': 'start',
-          // },
-          // '.indicators': {
-          //   transition: 'opacity 0.3s cubic-bezier(0.42, 0.42, 0.84, 1)',
-          // },
           '.indicators.-hidden': {
             opacity: '0',
           },
-          // '.indicators input[type="radio"]': {
-          //   display: 'none',
-          // },
-          // '.indicator:not(.-active):hover .dot': {
-          //   'background-color': '#019881',
-          // },
           '.indicators .indicator.-active .dot': {
-            'background-color': '#019881',
+            'background-color': theme('colors.ScrollIndicatorActive'),
           },
         }
       );
