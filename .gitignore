@@ -32,6 +32,7 @@ test-report.xml
 # Test tools
 /sites-test
 playwright-report
+accessibility-reports
 
 # API doc
 **/doc/api
