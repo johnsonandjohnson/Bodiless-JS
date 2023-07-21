@@ -19,11 +19,11 @@ import { TypographyMeta } from '../meta';
  * @todo: Move the token group to vitalTypography.ts as soon as all the V1 tokens are deprecated.
  */
 export default asTokenGroup(TypographyMeta)({
-  H1V2: 'text-4xl leading-5 font-normal font-2',
-  H2V2: 'text-3xl leading-5 font-normal font-2',
-  H3V2: 'text-2xl leading-5 font-normal font-2',
-  H4V2: 'text-xl leading-5 font-normal font-2',
-  H5V2: 'text-lg leading-5 font-normal font-2',
+  HeadlineXXLarge: 'text-4xl leading-5 font-normal font-2',
+  HeadlineXLarge: 'text-3xl leading-5 font-normal font-2',
+  HeadlineLarge: 'text-2xl leading-5 font-normal font-2',
+  HeadlineMedium: 'text-xl leading-5 font-normal font-2',
+  HeadlineSmall: 'text-lg leading-5 font-normal font-2',
   BodyRegular: 'text-base leading-6 font-normal font-2',
   BodyBold: 'text-14px lg:text-16px leading-6 font-bold font-2',
   BodyInlineLink: 'text-base leading-6 font-bold font-2 underline',
