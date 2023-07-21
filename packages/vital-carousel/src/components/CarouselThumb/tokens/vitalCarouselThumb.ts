@@ -21,9 +21,6 @@ const Default = asCarouselThumbToken({
   Behavior: {
     Image: 'cursor-pointer'
   },
-  Spacing: {
-    Wrapper: 'space-x-2',
-  }
 });
 
 // Add additional variant tokens or variators here.

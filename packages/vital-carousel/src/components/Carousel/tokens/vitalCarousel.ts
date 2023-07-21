@@ -108,9 +108,14 @@ const WithCarouselDots = asVitalCarouselToken(
       Slider: 'scrollbar-hide lg:scrollbar-default',
     },
     Spacing: {
-      Slider: as('-multi', vitalCarouselTokens.Spacing8),
+      Slider: as(
+        '-multi',
+        withDesign({
+          Item: 'pe-2',
+        }),
+      ),
       ControlsWrapper: 'pt-2',
-      Indicator: vitalCarouselTokens.Spacing8,
+      Indicator: 'ps-2',
     },
     Layout: {
       Slider: as(
