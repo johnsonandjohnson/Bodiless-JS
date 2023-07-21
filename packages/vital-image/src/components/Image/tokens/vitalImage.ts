@@ -43,7 +43,6 @@ import {
 
 // @ts-ignore Cannot find module
 import landscapeImage from '../../../../assets/landscape_image.png';
-import { withImageClientLoader } from './vitalImage.next';
 
 /**
  * @private
@@ -79,7 +78,6 @@ const Base = asElementToken({
       asImage,
       stylable,
       withImageLogger(),
-      withImageClientLoader,
       withoutHydration(),
     ),
   },
