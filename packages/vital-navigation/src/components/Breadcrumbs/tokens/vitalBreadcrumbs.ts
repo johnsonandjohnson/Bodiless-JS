@@ -17,10 +17,10 @@ import { withNodeKey } from '@bodiless/data';
 import { withoutLinkWhenLinkDataEmpty } from '@bodiless/components';
 import {
   withDesign,
-  addProps,
   stylable,
   flowHoc,
   as,
+  replaceWith,
 } from '@bodiless/fclasses';
 import {
   asBreadcrumbs,
@@ -38,10 +38,13 @@ const Base = asBreadcrumbsToken({
   Core: {
     _: asBreadcrumbs,
     NavWrapper: stylable,
-    Separator: addProps({ children: '·' }),
+    Separator: replaceWith(() => null),
     FinalTrail: withDesign({
       Link: withoutLinkWhenLinkDataEmpty,
     }),
+  },
+  A11y: {
+    Wrapper: 'space-x-2 divide-x-2 divide-black-300'
   },
   Schema: {
     _: flowHoc(
@@ -53,11 +56,10 @@ const Base = asBreadcrumbsToken({
   },
   Layout: {
     Wrapper: 'inline-flex',
-    Separator: 'flex',
   },
   Spacing: {
-    Separator: 'mx-1',
     Wrapper: 'my-3',
+    Item: 'ps-2',
   },
   Theme: {
     Wrapper: as(
@@ -73,9 +75,11 @@ const Base = asBreadcrumbsToken({
 /**
   * Token which produces the Default Vital Breadcrumbs.
   */
-const Default = asBreadcrumbsToken({
-  ...Base,
-});
+const Default = asBreadcrumbsToken(
+  {
+    ...Base,
+  },
+);
 
 /**
   * Breadcrumbs Token Definition Object.
