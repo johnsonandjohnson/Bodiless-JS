@@ -20,7 +20,7 @@ const CarouselThumbBase: FC<CarouselThumbBaseProps> = ({ components: C, ...rest 
 
   return (
     // Accessiblility Set tabindex for natural order
-    <C.Wrapper class="thumbs indicator" data-index={slideIndex} tabindex="0" type="button" {...rest}>
+    <C.Wrapper data-index={slideIndex} type="button" {...rest}>
       <C.Image />
     </C.Wrapper>
   );

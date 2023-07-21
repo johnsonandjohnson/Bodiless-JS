@@ -31,6 +31,15 @@ const Default = asVitalCarouselToken({
       }),
     ),
   },
+  A11y: {
+    Wrapper: as(
+      addProps({ role: 'region' }),
+      addProps({ 'aria-label': 'carousel' }),
+    ),
+    Slider: withDesign({
+      Item: addProps({ role: 'list' }),
+    }),
+  },
   Behavior: {
     // Setup scroll snap behavior
     Wrapper: 'slider',
@@ -73,6 +82,12 @@ const WithControls = asVitalCarouselToken({
       'align-center flex-row justify-center opacity-100',
     ),
   },
+  A11y: {
+    Indicator: as(
+      addProps({ 'aria-label': 'Navigation Controls' }),
+      addProps({ role: 'list' }),
+    ),
+  }
 });
 
 const WithCarouselDots = asVitalCarouselToken(

@@ -1,4 +1,5 @@
 import { vitalImage } from '@bodiless/vital-image';
+import { addProps } from '@bodiless/fclasses';
 import { asCarouselThumbToken } from '../CarouselThumbClean';
 import type { VitalCarouselThumb } from '../types';
 
@@ -7,7 +8,10 @@ const Default = asCarouselThumbToken({
     Image: vitalImage.Default,
   },
   Theme: {
-    Wrapper: 'border-none',
+    Wrapper: 'border-none thumbs indicator',
+  },
+  A11y: {
+    Wrapper: addProps({ tabindex: '0' }),
   },
   Layout: {
     Wrapper: 'block',

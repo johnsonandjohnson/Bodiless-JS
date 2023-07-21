@@ -19,8 +19,7 @@ const CarouselDotBase: FC<CarouselDotBaseProps> = ({ components: C, ...rest }) =
   const slideIndex = useCarouselSlideIndex();
 
   return (
-    // Accessbility: Remove an element using tabindex="-1"
-    <C.Wrapper class="indicator" data-index={slideIndex} tabindex="-1" {...rest}>
+    <C.Wrapper data-index={slideIndex} {...rest}>
       <C.Dot />
     </C.Wrapper>
   );
