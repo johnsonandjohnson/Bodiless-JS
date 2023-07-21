@@ -51,7 +51,9 @@ describe('fetchProducts', () => {
         faqs: [],
         images: [
           {
-            url: 'http://google.com',
+            file: {
+              url: 'http://google.com',
+            }
           },
         ],
         ingredients: [
