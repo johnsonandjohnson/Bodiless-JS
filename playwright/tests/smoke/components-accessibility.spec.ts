@@ -54,6 +54,7 @@ test.describe('Accessibility', () => {
 
       if (violations.length !== 0) {
         const violationsAsString = JSON.stringify(violations, null, 4);
+        console.error(`Accessibility violations\n${violationsAsString}`);
         test.info().attach('accessibility-violations', { body: violationsAsString, contentType: 'application/json'});
       }
       /* eslint-disable jest/valid-expect */
