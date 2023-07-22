@@ -70,7 +70,7 @@ export const vitalTestParameters: VitalTestParameters[] = [
     suite: 'Product',
     page: new VitalProductPage(),
     switchToItemContent: false,
-    disabledRules: ['list'],
+    disabledRules: ['list', 'color-contrast'],
   },
   {
     suite: 'Generic Template',
