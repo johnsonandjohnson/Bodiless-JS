@@ -20,11 +20,13 @@ export default asTokenGroup(ColorMeta)({
   TextPrimaryBrand: 'text-vital-primary-brand',
   BgPrimaryCard: 'bg-vital-primary-card-bg',
   BgPrimaryPage: 'bg-vital-primary-page-bg',
-  BgPrimaryInteractive: 'bg-vital-primary-interactive',
+  BgPrimaryInteractive: 'bg-vital-primary-interactive disabled:bg-vital-primary-button-disabled',
   BorderPrimaryInteractive: 'border-vital-primary-interactive',
   TextPrimaryInteractive: 'text-vital-primary-interactive hover:opacity-70 active:text-vital-primary-interactive-active',
+  TextSecondaryInteractive: 'text-vital-secondary-interactive active:text-vital-primary-interactive-active',
   TextPrimaryInteractiveNoHover: 'text-vital-primary-interactive active:text-vital-primary-interactive-active',
   TextPrimaryInteractiveHover: 'hover:text-vital-primary-interactive',
+  TextSecondaryInteractiveHover: 'hover:text-vital-secondary-interactive',
   WithTextPrimaryInteractiveDisabled: 'text-opacity-60',
   BgPrimaryDivider: 'bg-vital-primary-divider',
   TextPrimaryDivider: 'text-vital-primary-divider',
@@ -41,45 +43,21 @@ export default asTokenGroup(ColorMeta)({
   BorderSecondarySearch: 'border-vital-secondary-search',
   BgWhite: 'bg-white',
   TextWhite: 'text-white',
+
   TextButtonSelected: 'text-vital-secondary-button-selected',
+  TextSecondaryButtonSelected: 'text-vital-secondary-button-hovered',
+  BgButtonPrimarySelected: 'bg-vital-primary-button-selected',
+  BgSecondaryButtonInteractive: 'bg-vital-secondary-button-selected disabled:bg-transparent disabled:text-vital-primary-button-disabled disabled:border-vital-primary-button-disabled',
+  SecondaryButtonInteractive: 'hover:bg-vital-secondary-button-hovered disabled:bg-transparent disabled:text-vital-primary-button-disabled disabled:border-vital-primary-button-disabled',
+  BorderSecondaryButtonInteractive: 'hover:border-vital-secondary-button-hovered',
+  BgButtonSecondarySelected: 'bg-vital-secondary-button-selected',
+  BorderSecondaryButton: 'hover:border-vital-secondary-button-hovered border-vital-secondary-border-button-selected',
   BgButtonSelected: 'bg-vital-secondary-button-selected',
   BorderButtonSelected: 'border-vital-secondary-button-selected',
 
   /**
    * Vital 2.0 Colors coming from Figma Tokens. Colors above will be deprecated.
    */
-
-  // Background Color Tokens
-  BackgroundBase: 'neutral-100',
-  BackgroundLayer1: 'neutral-100',
-  BackgroundLayer2: 'quintenary-200',
-  BackgroundLayer3: 'tertiary-100',
-  BackgroundLayer4: 'quintenary-100',
-  BackgroundLayer5: 'secondary-200',
-  BackgroundLayer6: 'primary-100',
-  BackgroundInverse: 'neutral-900',
-
-  // Text Color Tokens
-  TextDark1: 'neutral-900',
-  TextDark2: 'neutral-700',
-  TextDark3: 'neutral-600',
-  TextLight1: 'neutral-100',
-  TextLight2: 'neutral-100',
-  TextLight3: 'neutral-300',
-
-  // Interactive Color Tokens
-  InteractiveDarkDefault: 'primary-500',
-  InteractiveDarkHover: 'primary-600',
-  InteractiveDarkFocus: 'primary-600',
-  InteractiveDarkPressed: 'primary-800',
-  InteractiveDarkDisabled: 'neutral-600',
-  InteractiveDarkBackgroundHover: 'primary-100',
-  InteractiveDarkBackgroundFocused: 'primary-100',
-  InteractiveDarkBackgroundPressed: 'primary-200',
-
-  // Border Color Tokens
-  BorderLight: 'neutral-200',
-  BorderDark: 'neutral-600',
 
   // Icon Color Tokens
   IconLight: 'neutral-100',
@@ -90,4 +68,82 @@ export default asTokenGroup(ColorMeta)({
   SignalWarning: 'warning-300',
   SignalSuccess: 'success-400',
   SignalInformational: 'informational-500',
+
+  // Background Color Tokens
+  BackgroundBase: 'bg-kenvue-neutrals-white',
+  BackgroundAlt1: 'bg-kenvue-green-tint-20',
+  BackgroundAlt2: 'bg-kenvue-purple-purple',
+  BackgroundAlt3: 'bg-kenvue-yellow-yellow',
+  BackgroundAlt4: 'bg-kenvue-red-red',
+  BackgroundAlt5: 'bg-kenvue-neutrals-black',
+  BackgroundAlt6: 'bg-kenvue-neutrals-lightest-grey',
+  BackgroundAlt7: 'bg-kenvue-green-shade-40',
+  BackgroundAlt8: 'bg-kenvue-neutrals-darkest-grey',
+
+  // Border Color Tokens
+  BorderLightThemeBase: 'border-kenvue-neutrals-light-grey',
+  BorderDarkThemeBase: 'border-kenvue-neutrals-white',
+  // BorderDarkThemeAlt1: 'border---no-value--',
+  BorderLightThemeAlt1: 'border-kenvue-neutrals-grey',
+
+  // Interactive Color Tokens for background
+  BackgroundInteractiveLightThemeIdle: 'bg-kenvue-green-green',
+  BackgroundInteractiveLightThemeHover: 'hover:bg-kenvue-green-shade-80',
+  BackgroundInteractiveLightThemeFocus: 'focus:bg-kenvue-green-shade-80',
+  BackgroundInteractiveLightThemePressed: 'active:bg-kenvue-green-shade-60',
+  BackgroundInteractiveLightThemeDisabled: 'bg-kenvue-neutrals-grey',
+
+  BackgroundInteractiveDarkThemeIdle: 'bg-kenvue-green-tint-40',
+  BackgroundInteractiveDarkThemeHover: 'hover:bg-kenvue-green-tint-60',
+  BackgroundInteractiveDarkThemeDisabled: 'bg-kenvue-neutrals-light-grey',
+  BackgroundInteractiveDarkThemePressed: 'active:bg-kenvue-green-tint-20',
+  BackgroundInteractiveDarkThemeFocus: 'focus:bg-kenvue-green-tint-60',
+
+  // Interactive Color Tokens for scrollbar
+  ScrollbarInteractiveDarkThemeIdle: 'scrollbar-kenvue-green-tint-40',
+  ScrollbarInteractiveDarkThemeHover: 'scrollbar-kenvue-green-tint-60',
+  ScrollbarInteractiveDarkThemeFocus: 'scrollbar-kenvue-green-tint-60',
+  ScrollbarInteractiveDarkThemePressed: 'scrollbar-kenvue-green-tint-20',
+  ScrollbarInteractiveDarkThemeDisabled: 'scrollbar-kenvue-neutrals-light-grey',
+
+  ScrollbarInteractiveLightThemeIdle: 'scrollbar-kenvue-green-green',
+  ScrollbarInteractiveLightThemeHover: 'scrollbar-kenvue-green-shade-80',
+  ScrollbarInteractiveLightThemeFocus: 'scrollbar-kenvue-green-shade-80',
+  ScrollbarInteractiveLightThemePressed: 'scrollbar-kenvue-green-shade-60',
+  ScrollbarInteractiveLightThemeDisabled: 'scrollbar-kenvue-neutrals-grey',
+
+  // Interactive Color Tokens for border
+  BorderInteractiveLightThemeIdle: 'border-kenvue-green-green',
+  BorderInteractiveLightThemeHover: 'hover:border-kenvue-green-shade-80',
+  BorderInteractiveLightThemeFocus: 'focus:border-kenvue-green-shade-80',
+  BorderInteractiveLightThemePressed: 'active:border-kenvue-green-shade-60',
+  BorderInteractiveLightThemeDisabled: 'border-kenvue-neutrals-grey',
+
+  BorderInteractiveDarkThemeIdle: 'border-kenvue-green-tint-40',
+  BorderInteractiveDarkThemeHover: 'border-kenvue-green-tint-60',
+  BorderInteractiveDarkThemeFocus: 'border-kenvue-green-tint-60',
+  BorderInteractiveDarkThemePressed: 'border-kenvue-green-tint-20',
+  BorderInteractiveDarkThemeDisabled: 'border-kenvue-neutrals-light-grey',
+
+  // Text Color Tokens
+  TextLightThemeBase: 'text-kenvue-neutrals-black',
+  TextLightThemeAlt1: 'text-kenvue-neutrals-darkest-grey',
+  TextLightThemeAlt2: 'text-kenvue-neutrals-dark-grey',
+  TextDarkThemeBase: 'text-kenvue-neutrals-white',
+  TextDarkThemeAlt1: 'text-kenvue-neutrals-lightest-grey',
+  TextDarkThemeAlt2: 'text---no-value--',
+
+  // Interactive Color Tokens for text
+  TextInteractiveLightThemeIdle: 'text-kenvue-green-green',
+  TextInteractiveLightThemeHover: 'hover:text-kenvue-green-shade-80',
+  TextInteractiveLightThemeFocus: 'focus:text-kenvue-green-shade-80',
+  TextInteractiveLightThemePressed: 'active:text-kenvue-green-shade-60',
+  TextInteractiveLightThemeDisabled: 'text-kenvue-neutrals-grey',
+
+  TextInteractiveDarkThemeIdle: 'text-kenvue-green-tint-40',
+  TextInteractiveDarkThemeHover: 'text-kenvue-green-tint-60',
+  TextInteractiveDarkThemeFocus: 'text-kenvue-green-tint-60',
+  TextInteractiveDarkThemePressed: 'text-kenvue-green-tint-20',
+  TextInteractiveDarkThemeDisabled: 'text-kenvue-neutrals-light-grey',
+
 });
