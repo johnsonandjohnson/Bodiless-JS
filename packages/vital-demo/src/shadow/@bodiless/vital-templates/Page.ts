@@ -3,9 +3,8 @@ import { on } from '@bodiless/fclasses';
 import { vitalContentListingTemplate } from '@bodiless/vital-content-listing';
 import { withLanguages } from '@bodiless/i18n';
 import { asFluidToken } from '@bodiless/vital-elements';
-import {
-  PDPTemplateClean, vitalPDPTemplate, GenericTemplateClean,
-} from '@bodiless/vital-templates';
+import { GenericTemplateClean } from '@bodiless/vital-templates';
+import { vitalPDPTemplate, PDPTemplateClean } from '@bodiless/vital-product';
 
 const Base = asFluidToken(vitalPageBase.Default, {
   Core: {

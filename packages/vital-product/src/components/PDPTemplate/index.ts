@@ -12,8 +12,10 @@
  * limitations under the License.
  */
 
-export * from './components/GenericTemplate';
-export * from './components/StyleGuideTemplate';
-export * from './components/Page';
-export * from './components/Hero';
-export { TemplateNodeKeys } from './components/TemplatesNodeKeys';
+export { default as PDPTemplateClean, asPDPTemplateToken } from './PDPTemplateClean';
+export { default as vitalPDPTemplateBase } from './tokens/vitalPDPTemplate';
+export { default as vitalPDPTemplate } from './tokens';
+
+export * from './PDPTemplateContext';
+export * from './PDPSlateHelpers';
+export * from './types';
