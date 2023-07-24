@@ -21,12 +21,7 @@ const twConfig = {
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
   theme: {
-    extend: {
-      colors: {
-        ScrollIndicatorActive: '#019881',
-        ScrollIndicatorInActive: '#BFBFBF',
-      }
-    },
+    extend: {},
   },
   plugins: [
     plugin(({ addBase, theme }) => {
@@ -39,11 +34,11 @@ const twConfig = {
           'border-radius': '10px',
         },
         '.scrollbar::-webkit-scrollbar-thumb': {
-          backgroundColor: theme('colors.ScrollIndicatorActive'),
+          backgroundColor: theme('colors.scrollbar-kenvue-green-green'),
           'border-radius': '10px',
         },
         '.scrollbar::-webkit-scrollbar-track': {
-          backgroundColor: theme('colors.ScrollIndicatorInActive'),
+          backgroundColor: theme('colors.border-kenvue-neutrals-light-grey'),
           'border-radius': '10px',
         },
       });
@@ -64,7 +59,7 @@ const twConfig = {
             opacity: '0',
           },
           '.indicators .indicator.-active .dot': {
-            'background-color': theme('colors.ScrollIndicatorActive'),
+            'background-color': theme('colors.scrollbar-kenvue-green-green'),
           },
         }
       );

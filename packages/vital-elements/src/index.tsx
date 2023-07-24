@@ -18,4 +18,5 @@ export * from './components/FontSize';
 export * from './components/Spacing';
 export * from './components/TextDecoration';
 export * from './components/KnapsackDemoElement';
+export { default as vitalScrollIndicatorElement } from './generated/vitalScrollIndicatorElement';
 export * from './util';

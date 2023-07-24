@@ -103,6 +103,8 @@ const twConfig = {
        */
       colors: {
         ...colors,
+        'scrollbar-kenvue-green-green': '#019881',
+        'border-kenvue-neutrals-light-grey': '#BFBFBF',
       },
       fontFamily: {
         DMSans: ['DM Sans', 'sans-serif'],
