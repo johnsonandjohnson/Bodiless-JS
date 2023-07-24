@@ -105,7 +105,7 @@ Base.constructor
 
 #### Defined in
 
-[packages/knapsack-renderer/src/renderer-bodiless.ts:55](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a607d3e8/packages/knapsack-renderer/src/renderer-bodiless.ts#L55)
+[packages/knapsack-renderer/src/renderer-bodiless.ts:55](https://github.com/johnsonandjohnson/Bodiless-JS/blob/e2db52c95/packages/knapsack-renderer/src/renderer-bodiless.ts#L55)
 
 ## Properties
 
@@ -307,7 +307,7 @@ Base.getMeta
 
 #### Defined in
 
-[packages/knapsack-renderer/src/renderer-bodiless.ts:442](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a607d3e8/packages/knapsack-renderer/src/renderer-bodiless.ts#L442)
+[packages/knapsack-renderer/src/renderer-bodiless.ts:442](https://github.com/johnsonandjohnson/Bodiless-JS/blob/e2db52c95/packages/knapsack-renderer/src/renderer-bodiless.ts#L442)
 
 ___
 
@@ -430,7 +430,7 @@ Base.inferSpec
 
 #### Defined in
 
-[packages/knapsack-renderer/src/renderer-bodiless.ts:349](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a607d3e8/packages/knapsack-renderer/src/renderer-bodiless.ts#L349)
+[packages/knapsack-renderer/src/renderer-bodiless.ts:349](https://github.com/johnsonandjohnson/Bodiless-JS/blob/e2db52c95/packages/knapsack-renderer/src/renderer-bodiless.ts#L349)
 
 ___
 
@@ -528,7 +528,7 @@ ___
 
 #### Defined in
 
-[packages/knapsack-renderer/src/renderer-bodiless.ts:53](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a607d3e8/packages/knapsack-renderer/src/renderer-bodiless.ts#L53)
+[packages/knapsack-renderer/src/renderer-bodiless.ts:53](https://github.com/johnsonandjohnson/Bodiless-JS/blob/e2db52c95/packages/knapsack-renderer/src/renderer-bodiless.ts#L53)
 
 ___
 
@@ -1070,7 +1070,7 @@ Base.getJsImports
 
 #### Defined in
 
-[packages/knapsack-renderer/src/renderer-bodiless.ts:79](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a607d3e8/packages/knapsack-renderer/src/renderer-bodiless.ts#L79)
+[packages/knapsack-renderer/src/renderer-bodiless.ts:79](https://github.com/johnsonandjohnson/Bodiless-JS/blob/e2db52c95/packages/knapsack-renderer/src/renderer-bodiless.ts#L79)
 
 ___
 
@@ -1121,7 +1121,7 @@ ___
 
 #### Defined in
 
-[packages/knapsack-renderer/src/renderer-bodiless.ts:94](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a607d3e8/packages/knapsack-renderer/src/renderer-bodiless.ts#L94)
+[packages/knapsack-renderer/src/renderer-bodiless.ts:94](https://github.com/johnsonandjohnson/Bodiless-JS/blob/e2db52c95/packages/knapsack-renderer/src/renderer-bodiless.ts#L94)
 
 ___
 
@@ -1143,7 +1143,7 @@ ___
 
 #### Defined in
 
-[packages/knapsack-renderer/src/renderer-bodiless.ts:85](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a607d3e8/packages/knapsack-renderer/src/renderer-bodiless.ts#L85)
+[packages/knapsack-renderer/src/renderer-bodiless.ts:85](https://github.com/johnsonandjohnson/Bodiless-JS/blob/e2db52c95/packages/knapsack-renderer/src/renderer-bodiless.ts#L85)
 
 ___
 
@@ -1195,7 +1195,7 @@ Base.getUsageAndImports
 
 #### Defined in
 
-[packages/knapsack-renderer/src/renderer-bodiless.ts:126](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a607d3e8/packages/knapsack-renderer/src/renderer-bodiless.ts#L126)
+[packages/knapsack-renderer/src/renderer-bodiless.ts:126](https://github.com/johnsonandjohnson/Bodiless-JS/blob/e2db52c95/packages/knapsack-renderer/src/renderer-bodiless.ts#L126)
 
 ___
 
@@ -1391,7 +1391,7 @@ Base.render
 
 #### Defined in
 
-[packages/knapsack-renderer/src/renderer-bodiless.ts:260](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a607d3e8/packages/knapsack-renderer/src/renderer-bodiless.ts#L260)
+[packages/knapsack-renderer/src/renderer-bodiless.ts:260](https://github.com/johnsonandjohnson/Bodiless-JS/blob/e2db52c95/packages/knapsack-renderer/src/renderer-bodiless.ts#L260)
 
 ___
 
