@@ -36,7 +36,7 @@ const Default = asFluidToken({
     ),
   },
   Components: {
-    _default: on(GenericTemplateClean)(vitalGenericTemplate.Generic),
+    _default: on(GenericTemplateClean)(vitalGenericTemplate.Default),
   },
   // @todo restore tools
   // Behavior: {
