@@ -64,19 +64,16 @@ export const vitalTestParameters: VitalTestParameters[] = [
     suite: 'Layout',
     page: new VitalLayoutPage(),
     switchToItemContent: false,
-    disabledRules: ['list'],
   },
   {
     suite: 'Product',
     page: new VitalProductPage(),
     switchToItemContent: false,
-    disabledRules: ['list', 'color-contrast'],
   },
   {
     suite: 'Generic Template',
     page: new VitalGenericTemplatePage(),
     switchToItemContent: false,
-    disabledRules: ['list'],
   }
 ];
 
