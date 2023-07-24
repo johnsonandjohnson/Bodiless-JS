@@ -32,7 +32,7 @@ export default asTokenGroup(SpacingMeta)({
   GuttonRight: 'mr-4',
 
   /**
-   * Vital 2.0 Colors coming from Figma Tokens. Colors above will be deprecated.
+   * Vital 2.0 Spacing below coming from Figma Tokens.
    */
 
   PaddingXSmall: 'p-8px md:p-16px',

@@ -51,3 +51,11 @@ export { default as vitalTextDecorationBase } from './components/TextDecoration/
  * @see [[vitalTypography]]
  */
 export { default as vitalTypographyBase } from './components/Typography/tokens/vitalTypography';
+
+/**
+ * Use this version of the vital accordion tokens when extending or shadowing.
+ * Import the token directly from @bodiless/vital-elements/lib/base.
+ * @category Token Collection
+ * @see [[vitalAccordionElement]]
+ */
+export { default as vitalAccordionElementBase } from './components/AccordionElement/tokens/vitalAccordionElement';
