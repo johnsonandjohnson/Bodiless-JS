@@ -19,7 +19,7 @@ import { writeFileSync } from 'fs-extra';
 import { accessibilityReportsPath } from '../setup/setup';
 import { vitalTestParameters } from '../config/vital-test-parameters';
 import {
-  VitalGenericTemplatePage, VitalLayoutPage, VitalPage, VitalVideoPage
+  VitalGenericTemplatePage, VitalProductPage, VitalLayoutPage, VitalPage, VitalVideoPage
 } from '../../pages';
 
 test.describe.configure({ mode: 'parallel' });
@@ -54,6 +54,7 @@ test.describe('Accessibility', () => {
 
       if (violations.length !== 0) {
         const violationsAsString = JSON.stringify(violations, null, 4);
+        console.error(`Accessibility violations\n${violationsAsString}`);
         test.info().attach('accessibility-violations', { body: violationsAsString, contentType: 'application/json'});
       }
       /* eslint-disable jest/valid-expect */
@@ -64,6 +65,13 @@ test.describe('Accessibility', () => {
   // Check known issues from https://github.com/johnsonandjohnson/Bodiless-JS/issues/2130
   test('Should have \'list\' violation on Layout page', async ({ page }) => {
     await new VitalLayoutPage().open(page);
+    const results = await analyze(page, (cfg) => cfg.withRules(['list']));
+    expect(results.violations.length).toEqual(1);
+    expect(results.violations[0].nodes.length).toEqual(1);
+  });
+
+  test('Should have \'list\' violation on Product page', async ({ page }) => {
+    await new VitalProductPage().open(page);
     const results = await analyze(page, (cfg) => cfg.withRules(['list']));
     expect(results.violations.length).toEqual(1);
     expect(results.violations[0].nodes.length).toEqual(1);
