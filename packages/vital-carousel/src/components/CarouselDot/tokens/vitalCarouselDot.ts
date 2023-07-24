@@ -1,14 +1,16 @@
 import { addProps, as } from '@bodiless/fclasses';
+
 import { asCarouselDotToken } from '../CarouselDotClean';
 import type { VitalCarouselDot } from '../types';
-import vitalCarouselTokens from '../../CarouselTokens';
 
 const Default = asCarouselDotToken({
   Theme: {
     Wrapper: 'indicator',
     Dot: as(
       'rounded-full border-none',
-      vitalCarouselTokens.ScrollIndicatorBackgroundInactive,
+      // TODO TOKEN PROBLEM IMPORT/VARIABLE NAME
+      // vitalScrollIndicatorElement.LightThemeInactive,
+      'bg-kenvue-neutrals-light-grey',
     ),
   },
   A11y: {

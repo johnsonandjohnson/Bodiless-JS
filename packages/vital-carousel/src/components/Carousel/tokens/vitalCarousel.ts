@@ -7,7 +7,7 @@ import {
 import { vitalImage } from '@bodiless/vital-image';
 import { vitalCard, CardClean } from '@bodiless/vital-card';
 import { asBodilessList } from '@bodiless/components';
-import vitalCarouselTokens from '../../CarouselTokens';
+import { vitalSpacing } from '@bodiless/vital-elements';
 import { asVitalCarouselToken } from '../VitalCarouselClean';
 import type { VitalCarousel } from '../types';
 import { CAROUSEL_NODE_KEY } from '../../utils/constants';
@@ -70,7 +70,7 @@ const Default = asVitalCarouselToken({
   },
   Spacing: {
     // Padding under slider above controls
-    Slider: vitalCarouselTokens.SpacingMedium,
+    Slider: vitalSpacing.PaddingBottomMedium,
   },
 });
 
@@ -161,7 +161,7 @@ const WithThumbnail = asVitalCarouselToken(
     },
     Spacing: {
       ControlsWrapper: 'pt-6',
-      Indicator: vitalCarouselTokens.Spacing8,
+      Indicator: 'space-x-8px',
     },
   }
 );
