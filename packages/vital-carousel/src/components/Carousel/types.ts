@@ -83,4 +83,6 @@ export interface VitalCarousel {
    * DesktopOnly: Show only Desktop
    */
   DesktopOnly: VitalCarouselToken;
+  WithHorizontalThumbs: VitalCarouselToken;
+  WithVerticalThumbs: VitalCarouselToken;
 }

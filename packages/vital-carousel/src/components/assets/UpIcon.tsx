@@ -15,7 +15,7 @@
 import React from 'react';
 import { stylable } from '@bodiless/fclasses';
 
-const Prev = (props: React.SVGProps<SVGSVGElement>) => (
+const Up = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -24,16 +24,16 @@ const Prev = (props: React.SVGProps<SVGSVGElement>) => (
     fill="none"
     {...props}
   >
-    <mask style={{ maskType: 'alpha' }} id="mask0_3721_63618" maskUnits="userSpaceOnUse" x="0" y="4" width="24" height="16">
-      <path d="M8.04428 19L1.04878 11.9954L8.05339 5" stroke="#0C0C36" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M1.47635 12.0409L22.8811 12.0409" stroke="#0C0C36" strokeWidth="2" strokeLinecap="round" />
+    <mask style={{ maskType: 'alpha' }} id="mask0_5803_792" maskUnits="userSpaceOnUse" x="4" y="0" width="16" height="24">
+      <path d="M5 8.04436L12.0046 1.04886L19 8.05347" stroke="#0C0C36" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M11.959 1.47632L11.959 22.8811" stroke="#0C0C36" strokeWidth="2" strokeLinecap="round" />
     </mask>
-    <g mask="url(#mask0_3721_63618)" style={{ maskType: 'alpha' }}>
-      <rect x="23.9299" y="24" width="24" height="24" transform="rotate(-180 23.9299 24)" fill="currentColor" />
+    <g mask="url(#mask0_5803_792)" style={{ maskType: 'alpha' }}>
+      <rect y="23.9299" width="24" height="24" transform="rotate(-90 0 23.9299)" fill="currentColor" />
     </g>
   </svg>
 );
 
-const PrevIcon = stylable(Prev);
+const UpIcon = stylable(Up);
 
-export default PrevIcon;
+export default UpIcon;

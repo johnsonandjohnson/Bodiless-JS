@@ -24,12 +24,12 @@ const Next = (props: React.SVGProps<SVGSVGElement>) => (
     fill="none"
     {...props}
   >
-    <mask id="mask0_3721_63619" maskUnits="userSpaceOnUse" x="0" y="4" width="24" height="16">
+    <mask style={{ maskType: 'alpha' }} id="mask0_3721_63619" maskUnits="userSpaceOnUse" x="0" y="4" width="24" height="16">
       <path d="M15.8856 5L22.8811 12.0046L15.8765 19" stroke="#0C0C36" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       <path d="M22.4535 11.9591H1.04875" stroke="#0C0C36" strokeWidth="2" strokeLinecap="round" />
     </mask>
-    <g mask="url(#mask0_3721_63619)">
-      <rect width="24" height="24" fill="#282828" />
+    <g mask="url(#mask0_3721_63619)" style={{ maskType: 'alpha' }}>
+      <rect width="24" height="24" fill="currentColor" />
     </g>
   </svg>
 );

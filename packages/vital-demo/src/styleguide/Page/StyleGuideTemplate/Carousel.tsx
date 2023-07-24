@@ -54,6 +54,13 @@ const vitalPDPVariations = varyDesigns(
     DesktopTabletPDPCarousel: as(
       vitalCarouselStatic.WithThumbnail,
       vitalCarouselStatic.TabletDesktopOnly,
+      vitalCarouselStatic.WithHorizontalThumbs,
+      forceHalf, // forcing half since this is how it will display on PDP
+    ),
+    DesktopTabletPDPVerticalCarousel: as(
+      vitalCarouselStatic.WithThumbnail,
+      vitalCarouselStatic.TabletDesktopOnly,
+      vitalCarouselStatic.WithVerticalThumbs,
       forceHalf, // forcing half since this is how it will display on PDP
     ),
   },
@@ -103,6 +110,12 @@ const data = {
   examples$DesktopTabletPDPCarousel$slides$image1$image: squareimage1,
   examples$DesktopTabletPDPCarousel$slides$image2$image: squareimage2,
   examples$DesktopTabletPDPCarousel$slides$image3$image: squareimage3,
+  examples$DesktopTabletPDPVerticalCarousel$slides: {
+    items: ['image1', 'image2', 'image3'],
+  },
+  examples$DesktopTabletPDPVerticalCarousel$slides$image1$image: squareimage1,
+  examples$DesktopTabletPDPVerticalCarousel$slides$image2$image: squareimage2,
+  examples$DesktopTabletPDPVerticalCarousel$slides$image3$image: squareimage3,
 };
 
 export const Carousel = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {

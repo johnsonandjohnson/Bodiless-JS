@@ -7,7 +7,7 @@ import {
 import { vitalImage } from '@bodiless/vital-image';
 import { vitalCard, CardClean } from '@bodiless/vital-card';
 import { asBodilessList } from '@bodiless/components';
-import { vitalSpacing } from '@bodiless/vital-elements';
+import { vitalColor, vitalSpacing } from '@bodiless/vital-elements';
 import { asVitalCarouselToken } from '../VitalCarouselClean';
 import type { VitalCarousel } from '../types';
 import { CAROUSEL_NODE_KEY } from '../../utils/constants';
@@ -16,6 +16,8 @@ import { CarouselThumbClean, vitalCarouselThumb } from '../../CarouselThumb';
 import { CarouselDotClean, vitalCarouselDot } from '../../CarouselDot';
 import PrevIcon from '../../assets/PrevIcon';
 import NextIcon from '../../assets/NextIcon';
+import UpIcon from '../../assets/UpIcon';
+import DownIcon from '../../assets/DownIcon';
 
 // Using withDesign throughout file to target the list that is added by asBodilessList.
 
@@ -81,7 +83,7 @@ const WithControls = asVitalCarouselToken({
       // Convert Indicators to List and use the same node key as slides to keep in sync
       asBodilessList(CAROUSEL_NODE_KEY, undefined, () => ({ groupLabel: 'Slide' })),
       'controls indicators',
-      'align-center flex-row justify-center opacity-100',
+      'align-center justify-center opacity-100',
     ),
   },
   A11y: {
@@ -134,6 +136,53 @@ const WithCarouselDots = asVitalCarouselToken(
   }
 );
 
+const WithVerticalThumbs = asVitalCarouselToken({
+  Components: {
+    NavWrapper: replaceWith(Div),
+    Prev: replaceWith(UpIcon),
+    Next: replaceWith(DownIcon),
+  },
+  Theme: {
+    Prev: vitalColor.TextPrimaryInteractive,
+    Next: vitalColor.TextPrimaryInteractive,
+  },
+  Layout: {
+    Wrapper: 'md:flex md:flex-row-reverse',
+    SliderWrapper: 'md:w-5/6',
+    ControlsWrapper: 'md:w-1/6 flex-col',
+    Indicator: 'flex flex-col',
+    NavWrapper: 'flex flex-row justify-between'
+  },
+  Spacing: {
+    ControlsWrapper: 'pr-16px',
+    Indicator: withDesign({
+      Item: 'pb-8px',
+    }),
+  },
+});
+
+const WithHorizontalThumbs = asVitalCarouselToken({
+  Components: {
+    NavWrapper: replaceWith(Div),
+    Prev: replaceWith(PrevIcon),
+    Next: replaceWith(NextIcon),
+  },
+  Theme: {
+    Prev: vitalColor.TextPrimaryInteractive,
+    Next: vitalColor.TextPrimaryInteractive,
+  },
+  Layout: {
+    Wrapper: 'md:flex-col',
+    SliderWrapper: '',
+    ControlsWrapper: 'flex-row',
+    Indicator: 'items-center',
+  },
+  Spacing: {
+    ControlsWrapper: 'pt-6',
+    Indicator: 'space-x-8px pe-8',
+  },
+});
+
 const WithThumbnail = asVitalCarouselToken(
   WithControls,
   {
@@ -144,8 +193,6 @@ const WithThumbnail = asVitalCarouselToken(
           Item: on(CarouselThumbClean)(vitalCarouselThumb.Default),
         }),
       ),
-      Prev: replaceWith(PrevIcon),
-      Next: replaceWith(NextIcon),
     },
     Behavior: {
       Slider: 'scrollbar-hide',
@@ -157,11 +204,7 @@ const WithThumbnail = asVitalCarouselToken(
     },
     Layout: {
       ControlsWrapper: 'flex justify-left',
-      Indicator: 'flex items-center',
-    },
-    Spacing: {
-      ControlsWrapper: 'pt-6',
-      Indicator: 'space-x-8px',
+      Indicator: 'flex',
     },
   }
 );
@@ -197,19 +240,19 @@ const MobileOnly = asVitalCarouselToken({
 
 const TabletOnly = asVitalCarouselToken({
   Layout: {
-    Wrapper: 'hidden md:block lg:hidden'
+    Wrapper: 'hidden md:flex lg:hidden'
   },
 });
 
 const TabletDesktopOnly = asVitalCarouselToken({
   Layout: {
-    Wrapper: 'hidden md:block'
+    Wrapper: 'hidden md:flex'
   },
 });
 
 const DesktopOnly = asVitalCarouselToken({
   Layout: {
-    Wrapper: 'hidden lg:block'
+    Wrapper: 'hidden lg:flex'
   },
 });
 
@@ -223,6 +266,8 @@ const DesktopOnly = asVitalCarouselToken({
 const vitalCarousel: VitalCarousel = {
   Default,
   // WithNavigationButtons,
+  WithHorizontalThumbs,
+  WithVerticalThumbs,
   WithControls,
   WithCarouselDots,
   WithThumbnail,
