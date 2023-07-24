@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import vitalProductCardElement from './vitalProductCardElement';
+import vitalProductCardElement from '../../../generated/vitalProductCardElement';
 
 export default vitalProductCardElement;
