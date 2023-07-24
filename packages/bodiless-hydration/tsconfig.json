@@ -11,6 +11,7 @@
   ],
   "exclude": [
     "lib",
+    "./src/islands/scripts",
     "node_modules",
     "__tests__/**/*.*",
     "src/**/__tests__/**/*.*"

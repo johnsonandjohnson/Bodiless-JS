@@ -38,7 +38,7 @@ function getHocForDomain<C extends DesignableComponents, D extends object = any>
   domainName: string,
   domain?: FinalDesign<C> | ReservedDomains<C, any>['Meta'] | ReservedDomains<C, any>['Flow'] | ReservedDomains<C, any>['Compose']
 ): HOCDef | undefined {
-  if (domainName === 'Island') return undefined;
+  if (domainName === 'IslandHydrator') return undefined;
   if (domainName === 'Flow') return undefined;
   if (domainName === 'Meta') return Array.isArray(domain) ? extendMeta(...domain) : domain;
   if (domainName === 'Compose') {

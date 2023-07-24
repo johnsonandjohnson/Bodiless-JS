@@ -16,7 +16,8 @@ import webpack from 'webpack';
 import { dirname, join, resolve } from 'path';
 import { existsSync, readFileSync } from 'fs';
 import { addStaticReplacementPlugin } from '@bodiless/webpack';
-import { islandsLoader } from '@bodiless/hydration/lib/cjs/Islands/Webpack';
+// @ts-ignore
+import islandsLoader from '@bodiless/hydration/islandsLoader';
 import { sync as globSync} from 'glob';
 import generateSitemapXml from './Sitemapxml';
 import generateRobotsTxt from './Robotstxt';
@@ -351,6 +352,7 @@ const bodilessWepackConfig = (config: any, options: BodilessNextConfigWithNext) 
     },
     optimization: {
       ...optimization,
+      minimize: false,
       providedExports: true
     },
     snapshot,

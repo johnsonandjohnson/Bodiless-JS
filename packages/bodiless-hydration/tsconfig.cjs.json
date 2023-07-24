@@ -8,7 +8,7 @@
     "allowJs": false
   },
   "include": [
-    "./src/Islands/Webpack",
+    "./src/islands/scripts",
   ],
   "exclude": [
     "lib",

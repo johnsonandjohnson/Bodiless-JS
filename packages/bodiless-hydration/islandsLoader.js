@@ -1,4 +1,4 @@
-export const islandsLoader = (config: any) => (
+module.exports = (config) => (
   {
     ...config,
     module: {
@@ -9,7 +9,7 @@ export const islandsLoader = (config: any) => (
           test: /\.js$/,
           use: [
             {
-              loader: require.resolve('./WebpackIslandLoader')
+              loader: require.resolve('./island-hydrator-loader'),
             },
           ],
         },

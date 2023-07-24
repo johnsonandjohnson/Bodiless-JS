@@ -8,8 +8,14 @@
   "sideEffects": false,
   "typings": "lib/index.d.ts",
   "files": [
-    "/lib"
+    "/lib",
+    "/bin",
+    "./islandsLoader.js",
+    "./island-hydrator-loader.js"
   ],
+  "bin": {
+    "bl-autodiscover-islands": "./bin/bl-autodiscover-islands"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"

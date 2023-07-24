@@ -21,6 +21,7 @@
     "@bodiless/i18n": "^1.0.0-rc.42",
     "@bodiless/layouts": "^1.0.0-rc.42",
     "@bodiless/layouts-ui": "^1.0.0-rc.42",
+    "@bodiless/hydration": "^1.0.0-rc.42",
     "@bodiless/next": "^1.0.0-rc.42",
     "@bodiless/page": "^1.0.0-rc.42",
     "@bodiless/schema-org": "^1.0.0-rc.42",
@@ -68,8 +69,9 @@
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
   "scripts": {
-    "build": "npm-run-all build:env-vars build:lib",
+    "build": "npm-run-all build:env-vars build:islands build:lib",
     "build:docs": "bl-docs-build",
+    "build:islands": "bl-autodiscover-islands",
     "build:env-vars": "bodiless generate-env-vars",
     "build:lib": "next build",
     "build:stats": "BODILESS_BUILD_STATS=1 npm run build",

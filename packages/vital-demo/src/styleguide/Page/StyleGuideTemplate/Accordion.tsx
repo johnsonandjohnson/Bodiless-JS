@@ -18,22 +18,23 @@ import {
   replaceWith,
   on,
   varyDesigns,
+  as
 } from '@bodiless/fclasses';
 import { AccordionClean, vitalAccordion } from '@bodiless/vital-accordion';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { withDefaultContent } from '@bodiless/data';
-import { componentsWithIsland } from '@bodiless/hydration';
+import { /* componentsWithIsland, */ withIsland } from '@bodiless/hydration';
 import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
-const BaseVariation = {
+export const BaseVariation = {
   // using '' means it won't add any string to name key of the variations
   '': on(AccordionClean)(
     vitalAccordion.Default,
   ),
 };
 
-const AccordionVariations = {
+export const AccordionVariations = {
   Default: '',
   FAQ: vitalAccordion.WithFAQ,
 };
@@ -47,10 +48,39 @@ export const vitalAccordionVariations = varyDesigns(
   }
 );
 
+// Temporary define the variations manually.
+// Once the webpack loader which detects componentsWithIsland
+// and generates the code for the Islands will be ready, vary design can be restored.
+const Components = {
+  StyleGuideAccordionDefault: as(
+    withIsland('StyleGuideAccordionDefault'),
+    BaseVariation['']
+  ),
+  StyleGuideAccordionDefaultExpanded: as(
+    withIsland('StyleGuideAccordionDefaultExpanded'),
+    BaseVariation[''],
+    vitalAccordion.WithInitiallyExpanded
+  ),
+  StyleGuideAccordionFAQ: as(
+    withIsland('StyleGuideAccordionFAQ'),
+    vitalAccordion.WithFAQ,
+    BaseVariation['']
+  ),
+  StyleGuideAccordionFAQExpanded: as(
+    withIsland('StyleGuideAccordionFAQExpanded'),
+    vitalAccordion.WithFAQ,
+    BaseVariation[''],
+    vitalAccordion.WithInitiallyExpanded
+  ),
+};
+
 const vitalAccordionFlowContainer = asFluidToken({
-  Components: {
+  Components
+  /*
+  : {
     ...componentsWithIsland(vitalAccordionVariations, 'StyleGuideAccordion'),
   },
+  */
 });
 
 const simplebody = [
@@ -78,7 +108,7 @@ const simplebody = [
   }
 ];
 
-const data = {
+export const data = {
   examples$Default$accordion$title: { text: 'What is the Accordion Default?' },
   examples$Default$accordion$body: simplebody,
   examples$DefaultExpanded$accordion$title: { text: 'What is Expanded on Open Accordion?' },

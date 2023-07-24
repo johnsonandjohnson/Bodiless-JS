@@ -22,7 +22,7 @@ export {
 
 export { default as loadable } from './loadable/index.gatsby';
 
-export * from './Islands';
+export * from './islands';
 
 export {
   StaticBlock,

@@ -32,11 +32,13 @@ import { asHeaderToken } from '../HeaderClean';
 import type { HeaderToken } from '../HeaderClean';
 
 const Default = asHeaderToken({
+  Island: {
+    MenuToggler: vitalMenuToggler.Default,
+    BurgerMenu: vitalBurgerMenu.Default,
+  },
   Components: {
     Logo: vitalLogo.Default,
-    MenuToggler: vitalMenuToggler.Default,
     Menu: vitalMenu.TopNav,
-    BurgerMenu: vitalBurgerMenu.Default,
     // UtilityMenu: vitalMenu.Utility,
     WhereToBuy: vitalButtons.WhereToBuy,
   },

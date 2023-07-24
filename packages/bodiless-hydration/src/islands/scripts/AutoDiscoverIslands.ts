@@ -1,13 +1,18 @@
-const fs = require('fs');
-const path = require('path');
-const fg = require('fast-glob');
+import {
+  existsSync,
+  mkdirSync,
+  writeFileSync,
+  rmSync
+} from 'fs';
+import { dirname, parse } from 'path';
+import fg from 'fast-glob';
 
 const getPackages = () => {
-  const dependencies = [];
+  const dependencies: string[] = [];
   // eslint-disable-next-line import/no-dynamic-require, global-require
   const packageJSON = require(`${process.cwd()}/package.json`);
   const rootDependencies = Object.keys(packageJSON.dependencies);
-  const traverse = (pkg) => {
+  const traverse = (pkg: string) => {
     if (dependencies.includes(pkg)) return;
     try {
       // eslint-disable-next-line import/no-dynamic-require, global-require
@@ -24,14 +29,14 @@ const getPackages = () => {
 
 const getScopedPackages = () => getPackages().filter(pkg => pkg.startsWith('@bodiless/') || pkg.startsWith('@kenvue/'));
 
-const findIslands = (scopedPackages) => {
-  const islands = [];
+const findIslands = (scopedPackages: string[]) => {
+  const islands: string[] = [];
 
   Object.values(scopedPackages).forEach(pkg => {
     try {
       const packagePath = require.resolve(pkg);
       const files = fg.sync([
-        `${path.dirname(packagePath)}/**/islands/*.js`,
+        `${dirname(packagePath)}/**/bl-islands/*.js`,
       ]);
       files.forEach(file => {
         console.log(`[Island Autodiscovery] Discovered Island in file ${file}`);
@@ -45,12 +50,12 @@ const findIslands = (scopedPackages) => {
   return islands;
 };
 
-const generateImports = (islands) => {
-  let imports = 'import { loadable } from \'@bodiless/hydration\';\n';
-  const exports = [];
+const generateImports = (islands: string[]) => {
+  let imports = 'const { loadable } = require(\'@bodiless/hydration\');\n';
+  const exports: string[] = [];
 
   islands.forEach(file => {
-    const filename = path.parse(file).name;
+    const filename = parse(file).name;
     const relativePath = file;
     exports.push(filename);
     imports += `const ${filename} = loadable(() => import('${relativePath}'));\n`;
@@ -62,18 +67,25 @@ const generateImports = (islands) => {
   return imports;
 };
 
-const main = (dest) => {
-  const scopedPackages = getScopedPackages();
+const AutoDiscoverIslands = (dest: string) => {
+  try {
+    // Remove previous generated file.
+    rmSync(`${dest}/index.js`);
 
-  const islands = findIslands(scopedPackages);
-  const imports = generateImports(islands);
+    const scopedPackages = getScopedPackages();
 
-  if (imports) {
-    if (!fs.existsSync(dest)) {
-      fs.mkdirSync(dest, { recursive: true});
+    const islands = findIslands(scopedPackages);
+    const imports = generateImports(islands);
+
+    if (imports) {
+      if (!existsSync(dest)) {
+        mkdirSync(dest, { recursive: true});
+      }
+      writeFileSync(`${dest}/index.js`, imports);
     }
-    fs.writeFileSync(`${dest}/islands.js`, imports);
+    return true;
+  } catch (e) {
+    return false;
   }
 };
-main('.next/cache');
-module.exports=main;
+export default AutoDiscoverIslands;

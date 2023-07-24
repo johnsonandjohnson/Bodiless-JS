@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+
+const bodilessAutodicsoverIslands = require('../lib/cjs/islands/scripts/AutoDiscoverIslands').default;
+bodilessAutodicsoverIslands('./node_modules/bl-islands')
