@@ -12,6 +12,9 @@ export type VitalCarouselComponents = {
   Slide: ComponentOrTag<any>,
   ControlsWrapper: ComponentOrTag<any>,
   Indicator: ComponentOrTag<any>,
+  NavWrapper: ComponentOrTag<any>,
+  Prev: ComponentOrTag<any>,
+  Next: ComponentOrTag<any>,
 };
 
 /**

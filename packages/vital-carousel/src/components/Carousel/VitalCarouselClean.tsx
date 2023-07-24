@@ -54,6 +54,9 @@ const vitalCarouselComponents: VitalCarouselComponents = {
   Slide: Div,
   ControlsWrapper: Div,
   Indicator: Fragment,
+  Prev: Fragment,
+  Next: Fragment,
+  NavWrapper: Fragment,
 };
 
 const VitalCarouselBase: FC<VitalCarouselBaseProps> = ({ components: C, ...rest }) => (
@@ -64,6 +67,10 @@ const VitalCarouselBase: FC<VitalCarouselBaseProps> = ({ components: C, ...rest 
     </C.SliderWrapper>
     <C.ControlsWrapper>
       <C.Indicator />
+      <C.NavWrapper>
+        <C.Prev />
+        <C.Next />
+      </C.NavWrapper>
     </C.ControlsWrapper>
   </C.Wrapper>
 );

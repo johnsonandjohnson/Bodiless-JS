@@ -14,6 +14,8 @@ import { CAROUSEL_NODE_KEY } from '../../utils/constants';
 import CarouselSlide from '../../utils/CarouselSlide';
 import { CarouselThumbClean, vitalCarouselThumb } from '../../CarouselThumb';
 import { CarouselDotClean, vitalCarouselDot } from '../../CarouselDot';
+import PrevIcon from '../../assets/PrevIcon';
+import NextIcon from '../../assets/NextIcon';
 
 // Using withDesign throughout file to target the list that is added by asBodilessList.
 
@@ -136,10 +138,14 @@ const WithThumbnail = asVitalCarouselToken(
   WithControls,
   {
     Components: {
-      Indicator: withDesign({
-        // Replace list items with styled thumbs
-        Item: on(CarouselThumbClean)(vitalCarouselThumb.Default),
-      }),
+      Indicator: as(
+        withDesign({
+          // Replace list items with styled thumbs
+          Item: on(CarouselThumbClean)(vitalCarouselThumb.Default),
+        }),
+      ),
+      Prev: replaceWith(PrevIcon),
+      Next: replaceWith(NextIcon),
     },
     Behavior: {
       Slider: 'scrollbar-hide',
