@@ -19,8 +19,8 @@ import { vitalEditorsFlowContainer } from '@bodiless/vital-editors';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
 import { vitalImageFlowContainer } from '@bodiless/vital-image';
-import { asPDPTemplateToken } from '@bodiless/vital-templates';
-import { vitalPDPTemplateBase } from '@bodiless/vital-templates/lib/base';
+import { asPDPTemplateToken } from '@bodiless/vital-product';
+import { vitalPDPTemplateBase } from '@bodiless/vital-product/lib/base';
 import { vitalYouTubeFlowContainer } from '@bodiless/vital-youtube';
 
 /* Limit the product description to only images, video & editor */
