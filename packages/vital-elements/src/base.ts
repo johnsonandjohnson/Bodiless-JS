@@ -58,4 +58,4 @@ export { default as vitalTypographyBase } from './components/Typography/tokens/v
  * @category Token Collection
  * @see [[vitalAccordionElement]]
  */
-export { default as vitalAccordionElementBase } from './components/AccordionElement/tokens/vitalAccordionElement';
+export { default as vitalAccordionElementBase } from './components/AccordionElement/tokens';
