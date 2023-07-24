@@ -27,7 +27,7 @@ runs:
       run: npx playwright install --with-deps
     - name: Run Playwright Tests
       shell: bash
-      run: npm run ${{ inputs.node-test-script }}
+      run: DEBUG=pw:webserver npm run ${{ inputs.node-test-script }}
     - name: Upload Tests Artifact
       if: always()
       uses: actions/upload-artifact@v2

@@ -63,6 +63,8 @@
     "@bodiless/vital-list": "^1.0.0-rc.42",
     "@bodiless/vital-meta": "^1.0.0-rc.42",
     "@bodiless/vital-navigation": "^1.0.0-rc.42",
+    "@bodiless/vital-product": "^1.0.0-rc.42",
+    "@bodiless/vital-search": "^1.0.0-rc.42",
     "@bodiless/vital-section": "^1.0.0-rc.42",
     "@bodiless/vital-table": "^1.0.0-rc.42",
     "@bodiless/vital-templates": "^1.0.0-rc.42",

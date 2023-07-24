@@ -28,7 +28,10 @@
     "build:watch": "npm run build:lib -- --watch",
     "dev": "npm run build:watch",
     "copy": "copyfiles -u 1 \"./src/*.css\" \"./lib/\"",
-    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
+    "tokens:clean": "rimraf \"src/generated/*\"",
+    "tokens:find": "node ./lib/cjs/scripts/find-tokens.js",
+    "tokens:parse": "node ./lib/cjs/scripts/parse-tokens.js"
   },
   "dependencies": {
     "@bodiless/cli": "^1.0.0-rc.42",

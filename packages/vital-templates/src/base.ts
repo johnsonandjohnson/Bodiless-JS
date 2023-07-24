@@ -32,14 +32,6 @@ export { default as vitalPageBase } from './components/Page/tokens/vitalPage';
  * Use this version of the vital card tokens when extending or shadowing.
  * Import the  token directly from @bodiless/vital-templates/lib/base.
  * @category Token Collection
- * @see [[vitalPDPTemplate]]
- */
-export { default as vitalPDPTemplateBase } from './components/PDPTemplate/tokens/vitalPDPTemplate';
-
-/**
- * Use this version of the vital card tokens when extending or shadowing.
- * Import the  token directly from @bodiless/vital-templates/lib/base.
- * @category Token Collection
  * @see [[vitalStyleGuideTemplate]]
  */
 export { default as vitalStyleGuideTemplateBase } from './components/StyleGuideTemplate/tokens/vitalStyleGuideTemplate';
