@@ -8,6 +8,7 @@
   },
   "include": [
     "src/util",
+    "src/scripts"
   ],
   "exclude": [
     "lib",

@@ -12,15 +12,16 @@ collection.
 
 To use it, run the following command from a local directory:
 
-  ```bash
-  npx @bodiless/vital-scaffold@next
-  ```
+```bash
+npx @bodiless/vital-scaffold@next
+```
 
 Follow the prompts to create the new component. The tool will generate the file structure based on
 the answers provided and populate it with the necessary files.
 
 Below is a list of prompts and their descriptions, please note that some prompts are conditional on
 previous answers.
+
 - `Path to "src" directory where component should be created [Required]`
 
   Relative or absolute path to the `src` directory of the package in which the new component should
@@ -68,29 +69,29 @@ previous answers.
 Using the scaffolding tool will produce the following file structure. Some files are optional; see
 below for full details.
 
-```
-package.json
-tsconfig.json
-bodiless.docs.json
-/doc
-/src
-    base.ts
-    index.ts
-    /components
-        /{Component}
-            index.ts
-            index.bl-edit.ts
-            index.static.ts
-            {Component}Clean.tsx
-            types.ts
-            __tests__/
-                {Component}.test.tsx
-            tokens/
-                index.ts
-                {brand}{Component}.ts
-    /shadow
-        {sourcePackage}/
-            {Component}.ts
+```text
+├── package.json
+├── tsconfig.json
+├── bodiless.docs.json
+├── doc/
+├── src/
+│   ├── base.ts
+│   ├── index.ts
+│   ├── components/
+│   │   └── {Component}/
+│   │       ├── index.ts
+│   │       ├── index.bl-edit.ts
+│   │       ├── index.static.ts
+│   │       ├── {Component}Clean.tsx
+│   │       ├── types.ts
+│   │       ├── __tests__/
+│   │       │   └── {Component}.test.tsx
+│   │       └── tokens/
+│   │           ├── index.ts
+│   │           └── {brand}{Component}.ts
+│   ├── shadow/
+│   │   └── {sourcePackage}/
+│   │       └── {Component}.ts
 ```
 
 This structure is intended to facilitate two build-time webpack optimizations:
