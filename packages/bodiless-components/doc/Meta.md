@@ -28,7 +28,7 @@ As a Site Builder, you can add metadata to a page's head, and make it editable f
 Editors by providing an SEO form in the editor interface.
 
 You can find a few examples of how to place editable and static metadata into a site's head section
-in the [Test Site](/Development/LocalSites#example-sites).  
+in the [Test Site](../Development/LocalSites/#example-sites).  
 See the code here:
 [`sites/test-site/src/components/Layout/meta.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/sites/test-site/src/components/Layout/meta.tsx
 ':target=_blank')
