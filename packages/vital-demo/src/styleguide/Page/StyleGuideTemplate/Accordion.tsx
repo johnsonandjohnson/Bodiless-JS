@@ -24,7 +24,7 @@ import { AccordionClean, vitalAccordion } from '@bodiless/vital-accordion';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { withDefaultContent } from '@bodiless/data';
-import { /* componentsWithIsland, */ withIsland } from '@bodiless/hydration';
+import { /* componentsAsIslands, */ asIsland } from '@bodiless/hydration';
 import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
 export const BaseVariation = {
@@ -49,25 +49,25 @@ export const vitalAccordionVariations = varyDesigns(
 );
 
 // Temporary define the variations manually.
-// Once the webpack loader which detects componentsWithIsland
+// Once the webpack loader which detects componentsAsIslands
 // and generates the code for the Islands will be ready, vary design can be restored.
 const Components = {
   StyleGuideAccordionDefault: as(
-    withIsland('StyleGuideAccordionDefault'),
+    asIsland('StyleGuideAccordionDefault'),
     BaseVariation['']
   ),
   StyleGuideAccordionDefaultExpanded: as(
-    withIsland('StyleGuideAccordionDefaultExpanded'),
+    asIsland('StyleGuideAccordionDefaultExpanded'),
     BaseVariation[''],
     vitalAccordion.WithInitiallyExpanded
   ),
   StyleGuideAccordionFAQ: as(
-    withIsland('StyleGuideAccordionFAQ'),
+    asIsland('StyleGuideAccordionFAQ'),
     vitalAccordion.WithFAQ,
     BaseVariation['']
   ),
   StyleGuideAccordionFAQExpanded: as(
-    withIsland('StyleGuideAccordionFAQExpanded'),
+    asIsland('StyleGuideAccordionFAQExpanded'),
     vitalAccordion.WithFAQ,
     BaseVariation[''],
     vitalAccordion.WithInitiallyExpanded
@@ -78,7 +78,7 @@ const vitalAccordionFlowContainer = asFluidToken({
   Components
   /*
   : {
-    ...componentsWithIsland(vitalAccordionVariations, 'StyleGuideAccordion'),
+    ...componentsAsIslands(vitalAccordionVariations, 'StyleGuideAccordion'),
   },
   */
 });

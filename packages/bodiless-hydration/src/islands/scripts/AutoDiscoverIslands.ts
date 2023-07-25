@@ -68,9 +68,12 @@ const generateImports = (islands: string[]) => {
 };
 
 const AutoDiscoverIslands = (dest: string) => {
+  const indexFile = `${dest}/index.js`;
   try {
     // Remove previous generated file.
-    rmSync(`${dest}/index.js`);
+    if (existsSync(indexFile)) {
+      rmSync(indexFile);
+    }
 
     const scopedPackages = getScopedPackages();
 
@@ -81,10 +84,11 @@ const AutoDiscoverIslands = (dest: string) => {
       if (!existsSync(dest)) {
         mkdirSync(dest, { recursive: true});
       }
-      writeFileSync(`${dest}/index.js`, imports);
+      writeFileSync(indexFile, imports);
     }
     return true;
   } catch (e) {
+    console.log('[Island Autodiscovery] Unable to discover Islands.');
     return false;
   }
 };

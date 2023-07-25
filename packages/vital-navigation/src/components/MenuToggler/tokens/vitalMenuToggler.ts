@@ -6,13 +6,13 @@ import {
   asBurgerMenuToggler,
 } from '@bodiless/navigation';
 import { asElementToken } from '@bodiless/vital-elements';
-import { withIsland } from '@bodiless/hydration';
+import { asIsland } from '@bodiless/hydration';
 import BurgerIcon from '../assets/BurgerIcon';
 
 const Default = asElementToken({
   Core: {
     _: as(
-      withIsland('vitalMenuToggler'),
+      asIsland('vitalMenuToggler'),
       asBurgerMenuToggler
     )
   },

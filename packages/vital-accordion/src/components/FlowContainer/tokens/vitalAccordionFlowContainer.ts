@@ -15,7 +15,7 @@
 import identity from 'lodash/identity';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { on, varyDesigns, flowHoc } from '@bodiless/fclasses';
-import { componentsWithIsland } from '@bodiless/hydration';
+import { componentsAsIslands } from '@bodiless/hydration';
 import { AccordionClean, vitalAccordion, asAccordionToken } from '../../Accordion';
 
 const BaseVariation = {
@@ -44,7 +44,7 @@ export const Components = varyDesigns(
  * Token which adds Accordion variations to a flow container.
  */
 const WithAccordionVariations = asFluidToken({
-  Components: componentsWithIsland(Components, 'vitalAccordionFlowContainer')
+  Components: componentsAsIslands(Components, 'vitalAccordionFlowContainer')
 });
 
 export default { WithAccordionVariations };

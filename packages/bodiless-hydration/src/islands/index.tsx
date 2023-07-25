@@ -11,6 +11,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export { default as withIsland } from './withIsland';
+export { default as asIsland } from './asIsland';
 export { default as withIslandsHydrator } from './IslandsHydrator';
-export * from './componentsWithIsland';
+export * from './componentsAsIslands';

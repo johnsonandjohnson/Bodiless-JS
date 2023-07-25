@@ -12,17 +12,17 @@
  * limitations under the License.
  */
 import { as } from '@bodiless/fclasses';
-import { withIsland } from './withIsland';
+import { asIsland } from './asIsland';
 
 type Components = {
   [key: string]: any;
 };
 
-const componentsWithIsland = (components: Components, prefix: string = '') => {
+const componentsAsIslands = (components: Components, prefix: string = '') => {
   const newComponents: Components = {};
   Object.keys(components).forEach((componentName: string) => {
     newComponents[`${prefix}${componentName}`] = as(
-      withIsland(`${prefix}${componentName}`),
+      asIsland(`${prefix}${componentName}`),
       components[componentName]
     );
   });
@@ -31,5 +31,5 @@ const componentsWithIsland = (components: Components, prefix: string = '') => {
 };
 
 export {
-  componentsWithIsland
+  componentsAsIslands
 };

@@ -24,7 +24,6 @@ import {
 
 const vitalTokenSpecDomains = {
   Core: {},
-  Island: {},
   Components: {},
   A11y: {},
   Analytics: {},
@@ -35,6 +34,7 @@ const vitalTokenSpecDomains = {
   A11yContent: {},
   Content: {},
   Behavior: {},
+  Island: {},
   Schema: {},
 };
 
