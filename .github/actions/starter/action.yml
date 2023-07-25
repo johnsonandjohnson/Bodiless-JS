@@ -1,0 +1,9 @@
+name: "Generate web site"
+description: "Generates web site from template"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Generate web site from template
+      shell: bash
+      run: ./packages/bodiless-cli/bin/bodiless new -r HEAD --clone-local --dest 'generated/sites/starter-site' --name 'starter-site' --site-template '__vital_next__'

@@ -81,10 +81,28 @@ jobs:
           uploadArtifacts: true
           temporaryPublicStorage: true
 
+  smoke-starter:
+    name: Smoke tests for starter
+    if: ${{ github.event_name == 'schedule' || github.event.label.name == 'ready-to-test' }}
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event_name == 'schedule' && 'main' || github.event.pull_request.head.sha }}
+      - name: Build
+        uses: ./.github/actions/build
+      - name: Generate web site
+        uses: ./.github/actions/starter
+      - name: Run playwright tests for generated site
+        uses: ./.github/actions/playwright
+        with:
+          node-test-script: test:starter
+          test-results-name: Smoke tests for starter
+
   cleanup:
     if: always() && github.event_name != 'schedule'
     runs-on: ubuntu-20.04
-    needs: [ setup, smoke-vital ]
+    needs: [ setup, smoke-vital, smoke-starter ]
     permissions:
       pull-requests: write
     steps:
@@ -98,7 +116,7 @@ jobs:
     name: Test Results
     if: always() && github.event.label.name == 'ready-to-test'
     runs-on: ubuntu-latest
-    needs: [ setup, smoke-vital ]
+    needs: [ setup, smoke-vital, smoke-starter ]
     permissions:
       checks: write
       pull-requests: write
