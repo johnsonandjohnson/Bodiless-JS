@@ -66,6 +66,12 @@ const twConfig = {
           '.indicators .indicator.-active .dot': {
             'background-color': theme('colors.ScrollIndicatorActive'),
           },
+          '.indicator.-hide': {
+            display: 'none',
+          },
+          '.arrow.-disabled': {
+            color: theme('colors.ScrollIndicatorInActive'),
+          }
         }
       );
       addUtilities({

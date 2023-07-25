@@ -51,6 +51,52 @@ const sliderSimpleInit = (sliderSimpleElement) => {
   
     sliderSimple.addEventListener('slide-pass', setSelected);
     sliderSimple.addEventListener('slide-stop', setSelected);
+
+    /* Control Arrows */
+
+    const NumThumbs = 4;
+    
+    const thumbbuttons = document.querySelectorAll(".indicators .thumbs.indicator");
+    for (const button of thumbbuttons) {
+        const show = button.classList.toggle(
+          "-hide",
+          button.dataset.index > (NumThumbs - 1)
+        );
+    }
+    
+    const prev = document.querySelector(".thumbcontrols .arrow.-prev");
+    const next = document.querySelector(".thumbcontrols .arrow.-next");
+  
+    const updateArrows = function (event) {
+      const slideElementIndex = event.detail;
+      
+      if (thumbbuttons.length > NumThumbs) {
+        if (slideElementIndex + NumThumbs < thumbbuttons.length) {
+          if (slideElementIndex === 0) { 
+            // buttons[slideElementIndex].classList.toggle("-hide");
+          } else {
+            thumbbuttons[slideElementIndex-1].classList.toggle("-hide");
+          }
+          thumbbuttons[slideElementIndex+NumThumbs].classList.toggle("-hide");  
+        }
+      }
+      
+      
+      prev.classList.toggle("-disabled", slideElementIndex === 0);
+      next.classList.toggle("-disabled", slideElementIndex === (thumbbuttons.length-1));
+      
+    };
+  
+    prev.addEventListener("click", function () {
+      sliderSimple.slideTo(sliderSimple.slide - 1);
+    });
+  
+    next.addEventListener("click", function () {
+      sliderSimple.slideTo(sliderSimple.slide + 1);
+    });
+    
+    sliderSimple.addEventListener('slide-pass', updateArrows)
+
   } catch(e) {
     //
   }

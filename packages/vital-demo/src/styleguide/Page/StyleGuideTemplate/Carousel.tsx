@@ -51,12 +51,12 @@ const vitalPDPVariations = varyDesigns(
       vitalCarouselStatic.WithCarouselDots,
       vitalCarouselStatic.MobileOnly,
     ),
-    DesktopTabletPDPCarousel: as(
-      vitalCarouselStatic.WithThumbnail,
-      vitalCarouselStatic.TabletDesktopOnly,
-      vitalCarouselStatic.WithHorizontalThumbs,
-      forceHalf, // forcing half since this is how it will display on PDP
-    ),
+    // DesktopTabletPDPCarousel: as(
+    //   vitalCarouselStatic.WithThumbnail,
+    //   vitalCarouselStatic.TabletDesktopOnly,
+    //   vitalCarouselStatic.WithHorizontalThumbs,
+    //   forceHalf, // forcing half since this is how it will display on PDP
+    // ),
     DesktopTabletPDPVerticalCarousel: as(
       vitalCarouselStatic.WithThumbnail,
       vitalCarouselStatic.TabletDesktopOnly,
@@ -93,7 +93,36 @@ const squareimage3 = {
   alt: 'blue',
   title: 'blue'
 };
-
+const squareimage4 = {
+  src: 'https://placehold.co/800x800/f2bdcd/FFF',
+  alt: 'pink',
+  title: 'pink'
+};
+const squareimage5 = {
+  src: 'https://placehold.co/800x800/bcd2ee/FFF',
+  alt: 'lightblue',
+  title: 'lightblue'
+};
+const squareimage6 = {
+  src: 'https://placehold.co/800x800/cc6633/FFF',
+  alt: 'brown',
+  title: 'brown'
+};
+const squareimage7 = {
+  src: 'https://placehold.co/800x800/fff000/FFF',
+  alt: 'yellow',
+  title: 'yellow'
+};
+const squareimage8 = {
+  src: 'https://placehold.co/800x800/884de3/FFF',
+  alt: 'purple',
+  title: 'purple'
+};
+const squareimage9 = {
+  src: 'https://placehold.co/800x800/00ffff/FFF',
+  alt: 'aqua',
+  title: 'aqua'
+};
 const data = {
   examples$ProductCardSection$slides: {
     items: ['card1', 'card2', 'card3', 'card4', 'card5'],
@@ -105,17 +134,29 @@ const data = {
   examples$MobilePDPCarousel$slides$image2$image: squareimage2,
   examples$MobilePDPCarousel$slides$image3$image: squareimage3,
   examples$DesktopTabletPDPCarousel$slides: {
-    items: ['image1', 'image2', 'image3'],
+    items: ['image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7', 'image8', 'image9'],
   },
   examples$DesktopTabletPDPCarousel$slides$image1$image: squareimage1,
   examples$DesktopTabletPDPCarousel$slides$image2$image: squareimage2,
   examples$DesktopTabletPDPCarousel$slides$image3$image: squareimage3,
+  examples$DesktopTabletPDPCarousel$slides$image4$image: squareimage4,
+  examples$DesktopTabletPDPCarousel$slides$image5$image: squareimage5,
+  examples$DesktopTabletPDPCarousel$slides$image6$image: squareimage6,
+  examples$DesktopTabletPDPCarousel$slides$image7$image: squareimage7,
+  examples$DesktopTabletPDPCarousel$slides$image8$image: squareimage8,
+  examples$DesktopTabletPDPCarousel$slides$image9$image: squareimage9,
   examples$DesktopTabletPDPVerticalCarousel$slides: {
-    items: ['image1', 'image2', 'image3'],
+    items: ['image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7', 'image8', 'image9'],
   },
   examples$DesktopTabletPDPVerticalCarousel$slides$image1$image: squareimage1,
   examples$DesktopTabletPDPVerticalCarousel$slides$image2$image: squareimage2,
   examples$DesktopTabletPDPVerticalCarousel$slides$image3$image: squareimage3,
+  examples$DesktopTabletPDPVerticalCarousel$slides$image4$image: squareimage4,
+  examples$DesktopTabletPDPVerticalCarousel$slides$image5$image: squareimage5,
+  examples$DesktopTabletPDPVerticalCarousel$slides$image6$image: squareimage6,
+  examples$DesktopTabletPDPVerticalCarousel$slides$image7$image: squareimage7,
+  examples$DesktopTabletPDPVerticalCarousel$slides$image8$image: squareimage8,
+  examples$DesktopTabletPDPVerticalCarousel$slides$image9$image: squareimage9,
 };
 
 export const Carousel = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {

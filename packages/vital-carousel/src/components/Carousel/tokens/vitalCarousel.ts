@@ -8,6 +8,7 @@ import { vitalImage } from '@bodiless/vital-image';
 import { vitalCard, CardClean } from '@bodiless/vital-card';
 import { asBodilessList } from '@bodiless/components';
 import { vitalColor, vitalSpacing } from '@bodiless/vital-elements';
+import { withChild } from '@bodiless/core';
 import { asVitalCarouselToken } from '../VitalCarouselClean';
 import type { VitalCarousel } from '../types';
 import { CAROUSEL_NODE_KEY } from '../../utils/constants';
@@ -22,9 +23,6 @@ import DownIcon from '../../assets/DownIcon';
 // Using withDesign throughout file to target the list that is added by asBodilessList.
 
 const Default = asVitalCarouselToken({
-  // Core: {
-  //   Wrapper: withCarouselInit,
-  // },
   Components: {
     Slider: flowHoc(
       // Convert to Bodiless List with carousel node key
@@ -125,7 +123,7 @@ const WithCarouselDots = asVitalCarouselToken(
       Slider: as(
         'w-screen md:w-full',
         withDesign({
-          // Controls Responspivenes Behavior.
+          // Controls Responspiveness Behavior.
           // A setting of at mobile of w-5/6 gives peek of next slide.
           Item: 'w-5/6 md:w-1/3 lg:w-1/4',
         }),
@@ -139,8 +137,8 @@ const WithCarouselDots = asVitalCarouselToken(
 const WithVerticalThumbs = asVitalCarouselToken({
   Components: {
     NavWrapper: replaceWith(Div),
-    Prev: replaceWith(UpIcon),
-    Next: replaceWith(DownIcon),
+    Prev: replaceWith(as(withChild(UpIcon))(Div)),
+    Next: replaceWith(as(withChild(DownIcon))(Div)),
   },
   Theme: {
     Prev: vitalColor.TextPrimaryInteractive,
@@ -150,8 +148,10 @@ const WithVerticalThumbs = asVitalCarouselToken({
     Wrapper: 'md:flex md:flex-row-reverse',
     SliderWrapper: 'md:w-5/6',
     ControlsWrapper: 'md:w-1/6 flex-col',
-    Indicator: 'flex flex-col',
-    NavWrapper: 'flex flex-row justify-between'
+    Indicator: 'flex flex-col list-item',
+    NavWrapper: 'flex flex-row justify-between thumbcontrols',
+    Prev: 'arrow -prev',
+    Next: 'arrow -next',
   },
   Spacing: {
     ControlsWrapper: 'pr-16px',
@@ -164,8 +164,8 @@ const WithVerticalThumbs = asVitalCarouselToken({
 const WithHorizontalThumbs = asVitalCarouselToken({
   Components: {
     NavWrapper: replaceWith(Div),
-    Prev: replaceWith(PrevIcon),
-    Next: replaceWith(NextIcon),
+    Prev: replaceWith(as(withChild(PrevIcon))(Div)),
+    Next: replaceWith(as(withChild(NextIcon))(Div)),
   },
   Theme: {
     Prev: vitalColor.TextPrimaryInteractive,
@@ -176,10 +176,14 @@ const WithHorizontalThumbs = asVitalCarouselToken({
     SliderWrapper: '',
     ControlsWrapper: 'flex-row',
     Indicator: 'items-center',
+    NavWrapper: 'flex flex-col justify-between thumbcontrols',
+    Prev: 'arrow -prev',
+    Next: 'arrow -next',
   },
   Spacing: {
     ControlsWrapper: 'pt-6',
-    Indicator: 'space-x-8px pe-8',
+    Indicator: 'space-x-8px pe-8px',
+    NavWrapper: 'p-8px',
   },
 });
 
