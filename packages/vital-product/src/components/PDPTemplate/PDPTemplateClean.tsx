@@ -24,7 +24,7 @@ import { EditorPlainClean } from '@bodiless/vital-editors';
 import { LayoutClean } from '@bodiless/vital-layout';
 import { FlowContainerClean } from '@bodiless/vital-flowcontainer';
 import { BreadcrumbsClean } from '@bodiless/vital-navigation';
-import { ButtonClean } from '@bodiless/vital-buttons';
+import { ButtonClean } from '@bodiless/vital-button';
 import { SectionClean } from '@bodiless/vital-section';
 
 import { JumpLinksClean } from '../JumpLinks';
