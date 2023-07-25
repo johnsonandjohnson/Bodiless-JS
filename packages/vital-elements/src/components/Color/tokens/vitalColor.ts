@@ -83,7 +83,6 @@ export default asTokenGroup(ColorMeta)({
   // Border Color Tokens
   BorderLightThemeBase: 'border-kenvue-neutrals-light-grey',
   BorderDarkThemeBase: 'border-kenvue-neutrals-white',
-  // BorderDarkThemeAlt1: 'border---no-value--',
   BorderLightThemeAlt1: 'border-kenvue-neutrals-grey',
 
   // Interactive Color Tokens for background
@@ -135,13 +134,13 @@ export default asTokenGroup(ColorMeta)({
 
   // Interactive Color Tokens for text
   TextInteractiveLightThemeIdle: 'text-kenvue-green-green',
-  TextInteractiveLightThemeHover: 'hover:text-kenvue-green-shade-80',
+  TextInteractiveLightThemeHover: 'group-hover:text-kenvue-green-shade-80',
   TextInteractiveLightThemeFocus: 'focus:text-kenvue-green-shade-80',
   TextInteractiveLightThemePressed: 'active:text-kenvue-green-shade-60',
   TextInteractiveLightThemeDisabled: 'text-kenvue-neutrals-grey',
 
   TextInteractiveDarkThemeIdle: 'text-kenvue-green-tint-40',
-  TextInteractiveDarkThemeHover: 'text-kenvue-green-tint-60',
+  TextInteractiveDarkThemeHover: 'group-text-kenvue-green-tint-60',
   TextInteractiveDarkThemeFocus: 'text-kenvue-green-tint-60',
   TextInteractiveDarkThemePressed: 'text-kenvue-green-tint-20',
   TextInteractiveDarkThemeDisabled: 'text-kenvue-neutrals-light-grey',
