@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import vitalButtonElement from '../../../generated/vitalButtonElement';
+import vitalButtonElement from './vitalButtonElement';
 
 export default vitalButtonElement;

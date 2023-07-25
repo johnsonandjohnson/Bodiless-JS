@@ -25,9 +25,9 @@ import { withPlaceholder } from '@bodiless/components';
 import { vitalEditorPlain, EditorPlainClean } from '@bodiless/vital-editors';
 import { asEditableLink } from '@bodiless/vital-link';
 import { withNodeKey } from '@bodiless/data';
+import { vitalButtonTokens } from '@bodiless/vital-elements/src/components/ButtonElement';
 import { ButtonComponent, ButtonToken, asButtonToken } from '../ButtonClean';
 import { WhereToBuy, WhereToBuyWithoutIcon } from './vitalWTB';
-import vitalButtonTokens from '../../ButtonTokens';
 
 const Plain = asButtonToken({
   Layout: {
@@ -37,7 +37,7 @@ const Plain = asButtonToken({
     // NOTE: Deprecated temporarily.
     // _: as(vitalLink.WithDownloadStyles, vitalLink.WithExternalStyles),
     Wrapper: as(
-      vitalButtonTokens.PrimaryBorderRadius,
+      vitalButtonTokens.PrimaryBorderRadiusBorderRadius,
       vitalButtonTokens.ShadowButtonFocus,
     ),
     Body: vitalButtonTokens.TextButtonDefault,
@@ -89,7 +89,6 @@ const WithPrimaryStyle = asButtonToken(Plain, {
       vitalButtonTokens.PrimaryBackgroundLightThemeHover,
       vitalButtonTokens.PrimaryBackgroundLightThemeFocus,
       vitalButtonTokens.PrimaryBackgroundLightThemePressed,
-      // vitalButtonTokens.PrimaryBackgroundLightThemeDisabled,
     ),
     Body: vitalButtonTokens.PrimaryTextLightThemeText,
   },
@@ -116,7 +115,6 @@ const WithSecondaryStyle = asButtonToken(Plain, {
 
 const WithTertiaryStyle = asButtonToken(Plain, {
   Theme: {
-    // Wrapper: vitalButtonTokens.ColorButtonTertiaryBackgroundFocus,
     Body: as(
       vitalButtonTokens.TertiaryTextLightThemeDefault,
       vitalButtonTokens.TertiaryTextLightThemeHover,
@@ -183,9 +181,6 @@ interface VitalButton extends TokenCollection<ButtonComponent, {}> {
 
 const vitalButton: VitalButton = {
   Plain,
-  // Primary,
-  // Secondary,
-  // Tertiary,
   WithPrimaryStyle,
   WithSecondaryStyle,
   WithTertiaryStyle,

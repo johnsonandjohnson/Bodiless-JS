@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+export * from './components/ButtonElement';
 export * from './components/Typography';
 export * from './components/Color';
 export * from './components/FontSize';

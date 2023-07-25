@@ -1,13 +1,8 @@
 /* eslint-disable max-len */
 import { as } from '@bodiless/fclasses';
-import { asTokenGroup, vitalColor, vitalTypography } from '@bodiless/vital-elements';
-
-export const ButtonMeta = {
-  categories: {
-    Type: ['Component'],
-    Group: ['Button'],
-  },
-};
+import { vitalTypography } from '../../Typography';
+import { asTokenGroup } from '../../../util';
+import { vitalColor } from '../../Color';
 
 // REFERENCE: https://github.com/dxp-prototype/vital-design-tokens/blob/tokens.json/components/buttons.json
 /**
@@ -15,39 +10,15 @@ export const ButtonMeta = {
  * It feels redundant to have `vitalProductCard.BorderProductCard` etc. We should either change
  * the collection name or discuss the options we have for changing the token names (in JSON file?).
  */
-const vitalButtonElement = asTokenGroup(ButtonMeta)({
+export default asTokenGroup()({
   // All button styles
-  PrimaryBorderRadius: 'rounded-8',
+  PrimaryBorderRadiusBorderRadius: 'rounded-8px',
+  SecondaryBorderRadiusBorderRadius: 'rounded-8px',
+  TertiaryBorderRadius: 'rounded-8px',
   BorderPaddingButton: 'px-24px py-16px',
   // TODO Needs work shouldn't have defined
   ShadowButtonFocus: 'focus:drop-shadow-button',
   TextButtonDefault: vitalTypography.BodyBold,
-  // Primary
-  // ButtonPrimaryBackgroundLightThemeIdle: vitalColor.ColorPrimaryBackgroundLightThemeIdle,
-  // ButtonPrimaryBackgroundLightThemeHover: vitalColor.ColorPrimaryBackgroundLightThemeHover,
-  // ButtonPrimaryBackgroundLightThemeFocus: vitalColor.ColorPrimaryBackgroundLightThemeFocus,
-  // // eslint-disable-next-line max-len
-  // ButtonPrimaryBackgroundLightThemePressed: vitalColor.ColorPrimaryBackgroundLightThemePressed,
-  // // eslint-disable-next-line max-len
-  // ButtonPrimaryBackgroundLightThemeDisabled: vitalColor.ColorPrimaryBackgroundLightThemeDisabled,
-  // ButtonPrimaryTextLightThemeText: vitalColor.ColorButtonPrimaryTextLightThemeText,
-  // // Secondary
-  // ButtonSecondaryTextLightThemeDefault: vitalColor.ColorSecondaryTextLightThemeDefault,
-  // ButtonSecondaryTextLightThemeHover: vitalColor.ColorSecondaryTextLightThemeHover,
-  // ButtonSecondaryTextLightThemeFocus: vitalColor.ColorSecondaryTextLightThemeFocus,
-  // ButtonSecondaryTextLightThemePressed: vitalColor.ColorSecondaryTextLightThemePressed,
-  // ButtonSecondaryTextLightThemeDisabled: vitalColor.ColorSecondaryTextLightThemeDisabled,
-  // ButtonSecondaryBorderLightThemeDefault: as(vitalColor.ColorSecondaryBorderLightThemeDefault, 'border-solid border-1'),
-  // ButtonSecondaryBorderLightThemeHover: as(vitalColor.ColorSecondaryBorderLightThemeHover, 'border-solid border-1'),
-  // ButtonSecondaryBorderLightThemeFocus: as(vitalColor.ColorSecondaryBorderLightThemeFocus, 'border-solid border-1'),
-  // ButtonSecondaryBorderLightThemePressed: as(vitalColor.ColorSecondaryBorderLightThemePressed, 'border-solid border-1'),
-  // ButtonSecondaryBorderLightThemeDisabled: as(vitalColor.ColorSecondaryBorderLightThemeDisabled, 'border-solid border-1'),
-  // // Tertiary
-  // ButtonTertiaryTextLightThemeDefault: vitalColor.ColorTertiaryTextLightThemeIdle,
-  // ButtonTertiaryTextLightThemeHover: vitalColor.ColorTertiaryTextLightThemeHover,
-  // ButtonTertiaryTextLightThemeFocus: vitalColor.ColorTertiaryTextLightThemeFocus,
-  // ButtonTertiaryTextLightThemePressed: vitalColor.ColorTertiaryTextLightThemePressed,
-  // ButtonTertiaryTextLightThemeDisabled: vitalColor.ColorTertiaryTextLightThemeDisabled,
 
   PrimaryBackgroundLightThemeIdle: vitalColor.BackgroundInteractiveLightThemeIdle,
   PrimaryBackgroundLightThemeHover: vitalColor.BackgroundInteractiveLightThemeHover,
@@ -73,11 +44,11 @@ const vitalButtonElement = asTokenGroup(ButtonMeta)({
   SecondaryTextLightThemePressed: vitalColor.TextInteractiveLightThemePressed,
   SecondaryTextLightThemeDisabled: vitalColor.TextInteractiveLightThemeDisabled,
 
-  SecondaryTextDarkThemePressed: vitalColor.TextInteractiveDarkThemePressed,
-  SecondaryTextDarkThemeDisabled: vitalColor.TextInteractiveDarkThemeDisabled,
-  SecondaryTextDarkThemeFocus: vitalColor.TextInteractiveDarkThemeFocus,
   SecondaryTextDarkThemeDefault: vitalColor.TextInteractiveDarkThemeIdle,
   SecondaryTextDarkThemeHover: vitalColor.TextInteractiveDarkThemeHover,
+  SecondaryTextDarkThemeFocus: vitalColor.TextInteractiveDarkThemeFocus,
+  SecondaryTextDarkThemePressed: vitalColor.TextInteractiveDarkThemePressed,
+  SecondaryTextDarkThemeDisabled: vitalColor.TextInteractiveDarkThemeDisabled,
 
   SecondaryBorderLightThemeDefault: as(vitalColor.BorderInteractiveLightThemeIdle, 'border-solid border-1px'),
   SecondaryBorderLightThemeFocus: as(vitalColor.BorderInteractiveLightThemeFocus, 'border-solid border-1px'),
@@ -104,5 +75,3 @@ const vitalButtonElement = asTokenGroup(ButtonMeta)({
   TertiaryTextDarkThemeDisabled: vitalColor.TextInteractiveDarkThemeDisabled,
 
 });
-
-export default vitalButtonElement;

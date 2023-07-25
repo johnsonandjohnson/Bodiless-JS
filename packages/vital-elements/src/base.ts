@@ -53,9 +53,9 @@ export { default as vitalTextDecorationBase } from './components/TextDecoration/
 export { default as vitalTypographyBase } from './components/Typography/tokens/vitalTypography';
 
 /**
- * Use this version of the vital accordion tokens when extending or shadowing.
+ * Use this version of the vital button tokens when extending or shadowing.
  * Import the token directly from @bodiless/vital-elements/lib/base.
  * @category Token Collection
- * @see [[vitalAccordionElement]]
+ * @see [[vitalButtonElement]]
  */
-export { default as vitalAccordionElementBase } from './components/AccordionElement/tokens/vitalAccordionElement';
+export { default as vitalButtonElementBase } from './components/ButtonElement/tokens';
