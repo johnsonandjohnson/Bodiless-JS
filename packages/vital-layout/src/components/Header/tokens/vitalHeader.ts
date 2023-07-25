@@ -29,6 +29,7 @@ import {
 import {
   as,
   flowHoc,
+  addProps
 } from '@bodiless/fclasses';
 import { vitalButtons } from '@bodiless/vital-buttons';
 import { vitalLogo } from '../../Logo';
@@ -50,6 +51,9 @@ const Default = asHeaderToken({
     ),
     // UtilityMenu: vitalMenu.Utility,
     WhereToBuy: vitalButtons.WhereToBuy,
+  },
+  Analytics: {
+    Wrapper: addProps({ 'data-layer-region': 'header' }),
   },
   Layout: {
     Container: 'flex justify-between items-center',
