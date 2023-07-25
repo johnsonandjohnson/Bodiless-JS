@@ -15,40 +15,6 @@
 import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
 const tailwindcssDir = require('tailwindcss-dir')();
-const designTokens = require('./assets/design-tokens.nested.json');
-
-// Parse the JSON Tokens data
-const parsedDesignTokens = JSON.parse(JSON.stringify(designTokens));
-
-/**
- * The `design-tokens.nested.json` file should only contain all Core tokens.
- * These core tokens are then used to extend the corresponding Tailwind config sections.
- *
- * @TODO: The `border.style` tokens do not have a corresponding key in the Tailwind config.
- * `borderStyle` is only a valid key for the TW variants and plugins. The default TW values for
- * borderStyle match the provided tokens.
- *
- * @TODO: `typography` tokens include `text-decoration` and `text-transform` tokens which are
- * not intended to be extended or modified in the Tailwind config and do not have corresponding
- * keys in the Tailwind config. The default TW config covers these tokens and provides the same
- * Default classes like `capitalize` or `uppercase`.
- *
- * @TODO: Also note that currently the `design-tokens.nested.json` is manually adjusted to
- * the more favourable format to resolve certain issues with resolving Figma Plugin aliases.
- * Thehere is a script being worked on to format tokens automatically.
- *
- * @TODO: The `border-width` and `border-style` tokens in JSON are combined under the same key.
- * Tailwind treats it as two separate styles with different config key. In manually updated JSON
- * it is split into two different token "section" like `border.width` and `boder.style`
- * to avoid TW config issues.
- */
-const {
-  // colors,
-  // spacing,
-  // typography,
-  opacity,
-  // border,
-} = parsedDesignTokens;
 
 const resolver = (pkgName) => require.resolve(pkgName);
 
@@ -97,38 +63,38 @@ const twConfig = {
         separator: '#666666',
         search: '#888888',
       },
-      kenvue: {
-        'neutrals-white': '#FFFFFF',
-        'neutrals-lightest-grey': '#F8F8F8',
-        'neutrals-light-grey': '#BFBFBF',
-        'neutrals-neutrals-grey': '#999999',
-        'neutrals-dark-grey': '#616161',
-        'neutrals-darkest-grey': '#2B2B2B',
-        'neutrals-black': '#000000',
-        'green-tint-20': '#CCEAE6',
-        'green-tint-40': '#99D6CD',
-        'green-tint-60': '#67C1B3',
-        'green-green': '#019881',
-        'green-shade-40': '#003D34',
-        'green-shade-60': '#015B4D',
-        'green-shade-80': '#017A67',
-        'purple-purple': '#D3BDF2',
-        'red-red': '#FF6B6B',
-        'yellow-yellow': '#FFB000',
-      }
     },
     extend: {
       /**
        * Vital 2.0 Tokens coming from Figma plugin.
        */
+      colors: {
+        kenvue: {
+          'neutrals-white': '#FFFFFF',
+          'neutrals-lightest-grey': '#F8F8F8',
+          'neutrals-light-grey': '#BFBFBF',
+          'neutrals-grey': '#999999',
+          'neutrals-dark-grey': '#616161',
+          'neutrals-darkest-grey': '#2B2B2B',
+          'neutrals-black': '#000000',
+          'green-tint-20': '#CCEAE6',
+          'green-tint-40': '#99D6CD',
+          'green-tint-60': '#67C1B3',
+          'green-green': '#019881',
+          'green-shade-40': '#003D34',
+          'green-shade-60': '#015B4D',
+          'green-shade-80': '#017A67',
+          'purple-purple': '#D3BDF2',
+          'red-red': '#FF6B6B',
+          'yellow-yellow': '#FFB000',
+        }
+      },
       fontFamily: {
         DMSans: ['DM Sans', 'sans-serif'],
-        // ...typography['font-family'],
         1: 'DM Sans',
         2: 'DM Sans',
       },
       fontWeights: {
-        // ...typography.font,
       },
       fontSize: {
         '11.7px': '11.7px',
@@ -147,15 +113,12 @@ const twConfig = {
         '39.8px': '39.8px',
       },
       lineHeight: {
-        // ...typography.leading,
         5: '120%',
         6: '150%'
       },
       textSizes: {
-        // ...typography.text,
       },
       spacing: {
-        // ...spacing,
         '0px': '0px',
         '1px': '1px',
         '2px': '2px',
@@ -180,25 +143,20 @@ const twConfig = {
         '64px': '64px',
       },
       borderWidth: {
-        // ...border.width,
         '1px': '1px',
       },
       borderRadius: {
-        // ...border.rounded,
-        0: '0px',
-        2: '2px',
-        4: '4px',
-        6: '6px',
-        8: '8px',
-        10: '10px',
-        12: '12px',
-        20: '20px',
-        150: '150px',
-        600: '600px',
+        '0px': '0px',
+        '2px': '2px',
+        '4px': '4px',
+        '6px': '6px',
+        '8px': '8px',
+        '10px': '10px',
+        '12px': '12px',
+        '20px': '20px',
+        '150px': '150px',
+        '600px': '600px',
         pill: '9999px',
-      },
-      opacity: {
-        // ...opacity,
       },
     },
   },
