@@ -28,6 +28,23 @@ const configurators = {
     };
     baseConfig.globalSetup = require.resolve('./playwright/tests/setup/setup.ts');
   },
+  'smoke-starter': (baseConfig: PlaywrightTestConfig) => {
+    baseConfig.workers = 1;
+    baseConfig.testDir = './playwright/tests/smoke-deprecated';
+    baseConfig.webServer = {
+      ...defaultServerConfig,
+      url: 'http://localhost:8000/',
+      command: 'cd generated/sites/starter-site && npm run dev',
+    };
+    baseConfig.globalSetup = require.resolve('./playwright/tests/setup/setup.ts');
+    baseConfig.use = {
+      actionTimeout: 0,
+      baseURL: 'http://localhost:8000',
+      trace: 'on',
+      testIdAttribute: 'id'
+    };
+    baseConfig.testMatch = '*editorMenu.spec.ts';
+  },
 };
 /* eslint-enable no-param-reassign */
 
