@@ -73,8 +73,7 @@ const withNextImageClientLoader = (Component: ComponentOrTag<any>) => (
       
     observer.observe(document, observerOptions);
   })();
-`; 
-
+`;
   return isEdit ? <Component {...props} /> : (
     <>
       <Helmet>
