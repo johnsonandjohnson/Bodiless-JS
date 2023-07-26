@@ -12,40 +12,47 @@
  * limitations under the License.
  */
 
-import { ContentListing, ContentListingMultiple } from './ContentListing';
-import { Editors, EditorsMonoFont } from './Editors';
-import { Typography } from './Typography';
-import { Header } from './Header';
-import { FlowContainer } from './FlowContainer';
-import { Images } from './Images';
-import { Footer } from './Footer';
+import { _default } from './_default';
+import { Accordion } from './Accordion';
+import { Border } from './Border';
+import { Buttons } from './Buttons';
 import { Card } from './Card';
 import { Color } from './Color';
-import { Table } from './Table';
+import { ContentListing, ContentListingMultiple } from './ContentListing';
+import { Editors, EditorsMonoFont } from './Editors';
+import { FlowContainer } from './FlowContainer';
+import { Footer } from './Footer';
+import { Header } from './Header';
+import { Images } from './Images';
+import { Link } from './Link';
 import { List } from './List';
-import { Buttons } from './Buttons';
-import { _default } from './_default';
+import { Spacing } from './Spacing';
+import { Table } from './Table';
+import { Typography } from './Typography';
 import { Video } from './Video';
-import { Accordion } from './Accordion';
+
 import { Section } from './Section';
 
 export const VitalDemoStyleGuideTemplate = {
   _default,
+  Accordion,
+  Border,
+  Buttons,
+  Card,
+  Color,
   ContentListing,
   ContentListingMultiple,
   Editors,
   EditorsMonoFont,
-  Typography,
-  Header,
-  Images,
   FlowContainer,
   Footer,
-  Video,
-  Card,
-  Color,
-  Table,
+  Header,
+  Images,
+  Link,
   List,
-  Accordion,
-  Buttons,
   Section,
+  Spacing,
+  Table,
+  Typography,
+  Video,
 };

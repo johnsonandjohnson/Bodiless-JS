@@ -63,7 +63,6 @@ const ButtonStyleVariations = varyDesigns(
 const LinkVariations = varyDesigns(
   {
     Default: vitalLink.Default,
-    Primary: vitalLink.PrimaryLink,
   },
   {
     '': '', // vary on itself and produce plain link variation

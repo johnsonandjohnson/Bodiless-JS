@@ -20,10 +20,9 @@ import {
   as,
   flowIf,
   on,
-  flowHoc,
 } from '@bodiless/fclasses';
 import { withSidecarNodes, withNodeKey } from '@bodiless/data';
-import { vitalColor, vitalTypography } from '@bodiless/vital-elements';
+import { vitalLinkElement } from '@bodiless/vital-elements';
 import { asLinkToken } from '../LinkClean';
 import { useExternalLinkToggle, asEditableLink, useIsDownloadLink } from '../util';
 
@@ -82,18 +81,24 @@ const Default = asLinkToken(Base, {
      * VitalDS typography and colors.
      */
   Theme: {
-    _: as(WithDownloadStyles, WithExternalStyles),
-    Wrapper: as(vitalTypography.Link),
+    // Turning Download & External styles off Default until we need it.
+    // _: as(WithDownloadStyles, WithExternalStyles),
+    Wrapper: as(
+      vitalLinkElement.TextLightThemeIdle,
+      vitalLinkElement.TextLightThemeHover,
+      vitalLinkElement.TextLightThemeFocus,
+    ),
   },
 });
 
-const PrimaryLink = asLinkToken(Default, {
-  Theme: {
-    Wrapper: 'hover:vital-arrow hover:pr-1 hover:w-6 hover:h-2',
-    Body: vitalColor.TextPrimaryInteractiveNoHover,
-  },
-  Meta: flowHoc.meta.term('Style')('With Hover Arrow'),
-});
+// PrimaryLink is deprecated but saving if we want hover arrow option in future
+// const PrimaryLink = asLinkToken(Default, {
+//   Theme: {
+//     Wrapper: 'hover:vital-arrow hover:pr-1 hover:w-6 hover:h-2',
+//     Body: vitalColor.TextPrimaryInteractiveNoHover,
+//   },
+//   Meta: flowHoc.meta.term('Style')('With Hover Arrow'),
+// });
 
 const Sidecar = asLinkToken({
   ...Default,
@@ -110,6 +115,5 @@ export default {
   Default,
   WithExternalStyles,
   WithDownloadStyles,
-  PrimaryLink,
   Sidecar,
 };

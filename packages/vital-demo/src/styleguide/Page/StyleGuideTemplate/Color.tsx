@@ -18,33 +18,90 @@ import {
   replaceWith,
   on,
   Div,
+  Span,
   varyDesigns,
+  addProps,
 } from '@bodiless/fclasses';
-import { EditorPlainClean, vitalEditorPlain } from '@bodiless/vital-editors';
-import { asFluidToken } from '@bodiless/vital-elements';
+import { asFluidToken, vitalColor } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
-import { withParent } from '@bodiless/core';
 import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
-const BaseVariation = {
-  '': on(EditorPlainClean)(
-    vitalEditorPlain.Default,
-    withParent(Div),
+const BaseColorVariation = {
+  '': on(Div)(
+    'w-[100px] h-[100px]',
+    'block',
   ),
 };
 
 const ColorVariations = {
-
+  BackgroundInteractiveLightThemeIdle: vitalColor.BackgroundInteractiveLightThemeIdle,
+  BackgroundInteractiveLightThemeHover: vitalColor.BackgroundInteractiveLightThemeHover,
+  BackgroundInteractiveLightThemeFocus: vitalColor.BackgroundInteractiveLightThemeFocus,
+  BackgroundInteractiveLightThemePressed: vitalColor.BackgroundInteractiveLightThemePressed,
+  BackgroundInteractiveLightThemeDisabled: vitalColor.BackgroundInteractiveLightThemeDisabled,
+  BackgroundInteractiveDarkThemeIdle: vitalColor.BackgroundInteractiveDarkThemeIdle,
+  BackgroundInteractiveDarkThemeHover: vitalColor.BackgroundInteractiveDarkThemeHover,
+  BackgroundInteractiveDarkThemeFocus: vitalColor.BackgroundInteractiveDarkThemeFocus,
+  BackgroundInteractiveDarkThemePressed: vitalColor.BackgroundInteractiveDarkThemePressed,
+  BackgroundInteractiveDarkThemeDisabled: vitalColor.BackgroundInteractiveDarkThemeDisabled,
 };
 
+const BaseTextVariation = {
+  '': on(Span)(
+    'w-[100px] h-[100px]',
+    'block',
+    addProps({children: 'Text'}),
+  ),
+};
+
+const TextVariations = {
+  TextInteractiveDarkThemeIdle: vitalColor.TextInteractiveDarkThemeIdle,
+  TextInteractiveLightThemeIdle: vitalColor.TextInteractiveLightThemeIdle,
+  TextInteractiveDarkThemeHover: vitalColor.TextInteractiveDarkThemeHover,
+  TextInteractiveDarkThemeDisabled: vitalColor.TextInteractiveDarkThemeDisabled,
+  TextInteractiveDarkThemePressed: vitalColor.TextInteractiveDarkThemePressed,
+  TextInteractiveDarkThemeFocus: vitalColor.TextInteractiveDarkThemeFocus,
+  TextInteractiveLightThemeDisabled: vitalColor.TextInteractiveLightThemeDisabled,
+  BorderInteractiveLightThemeFocus: vitalColor.BorderInteractiveLightThemeFocus,
+  TextInteractiveLightThemeFocus: vitalColor.TextInteractiveLightThemeFocus,
+  TextInteractiveLightThemePressed: vitalColor.TextInteractiveLightThemePressed,
+  TextDarkThemeBase: vitalColor.TextDarkThemeBase,
+  TextLightThemeBase: vitalColor.TextLightThemeBase,
+  TextInteractiveLightThemeHover: vitalColor.TextInteractiveLightThemeHover,
+};
+
+// const SpecialColors = {
+//   IconLight: vitalColor.IconLight,
+//   IconDark: vitalColor.IconDark,
+//   SignalError: vitalColor.SignalError,
+//   SignalWarning: vitalColor.SignalWarning,
+//   SignalSuccess: vitalColor.SignalSuccess,
+//   SignalInformational: vitalColor.SignalInformational,
+// };
+
 const vitalColorVariations = varyDesigns(
-  BaseVariation,
+  BaseColorVariation,
   ColorVariations,
+);
+
+const vitalTextVariations = varyDesigns(
+  BaseTextVariation,
+  TextVariations,
 );
 
 const vitalColorFlowContainer = asFluidToken({
   Components: {
     ...vitalColorVariations,
+    ...vitalTextVariations,
+    // ...SpecialColors,
+  },
+});
+
+const StyleGuideColumns = asFluidToken({
+  ...vitalStyleGuideExamples.Default,
+  Layout: {
+    Wrapper: 'flex flex-wrap',
+    ItemWrapper: 'w-1/2',
   },
 });
 
@@ -54,6 +111,7 @@ export const Color = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, 
     Title: replaceWith(() => <>Color</>),
     Description: replaceWith(() => <>The following are examples of Vital Color.</>),
     Examples: on(StyleGuideExamplesClean)(
+      StyleGuideColumns,
       vitalStyleGuideExamples.Default,
       vitalColorFlowContainer,
     ),
