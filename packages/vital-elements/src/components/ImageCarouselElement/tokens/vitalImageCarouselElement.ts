@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import tokens from './vitalJumpLinksElement';
+import vitalImageCarouselElement from 'src/generated/vitalImageCarouselElement';
 
-export default tokens;
+export default vitalImageCarouselElement;

@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import tokens from './vitalJumpLinksElement';
+import vitalCheckboxElement from 'src/generated/vitalCheckboxElement';
 
-export default tokens;
+export default vitalCheckboxElement;

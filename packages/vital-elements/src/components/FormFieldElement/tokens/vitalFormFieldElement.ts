@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import tokens from './vitalJumpLinksElement';
+import vitalFormFieldElement from 'src/generated/vitalFormFieldElement';
 
-export default tokens;
+export default vitalFormFieldElement;

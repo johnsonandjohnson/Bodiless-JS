@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import tokens from './vitalJumpLinksElement';
+import vitalProductCardElement from 'src/generated/vitalProductCardElement';
 
-export default tokens;
+export default vitalProductCardElement;

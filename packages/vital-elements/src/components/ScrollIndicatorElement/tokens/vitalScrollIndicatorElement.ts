@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import tokens from './vitalJumpLinksElement';
+import vitalScrollIndicatorElement from 'src/generated/vitalScrollIndicatorElement';
 
-export default tokens;
+export default vitalScrollIndicatorElement;

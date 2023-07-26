@@ -12,10 +12,11 @@
  * limitations under the License.
  */
 
-import { asTokenGroup } from '../../../util';
+import generatedTokens from 'src/generated/vitalColor';
+import { asTokenGroup } from 'src/util';
 import { ColorMeta } from '../meta';
 
-export default asTokenGroup(ColorMeta)({
+const tokenOverrides = asTokenGroup(ColorMeta)({
   BgPrimaryBrand: 'bg-vital-primary-brand',
   TextPrimaryBrand: 'text-vital-primary-brand',
   BgPrimaryCard: 'bg-vital-primary-card-bg',
@@ -137,3 +138,8 @@ export default asTokenGroup(ColorMeta)({
   TextInteractiveDarkThemeDisabled: 'text-kenvue-neutrals-light-grey',
 
 });
+
+export default {
+  ...generatedTokens,
+  ...tokenOverrides,
+};

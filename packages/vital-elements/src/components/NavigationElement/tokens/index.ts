@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import vitalNavigationElement from '../../../generated/vitalNavigationElement';
+import tokens from './vitalNavigationElement';
 
-export default vitalNavigationElement;
+export default tokens;

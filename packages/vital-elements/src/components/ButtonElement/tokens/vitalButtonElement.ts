@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import tokens from './vitalJumpLinksElement';
+import vitalButtonElement from 'src/generated/vitalButtonElement';
 
-export default tokens;
+export default vitalButtonElement;
