@@ -15,6 +15,6 @@ export default asTokenGroup(meta)({
   PrimaryBackgroundLightThemePrimaryNavigation: vitalColor.BackgroundBase,
   PrimaryDropdownBorderDarkThemeBorder: vitalColor.BorderInteractiveDarkThemeIdle,
   PrimaryDropdownBorderLightThemeBorder: vitalColor.BorderInteractiveLightThemeIdle,
-  SecondaryBackgroundDarkThemeSecondaryNavigation: vitalColor.BackgroundAlt8,
-  SecondaryBackgroundLightThemeSecondaryNavigation: vitalColor.BackgroundAlt6,
+  SecondaryBackgroundDarkThemeBackground: vitalColor.BackgroundAlt8,
+  SecondaryBackgroundLightThemeBackground: vitalColor.BackgroundAlt6,
 });

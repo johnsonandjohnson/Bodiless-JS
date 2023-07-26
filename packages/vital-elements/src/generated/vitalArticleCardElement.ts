@@ -9,14 +9,20 @@ export const meta = {
 };
 
 export default asTokenGroup(meta)({
-  BorderRadius: 'rounded-0px',
+  BorderRadiusTopRight: 'rounded-tr-0px',
+  ImageBorderRadiusBottomRight: 'rounded-br-0px',
+  ImageBorderRadiusTopRight: 'rounded-tr-0px',
+  BorderRadiusBottomLeft: 'rounded-bl-0px',
+  BorderRadiusBottomRight: 'rounded-br-0px',
+  BorderRadiusTopLeft: 'rounded-tl-0px',
   TextDarkThemeEyebrow: vitalColor.TextDarkThemeBase,
   TextDarkThemeBody: vitalColor.TextDarkThemeBase,
   TextDarkThemeHeadline: vitalColor.TextDarkThemeBase,
   TextLightThemeEyebrow: vitalColor.TextLightThemeBase,
   TextLightThemeBody: vitalColor.TextLightThemeBase,
   TextLightThemeHeadline: vitalColor.TextLightThemeBase,
-  ImageBorderRadius: 'rounded-0px',
+  ImageBorderRadiusTopLeft: 'rounded-tl-0px',
+  ImageBorderRadiusBottomLeft: 'rounded-bl-0px',
   BackgroundDarkThemeBackground: vitalColor.BackgroundAlt5,
   BackgroundLightThemeBackground: vitalColor.BackgroundBase,
 });
