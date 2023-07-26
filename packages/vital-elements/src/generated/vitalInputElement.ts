@@ -44,6 +44,7 @@ export default asTokenGroup(meta)({
   RadioBorderLightThemeIdleChecked: vitalColor.BorderInteractiveLightThemeIdle,
   RadioBorderLightThemeHoverUnchecked: vitalColor.BorderLightThemeBase,
   RadioBorderLightThemeIdleUnchecked: vitalColor.BorderLightThemeBase,
+  // eslint-disable-next-line max-len
   SwitchInnerCircleBorderLightThemeDisabledUnchecked: vitalColor.BorderInteractiveLightThemeDisabled,
   SwitchBorderLightThemeDisabledUnchecked: vitalColor.BorderInteractiveLightThemeDisabled,
   CheckboxBorderLightThemeDisabledChecked: vitalColor.BorderInteractiveLightThemeDisabled,

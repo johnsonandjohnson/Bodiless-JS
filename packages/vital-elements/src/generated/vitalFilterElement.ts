@@ -26,6 +26,7 @@ export default asTokenGroup(meta)({
   HeaderBorderLightThemeBorder: vitalColor.BorderLightThemeBase,
   QuickFilterBorderLightThemeIdleUnchecked: vitalColor.BorderInteractiveLightThemeIdle,
   QuickFilterBorderLightThemeIdleChecked: vitalColor.BorderInteractiveLightThemeIdle,
+  // eslint-disable-next-line max-len
   QuickFilterBackgroundLightThemeDisabledChecked: vitalColor.BackgroundInteractiveLightThemeDisabled,
   CategoryPaddingBottom: 'pb-0px',
   QuickFilterBackgroundLightThemeHoverUnchecked: vitalColor.BackgroundBase,
