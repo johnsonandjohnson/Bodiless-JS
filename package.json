@@ -40,7 +40,7 @@
     "test": "jest && npx -y turbo test",
     "test:pw-functional": "WAIT_ON_TIMEOUT=600000 PLAYWRIGHT_SUITE=smoke-deprecated npx playwright test",
     "test:playwright": "APPLITOOLS_BATCH_ID=`uuidgen` WAIT_ON_TIMEOUT=600000 PLAYWRIGHT_SUITE=smoke-vital npx playwright test",
-    "test:starter": "WAIT_ON_TIMEOUT=600000 PLAYWRIGHT_SUITE=smoke-starter npx playwright test",
+    "test:bodiless-cli": "WAIT_ON_TIMEOUT=600000 PLAYWRIGHT_SUITE=smoke-bodiless-cli npx playwright test",
     "version": "git checkout package-lock.json",
     "vital-check": "node ./scripts/vital-check"
   },
