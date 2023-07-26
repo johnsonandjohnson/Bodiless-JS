@@ -20,6 +20,7 @@ import { FlowContainer } from './FlowContainer';
 import { Images } from './Images';
 import { Footer } from './Footer';
 import { Card } from './Card';
+import { Color } from './Color';
 import { Table } from './Table';
 import { List } from './List';
 import { Buttons } from './Buttons';
@@ -41,6 +42,7 @@ export const VitalDemoStyleGuideTemplate = {
   Footer,
   Video,
   Card,
+  Color,
   Table,
   List,
   Accordion,
