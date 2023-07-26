@@ -104,7 +104,7 @@ export const writeComponentTokens = async (
 ) => {
   const imports = {
     '../util': ['asTokenGroup'],
-    './semantic': ['vitalColor'],
+    '../components/Color': ['vitalColor'],
   };
 
   const promises = Object.keys(components).map(key => writeTokenCollection({
