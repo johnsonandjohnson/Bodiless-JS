@@ -81,8 +81,8 @@ jobs:
           uploadArtifacts: true
           temporaryPublicStorage: true
 
-  smoke-starter:
-    name: Smoke tests for starter
+  smoke-bodiless-cli:
+    name: Smoke tests for Bodiless CLI
     if: ${{ github.event_name == 'schedule' || github.event.label.name == 'ready-to-test' }}
     runs-on: ubuntu-20.04
     steps:
@@ -91,18 +91,16 @@ jobs:
           ref: ${{ github.event_name == 'schedule' && 'main' || github.event.pull_request.head.sha }}
       - name: Build
         uses: ./.github/actions/build
-      - name: Generate web site
-        uses: ./.github/actions/starter
       - name: Run playwright tests for generated site
         uses: ./.github/actions/playwright
         with:
-          node-test-script: test:starter
-          test-results-name: Smoke tests for starter
+          node-test-script: test:bodiless-cli
+          test-results-name: Smoke tests for Bodiless CLI
 
   cleanup:
     if: always() && github.event_name != 'schedule'
     runs-on: ubuntu-20.04
-    needs: [ setup, smoke-vital, smoke-starter ]
+    needs: [ setup, smoke-vital, smoke-bodiless-cli ]
     permissions:
       pull-requests: write
     steps:
@@ -116,7 +114,7 @@ jobs:
     name: Test Results
     if: always() && github.event.label.name == 'ready-to-test'
     runs-on: ubuntu-latest
-    needs: [ setup, smoke-vital, smoke-starter ]
+    needs: [ setup, smoke-vital, smoke-bodiless-cli ]
     permissions:
       checks: write
       pull-requests: write
