@@ -18,9 +18,10 @@ import React, {
   ReactNode,
   useLayoutEffect,
   useState,
-  PropsWithChildren
+  PropsWithChildren,
 } from 'react';
-import { useNode, NodeProvider } from '@bodiless/data';
+import { useNode, NodeProvider, ContentfulNode } from '@bodiless/data';
+import type { DefaultContentNode } from '@bodiless/data';
 import { createPortal /* hydrateRoot */ } from 'react-dom';
 import { HOC, ComponentWithMeta } from '@bodiless/fclasses';
 import { withoutHydration } from '../withoutHydration';
@@ -36,17 +37,22 @@ type IslandsHydratorProps = {
 
 type IslandWithNodeProps = {
   nodeCollection?: string,
-  nodeKeys: string[]
+  nodeKeys: string[],
+  content?: object
 };
 
 const IslandWithNode :FC<PropsWithChildren<IslandWithNodeProps>> = ({
   nodeCollection,
   nodeKeys,
+  content = {},
   children
 }) => {
   let { node } = useNode(nodeCollection);
+  if (Object.keys(content).length) {
+    node = ContentfulNode.create((node as DefaultContentNode<object>), content);
+  }
   nodeKeys.forEach(nodeKey => {
-    node = node.child(nodeKey);
+    node = node.child ? node.child(nodeKey) : node;
   });
 
   return (
@@ -64,7 +70,7 @@ const IslandComponents = ({islands}: {islands: Islands}) => {
       document.querySelectorAll('[data-island-component]').forEach((island) => {
         const {
           dataset: {
-            nodekeyParentTrail = '', islandProps, nodeCollection, islandComponent
+            nodekeyParentTrail = '', islandProps, nodeCollection, islandComponent, islandContent = ''
           }
         } = island as HTMLElement;
 
@@ -75,7 +81,6 @@ const IslandComponents = ({islands}: {islands: Islands}) => {
         const Component = islands[islandComponent];
 
         const props = JSON.parse(islandProps || '{}');
-
         // eslint-disable-next-line no-param-reassign
         island.innerHTML = '';
         if (nodekeyParentTrail) {
@@ -85,7 +90,11 @@ const IslandComponents = ({islands}: {islands: Islands}) => {
 
           if (nodeKeys.length) {
             components.push(createPortal(
-              <IslandWithNode nodeCollection={nodeCollection} nodeKeys={nodeKeys}>
+              <IslandWithNode
+                content={JSON.parse(islandContent)}
+                nodeCollection={nodeCollection}
+                nodeKeys={nodeKeys}
+              >
                 <Component {...props} />
               </IslandWithNode>,
               island

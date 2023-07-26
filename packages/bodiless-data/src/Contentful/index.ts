@@ -14,10 +14,12 @@
 
 import withDefaultContent from './withDefaultContent';
 import getContentFrom from './getContentFrom';
+import ContentfulNode from './ContentfulNode';
 import type { GetContentFrom, DefaultContent, DefaultNodeContent } from './ContentfulNode';
 
 export {
   withDefaultContent,
   getContentFrom,
+  ContentfulNode,
 };
 export type { GetContentFrom, DefaultContent, DefaultNodeContent };

@@ -13,27 +13,33 @@
  */
 import React from 'react';
 import { HOC, Span } from '@bodiless/fclasses';
-import { withNodeKeyParentTrail } from '@bodiless/data';
+import { useNode, withNodeKeyParentTrail } from '@bodiless/data';
 import { isEditClientSide, isStaticClientSide } from '../utils';
 
 const stringifyReplacer = (key: string, value: any): any => {
   const propsToRemove = ['__source', '__self', 'stateNode', '_context', 'return', 'children'];
   return propsToRemove.includes(key) ? undefined : value;
 };
-
 const createSerializedData = (props: any) => JSON.stringify(props, stringifyReplacer);
 
 const asIsland = (ComponentName: string) : HOC => (Component) => {
   const AsIsland = (props: any) => {
     if (isStaticClientSide || isEditClientSide) return <Component {...props} />;
 
-    const serializedData = createSerializedData(props);
+    // const { componentData } = useNodeDataHandlers();
+    const { node } = useNode();
+    // @ts-ignore
+    const content = Object.keys(node.data).length ? node.data : node.content || {};
+
+    const serializedProps = createSerializedData(props);
+    const serializedContent = createSerializedData(content);
     const ComponentWithNodeKeyParentTrail = withNodeKeyParentTrail(Span);
 
     return (
       <ComponentWithNodeKeyParentTrail
         data-island-component={ComponentName}
-        data-island-props={serializedData}
+        data-island-props={serializedProps}
+        data-island-content={serializedContent}
         style={{display: 'content'}}
       >
         <Component

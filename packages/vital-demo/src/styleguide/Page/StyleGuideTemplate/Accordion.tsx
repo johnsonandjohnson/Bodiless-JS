@@ -53,24 +53,24 @@ export const vitalAccordionVariations = varyDesigns(
 // and generates the code for the Islands will be ready, vary design can be restored.
 const Components = {
   StyleGuideAccordionDefault: as(
+    BaseVariation[''],
     asIsland('StyleGuideAccordionDefault'),
-    BaseVariation['']
   ),
   StyleGuideAccordionDefaultExpanded: as(
-    asIsland('StyleGuideAccordionDefaultExpanded'),
     BaseVariation[''],
-    vitalAccordion.WithInitiallyExpanded
+    vitalAccordion.WithInitiallyExpanded,
+    asIsland('StyleGuideAccordionDefaultExpanded'),
   ),
   StyleGuideAccordionFAQ: as(
-    asIsland('StyleGuideAccordionFAQ'),
-    vitalAccordion.WithFAQ,
-    BaseVariation['']
-  ),
-  StyleGuideAccordionFAQExpanded: as(
-    asIsland('StyleGuideAccordionFAQExpanded'),
     vitalAccordion.WithFAQ,
     BaseVariation[''],
-    vitalAccordion.WithInitiallyExpanded
+    asIsland('StyleGuideAccordionFAQ'),
+  ),
+  StyleGuideAccordionFAQExpanded: as(
+    vitalAccordion.WithFAQ,
+    BaseVariation[''],
+    vitalAccordion.WithInitiallyExpanded,
+    asIsland('StyleGuideAccordionFAQExpanded'),
   ),
 };
 
@@ -109,14 +109,14 @@ const simplebody = [
 ];
 
 export const data = {
-  examples$Default$accordion$title: { text: 'What is the Accordion Default?' },
-  examples$Default$accordion$body: simplebody,
-  examples$DefaultExpanded$accordion$title: { text: 'What is Expanded on Open Accordion?' },
-  examples$DefaultExpanded$accordion$body: simplebody,
-  examples$FAQ$accordion$title: { text: 'What is FAQ accordion?' },
-  examples$FAQ$accordion$body: simplebody,
-  examples$FAQExpanded$accordion$title: { text: 'What is Expanded on a FAQ accordion?' },
-  examples$FAQExpanded$accordion$body: simplebody,
+  examples$StyleGuideAccordionDefault$accordion$title: { text: 'What is the Accordion Default?' },
+  examples$StyleGuideAccordionDefault$accordion$body: simplebody,
+  examples$StyleGuideAccordionDefaultExpanded$accordion$title: { text: 'What is Expanded on Open Accordion?' },
+  examples$StyleGuideAccordionDefaultExpanded$accordion$body: simplebody,
+  examples$StyleGuideAccordionFAQ$accordion$title: { text: 'What is FAQ accordion?' },
+  examples$StyleGuideAccordionFAQ$accordion$body: simplebody,
+  examples$StyleGuideAccordionFAQExpanded$accordion$title: { text: 'What is Expanded on a FAQ accordion?' },
+  examples$StyleGuideAccordionFAQExpanded$accordion$body: simplebody,
 };
 
 export const Accordion = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {

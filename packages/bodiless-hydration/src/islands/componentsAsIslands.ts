@@ -22,8 +22,8 @@ const componentsAsIslands = (components: Components, prefix: string = '') => {
   const newComponents: Components = {};
   Object.keys(components).forEach((componentName: string) => {
     newComponents[`${prefix}${componentName}`] = as(
+      components[componentName],
       asIsland(`${prefix}${componentName}`),
-      components[componentName]
     );
   });
 
