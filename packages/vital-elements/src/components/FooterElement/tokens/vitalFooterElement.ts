@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import vitalFooterElement from 'src/generated/vitalFooterElement';
+import vitalFooterElement from '../../../generated/vitalFooterElement';
 
 export default vitalFooterElement;

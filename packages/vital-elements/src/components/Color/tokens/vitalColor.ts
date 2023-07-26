@@ -12,8 +12,8 @@
  * limitations under the License.
  */
 
-import generatedTokens from 'src/generated/vitalColor';
-import { asTokenGroup } from 'src/util';
+import { asTokenGroup } from '../../../util';
+import generatedTokens from '../../../generated/vitalColor';
 import { ColorMeta } from '../meta';
 
 const tokenOverrides = asTokenGroup(ColorMeta)({

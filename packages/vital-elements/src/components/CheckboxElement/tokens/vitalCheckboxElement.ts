@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import vitalCheckboxElement from 'src/generated/vitalCheckboxElement';
+import vitalCheckboxElement from '../../../generated/vitalCheckboxElement';
 
 export default vitalCheckboxElement;

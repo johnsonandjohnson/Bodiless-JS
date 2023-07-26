@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import vitalFormFieldElement from 'src/generated/vitalFormFieldElement';
+import vitalFormFieldElement from '../../../generated/vitalFormFieldElement';
 
 export default vitalFormFieldElement;

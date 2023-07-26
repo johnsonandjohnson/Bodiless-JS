@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import vitalImageCarouselElement from 'src/generated/vitalImageCarouselElement';
+import vitalImageCarouselElement from '../../../generated/vitalImageCarouselElement';
 
 export default vitalImageCarouselElement;

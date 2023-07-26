@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import vitalBreadcrumbElement from 'src/generated/vitalBreadcrumbElement';
+import vitalBreadcrumbElement from '../../../generated/vitalBreadcrumbElement';
 
 export default vitalBreadcrumbElement;

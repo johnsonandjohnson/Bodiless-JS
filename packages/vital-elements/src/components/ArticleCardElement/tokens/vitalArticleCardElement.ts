@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import vitalArticleCardElement from 'src/generated/vitalArticleCardElement';
+import vitalArticleCardElement from '../../../generated/vitalArticleCardElement';
 
 export default vitalArticleCardElement;

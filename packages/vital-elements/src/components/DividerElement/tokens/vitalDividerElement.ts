@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import vitalDividerElement from 'src/generated/vitalDividerElement';
+import vitalDividerElement from '../../../generated/vitalDividerElement';
 
 export default vitalDividerElement;

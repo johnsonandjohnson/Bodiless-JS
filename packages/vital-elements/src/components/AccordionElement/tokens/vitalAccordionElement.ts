@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import vitalAccordionElement from 'src/generated/vitalAccordionElement';
+import vitalAccordionElement from '../../../generated/vitalAccordionElement';
 
 export default vitalAccordionElement;

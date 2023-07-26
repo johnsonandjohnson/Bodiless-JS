@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import vitalNavigationElement from 'src/generated/vitalNavigationElement';
+import vitalNavigationElement from '../../../generated/vitalNavigationElement';
 
 export default vitalNavigationElement;
