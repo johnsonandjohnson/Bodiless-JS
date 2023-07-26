@@ -65,6 +65,7 @@ const vitalTypographyVariations = varyDesigns(
   TypographyVariations,
 );
 
+// TO DO bring in Component/Link/Text
 const LinkVariation = {
   Link: on(EditorPlainClean)(
     vitalEditorPlain.Default,
