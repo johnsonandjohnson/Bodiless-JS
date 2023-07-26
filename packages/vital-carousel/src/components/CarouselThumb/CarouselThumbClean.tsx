@@ -19,7 +19,6 @@ const CarouselThumbBase: FC<CarouselThumbBaseProps> = ({ components: C, ...rest 
   const slideIndex = useCarouselSlideIndex();
 
   return (
-    // Accessiblility Set tabindex for natural order
     <C.Wrapper data-index={slideIndex} type="button" {...rest}>
       <C.Image />
     </C.Wrapper>

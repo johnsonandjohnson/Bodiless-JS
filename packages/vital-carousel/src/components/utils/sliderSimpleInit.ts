@@ -4,98 +4,201 @@
 /*
  * Sourced from https://github.com/barthy-koeln/scroll-snap-slider
  */
+import { ScrollSnapSlider } from './ScrollSnapSlider';
 
+export const sliderSimpleInit = (sliderSimpleElement: HTMLElement) => {
+  try {
+    const sliderDotCarousel = sliderSimpleElement.getElementsByClassName('scroll-snap-dot-slider');
+    if (sliderDotCarousel.length !== 0) {
+      const slidesDot = sliderSimpleElement.getElementsByClassName('scroll-snap-slide');
+      const sliderDot = new ScrollSnapSlider({ element: sliderDotCarousel[0] });
+
+      // Make the Indicators active or not
+      const buttons = sliderSimpleElement.querySelectorAll('.indicators .indicator');
+      const setSelected = function (event: CustomEvent) {
+        const slideElementIndex = event.detail;
+        const slideElement = slidesDot[slideElementIndex];
+
+        for (const button of Array.from(buttons)) {
+          button.classList.toggle(
+            '-active',
+            (button as HTMLElement).dataset.index === (slideElement as HTMLElement).dataset.index
+          );
+        }
+      };
+
+      // Add the listeners
+      sliderDot.addEventListener<any>('slide-pass', setSelected);
+      sliderDot.addEventListener<any>('slide-stop', setSelected);
+    }
+
+    // Thumb Carousel
+    const sliderThumbCarousel = sliderSimpleElement.getElementsByClassName('scroll-snap-thumb-slider');
+    if (sliderThumbCarousel.length !== 0) {
+      const slidesThumb = sliderSimpleElement.getElementsByClassName('scroll-snap-slide');
+      const sliderThumb = new ScrollSnapSlider({ element: sliderThumbCarousel[0] });
+
+      // Only make the thumbs clickable not all dots
+      const buttonsThumbs = sliderSimpleElement.querySelectorAll('.indicators .thumbs.indicator');
+      for (const button of Array.from(buttonsThumbs)) {
+        button.addEventListener('click', (event) => {
+          const slideElementIndex = Array.prototype.slice
+            .call(slidesThumb)
+            .findIndex((item) => item.dataset.index === (button as HTMLElement).dataset.index);
+
+          sliderThumb.slideTo(slideElementIndex);
+        });
+        button.addEventListener('keydown', (event) => {
+          const slideElementIndex = Array.prototype.slice
+            .call(slidesThumb)
+            .findIndex((item) => item.dataset.index === (button as HTMLElement).dataset.index);
+
+          sliderThumb.slideTo(slideElementIndex);
+        });
+      }
+
+      /* Add the Control Arrows to thumbs */
+
+      const NumThumbs = 4;
+      for (const button of Array.from(buttonsThumbs)) {
+        const buttonindex = (button as HTMLElement).dataset.index;
+        button.classList.toggle(
+          '-hide',
+          Number(buttonindex) > (NumThumbs - 1)
+        );
+      }
+
+      const prev = document.querySelector('.thumbcontrols .arrow.-prev');
+      const next = document.querySelector('.thumbcontrols .arrow.-next');
+      (prev as HTMLElement).classList.toggle('-disabled');
+
+      const updateArrows = function (event: CustomEvent) {
+        const slideElementIndex = event.detail;
+
+        if (buttonsThumbs.length > NumThumbs) {
+          if (slideElementIndex + NumThumbs < buttonsThumbs.length) {
+            if (slideElementIndex === 0) {
+              buttonsThumbs[slideElementIndex+NumThumbs].classList.toggle('-hide');
+            } else {
+              buttonsThumbs[slideElementIndex-1].classList.toggle('-hide');
+            }
+            buttonsThumbs[slideElementIndex+NumThumbs].classList.toggle('-hide');
+          }
+        }
+
+        (prev as HTMLElement).classList.toggle('-disabled', slideElementIndex === 0);
+        (next as HTMLElement).classList.toggle('-disabled', slideElementIndex === (buttonsThumbs.length-1));
+      };
+
+      // Add the listeners
+      (prev as HTMLElement).addEventListener<any>('click', () => {
+        sliderThumb.slideTo(sliderThumb.slide - 1);
+      });
+      (next as HTMLElement).addEventListener<any>('click', () => {
+        sliderThumb.slideTo(sliderThumb.slide + 1);
+      });
+      sliderThumb.addEventListener<any>('slide-pass', updateArrows);
+    }
+  } catch (e) {
+    //
+  }
+};
+
+// Repeat of above.....  not great as change above won't change on
 export const sliderSimpleInitScript = `
-
 const sliderSimpleInit = (sliderSimpleElement) => {
   try {
-    const slider = sliderSimpleElement.getElementsByClassName('scroll-snap-slider'); 
-    const slides = sliderSimpleElement.getElementsByClassName(
-      'scroll-snap-slide'
-    );
-    const sliderSimple = new ScrollSnapSlider({ element: slider[0] });
-  
-    const buttons = sliderSimpleElement.querySelectorAll('.indicators .indicator');
-    const buttonsThumbs = sliderSimpleElement.querySelectorAll('.indicators .thumbs.indicator');
-  
-    const setSelected = function (event) {
-      const slideElementIndex = event.detail;
-      const slideElement = slides[slideElementIndex];
-  
-      for (const button of buttons) {
-        const isActive = button.classList.toggle(
-          '-active',
-          button.dataset.index === slideElement.dataset.index
-        );
-      }
-    };
-  
-    // Only make the thumbs clickable not all dots
-    for (const button of buttonsThumbs) {
-      button.addEventListener('click', (event) => {
-        const slideElementIndex = Array.prototype.slice
-          .call(slides)
-          .findIndex((item) => item.dataset.index === button.dataset.index);
-  
-        sliderSimple.slideTo(slideElementIndex);
-      });
-      button.addEventListener('keydown', (event) => {
-        const slideElementIndex = Array.prototype.slice
-        .call(slides)
-        .findIndex((item) => item.dataset.index === button.dataset.index);
+    const sliderDotCarousel = sliderSimpleElement.getElementsByClassName('scroll-snap-dot-slider');
+    if (sliderDotCarousel.length !== 0) {
+      const slidesDot = sliderSimpleElement.getElementsByClassName('scroll-snap-slide');
+      const sliderDot = new ScrollSnapSlider({ element: sliderDotCarousel[0] });
 
-      sliderSimple.slideTo(slideElementIndex);
+      // Make the Indicators active or not
+      const buttons = sliderSimpleElement.querySelectorAll('.indicators .indicator');
+      const setSelected = function (event) {
+        const slideElementIndex = event.detail;
+        const slideElement = slidesDot[slideElementIndex];
 
-      });
-    }
-  
-    sliderSimple.addEventListener('slide-pass', setSelected);
-    sliderSimple.addEventListener('slide-stop', setSelected);
-
-    /* Control Arrows */
-
-    const NumThumbs = 4;
-    
-    const thumbbuttons = document.querySelectorAll(".indicators .thumbs.indicator");
-    for (const button of thumbbuttons) {
-        const show = button.classList.toggle(
-          "-hide",
-          button.dataset.index > (NumThumbs - 1)
-        );
-    }
-    
-    const prev = document.querySelector(".thumbcontrols .arrow.-prev");
-    const next = document.querySelector(".thumbcontrols .arrow.-next");
-  
-    const updateArrows = function (event) {
-      const slideElementIndex = event.detail;
-      
-      if (thumbbuttons.length > NumThumbs) {
-        if (slideElementIndex + NumThumbs < thumbbuttons.length) {
-          if (slideElementIndex === 0) { 
-            // buttons[slideElementIndex].classList.toggle("-hide");
-          } else {
-            thumbbuttons[slideElementIndex-1].classList.toggle("-hide");
-          }
-          thumbbuttons[slideElementIndex+NumThumbs].classList.toggle("-hide");  
+        for (const button of buttons) {
+          button.classList.toggle(
+            '-active',
+            button.dataset.index === slideElement.dataset.index
+          );
         }
+      };
+
+      // Add the listeners
+      sliderDot.addEventListener('slide-pass', setSelected);
+      sliderDot.addEventListener('slide-stop', setSelected);
+    }
+
+    // Thumb Carousel
+    const sliderThumbCarousel = sliderSimpleElement.getElementsByClassName('scroll-snap-thumb-slider');
+    if (sliderThumbCarousel.length !== 0) {
+      const slidesThumb = sliderSimpleElement.getElementsByClassName('scroll-snap-slide');
+      const sliderThumb = new ScrollSnapSlider({ element: sliderThumbCarousel[0] });
+
+      // Only make the thumbs clickable not all dots
+      const buttonsThumbs = sliderSimpleElement.querySelectorAll('.indicators .thumbs.indicator');
+      for (const button of buttonsThumbs) {
+        button.addEventListener('click', (event) => {
+          const slideElementIndex = Array.prototype.slice
+            .call(slidesThumb)
+            .findIndex((item) => item.dataset.index === button.dataset.index);
+
+          sliderThumb.slideTo(slideElementIndex);
+        });
+        button.addEventListener('keydown', (event) => {
+          const slideElementIndex = Array.prototype.slice
+            .call(slidesThumb)
+            .findIndex((item) => item.dataset.index === button.dataset.index);
+
+          sliderThumb.slideTo(slideElementIndex);
+        });
       }
-      
-      
-      prev.classList.toggle("-disabled", slideElementIndex === 0);
-      next.classList.toggle("-disabled", slideElementIndex === (thumbbuttons.length-1));
-      
+
+      /* Add the Control Arrows to thumbs */
+
+      const NumThumbs = 4;
+      for (const button of buttonsThumbs) {
+        const buttonindex = button.dataset.index;
+        button.classList.toggle(
+          '-hide',
+          Number(buttonindex) > (NumThumbs - 1)
+        );
+      }
+
+      const prev = document.querySelector('.thumbcontrols .arrow.-prev');
+      const next = document.querySelector('.thumbcontrols .arrow.-next');
+      prev.classList.toggle('-disabled');
+
+      const updateArrows = function (event) {
+        const slideElementIndex = event.detail;
+
+        if (buttonsThumbs.length > NumThumbs) {
+          if (slideElementIndex + NumThumbs < buttonsThumbs.length) {
+            if (slideElementIndex === 0) {
+              buttonsThumbs[slideElementIndex+NumThumbs].classList.toggle('-hide');
+            } else {
+              buttonsThumbs[slideElementIndex-1].classList.toggle('-hide');
+            }
+            buttonsThumbs[slideElementIndex+NumThumbs].classList.toggle('-hide');
+          }
+        }
+
+        prev.classList.toggle('-disabled', slideElementIndex === 0);
+        next.classList.toggle('-disabled', slideElementIndex === (buttonsThumbs.length-1));
     };
-  
-    prev.addEventListener("click", function () {
-      sliderSimple.slideTo(sliderSimple.slide - 1);
+
+    // Add the listeners
+    prev.addEventListener('click', () => {
+      sliderThumb.slideTo(sliderThumb.slide - 1);
     });
-  
-    next.addEventListener("click", function () {
-      sliderSimple.slideTo(sliderSimple.slide + 1);
+    next.addEventListener('click', () => {
+      sliderThumb.slideTo(sliderThumb.slide + 1);
     });
-    
-    sliderSimple.addEventListener('slide-pass', updateArrows)
+    sliderThumb.addEventListener('slide-pass', updateArrows);
+  }
 
   } catch(e) {
     //

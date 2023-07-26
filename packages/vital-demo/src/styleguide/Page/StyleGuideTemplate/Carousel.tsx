@@ -40,7 +40,7 @@ const BaseVariation = {
 
 const forceHalf = asVitalCarouselToken({
   Theme: {
-    Wrapper: 'md:w-1/2'
+    Wrapper: 'lg:w-1/2'
   }
 });
 
@@ -49,17 +49,18 @@ const vitalPDPVariations = varyDesigns(
   {
     MobilePDPCarousel: as(
       vitalCarouselStatic.WithCarouselDots,
-      vitalCarouselStatic.MobileOnly,
+      vitalCarouselStatic.MobileTabletOnly,
+      vitalCarouselStatic.WithCarouselDotsMobileTablet,
     ),
     // DesktopTabletPDPCarousel: as(
     //   vitalCarouselStatic.WithThumbnail,
-    //   vitalCarouselStatic.TabletDesktopOnly,
+    //   vitalCarouselStatic.DesktopOnly,
     //   vitalCarouselStatic.WithHorizontalThumbs,
     //   forceHalf, // forcing half since this is how it will display on PDP
     // ),
-    DesktopTabletPDPVerticalCarousel: as(
+    DesktopPDPVerticalCarousel: as(
       vitalCarouselStatic.WithThumbnail,
-      vitalCarouselStatic.TabletDesktopOnly,
+      vitalCarouselStatic.DesktopOnly,
       vitalCarouselStatic.WithVerticalThumbs,
       forceHalf, // forcing half since this is how it will display on PDP
     ),
@@ -73,6 +74,7 @@ const vitalCarouselFlowContainer = asFluidToken({
       vitalCarouselStatic.Default,
       vitalCarouselStatic.WithCardSlide,
       vitalCarouselStatic.WithCarouselDots,
+      vitalCarouselStatic.WithCarouselDotsAllViewports
     ),
   },
 });
@@ -128,11 +130,14 @@ const data = {
     items: ['card1', 'card2', 'card3', 'card4', 'card5'],
   },
   examples$MobilePDPCarousel$slides: {
-    items: ['image1', 'image2', 'image3'],
+    items: ['image1', 'image2', 'image3', 'image4', 'image5', 'image6'],
   },
   examples$MobilePDPCarousel$slides$image1$image: squareimage1,
   examples$MobilePDPCarousel$slides$image2$image: squareimage2,
   examples$MobilePDPCarousel$slides$image3$image: squareimage3,
+  examples$MobilePDPCarousel$slides$image4$image: squareimage4,
+  examples$MobilePDPCarousel$slides$image5$image: squareimage5,
+  examples$MobilePDPCarousel$slides$image6$image: squareimage6,
   examples$DesktopTabletPDPCarousel$slides: {
     items: ['image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7', 'image8', 'image9'],
   },
@@ -145,18 +150,18 @@ const data = {
   examples$DesktopTabletPDPCarousel$slides$image7$image: squareimage7,
   examples$DesktopTabletPDPCarousel$slides$image8$image: squareimage8,
   examples$DesktopTabletPDPCarousel$slides$image9$image: squareimage9,
-  examples$DesktopTabletPDPVerticalCarousel$slides: {
+  examples$DesktopPDPVerticalCarousel$slides: {
     items: ['image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7', 'image8', 'image9'],
   },
-  examples$DesktopTabletPDPVerticalCarousel$slides$image1$image: squareimage1,
-  examples$DesktopTabletPDPVerticalCarousel$slides$image2$image: squareimage2,
-  examples$DesktopTabletPDPVerticalCarousel$slides$image3$image: squareimage3,
-  examples$DesktopTabletPDPVerticalCarousel$slides$image4$image: squareimage4,
-  examples$DesktopTabletPDPVerticalCarousel$slides$image5$image: squareimage5,
-  examples$DesktopTabletPDPVerticalCarousel$slides$image6$image: squareimage6,
-  examples$DesktopTabletPDPVerticalCarousel$slides$image7$image: squareimage7,
-  examples$DesktopTabletPDPVerticalCarousel$slides$image8$image: squareimage8,
-  examples$DesktopTabletPDPVerticalCarousel$slides$image9$image: squareimage9,
+  examples$DesktopPDPVerticalCarousel$slides$image1$image: squareimage1,
+  examples$DesktopPDPVerticalCarousel$slides$image2$image: squareimage2,
+  examples$DesktopPDPVerticalCarousel$slides$image3$image: squareimage3,
+  examples$DesktopPDPVerticalCarousel$slides$image4$image: squareimage4,
+  examples$DesktopPDPVerticalCarousel$slides$image5$image: squareimage5,
+  examples$DesktopPDPVerticalCarousel$slides$image6$image: squareimage6,
+  examples$DesktopPDPVerticalCarousel$slides$image7$image: squareimage7,
+  examples$DesktopPDPVerticalCarousel$slides$image8$image: squareimage8,
+  examples$DesktopPDPVerticalCarousel$slides$image9$image: squareimage9,
 };
 
 export const Carousel = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {

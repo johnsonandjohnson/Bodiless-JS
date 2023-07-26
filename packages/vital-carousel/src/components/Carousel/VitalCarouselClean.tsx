@@ -7,14 +7,13 @@ import {
 } from '@bodiless/fclasses';
 import { Helmet } from 'react-helmet';
 import type { DesignableComponentsProps } from '@bodiless/fclasses';
-import isUndefined from 'lodash/isUndefined';
 import type { VitalCarouselComponents } from './types';
 import { carouselScrollSnapSliderScript } from '../utils/ScrollSnapSlider';
-import { sliderSimpleInitScript } from '../utils/sliderSimpleInit';
+import { sliderSimpleInitScript, sliderSimpleInit } from '../utils/sliderSimpleInit';
 
 type VitalCarouselBaseProps = DesignableComponentsProps<VitalCarouselComponents>;
 
-const CarouselScript = () => (
+const CarouselScript = () => (process.env.NODE_ENV === 'production' ? (
   <Helmet>
     <script type="text/javascript">
       {carouselScrollSnapSliderScript}
@@ -23,18 +22,16 @@ const CarouselScript = () => (
       {sliderSimpleInitScript}
     </script>
   </Helmet>
-);
-
-const sliderSimpleInit = isUndefined; // Seems needed or get errors on line 35/36
+): <></>);
 
 const withCarouselInit: HOC = Component => {
   const WithCarouselInit = (props: any) => {
     const carouselRef = useRef<HTMLElement>(null);
 
     useLayoutEffect(() => {
-      // if (sliderSimpleInit !== 'undefined') {
-      sliderSimpleInit(carouselRef.current);
-      // }
+      if (typeof sliderSimpleInit !== 'undefined' && carouselRef.current) {
+        sliderSimpleInit(carouselRef.current);
+      }
     }, []);
     return (
       <Component forwardRef={carouselRef} {...props} />

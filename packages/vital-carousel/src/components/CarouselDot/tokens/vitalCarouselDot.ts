@@ -14,7 +14,7 @@ const Default = asCarouselDotToken({
     ),
   },
   A11y: {
-    Wrapper: addProps({ tabindex: '-1' }),
+    Wrapper: addProps({ tabIndex: '-1' }),
   },
   Layout: {
     // Hardcoded for now, site builders can override this.

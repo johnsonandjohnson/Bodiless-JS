@@ -79,7 +79,7 @@ const twConfig = {
         brand: '#CA081B',
         'card-bg': '#ffffff',
         'page-bg': '#F4F4F4',
-        interactive: '#019881',
+        interactive: '#000099',
         'interactive-active': '#000341',
         divider: '#D8D8D8',
         'body-copy': '#63666A',
@@ -89,11 +89,11 @@ const twConfig = {
       'vital-secondary': {
         eyebrow: '#CC0099',
         'footer-bg': '#2B2B33',
-        interactive: '#018571',
         table: '#E5E7EB',
         'table-interactive': '#f3f4f6',
         separator: '#666666',
         search: '#888888',
+        'button-selected': '#000041',
       },
       kenvue: {
         'neutrals-white': '#FFFFFF',
@@ -197,6 +197,16 @@ const twConfig = {
       },
       opacity: {
         // ...opacity,
+      },
+      margin: {
+        4.5: '1.125rem',
+        5.75: '1.438rem',
+        'site-percent': '5%',
+        'md-site-percent': '8%',
+      },
+      padding: {
+        'site-percent': '5%',
+        'md-site-percent': '8%',
       },
     },
   },

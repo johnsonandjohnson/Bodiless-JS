@@ -50,23 +50,26 @@ export interface VitalCarousel {
    * WithCarouselDots: Show dots
    */
   WithCarouselDots: VitalCarouselToken;
-  // /**
-  //  * WithThumbnail: Show dots as thumbnail images.
-  //  */
+  /**
+   * WithCarouselDotsAllViewports: Show carousel dots on all viewports (Usage: Product carousel)
+   */
+  WithCarouselDotsAllViewports: VitalCarouselToken;
+  /**
+   * WithCarouselDotsMobileTablet: Show carousel dots on mobile/tablet viewports (Usage:Product PDP)
+   */
+  WithCarouselDotsMobileTablet: VitalCarouselToken;
+  /**
+   * WithThumbnail: Show dots as thumbnail images.
+   */
   WithThumbnail: VitalCarouselToken;
-  // /**
-  //  * asAccessibleCarousel: make carousel accessible
-  //  */
-  // asAccessibleCarousel: VitalCarouselToken;
-  // /**
-  //  * WithImageSlide: Show Image for each slide
-  //  */
+  /**
+   * WithImageSlide: Show Image for each slide
+   */
   WithImageSlide: VitalCarouselToken;
   /**
    * WithCardSlide: Show Product Card for each slide
    */
   WithCardSlide: VitalCarouselToken;
-
   /**
    * MobileOnly: Show only on Mobile
    */
@@ -76,6 +79,10 @@ export interface VitalCarousel {
    */
   TabletOnly: VitalCarouselToken;
   /**
+   * MobileTabletOnly: Show only Mobile & Tablet
+   */
+  MobileTabletOnly: VitalCarouselToken;
+  /**
    * TabletDesktopOnly: Show only on Tablet/Desktop
    */
   TabletDesktopOnly: VitalCarouselToken;
@@ -83,6 +90,12 @@ export interface VitalCarousel {
    * DesktopOnly: Show only Desktop
    */
   DesktopOnly: VitalCarouselToken;
+  /**
+   * Show Thumbs as Horizontal on carousel
+   */
   WithHorizontalThumbs: VitalCarouselToken;
+  /**
+   * Show Thumbs as Vertical on carousel
+   */
   WithVerticalThumbs: VitalCarouselToken;
 }

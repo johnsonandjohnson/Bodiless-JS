@@ -9,7 +9,7 @@ import { vitalCard, CardClean } from '@bodiless/vital-card';
 import { asBodilessList } from '@bodiless/components';
 import { vitalColor, vitalSpacing } from '@bodiless/vital-elements';
 import { withChild } from '@bodiless/core';
-import { asVitalCarouselToken } from '../VitalCarouselClean';
+import { asVitalCarouselToken, withCarouselInit } from '../VitalCarouselClean';
 import type { VitalCarousel } from '../types';
 import { CAROUSEL_NODE_KEY } from '../../utils/constants';
 import CarouselSlide from '../../utils/CarouselSlide';
@@ -42,12 +42,13 @@ const Default = asVitalCarouselToken({
       Item: addProps({ role: 'list' }),
     }),
   },
+  Theme: {
+    Wrapper: 'slider',
+  },
   Behavior: {
     // Setup scroll snap behavior
-    Wrapper: 'slider',
     Slider: as(
       'scroll-smooth snap-always snap-x',
-      'scroll-snap-slider -simple',
       'scrollbar', // Colors the scrollbar
       withDesign({
         Item: as(
@@ -80,7 +81,7 @@ const WithControls = asVitalCarouselToken({
       replaceWith(Div),
       // Convert Indicators to List and use the same node key as slides to keep in sync
       asBodilessList(CAROUSEL_NODE_KEY, undefined, () => ({ groupLabel: 'Slide' })),
-      'controls indicators',
+      'controls indicators list-none',
       'align-center justify-center opacity-100',
     ),
   },
@@ -103,36 +104,52 @@ const WithCarouselDots = asVitalCarouselToken(
     },
     A11y: {
       Slider: withDesign({
-        Item: addProps({ tabindex: '0' }),
+        Item: addProps({ tabIndex: '0' }),
       }),
     },
     Behavior: {
-      Slider: 'scrollbar-hide lg:scrollbar-default',
+      Wrapper: withCarouselInit,
+      Slider: 'scroll-snap-dot-slider scrollbar-hide lg:scrollbar-default',
     },
     Spacing: {
-      Slider: as(
-        '-multi',
-        withDesign({
-          Item: 'pe-2',
-        }),
-      ),
+      Slider: withDesign({
+        Item: 'pe-2',
+      }),
       ControlsWrapper: 'pt-2',
       Indicator: 'ps-2',
     },
     Layout: {
-      Slider: as(
-        'w-screen md:w-full',
-        withDesign({
-          // Controls Responspiveness Behavior.
-          // A setting of at mobile of w-5/6 gives peek of next slide.
-          Item: 'w-5/6 md:w-1/3 lg:w-1/4',
-        }),
-      ),
       ControlsWrapper: 'flex',
       Indicator: 'flex items-center dots -simple lg:hidden',
     }
   }
 );
+
+const WithCarouselDotsAllViewports = asVitalCarouselToken({
+  Layout: {
+    Slider: as(
+      'w-screen md:w-full',
+      withDesign({
+        // Controls Responspiveness Behavior.
+        // A setting of at mobile of w-5/6 gives peek of next slide.
+        Item: 'w-5/6 md:w-1/3 lg:w-1/4',
+      }),
+    ),
+  }
+});
+
+const WithCarouselDotsMobileTablet = asVitalCarouselToken({
+  Layout: {
+    Slider: as(
+      'w-screen md:w-full',
+      withDesign({
+        // Controls Responspiveness Behavior.
+        // A setting of at mobile of w-5/6 gives peek of next slide.
+        Item: 'w-5/6 md:w-full',
+      }),
+    ),
+  }
+});
 
 const WithVerticalThumbs = asVitalCarouselToken({
   Components: {
@@ -145,9 +162,9 @@ const WithVerticalThumbs = asVitalCarouselToken({
     Next: vitalColor.TextPrimaryInteractive,
   },
   Layout: {
-    Wrapper: 'md:flex md:flex-row-reverse',
-    SliderWrapper: 'md:w-5/6',
-    ControlsWrapper: 'md:w-1/6 flex-col',
+    Wrapper: 'lg:flex lg:flex-row-reverse',
+    SliderWrapper: 'lg:w-5/6',
+    ControlsWrapper: 'lg:w-1/6 flex-col',
     Indicator: 'flex flex-col list-item',
     NavWrapper: 'flex flex-row justify-between thumbcontrols',
     Prev: 'arrow -prev',
@@ -172,7 +189,7 @@ const WithHorizontalThumbs = asVitalCarouselToken({
     Next: vitalColor.TextPrimaryInteractive,
   },
   Layout: {
-    Wrapper: 'md:flex-col',
+    Wrapper: 'lg:flex-col',
     SliderWrapper: '',
     ControlsWrapper: 'flex-row',
     Indicator: 'items-center',
@@ -199,7 +216,8 @@ const WithThumbnail = asVitalCarouselToken(
       ),
     },
     Behavior: {
-      Slider: 'scrollbar-hide',
+      Wrapper: withCarouselInit,
+      Slider: 'scroll-snap-thumb-slider scrollbar-hide',
     },
     Theme: {
       Slider: withDesign({
@@ -248,6 +266,12 @@ const TabletOnly = asVitalCarouselToken({
   },
 });
 
+const MobileTabletOnly = asVitalCarouselToken({
+  Layout: {
+    Wrapper: 'lg:hidden'
+  },
+});
+
 const TabletDesktopOnly = asVitalCarouselToken({
   Layout: {
     Wrapper: 'hidden md:flex'
@@ -274,11 +298,14 @@ const vitalCarousel: VitalCarousel = {
   WithVerticalThumbs,
   WithControls,
   WithCarouselDots,
+  WithCarouselDotsAllViewports,
+  WithCarouselDotsMobileTablet,
   WithThumbnail,
   WithImageSlide,
   WithCardSlide,
   MobileOnly,
   TabletOnly,
+  MobileTabletOnly,
   TabletDesktopOnly,
   DesktopOnly,
 };

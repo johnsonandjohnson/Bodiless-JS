@@ -11,7 +11,7 @@ const Default = asCarouselThumbToken({
     Wrapper: 'border-none thumbs indicator',
   },
   A11y: {
-    Wrapper: addProps({ tabindex: '0' }),
+    Wrapper: addProps({ tabIndex: '0' }),
   },
   Layout: {
     Wrapper: 'block',
