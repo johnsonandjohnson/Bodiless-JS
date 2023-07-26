@@ -14,11 +14,27 @@
 import { asTokenGroup } from '../../../util';
 import { TypographyMeta } from '../meta';
 
-/**
+export default asTokenGroup(TypographyMeta)({
+  H1V2: 'text-4xl leading-5 font-normal font-2',
+  H2V2: 'text-3xl leading-5 font-normal font-2',
+  H3V2: 'text-2xl leading-5 font-normal font-2',
+  H4V2: 'text-xl leading-5 font-normal font-2',
+  H5V2: 'text-lg leading-5 font-normal font-2',
+  // BodyRegular: 'text-base leading-6 font-normal font-2',
+  // BodyBold: 'text-base leading-6 font-bold font-2',
+  BodyInlineLink: 'text-base leading-6 font-bold font-2 underline',
+  // BodyLargeRegular: 'text-lg leading-6 font-normal font-2',
+  // BodyLargeBold: 'text-lg leading-6 font-bold font-2',
+  BodyLargeInlineLink: 'text-lg leading-6 font-bold font-2 underline',
+  EyebrowV2: 'text-sm leading-6 font-bold font-2 uppercase',
+  LinkV2: 'text-base leading-6 font-bold font-2 uppercase',
+  CrumbsReviewsRegular: 'text-sm leading-6 font-normal font-2',
+
+  /**
+ * Vital 2.0 Typography coming from Figma Tokens. Tokens above will be deprecated.
  * @todo: Move the token group to vitalTypography.ts as soon as all the V1 tokens are deprecated.
  */
 
-export default asTokenGroup(TypographyMeta)({
   HeadlineXXLarge: 'text-34.8px lg:text-39.8px leading-5 font-normal font-2',
   HeadlineXLarge: 'text-29px lg:text-33.2px leading-5 font-normal font-2',
   HeadlineLarge: 'text-24.2px lg:text-27.6px leading-5 font-normal font-2',
@@ -32,16 +48,10 @@ export default asTokenGroup(TypographyMeta)({
   BodyUnderlined: 'text-14px lg:text-16px leading-6 font-normal underline font-2',
   BodyBold: 'text-14px lg:text-16px leading-6 font-bold font-2',
   BodyBoldUnderlined: 'text-14px lg:text-16px leading-6 font-bold underline font-2',
+  EyebrowRegular: 'text-11.7px lg:text-13.3px leading-6 font-normal font-2 uppercase',
+  EyebrowBold: 'text-11.7px lg:text-13.3px leading-6 font-bold font-2 uppercase',
   BodySmallRegular: 'text-11.7px lg:text-13.3px leading-6 font-normal font-2',
   BodySmallUnderlined: 'text-11.7px lg:text-13.3px leading-6 font-normal font-2',
   BodySmallBold: 'text-11.7px lg:text-13.3px leading-6 font-bold font-2',
   BodySmallBoldUnderlined: 'text-11.7px lg:text-13.3px leading-6 font-bold font-2',
-  EyebrowRegular: 'text-11.7px lg:text-13.3px leading-6 font-normal font-2 uppercase',
-  EyebrowBold: 'text-11.7px lg:text-13.3px leading-6 font-bold font-2 uppercase',
-
-  // BodyInlineLink: 'text-base leading-6 font-bold font-2 underline',
-  // BodyLargeInlineLink: 'text-lg leading-6 font-bold font-2 underline',
-  // EyebrowV2: 'text-sm leading-6 font-bold font-2 uppercase',
-  // LinkV2: 'text-base leading-6 font-bold font-2 uppercase',
-  // CrumbsReviewsRegular: 'text-sm leading-6 font-normal font-2',
 });

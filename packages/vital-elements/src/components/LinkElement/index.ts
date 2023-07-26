@@ -12,6 +12,4 @@
  * limitations under the License.
  */
 
-import vitalCheckboxElement from '../../../generated/vitalCategoryCardElement';
-
-export default vitalCheckboxElement;
+export { default as vitalLinkElement } from './tokens';

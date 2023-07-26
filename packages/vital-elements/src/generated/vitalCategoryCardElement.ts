@@ -10,6 +10,8 @@ export const meta = {
 
 export default asTokenGroup(meta)({
   PaddingLeft: 'pl-0px',
+  PaddingBottom: 'pb-0px',
+  PaddingTop: 'pt-0px',
   BorderRadiusBottomRight: 'rounded-br-0px',
   BorderRadiusTopRight: 'rounded-tr-0px',
   PaddingRight: 'pr-0px',
