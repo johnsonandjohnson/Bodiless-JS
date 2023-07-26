@@ -15,6 +15,7 @@
 import { asStatic, withChild } from '@bodiless/core';
 import { vitalColor } from '@bodiless/vital-elements';
 import { vitalButtons } from '@bodiless/vital-buttons';
+import { asIsland } from '@bodiless/hydration';
 import {
   addClassesIf,
   as,
@@ -29,7 +30,10 @@ import { asBurgerMenuToken } from '../BurgerMenuClean';
  */
 const Base = asBurgerMenuToken({
   Core: {
-    _: asStatic,
+    _: as(
+      asIsland('vitalBurgerMenu'),
+      asStatic
+    ),
     MenuToggler: asBurgerMenuToggler,
   },
   Components: {

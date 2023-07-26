@@ -13,7 +13,7 @@
  */
 
 import Image, { asBodilessImage, withImageLibrary } from './Image';
-import { truncateFileName } from './FileUpload';
+import { truncateFileName } from './FileUpload.bl-edit';
 import { useChameleonSelectorForm } from './useChameleonSelectorForm';
 
 export {

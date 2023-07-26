@@ -22,25 +22,15 @@ import {
   WithoutHydrationWrapperFunction,
   WithoutHydrationOptions,
 } from './types';
+import {
+  isStaticClientSide,
+  isEdit
+} from '../utils';
 
 const DEFAULT_OPTIONS: WithoutHydrationOptions = {
   WrapperElement: 'div',
   WrapperStyle: { display: 'contents' },
 };
-
-export const isStaticClientSide = !!(
-  typeof window !== 'undefined'
-  && window.document
-  && process.env.NODE_ENV === 'production'
-);
-
-export const isEditClientSide = !!(
-  typeof window !== 'undefined'
-  && window.document
-  && process.env.NODE_ENV === 'development'
-);
-
-export const isEdit = process.env.NODE_ENV === 'development';
 
 /**
  * InnerHtml is memoized to allow retrieving it on component remount.

@@ -21,7 +21,8 @@ import { observer } from '@bodiless/core';
 import type { HOC } from '@bodiless/fclasses';
 import { BreadcrumbItem } from './BreadcrumbStore';
 import type { BreadcrumbItemType } from './BreadcrumbStore';
-import { useBreadcrumbStore, asHiddenBreadcrumbSource } from './BreadcrumbStoreProvider';
+import { useBreadcrumbStore } from './BreadcrumbStoreProvider';
+import asHiddenBreadcrumbSource from './asHiddenBreadcrumbSource.bl-edit';
 
 const breadcrumbContext = createContext<BreadcrumbItemType | undefined>(undefined);
 

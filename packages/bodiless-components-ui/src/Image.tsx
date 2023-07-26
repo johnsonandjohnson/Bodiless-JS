@@ -23,7 +23,7 @@ import {
   withoutProps,
 } from '@bodiless/fclasses';
 import { ComponentSelector } from '@bodiless/layouts-ui';
-import { fileUploadUI, withUI } from './FileUpload';
+import { fileUploadUI, withUI } from './FileUpload.bl-edit';
 
 const asBodilessImage:AsBodilessImage = (nodeKey, defaultData, useOverrides) => flowRight(
   withUI(fileUploadUI),

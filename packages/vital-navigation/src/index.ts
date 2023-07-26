@@ -24,6 +24,7 @@ export {
 export * from './components/Breadcrumbs';
 export * from './components/BurgerMenu';
 export * from './components/Menu';
+export * from './components/MenuToggler';
 export * from './components/MenuTitle';
 export * from './components/SubMenu';
 export * from './components/Separator';

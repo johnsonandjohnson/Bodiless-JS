@@ -34,6 +34,7 @@ const vitalTokenSpecDomains = {
   A11yContent: {},
   Content: {},
   Behavior: {},
+  Island: {},
   Schema: {},
 };
 
@@ -48,6 +49,18 @@ export type DefaultDomains = typeof vitalTokenSpecDomains;
 const asVitalTokenSpec = <
   C extends DesignableComponents
 >() => asTokenSpec<C, DefaultDomains>(vitalTokenSpecDomains);
+
+const vitalPageTokenSpecDomains = {
+  ...vitalTokenSpecDomains,
+  IslandHydrator: {}
+};
+
+type PageDefaultDomains = typeof vitalPageTokenSpecDomains;
+
+/**
+ * Creates a token definition utility for a page component which can use Island Hydrator.
+ */
+const asPageToken = asTokenSpec<any, PageDefaultDomains>(vitalPageTokenSpecDomains);
 
 /**
  * Creates an element level token (one in which only the _ design key is allowed);
@@ -117,7 +130,7 @@ const asSimpleToken = (...tokens: Token[]) => asElementToken({
 
 export {
   asVitalTokenSpec, asMetaToken, asElementToken, asFluidToken,
-  asTokenGroup, asSimpleToken, vitalTokenSpecDomains,
+  asTokenGroup, asSimpleToken, vitalTokenSpecDomains, asPageToken
 };
 export type {
   ElementToken, FluidToken,

@@ -16,6 +16,8 @@ import webpack from 'webpack';
 import { dirname, join, resolve } from 'path';
 import { existsSync, readFileSync } from 'fs';
 import { addStaticReplacementPlugin } from '@bodiless/webpack';
+// @ts-ignore
+import islandsLoader from '@bodiless/hydration/islandsLoader';
 import { sync as globSync} from 'glob';
 import generateSitemapXml from './Sitemapxml';
 import generateRobotsTxt from './Robotstxt';
@@ -133,6 +135,26 @@ const replaceCssLoader = (config: any, newCssLoader: any) => (
   }
 );
 
+const prevalTailwindConfigLoader = (config: any) => (
+  {
+    ...config,
+    module: {
+      ...config.module,
+      rules: [
+        ...config.module.rules,
+        {
+          test: /fclasses\/src\/tailwindcss\/resolveConfig.ts$/,
+          use: [
+            {
+              loader: resolve(dirname(__filename), './prevalLoader')
+            },
+          ],
+        },
+      ]
+    }
+  }
+);
+
 /**
  *
  * Helper function which removes NextJS error loader for global css.
@@ -235,6 +257,13 @@ const bodilessWepackConfig = (config: any, options: BodilessNextConfigWithNext) 
   const isEdit = process.env.NODE_ENV === 'development';
   const buildJS = !nextWebpack.dev && !nextWebpack.isServer;
   const devJS = nextWebpack.dev && !nextWebpack.isServer;
+  // eslint-disable-next-line no-param-reassign
+  config = prevalTailwindConfigLoader(config);
+
+  if (buildJS) {
+    // eslint-disable-next-line no-param-reassign
+    config = islandsLoader(config);
+  }
 
   if (nextWebpack.isServer && nextWebpack.nextRuntime === 'nodejs') {
     generateRobotsTxt(options.robotstxt);
@@ -323,6 +352,7 @@ const bodilessWepackConfig = (config: any, options: BodilessNextConfigWithNext) 
     },
     optimization: {
       ...optimization,
+      minimize: false,
       providedExports: true
     },
     snapshot,

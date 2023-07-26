@@ -28,4 +28,6 @@ const useContextMenuForm = () => useCallback(
   [],
 );
 
+export const FormChrome = Fragment;
+
 export default useContextMenuForm;

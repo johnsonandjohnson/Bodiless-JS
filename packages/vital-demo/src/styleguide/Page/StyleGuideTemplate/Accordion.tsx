@@ -18,26 +18,28 @@ import {
   replaceWith,
   on,
   varyDesigns,
+  as
 } from '@bodiless/fclasses';
 import { AccordionClean, vitalAccordion } from '@bodiless/vital-accordion';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { withDefaultContent } from '@bodiless/data';
+import { /* componentsAsIslands, */ asIsland } from '@bodiless/hydration';
 import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
-const BaseVariation = {
+export const BaseVariation = {
   // using '' means it won't add any string to name key of the variations
   '': on(AccordionClean)(
     vitalAccordion.Default,
   ),
 };
 
-const AccordionVariations = {
+export const AccordionVariations = {
   Default: '',
   FAQ: vitalAccordion.WithFAQ,
 };
 
-const vitalAccordionVariations = varyDesigns(
+export const vitalAccordionVariations = varyDesigns(
   BaseVariation,
   AccordionVariations,
   {
@@ -46,10 +48,39 @@ const vitalAccordionVariations = varyDesigns(
   }
 );
 
+// Temporary define the variations manually.
+// Once the webpack loader which detects componentsAsIslands
+// and generates the code for the Islands will be ready, vary design can be restored.
+const Components = {
+  StyleGuideAccordionDefault: as(
+    BaseVariation[''],
+    asIsland('StyleGuideAccordionDefault'),
+  ),
+  StyleGuideAccordionDefaultExpanded: as(
+    BaseVariation[''],
+    vitalAccordion.WithInitiallyExpanded,
+    asIsland('StyleGuideAccordionDefaultExpanded'),
+  ),
+  StyleGuideAccordionFAQ: as(
+    vitalAccordion.WithFAQ,
+    BaseVariation[''],
+    asIsland('StyleGuideAccordionFAQ'),
+  ),
+  StyleGuideAccordionFAQExpanded: as(
+    vitalAccordion.WithFAQ,
+    BaseVariation[''],
+    vitalAccordion.WithInitiallyExpanded,
+    asIsland('StyleGuideAccordionFAQExpanded'),
+  ),
+};
+
 const vitalAccordionFlowContainer = asFluidToken({
-  Components: {
-    ...vitalAccordionVariations,
+  Components
+  /*
+  : {
+    ...componentsAsIslands(vitalAccordionVariations, 'StyleGuideAccordion'),
   },
+  */
 });
 
 const simplebody = [
@@ -77,15 +108,15 @@ const simplebody = [
   }
 ];
 
-const data = {
-  examples$Default$accordion$title: { text: 'What is the Accordion Default?' },
-  examples$Default$accordion$body: simplebody,
-  examples$DefaultExpanded$accordion$title: { text: 'What is Expanded on Open Accordion?' },
-  examples$DefaultExpanded$accordion$body: simplebody,
-  examples$FAQ$accordion$title: { text: 'What is FAQ accordion?' },
-  examples$FAQ$accordion$body: simplebody,
-  examples$FAQExpanded$accordion$title: { text: 'What is Expanded on a FAQ accordion?' },
-  examples$FAQExpanded$accordion$body: simplebody,
+export const data = {
+  examples$StyleGuideAccordionDefault$accordion$title: { text: 'What is the Accordion Default?' },
+  examples$StyleGuideAccordionDefault$accordion$body: simplebody,
+  examples$StyleGuideAccordionDefaultExpanded$accordion$title: { text: 'What is Expanded on Open Accordion?' },
+  examples$StyleGuideAccordionDefaultExpanded$accordion$body: simplebody,
+  examples$StyleGuideAccordionFAQ$accordion$title: { text: 'What is FAQ accordion?' },
+  examples$StyleGuideAccordionFAQ$accordion$body: simplebody,
+  examples$StyleGuideAccordionFAQExpanded$accordion$title: { text: 'What is Expanded on a FAQ accordion?' },
+  examples$StyleGuideAccordionFAQExpanded$accordion$body: simplebody,
 };
 
 export const Accordion = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {

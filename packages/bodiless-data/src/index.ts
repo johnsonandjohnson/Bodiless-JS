@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import withNode, { withNodeKey } from './withNode';
+import withNode, { withNodeKey, withNodeKeyParentTrail } from './withNode';
 import withSidecarNodes, { startSidecarNodes, endSidecarNodes } from './withSidecarNodes';
 import withData from './withData';
 import {
@@ -30,6 +30,7 @@ export * from './Contentful';
 export {
   withNode,
   withNodeKey,
+  withNodeKeyParentTrail,
   withSidecarNodes,
   startSidecarNodes,
   endSidecarNodes,
