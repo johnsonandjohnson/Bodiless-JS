@@ -17,7 +17,10 @@
   },
   "files": [
     "/bin",
-    "/lib"
+    "/lib",
+    "/doc",
+    "/bodiless.docs.json",
+    "/getDocs.js"
   ],
   "repository": {
     "type": "git",
@@ -34,6 +37,7 @@
     "build:watch": "npm run build -- --watch"
   },
   "dependencies": {
+    "@bodiless/cli": "^1.0.0-rc.42",
     "copyfiles": "^2.1.1",
     "plop": "^3.1.2"
   },

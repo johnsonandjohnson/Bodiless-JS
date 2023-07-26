@@ -61,6 +61,7 @@
     "@bodiless/vital-list": "^1.0.0-rc.42",
     "@bodiless/vital-meta": "^1.0.0-rc.42",
     "@bodiless/vital-navigation": "^1.0.0-rc.42",
+    "@bodiless/vital-scaffold": "^1.0.0-rc.42",
     "@bodiless/vital-table": "^1.0.0-rc.42",
     "@bodiless/vital-templates": "^1.0.0-rc.42",
     "@bodiless/vital-youtube": "^1.0.0-rc.42",
