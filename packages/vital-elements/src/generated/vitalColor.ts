@@ -1,6 +1,6 @@
 import { asTokenGroup } from '../util';
 
-const meta = {
+export const meta = {
   categories: {
     Type: ['Element'],
     Group: ['Color'],
