@@ -37,6 +37,7 @@
     "@bodiless/core": "^1.0.0-rc.42",
     "@bodiless/data": "^1.0.0-rc.42",
     "@bodiless/fclasses": "^1.0.0-rc.42",
+    "@bodiless/hydration": "^1.0.0-rc.42",
     "@bodiless/layouts": "^1.0.0-rc.42",
     "@bodiless/schema-org": "^1.0.0-rc.42",
     "@bodiless/vital-editors": "^1.0.0-rc.42",
