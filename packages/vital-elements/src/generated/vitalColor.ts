@@ -44,7 +44,7 @@ export default asTokenGroup(meta)({
   ScrollbarInteractiveLightThemeDisabled: 'scrollbar-kenvue-neutrals-grey',
   BorderInteractiveLightThemeFocus: 'focus:border-kenvue-green-shade-80',
   BackgroundInteractiveLightThemeFocus: 'focus:bg-kenvue-green-shade-80',
-  TextInteractiveLightThemeFocus: 'text-kenvue-green-shade-80',
+  TextInteractiveLightThemeFocus: 'focus:text-kenvue-green-shade-80',
   ScrollbarInteractiveLightThemeFocus: 'focus:scrollbar-kenvue-green-shade-80',
   BorderLightThemeAlt1: 'border-kenvue-neutrals-grey',
   BackgroundAlt1: 'bg-kenvue-green-tint-20',
