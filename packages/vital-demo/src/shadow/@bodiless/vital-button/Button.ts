@@ -22,23 +22,32 @@ const Plain = asButtonToken(vitalButtonBase.Plain, {
   },
 });
 
-const WithPrimaryStyle = asButtonToken(vitalButtonBase.WithPrimaryStyle, {
-  Behavior: {
-    Wrapper: addProps({ 'data-shadowed-by': 'vital-demo:PrimaryButton' }),
-  },
-});
+const WithPrimaryStyle = asButtonToken(
+  vitalButtonBase.Plain,
+  vitalButtonBase.WithPrimaryStyle, {
+    Behavior: {
+      Wrapper: addProps({ 'data-shadowed-by': 'vital-demo:PrimaryButton' }),
+    },
+  }
+);
 
-const WithSecondaryStyle = asButtonToken(vitalButtonBase.WithSecondaryStyle, {
-  Behavior: {
-    Wrapper: addProps({ 'data-shadowed-by': 'vital-demo:SecondaryButton' }),
-  },
-});
+const WithSecondaryStyle = asButtonToken(
+  vitalButtonBase.Plain,
+  vitalButtonBase.WithSecondaryStyle, {
+    Behavior: {
+      Wrapper: addProps({ 'data-shadowed-by': 'vital-demo:SecondaryButton' }),
+    },
+  }
+);
 
-const WithTertiaryStyle = asButtonToken(vitalButtonBase.WithTertiaryStyle, {
-  Behavior: {
-    Wrapper: addProps({ 'data-shadowed-by': 'vital-demo:TertiaryButton' }),
-  },
-});
+const WithTertiaryStyle = asButtonToken(
+  vitalButtonBase.Plain,
+  vitalButtonBase.WithTertiaryStyle, {
+    Behavior: {
+      Wrapper: addProps({ 'data-shadowed-by': 'vital-demo:TertiaryButton' }),
+    },
+  }
+);
 
 export default {
   ...vitalButtonBase,
