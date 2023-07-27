@@ -33,6 +33,11 @@ const twConfig = {
       },
       dropShadow: {
         button: '0 0 4px #68a7f8',
+        none: 'none',
+      },
+      boxShadow: {
+        button: '0px 0px 4px #68a7f8',
+        none: 'none',
       },
     },
   },
