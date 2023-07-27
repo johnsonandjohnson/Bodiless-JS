@@ -25,7 +25,7 @@ import { withPlaceholder } from '@bodiless/components';
 import { vitalEditorPlain, EditorPlainClean } from '@bodiless/vital-editors';
 import { asEditableLink } from '@bodiless/vital-link';
 import { withNodeKey } from '@bodiless/data';
-import { vitalButtonTokens } from '@bodiless/vital-elements/src/components/ButtonElement';
+import { vitalButtonTokens } from '@bodiless/vital-elements';
 import { ButtonComponent, ButtonToken, asButtonToken } from '../ButtonClean';
 import { WhereToBuy, WhereToBuyWithoutIcon } from './vitalWTB';
 
@@ -80,9 +80,7 @@ const Plain = asButtonToken({
 //   Meta: flowHoc.meta.term('Style')('With Hover Arrow'),
 // });
 
-// Prefix button tokens with 'With' + remove extension of Default
-
-const WithPrimaryStyle = asButtonToken(Plain, {
+const WithPrimaryStyle = asButtonToken({
   Theme: {
     Wrapper: as(
       vitalButtonTokens.PrimaryBackgroundLightThemeIdle,
@@ -95,13 +93,14 @@ const WithPrimaryStyle = asButtonToken(Plain, {
   Meta: flowHoc.meta.term('Style')('Primary'),
 });
 
-const WithSecondaryStyle = asButtonToken(Plain, {
+const WithSecondaryStyle = asButtonToken({
   Theme: {
     Wrapper: as(
       vitalButtonTokens.SecondaryBorderLightThemeDefault,
       vitalButtonTokens.SecondaryBorderLightThemeHover,
       vitalButtonTokens.SecondaryBorderLightThemeFocus,
       vitalButtonTokens.SecondaryBorderLightThemePressed,
+      vitalButtonTokens.BorderShadowButtonFocus,
     ),
     Body: as(
       vitalButtonTokens.SecondaryTextLightThemeDefault,
@@ -113,7 +112,7 @@ const WithSecondaryStyle = asButtonToken(Plain, {
   Meta: flowHoc.meta.term('Style')('Secondary'),
 });
 
-const WithTertiaryStyle = asButtonToken(Plain, {
+const WithTertiaryStyle = asButtonToken({
   Theme: {
     Body: as(
       vitalButtonTokens.TertiaryTextLightThemeDefault,
