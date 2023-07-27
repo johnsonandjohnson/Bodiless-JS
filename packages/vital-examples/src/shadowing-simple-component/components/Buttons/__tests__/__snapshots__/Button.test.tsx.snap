@@ -19,7 +19,7 @@ exports[`Button Matches snapshot for Plain 1`] = `
       className="text-14px lg:text-16px leading-6 font-bold font-2"
       dangerouslySetInnerHTML={
         Object {
-          "__html": "Button",
+          "__html": "BUTTON",
         }
       }
     />
@@ -147,7 +147,7 @@ exports[`Button Matches snapshot for WithBigButton 1`] = `
       className="text-14px lg:text-16px leading-6 font-bold font-2"
       dangerouslySetInnerHTML={
         Object {
-          "__html": "Button",
+          "__html": "BUTTON",
         }
       }
     />
@@ -175,7 +175,7 @@ exports[`Button Matches snapshot for WithPrimary 1`] = `
 
 exports[`Button Matches snapshot for WithPrimaryStyle 1`] = `
 <a
-  className="bg-kenvue-green-shade-60% bg-kenvue-green-shade-80% bg-kenvue-green-green focus:drop-shadow-button focus:outline-none active:drop-shadow-none"
+  className="active:bg-kenvue-green-shade-60 focus:bg-kenvue-green-shade-80 hover:bg-kenvue-green-shade-80 bg-kenvue-green-green focus:drop-shadow-button focus:outline-none active:drop-shadow-none"
 >
   <span
     className="text-kenvue-neutrals-white"
@@ -185,10 +185,10 @@ exports[`Button Matches snapshot for WithPrimaryStyle 1`] = `
 
 exports[`Button Matches snapshot for WithSecondaryStyle 1`] = `
 <a
-  className="border-kenvue-green-shade-60% border-kenvue-green-shade-80% border-kenvue-green-green focus:shadow-button focus:outline-none active:shadow-none"
+  className="active:border-kenvue-green-shade-60 focus:border-kenvue-green-shade-80 hover:border-kenvue-green-shade-80 border-kenvue-green-green border-solid border-1px focus:shadow-button focus:outline-none active:shadow-none"
 >
   <span
-    className="text-kenvue-green-shade-60% text-kenvue-green-shade-80% text-kenvue-green-green"
+    className="group-active:text-kenvue-green-shade-60 focus:text-kenvue-green-shade-80 group-hover:text-kenvue-green-shade-80 text-kenvue-green-green"
   />
 </a>
 `;
@@ -198,7 +198,7 @@ exports[`Button Matches snapshot for WithTertiaryStyle 1`] = `
   className="focus:drop-shadow-button focus:outline-none active:drop-shadow-none"
 >
   <span
-    className="text-kenvue-green-shade-60% text-kenvue-green-shade-80% text-kenvue-green-green"
+    className="active:text-kenvue-green-shade-60 focus:text-kenvue-green-shade-80 hover:text-kenvue-green-shade-80 text-kenvue-green-green"
   />
 </a>
 `;
