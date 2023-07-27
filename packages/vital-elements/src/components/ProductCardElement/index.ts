@@ -12,4 +12,4 @@
  * limitations under the License.
  */
 
-export { default as vitalProducCardElement } from './tokens';
+export { default as vitalProductCardElement } from './tokens';

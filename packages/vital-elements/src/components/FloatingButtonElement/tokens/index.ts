@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import vitalFloatingButtonElement from '../../../generated/vitalFloatingButtonElement';
+import tokens from './vitalFloatingButtonElement';
 
-export default vitalFloatingButtonElement;
+export default tokens;

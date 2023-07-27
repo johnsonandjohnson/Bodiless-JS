@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import vitalPDPProductOverviewElement from '../../../generated/vitalPDPProductOverviewElement';
+import tokens from './vitalPDPProductOverviewElement';
 
-export default vitalPDPProductOverviewElement;
+export default tokens;

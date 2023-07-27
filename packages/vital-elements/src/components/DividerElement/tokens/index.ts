@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import vitalDividerElement from './vitalDividerElement';
+import tokens from './vitalDividerElement';
 
-export default vitalDividerElement;
+export default tokens;

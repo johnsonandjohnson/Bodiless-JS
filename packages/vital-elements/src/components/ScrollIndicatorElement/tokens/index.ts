@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import vitalScrollIndicatorElement from './vitalScrollIndicatorElement';
+import tokens from './vitalScrollIndicatorElement';
 
-export default vitalScrollIndicatorElement;
+export default tokens;

@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import vitalHeroBannerElement from '../../../generated/vitalHeroBannerElement';
+import tokens from './vitalHeroBannerElement';
 
-export default vitalHeroBannerElement;
+export default tokens;

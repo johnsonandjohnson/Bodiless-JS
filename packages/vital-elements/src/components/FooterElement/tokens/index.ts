@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import vitalFooterElement from '../../../generated/vitalFooterElement';
+import tokens from './vitalFooterElement';
 
-export default vitalFooterElement;
+export default tokens;
