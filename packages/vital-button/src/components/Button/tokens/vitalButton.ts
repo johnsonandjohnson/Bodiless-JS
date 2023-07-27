@@ -48,7 +48,7 @@ const Plain = asButtonToken({
     Body: on(EditorPlainClean)(vitalEditorPlain.Default),
   },
   Content: {
-    Body: withPlaceholder('Button'),
+    Body: withPlaceholder('BUTTON'),
   },
   Schema: {
     _: asEditableLink(),
@@ -97,6 +97,7 @@ const WithSecondaryStyle = asButtonToken({
   Theme: {
     Wrapper: as(
       vitalButtonTokens.BorderShadowButtonFocus,
+      vitalButtonTokens.BorderWidthButton,
       vitalButtonTokens.SecondaryBorderLightThemeIdle,
       vitalButtonTokens.SecondaryBorderLightThemeHover,
       vitalButtonTokens.SecondaryBorderLightThemeFocus,
