@@ -18,7 +18,7 @@ export default asTokenGroup()({
   BorderPaddingButton: 'px-24px py-16px',
   // TODO Needs work shouldn't have defined
   ShadowButtonFocus: 'focus:drop-shadow-button focus:outline-none active:drop-shadow-none',
-  BorderShadowButtonFocus: 'focus:shadow-button focus:outline-none focus:drop-shadow-none active:shadow-none',
+  BorderShadowButtonFocus: 'focus:shadow-button focus:outline-none active:shadow-none',
   TextButtonDefault: vitalTypography.BodyBold,
 
   PrimaryBackgroundLightThemeIdle: vitalColor.BackgroundInteractiveLightThemeIdle,
