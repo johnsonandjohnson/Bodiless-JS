@@ -1,7 +1,7 @@
 import { asTokenGroup } from '../util';
-import { vitalColor } from './semantic';
+import { vitalColor } from '../components/Color';
 
-const meta = {
+export const meta = {
   categories: {
     Type: ['Element'],
     Group: ['CategoryCardElement'],
@@ -10,6 +10,8 @@ const meta = {
 
 export default asTokenGroup(meta)({
   PaddingLeft: 'pl-0px',
+  PaddingBottom: 'pb-0px',
+  PaddingTop: 'pt-0px',
   BorderRadiusBottomRight: 'rounded-br-0px',
   BorderRadiusTopRight: 'rounded-tr-0px',
   PaddingRight: 'pr-0px',

@@ -1,6 +1,6 @@
 import { asTokenGroup } from '../util';
 
-const meta = {
+export const meta = {
   categories: {
     Type: ['Element'],
     Group: ['Color'],
@@ -15,7 +15,7 @@ export default asTokenGroup(meta)({
   BackgroundInteractiveDarkThemeIdle: 'bg-kenvue-green-tint-40%',
   TextInteractiveDarkThemeIdle: 'text-kenvue-green-tint-40%',
   ScrollbarInteractiveDarkThemeIdle: 'scrollbar-kenvue-green-tint-40%',
-  TextDarkThemeAlt2: 'text---no-value--',
+  TextDarkThemeAlt2: 'text-transparent',
   BorderInteractiveLightThemeIdle: 'border-kenvue-green-green',
   BackgroundInteractiveLightThemeIdle: 'bg-kenvue-green-green',
   TextInteractiveLightThemeIdle: 'text-kenvue-green-green',
@@ -36,7 +36,7 @@ export default asTokenGroup(meta)({
   BackgroundInteractiveDarkThemeFocus: 'bg-kenvue-green-tint-60%',
   TextInteractiveDarkThemeFocus: 'text-kenvue-green-tint-60%',
   ScrollbarInteractiveDarkThemeFocus: 'scrollbar-kenvue-green-tint-60%',
-  BorderDarkThemeAlt1: 'border---no-value--',
+  BorderDarkThemeAlt1: 'border-transparent',
   BackgroundAlt3: 'bg-kenvue-yellow-yellow',
   BorderInteractiveLightThemeDisabled: 'border-kenvue-neutrals-grey',
   BackgroundInteractiveLightThemeDisabled: 'bg-kenvue-neutrals-grey',

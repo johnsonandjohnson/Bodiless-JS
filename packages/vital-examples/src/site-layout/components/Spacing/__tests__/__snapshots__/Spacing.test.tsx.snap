@@ -36,6 +36,66 @@ exports[`Spacing Matches snapshot for GuttonRight 1`] = `
 />
 `;
 
+exports[`Spacing Matches snapshot for MarginLarge 1`] = `
+<div
+  className="m-36px md:48px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for MarginMedium 1`] = `
+<div
+  className="m-36px md:48px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for MarginSmall 1`] = `
+<div
+  className="m-36px md:48px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for MarginXLarge 1`] = `
+<div
+  className="m-36px md:48px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for MarginXSmall 1`] = `
+<div
+  className="m-36px md:48px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for PaddingLarge 1`] = `
+<div
+  className="p-24px md:p-36px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for PaddingMedium 1`] = `
+<div
+  className="p-20px md:p-24px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for PaddingSmall 1`] = `
+<div
+  className="p-16px md:p-20px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for PaddingXLarge 1`] = `
+<div
+  className="p-36px md:p-48px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for PaddingXSmall 1`] = `
+<div
+  className="p-8px md:p-16px"
+/>
+`;
+
 exports[`Spacing Matches snapshot for WithSiteMargin 1`] = `
 <div
   className="mx-2 xl:mx-6 xxl:px-20"
