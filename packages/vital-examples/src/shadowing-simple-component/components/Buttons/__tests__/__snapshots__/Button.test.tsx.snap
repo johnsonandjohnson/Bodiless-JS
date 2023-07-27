@@ -1,5 +1,208 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Button Matches snapshot for Plain 1`] = `
+<a
+  className="rounded-8px px-24px py-16px group justify-center"
+  href="#"
+  role="button"
+>
+  <span
+    data-no-hydrate={true}
+    id="123b58b4a9e4407d42b2606d912b6deb"
+    style={
+      Object {
+        "display": "contents",
+      }
+    }
+  >
+    <span
+      className="text-14px lg:text-16px leading-6 font-bold font-2"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "Button",
+        }
+      }
+    />
+  </span>
+</a>
+`;
+
+exports[`Button Matches snapshot for PrimaryDisabled 1`] = `
+<button
+  className="bg-kenvue-neutrals-grey"
+  disabled="true"
+>
+  <span
+    className="text-kenvue-neutrals-white"
+  />
+</button>
+`;
+
+exports[`Button Matches snapshot for SecondaryDisabled 1`] = `
+<button
+  className="border-kenvue-neutrals-grey"
+  disabled="true"
+>
+  <span
+    className="text-kenvue-neutrals-grey"
+  />
+</button>
+`;
+
+exports[`Button Matches snapshot for TertiaryDisabled 1`] = `
+<button
+  disabled="true"
+>
+  <span
+    className="text-kenvue-neutrals-grey"
+  />
+</button>
+`;
+
+exports[`Button Matches snapshot for WhereToBuy 1`] = `
+<a
+  className="rounded text-m-base lg:text-base uppercase font-bold text-vital-primary-footer-copy bg-vital-primary-interactive disabled:bg-vital-primary-button-disabled mx-auto p-3 w-full flex justify-center items-center max-w-64 h-12 lg:w-full"
+  href="/where-to-buy"
+>
+  <svg
+    className="w-6 h-6 mr-3 xl:mr-0 2xl:mr-3"
+    height="25"
+    viewBox="0 0 27.27 25"
+    width="27.27"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g
+      data-name="CART ICON"
+      id="CART_ICON"
+      transform="translate(1 1)"
+    >
+      <path
+        d="M-2020.75,2766.846h4.712l3.426,15.993h14.314l2.818-11h-19.487"
+        data-name="Path 5710"
+        fill="none"
+        id="Path_5710"
+        stroke="#fff"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        transform="translate(2020.75 -2766.846)"
+      />
+      <circle
+        cx="2.404"
+        cy="2.404"
+        data-name="Ellipse 1822"
+        fill="#fff"
+        id="Ellipse_1822"
+        r="2.404"
+        transform="translate(8.019 19.192)"
+      />
+      <circle
+        cx="2.404"
+        cy="2.404"
+        data-name="Ellipse 1823"
+        fill="#fff"
+        id="Ellipse_1823"
+        r="2.404"
+        transform="translate(17.657 19.192)"
+      />
+    </g>
+  </svg>
+  <span
+    className="leading xl:hidden 2xl:block"
+  >
+    Where to Buy
+  </span>
+</a>
+`;
+
+exports[`Button Matches snapshot for WhereToBuyWithoutIcon 1`] = `
+<a
+  className="rounded text-m-base lg:text-base uppercase font-bold text-vital-primary-footer-copy bg-vital-primary-interactive disabled:bg-vital-primary-button-disabled mx-auto p-3 w-full flex justify-center items-center max-w-64 h-12 lg:w-full"
+  href="/where-to-buy"
+>
+  <span
+    className="leading xl:hidden 2xl:block"
+  >
+    Where to Buy
+  </span>
+</a>
+`;
+
+exports[`Button Matches snapshot for WithBigButton 1`] = `
+<a
+  className="rounded-8px px-12 py-6 group justify-center"
+  href="#"
+  role="button"
+>
+  <span
+    data-no-hydrate={true}
+    id="123b58b4a9e4407d42b2606d912b6deb"
+    style={
+      Object {
+        "display": "contents",
+      }
+    }
+  >
+    <span
+      className="text-14px lg:text-16px leading-6 font-bold font-2"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "Button",
+        }
+      }
+    />
+  </span>
+</a>
+`;
+
+exports[`Button Matches snapshot for WithDisabled 1`] = `
+<button
+  disabled="true"
+>
+  <span />
+</button>
+`;
+
+exports[`Button Matches snapshot for WithPrimary 1`] = `
+<a
+  className="rounded hover:bg-vital-primary-interactive transition-colors duration-400 text-m-base lg:text-base uppercase font-bold text-white bg-vital-primary-brand"
+>
+  <span
+    className="text-kenvue-neutrals-white"
+  />
+</a>
+`;
+
+exports[`Button Matches snapshot for WithPrimaryStyle 1`] = `
+<a
+  className="bg-kenvue-green-shade-60% bg-kenvue-green-shade-80% bg-kenvue-green-green focus:drop-shadow-button focus:outline-none active:drop-shadow-none"
+>
+  <span
+    className="text-kenvue-neutrals-white"
+  />
+</a>
+`;
+
+exports[`Button Matches snapshot for WithSecondaryStyle 1`] = `
+<a
+  className="border-kenvue-green-shade-60% border-kenvue-green-shade-80% border-kenvue-green-green focus:shadow-button focus:outline-none active:shadow-none"
+>
+  <span
+    className="text-kenvue-green-shade-60% text-kenvue-green-shade-80% text-kenvue-green-green"
+  />
+</a>
+`;
+
+exports[`Button Matches snapshot for WithTertiaryStyle 1`] = `
+<a
+  className="focus:drop-shadow-button focus:outline-none active:drop-shadow-none"
+>
+  <span
+    className="text-kenvue-green-shade-60% text-kenvue-green-shade-80% text-kenvue-green-green"
+  />
+</a>
+`;
+
 exports[`Buttons Matches snapshot for Default 1`] = `
 <a
   className="hover:opacity-80 leading-tight uppercase focus:outline-none focus:ring-0 rounded transition duration-150 ease-in-out px-6 py-3.5 flex group justify-center"
