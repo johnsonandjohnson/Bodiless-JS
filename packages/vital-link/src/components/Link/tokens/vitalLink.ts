@@ -25,7 +25,7 @@ import { withSidecarNodes, withNodeKey } from '@bodiless/data';
 import { vitalLinkElement } from '@bodiless/vital-elements';
 import { asLinkToken } from '../LinkClean';
 import { useExternalLinkToggle, asEditableLink, useIsDownloadLink } from '../util';
-
+import type { LinkToken } from '../LinkClean';
 /**
    * Token which causes link to display as an external link.
    */
@@ -110,10 +110,46 @@ const Sidecar = asLinkToken({
   },
 });
 
-export default {
+/**
+ * Tokens for the vital link
+ *
+ * @category Token Collection
+ */
+export interface VitalLink {
+  /**
+   * Unstyled Link Token.
+   */
+  Base: LinkToken,
+  /**
+   * Styled Link Token.
+   */
+  Default: LinkToken,
+  /**
+   * Add External Icon add end of the link
+   */
+  WithExternalStyles: LinkToken,
+  /**
+   * Add Downloadable Icon add end of the link
+   */
+  WithDownloadStyles: LinkToken,
+  /**
+   * Attaches a node to the link for saving link value
+   */
+  Sidecar: LinkToken,
+}
+
+/**
+ * Tokens for Vital Image
+ *
+ * @category Token Collection
+ * @see [[VitalLink]]
+ */
+const vitalLink: VitalLink = {
   Base,
   Default,
   WithExternalStyles,
   WithDownloadStyles,
   Sidecar,
 };
+
+export default vitalLink;
