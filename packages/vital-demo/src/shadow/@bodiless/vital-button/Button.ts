@@ -16,25 +16,25 @@ import { asButtonToken } from '@bodiless/vital-button';
 import { vitalButtonBase } from '@bodiless/vital-button/lib/base';
 import { addProps } from '@bodiless/fclasses';
 
-const Default = asButtonToken(vitalButtonBase.Plain, {
+const Plain = asButtonToken(vitalButtonBase.Plain, {
   Behavior: {
     Wrapper: addProps({ 'data-shadowed-by': 'vital-demo:DefaultButton' }),
   },
 });
 
-const Primary = asButtonToken(vitalButtonBase.WithPrimaryStyle, {
+const WithPrimaryStyle = asButtonToken(vitalButtonBase.WithPrimaryStyle, {
   Behavior: {
     Wrapper: addProps({ 'data-shadowed-by': 'vital-demo:PrimaryButton' }),
   },
 });
 
-const Secondary = asButtonToken(vitalButtonBase.WithSecondaryStyle, {
+const WithSecondaryStyle = asButtonToken(vitalButtonBase.WithSecondaryStyle, {
   Behavior: {
     Wrapper: addProps({ 'data-shadowed-by': 'vital-demo:SecondaryButton' }),
   },
 });
 
-const Tertiary = asButtonToken(vitalButtonBase.WithTertiaryStyle, {
+const WithTertiaryStyle = asButtonToken(vitalButtonBase.WithTertiaryStyle, {
   Behavior: {
     Wrapper: addProps({ 'data-shadowed-by': 'vital-demo:TertiaryButton' }),
   },
@@ -42,8 +42,8 @@ const Tertiary = asButtonToken(vitalButtonBase.WithTertiaryStyle, {
 
 export default {
   ...vitalButtonBase,
-  Default,
-  Primary,
-  Secondary,
-  Tertiary,
+  Plain,
+  WithPrimaryStyle,
+  WithSecondaryStyle,
+  WithTertiaryStyle,
 };
