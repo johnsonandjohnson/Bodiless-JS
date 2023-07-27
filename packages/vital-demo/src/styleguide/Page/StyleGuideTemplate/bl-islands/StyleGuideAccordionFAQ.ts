@@ -1,9 +1,9 @@
 import {
-  on,
+  as,
 } from '@bodiless/fclasses';
 import { AccordionClean, vitalAccordion } from '@bodiless/vital-accordion';
 
-export default on(AccordionClean)(
+export default as(
   vitalAccordion.Default,
   vitalAccordion.WithFAQ,
-);
+)(AccordionClean);

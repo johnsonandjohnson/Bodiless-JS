@@ -51,7 +51,7 @@ exports.default = function (source) {
         CallExpression(path) {
           // Look for usage of asFluidToken.
           if (path.node.callee.type === 'Identifier' && path.node.callee.name === 'asPageToken') {
-            // Remove any token provided to asFluidToken which is not an Object defined in place;
+            // Remove any token provided to asPageToken which is not an Object defined in place;
             // eslint-disable-next-line no-param-reassign
             path.node.arguments = path.node.arguments.filter(node => node.type === 'ObjectExpression');
             // Traverse inside asFluidToken.

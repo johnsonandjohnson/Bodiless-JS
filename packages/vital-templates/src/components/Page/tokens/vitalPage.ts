@@ -41,7 +41,6 @@ const Default = asPageToken({
     _: as(
       withIslandsHydrator({}),
       withBurgerMenuProvider,
-      asBodilessPage,
     )
   },
   Components: {

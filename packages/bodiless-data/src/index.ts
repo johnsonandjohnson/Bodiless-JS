@@ -25,6 +25,8 @@ import { DefaultContentNode } from './ContentNode';
 import type { ContentNode, ContentNodePath } from './ContentNode';
 import { WithNodeProps, WithNodeKeyProps } from './NodeTypes';
 
+export { default as childKeys } from './childKeys';
+
 export * from './Contentful';
 
 export {

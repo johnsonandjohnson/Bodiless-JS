@@ -3,7 +3,7 @@ import { on, as } from '@bodiless/fclasses';
 import { vitalContentListingTemplate } from '@bodiless/vital-content-listing';
 import { withLanguages } from '@bodiless/i18n';
 import { asPageToken } from '@bodiless/vital-elements';
-import { GenericTemplateClean, asBodilessPage } from '@bodiless/vital-templates';
+import { GenericTemplateClean } from '@bodiless/vital-templates';
 import { vitalPDPTemplate, PDPTemplateClean } from '@bodiless/vital-product';
 import { withBurgerMenuProvider } from '@bodiless/navigation';
 import { withIslandsHydrator } from '@bodiless/hydration';
@@ -29,7 +29,6 @@ const Default = asPageToken(vitalPageBase.Default, {
       withIslandsHydrator({}),
       WithLanguage,
       withBurgerMenuProvider,
-      asBodilessPage
     )
   },
   Components: {

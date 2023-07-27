@@ -12,7 +12,6 @@ import BurgerIcon from '../assets/BurgerIcon';
 const Default = asElementToken({
   Core: {
     _: as(
-      asIsland('vitalMenuToggler'),
       asBurgerMenuToggler
     )
   },
@@ -26,6 +25,9 @@ const Default = asElementToken({
   Content: {
     _: withChild(BurgerIcon),
   },
+  Behavior: {
+    _: asIsland('vitalMenuToggler'),
+  }
 });
 
 export default {

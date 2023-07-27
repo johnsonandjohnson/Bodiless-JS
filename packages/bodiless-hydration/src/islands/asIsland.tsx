@@ -13,7 +13,12 @@
  */
 import React from 'react';
 import { HOC, Span } from '@bodiless/fclasses';
-import { useNode, withNodeKeyParentTrail } from '@bodiless/data';
+import {
+  useNode,
+  withNodeKeyParentTrail,
+  childKeys,
+  ContentNode
+} from '@bodiless/data';
 import { isEditClientSide, isStaticClientSide } from '../utils';
 
 const stringifyReplacer = (key: string, value: any): any => {
@@ -22,30 +27,47 @@ const stringifyReplacer = (key: string, value: any): any => {
 };
 const createSerializedData = (props: any) => JSON.stringify(props, stringifyReplacer);
 
+const extractNodeData = (
+  source: ContentNode<any>
+) => childKeys(source).reduce((acc, k): Object => ({
+  ...acc,
+  [`${source.path.join('$')}$${k}`]: source.child(k).data,
+  ...extractNodeData(source.child(k)) as Object
+}), {});
+
 const asIsland = (ComponentName: string) : HOC => (Component) => {
   const AsIsland = (props: any) => {
     if (isStaticClientSide || isEditClientSide) return <Component {...props} />;
 
-    // const { componentData } = useNodeDataHandlers();
     const { node } = useNode();
+    const data = extractNodeData(node);
+
     // @ts-ignore
-    const content = Object.keys(node.data).length ? node.data : node.content || {};
+    const content = Object.keys(node.data).length ? node.data : node.content || undefined;
 
     const serializedProps = createSerializedData(props);
-    const serializedContent = createSerializedData(content);
+    const serializedContent = createSerializedData(data);
     const ComponentWithNodeKeyParentTrail = withNodeKeyParentTrail(Span);
 
     return (
-      <ComponentWithNodeKeyParentTrail
-        data-island-component={ComponentName}
-        data-island-props={serializedProps}
-        data-island-content={serializedContent}
-        style={{display: 'content'}}
-      >
-        <Component
-          {...props}
-        />
-      </ComponentWithNodeKeyParentTrail>
+      // The Island must be wrapped in this span to use this span as the portal root.
+      <span style={{display: 'content'}}>
+        <ComponentWithNodeKeyParentTrail
+          data-island-component={ComponentName}
+          data-island-props={serializedProps}
+          style={{display: 'content'}}
+        >
+          <Component
+            {...props}
+          />
+          <script
+            type="application/json"
+            dangerouslySetInnerHTML={{
+              __html: serializedContent
+            }}
+          />
+        </ComponentWithNodeKeyParentTrail>
+      </span>
     );
   };
 

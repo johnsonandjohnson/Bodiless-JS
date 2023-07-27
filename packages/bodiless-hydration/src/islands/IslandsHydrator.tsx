@@ -13,17 +13,17 @@
  */
 import React, {
   Component,
-  FC,
   ReactPortal,
   ReactNode,
   useLayoutEffect,
   useState,
+  FC,
   PropsWithChildren,
 } from 'react';
-import { useNode, NodeProvider, ContentfulNode } from '@bodiless/data';
-import type { DefaultContentNode } from '@bodiless/data';
 import { createPortal /* hydrateRoot */ } from 'react-dom';
 import { HOC, ComponentWithMeta } from '@bodiless/fclasses';
+import { NodeProvider, useNode, ContentfulNode } from '@bodiless/data';
+import type { DefaultContentNode } from '@bodiless/data';
 import { withoutHydration } from '../withoutHydration';
 
 type Islands = {
@@ -36,27 +36,23 @@ type IslandsHydratorProps = {
 };
 
 type IslandWithNodeProps = {
-  nodeCollection?: string,
-  nodeKeys: string[],
-  content?: object
+  data: object,
+  collection: string,
+  nodekeys: string[],
 };
 
 const IslandWithNode :FC<PropsWithChildren<IslandWithNodeProps>> = ({
-  nodeCollection,
-  nodeKeys,
-  content = {},
+  data,
+  collection,
+  nodekeys,
   children
 }) => {
-  let { node } = useNode(nodeCollection);
-  if (Object.keys(content).length) {
-    node = ContentfulNode.create((node as DefaultContentNode<object>), content);
-  }
-  nodeKeys.forEach(nodeKey => {
-    node = node.child ? node.child(nodeKey) : node;
-  });
+  const { node } = useNode();
+  const contentNode = ContentfulNode.create((node as DefaultContentNode<object>), data);
+  contentNode.path = nodekeys;
 
   return (
-    <NodeProvider node={node} collection={nodeCollection}>
+    <NodeProvider node={contentNode} collection={collection}>
       {children}
     </NodeProvider>
   );
@@ -67,12 +63,12 @@ const IslandComponents = ({islands}: {islands: Islands}) => {
   if (typeof window !== 'undefined') {
     useLayoutEffect(() => {
       const components: ReactPortal[] = [];
-      document.querySelectorAll('[data-island-component]').forEach((island) => {
+      document.querySelectorAll<HTMLElement>('[data-island-component]').forEach((island) => {
         const {
           dataset: {
-            nodekeyParentTrail = '', islandProps, nodeCollection, islandComponent, islandContent = ''
+            nodekeyParentTrail= '', islandProps, islandComponent, nodeCollection = '_default'
           }
-        } = island as HTMLElement;
+        } = island;
 
         if (typeof islandComponent === 'undefined') return;
 
@@ -81,30 +77,51 @@ const IslandComponents = ({islands}: {islands: Islands}) => {
         const Component = islands[islandComponent];
 
         const props = JSON.parse(islandProps || '{}');
-        // eslint-disable-next-line no-param-reassign
-        island.innerHTML = '';
-        if (nodekeyParentTrail) {
-          const nodeKeys = nodekeyParentTrail.split('$');
-          // Remove first item which refers to NodeCollection.
-          nodeKeys.shift();
 
-          if (nodeKeys.length) {
-            components.push(createPortal(
-              <IslandWithNode
-                content={JSON.parse(islandContent)}
-                nodeCollection={nodeCollection}
-                nodeKeys={nodeKeys}
-              >
-                <Component {...props} />
-              </IslandWithNode>,
-              island
-            ));
-            return;
+        const data = JSON.parse(
+          island.querySelector('script[type="application/json"]')?.innerHTML || '{}'
+        );
+
+        const nodeKeys = nodekeyParentTrail.split('$');
+        nodeKeys.unshift();
+
+        const root = island.parentElement || island;
+        const obeserverConfig = { childList: true };
+
+        // The mutation observer removes the static HTML once the React Component is actually added.
+        const observer = new MutationObserver(
+          (mutationList: MutationRecord[], observer: MutationObserver) => {
+            mutationList.forEach(mutation => {
+              if (mutation.type === 'childList' && mutation.previousSibling) {
+                (mutation.previousSibling as HTMLElement).remove();
+                observer.disconnect();
+              }
+            });
           }
-        }
-        components.push(createPortal(<Component {...props} />, island));
+        );
+
+        observer.observe(root, obeserverConfig);
 
         // Remove existing html and replace with the component in portal.
+        // eslint-disable-next-line no-param-reassign
+        // island.innerHTML='';
+        if (Object.keys(data).length) {
+          components.push(createPortal(
+            <IslandWithNode
+              data={data}
+              collection={nodeCollection}
+              nodekeys={nodeKeys}
+            >
+              <Component {...props} />
+            </IslandWithNode>,
+            root
+          ));
+          return;
+        }
+
+        components.push(createPortal(
+          <Component {...props} />, root
+        ));
       });
       setIslandComponents(components);
     }, []);

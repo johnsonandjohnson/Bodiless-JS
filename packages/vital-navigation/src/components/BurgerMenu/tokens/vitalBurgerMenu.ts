@@ -31,7 +31,6 @@ import { asBurgerMenuToken } from '../BurgerMenuClean';
 const Base = asBurgerMenuToken({
   Core: {
     _: as(
-      asIsland('vitalBurgerMenu'),
       asStatic
     ),
     MenuToggler: asBurgerMenuToggler,
@@ -73,6 +72,7 @@ const Base = asBurgerMenuToken({
     Overlay: 'z-10 bg-gray-112-10 backdrop-filter backdrop-blur-m-md backdrop-brightness-80',
   },
   Behavior: {
+    _: asIsland('vitalBurgerMenu'),
     // Opens/closes burger menu.
     Wrapper: as(
       addClassesIf(useIsBurgerMenuHidden)('transform -translate-x-full'),
