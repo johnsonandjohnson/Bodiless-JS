@@ -18,6 +18,7 @@ import generatedTokens, { meta } from '../../../generated/vitalButtonElement';
 
 const manualTokensandOverrides = asTokenGroup(meta)({
   BorderPaddingButton: 'px-24px py-16px',
+  BorderWidthButton: 'border-solid border-1px',
   // TODO Needs work shouldn't have defined
   ShadowButtonFocus: 'focus:drop-shadow-button focus:outline-none active:drop-shadow-none',
   BorderShadowButtonFocus: 'focus:shadow-button focus:outline-none active:shadow-none',
