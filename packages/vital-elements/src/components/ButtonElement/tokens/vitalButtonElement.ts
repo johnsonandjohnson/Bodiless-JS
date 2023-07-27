@@ -12,8 +12,8 @@
  * limitations under the License.
  */
 
-import { vitalTypography } from 'src/components/Typography';
-import { asTokenGroup } from 'src/util';
+import { vitalTypography } from '../../Typography';
+import { asTokenGroup } from '../../../util';
 import generatedTokens, { meta } from '../../../generated/vitalButtonElement';
 
 const manualTokensandOverrides = asTokenGroup(meta)({

@@ -37,7 +37,7 @@ const Plain = asButtonToken({
     // NOTE: Deprecated temporarily.
     // _: as(vitalLink.WithDownloadStyles, vitalLink.WithExternalStyles),
     Wrapper: as(
-      vitalButtonTokens.PrimaryBorderRadiusBorderRadius,
+      vitalButtonTokens.PrimaryBorderRadiusAll,
     ),
     Body: vitalButtonTokens.TextButtonDefault,
   },
@@ -97,13 +97,13 @@ const WithSecondaryStyle = asButtonToken({
   Theme: {
     Wrapper: as(
       vitalButtonTokens.BorderShadowButtonFocus,
-      vitalButtonTokens.SecondaryBorderLightThemeDefault,
+      vitalButtonTokens.SecondaryBorderLightThemeIdle,
       vitalButtonTokens.SecondaryBorderLightThemeHover,
       vitalButtonTokens.SecondaryBorderLightThemeFocus,
       vitalButtonTokens.SecondaryBorderLightThemePressed,
     ),
     Body: as(
-      vitalButtonTokens.SecondaryTextLightThemeDefault,
+      vitalButtonTokens.SecondaryTextLightThemeIdle,
       vitalButtonTokens.SecondaryTextLightThemeHover,
       vitalButtonTokens.SecondaryTextLightThemeFocus,
       vitalButtonTokens.SecondaryTextLightThemePressed,
@@ -116,7 +116,7 @@ const WithTertiaryStyle = asButtonToken({
   Theme: {
     Wrapper: vitalButtonTokens.ShadowButtonFocus,
     Body: as(
-      vitalButtonTokens.TertiaryTextLightThemeDefault,
+      vitalButtonTokens.TertiaryTextLightThemeIdle,
       vitalButtonTokens.TertiaryTextLightThemeHover,
       vitalButtonTokens.TertiaryTextLightThemeFocus,
       vitalButtonTokens.TertiaryTextLightThemePressed,
