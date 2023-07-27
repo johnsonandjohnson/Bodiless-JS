@@ -136,11 +136,11 @@ export default asTokenGroup(ColorMeta)({
   TextInteractiveLightThemeIdle: 'text-kenvue-green-green',
   TextInteractiveLightThemeHover: 'group-hover:text-kenvue-green-shade-80',
   TextInteractiveLightThemeFocus: 'focus:text-kenvue-green-shade-80',
-  TextInteractiveLightThemePressed: 'active:text-kenvue-green-shade-60',
+  TextInteractiveLightThemePressed: 'group-active:text-kenvue-green-shade-60',
   TextInteractiveLightThemeDisabled: 'text-kenvue-neutrals-grey',
 
   TextInteractiveDarkThemeIdle: 'text-kenvue-green-tint-40',
-  TextInteractiveDarkThemeHover: 'group-text-kenvue-green-tint-60',
+  TextInteractiveDarkThemeHover: 'text-kenvue-green-tint-60',
   TextInteractiveDarkThemeFocus: 'text-kenvue-green-tint-60',
   TextInteractiveDarkThemePressed: 'text-kenvue-green-tint-20',
   TextInteractiveDarkThemeDisabled: 'text-kenvue-neutrals-light-grey',
