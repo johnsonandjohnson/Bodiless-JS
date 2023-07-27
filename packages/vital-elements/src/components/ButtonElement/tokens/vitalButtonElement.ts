@@ -23,6 +23,9 @@ const manualTokensandOverrides = asTokenGroup(meta)({
   ShadowButtonFocus: 'focus:drop-shadow-button focus:outline-none active:drop-shadow-none',
   BorderShadowButtonFocus: 'focus:shadow-button focus:outline-none active:shadow-none',
   TextButtonDefault: vitalTypography.BodyBold,
+
+  SecondaryTextLightThemeHover: 'group-hover:text-kenvue-green-shade-80',
+  SecondaryTextLightThemePressed: 'group-active:text-kenvue-green-shade-60',
 });
 
 export default {
