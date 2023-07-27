@@ -15,6 +15,13 @@
       "type": "FilterableContent"
     },
     {
+      "uuid": "74d763e0-2c76-11ee-bf82-ef4ac34baf6e",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "FilterableContent"
+    },
+    {
       "uuid": "7a28fdc0-2bf6-11ee-a9e7-b7e1185fb147",
       "wrapperProps": {
         "className": "w-full"
