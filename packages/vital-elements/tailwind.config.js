@@ -95,6 +95,7 @@ const twConfig = {
         search: '#888888',
         'button-selected': '#000041',
       },
+      white: '#FFFFFF',
       kenvue: {
         'neutrals-white': '#FFFFFF',
         'neutrals-lightest-grey': '#F8F8F8',

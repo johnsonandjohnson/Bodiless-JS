@@ -13,7 +13,7 @@
  */
 
 /**
- * Use this version of the vital card tokens when extending or shadowing.
+ * Use this version of the vital Color tokens when extending or shadowing.
  * Import the  token directly from @bodiless/vital-elements/lib/base.
  * @category Token Collection
  * @see [[vitalColor]]
@@ -21,7 +21,7 @@
 export { default as vitalColorBase } from './components/Color/tokens/vitalColor';
 
 /**
- * Use this version of the vital card tokens when extending or shadowing.
+ * Use this version of the vital FontSize tokens when extending or shadowing.
  * Import the  token directly from @bodiless/vital-elements/lib/base.
  * @category Token Collection
  * @see [[vitalFontSize]]
@@ -29,7 +29,7 @@ export { default as vitalColorBase } from './components/Color/tokens/vitalColor'
 export { default as vitalFontSizeBase } from './components/FontSize/tokens/vitalFontSize';
 
 /**
- * Use this version of the vital card tokens when extending or shadowing.
+ * Use this version of the vital Spacing tokens when extending or shadowing.
  * Import the  token directly from @bodiless/vital-elements/lib/base.
  * @category Token Collection
  * @see [[vitalSpacing]]
@@ -37,7 +37,7 @@ export { default as vitalFontSizeBase } from './components/FontSize/tokens/vital
 export { default as vitalSpacingBase } from './components/Spacing/tokens/vitalSpacing';
 
 /**
- * Use this version of the vital card tokens when extending or shadowing.
+ * Use this version of the vital TextDecoration tokens when extending or shadowing.
  * Import the  token directly from @bodiless/vital-elements/lib/base.
  * @category Token Collection
  * @see [[vitalTextDecoration]]
@@ -45,9 +45,161 @@ export { default as vitalSpacingBase } from './components/Spacing/tokens/vitalSp
 export { default as vitalTextDecorationBase } from './components/TextDecoration/tokens/vitalTextDecoration';
 
 /**
- * Use this version of the vital card tokens when extending or shadowing.
+ * Use this version of the vital Card tokens when extending or shadowing.
  * Import the  token directly from @bodiless/vital-elements/lib/base.
  * @category Token Collection
  * @see [[vitalTypography]]
  */
 export { default as vitalTypographyBase } from './components/Typography/tokens/vitalTypography';
+
+/**
+ * Use this version of the vital Accordion tokens when extending or shadowing.
+ * Import the token directly from @bodiless/vital-elements/lib/base.
+ * @category Token Collection
+ * @see [[vitalAccordionElement]]
+ */
+export { default as vitalAccordionElementBase } from './components/AccordionElement/tokens/vitalAccordionElement';
+
+/**
+ * Use this version of the vital ArticleCard tokens when extending or shadowing.
+ * Import the token directly from @bodiless/vital-elements/lib/base.
+ * @category Token Collection
+ * @see [[vitalArticleCardElement]]
+ */
+export { default as vitalArticleCardElementBase } from './components/ArticleCardElement/tokens/vitalArticleCardElement';
+
+/**
+ * Use this version of the vital Breadcrumb tokens when extending or shadowing.
+ * Import the token directly from @bodiless/vital-elements/lib/base.
+ * @category Token Collection
+ * @see [[vitalBreadcrumbElement]]
+ */
+export { default as vitalBreadcrumbElementBase } from './components/BreadcrumbElement/tokens/vitalBreadcrumbElement';
+
+/**
+ * Use this version of the vital Button tokens when extending or shadowing.
+ * Import the token directly from @bodiless/vital-elements/lib/base.
+ * @category Token Collection
+ * @see [[vitalButtonElement]]
+ */
+export { default as vitalButtonElementBase } from './components/ButtonElement/tokens/vitalButtonElement';
+
+/**
+ * Use this version of the vital CategoryCard tokens when extending or shadowing.
+ * Import the token directly from @bodiless/vital-elements/lib/base.
+ * @category Token Collection
+ * @see [[vitalCategoryCardElement]]
+ */
+export { default as vitalCategoryCardElementBase } from './components/CategoryCardElement/tokens/vitalCategoryCardElement';
+
+/**
+ * Use this version of the vital Divider tokens when extending or shadowing.
+ * Import the token directly from @bodiless/vital-elements/lib/base.
+ * @category Token Collection
+ * @see [[vitalDividerElement]]
+ */
+export { default as vitalDividerElementBase } from './components/DividerElement/tokens/vitalDividerElement';
+
+/**
+ * Use this version of the vital FloatingButton tokens when extending or shadowing.
+ * Import the token directly from @bodiless/vital-elements/lib/base.
+ * @category Token Collection
+ * @see [[vitalFloatingButtonElement]]
+ */
+export { default as vitalFloatingButtonElementBase } from './components/FloatingButtonElement/tokens/vitalFloatingButtonElement';
+
+/**
+ * Use this version of the vital Footer tokens when extending or shadowing.
+ * Import the token directly from @bodiless/vital-elements/lib/base.
+ * @category Token Collection
+ * @see [[vitalFooterElement]]
+ */
+export { default as vitalFooterElementBase } from './components/FooterElement/tokens/vitalFooterElement';
+
+/**
+ * Use this version of the vital HeroBanner tokens when extending or shadowing.
+ * Import the token directly from @bodiless/vital-elements/lib/base.
+ * @category Token Collection
+ * @see [[vitalHeroBannerElement]]
+ */
+export { default as vitalHeroBannerElementBase } from './components/HeroBannerElement/tokens/vitalHeroBannerElement';
+
+/**
+ * Use this version of the vital ImageCarousel tokens when extending or shadowing.
+ * Import the token directly from @bodiless/vital-elements/lib/base.
+ * @category Token Collection
+ * @see [[vitalImageCarouselElement]]
+ */
+export { default as vitalImageCarouselElementBase } from './components/ImageCarouselElement/tokens/vitalImageCarouselElement';
+
+/**
+ * Use this version of the vital JumpLinks tokens when extending or shadowing.
+ * Import the token directly from @bodiless/vital-elements/lib/base.
+ * @category Token Collection
+ * @see [[vitalJumpLinksElement]]
+ */
+export { default as vitalJumpLinksElementBase } from './components/JumpLinksElement/tokens/vitalJumpLinksElement';
+
+/**
+ * Use this version of the vital Navigation tokens when extending or shadowing.
+ * Import the token directly from @bodiless/vital-elements/lib/base.
+ * @category Token Collection
+ * @see [[vitalNavigationElement]]
+ */
+export { default as vitalNavigationElementBase } from './components/NavigationElement/tokens/vitalNavigationElement';
+
+/**
+ * Use this version of the vital PDPProductOverview tokens when extending or shadowing.
+ * Import the token directly from @bodiless/vital-elements/lib/base.
+ * @category Token Collection
+ * @see [[vitalPDPProductOverviewElement]]
+ */
+export { default as vitalPDPProductOverviewElementBase } from './components/PDPProductOverviewElement/tokens/vitalPDPProductOverviewElement';
+
+/**
+ * Use this version of the vital ProductCard tokens when extending or shadowing.
+ * Import the token directly from @bodiless/vital-elements/lib/base.
+ * @category Token Collection
+ * @see [[vitalProductCardElement]]
+ */
+export { default as vitalProductCardElementBase } from './components/ProductCardElement/tokens/vitalProductCardElement';
+
+/**
+ * Use this version of the vital ScrollIndicator tokens when extending or shadowing.
+ * Import the token directly from @bodiless/vital-elements/lib/base.
+ * @category Token Collection
+ * @see [[vitalScrollIndicatorElement]]
+ */
+export { default as vitalScrollIndicatorElementBase } from './components/ScrollIndicatorElement/tokens/vitalScrollIndicatorElement';
+
+/**
+ * Use this version of the vital ScrollIndicator tokens when extending or shadowing.
+ * Import the token directly from @bodiless/vital-elements/lib/base.
+ * @category Token Collection
+ * @see [[vitalFilterElement]]
+ */
+export { default as vitalFilterElementBase } from './components/FilterElement/tokens/vitalFilterElement';
+
+/**
+ * Use this version of the vital ScrollIndicator tokens when extending or shadowing.
+ * Import the token directly from @bodiless/vital-elements/lib/base.
+ * @category Token Collection
+ * @see [[vitalInputElement]]
+ */
+export { default as vitalInputElementBase } from './components/InputElement/tokens/vitalInputElement';
+
+/**
+ * Use this version of the vital ScrollIndicator tokens when extending or shadowing.
+ * Import the token directly from @bodiless/vital-elements/lib/base.
+ * @category Token Collection
+ * @see [[vitalLinkElement]]
+ */
+export { default as vitalLinkElementBase } from './components/LinkElement/tokens/vitalLinkElement';
+
+/**
+ * Use this version of the vital ScrollIndicator tokens when extending or shadowing.
+ * Import the token directly from @bodiless/vital-elements/lib/base.
+ * @category Token Collection
+ * @see [[vitalModalElement]]
+ */
+export { default as vitalModalElementBase } from './components/ModalElement/tokens/vitalModalElement';

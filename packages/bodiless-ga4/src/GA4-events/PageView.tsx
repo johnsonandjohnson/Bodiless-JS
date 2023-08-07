@@ -102,4 +102,4 @@ export const DefaultPageGA4DataLayerHelmet = withGlobalGA4Form(
   withDataLayerPageLocRef(),
 )(Helmet);
 
-export const WithGA4DesignKeys = withShowDesignKeys(true, 'layer-region');
+export const WithGA4DesignKeys = withShowDesignKeys(true, 'layer-component');

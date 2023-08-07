@@ -75,7 +75,7 @@ const runVisualTest = (data: VitalTestParameters[]) => {
 
           let element: Locator = page.getByTestId(elementId);
           if (param.switchToItemContent) {
-            element = element.locator('[data-layer-region="StyleGuideExamples:ItemContent"]');
+            element = element.locator('[data-layer-component="StyleGuideExamples:ItemContent"]');
           }
 
           const settings: CheckSettingsAutomation = Target.region(element).strict().fully();
