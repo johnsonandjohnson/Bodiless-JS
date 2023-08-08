@@ -204,7 +204,7 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
   }
 
   toTwColorName(target: ColorTargets, state: States = States.Idle): string {
-    const cleanedName = this.segments.slice(1).join('/').replace(/[/ ]/g, '-')
+    const cleanedName = this.segments.slice(1).join('/').replace(/[/ ]/g, '-').replace(/%/g, '')
       .toLowerCase();
     const statePrefix = TwStatePrefixes[state];
     const typePrefix = TwColorTargetPrefixes[target];
