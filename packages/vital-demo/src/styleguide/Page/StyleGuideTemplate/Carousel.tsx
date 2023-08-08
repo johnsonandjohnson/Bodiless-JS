@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /**
  * Copyright © 2023 Johnson & Johnson
  *
@@ -69,13 +70,13 @@ const vitalPDPVariations = varyDesigns(
 
 const vitalCarouselFlowContainer = asFluidToken({
   Components: {
-    ...vitalPDPVariations,
     ProductCardSection: on(CarouselStatic)(
       vitalCarouselStatic.Default,
       vitalCarouselStatic.WithCardSlide,
       vitalCarouselStatic.WithCarouselDots,
       vitalCarouselStatic.WithCarouselDotsAllViewports
     ),
+    ...vitalPDPVariations,
   },
 });
 
@@ -168,7 +169,16 @@ export const Carousel = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Defaul
   Meta: flowHoc.meta.term('Token')('Carousel'),
   Content: {
     Title: replaceWith(() => <>Carousel</>),
-    Description: replaceWith(() => <>The following are examples of Vital Carousel.</>),
+    Description: replaceWith(() => (
+      <>
+        The following are examples of Vital Carousel.
+        {' '}
+        <ul>
+          <li>The First example is a carousel used in the Product Section.</li>
+          <li>The Second example is carousel used on Product Detail Page, and is waiting on implementation of final designs.</li>
+        </ul>
+      </>
+    )),
     Examples: on(StyleGuideExamplesClean)(
       vitalStyleGuideExamples.Default,
       vitalCarouselFlowContainer,

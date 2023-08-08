@@ -8,8 +8,9 @@ const Default = asCarouselDotToken({
     Wrapper: 'indicator',
     Dot: as(
       'rounded-full border-none',
-      // TODO TOKEN PROBLEM IMPORT/VARIABLE NAME
-      // vitalScrollIndicatorElement.LightThemeInactive,
+      // @TODO TOKEN PROBLEM IMPORT/VARIABLE NAME
+      // vitalScrollIndicatorElement.LightThemeInactive = vitalColor.BorderLightThemeBase,
+      // Token needs to change vitalColor.BackgroundLightThemeBase,
       'bg-kenvue-neutrals-light-grey',
     ),
   },

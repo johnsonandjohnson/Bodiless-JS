@@ -23,6 +23,10 @@ const twConfig = {
   theme: {
     extend: {
       colors: {
+        /* TODO
+         * These are currently hardcoded until we determine best way to pass token values
+         * back directly into here tailwind config
+         */
         ScrollIndicatorActive: '#019881',
         ScrollIndicatorInActive: '#BFBFBF',
       }
