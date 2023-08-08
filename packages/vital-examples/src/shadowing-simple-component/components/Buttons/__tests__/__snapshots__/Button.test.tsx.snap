@@ -40,7 +40,7 @@ exports[`Button Matches snapshot for PrimaryDisabled 1`] = `
 
 exports[`Button Matches snapshot for SecondaryDisabled 1`] = `
 <button
-  className="border-kenvue-neutrals-grey"
+  className="border-solid border-1px border-kenvue-neutrals-grey"
   disabled="true"
 >
   <span
