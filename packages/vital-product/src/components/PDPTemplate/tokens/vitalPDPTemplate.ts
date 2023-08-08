@@ -21,7 +21,7 @@ import {
 import { asSchemaSource, WithProductSchema } from '@bodiless/schema-org';
 import { vitalGenericTemplate, TemplateNodeKeys } from '@bodiless/vital-templates';
 import { vitalEditorPlain, withAutoSuperscript } from '@bodiless/vital-editors';
-import { vitalButtons, asButtonToken } from '@bodiless/vital-buttons';
+import { vitalButton, asButtonToken } from '@bodiless/vital-button';
 import { vitalImage } from '@bodiless/vital-image';
 import {
   vitalColor, vitalTextDecoration, vitalTypography, vitalFontSize,
@@ -48,13 +48,13 @@ const vitalPDPBreadcrumbs = asBreadcrumbsToken({
 
 const vitalProductButtons = {
   WhereToBuy: asButtonToken({
-    ...vitalButtons.WhereToBuyWithoutIcon,
+    ...vitalButton.WhereToBuyWithoutIcon,
     Spacing: {
-      ...vitalButtons.WhereToBuyWithoutIcon.Spacing,
+      ...vitalButton.WhereToBuyWithoutIcon.Spacing,
       Wrapper: 'p-3',
     },
     Theme: {
-      ...vitalButtons.WhereToBuyWithoutIcon.Theme,
+      ...vitalButton.WhereToBuyWithoutIcon.Theme,
       Wrapper: as(
         'bg-interactive-primary-active hover:bg-interactive-primary-hover rounded',
         vitalColor.TextWhite,

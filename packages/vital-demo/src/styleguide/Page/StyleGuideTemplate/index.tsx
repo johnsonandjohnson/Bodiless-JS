@@ -17,6 +17,7 @@ import { Accordion } from './Accordion';
 import { Border } from './Border';
 import { Buttons } from './Buttons';
 import { Card } from './Card';
+import { Carousel } from './Carousel';
 import { Color } from './Color';
 import { ContentListing, ContentListingMultiple } from './ContentListing';
 import { Editors, EditorsMonoFont } from './Editors';
@@ -30,7 +31,6 @@ import { Spacing } from './Spacing';
 import { Table } from './Table';
 import { Typography } from './Typography';
 import { Video } from './Video';
-
 import { Section } from './Section';
 
 export const VitalDemoStyleGuideTemplate = {
@@ -39,6 +39,7 @@ export const VitalDemoStyleGuideTemplate = {
   Border,
   Buttons,
   Card,
+  Carousel,
   Color,
   ContentListing,
   ContentListingMultiple,

@@ -66,6 +66,36 @@ exports[`Spacing Matches snapshot for MarginXSmall 1`] = `
 />
 `;
 
+exports[`Spacing Matches snapshot for PaddingBottomLarge 1`] = `
+<div
+  className="pb-24px md:pb-36px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for PaddingBottomMedium 1`] = `
+<div
+  className="pb-20px md:pb-24px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for PaddingBottomSmall 1`] = `
+<div
+  className="pb-16px md:pb-20px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for PaddingBottomXLarge 1`] = `
+<div
+  className="pb-36px md:pb-48px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for PaddingBottomXSmall 1`] = `
+<div
+  className="pb-8px md:pb-16px"
+/>
+`;
+
 exports[`Spacing Matches snapshot for PaddingLarge 1`] = `
 <div
   className="p-24px md:p-36px"

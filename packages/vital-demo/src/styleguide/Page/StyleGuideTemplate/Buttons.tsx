@@ -18,91 +18,101 @@ import {
   replaceWith,
   on,
   varyDesigns,
-  addProps
 } from '@bodiless/fclasses';
-import { ButtonClean, vitalButtons } from '@bodiless/vital-buttons';
-import { asFluidToken, vitalTypography } from '@bodiless/vital-elements';
+import { ButtonClean, vitalButton } from '@bodiless/vital-button';
+import { asFluidToken } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
-import { LinkClean, vitalLink } from '@bodiless/vital-link';
+// import { LinkClean, vitalLink } from '@bodiless/vital-link';
 import { withDefaultContent } from '@bodiless/data';
 import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
 const label = {
-  buttontext: { text: 'Button Label' },
+  buttontext: { text: 'BUTTON' },
 };
 
 const Default = on(ButtonClean)(
-  vitalButtons.Default,
+  vitalButton.Plain,
   withDefaultContent(label),
 );
 
-// Generate the Button Varations
-const ButtonStyleVariations = varyDesigns(
+const DisabledButtonStyleVariations = varyDesigns(
   {
-    Primary: vitalButtons.Primary,
-    Secondary: vitalButtons.Secondary,
-    PrimarySelected: vitalButtons.PrimarySelected,
-    SecondarySelected: vitalButtons.SecondarySelected,
-  },
-  {
-    '': '', // vary on itself and produce default button variation
-    AsDisabled: vitalButtons.WithDisabled,
-    WithArrow: vitalButtons.WithArrow,
+    PrimaryDisabled: vitalButton.PrimaryDisabled,
+    SecondaryDisabled: vitalButton.SecondaryDisabled,
+    TertiaryDisabled: vitalButton.TertiaryDisabled,
   },
   {
     '': Default
   },
 );
 
-// Generate the Link Varations
-const LinkVariations = varyDesigns(
+const ButtonStyleVariations = varyDesigns(
   {
-    Default: vitalLink.Default,
+    Primary: vitalButton.WithPrimaryStyle,
+    Secondary: vitalButton.WithSecondaryStyle,
+    Tertiary: vitalButton.WithTertiaryStyle,
   },
   {
-    '': '', // vary on itself and produce plain link variation
-    External: vitalLink.Default,
-    PDF: vitalLink.Default,
+    '': '', // vary on itself and produce default button variation
+    // WithArrow: vitalButton.WithArrow,
   },
   {
-    Link: on(LinkClean)(
-      vitalTypography.Link,
-      addProps({ children: 'Lorem Ipsum' }),
-    ),
+    '': Default
   },
 );
 
+// SAVING FOR FUTURE // Generate the Link Varations
+// const LinkVariations = varyDesigns(
+//   {
+//     Default: vitalLink.Default,
+//     Primary: vitalLink.PrimaryLink,
+//   },
+//   {
+//     '': '', // vary on itself and produce plain link variation
+//     External: vitalLink.Default,
+//     PDF: vitalLink.Default,
+//   },
+//   {
+//     Link: on(LinkClean)(
+//       vitalTypography.Link,
+//       addProps({ children: 'Lorem Ipsum' }),
+//     ),
+//   },
+// );
+
 const DemoFlowContainer = asFluidToken({
   Components: {
-    ...LinkVariations,
-    Default,
+    // ...LinkVariations,
+    // Default,
     ...ButtonStyleVariations,
+    ...DisabledButtonStyleVariations,
   },
 });
 
 const StyleGuideColumns = asFluidToken({
   ...vitalStyleGuideExamples.Default,
   Layout: {
-    Wrapper: 'flex flex-wrap gap-20',
+    Wrapper: 'flex flex-wrap gap-28',
+    ItemContent: 'flex',
   },
 });
 
-const data = {
-  examples$DefaultPDFLink: { href: '/files/pages/styleguide/buttons/test.pdf' },
-  examples$DefaultExternalLink: { href: 'https://www.example.com/' },
-  examples$PrimaryPDFLink: { href: '/files/pages/styleguide/buttons/test.pdf' },
-  examples$PrimaryExternalLink: { href: 'https://www.example.com/' },
-};
+// const data = {
+//   examples$DefaultPDFLink: { href: '/files/pages/styleguide/buttons/test.pdf' },
+//   examples$DefaultExternalLink: { href: 'https://www.example.com/' },
+//   examples$PrimaryPDFLink: { href: '/files/pages/styleguide/buttons/test.pdf' },
+//   examples$PrimaryExternalLink: { href: 'https://www.example.com/' },
+// };
 
 export const Buttons = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
   Meta: flowHoc.meta.term('Token')('Buttons'),
   Content: {
     Title: replaceWith(() => <>Buttons</>),
-    Description: replaceWith(() => <>The following are examples of Vital Links & Buttons.</>),
+    Description: replaceWith(() => <>The following are examples of Vital Buttons.</>),
     Examples: on(StyleGuideExamplesClean)(
       StyleGuideColumns,
       DemoFlowContainer,
-      withDefaultContent(data),
+      // withDefaultContent(data),
     ),
   },
 });
