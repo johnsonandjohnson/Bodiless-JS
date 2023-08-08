@@ -15,6 +15,7 @@
 import { asHeaderToken } from '@bodiless/vital-layout';
 import { vitalHeaderBase } from '@bodiless/vital-layout/lib/base';
 import { LinkClean, vitalLink, asLinkToken } from '@bodiless/vital-link';
+import { withoutHydration } from '@bodiless/hydration';
 import { asLanguageSelector, withLanguageNode } from '@bodiless/i18n';
 import {
   addProps,
@@ -35,6 +36,15 @@ export const asLanguageSelectorLink = on(LinkClean)(
 const Default = asHeaderToken(
   vitalHeaderBase.Default,
   vitalHeaderBase.WithLanguageSelector,
+  {
+    Core: {
+      /**
+       * To address the performance issues we disabled the hydration for the menus.
+       * @TODO: address by converting js functionality to css only.
+       */
+      _: withoutHydration(),
+    },
+  },
   {
     Schema: {
       _: withLanguageNode,

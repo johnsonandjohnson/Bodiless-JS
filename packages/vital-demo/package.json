@@ -67,6 +67,7 @@
     "@bodiless/vital-table": "^1.0.0-rc.42",
     "@bodiless/vital-templates": "^1.0.0-rc.42",
     "@bodiless/vital-youtube": "^1.0.0-rc.42",
+    "@bodiless/hydration": "^1.0.0-rc.42",
     "lodash": "^4.17.19",
     "tailwindcss": "^3.0.23"
   }

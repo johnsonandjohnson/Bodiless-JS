@@ -15,8 +15,16 @@
 import { asAccordionToken } from '@bodiless/vital-accordion';
 import { addProps } from '@bodiless/fclasses';
 import { vitalAccordionBase } from '@bodiless/vital-accordion/lib/base';
+import { withoutHydration } from '@bodiless/hydration';
 
 const Default = asAccordionToken(vitalAccordionBase.Default, {
+  Core: {
+    /**
+     * To address the performance issues we disabled the hydration for the menus.
+     * @TODO: address by converting js functionality to css only.
+     */
+    _: withoutHydration(),
+  },
   Behavior: {
     Wrapper: addProps({ 'data-shadowed-by': 'vital-demo:Accordion' }),
   },
