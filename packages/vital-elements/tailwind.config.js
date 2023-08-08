@@ -100,7 +100,7 @@ const twConfig = {
         'neutrals-white': '#FFFFFF',
         'neutrals-lightest-grey': '#F8F8F8',
         'neutrals-light-grey': '#BFBFBF',
-        'neutrals-neutrals-grey': '#999999',
+        'neutrals-grey': '#999999',
         'neutrals-dark-grey': '#616161',
         'neutrals-darkest-grey': '#2B2B2B',
         'neutrals-black': '#000000',
