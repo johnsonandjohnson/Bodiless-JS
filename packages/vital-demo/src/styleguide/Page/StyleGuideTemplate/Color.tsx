@@ -51,6 +51,7 @@ const BaseTextVariation = {
   '': on(Span)(
     'w-[100px] h-[100px]',
     'block',
+    'text-24.2px',
     addProps({children: 'Text'}),
   ),
 };
@@ -64,9 +65,9 @@ const TextVariations = {
   TextInteractiveDarkThemeFocus: 'text-kenvue-green-tint-60',
   TextInteractiveLightThemeDisabled: vitalColor.TextInteractiveLightThemeDisabled,
   BorderInteractiveLightThemeFocus: 'text-kenvue-green-shade-80',
-  TextInteractiveLightThemeFocus: vitalColor.TextInteractiveLightThemeFocus,
+  TextInteractiveLightThemeFocus: 'text-kenvue-green-shade-80',
   TextInteractiveLightThemePressed: 'text-kenvue-green-shade-60',
-  TextDarkThemeBase: as(vitalColor.TextDarkThemeBase, vitalColor.BackgroundInteractiveLightThemeIdle, 'p-2'),
+  TextDarkThemeBase: as(vitalColor.TextDarkThemeBase, vitalColor.BackgroundInteractiveLightThemeDisabled, 'p-2'),
   TextLightThemeBase: vitalColor.TextLightThemeBase,
   TextInteractiveLightThemeHover: 'text-kenvue-green-shade-80',
 };
