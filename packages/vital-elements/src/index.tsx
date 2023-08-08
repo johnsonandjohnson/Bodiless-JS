@@ -35,7 +35,5 @@ export * from './components/ProductCardElement';
 export * from './components/ScrollIndicatorElement';
 export * from './components/Spacing';
 export * from './components/TextDecoration';
-export * from './components/KnapsackDemoElement';
-export { default as vitalScrollIndicatorElement } from './generated/vitalScrollIndicatorElement';
 export * from './components/Typography';
 export * from './util';
