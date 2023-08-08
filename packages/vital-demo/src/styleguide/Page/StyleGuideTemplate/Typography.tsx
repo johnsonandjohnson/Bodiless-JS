@@ -14,12 +14,10 @@
 
 import React from 'react';
 import {
-  as,
   flowHoc,
   replaceWith,
   on,
   Div,
-  A,
   withDesign,
   varyDesigns,
 } from '@bodiless/fclasses';
@@ -27,8 +25,7 @@ import { EditorPlainClean, vitalEditorPlain } from '@bodiless/vital-editors';
 import { asFluidToken, vitalTypography } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { withParent } from '@bodiless/core';
-import { withDefaultContent, withNodeKey } from '@bodiless/data';
-import { vitalLink } from '@bodiless/vital-link';
+import { withDefaultContent } from '@bodiless/data';
 import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
 const BaseVariation = {
@@ -65,26 +62,9 @@ const vitalTypographyVariations = varyDesigns(
   TypographyVariations,
 );
 
-// TO DO bring in Component/Link/Text
-const LinkVariation = {
-  Link: on(EditorPlainClean)(
-    vitalEditorPlain.Default,
-    withParent(A),
-    withDesign({
-      Parent: as(
-        vitalTypography.Link,
-        vitalLink.Default,
-        vitalLink.Sidecar,
-      )
-    }),
-    withNodeKey('linktext'),
-  ),
-};
-
 const vitalTypographyFlowContainer = asFluidToken({
   Components: {
     ...vitalTypographyVariations,
-    ...LinkVariation,
   },
 });
 
@@ -108,8 +88,6 @@ const data = {
   examples$BodySmallUnderlined: { text: 'An example of the BodySmallUnderlined' },
   examples$BodySmallBold: { text: 'An example of the BodySmallBold' },
   examples$BodySmallBoldUnderlined: { text: 'An example of the BodySmallBoldUnderlined' },
-  examples$Link$linktext: { text: 'An example of the Link' },
-  examples$Link: { href: '/test/' },
 };
 
 export const Typography = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
