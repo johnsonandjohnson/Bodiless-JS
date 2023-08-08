@@ -151,7 +151,10 @@ const SecondaryDisabled = asButtonToken(
   WithDisabled,
   {
     Theme: {
-      Wrapper: vitalButtonTokens.SecondaryBorderLightThemeDisabled,
+      Wrapper: as(
+        vitalButtonTokens.SecondaryBorderLightThemeDisabled,
+        vitalButtonTokens.BorderWidthButton,
+      ),
       Body: vitalButtonTokens.SecondaryTextLightThemeDisabled,
     }
   }
