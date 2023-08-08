@@ -12,4 +12,4 @@
  * limitations under the License.
  */
 
-export { default as vitalButtonElement } from './tokens';
+export { default as vitalButtonTokens } from './tokens';

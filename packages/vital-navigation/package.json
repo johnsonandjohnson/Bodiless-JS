@@ -37,7 +37,7 @@
     "@bodiless/data": "^1.0.0-rc.42",
     "@bodiless/fclasses": "^1.0.0-rc.42",
     "@bodiless/navigation": "^1.0.0-rc.42",
-    "@bodiless/vital-buttons": "^1.0.0-rc.42",
+    "@bodiless/vital-button": "^1.0.0-rc.42",
     "@bodiless/vital-editors": "^1.0.0-rc.42",
     "@bodiless/vital-elements": "^1.0.0-rc.42",
     "@bodiless/vital-link": "^1.0.0-rc.42",

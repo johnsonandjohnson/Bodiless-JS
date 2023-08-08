@@ -687,6 +687,17 @@ blocks:
       rootFontSize: 16px
 demos:
   byId:
+    '-Dp30sC5xl':
+      data:
+        props:
+          Tertiary: true
+        slots: {}
+      description: A Tertiary Button
+      id: '-Dp30sC5xl'
+      patternId: button
+      templateId: bodiless-6GKNPvcRI1
+      title: Tertiary
+      type: data
     07HJPaXqRQ:
       data:
         props:
@@ -760,6 +771,17 @@ demos:
       templateId: bodiless-6GKNPvcRI9
       title: Background Primary
       type: data
+    MZRAla9YAT:
+      data:
+        props:
+          PrimaryDisabled: true
+        slots: {}
+      description: A primary disabled button
+      id: MZRAla9YAT
+      patternId: button
+      templateId: bodiless-6GKNPvcRI1
+      title: Primary Disables
+      type: data
     MecoUEAtY3:
       data:
         props:
@@ -773,6 +795,29 @@ demos:
       templateId: bodiless-6GKNPvcRI9
       title: Text Primary
       type: data
+    QClm5U_sxR:
+      data:
+        props:
+          Secondary: false
+          SecondaryDisabled: true
+        slots: {}
+      description: A Secondary Disabled Button
+      id: QClm5U_sxR
+      patternId: button
+      templateId: bodiless-6GKNPvcRI1
+      title: Secondary Disabled
+      type: data
+    RpJiPyPB6h:
+      data:
+        props:
+          Secondary: true
+        slots: {}
+      description: A Secondary Button
+      id: RpJiPyPB6h
+      patternId: button
+      templateId: bodiless-6GKNPvcRI1
+      title: Secondary
+      type: data
     SjJMO5dEv_:
       data:
         extras:
@@ -781,11 +826,11 @@ demos:
         props:
           Primary: true
         slots: {}
-      description: A description
+      description: A Primary Button
       id: SjJMO5dEv_
       patternId: button
       templateId: bodiless-6GKNPvcRI1
-      title: Primary Button
+      title: Primary
       type: data
     Tb6vk8upkF:
       data:
@@ -914,6 +959,17 @@ demos:
       patternId: card
       templateId: bodiless-Kmd8Nb3inj
       title: New Variation
+      type: data
+    wWaUNg2fcI:
+      data:
+        props:
+          TertiaryDisabled: true
+        slots: {}
+      description: A tertiary disabled button
+      id: wWaUNg2fcI
+      patternId: button
+      templateId: bodiless-6GKNPvcRI1
+      title: Tertiary Disabled
       type: data
   settings: {}
 settings:

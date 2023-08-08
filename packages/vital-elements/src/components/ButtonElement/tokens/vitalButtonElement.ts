@@ -12,6 +12,23 @@
  * limitations under the License.
  */
 
-import vitalButtonElement from '../../../generated/vitalButtonElement';
+import { vitalTypography } from '../../Typography';
+import { asTokenGroup } from '../../../util';
+import generatedTokens, { meta } from '../../../generated/vitalButtonElement';
 
-export default vitalButtonElement;
+const manualTokensandOverrides = asTokenGroup(meta)({
+  BorderPaddingButton: 'px-24px py-16px',
+  BorderWidthButton: 'border-solid border-1px',
+  // TODO Needs work shouldn't have defined
+  ShadowButtonFocus: 'focus:drop-shadow-button focus:outline-none active:drop-shadow-none',
+  BorderShadowButtonFocus: 'focus:shadow-button focus:outline-none active:shadow-none',
+  TextButtonDefault: vitalTypography.BodyBold,
+
+  SecondaryTextLightThemeHover: 'group-hover:text-kenvue-green-shade-80',
+  SecondaryTextLightThemePressed: 'group-active:text-kenvue-green-shade-60',
+});
+
+export default {
+  ...generatedTokens,
+  ...manualTokensandOverrides,
+};

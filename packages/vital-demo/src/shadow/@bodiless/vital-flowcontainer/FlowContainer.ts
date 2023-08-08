@@ -16,13 +16,13 @@ import { asFluidToken } from '@bodiless/vital-elements';
 import { FlowContainerClean } from '@bodiless/vital-flowcontainer';
 import { vitalFlowContainerBase } from '@bodiless/vital-flowcontainer/lib/base';
 import { vitalImageFlowContainer } from '@bodiless/vital-image';
-import {vitalEditorsFlowContainer } from '@bodiless/vital-editors';
+import { vitalEditorsFlowContainer } from '@bodiless/vital-editors';
 import { vitalYouTubeFlowContainer } from '@bodiless/vital-youtube';
 import { vitalListFlowContainer } from '@bodiless/vital-list';
 import { vitalCardFlowContainer } from '@bodiless/vital-card';
 import { vitalTableFlowContainer } from '@bodiless/vital-table';
 import { vitalAccordionFlowContainer } from '@bodiless/vital-accordion';
-import { vitalButtonFlowContainer } from '@bodiless/vital-buttons';
+import { vitalButtonFlowContainer } from '@bodiless/vital-button';
 import { addProps, on } from '@bodiless/fclasses';
 
 /**
