@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CarouselDot Tokens Matches snapshot for Default 1`] = `
+<div
+  data-no-hydrate={true}
+  id="63a9f0ea7bb98050796b649e85481845"
+  style={
+    Object {
+      "display": "contents",
+    }
+  }
+>
+  <div
+    className="indicator pe-2"
+    data-index={0}
+    tabIndex="-1"
+  >
+    <span
+      className="bg-kenvue-neutrals-light-grey rounded-full border-none dot block w-[8px] h-[8px]"
+    />
+  </div>
+</div>
+`;
