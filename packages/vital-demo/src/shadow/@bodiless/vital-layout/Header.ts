@@ -21,8 +21,23 @@ import {
   addProps,
   on,
   startWith,
-  Div
+  Div,
+  Fragment,
+  replaceWith,
 } from '@bodiless/fclasses';
+
+/**
+ * To address the performance issues we disabled the Burger Menu
+ * @TODO: address by converting js functionality to css only.
+ */
+const DemoHeaderBase = asHeaderToken({
+  ...vitalHeaderBase.Default,
+  Components: {
+    ...vitalHeaderBase.Default.Components,
+    BurgerMenu: replaceWith(Fragment),
+    UtilityMenu: replaceWith(Fragment),
+  },
+});
 
 export const asLanguageSelectorLink = on(LinkClean)(
   asLinkToken({
@@ -34,7 +49,7 @@ export const asLanguageSelectorLink = on(LinkClean)(
 );
 
 const Default = asHeaderToken(
-  vitalHeaderBase.Default,
+  DemoHeaderBase,
   vitalHeaderBase.WithLanguageSelector,
   {
     Core: {
@@ -44,8 +59,6 @@ const Default = asHeaderToken(
        */
       _: withoutHydration(),
     },
-  },
-  {
     Schema: {
       _: withLanguageNode,
     },
