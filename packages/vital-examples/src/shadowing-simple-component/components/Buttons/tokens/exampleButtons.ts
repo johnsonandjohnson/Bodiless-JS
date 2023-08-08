@@ -1,6 +1,6 @@
 import { as } from '@bodiless/fclasses';
-import { asButtonToken } from '@bodiless/vital-buttons';
-import { vitalButtonsBase } from '@bodiless/vital-buttons/src/base';
+import { asButtonToken } from '@bodiless/vital-button';
+import { vitalButtonBase } from '@bodiless/vital-button/src/base';
 import {
   vitalColor,
   vitalFontSize,
@@ -13,17 +13,17 @@ import {
  * replaced.
  * Note that the order is essential, since — as we are working with JavaScript
  * objects at the end of the day — the keys that come later in the object's
- * definition overwrite the ones we inherit from `vitalButtonsBase.Primary`.
+ * definition overwrite the ones we inherit from `vitalButtonBase.Primary`.
  *
  * The `asButtonToken` function helps us with the tokens convention, creating
  * the auto-complete for the `ButtonClean` component.
  */
 const WithPrimary = asButtonToken({
-  ...vitalButtonsBase.Primary,
+  ...vitalButtonBase.WithPrimaryStyle,
   Theme: {
     // Spreading `Theme` here prevents unwanted changes,
     // keeping all tokens other than the wrappers.
-    ...vitalButtonsBase.Primary.Theme,
+    ...vitalButtonBase.WithPrimaryStyle.Theme,
     Wrapper: as(
       // vital-elements tokens
       vitalColor.BgPrimaryBrand,
@@ -49,9 +49,9 @@ const WithPrimary = asButtonToken({
  * the auto-complete for the `ButtonClean` component.
  */
 const WithBigButton = asButtonToken({
-  ...vitalButtonsBase.Default,
+  ...vitalButtonBase.Plain,
   Spacing: {
-    ...vitalButtonsBase.Default.Spacing,
+    ...vitalButtonBase.Plain.Spacing,
     Wrapper: 'px-12 py-6',
   },
 });
@@ -59,11 +59,11 @@ const WithBigButton = asButtonToken({
 
 /// [export-default]
 /**
- * Exporting the `vitalButtonsBase` with our custom Primary with hover, and
+ * Exporting the `vitalButtonBase` with our custom Primary with hover, and
  * our new big variation.
  */
 export default {
-  ...vitalButtonsBase,
+  ...vitalButtonBase,
   WithPrimary,
   WithBigButton,
 };
