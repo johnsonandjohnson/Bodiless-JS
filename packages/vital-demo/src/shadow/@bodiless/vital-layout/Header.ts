@@ -27,11 +27,15 @@ import {
 } from '@bodiless/fclasses';
 
 /**
- * To address the performance issues we disabled the Burger Menu
+ * To address the performance issues we disabled the Burger Menu and Hydration for Header.
  * @TODO: address by converting js functionality to css only.
  */
 const DemoHeaderBase = asHeaderToken({
   ...vitalHeaderBase.Default,
+  Core: {
+    ...vitalHeaderBase.Default.Core,
+    _: withoutHydration(),
+  },
   Components: {
     ...vitalHeaderBase.Default.Components,
     BurgerMenu: replaceWith(Fragment),
@@ -52,13 +56,6 @@ const Default = asHeaderToken(
   DemoHeaderBase,
   vitalHeaderBase.WithLanguageSelector,
   {
-    Core: {
-      /**
-       * To address the performance issues we disabled the hydration for the menus.
-       * @TODO: address by converting js functionality to css only.
-       */
-      _: withoutHydration(),
-    },
     Schema: {
       _: withLanguageNode,
     },
