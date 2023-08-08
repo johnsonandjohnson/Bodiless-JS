@@ -21,6 +21,7 @@ import {
   Span,
   varyDesigns,
   addProps,
+  as,
 } from '@bodiless/fclasses';
 import { asFluidToken, vitalColor } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
@@ -35,14 +36,14 @@ const BaseColorVariation = {
 
 const ColorVariations = {
   BackgroundInteractiveLightThemeIdle: vitalColor.BackgroundInteractiveLightThemeIdle,
-  BackgroundInteractiveLightThemeHover: vitalColor.BackgroundInteractiveLightThemeHover,
-  BackgroundInteractiveLightThemeFocus: vitalColor.BackgroundInteractiveLightThemeFocus,
-  BackgroundInteractiveLightThemePressed: vitalColor.BackgroundInteractiveLightThemePressed,
+  BackgroundInteractiveLightThemeHover: 'bg-kenvue-green-shade-80',
+  BackgroundInteractiveLightThemeFocus: 'bg-kenvue-green-shade-80',
+  BackgroundInteractiveLightThemePressed: 'bg-kenvue-green-shade-60',
   BackgroundInteractiveLightThemeDisabled: vitalColor.BackgroundInteractiveLightThemeDisabled,
   BackgroundInteractiveDarkThemeIdle: vitalColor.BackgroundInteractiveDarkThemeIdle,
-  BackgroundInteractiveDarkThemeHover: vitalColor.BackgroundInteractiveDarkThemeHover,
-  BackgroundInteractiveDarkThemeFocus: vitalColor.BackgroundInteractiveDarkThemeFocus,
-  BackgroundInteractiveDarkThemePressed: vitalColor.BackgroundInteractiveDarkThemePressed,
+  BackgroundInteractiveDarkThemeHover: 'bg-kenvue-green-tint-60',
+  BackgroundInteractiveDarkThemeFocus: 'bg-kenvue-green-tint-60',
+  BackgroundInteractiveDarkThemePressed: 'bg-kenvue-green-tint-20',
   BackgroundInteractiveDarkThemeDisabled: vitalColor.BackgroundInteractiveDarkThemeDisabled,
 };
 
@@ -57,17 +58,17 @@ const BaseTextVariation = {
 const TextVariations = {
   TextInteractiveDarkThemeIdle: vitalColor.TextInteractiveDarkThemeIdle,
   TextInteractiveLightThemeIdle: vitalColor.TextInteractiveLightThemeIdle,
-  TextInteractiveDarkThemeHover: vitalColor.TextInteractiveDarkThemeHover,
+  TextInteractiveDarkThemeHover: 'text-kenvue-green-tint-60',
   TextInteractiveDarkThemeDisabled: vitalColor.TextInteractiveDarkThemeDisabled,
-  TextInteractiveDarkThemePressed: vitalColor.TextInteractiveDarkThemePressed,
-  TextInteractiveDarkThemeFocus: vitalColor.TextInteractiveDarkThemeFocus,
+  TextInteractiveDarkThemePressed: 'text-kenvue-green-tint-20',
+  TextInteractiveDarkThemeFocus: 'text-kenvue-green-tint-60',
   TextInteractiveLightThemeDisabled: vitalColor.TextInteractiveLightThemeDisabled,
-  BorderInteractiveLightThemeFocus: vitalColor.BorderInteractiveLightThemeFocus,
+  BorderInteractiveLightThemeFocus: 'text-kenvue-green-shade-80',
   TextInteractiveLightThemeFocus: vitalColor.TextInteractiveLightThemeFocus,
-  TextInteractiveLightThemePressed: vitalColor.TextInteractiveLightThemePressed,
-  TextDarkThemeBase: vitalColor.TextDarkThemeBase,
+  TextInteractiveLightThemePressed: 'text-kenvue-green-shade-60',
+  TextDarkThemeBase: as(vitalColor.TextDarkThemeBase, vitalColor.BackgroundInteractiveLightThemeIdle, 'p-2'),
   TextLightThemeBase: vitalColor.TextLightThemeBase,
-  TextInteractiveLightThemeHover: vitalColor.TextInteractiveLightThemeHover,
+  TextInteractiveLightThemeHover: 'text-kenvue-green-shade-80',
 };
 
 // const SpecialColors = {
