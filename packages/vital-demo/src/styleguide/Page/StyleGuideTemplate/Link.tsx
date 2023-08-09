@@ -14,45 +14,25 @@
 
 import React from 'react';
 import {
-  as,
   flowHoc,
   replaceWith,
   on,
-  A,
-  withDesign,
-  Span,
+  withProps,
 } from '@bodiless/fclasses';
-import { EditorPlainClean, vitalEditorPlain } from '@bodiless/vital-editors';
-import { asFluidToken, vitalLinkElement } from '@bodiless/vital-elements';
+import { asFluidToken } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
-import { withParent } from '@bodiless/core';
-import { withDefaultContent, withNodeKey } from '@bodiless/data';
-import { vitalLink } from '@bodiless/vital-link';
+import { LinkClean, vitalLink } from '@bodiless/vital-link';
 import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
 const LinkVariation = {
-  Link: on(EditorPlainClean)(
-    vitalEditorPlain.Default,
-    withParent(A),
-    withDesign({
-      Parent: as(
-        vitalLink.Default,
-        vitalLink.Sidecar,
-      )
-    }),
-    withNodeKey('linktext'),
+  Link: on(LinkClean)(
+    vitalLink.Default,
+    vitalLink.Sidecar,
+    withProps({ children: 'An example of the Link', href: '/test/' })
   ),
-  DisabledLink: on(EditorPlainClean)(
-    vitalEditorPlain.Default,
-    withParent(Span), // Changed to span to disable link
-    withDesign({
-      Parent: as(
-        vitalLink.Default,
-        vitalLink.Sidecar,
-        vitalLinkElement.TextLightThemeDisabled,
-      )
-    }),
-    withNodeKey('linktext'),
+  DisabledLink: on(LinkClean)(
+    vitalLink.Disabled,
+    withProps({ children: 'An example of the Disabled Link', href: '/test/' })
   ),
 };
 
@@ -62,13 +42,6 @@ const vitalLinkFlowContainer = asFluidToken({
   },
 });
 
-const data = {
-  examples$Link$linktext: { text: 'An example of the Link' },
-  examples$Link: { href: '/test/' },
-  examples$DisabledLink$linktext: { text: 'An example of the Link' },
-  examples$DisabledLink: { href: '/test/' },
-};
-
 export const Link = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
   Meta: flowHoc.meta.term('Token')('Link'),
   Content: {
@@ -77,7 +50,6 @@ export const Link = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
     Examples: on(StyleGuideExamplesClean)(
       vitalStyleGuideExamples.Default,
       vitalLinkFlowContainer,
-      withDefaultContent(data),
     ),
   },
 });

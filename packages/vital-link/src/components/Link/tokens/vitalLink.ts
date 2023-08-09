@@ -20,6 +20,7 @@ import {
   as,
   flowIf,
   on,
+  replaceWith,
 } from '@bodiless/fclasses';
 import { withSidecarNodes, withNodeKey } from '@bodiless/data';
 import { vitalLinkElement } from '@bodiless/vital-elements';
@@ -91,6 +92,18 @@ const Default = asLinkToken(Base, {
   },
 });
 
+/**
+   * Token which produces a Disabled VitalDS link.
+   */
+const Disabled = asLinkToken(Base, {
+  Components: {
+    Wrapper: replaceWith(Span)
+  },
+  Theme: {
+    Wrapper: vitalLinkElement.TextDarkThemeDisabled,
+  },
+});
+
 // PrimaryLink is deprecated but saving if we want hover arrow option in future
 // const PrimaryLink = asLinkToken(Default, {
 //   Theme: {
@@ -125,6 +138,10 @@ export interface VitalLink {
    */
   Default: LinkToken,
   /**
+   * Disabled Link Token.
+   */
+  Disabled: LinkToken
+  /**
    * Add External Icon add end of the link
    */
   WithExternalStyles: LinkToken,
@@ -147,6 +164,7 @@ export interface VitalLink {
 const vitalLink: VitalLink = {
   Base,
   Default,
+  Disabled,
   WithExternalStyles,
   WithDownloadStyles,
   Sidecar,
