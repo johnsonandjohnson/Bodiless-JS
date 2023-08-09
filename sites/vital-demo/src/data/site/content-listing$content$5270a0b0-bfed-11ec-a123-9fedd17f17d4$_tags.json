@@ -2,7 +2,17 @@
   "tags": [
     {
       "id": "afff9ba0-8808-461f-abd9-bcf3b741968e",
-      "name": "Components"
+      "name": "Components",
+      "value": "afff9ba0-8808-461f-abd9-bcf3b741968e",
+      "label": "Components"
+    },
+    {
+      "value": "Vital 1.0",
+      "label": "Vital 1.0"
+    },
+    {
+      "value": "Vital 2.0",
+      "label": "Vital 2.0"
     }
   ]
 }
