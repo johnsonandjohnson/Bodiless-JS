@@ -62,25 +62,25 @@ exports[`Typography Matches snapshot for BodyRegular 1`] = `
 
 exports[`Typography Matches snapshot for BodySmallBold 1`] = `
 <span
-  className="text-11.7px lg:text-13.3px leading-6 font-bold font-2"
+  className="text-11.67px lg:text-13.33px leading-6 font-bold font-2"
 />
 `;
 
 exports[`Typography Matches snapshot for BodySmallBoldUnderlined 1`] = `
 <span
-  className="text-11.7px lg:text-13.3px leading-6 font-bold font-2"
+  className="text-11.67px lg:text-13.33px leading-6 font-bold underline font-2"
 />
 `;
 
 exports[`Typography Matches snapshot for BodySmallRegular 1`] = `
 <span
-  className="text-11.7px lg:text-13.3px leading-6 font-normal font-2"
+  className="text-11.67px lg:text-13.33px leading-6 font-normal font-2"
 />
 `;
 
 exports[`Typography Matches snapshot for BodySmallUnderlined 1`] = `
 <span
-  className="text-11.7px lg:text-13.3px leading-6 font-normal font-2"
+  className="text-11.67px lg:text-13.33px leading-6 font-normal underline font-2"
 />
 `;
 
@@ -104,7 +104,7 @@ exports[`Typography Matches snapshot for Eyebrow 1`] = `
 
 exports[`Typography Matches snapshot for EyebrowBold 1`] = `
 <span
-  className="text-11.7px lg:text-13.3px leading-6 font-bold font-2 uppercase"
+  className="text-11.67px lg:text-13.33px leading-6 font-bold font-2 uppercase"
 />
 `;
 
@@ -116,7 +116,7 @@ exports[`Typography Matches snapshot for EyebrowNoSpacing 1`] = `
 
 exports[`Typography Matches snapshot for EyebrowRegular 1`] = `
 <span
-  className="text-11.7px lg:text-13.3px leading-6 font-normal font-2 uppercase"
+  className="text-11.67px lg:text-13.33px leading-6 font-normal font-2 uppercase"
 />
 `;
 
@@ -200,13 +200,13 @@ exports[`Typography Matches snapshot for HeaderLink 1`] = `
 
 exports[`Typography Matches snapshot for HeadlineLarge 1`] = `
 <span
-  className="text-24.2px lg:text-27.6px leading-5 font-normal font-2"
+  className="text-24.19px lg:text-27.65px leading-5 font-normal font-2"
 />
 `;
 
 exports[`Typography Matches snapshot for HeadlineMedium 1`] = `
 <span
-  className="text-20.2px lg:text-23px leading-5 font-normal font-2"
+  className="text-20.16px lg:text-23.04px leading-5 font-normal font-2"
 />
 `;
 
@@ -218,13 +218,13 @@ exports[`Typography Matches snapshot for HeadlineSmall 1`] = `
 
 exports[`Typography Matches snapshot for HeadlineXLarge 1`] = `
 <span
-  className="text-29px lg:text-33.2px leading-5 font-normal font-2"
+  className="text-29.03px lg:text-33.18px leading-5 font-normal font-2"
 />
 `;
 
 exports[`Typography Matches snapshot for HeadlineXXLarge 1`] = `
 <span
-  className="text-34.8px lg:text-39.8px leading-5 font-normal font-2"
+  className="text-34.84px lg:text-39.81px leading-5 font-normal font-2"
 />
 `;
 
