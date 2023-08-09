@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "@bodiless/cli": "^1.0.0-rc.42",
+    "@bodiless/carousel": "^1.0.0-rc.42",
     "@bodiless/components": "^1.0.0-rc.42",
     "@bodiless/components-ui": "^1.0.0-rc.42",
     "@bodiless/core": "^1.0.0-rc.42",
@@ -49,7 +50,8 @@
     "@bodiless/richtext": "^1.0.0-rc.42",
     "@bodiless/richtext-ui": "^1.0.0-rc.42",
     "@bodiless/vital-accordion": "^1.0.0-rc.42",
-    "@bodiless/vital-buttons": "^1.0.0-rc.42",
+    "@bodiless/vital-carousel": "^1.0.0-rc.42",
+    "@bodiless/vital-button": "^1.0.0-rc.42",
     "@bodiless/vital-card": "^1.0.0-rc.42",
     "@bodiless/vital-content-listing": "^1.0.0-rc.42",
     "@bodiless/vital-editors": "^1.0.0-rc.42",
@@ -69,6 +71,7 @@
     "@bodiless/vital-youtube": "^1.0.0-rc.42",
     "@bodiless/hydration": "^1.0.0-rc.42",
     "lodash": "^4.17.19",
+    "pure-react-carousel": "^1.27.6",
     "tailwindcss": "^3.0.23"
   }
 }

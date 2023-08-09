@@ -25,7 +25,7 @@
     "@bodiless/page": "^1.0.0-rc.42",
     "@bodiless/schema-org": "^1.0.0-rc.42",
     "@bodiless/ui": "^1.0.0-rc.42",
-    "@bodiless/vital-buttons": "^1.0.0-rc.42",
+    "@bodiless/vital-button": "^1.0.0-rc.42",
     "@bodiless/vital-card": "^1.0.0-rc.42",
     "@bodiless/vital-demo": "^1.0.0-rc.42",
     "@bodiless/vital-editors": "^1.0.0-rc.42",

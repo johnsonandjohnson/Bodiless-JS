@@ -84,7 +84,7 @@ const content = {
 };
 
 export const Card = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
-  Meta: flowHoc.meta.term('Token')('Buttons'),
+  Meta: flowHoc.meta.term('Token')('Cards'),
   Content: {
     Title: replaceWith(() => <>Example Cards</>),
     Description: replaceWith(() => (

@@ -25,7 +25,7 @@ import { vitalTypography, asFluidToken } from '@bodiless/vital-elements';
 import {
   EditorPlainClean, vitalEditorPlain, RichTextClean, vitalRichText,
 } from '@bodiless/vital-editors';
-import { ButtonClean, vitalButtons } from '@bodiless/vital-buttons';
+import { ButtonClean, vitalButton } from '@bodiless/vital-button';
 import { LinkClean, vitalLink } from '@bodiless/vital-link';
 import { asCardToken, CardDescriptionPreview } from '../CardClean';
 import type { CardToken } from '../CardClean';
@@ -153,7 +153,7 @@ const WithPrimaryButton = asCardToken({
     CTALink: replaceWith(ButtonClean),
   },
   Theme: {
-    CTALink: as(vitalButtons.Primary, vitalButtons.WithArrow),
+    CTALink: as(vitalButton.WithPrimaryStyle)
   },
   Meta: extendMeta(
     flowHoc.meta.term('CTA Style')('Primary Button'),
@@ -167,7 +167,7 @@ const WithSecondaryButton = asCardToken({
     CTALink: replaceWith(ButtonClean),
   },
   Theme: {
-    CTALink: as(vitalButtons.Secondary, vitalButtons.WithArrow),
+    CTALink: as(vitalButton.WithSecondaryStyle)
   },
   Meta: extendMeta(
     flowHoc.meta.term('CTA Style')('Secondary Button'),

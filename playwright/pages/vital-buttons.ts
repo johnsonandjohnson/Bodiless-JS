@@ -21,44 +21,7 @@ export class VitalButtonsPage extends VitalPage {
     super('/styleguide/buttons/');
     this.vitalButtons = [
       {
-        id: 'DefaultLink',
-        type: VitalButtonType.DEFAULT
-      },
-      {
-        id: 'DefaultExternalLink',
-        type: VitalButtonType.EXTERNAL
-      },
-      {
-        id: 'DefaultPDFLink',
-        type: VitalButtonType.PDF
-      },
-      {
-        id: 'PrimaryLink',
-        type: VitalButtonType.DEFAULT
-      },
-      {
-        id: 'PrimaryExternalLink',
-        type: VitalButtonType.EXTERNAL
-      },
-      {
-        id: 'PrimaryPDFLink',
-        type: VitalButtonType.PDF
-      },
-      {
-        id: 'Default',
-        name: 'Default Button',
-        type: VitalButtonType.DEFAULT
-      },
-      {
         id: 'Primary',
-        type: VitalButtonType.DEFAULT
-      },
-      {
-        id: 'PrimaryAsDisabled',
-        type: VitalButtonType.DISABLED
-      },
-      {
-        id: 'PrimaryWithArrow',
         type: VitalButtonType.DEFAULT
       },
       {
@@ -66,37 +29,21 @@ export class VitalButtonsPage extends VitalPage {
         type: VitalButtonType.DEFAULT
       },
       {
-        id: 'SecondaryAsDisabled',
+        id: 'Tertiary',
+        type: VitalButtonType.DEFAULT
+      },
+      {
+        id: 'PrimaryDisabled',
         type: VitalButtonType.DISABLED
       },
       {
-        id: 'SecondaryWithArrow',
-        type: VitalButtonType.DEFAULT
-      },
-      {
-        id: 'PrimarySelected',
-        type: VitalButtonType.DEFAULT
-      },
-      {
-        id: 'PrimarySelectedAsDisabled',
+        id: 'SecondaryDisabled',
         type: VitalButtonType.DISABLED
       },
       {
-        id: 'PrimarySelectedWithArrow',
-        type: VitalButtonType.DEFAULT
-      },
-      {
-        id: 'SecondarySelected',
-        type: VitalButtonType.DEFAULT
-      },
-      {
-        id: 'SecondarySelectedAsDisabled',
+        id: 'TertiaryDisabled',
         type: VitalButtonType.DISABLED
       },
-      {
-        id: 'SecondarySelectedWithArrow',
-        type: VitalButtonType.DEFAULT
-      }
     ];
   }
 
@@ -115,7 +62,5 @@ export interface VitalButton extends VitalElement {
 
 export enum VitalButtonType {
   DEFAULT,
-  EXTERNAL,
-  PDF,
   DISABLED,
 }
