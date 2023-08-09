@@ -67,7 +67,8 @@ const TextVariations = {
   BorderInteractiveLightThemeFocus: 'text-kenvue-green-shade-80',
   TextInteractiveLightThemeFocus: 'text-kenvue-green-shade-80',
   TextInteractiveLightThemePressed: 'text-kenvue-green-shade-60',
-  TextDarkThemeBase: as(vitalColor.TextDarkThemeBase, vitalColor.BackgroundInteractiveLightThemeDisabled, 'p-2'),
+  // eslint-disable-next-line max-len
+  TextDarkThemeBase: as(vitalColor.TextDarkThemeBase, vitalColor.BackgroundInteractiveLightThemeDisabled, 'p-8px'),
   TextLightThemeBase: vitalColor.TextLightThemeBase,
   TextInteractiveLightThemeHover: 'text-kenvue-green-shade-80',
 };
