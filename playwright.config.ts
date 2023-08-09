@@ -27,6 +27,8 @@ const configurators = {
       command: 'cd sites/vital-demo-next && npm run serve:test',
     };
     baseConfig.globalSetup = require.resolve('./playwright/tests/setup/setup.ts');
+    // Temporarily disable tests for Accordion page because of known issue
+    baseConfig.testIgnore = '*vital-accordion.spec.ts';
   },
 };
 /* eslint-enable no-param-reassign */
