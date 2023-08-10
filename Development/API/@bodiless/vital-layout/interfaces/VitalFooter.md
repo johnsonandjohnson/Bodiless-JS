@@ -48,7 +48,7 @@ export default {
 
 #### Defined in
 
-[vital-layout/src/components/Footer/tokens/vitalFooter.ts:120](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/vital-layout/src/components/Footer/tokens/vitalFooter.ts#L120)
+[vital-layout/src/components/Footer/tokens/vitalFooter.ts:120](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/vital-layout/src/components/Footer/tokens/vitalFooter.ts#L120)
 
 ___
 
@@ -60,4 +60,4 @@ An extendable token to move rewards above footer on 2xl responsive viewports
 
 #### Defined in
 
-[vital-layout/src/components/Footer/tokens/vitalFooter.ts:124](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/vital-layout/src/components/Footer/tokens/vitalFooter.ts#L124)
+[vital-layout/src/components/Footer/tokens/vitalFooter.ts:124](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/vital-layout/src/components/Footer/tokens/vitalFooter.ts#L124)

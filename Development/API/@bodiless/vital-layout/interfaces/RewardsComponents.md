@@ -37,7 +37,7 @@ RECOMMEND TO NOT USE and marked as deprecated
 
 #### Defined in
 
-[vital-layout/src/components/Footer/Rewards/types.ts:30](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/vital-layout/src/components/Footer/Rewards/types.ts#L30)
+[vital-layout/src/components/Footer/Rewards/types.ts:30](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/vital-layout/src/components/Footer/Rewards/types.ts#L30)
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 #### Defined in
 
-[vital-layout/src/components/Footer/Rewards/types.ts:28](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/vital-layout/src/components/Footer/Rewards/types.ts#L28)
+[vital-layout/src/components/Footer/Rewards/types.ts:28](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/vital-layout/src/components/Footer/Rewards/types.ts#L28)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 #### Defined in
 
-[vital-layout/src/components/Footer/Rewards/types.ts:35](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/vital-layout/src/components/Footer/Rewards/types.ts#L35)
+[vital-layout/src/components/Footer/Rewards/types.ts:35](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/vital-layout/src/components/Footer/Rewards/types.ts#L35)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 #### Defined in
 
-[vital-layout/src/components/Footer/Rewards/types.ts:34](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/vital-layout/src/components/Footer/Rewards/types.ts#L34)
+[vital-layout/src/components/Footer/Rewards/types.ts:34](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/vital-layout/src/components/Footer/Rewards/types.ts#L34)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[vital-layout/src/components/Footer/Rewards/types.ts:33](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/vital-layout/src/components/Footer/Rewards/types.ts#L33)
+[vital-layout/src/components/Footer/Rewards/types.ts:33](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/vital-layout/src/components/Footer/Rewards/types.ts#L33)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 #### Defined in
 
-[vital-layout/src/components/Footer/Rewards/types.ts:32](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/vital-layout/src/components/Footer/Rewards/types.ts#L32)
+[vital-layout/src/components/Footer/Rewards/types.ts:32](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/vital-layout/src/components/Footer/Rewards/types.ts#L32)
 
 ___
 
@@ -97,7 +97,7 @@ ___
 
 #### Defined in
 
-[vital-layout/src/components/Footer/Rewards/types.ts:31](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/vital-layout/src/components/Footer/Rewards/types.ts#L31)
+[vital-layout/src/components/Footer/Rewards/types.ts:31](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/vital-layout/src/components/Footer/Rewards/types.ts#L31)
 
 ___
 
@@ -107,7 +107,7 @@ ___
 
 #### Defined in
 
-[vital-layout/src/components/Footer/Rewards/types.ts:29](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/vital-layout/src/components/Footer/Rewards/types.ts#L29)
+[vital-layout/src/components/Footer/Rewards/types.ts:29](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/vital-layout/src/components/Footer/Rewards/types.ts#L29)
 
 ___
 
@@ -117,4 +117,4 @@ ___
 
 #### Defined in
 
-[vital-layout/src/components/Footer/Rewards/types.ts:27](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/vital-layout/src/components/Footer/Rewards/types.ts#L27)
+[vital-layout/src/components/Footer/Rewards/types.ts:27](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/vital-layout/src/components/Footer/Rewards/types.ts#L27)

@@ -113,7 +113,7 @@
 
 #### Defined in
 
-[packages/bodiless-layouts/src/ComponentSelector/types.tsx:43](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/ComponentSelector/types.tsx#L43)
+[packages/bodiless-layouts/src/ComponentSelector/types.tsx:43](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/ComponentSelector/types.tsx#L43)
 
 ___
 
@@ -123,7 +123,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/ComponentSelector/componentSelectorForm.tsx:21](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/ComponentSelector/componentSelectorForm.tsx#L21)
+[packages/bodiless-layouts/src/ComponentSelector/componentSelectorForm.tsx:21](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/ComponentSelector/componentSelectorForm.tsx#L21)
 
 ___
 
@@ -133,7 +133,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/ComponentSelector/types.tsx:174](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/ComponentSelector/types.tsx#L174)
+[packages/bodiless-layouts/src/ComponentSelector/types.tsx:174](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/ComponentSelector/types.tsx#L174)
 
 ___
 
@@ -143,7 +143,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/ComponentSelector/types.tsx:24](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/ComponentSelector/types.tsx#L24)
+[packages/bodiless-layouts/src/ComponentSelector/types.tsx:24](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/ComponentSelector/types.tsx#L24)
 
 ___
 
@@ -153,7 +153,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/ComponentSelector/types.tsx:172](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/ComponentSelector/types.tsx#L172)
+[packages/bodiless-layouts/src/ComponentSelector/types.tsx:172](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/ComponentSelector/types.tsx#L172)
 
 ___
 
@@ -169,7 +169,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/ComponentSelector/types.tsx:70](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/ComponentSelector/types.tsx#L70)
+[packages/bodiless-layouts/src/ComponentSelector/types.tsx:70](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/ComponentSelector/types.tsx#L70)
 
 ___
 
@@ -185,7 +185,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/ComponentSelector/types.tsx:71](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/ComponentSelector/types.tsx#L71)
+[packages/bodiless-layouts/src/ComponentSelector/types.tsx:71](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/ComponentSelector/types.tsx#L71)
 
 ___
 
@@ -209,7 +209,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/deserializers/createFlowContainerItem.ts:28](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/deserializers/createFlowContainerItem.ts#L28)
+[packages/bodiless-layouts/src/deserializers/createFlowContainerItem.ts:28](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/deserializers/createFlowContainerItem.ts#L28)
 
 ___
 
@@ -227,7 +227,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/deserializers/createFlowContainerItem.ts:23](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/deserializers/createFlowContainerItem.ts#L23)
+[packages/bodiless-layouts/src/deserializers/createFlowContainerItem.ts:23](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/deserializers/createFlowContainerItem.ts#L23)
 
 ___
 
@@ -251,7 +251,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/deserializers/htmlDeserializer.ts:35](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/deserializers/htmlDeserializer.ts#L35)
+[packages/bodiless-layouts/src/deserializers/htmlDeserializer.ts:35](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/deserializers/htmlDeserializer.ts#L35)
 
 ___
 
@@ -271,7 +271,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/deserializers/deserializer.ts:21](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/deserializers/deserializer.ts#L21)
+[packages/bodiless-layouts/src/deserializers/deserializer.ts:21](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/deserializers/deserializer.ts#L21)
 
 ___
 
@@ -322,7 +322,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/ComponentSelector/types.tsx:95](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/ComponentSelector/types.tsx#L95)
+[packages/bodiless-layouts/src/ComponentSelector/types.tsx:95](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/ComponentSelector/types.tsx#L95)
 
 ___
 
@@ -340,7 +340,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/deserializers/createFlowContainerItem.ts:17](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/deserializers/createFlowContainerItem.ts#L17)
+[packages/bodiless-layouts/src/deserializers/createFlowContainerItem.ts:17](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/deserializers/createFlowContainerItem.ts#L17)
 
 ___
 
@@ -354,7 +354,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/deserializers/deserializer.ts:17](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/deserializers/deserializer.ts#L17)
+[packages/bodiless-layouts/src/deserializers/deserializer.ts:17](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/deserializers/deserializer.ts#L17)
 
 ___
 
@@ -364,7 +364,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/FlowContainer/types.ts:57](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/FlowContainer/types.ts#L57)
+[packages/bodiless-layouts/src/FlowContainer/types.ts:57](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/FlowContainer/types.ts#L57)
 
 ___
 
@@ -380,7 +380,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/FlowContainer/types.ts:87](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/FlowContainer/types.ts#L87)
+[packages/bodiless-layouts/src/FlowContainer/types.ts:87](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/FlowContainer/types.ts#L87)
 
 ___
 
@@ -401,7 +401,7 @@ Props passed to the list of items within the component selector.
 
 #### Defined in
 
-[packages/bodiless-layouts/src/ComponentSelector/types.tsx:76](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/ComponentSelector/types.tsx#L76)
+[packages/bodiless-layouts/src/ComponentSelector/types.tsx:76](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/ComponentSelector/types.tsx#L76)
 
 ___
 
@@ -421,7 +421,7 @@ if FlowContainerItem is actually a Library Item.
 
 #### Defined in
 
-[packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx:47](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx#L47)
+[packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx:47](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx#L47)
 
 ___
 
@@ -439,7 +439,7 @@ Flow Container Library Item Provider Props.
 
 #### Defined in
 
-[packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx:39](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx#L39)
+[packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx:39](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx#L39)
 
 ___
 
@@ -461,7 +461,7 @@ information about a component,
 
 #### Defined in
 
-[packages/bodiless-layouts/src/ComponentSelector/types.tsx:51](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/ComponentSelector/types.tsx#L51)
+[packages/bodiless-layouts/src/ComponentSelector/types.tsx:51](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/ComponentSelector/types.tsx#L51)
 
 ___
 
@@ -482,7 +482,7 @@ render the component selector.
 
 #### Defined in
 
-[packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx:26](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx#L26)
+[packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx:26](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx#L26)
 
 ___
 
@@ -504,7 +504,7 @@ SelectorComponents class.
 
 #### Defined in
 
-[packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx:41](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx#L41)
+[packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx:41](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx#L41)
 
 ___
 
@@ -532,7 +532,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/SortableResizableWrapper/index.tsx:40](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/SortableResizableWrapper/index.tsx#L40)
+[packages/bodiless-layouts/src/SortableResizableWrapper/index.tsx:40](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/SortableResizableWrapper/index.tsx#L40)
 
 ___
 
@@ -542,7 +542,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/SortableResizableWrapper/index.tsx:29](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/SortableResizableWrapper/index.tsx#L29)
+[packages/bodiless-layouts/src/SortableResizableWrapper/index.tsx:29](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/SortableResizableWrapper/index.tsx#L29)
 
 ___
 
@@ -563,7 +563,7 @@ Type of the options for `withTitleFromTerms`
 
 #### Defined in
 
-[packages/bodiless-layouts/src/meta/withTitleFromTerms.tsx:23](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/meta/withTitleFromTerms.tsx#L23)
+[packages/bodiless-layouts/src/meta/withTitleFromTerms.tsx:23](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/meta/withTitleFromTerms.tsx#L23)
 
 ## Variables
 
@@ -575,7 +575,7 @@ Default Prefix for the Library Item Flow Container Item type.
 
 #### Defined in
 
-[packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx:25](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx#L25)
+[packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx:25](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx#L25)
 
 ___
 
@@ -592,7 +592,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/withDirection/withDirection.tsx:22](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/withDirection/withDirection.tsx#L22)
+[packages/bodiless-layouts/src/withDirection/withDirection.tsx:22](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/withDirection/withDirection.tsx#L22)
 
 ___
 
@@ -602,7 +602,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/FlowContainer/index.bl-edit.tsx:43](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/FlowContainer/index.bl-edit.tsx#L43)
+[packages/bodiless-layouts/src/FlowContainer/index.bl-edit.tsx:43](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/FlowContainer/index.bl-edit.tsx#L43)
 
 ___
 
@@ -618,7 +618,7 @@ LibraryItemContextProps
 
 #### Defined in
 
-[packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx:56](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx#L56)
+[packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx:56](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx#L56)
 
 ## HOC Utility Functions
 
@@ -812,7 +812,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/SortableResizableWrapper/index.tsx:61](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/SortableResizableWrapper/index.tsx#L61)
+[packages/bodiless-layouts/src/SortableResizableWrapper/index.tsx:61](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/SortableResizableWrapper/index.tsx#L61)
 
 ___
 
@@ -832,7 +832,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/meta/index.tsx:30](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/meta/index.tsx#L30)
+[packages/bodiless-layouts/src/meta/index.tsx:30](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/meta/index.tsx#L30)
 
 ___
 
@@ -866,7 +866,7 @@ Returns a component selector wrapped in a context menu form.
 
 #### Defined in
 
-[packages/bodiless-layouts/src/ComponentSelector/componentSelectorForm.tsx:32](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/ComponentSelector/componentSelectorForm.tsx#L32)
+[packages/bodiless-layouts/src/ComponentSelector/componentSelectorForm.tsx:32](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/ComponentSelector/componentSelectorForm.tsx#L32)
 
 ___
 
@@ -886,7 +886,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/deserializers/defaultDeserializers.ts:21](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/deserializers/defaultDeserializers.ts#L21)
+[packages/bodiless-layouts/src/deserializers/defaultDeserializers.ts:21](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/deserializers/defaultDeserializers.ts#L21)
 
 ___
 
@@ -906,7 +906,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/deserializers/createFlowContainerItem.ts:28](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/deserializers/createFlowContainerItem.ts#L28)
+[packages/bodiless-layouts/src/deserializers/createFlowContainerItem.ts:28](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/deserializers/createFlowContainerItem.ts#L28)
 
 ___
 
@@ -928,7 +928,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/deserializers/listDeserializer.ts:64](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/deserializers/listDeserializer.ts#L64)
+[packages/bodiless-layouts/src/deserializers/listDeserializer.ts:64](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/deserializers/listDeserializer.ts#L64)
 
 ___
 
@@ -950,7 +950,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/deserializers/htmlDeserializer.ts:71](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/deserializers/htmlDeserializer.ts#L71)
+[packages/bodiless-layouts/src/deserializers/htmlDeserializer.ts:71](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/deserializers/htmlDeserializer.ts#L71)
 
 ___
 
@@ -984,7 +984,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/deserializers/listDeserializer.ts:23](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/deserializers/listDeserializer.ts#L23)
+[packages/bodiless-layouts/src/deserializers/listDeserializer.ts:23](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/deserializers/listDeserializer.ts#L23)
 
 ___
 
@@ -1005,7 +1005,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/deserializers/createFlowContainerItem.ts:30](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/deserializers/createFlowContainerItem.ts#L30)
+[packages/bodiless-layouts/src/deserializers/createFlowContainerItem.ts:30](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/deserializers/createFlowContainerItem.ts#L30)
 
 ___
 
@@ -1025,7 +1025,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/FlowContainer/utils/appendTailwindWidthClass.ts:140](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/FlowContainer/utils/appendTailwindWidthClass.ts#L140)
+[packages/bodiless-layouts/src/FlowContainer/utils/appendTailwindWidthClass.ts:140](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/FlowContainer/utils/appendTailwindWidthClass.ts#L140)
 
 ___
 
@@ -1049,7 +1049,7 @@ boolean
 
 #### Defined in
 
-[packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx:33](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx#L33)
+[packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx:33](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx#L33)
 
 ___
 
@@ -1072,7 +1072,7 @@ metadata from the component.
 
 #### Defined in
 
-[packages/bodiless-layouts/src/meta/index.tsx:111](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/meta/index.tsx#L111)
+[packages/bodiless-layouts/src/meta/index.tsx:111](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/meta/index.tsx#L111)
 
 ___
 
@@ -1091,7 +1091,7 @@ boolean
 
 #### Defined in
 
-[packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx:73](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx#L73)
+[packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx:73](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx#L73)
 
 ___
 
@@ -1112,7 +1112,7 @@ LibraryItemContextProps
 
 #### Defined in
 
-[packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx:66](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx#L66)
+[packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx:66](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/ContentLibrary/withLibraryContext.tsx#L66)
 
 ___
 
@@ -1132,7 +1132,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx:125](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx#L125)
+[packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx:125](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/ComponentSelector/SelectorComponents.tsx#L125)
 
 ___
 
@@ -1158,7 +1158,7 @@ HOC which adds a default title to all components in the flow container.
 
 #### Defined in
 
-[packages/bodiless-layouts/src/meta/withTitleFromTerms.tsx:98](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/meta/withTitleFromTerms.tsx#L98)
+[packages/bodiless-layouts/src/meta/withTitleFromTerms.tsx:98](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/meta/withTitleFromTerms.tsx#L98)
 
 ___
 
@@ -1180,7 +1180,7 @@ withAppendDesc returns a HOC that appends a description to the component sideloa
 
 #### Defined in
 
-[packages/bodiless-layouts/src/meta/index.tsx:92](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/meta/index.tsx#L92)
+[packages/bodiless-layouts/src/meta/index.tsx:92](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/meta/index.tsx#L92)
 
 ___
 
@@ -1202,7 +1202,7 @@ withAppendDisplayName returns a HOC that appends a name to the sideloaded `Displ
 
 #### Defined in
 
-[packages/bodiless-layouts/src/meta/index.tsx:74](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/meta/index.tsx#L74)
+[packages/bodiless-layouts/src/meta/index.tsx:74](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/meta/index.tsx#L74)
 
 ___
 
@@ -1225,7 +1225,7 @@ Note it appends to the title with a space.
 
 #### Defined in
 
-[packages/bodiless-layouts/src/meta/index.tsx:56](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/meta/index.tsx#L56)
+[packages/bodiless-layouts/src/meta/index.tsx:56](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/meta/index.tsx#L56)
 
 ___
 
@@ -1263,7 +1263,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/ContentLibrary/withContentLibrary.tsx:37](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/ContentLibrary/withContentLibrary.tsx#L37)
+[packages/bodiless-layouts/src/ContentLibrary/withContentLibrary.tsx:37](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/ContentLibrary/withContentLibrary.tsx#L37)
 
 ___
 
@@ -1285,7 +1285,7 @@ withDesc returns a HOC that sideloads the provided description to the component.
 
 #### Defined in
 
-[packages/bodiless-layouts/src/meta/index.tsx:85](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/meta/index.tsx#L85)
+[packages/bodiless-layouts/src/meta/index.tsx:85](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/meta/index.tsx#L85)
 
 ___
 
@@ -1305,7 +1305,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/withDirection/withDirection.tsx:27](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/withDirection/withDirection.tsx#L27)
+[packages/bodiless-layouts/src/withDirection/withDirection.tsx:27](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/withDirection/withDirection.tsx#L27)
 
 ___
 
@@ -1327,7 +1327,7 @@ withDisplayName returns a HOC that sideloads a `displayName` to a component.
 
 #### Defined in
 
-[packages/bodiless-layouts/src/meta/index.tsx:67](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/meta/index.tsx#L67)
+[packages/bodiless-layouts/src/meta/index.tsx:67](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/meta/index.tsx#L67)
 
 ___
 
@@ -1374,7 +1374,7 @@ currying), and returns a Variant that can be used in the on function.
 
 #### Defined in
 
-[packages/bodiless-layouts/src/meta/index.tsx:122](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/meta/index.tsx#L122)
+[packages/bodiless-layouts/src/meta/index.tsx:122](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/meta/index.tsx#L122)
 
 ___
 
@@ -1395,7 +1395,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/deserializers/withFlowContainerDefaultHtml.tsx:24](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/deserializers/withFlowContainerDefaultHtml.tsx#L24)
+[packages/bodiless-layouts/src/deserializers/withFlowContainerDefaultHtml.tsx:24](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/deserializers/withFlowContainerDefaultHtml.tsx#L24)
 
 ___
 
@@ -1425,7 +1425,7 @@ Token
 
 #### Defined in
 
-[packages/bodiless-layouts/src/ContentLibrary/withLibraryComponents.bl-edit.tsx:324](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/ContentLibrary/withLibraryComponents.bl-edit.tsx#L324)
+[packages/bodiless-layouts/src/ContentLibrary/withLibraryComponents.bl-edit.tsx:324](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/ContentLibrary/withLibraryComponents.bl-edit.tsx#L324)
 
 ___
 
@@ -1479,7 +1479,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/FlowContainer/index.ts:18](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/FlowContainer/index.ts#L18)
+[packages/bodiless-layouts/src/FlowContainer/index.ts:18](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/FlowContainer/index.ts#L18)
 
 ___
 
@@ -1501,7 +1501,7 @@ withMeta creates a HOC that will add metadata to a React Component.
 
 #### Defined in
 
-[packages/bodiless-layouts/src/meta/index.tsx:40](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/meta/index.tsx#L40)
+[packages/bodiless-layouts/src/meta/index.tsx:40](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/meta/index.tsx#L40)
 
 ___
 
@@ -1536,7 +1536,7 @@ tuples for each one of them.
 
 #### Defined in
 
-[packages/bodiless-layouts/src/FlowContainer/utils/appendTailwindWidthClass.ts:62](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/FlowContainer/utils/appendTailwindWidthClass.ts#L62)
+[packages/bodiless-layouts/src/FlowContainer/utils/appendTailwindWidthClass.ts:62](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/FlowContainer/utils/appendTailwindWidthClass.ts#L62)
 
 ___
 
@@ -1568,7 +1568,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/FlowContainer/utils/appendTailwindWidthClass.ts:185](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/FlowContainer/utils/appendTailwindWidthClass.ts#L185)
+[packages/bodiless-layouts/src/FlowContainer/utils/appendTailwindWidthClass.ts:185](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/FlowContainer/utils/appendTailwindWidthClass.ts#L185)
 
 ___
 
@@ -1603,7 +1603,7 @@ the category and term on to the component.
 
 #### Defined in
 
-[packages/bodiless-layouts/src/meta/index.tsx:103](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/meta/index.tsx#L103)
+[packages/bodiless-layouts/src/meta/index.tsx:103](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/meta/index.tsx#L103)
 
 ___
 
@@ -1625,7 +1625,7 @@ withTitle returns a HOC that sideloads a title to a component.
 
 #### Defined in
 
-[packages/bodiless-layouts/src/meta/index.tsx:48](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/meta/index.tsx#L48)
+[packages/bodiless-layouts/src/meta/index.tsx:48](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/meta/index.tsx#L48)
 
 ___
 
@@ -1652,7 +1652,7 @@ A token which adds a title.
 
 #### Defined in
 
-[packages/bodiless-layouts/src/meta/withTitleFromTerms.tsx:81](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/meta/withTitleFromTerms.tsx#L81)
+[packages/bodiless-layouts/src/meta/withTitleFromTerms.tsx:81](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/meta/withTitleFromTerms.tsx#L81)
 
 ___
 
@@ -1702,4 +1702,4 @@ snapOptions
 
 #### Defined in
 
-[packages/bodiless-layouts/src/FlowContainer/utils/appendTailwindWidthClass.ts:44](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/bodiless-layouts/src/FlowContainer/utils/appendTailwindWidthClass.ts#L44)
+[packages/bodiless-layouts/src/FlowContainer/utils/appendTailwindWidthClass.ts:44](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/bodiless-layouts/src/FlowContainer/utils/appendTailwindWidthClass.ts#L44)

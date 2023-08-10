@@ -43,4 +43,4 @@ export default {
 
 #### Defined in
 
-[vital-layout/src/components/Logo/tokens/vitalLogo.ts:82](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5600222bc/packages/vital-layout/src/components/Logo/tokens/vitalLogo.ts#L82)
+[vital-layout/src/components/Logo/tokens/vitalLogo.ts:82](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5e5762af0/packages/vital-layout/src/components/Logo/tokens/vitalLogo.ts#L82)
