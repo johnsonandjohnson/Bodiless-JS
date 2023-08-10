@@ -69,7 +69,7 @@ export const writeTokenCollection = async ({
 
   const content = `${importString}
 
-const meta = {
+export const meta = {
   categories: {
     Type: ['Element'],
     Group: ['${group}'],

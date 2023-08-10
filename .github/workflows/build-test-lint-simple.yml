@@ -59,6 +59,27 @@ jobs:
           name: Accessibility
           path: accessibility-reports/
           retention-days: 30
+  
+  lhci:
+    name: Lighthouse
+    if: ${{ github.event_name == 'schedule' || github.event.label.name == 'ready-to-test' }}
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event_name == 'schedule' && 'main' || github.event.pull_request.head.sha }}
+      - name: Build
+        uses: ./.github/actions/build
+      - name: Lighthouse audit
+        if: always()
+        uses: treosh/lighthouse-ci-action@v10
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          APP_SITE_NAME: vital-demo-next
+        with:
+          configPath: ./lighthouserc.js
+          uploadArtifacts: true
+          temporaryPublicStorage: true
 
   cleanup:
     if: always() && github.event_name != 'schedule'

@@ -23,7 +23,7 @@ export abstract class VitalPage {
   constructor(relativeUrl: string) {
     this.relativeUrl = relativeUrl;
     this.mainContentSelector = 'main-content';
-    this.linkWrapperSelector = '[data-layer-region="Link:Wrapper"]';
+    this.linkWrapperSelector = '[data-layer-component="Link:Wrapper"]';
   }
 
   async open(page: Page): Promise<void> {

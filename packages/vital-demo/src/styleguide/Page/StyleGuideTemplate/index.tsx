@@ -26,10 +26,12 @@ import { Buttons } from './Buttons';
 import { _default } from './_default';
 import { Video } from './Video';
 import { Accordion } from './Accordion';
+import { Carousel } from './Carousel';
 import { Section } from './Section';
 
 export const VitalDemoStyleGuideTemplate = {
   _default,
+  Carousel,
   ContentListing,
   ContentListingMultiple,
   Editors,

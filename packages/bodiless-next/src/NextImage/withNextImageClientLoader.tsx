@@ -24,19 +24,56 @@ const withNextImageClientLoader = (Component: ComponentOrTag<any>) => (
   props: any,
 ) => {
   const isEdit = process.env.NODE_ENV === 'development';
-  const script = `(function(){
-    const imgs = document.getElementsByTagName('img');
-    const removeImageBg = function(e) {
-      const t = e.target; if (void 0==t||void 0==t.style)return;
-      t.style.backgroundImage=null;t.style.backgroundSize=null;
-      t.style.backgroundPosition=null;t.style.backgroundRepeat=null;
+  const script = `(function() {
+    const observeImages = function(imgs) {
+      const removeImageBg = function(target) {
+        if (typeof target.style === 'undefined') {
+          return;
+        }
+        target.style.backgroundImage = null;
+        target.style.backgroundSize = null;
+        target.style.backgroundPosition = null;
+        target.style.backgroundRepeat = null;
+      };
+      
+      for (let i = 0; i < imgs.length; i++) {
+        if (typeof imgs[i].dataset.nimg === 'undefined') {
+          return;
+        }
+        if (imgs[i].loading === 'eager') {
+          removeImageBg(imgs[i]);
+        } else {
+          imgs[i].addEventListener('load', function() {
+            removeImageBg(this);
+          }, { once: true });
+        }
+      }
     };
-    for(let i = 0; i < imgs.length; i++) {
-      if(void 0===imgs[i].dataset.nimg)return;
-      if(imgs[i].loading==='eager') { removeImageBg({target: imgs[i]});}
-      else {imgs[i].addEventListener('load', removeImageBg, {once: true});}
-    }
-  })();`;
+    
+    const observer = new MutationObserver(function(mutationsList) {
+      for (let mutation of mutationsList) {
+        if (mutation.type === 'childList' && mutation.addedNodes.length) {
+          const nodesWithNoHydrateAttribute = Array.from(mutation.addedNodes).filter(node =>
+            node.nodeType === 1 && node.getAttribute('data-no-hydrate') === 'true'
+          );
+          if(nodesWithNoHydrateAttribute.length) {
+            for (let node of nodesWithNoHydrateAttribute) {
+              const images = node.querySelectorAll('img');
+              observeImages(images);
+            }
+          }
+        }
+      }
+    });
+          
+    const observerOptions = {
+      childList: true,
+      subtree: true
+    };
+      
+    observer.observe(document, observerOptions);
+  })();
+`;
   return isEdit ? <Component {...props} /> : (
     <>
       <Helmet>

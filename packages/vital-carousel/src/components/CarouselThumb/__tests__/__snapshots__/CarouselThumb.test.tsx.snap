@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CarouselThumb Tokens Matches snapshot for Default 1`] = `
+<div
+  className="border-none thumbs indicator block"
+  data-index={0}
+  tabIndex="0"
+  type="button"
+>
+  <div
+    data-no-hydrate={true}
+    id="f64e1b3016f7c8d0d277ce020d98ee0d"
+    style={
+      Object {
+        "display": "contents",
+      }
+    }
+  >
+    <img
+      alt=""
+      className="cursor-pointer w-[94px] h-[94px]"
+      src="test-file-stub"
+      title=""
+    />
+  </div>
+</div>
+`;

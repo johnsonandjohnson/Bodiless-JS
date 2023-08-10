@@ -22,7 +22,7 @@ import {
 } from '@bodiless/fclasses';
 import { withoutHydration } from '@bodiless/hydration';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
-import { ButtonClean } from '@bodiless/vital-buttons';
+import { ButtonClean } from '@bodiless/vital-button';
 import {
   BurgerMenuClean,
   MenuClean,

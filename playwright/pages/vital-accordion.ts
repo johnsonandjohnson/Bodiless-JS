@@ -44,19 +44,19 @@ export class VitalAccordionPage extends VitalPage {
   }
 
   async toggle(accordion: Locator): Promise<string> {
-    await accordion.locator('[data-layer-region="AccordionTitle:Wrapper"]').click({
+    await accordion.locator('[data-layer-component="AccordionTitle:Wrapper"]').click({
       delay: 500
     });
     return this.getAction(accordion);
   }
 
   async getAction(accordion: Locator): Promise<string> {
-    const icon: Locator = accordion.locator('[data-layer-region="AccordionTitle:Icon"]');
+    const icon: Locator = accordion.locator('[data-layer-component="AccordionTitle:Icon"]');
     return await icon.getAttribute('data-accordion-icon') as string;
   }
 
   async isBodyVisible(accordion: Locator): Promise<boolean> {
-    return accordion.locator('[data-layer-region="Accordion:Body"]').isVisible();
+    return accordion.locator('[data-layer-component="Accordion:Body"]').isVisible();
   }
 }
 
