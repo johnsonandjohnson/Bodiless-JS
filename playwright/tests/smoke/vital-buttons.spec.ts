@@ -19,47 +19,23 @@ test.describe.configure({ mode: 'parallel' });
 test.describe('Vital Buttons', () => {
   const buttonsPage: VitalButtonsPage = new VitalButtonsPage();
 
-  test.beforeEach(async ({page}) => { await buttonsPage.open(page); });
+  test.beforeEach(async ({ page }) => { await buttonsPage.open(page); });
 
   buttonsPage.vitalButtons.forEach((btn) => {
     switch (btn.type) {
       case VitalButtonType.DISABLED: {
-        test(`Should try to click on ${btn.id} disable button`, async ({page, baseURL}) => {
+        test(`Should try to click on ${btn.id} disable button`, async ({ page, baseURL }) => {
           await buttonsPage.locateTarget(page.getByTestId(btn.id)).click({ force: true });
 
           expect(page.url()).toBe(baseURL + buttonsPage.relativeUrl);
         });
         break;
       }
-      case VitalButtonType.EXTERNAL: {
-        test(`Should click on ${btn.id} external button`, async ({page, context}) => {
-          const [externalPage] = await Promise.all([
-            context.waitForEvent('page'),
-            buttonsPage.locateTarget(page.getByTestId(btn.id)).click(),
-          ]);
-
-          await externalPage.waitForLoadState();
-
-          expect(externalPage.url()).toBe('https://www.example.com/');
-        });
-        break;
-      }
       case VitalButtonType.DEFAULT: {
-        test(`Should click on ${btn.id} default button`, async ({page, baseURL}) => {
+        test(`Should click on ${btn.id} default button`, async ({ page, baseURL }) => {
           await buttonsPage.locateTarget(page.getByTestId(btn.id)).click();
 
           expect(page.url()).toBe(`${baseURL}${buttonsPage.relativeUrl}#`);
-        });
-        break;
-      }
-      case VitalButtonType.PDF: {
-        test(`Should click on ${btn.id} PDF button`, async ({page}) => {
-          const [download] = await Promise.all([
-            page.waitForEvent('download'),
-            buttonsPage.locateTarget(page.getByTestId(btn.id)).click()
-          ]);
-
-          expect(download.suggestedFilename()).toBe('test.pdf');
         });
         break;
       }

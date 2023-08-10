@@ -1,7 +1,7 @@
 import { asTokenGroup } from '../util';
-import { vitalColor } from './semantic';
+import { vitalColor } from '../components/Color';
 
-const meta = {
+export const meta = {
   categories: {
     Type: ['Element'],
     Group: ['AccordionElement'],
@@ -14,7 +14,7 @@ export default asTokenGroup(meta)({
   DropdownTextDarkThemeBody: vitalColor.TextDarkThemeBase,
   DropdownTextLightThemeBody: vitalColor.TextLightThemeBase,
   DropdownBackgroundDarkThemeBackground: vitalColor.BackgroundAlt8,
-  BorderLightThemeColor: vitalColor.BorderLightThemeBase,
+  BorderLightThemeBorder: vitalColor.BorderLightThemeBase,
   LabelBorderRadiusActiveTopRight: 'rounded-tr-0px',
   LabelBorderRadiusActiveTopLeft: 'rounded-tl-0px',
   LabelBorderRadiusIdleBottomLeft: 'rounded-bl-0px',
@@ -29,6 +29,6 @@ export default asTokenGroup(meta)({
   LabelBorderRadiusActiveBottomLeft: 'rounded-bl-0px',
   DropdownBorderRadiusActiveTopLeft: 'rounded-tl-0px',
   DropdownBackgroundLightThemeBackground: vitalColor.BackgroundBase,
-  BorderDarkThemeColor: vitalColor.BorderDarkThemeBase,
+  BorderDarkThemeBorder: vitalColor.BorderDarkThemeBase,
   LabelBackgroundDarkThemeBackground: vitalColor.BackgroundAlt7,
 });

@@ -39,7 +39,7 @@ export class VitalSectionPage extends VitalPage {
         hasLink: true,
       },
     ];
-    this.sectionLinkSelector = '[data-layer-region="Section:Link"]';
+    this.sectionLinkSelector = '[data-layer-component="Section:Link"]';
   }
 
   getElements(): VitalElement[] {

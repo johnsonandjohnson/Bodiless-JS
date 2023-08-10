@@ -22,7 +22,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "run-s build:lib copy",
+    "build": "run-s build:lib copy build:api-doc",
     "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api src",
     "build:lib": "tsc -p ./tsconfig.json",
     "build:watch": "npm run build:lib -- --watch && npm run copy",
@@ -39,7 +39,7 @@
     "@bodiless/fclasses": "^1.0.0-rc.42",
     "@bodiless/hydration": "^1.0.0-rc.42",
     "@bodiless/layouts": "^1.0.0-rc.42",
-    "@bodiless/vital-buttons": "^1.0.0-rc.42",
+    "@bodiless/vital-button": "^1.0.0-rc.42",
     "@bodiless/vital-editors": "^1.0.0-rc.42",
     "@bodiless/vital-elements": "^1.0.0-rc.42",
     "@bodiless/vital-image": "^1.0.0-rc.42",

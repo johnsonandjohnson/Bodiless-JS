@@ -6,7 +6,7 @@ website; in it, we will define colors, fonts, typography, and the like.
 ## Overview
 
 Specifically, we will learn how to shadow a button component to apply custom styles and
-modifications to it. In our case, we will override `vitalButtonsBase.Primary` to add a hover
+modifications to it. In our case, we will override `vitalButtonBase.Primary` to add a hover
 transition, and we will create a new variation: a larger button, which can be combined with all
 other existing variations. To accomplish this, we will use the best practices for shadowing
 components.
@@ -57,7 +57,7 @@ structure:
 Since we are shadowing Vital elements, we should import the base version of the component:
 
 ```ts
-import { vitalButtonsBase } from '@bodiless/vital-buttons/src/base';
+import { vitalButtonBase } from '@bodiless/vital-button/src/base';
 ```
 
 And once we have all the base variations from the Vital package, we can spread
@@ -73,7 +73,7 @@ Here we rely on the `asButtonToken` function to help us with the tokens conventi
 extends from
 [`asVitalTokenSpec`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/util/tokenSpec.ts#L48
 ':target=_blank') to create the token definition utility for the
-[`ButtonClean`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-buttons/src/components/Buttons/ButtonClean.tsx
+[`ButtonClean`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-button/src/components/Button/ButtonClean.tsx
 ':target=_blank') component.
 
 ?> **Note:** As you may have noticed, we use a mix of `vital-elements` tokens and Tailwind classes
@@ -94,14 +94,14 @@ buttons:
 
 ### Shadowing
 
-And now, to shadow our tokens, create a `Buttons.ts` file with the same path of the package. In our
-case, since we are shadowing the `@bodiles/vital-buttons` package, we'll have this structure:
+And now, to shadow our tokens, create a `Button.ts` file with the same path of the package. In our
+case, since we are shadowing the `@bodiles/vital-button` package, we'll have this structure:
 
 ```text
 ├── shadow
 │   ├── @bodiless
-│   │   ├── vital-buttons
-│   │   │   └─ Buttons.ts
+│   │   ├── vital-button
+│   │   │   └─ Button.ts
 ```
 
 Each file must only export the tokens from the components folder with our helper `shadow` function.
@@ -111,7 +111,7 @@ You can see more about this function [here](TBD). -->
 
 Our whole file will only have 3 lines.
 
-[Buttons.ts](https://raw.githubusercontent.com/johnsonandjohnson/Bodiless-JS/main/packages/vital-examples/src/shadowing-simple-component/shadow/%40bodiless/vital-buttons/Buttons.ts
+[Button.ts](https://raw.githubusercontent.com/johnsonandjohnson/Bodiless-JS/main/packages/vital-examples/src/shadowing-simple-component/shadow/%40bodiless/vital-button/Button.ts
 ':include :type=code')
 
 That's all. With this done, our primary button will have a nice looking transition; we will also

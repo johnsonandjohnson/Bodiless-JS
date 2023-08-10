@@ -125,6 +125,13 @@
         "className": "w-full"
       },
       "type": "FilterableContent"
+    },
+    {
+      "uuid": "08f21ce0-1c6a-11ee-b437-9ff190668ab3",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "FilterableContent"
     }
   ]
 }

@@ -21,7 +21,7 @@ import {
   designable,
 } from '@bodiless/fclasses';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
-import { ButtonClean } from '@bodiless/vital-buttons';
+import { ButtonClean } from '@bodiless/vital-button';
 import {
   BurgerMenuClean,
   MenuClean,

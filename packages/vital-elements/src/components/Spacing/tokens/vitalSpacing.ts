@@ -30,4 +30,25 @@ export default asTokenGroup(SpacingMeta)({
   GutterBottom: 'mb-4',
   GuttonLeft: 'ml-4',
   GuttonRight: 'mr-4',
+
+  /**
+   * Vital 2.0 Spacing below coming from Figma Tokens.
+   */
+
+  PaddingXSmall: 'p-8px md:p-16px',
+  PaddingSmall: 'p-16px md:p-20px',
+  PaddingMedium: 'p-20px md:p-24px',
+  PaddingLarge: 'p-24px md:p-36px',
+  PaddingXLarge: 'p-36px md:p-48px',
+  // @TODO Add Padding Top when needed
+  PaddingBottomXSmall: 'pb-8px md:pb-16px',
+  PaddingBottomSmall: 'pb-16px md:pb-20px',
+  PaddingBottomMedium: 'pb-20px md:pb-24px',
+  PaddingBottomLarge: 'pb-24px md:pb-36px',
+  PaddingBottomXLarge: 'pb-36px md:pb-48px',
+  MarginXSmall: 'm-36px md:48px',
+  MarginSmall: 'm-36px md:48px',
+  MarginMedium: 'm-36px md:48px',
+  MarginLarge: 'm-36px md:48px',
+  MarginXLarge: 'm-36px md:48px',
 });

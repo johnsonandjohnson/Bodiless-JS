@@ -33,6 +33,7 @@ const {
   Accordion,
   Buttons,
   Section,
+  Carousel,
   _default
 } = VitalDemoStyleGuideTemplate;
 
@@ -55,7 +56,8 @@ const Default = asFluidToken({
     List,
     Accordion,
     Buttons,
-    Section
+    Section,
+    Carousel
   },
 });
 

@@ -1,7 +1,7 @@
 import { asTokenGroup } from '../util';
-import { vitalColor } from './semantic';
+import { vitalColor } from '../components/Color';
 
-const meta = {
+export const meta = {
   categories: {
     Type: ['Element'],
     Group: ['ProductCardElement'],
@@ -9,13 +9,14 @@ const meta = {
 };
 
 export default asTokenGroup(meta)({
+  TextDarkThemeEyebrow: vitalColor.TextDarkThemeBase,
   BorderLightThemeBorder: vitalColor.BorderLightThemeBase,
   TextDarkThemeReviews: vitalColor.TextDarkThemeBase,
+  TextLightThemeEyebrow: vitalColor.TextLightThemeBase,
   TextDarkThemeHeadline: vitalColor.TextDarkThemeBase,
   TextLightThemeHeadline: vitalColor.TextLightThemeBase,
   BackgroundDarkThemeBackground: vitalColor.BackgroundAlt5,
   BorderDarkThemeBorder: vitalColor.BorderDarkThemeBase,
-  ImageBorderRadius: 'rounded-0px',
   TextLightThemeReviews: vitalColor.TextLightThemeBase,
   BackgroundLightThemeBackground: vitalColor.BackgroundBase,
   BorderRadius: 'rounded-0px',
