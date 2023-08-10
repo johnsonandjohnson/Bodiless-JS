@@ -23,7 +23,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "run-p build:lib",
+    "build": "run-p build:lib build:api-doc",
     "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api src",
     "build:lib": "tsc -p ./tsconfig.json",
     "build:watch": "npm run build:lib -- --watch",
