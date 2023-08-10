@@ -1,7 +1,7 @@
 {
   "Tools": {
     "CLI": {
-      "VitalScaffold.md": "./doc/README.md"
+      "BodilessScaffold.md": "./doc/README.md"
     }
   }
 }
