@@ -6,6 +6,7 @@
   "homepage": "",
   "license": "Apache-2.0",
   "main": "./lib/index.js",
+  "type": "module",
   "bin": {
     "scaffold": "./bin/scaffold.js"
   },
