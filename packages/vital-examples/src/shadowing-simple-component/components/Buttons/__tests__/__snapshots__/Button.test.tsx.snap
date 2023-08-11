@@ -2,7 +2,7 @@
 
 exports[`Button Matches snapshot for Plain 1`] = `
 <a
-  className="rounded-8px px-24px py-16px group justify-center"
+  className="rounded-8px group justify-center"
   href="#"
   role="button"
 >
@@ -29,7 +29,7 @@ exports[`Button Matches snapshot for Plain 1`] = `
 
 exports[`Button Matches snapshot for PrimaryDisabled 1`] = `
 <button
-  className="bg-kenvue-neutrals-grey"
+  className="px-24px py-16px bg-kenvue-neutrals-grey"
   disabled="true"
 >
   <span
@@ -40,7 +40,7 @@ exports[`Button Matches snapshot for PrimaryDisabled 1`] = `
 
 exports[`Button Matches snapshot for SecondaryDisabled 1`] = `
 <button
-  className="border-solid border-1px border-kenvue-neutrals-grey"
+  className="px-24px py-16px border-solid border-1px border-kenvue-neutrals-grey"
   disabled="true"
 >
   <span
@@ -175,7 +175,7 @@ exports[`Button Matches snapshot for WithPrimary 1`] = `
 
 exports[`Button Matches snapshot for WithPrimaryStyle 1`] = `
 <a
-  className="active:bg-kenvue-green-shade-60 focus:bg-kenvue-green-shade-80 hover:bg-kenvue-green-shade-80 bg-kenvue-green-green focus:drop-shadow-button focus:outline-none active:drop-shadow-none"
+  className="active:bg-kenvue-green-shade-60 focus:bg-kenvue-green-shade-80 hover:bg-kenvue-green-shade-80 bg-kenvue-green-green px-24px py-16px focus:drop-shadow-button focus:outline-none active:drop-shadow-none"
 >
   <span
     className="text-kenvue-neutrals-white"
@@ -185,7 +185,7 @@ exports[`Button Matches snapshot for WithPrimaryStyle 1`] = `
 
 exports[`Button Matches snapshot for WithSecondaryStyle 1`] = `
 <a
-  className="active:border-kenvue-green-shade-60 focus:border-kenvue-green-shade-80 hover:border-kenvue-green-shade-80 border-kenvue-green-green border-solid border-1px focus:shadow-button focus:outline-none active:shadow-none"
+  className="active:border-kenvue-green-shade-60 focus:border-kenvue-green-shade-80 hover:border-kenvue-green-shade-80 border-kenvue-green-green px-24px py-16px border-solid border-1px focus:shadow-button focus:outline-none active:shadow-none"
 >
   <span
     className="group-active:text-kenvue-green-shade-60 focus:text-kenvue-green-shade-80 group-hover:text-kenvue-green-shade-80 text-kenvue-green-green"
