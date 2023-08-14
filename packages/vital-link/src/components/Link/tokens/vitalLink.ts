@@ -86,8 +86,14 @@ const Default = asLinkToken(Base, {
     // _: as(WithDownloadStyles, WithExternalStyles),
     Wrapper: as(
       vitalLinkElement.TextLightThemeIdle,
+      vitalLinkElement.TextLightThemePressed,
       vitalLinkElement.TextLightThemeHover,
       vitalLinkElement.TextLightThemeFocus,
+      'hover:underline active:underline',
+      // @TODO: Manually adding for now, but outline color
+      // should be coming in via generated tokens. Rework parsetokens script
+      // to correctly import.
+      'outline-signal-informational'
     ),
   },
 });

@@ -114,6 +114,9 @@ const twConfig = {
         'purple-purple': '#D3BDF2',
         'red-red': '#FF6B6B',
         'yellow-yellow': '#FFB000',
+      },
+      signal: {
+        informational: '#428BF1',
       }
     },
     extend: {
