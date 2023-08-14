@@ -41,9 +41,6 @@ const Plain = asButtonToken({
     ),
     Body: vitalButtonTokens.TextButtonDefault,
   },
-  Spacing: {
-    Wrapper: vitalButtonTokens.BorderPaddingButton,
-  },
   Components: {
     Body: on(EditorPlainClean)(vitalEditorPlain.Default),
   },
@@ -83,6 +80,7 @@ const WithPrimaryStyle = asButtonToken({
   Theme: {
     Wrapper: as(
       vitalButtonTokens.ShadowButtonFocus,
+      vitalButtonTokens.BorderPaddingButton,
       vitalButtonTokens.PrimaryBackgroundLightThemeIdle,
       vitalButtonTokens.PrimaryBackgroundLightThemeHover,
       vitalButtonTokens.PrimaryBackgroundLightThemeFocus,
@@ -98,6 +96,7 @@ const WithSecondaryStyle = asButtonToken({
     Wrapper: as(
       vitalButtonTokens.BorderShadowButtonFocus,
       vitalButtonTokens.BorderWidthButton,
+      vitalButtonTokens.BorderPaddingButton,
       vitalButtonTokens.SecondaryBorderLightThemeIdle,
       vitalButtonTokens.SecondaryBorderLightThemeHover,
       vitalButtonTokens.SecondaryBorderLightThemeFocus,
@@ -141,7 +140,10 @@ const PrimaryDisabled = asButtonToken(
   WithDisabled,
   {
     Theme: {
-      Wrapper: vitalButtonTokens.PrimaryBackgroundLightThemeDisabled,
+      Wrapper: as(
+        vitalButtonTokens.PrimaryBackgroundLightThemeDisabled,
+        vitalButtonTokens.BorderPaddingButton
+      ),
       Body: vitalButtonTokens.PrimaryTextLightThemeText,
     },
   }
@@ -154,6 +156,7 @@ const SecondaryDisabled = asButtonToken(
       Wrapper: as(
         vitalButtonTokens.SecondaryBorderLightThemeDisabled,
         vitalButtonTokens.BorderWidthButton,
+        vitalButtonTokens.BorderPaddingButton,
       ),
       Body: vitalButtonTokens.SecondaryTextLightThemeDisabled,
     }

@@ -22,7 +22,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json",
+    "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
     "build:required": "npm run build",
     "build:watch": "npm run build -- --watch",
     "dev": "npm run build:watch",
