@@ -26,7 +26,7 @@ import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples
 
 const BaseVariation = {
   '': on(Div)(
-    'w-[100px] h-[100px]',
+    'w-[100px] h-[50px]',
     'block border',
   ),
 };
@@ -77,10 +77,16 @@ const vitalBorderVariations = varyDesigns(
 const vitalWidthVariations = varyDesigns(
   BaseVariation,
   BorderWidthVariations,
+  {
+    '': vitalColor.BorderLightThemeBase
+  }
 );
 const vitalRoundingVariations = varyDesigns(
   BaseVariation,
   BorderRoundingVariations,
+  {
+    '': vitalColor.BackgroundInteractiveLightThemeIdle
+  }
 );
 
 const vitalBorderFlowContainer = asFluidToken({
