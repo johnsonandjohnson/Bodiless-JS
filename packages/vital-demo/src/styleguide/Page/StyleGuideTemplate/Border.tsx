@@ -19,9 +19,12 @@ import {
   on,
   Div,
   varyDesigns,
+  as,
+  withDesign,
 } from '@bodiless/fclasses';
-import { asFluidToken, vitalColor } from '@bodiless/vital-elements';
+import { asFluidToken, vitalColor, vitalSpacing } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
+import { withParent } from '@bodiless/core';
 import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
 const BaseVariation = {
@@ -38,7 +41,17 @@ const BorderColorVariations = {
   BorderInteractiveLightThemeFocus: 'border-kenvue-green-shade-80',
   BorderInteractiveLightThemePressed: 'border-kenvue-green-shade-60',
   BorderInteractiveLightThemeHover: 'border-kenvue-green-shade-80',
-  BorderDarkThemeBase: vitalColor.BorderDarkThemeBase,
+  BorderDarkThemeBase: as(
+    withParent(Div),
+    withDesign({
+      Parent: as(
+        vitalSpacing.PaddingXSmall,
+        vitalColor.BackgroundAlt5,
+        'flex justify-center items-center w-[150px]',
+      ),
+    }),
+    vitalColor.BorderDarkThemeBase,
+  ),
   BorderInteractiveDarkThemeIdle: vitalColor.BorderInteractiveDarkThemeIdle,
   BorderInteractiveDarkThemeHover: 'border-kenvue-green-tint-60',
   BorderInteractiveDarkThemeDisabled: vitalColor.BorderInteractiveDarkThemeDisabled,
@@ -85,7 +98,10 @@ const vitalRoundingVariations = varyDesigns(
   BaseVariation,
   BorderRoundingVariations,
   {
-    '': vitalColor.BackgroundInteractiveLightThemeIdle
+    '': as(
+      vitalColor.BackgroundInteractiveLightThemeIdle,
+      'border-none',
+    ),
   }
 );
 
