@@ -63,9 +63,11 @@ const VitalCarouselBase: FC<VitalCarouselBaseProps> = ({ components: C, ...rest 
       <C.Slider />
     </C.SliderWrapper>
     <C.ControlsWrapper>
-      <C.Indicator />
       <C.NavWrapper>
         <C.Prev />
+      </C.NavWrapper>
+      <C.Indicator />
+      <C.NavWrapper>
         <C.Next />
       </C.NavWrapper>
     </C.ControlsWrapper>
