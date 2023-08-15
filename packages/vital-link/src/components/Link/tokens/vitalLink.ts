@@ -20,13 +20,13 @@ import {
   as,
   flowIf,
   on,
-  flowHoc,
+  replaceWith,
 } from '@bodiless/fclasses';
 import { withSidecarNodes, withNodeKey } from '@bodiless/data';
-import { vitalColor, vitalTypography } from '@bodiless/vital-elements';
+import { vitalLinkElement } from '@bodiless/vital-elements';
 import { asLinkToken } from '../LinkClean';
 import { useExternalLinkToggle, asEditableLink, useIsDownloadLink } from '../util';
-
+import type { LinkToken } from '../LinkClean';
 /**
    * Token which causes link to display as an external link.
    */
@@ -82,18 +82,42 @@ const Default = asLinkToken(Base, {
      * VitalDS typography and colors.
      */
   Theme: {
-    _: as(WithDownloadStyles, WithExternalStyles),
-    Wrapper: as(vitalTypography.Link),
+    // Turning Download & External styles off Default until we need it.
+    // _: as(WithDownloadStyles, WithExternalStyles),
+    Wrapper: as(
+      vitalLinkElement.TextLightThemeIdle,
+      vitalLinkElement.TextLightThemePressed,
+      vitalLinkElement.TextLightThemeHover,
+      vitalLinkElement.TextLightThemeFocus,
+      'hover:underline active:underline',
+      // @TODO: Manually adding for now, but outline color
+      // should be coming in via generated tokens. Rework parsetokens script
+      // to correctly import.
+      'outline-signal-informational'
+    ),
   },
 });
 
-const PrimaryLink = asLinkToken(Default, {
-  Theme: {
-    Wrapper: 'hover:vital-arrow hover:pr-1 hover:w-6 hover:h-2',
-    Body: vitalColor.TextPrimaryInteractiveNoHover,
+/**
+   * Token which produces a Disabled VitalDS link.
+   */
+const Disabled = asLinkToken(Base, {
+  Components: {
+    Wrapper: replaceWith(Span)
   },
-  Meta: flowHoc.meta.term('Style')('With Hover Arrow'),
+  Theme: {
+    Wrapper: vitalLinkElement.TextDarkThemeDisabled,
+  },
 });
+
+// PrimaryLink is deprecated but saving if we want hover arrow option in future
+// const PrimaryLink = asLinkToken(Default, {
+//   Theme: {
+//     Wrapper: 'hover:vital-arrow hover:pr-1 hover:w-6 hover:h-2',
+//     Body: vitalColor.TextPrimaryInteractiveNoHover,
+//   },
+//   Meta: flowHoc.meta.term('Style')('With Hover Arrow'),
+// });
 
 const Sidecar = asLinkToken({
   ...Default,
@@ -105,11 +129,51 @@ const Sidecar = asLinkToken({
   },
 });
 
-export default {
+/**
+ * Tokens for the vital link
+ *
+ * @category Token Collection
+ */
+export interface VitalLink {
+  /**
+   * Unstyled Link Token.
+   */
+  Base: LinkToken,
+  /**
+   * Styled Link Token.
+   */
+  Default: LinkToken,
+  /**
+   * Disabled Link Token.
+   */
+  Disabled: LinkToken
+  /**
+   * Add External Icon add end of the link
+   */
+  WithExternalStyles: LinkToken,
+  /**
+   * Add Downloadable Icon add end of the link
+   */
+  WithDownloadStyles: LinkToken,
+  /**
+   * Attaches a node to the link for saving link value
+   */
+  Sidecar: LinkToken,
+}
+
+/**
+ * Tokens for Vital Image
+ *
+ * @category Token Collection
+ * @see [[VitalLink]]
+ */
+const vitalLink: VitalLink = {
   Base,
   Default,
+  Disabled,
   WithExternalStyles,
   WithDownloadStyles,
-  PrimaryLink,
   Sidecar,
 };
+
+export default vitalLink;

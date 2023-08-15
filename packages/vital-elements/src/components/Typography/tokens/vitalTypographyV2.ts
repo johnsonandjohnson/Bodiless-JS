@@ -35,10 +35,10 @@ export default asTokenGroup(TypographyMeta)({
  * @todo: Move the token group to vitalTypography.ts as soon as all the V1 tokens are deprecated.
  */
 
-  HeadlineXXLarge: 'text-34.8px lg:text-39.8px leading-5 font-normal font-2',
-  HeadlineXLarge: 'text-29px lg:text-33.2px leading-5 font-normal font-2',
-  HeadlineLarge: 'text-24.2px lg:text-27.6px leading-5 font-normal font-2',
-  HeadlineMedium: 'text-20.2px lg:text-23px leading-5 font-normal font-2',
+  HeadlineXXLarge: 'text-34.84px lg:text-39.81px leading-5 font-normal font-2',
+  HeadlineXLarge: 'text-29.03px lg:text-33.18px leading-5 font-normal font-2',
+  HeadlineLarge: 'text-24.19px lg:text-27.65px leading-5 font-normal font-2',
+  HeadlineMedium: 'text-20.16px lg:text-23.04px leading-5 font-normal font-2',
   HeadlineSmall: 'text-15.2px lg:text-19.2px leading-5 font-normal font-2',
   BodyLargeRegular: 'text-15.2px lg:text-19.2px leading-6 font-normal font-2',
   BodyLargeUnderlined: 'text-15.2px lg:text-19.2px leading-6 font-normal underline font-2',
@@ -48,10 +48,10 @@ export default asTokenGroup(TypographyMeta)({
   BodyUnderlined: 'text-14px lg:text-16px leading-6 font-normal underline font-2',
   BodyBold: 'text-14px lg:text-16px leading-6 font-bold font-2',
   BodyBoldUnderlined: 'text-14px lg:text-16px leading-6 font-bold underline font-2',
-  EyebrowRegular: 'text-11.7px lg:text-13.3px leading-6 font-normal font-2 uppercase',
-  EyebrowBold: 'text-11.7px lg:text-13.3px leading-6 font-bold font-2 uppercase',
-  BodySmallRegular: 'text-11.7px lg:text-13.3px leading-6 font-normal font-2',
-  BodySmallUnderlined: 'text-11.7px lg:text-13.3px leading-6 font-normal font-2',
-  BodySmallBold: 'text-11.7px lg:text-13.3px leading-6 font-bold font-2',
-  BodySmallBoldUnderlined: 'text-11.7px lg:text-13.3px leading-6 font-bold font-2',
+  EyebrowRegular: 'text-11.67px lg:text-13.33px leading-6 font-normal font-2 underline uppercase',
+  EyebrowBold: 'text-11.67px lg:text-13.33px leading-6 font-bold font-2 underline uppercase',
+  BodySmallRegular: 'text-11.67px lg:text-13.33px leading-6 font-normal font-2',
+  BodySmallUnderlined: 'text-11.67px lg:text-13.33px leading-6 font-normal underline font-2',
+  BodySmallBold: 'text-11.67px lg:text-13.33px leading-6 font-bold font-2',
+  BodySmallBoldUnderlined: 'text-11.67px lg:text-13.33px leading-6 font-bold underline font-2',
 });

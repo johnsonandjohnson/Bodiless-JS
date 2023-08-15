@@ -39,8 +39,13 @@ const LinkBase: FC<PropsWithChildren<LinkBaseProps>> = ({ components: C, childre
 
 const asLinkToken = asVitalTokenSpec<LinkComponents>();
 
+const linkToken = asLinkToken();
+type LinkToken = typeof linkToken;
+
 const LinkClean = designable(linkComponents, 'Link')(LinkBase);
 const LinkStatic = withoutHydrationInline()(LinkClean);
 
 export default LinkClean;
 export { asLinkToken, LinkStatic };
+
+export type { LinkToken };
