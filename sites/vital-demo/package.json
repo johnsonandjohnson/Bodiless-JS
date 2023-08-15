@@ -40,6 +40,7 @@
     "@bodiless/vital-templates": "^1.0.0-rc.42",
     "@bodiless/vital-youtube": "^1.0.0-rc.42",
     "@bodiless/webpack": "^1.0.0-rc.42",
+    "@mdx-js/react": "^2.3.0",
     "@uiw/react-md-editor": "^3.19.7",
     "autoprefixer": "^10.4.2",
     "docsify-cli": "^4.3.0",

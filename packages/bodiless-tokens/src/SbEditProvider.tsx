@@ -13,7 +13,9 @@
  */
 
 /* eslint-disable class-methods-use-this */
-import React, { FC, useEffect, useMemo } from 'react';
+import React, {
+  FC, PropsWithChildren, useEffect, useMemo
+} from 'react';
 import { HOC, as, Enhancer } from '@bodiless/fclasses';
 import {
   BodilessStoreProvider, useEditContext, BodilessMobxStore,
@@ -85,7 +87,7 @@ const writeDataToSessionStorage = (slug: string, data: object) => {
   }
 };
 
-const SbSessionStoreProvider: FC<{ slug: string }> = props => {
+const SbSessionStoreProvider: FC<PropsWithChildren<{ slug: string }>> = props => {
   const { slug, ...rest } = props;
   const store = useMemo(() => new SbStore(slug), []);
   const data = useMemo(() => getFromSessionStorage(slug), []);

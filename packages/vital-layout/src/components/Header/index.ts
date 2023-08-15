@@ -12,24 +12,24 @@
  * limitations under the License.
  */
 
-import type { TokenDemoSpec } from '@bodiless/tokens';
+// import type { TokenDemoSpec } from '@bodiless/tokens';
 import HeaderClean, { asHeaderToken, HeaderStatic } from './HeaderClean';
 import vitalHeader from './tokens';
 import vitalHeaderBase from './tokens/vitalHeader';
+import type { VitalHeader } from './tokens/vitalHeader';
 
-const vitalHeaderSpec: TokenDemoSpec = {
-  title: 'Global Components/Header',
-  component: HeaderClean,
-  tokens: vitalHeader,
-  defaultTokens: ['Default'],
-  componentExportName: 'HeaderClean',
-  tokensExportName: 'vitalHeader',
-};
+// const vitalHeaderSpec: TokenDemoSpec = {
+//   title: 'Global Components/Header',
+//   component: HeaderClean,
+//   tokens: vitalHeader,
+//   defaultTokens: ['Default'],
+//   componentExportName: 'HeaderClean',
+//   tokensExportName: 'vitalHeader',
+// };
 
 export {
-  HeaderClean, asHeaderToken, vitalHeader, vitalHeaderBase, vitalHeaderSpec, HeaderStatic
+  HeaderClean, asHeaderToken, vitalHeader, vitalHeaderBase, HeaderStatic
 };
 
 export type { HeaderComponents, HeaderProps } from './types';
-import type { VitalHeader } from './tokens/vitalHeader';
 export type { VitalHeader };

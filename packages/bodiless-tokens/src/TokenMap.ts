@@ -21,7 +21,9 @@ export type Tokens = {
 };
 
 const extractMeta = (token?: Token): TokenMeta => {
-  if (typeof token === 'function') return token?.meta || {};
+  // TODO  error TS2339: Property 'meta' does not exist on type 'HOC<{}, {}, {}>'.
+  // if (typeof token === 'function') return token?.meta || {};
+  if (typeof token === 'function') return {};
   if (typeof token === 'string') return {};
   return (token as TokenSpec<any, any>)?.Meta || {};
 };

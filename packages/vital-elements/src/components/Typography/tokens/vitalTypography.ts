@@ -12,12 +12,12 @@
  * limitations under the License.
  */
 
-import { addProps, as, flowHoc } from '@bodiless/fclasses';
+import { addProps, as } from '@bodiless/fclasses';
 import { asElementToken } from '../../../util';
 import { vitalColor } from '../../Color';
 import { vitalFontSize } from '../../FontSize';
 import { vitalTextDecoration } from '../../TextDecoration';
-import { TypographyMeta } from '../meta';
+import { TypographyMeta as Meta } from '../meta';
 import vitalTypographyV2 from './vitalTypographyV2';
 
 const Link = asElementToken({
@@ -28,7 +28,7 @@ const Link = asElementToken({
       vitalColor.TextPrimaryInteractive,
     ),
   },
-  Meta: TypographyMeta,
+  Meta,
 });
 
 const H1 = asElementToken({
@@ -49,7 +49,7 @@ const H1 = asElementToken({
   Spacing: {
     _: 'mt-10 mb-5 lg:mb-6',
   },
-  Meta: TypographyMeta,
+  Meta,
 });
 
 const H2 = asElementToken({
@@ -70,7 +70,7 @@ const H2 = asElementToken({
   Spacing: {
     _: 'mb-5',
   },
-  Meta: TypographyMeta,
+  Meta,
 });
 
 const H3 = asElementToken({
@@ -91,7 +91,7 @@ const H3 = asElementToken({
   Spacing: {
     _: 'mb-5',
   },
-  Meta: TypographyMeta,
+  Meta,
 });
 
 const H4 = asElementToken({
@@ -112,7 +112,7 @@ const H4 = asElementToken({
   Spacing: {
     _: 'mb-5.75 lg:mb-9',
   },
-  Meta: TypographyMeta,
+  Meta,
 });
 
 const H5 = asElementToken({
@@ -133,7 +133,7 @@ const H5 = asElementToken({
   Spacing: {
     _: 'mb-5 lg:mb-4.5',
   },
-  Meta: TypographyMeta,
+  Meta,
 });
 
 const HeaderLink = asElementToken({
@@ -158,7 +158,7 @@ const Body = asElementToken({
   Spacing: {
     _: 'mb-6',
   },
-  Meta: TypographyMeta,
+  Meta,
 });
 
 const Eyebrow = asElementToken({
@@ -175,7 +175,7 @@ const Eyebrow = asElementToken({
   Spacing: {
     _: 'mb-3',
   },
-  Meta: TypographyMeta,
+  Meta,
 });
 const EyebrowNoSpacing = asElementToken({
   ...Eyebrow,
@@ -194,14 +194,7 @@ const Rest = asElementToken({
       vitalColor.TextPrimaryBodyCopy,
     ),
   },
-  Meta: TypographyMeta,
-});
-
-const WithDemoContent = asElementToken({
-  Meta: flowHoc.meta.term('Group')('Demo'),
-  Core: {
-    _: addProps({ children: 'Lorem ipsum dolor sit amet' }),
-  },
+  Meta,
 });
 
 // Variant testing autoprefixer
@@ -213,7 +206,19 @@ const Gradient = asElementToken({
     _: as('bg-clip-text text-transparent bg-gradient-to-r',
       'from-vital-secondary-eyebrow via-vital-primary-interactive to-vital-secondary-eyebrow',),
   },
-  Meta: TypographyMeta,
+  Meta,
+});
+
+const WithDemoContent = asElementToken({
+  Meta: {
+    categories: {
+      Type: ['Element'],
+      Group: ['Demo'],
+    },
+  },
+  Core: {
+    _: addProps({ children: 'Lorem ipsum dolor sit amet' }),
+  },
 });
 
 /**
