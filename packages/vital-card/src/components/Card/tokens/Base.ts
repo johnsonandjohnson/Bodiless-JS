@@ -139,7 +139,7 @@ const WithPrimaryTextLink = asCardToken({
     CTALink: replaceWith(LinkClean),
   },
   Theme: {
-    CTALink: vitalLink.PrimaryLink,
+    CTALink: vitalLink.Default,
   },
   Meta: extendMeta(
     flowHoc.meta.term('CTA Style')('Text Link'),

@@ -16,22 +16,28 @@ import { VitalElement, VitalPage } from './vital-page';
 export class VitalTypographyPage extends VitalPage {
   readonly typographyElements: string[];
 
-  readonly linkId: string;
-
   constructor() {
     super('/styleguide/typography/');
-    this.linkId = 'Link';
     this.typographyElements = [
-      'H1',
-      'H2',
-      'H3',
-      'H4',
-      'H5',
-      'Body',
-      'Eyebrow',
-      'Gradient',
-      'Rest',
-      this.linkId
+      'HeadlineXXLarge',
+      'HeadlineXLarge',
+      'HeadlineLarge',
+      'HeadlineMedium',
+      'HeadlineSmall',
+      'BodyLargeRegular',
+      'BodyLargeUnderlined',
+      'BodyLargeBold',
+      'BodyLargeBoldUnderlined',
+      'BodyRegular',
+      'BodyUnderlined',
+      'BodyBold',
+      'BodyBoldUnderlined',
+      'BodySmallRegular',
+      'BodySmallUnderlined',
+      'BodySmallBold',
+      'BodySmallBoldUnderlined',
+      'EyebrowRegular',
+      'EyebrowBold'
     ];
   }
 
