@@ -13,7 +13,7 @@
  */
 
 import React, {
-  FC, useState, createContext, useContext,
+  FC, useState, createContext, useContext, PropsWithChildren,
 } from 'react';
 import { HOC } from '@bodiless/fclasses';
 
@@ -76,7 +76,9 @@ export const useIsLibraryItem = () => useLibraryItemContext().isLibraryItem;
  * A `LibraryItemProvider` indicates whether the current Flow Container Item is a Library Item.
  * @see LibraryItemProviderProps.
  */
-export const LibraryItemProvider: FC<LibraryItemProviderProps> = ({ isLibrary, children }) => {
+export const LibraryItemProvider: FC<PropsWithChildren<LibraryItemProviderProps>> = (
+  { isLibrary, children }
+) => {
   const [isLibraryItem, setIsLibraryItem] = useState(isLibrary);
 
   return (
@@ -87,7 +89,7 @@ export const LibraryItemProvider: FC<LibraryItemProviderProps> = ({ isLibrary, c
 };
 
 /**
- * HOC that wrapps component in LibraryItemProvider.
+ * HOC that wraps component in LibraryItemProvider.
  * When wrapped in `LibraryItemProvider`, it checks whether FlowContainerItem
  * is actually a Library Item by checking its `FlowContainerItem.type` prefix.
  * @see LibraryItemContextProps

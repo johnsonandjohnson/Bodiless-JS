@@ -15,7 +15,7 @@
 import React, { Fragment } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
-import { flowHoc, withTokenFilter } from '../src';
+import { flowHoc, withTokenFilter, HOCWithMeta } from '../src';
 import type { HOC } from '../src';
 
 const { meta } = flowHoc;
@@ -33,10 +33,6 @@ describe('flowHoc', () => {
     it('meta.term creates an object of the right shape', () => {
       const t = meta.term('foo')('bar');
       expect(t).toEqual({ categories: { foo: ['bar'] } });
-    });
-    it('meta.cat creates an object of the right shape', () => {
-      const t = meta.cat('foo');
-      expect(t).toEqual({ categories: { foo: [] } });
     });
   });
 
@@ -70,7 +66,7 @@ describe('flowHoc', () => {
 
   describe('HOC order', () => {
     const Base = () => <></>;
-    it('Applies hocs left to right', () => {
+    it('Applies HOCs left to right', () => {
       const asTest = flowHoc(
         addProp('foo'),
         addProp('foo', 'bar'),
@@ -80,7 +76,7 @@ describe('flowHoc', () => {
       expect(wrapper.find(Base).prop('foo')).toBe('bar');
     });
 
-    it('Applies hocs left to right including nested tokens', () => {
+    it('Applies HOCs left to right including nested tokens', () => {
       const asFoo = flowHoc(
         addProp('foo'),
       );
@@ -185,7 +181,9 @@ describe('flowHoc', () => {
       addProp('bar'),
     );
 
-    const withoutFiltered = withTokenFilter(t => !t.meta?.categories?.Type?.includes('Filtered'));
+    const withoutFiltered = withTokenFilter(
+      (t: HOCWithMeta) => !t.meta?.categories?.Type?.includes('Filtered')
+    );
 
     it('Filters flat tokens', () => {
       const asTest = flowHoc(asFoo, asBar);

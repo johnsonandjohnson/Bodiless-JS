@@ -14,12 +14,15 @@
 import { withoutProps, flowHoc } from '@bodiless/fclasses';
 import {
   withContextActivator,
-  withNode,
-  withNodeDataHandlers,
   withLocalContextMenu,
   ifEditable,
-  withNodeKey,
 } from '@bodiless/core';
+
+import {
+  withNode,
+  withNodeDataHandlers,
+  withNodeKey,
+} from '@bodiless/data';
 import { withTagButton, TagsNodeType } from '../TagButton';
 import type { UseTagButtonOverrides } from '../TagButton';
 
@@ -27,7 +30,7 @@ const emptyValue: TagsNodeType = {
   tags: [],
 };
 
-// Composed hoc which creates editable version of the component.
+// Composed HOC which creates editable version of the component.
 // Note - the order is important. In particular:
 // - the node data handlers must be outermost
 // - anything relying on the context (activator, indicator) must be
@@ -42,7 +45,7 @@ const asTaggableItem = (
     'registerSuggestions',
     'getSuggestions',
     'allowNew',
-    'noSuggestionsText',
+    'noOptionsText',
     'componentData',
     'inputAttributes',
     'seeAllText',

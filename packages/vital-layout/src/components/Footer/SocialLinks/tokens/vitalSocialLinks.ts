@@ -17,8 +17,9 @@ import {
   startWith,
 } from '@bodiless/fclasses';
 import { asSocialLinksToken } from '../SocialLinksClean';
+import type { SocialLinksToken } from '../SocialLinksClean';
 
-const Base = asSocialLinksToken({
+const Default = asSocialLinksToken({
   Components: {
     Wrapper: startWith(Div),
   },
@@ -29,11 +30,28 @@ const Base = asSocialLinksToken({
   }
 });
 
-const Default = asSocialLinksToken({
-  ...Base,
-});
+/**
+ * Tokens for the vital Social Links
+ *
+ * @category Token Collection
+ * @see [[SocialLinksClean]]
+ */
+export interface VitalSocialLinks {
+  /**
+   * Setups social links with some styling.
+   */
+  Default: SocialLinksToken,
+}
 
-export default {
-  Base,
+/**
+ * Tokens for Vital Social Links
+ *
+ * @category Token Collection
+ * @see [[VitalSocialLinks]]
+ * @see [[SocialLinksClean]]
+ */
+const vitalSocialLinks: VitalSocialLinks = {
   Default,
 };
+
+export default vitalSocialLinks;

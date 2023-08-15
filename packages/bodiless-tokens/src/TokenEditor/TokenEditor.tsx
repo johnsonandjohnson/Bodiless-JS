@@ -20,7 +20,7 @@ import {
 import { FlowContainer } from '@bodiless/layouts-ui';
 import {
   useNode, WithNodeKeyProps, withNodeKey, withNodeDataHandlers, withNode, WithNodeProps,
-} from '@bodiless/core';
+} from '@bodiless/data';
 import flow from 'lodash/flow';
 import TokenPrinter, { TokenPrinterProps } from '../TokenPrinter';
 import { withTokenNamesFromData } from '../withTokenSelector';
@@ -58,7 +58,7 @@ const TokenEditorClean = designable<TokenEditorComponents>(
 /**
  * @private
  *
- * Creates an HOC which wraps the target component with the node belonging to
+ * Creates a HOC which wraps the target component with the node belonging to
  * the first item in the flow container whose data is located at the specified
  * node key.
  *

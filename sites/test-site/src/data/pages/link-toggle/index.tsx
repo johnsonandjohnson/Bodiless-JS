@@ -20,7 +20,7 @@ import {
 import { asBodilessLink } from '@bodiless/components-ui';
 import { A, H2, H1 } from '@bodiless/fclasses';
 import { flowRight } from 'lodash';
-import { withNode, withNodeKey } from '@bodiless/core';
+import { withNode, withNodeKey } from '@bodiless/data';
 import Layout from '../../../components/Layout';
 import {
   asEditableLink, asLink, asHeader1, asHeader2,

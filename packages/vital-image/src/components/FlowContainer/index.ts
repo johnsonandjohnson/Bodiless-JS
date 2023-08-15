@@ -12,42 +12,10 @@
  * limitations under the License.
  */
 
-import { asFluidToken, asMetaToken } from '@bodiless/vital-elements';
+import vitalImageFlowContainer from './tokens';
 import {
-  Img, on, varyDesigns, withDesign, as, flowHoc
-} from '@bodiless/fclasses';
-import { vitalImage } from '../Img';
+  VitalImageFlowContainer
+} from './tokens/vitalImageFlowContainer';
 
-// For the base variation, we apply the default token to the design key of
-// the designable element. This can be overridden from the design context.
-const baseVariation = {
-  Image: on(Img)(withDesign({
-    Image: vitalImage.Default,
-  })),
-};
-
-// For variations, we apply tokens directly (not to the design key). These will
-// not be overridden from the design context. This allows a site to override
-// the base image globally, while still preserving variations in the flow container.
-const placeholderVariations = {
-  Square: as(
-    vitalImage.Default,
-    asMetaToken(flowHoc.meta.term('Placeholder')('Square')),
-  ),
-  Landscape: as(
-    vitalImage.Default,
-    vitalImage.WithLandscapePlaceholder,
-  ),
-};
-
-/**
- * Token which adds image variations to a flow container.
- */
-const WithImageVariations = asFluidToken({
-  Components: varyDesigns(
-    baseVariation,
-    placeholderVariations,
-  ),
-});
-
-export const vitalImageFlowContainer = { WithImageVariations };
+export { vitalImageFlowContainer };
+export type { VitalImageFlowContainer };

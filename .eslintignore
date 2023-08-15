@@ -1,11 +1,17 @@
 html.js
 **/lib
+**/doc
+packages/bodiless-backend/bin
 packages/gatsby-theme-bodiless/dist
+packages/gatsby-theme-bodiless/cjs
 packages/gatsby-theme-bodiless/index.js
 packages/gatsby-theme-bodiless/index.d.ts
 packages/bodiless-migration-tool/conf
 packages/bodiless-migration-tool/tests/data
 packages/bodiless-migration-tool/tests/testserver
+packages/gatsby-plugin-akamai-auth/dist
+packages/gatsby-plugin-akamai-auth/cjs
+packages/gatsby-plugin-akamai-auth/index.js
 **/public
 **/.cache
 **/static

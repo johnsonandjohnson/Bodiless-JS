@@ -14,10 +14,9 @@
 
 import {
   withMenuOptions,
-  useNode,
   TMenuOption,
 } from '@bodiless/core';
-
+import { useNode } from '@bodiless/data';
 import type { LinkData, ExtraLinkOptions } from './types';
 
 const useGoToLinkMenuOptions = (useOverrides: () => ExtraLinkOptions) => {

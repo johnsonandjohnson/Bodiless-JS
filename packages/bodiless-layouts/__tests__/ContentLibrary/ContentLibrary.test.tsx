@@ -13,13 +13,16 @@
  */
 
 import {
-  PageEditContext, useNode, DefaultContentNode, NodeProvider,
+  PageEditContext,
   PageContextProvider,
+} from '@bodiless/core';
+import {
+  useNode, DefaultContentNode, NodeProvider,
   withNodeKey,
   withNode,
   ContentNode,
-} from '@bodiless/core';
-import React, { FC } from 'react';
+} from '@bodiless/data';
+import React, { FC, PropsWithChildren } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount, ReactWrapper } from 'enzyme';
 import flow from 'lodash/flow';
@@ -52,7 +55,7 @@ const createMockStore = (data: any) => {
   return { actions, getters };
 };
 
-const MockNodeProvider: FC<{ store: any }> = ({ store, children }: any) => {
+const MockNodeProvider: FC<PropsWithChildren<{ store: any }>> = ({ store, children }: any) => {
   const { node } = useNode() as { node: DefaultContentNode<any> };
   const { actions, getters } = store;
   const { path } = node;

@@ -29,8 +29,8 @@ import {
   Div,
   Design,
   flowHoc,
+  A,
 } from '@bodiless/fclasses';
-import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import {
   asBold,
   asItalic,
@@ -63,7 +63,7 @@ const basicDesign = {
   Bold: asBold,
   Italic: asItalic,
   Underline: asUnderline,
-  Link: flowHoc(asEditableLink(), asLink, withLinkDeserializer, startWith(GatsbyLink)),
+  Link: flowHoc(asEditableLink(), asLink, withLinkDeserializer, startWith(A)),
   ...simpleDesign,
   AlignLeft: asAlignLeft,
   AlignRight: asAlignRight,
@@ -81,7 +81,7 @@ const fullFeaturedDesign: Design = {
   Italic: asItalic,
   Underline: asUnderline,
   StrikeThrough: flowHoc(asStrikeThrough, withStrikeThroughMeta),
-  Link: flowHoc(asEditableLink(), asLink, withLinkDeserializer, startWith(GatsbyLink)),
+  Link: flowHoc(asEditableLink(), asLink, withLinkDeserializer, startWith(A)),
   SuperScript: asSuperScript,
   AlignLeft: asAlignLeft,
   AlignRight: asAlignRight,

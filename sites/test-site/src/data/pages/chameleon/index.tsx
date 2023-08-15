@@ -13,7 +13,7 @@
  */
 
 import React, {
-  FC, useState, useCallback, createContext, useContext, ComponentType, ReactNode,
+  FC, useState, useCallback, createContext, useContext, ComponentType, ReactNode, PropsWithChildren,
 } from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
@@ -26,7 +26,6 @@ import {
   extendDesign,
   varyDesigns,
 } from '@bodiless/fclasses';
-import { observer } from 'mobx-react';
 
 import {
   asBodilessChameleon, withChameleonContext, withChameleonButton,
@@ -40,7 +39,7 @@ import {
 import { withAllTitlesFromTerms, ComponentSelectorScale } from '@bodiless/layouts';
 
 import {
-  useMenuOptionUI, asBodilessComponent,
+  useMenuOptionUI, asBodilessComponent, observer
 } from '@bodiless/core';
 import { asHeader1, asHeader2 } from '../../../components/Elements.token';
 import Layout from '../../../components/Layout';
@@ -216,7 +215,7 @@ const addToCartButtonOptions = {
         <ComponentFormTitle>Add-to-Cart Configuration</ComponentFormTitle>
         <ComponentFormLabel>
           Product ID
-          <ComponentFormText field="productId" />
+          <ComponentFormText name="productId" />
         </ComponentFormLabel>
         {unwrap && (
           <ComponentFormUnwrapButton onClick={unwrap}>
@@ -278,7 +277,7 @@ const AvailabilityAccordionToggle = flowHoc(
 )(AvailabilityAccordion);
 
 const LayoutContext = createContext<string|undefined>(undefined);
-const Example: FC = ({ children }) => {
+const Example: FC<PropsWithChildren> = ({ children }) => {
   const widthClass = useContext(LayoutContext) || 'w-1/3';
   const className = `${widthClass} p-5`;
   return (
@@ -301,7 +300,7 @@ const ExampleLayoutProvider = flowHoc(
     'One-Half Width Items': addProps({ value: 'w-1/2' }),
     'Full Width Items': addProps({ value: 'w-full' }),
   }),
-)(LayoutContext.Provider) as ComponentType;
+)(LayoutContext.Provider) as ComponentType<PropsWithChildren>;
 
 const H1 = flowHoc(addClasses('pt-5'), asHeader1)(H1$);
 const H2 = flowHoc(addClasses('pt-5'), asHeader2)(H2$);

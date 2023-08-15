@@ -12,10 +12,11 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { HOC } from '@bodiless/fclasses';
 import { withMetaForm } from '@bodiless/components';
-import { useMenuOptionUI, useNode } from '@bodiless/core';
+import { useMenuOptionUI } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 
 /**
  * isHomePage verify if the page is a home page.
@@ -63,7 +64,7 @@ export const SocialShareFormImage = () => {
   const { ComponentFormText, ComponentFormDescription } = useMenuOptionUI();
   return (
     <>
-      <ComponentFormText field={metaSocialShareImageName} id="social-share-img-src" />
+      <ComponentFormText name={metaSocialShareImageName} id="social-share-img-src" />
       <ComponentFormDescription>
         Provide an absolute image url.
       </ComponentFormDescription>
@@ -80,7 +81,7 @@ export const withMetaHtmlAttributes = (
   dir: string,
   nodeKey: string,
   nodeCollection: string | undefined,
-): HOC => HelmetComponent => props => {
+): HOC<PropsWithChildren> => HelmetComponent => props => {
   const { children, ...rest } = props;
   const { node } = useNode(nodeCollection);
   const childNode = node.child(nodeKey);

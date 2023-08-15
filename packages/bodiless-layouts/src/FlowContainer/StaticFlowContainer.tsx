@@ -12,16 +12,13 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
-import { withNode } from '@bodiless/core';
-import {
-  Div,
-  withoutProps,
-  DesignableProps,
-} from '@bodiless/fclasses';
-import { observer } from 'mobx-react';
+import React from 'react';
+import type { FC } from 'react';
+import { withNode } from '@bodiless/data';
+import { Div, withoutProps } from '@bodiless/fclasses';
+import type { DesignableProps } from '@bodiless/fclasses';
 import { useItemHandlers } from './model';
-import { FlowContainerItem, FlowContainerComponents } from './types';
+import type { FlowContainerItem, FlowContainerComponents } from './types';
 import { SelectorComponents } from '../ComponentSelector/SelectorComponents';
 
 const flowContainerComponentStart: FlowContainerComponents = {
@@ -31,7 +28,7 @@ const flowContainerComponentStart: FlowContainerComponents = {
 
 const NodeProvider = withNode(React.Fragment);
 
-const StaticFlowContainer: FC<DesignableProps> = ({ design }) => {
+const StaticFlowContainer: FC<DesignableProps & { id?: string }> = ({ design, id }) => {
   const items = useItemHandlers().getItems();
   const { components } = new SelectorComponents({
     design,
@@ -45,7 +42,7 @@ const StaticFlowContainer: FC<DesignableProps> = ({ design }) => {
   const { Wrapper, ComponentWrapper } = components;
   return (
     // When in a static mode we don't want to use `bl-*` prefixed classes.
-    <Wrapper itemCount={items.length}>
+    <Wrapper itemCount={items.length} id={id}>
       {items
         .map((flowContainerItem: FlowContainerItem) => {
           const ChildComponent = components[flowContainerItem.type];
@@ -74,4 +71,4 @@ const StaticFlowContainer: FC<DesignableProps> = ({ design }) => {
 
 StaticFlowContainer.displayName = 'FlowContainer';
 
-export default observer(StaticFlowContainer);
+export default StaticFlowContainer;

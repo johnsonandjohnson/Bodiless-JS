@@ -1,0 +1,40 @@
+import React, { FC, Fragment } from 'react';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
+import { designable, Div } from '@bodiless/fclasses';
+import type { DesignableComponentsProps } from '@bodiless/fclasses';
+import type { {{properCase componentName}}Components } from './types';
+
+type {{properCase componentName}}BaseProps = DesignableComponentsProps<{{properCase componentName}}Components>;
+
+/**
+ * The starting components for each slot.
+ */
+const {{camelCase componentName}}Components: {{properCase componentName}}Components = {
+  Wrapper: Div,
+  Slot1Wrapper: Div,
+  Slot1: Fragment,
+  Slot2Wrapper: Div,
+  Slot2: Fragment,
+};
+
+const {{properCase componentName}}Base: FC<{{properCase componentName}}BaseProps> = ({ components: C, ...rest }) => (
+  <C.Wrapper {...rest}>
+    <C.Slot1Wrapper>
+      <C.Slot1 />
+    </C.Slot1Wrapper>
+    <C.Slot2Wrapper>
+      <C.Slot2 />
+    </C.Slot2Wrapper>
+  </C.Wrapper>
+);
+
+const {{properCase componentName}}Clean = designable({{camelCase componentName}}Components, '{{properCase componentName}}')({{properCase componentName}}Base);
+
+/**
+ * A token creator that respects the {{properCase componentName}} slots.
+ *
+ * @category Token Collection
+ */
+export const as{{properCase componentName}}Token = asVitalTokenSpec<{{properCase componentName}}Components>();
+
+export default {{properCase componentName}}Clean;

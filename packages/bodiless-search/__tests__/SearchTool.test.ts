@@ -16,11 +16,13 @@ import fs from 'fs';
 import path from 'path';
 import glob from 'glob';
 import SearchTool, { SearchConfig } from '../src/SearchTool';
-import type { TLanguageSetting } from '../src/types';
+import type { TLanguageSetting, TSearchConf } from '../src/types';
 
-process.env.BODILESS_SEARCH_CONFIG = path.resolve(__dirname, '..', 'search.config.json.example');
-const config = SearchConfig.getConfig();
+const configPath = path.resolve(__dirname, '..', 'search.config.json.example');
+// We can assert as TSearchConf below since the example config file will always exist.
+const config = SearchConfig.getConfig(configPath) as TSearchConf;
 const searchTool = new SearchTool(config);
+
 describe('Search Tool', () => {
   const settings: TLanguageSetting = {
     name: 'English',
@@ -44,7 +46,7 @@ describe('Search Tool', () => {
   it('throws Error if source path does not exist', () => {
     jest.spyOn(fs, 'existsSync').mockImplementationOnce(() => false);
     expect(() => searchTool.findSourceFiles(settings)).toThrow(
-      /Invalid source path/,
+      /source path not found/,
     );
   });
 

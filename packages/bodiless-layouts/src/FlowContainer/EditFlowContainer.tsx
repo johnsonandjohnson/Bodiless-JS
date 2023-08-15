@@ -13,14 +13,14 @@
  */
 
 import React, { FC } from 'react';
-import { createHash } from 'crypto';
-import { arrayMove, SortEnd } from 'react-sortable-hoc';
-import { observer } from 'mobx-react';
+import MD5 from 'crypto-js/md5';
+import { arrayMove } from '@dnd-kit/sortable';
 import flowRight from 'lodash/flowRight';
 
 import {
-  withNode, withMenuOptions, withResizeDetector, withActivateOnEffect,
+  withMenuOptions, withResizeDetector, withActivateOnEffect, observer,
 } from '@bodiless/core';
+import { withNode } from '@bodiless/data';
 import {
   stylable, ComponentOrTag,
 } from '@bodiless/fclasses';
@@ -37,6 +37,7 @@ import {
 } from './types';
 import { ComponentDisplayModeProvider, ComponentDisplayMode } from './ComponentDisplayMode';
 import { useSelectorComponents } from '../ComponentSelector/SelectorComponents';
+import type { onSortEndArgs } from './SortableContainer';
 
 const ChildNodeProvider = withNode(React.Fragment);
 
@@ -59,7 +60,7 @@ const withKeyFromDesign = (Component: ComponentOrTag<any>) => {
       return <Component {...props} />;
     }
     const json = JSON.stringify(Object.keys(design).sort());
-    const key = createHash('md5').update(json).digest('hex');
+    const key = MD5(json).toString();
     return <Component {...props} key={key} />;
   };
   return WithKeyFromDesign;
@@ -70,7 +71,7 @@ const withKeyFromDesign = (Component: ComponentOrTag<any>) => {
  */
 const EditFlowContainer: FC<EditFlowContainerProps> = (props: EditFlowContainerProps) => {
   const {
-    design, ui, snapData, getDefaultWidth, itemButtonGroupLabel,
+    design, ui, snapData, getDefaultWidth, itemButtonGroupLabel, id
   } = props;
   const items = useItemHandlers().getItems();
   const { components } = useSelectorComponents({
@@ -94,11 +95,12 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props: EditFlowContainerP
     <ComponentDisplayModeProvider mode={ComponentDisplayMode.EditFlowContainer}>
       <Wrapper
         itemCount={items.length}
-        onSortEnd={(sort: SortEnd) => {
+        onSortEnd={(sort: onSortEndArgs) => {
           const { oldIndex, newIndex } = sort;
           setFlowContainerItems(arrayMove(items, oldIndex, newIndex));
         }}
         ui={ui}
+        id={id}
       >
         {items.map(
           (flowContainerItem: FlowContainerItem, index: number): React.ReactNode => {

@@ -33,6 +33,7 @@ import {
   designable,
   HOC,
   flowHoc,
+  DesignableComponents,
 } from '@bodiless/fclasses';
 import type { ImageData } from '@bodiless/components';
 import type {
@@ -42,10 +43,21 @@ import type {
 } from 'gatsby-image';
 import GatsbyImagePresets from './GatsbyImagePresets';
 
-type BodilessImageComponents = {
+/**
+ * Bodiless Image Components to function as either Gatsby image or plain image
+ *
+ * @category Component
+ */
+export interface BodilessImageComponents extends DesignableComponents {
+  /**
+   * Gatsby Image
+   */
   GatsbyImage: CT<GatsbyPluginImageProps>,
+  /**
+   * Plain Image
+   */
   Image: CT<any>,
-};
+}
 
 export type BodilessFluidObject = FluidObject & {
   srcSetType: string;
@@ -100,6 +112,7 @@ const getGatsbyPluginImageProps = (props: GatsbyImageProps): BodilessGatsbyImage
     ...rest
   } = props;
 
+  const gatsbyImageLoading = loading === 'auto' ? 'lazy' : loading;
   if (gatsbyImg !== undefined) {
     /**
      * fallback for placeholder, dominantColor | blurred | tracedSVG
@@ -133,7 +146,6 @@ const getGatsbyPluginImageProps = (props: GatsbyImageProps): BodilessGatsbyImage
           },
         ],
       };
-
       if (fluid.srcSetWebp) {
         const webp = {
           sizes: '',
@@ -142,7 +154,7 @@ const getGatsbyPluginImageProps = (props: GatsbyImageProps): BodilessGatsbyImage
         };
         webp.srcSet = fluid.srcSetWebp;
         webp.sizes = fluid.sizes;
-        images.sources?.push(webp);
+        images.sources?.unshift(webp);
       }
     } else {
       const fixed = ((Array.isArray(gatsbyImg.fixed) && gatsbyImg.fixed.length)
@@ -157,6 +169,14 @@ const getGatsbyPluginImageProps = (props: GatsbyImageProps): BodilessGatsbyImage
           src: fixed.src,
         },
       };
+      if (fixed.srcSetWebp) {
+        images.sources = [
+          {
+            type: 'image/webp',
+            srcSet: fixed.srcSetWebp,
+          }
+        ];
+      }
     }
 
     const image: IGatsbyImageData = {
@@ -175,6 +195,7 @@ const getGatsbyPluginImageProps = (props: GatsbyImageProps): BodilessGatsbyImage
       image,
       alt,
       backgroundColor,
+      loading: gatsbyImageLoading,
       ...rest,
     };
   }
@@ -183,6 +204,7 @@ const getGatsbyPluginImageProps = (props: GatsbyImageProps): BodilessGatsbyImage
     components,
     image: undefined,
     alt,
+    loading: gatsbyImageLoading,
     ...rest,
   };
 };
@@ -205,7 +227,6 @@ const asDesignableGatsbyImage = (ImageComponent: CT<any>) => {
       GatsbyImage,
       Image,
     } = components;
-
     if (imageData !== undefined) {
       return (
         <GatsbyImage {...omit(rest, 'canonicalPreset', '_nodeKey')} alt={alt} image={imageData} />
@@ -228,6 +249,10 @@ const asDesignableGatsbyImage = (ImageComponent: CT<any>) => {
 
 const withActivatorWrapperDefaultStyles = addClasses('bl-w-full');
 
+/**
+ * `asGatsbyImage` is a HOC that either replaces the component with GatsbyImg, if the data required
+ * for GatsbyImg is available, or it renders the input component, otherwise.
+ */
 const asGatsbyImage = flowHoc(
   // @todo this cast should not be necessary.
   asDesignableGatsbyImage as HOC,
@@ -241,6 +266,10 @@ const asGatsbyImage = flowHoc(
   }),
 );
 
+/**
+ * `isGatsbyImage` determines if the image is utlizing gatsby images.
+ * @returns Boolean
+ */
 export const isGatsbyImage = ({ gatsbyImg }: GatsbyImageProps) => gatsbyImg !== undefined;
 
 /**

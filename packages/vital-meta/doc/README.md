@@ -1,15 +1,7 @@
-# VitalDS tokens for adding site metatags.
+# Vital Meta
 
-- Provides main component as cxMeta
-- 2 categories are available - SEO & Share
+The Vital Design System provides some default meta tags via the Vital Meta component. These meta
+tags are divided into two categories:
 
-## Usage
-
-```js
-import Helmet from 'react-helmet';
-import { as } from '@canvasx/elements';
-import { vitalMeta } from '@canvasx/meta';
-
-const SeoMetaHelmet = as(vitalMeta.SEO)(Helmet);
-const ShareMetaHelmet = as(vitalMeta.Share)(Helmet);
-```
+- [SEO](./SEO)
+- [Share](./Share)

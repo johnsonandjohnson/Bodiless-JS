@@ -13,43 +13,55 @@
  */
 
 import {
-  on,
   as,
-  Img,
-  addProps,
+  flowIf,
+  Fragment,
+  replaceWith,
+  TokenCollection,
 } from '@bodiless/fclasses';
-import { vitalImage } from '@bodiless/vital-image';
-import { LayoutClean, vitalLayout } from '@bodiless/vital-layout';
+import { vitalLayout } from '@bodiless/vital-layout';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
-import { withNodeKey } from '@bodiless/core';
-import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
-import { asGenericTemplateToken } from '../GenericTemplateClean';
-import { GenericTemplateNodeKeys } from '../constants';
+import { withNode, withNodeKey, useNode } from '@bodiless/data';
+import { vitalSpacing } from '@bodiless/vital-elements';
+import { vitalBreadcrumbs } from '@bodiless/vital-navigation';
+import { asGenericTemplateToken, GenericTemplateToken } from '../GenericTemplateClean';
+import { TemplateNodeKeys } from '../../TemplatesNodeKeys';
+import { vitalHero } from '../../Hero';
+import { GenericTemplateComponents } from '../types';
+
+const isHomePage = () => useNode().node.pagePath === '/';
+
+const WithNoBreadcrumbsOnHomePage = asGenericTemplateToken({
+  Flow: flowIf(isHomePage),
+  Components: {
+    BreadcrumbWrapper: replaceWith(Fragment),
+    Breadcrumb: replaceWith(Fragment),
+  },
+});
 
 const Default = asGenericTemplateToken({
   Components: {
-    PageWrapper: on(LayoutClean)(vitalLayout.Default),
-    // @todo breadcrumb placeholder
-    Breadcrumb: addProps({ children: 'Breadcrumb Placeholder', }),
-    // @todo in Hero ticket is change this to chameleon.
-    TopContent: on(Img)(vitalImage.Default, vitalImage.WithLandscapePlaceholder),
+    PageWrapper: vitalLayout.Default,
+    Breadcrumb: as(vitalBreadcrumbs.Default),
+    TopContent: vitalHero.Default,
     Content: as(vitalFlowContainer.Default),
     BottomContent: as(vitalFlowContainer.Default),
   },
   Schema: {
-    TopContent: withNodeKey(GenericTemplateNodeKeys.TopContent),
-    Content: withNodeKey(GenericTemplateNodeKeys.Content),
-    BottomContent: withNodeKey(GenericTemplateNodeKeys.BottomContent),
+    TopContent: as(withNode, withNodeKey(TemplateNodeKeys.TopContent)),
+    Content: withNodeKey(TemplateNodeKeys.Content),
+    BottomContent: withNodeKey(TemplateNodeKeys.BottomContent),
   },
   Spacing: {
-    TopContent: vitalSpacing.WithSiteXLConstraint,
     BreadcrumbWrapper: as(
       vitalSpacing.WithSiteMargin,
       vitalSpacing.WithSiteXLConstraint,
       'my-2.5',
     ),
-    // @todo move styling of breadcrumb to breadcrumb component when it exists.
-    Breadcrumb: vitalTypography.Rest,
+    TopWrapper: as(
+      vitalSpacing.GutterBottom,
+      vitalSpacing.WithSiteXLConstraint
+    ),
     ContentWrapper: as(
       vitalSpacing.WithSiteMargin,
       vitalSpacing.WithSiteXLConstraint
@@ -59,8 +71,31 @@ const Default = asGenericTemplateToken({
       vitalSpacing.WithSiteXLConstraint
     ),
   },
+  Compose: {
+    WithNoBreadcrumbsOnHomePage,
+  },
+  Meta: {
+    title: 'Default',
+  },
 });
 
-export default {
+const Generic = asGenericTemplateToken({
+  ...Default,
+  Meta: {
+    title: 'Generic',
+  },
+});
+
+interface VitalGenericTemplate extends TokenCollection<GenericTemplateComponents, {}> {
+  Default: GenericTemplateToken,
+  Generic: GenericTemplateToken,
+  WithNoBreadcrumbsOnHomePage: GenericTemplateToken,
+}
+
+const vitalGenericTemplate: VitalGenericTemplate = {
   Default,
+  Generic,
+  WithNoBreadcrumbsOnHomePage,
 };
+
+export default vitalGenericTemplate;

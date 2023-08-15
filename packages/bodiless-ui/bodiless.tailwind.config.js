@@ -57,11 +57,9 @@ const remGrid = {
 const tailwindcssDir = require('tailwindcss-dir');
 
 module.exports = {
-  safelist: [
-    {
-      pattern: /^bl-/, // Covers all bl-classes
-      variants: ['first', 'last', 'ltr', 'rtl', 'hover', 'group-hover', 'sm', 'md', 'lg'],
-    },
+  content: [
+    '../bodiless-*/src/**/!(*.d).{ts,js,jsx,tsx}',
+    '../fclasses/src/**/!(*.d).{ts,js,jsx,tsx}'
   ],
   prefix: 'bl-',
   theme: {

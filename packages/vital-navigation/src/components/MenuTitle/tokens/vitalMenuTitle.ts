@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { withNodeKey, withSidecarNodes } from '@bodiless/core';
+import { withNodeKey, withSidecarNodes } from '@bodiless/data';
 import {
   Div,
   as,
@@ -40,11 +40,11 @@ const Default = asMenuTitleToken({
   Theme: {
     Link: as(vitalLink.WithDownloadStyles, vitalLink.WithExternalStyles),
   },
-  Editors: {
+  Components: {
     Title: vitalEditorPlain.Default,
+    Link: asMenuLink(withBodilessLinkToggle(asBodilessLink, startWith(Div), true)),
   },
   Schema: {
-    Link: asMenuLink(withBodilessLinkToggle(asBodilessLink, startWith(Div), true)),
     Title: withNodeKey('text'),
   },
   Content: {

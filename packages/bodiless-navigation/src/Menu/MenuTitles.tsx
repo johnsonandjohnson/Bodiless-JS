@@ -15,12 +15,12 @@
 import React, { ComponentType, FC } from 'react';
 import {
   withSidecarNodes, withNode, withNodeKey,
-} from '@bodiless/core';
+} from '@bodiless/data';
 import { asEditable, withBodilessLinkToggle } from '@bodiless/components';
 import { asBodilessLink } from '@bodiless/components-ui';
 import { CardClean } from '@bodiless/card';
 import {
-  A, HOC, flowHoc, Fragment, designable, TokenDef,
+  A, HOC, flowHoc, Fragment, designable, HOCDef,
   withDesign, startWith, DesignableComponentsProps,
 } from '@bodiless/fclasses';
 
@@ -84,7 +84,7 @@ const withDefaultMenuTitleEditors = withDesign({
  */
 const withMenuTitleEditors = <P extends object>(
   withTitleEditors: HOC = withDefaultMenuTitleEditors,
-  ...tokenDefs: TokenDef[]
+  ...tokenDefs: HOCDef[]
 ) => withDesign({
     Title: flowHoc(withTitleEditors, ...tokenDefs),
   });

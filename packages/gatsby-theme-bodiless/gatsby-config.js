@@ -15,8 +15,8 @@
 const path = require('path');
 const fg = require('fast-glob');
 const fs = require('fs');
-const { getDisabledPages } = require('@bodiless/components/node-api');
-const { createDefaultContentPlugins } = require('./dist/DefaultContent');
+const { getDisabledPages } = require('@bodiless/page/lib/cjs/NodeApi');
+const { createDefaultContentPlugins } = require('./cjs/dist/DefaultContent');
 
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
@@ -59,14 +59,22 @@ const plugins = [
     },
   },
   {
+    resolve: 'gatsby-plugin-env-variables',
+    options: {
+      allowList: ['BODILESS_GOOGLE_YOUTUBE_API_KEY']
+    },
+  },
+  {
     resolve: 'gatsby-plugin-sharp',
   },
   'gatsby-transformer-sharp',
-  'gatsby-plugin-image',
   // 'gatsby-plugin-offline',
   // 'gatsby-plugin-remove-serviceworker',
 ];
 
+if (!process.env.BODILESS_GATSBY_PLUGIN_IMAGE_OMIT || process.env.NODE_ENV === 'development') {
+  plugins.push('gatsby-plugin-image');
+}
 /**
  * Google Fonts plugin.
  */

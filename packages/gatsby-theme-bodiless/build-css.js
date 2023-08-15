@@ -40,6 +40,8 @@ if (!tailwindThemeEnabled) {
         postCssPlugins: [
           // eslint-disable-next-line global-require
           require('tailwindcss')(tailWindConfigFile),
+          // eslint-disable-next-line global-require
+          require('autoprefixer')(),
         ],
       },
     });

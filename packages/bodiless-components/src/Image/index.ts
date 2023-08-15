@@ -12,11 +12,15 @@
  * limitations under the License.
  */
 
-export type { AsBodilessImage, ImageToken, Data as ImageData } from './Image';
+export type {
+  AsBodilessImage,
+  ImageToken,
+  Data as ImageData,
+  TImagePickerUI
+} from './Image';
 export {
   default as Image,
   asBodilessImage,
-  TImagePickerUI,
   withImagePlaceholder,
   DropZonePlugin as ImageDropZone,
 } from './Image';

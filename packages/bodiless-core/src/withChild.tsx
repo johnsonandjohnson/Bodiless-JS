@@ -33,7 +33,7 @@ type InsertChildOptions = {
  * @param Child - Component to add as a child
  * @param options - A Design key to reach the Child and an optional mode ('append' | 'prepend').
  *
- * @return An HOC which will append the Child to the given Component.
+ * @return A HOC which will append the Child to the given Component.
  */
 const insertChild = (Child: CT, options: InsertChildOptions): HOC => (
   Component = Fragment,
@@ -80,7 +80,7 @@ const insertChild = (Child: CT, options: InsertChildOptions): HOC => (
  * @param designKey - Design key to reach the Child component using Design API.
  * @param componentName - Optional component namespace for design key data attribute.
  *
- * @return An HOC which will add the Child to the given Parent.
+ * @return A HOC which will add the Child to the given Parent.
  *
  * @example Example of adding 'span' as a child to 'div'.
  * Then customizing the span leveraging design API.
@@ -99,7 +99,7 @@ const insertChild = (Child: CT, options: InsertChildOptions): HOC => (
  * ```
  */
 const withChild = <P extends object>(
-  Child: CT,
+  Child: CT<any>,
   designKey: string = 'Child',
   componentName: string = 'Component',
 ): HOC<P> => insertChild(Child, { designKey, componentName });
@@ -112,10 +112,10 @@ const withChild = <P extends object>(
  * @param designKey - Design key to reach the Child component using Design API.
  * @param componentName - Optional component namespace for design key data attribute.
  *
- * @return An HOC which will append the Child to the given Component.
+ * @return A HOC which will append the Child to the given Component.
  */
 const withAppendChild = <P extends object>(
-  Child: CT,
+  Child: CT<any>,
   designKey: string,
   componentName: string = 'Component',
 ): HOC<P> => insertChild(Child, { designKey, componentName, mode: 'append' });
@@ -128,10 +128,10 @@ const withAppendChild = <P extends object>(
  * @param designKey - Design key to reach the Child component using Design API.
  * @param componentName - Optional component namespace for design key data attribute.
  *
- * @return An HOC which will prepend the Child to the given Component.
+ * @return A HOC which will prepend the Child to the given Component.
  */
 const withPrependChild = <P extends object>(
-  Child: CT,
+  Child: CT<any>,
   designKey: string,
   componentName: string = 'Component',
 ): HOC<P> => insertChild(Child, { designKey, componentName, mode: 'prepend' });

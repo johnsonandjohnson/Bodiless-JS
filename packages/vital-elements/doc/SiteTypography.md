@@ -4,25 +4,25 @@ The site typography consists of updating fonts, colors, font sizes, and basic to
 
 ## Step 1: Setup Fonts
 
-The Vital Site utilizes the [DM Sans](https://fonts.google.com/specimen/DM+Sans) font from the
-Google API. If your designs require a different font, please refer to the [fonts documentation
-guide](/Development/Guides/BuildingSites/Typography/Fonts).
+The Vital Site utilizes the [DM Sans](https://fonts.google.com/specimen/DM+Sans ':target=_blank')
+font from the Google API. If your designs require a different font, please refer to the [fonts
+documentation guide](/Development/Guides/BuildingSites/Typography/Fonts).
 
 ## Step 2: Font Size & Line Heights
 
 The Vital Design System has defined the following [font
-sizes](https://xd.adobe.com/view/fd6e4dde-2ecf-480a-aaaf-f5043cb04bf0-a83d/screen/d0c37949-f384-4a14-ad34-011d39ef62ba/specs/),
-and they have been converted into the REM point system using base 16.
+sizes](https://zeroheight.com/98a659433/p/1195ae-typography-final/b/5108bf ':target=_blank'), and
+they have been converted into the REM point system using base 16.
 
 To facilitate converting a custom font size into REM units, please refer to this [XLS
 Template](./assets/PXtoREMTemplate.xlsx).
 
 ### Option 1: Shadow `vitalFontSize` (*Preferred Solution)
 
-Define a Shadowing token collection as defined in [Shadow](./Shadow).
+Define a Shadowing token collection as defined in [Shadowing Tokens](./ShadowingTokens).
 
 File to shadow:
-[`vitalFontSize`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Element/FontSize/tokens/vitalFontSize.ts)
+[`vitalFontSize`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/FontSize/tokens/vitalFontSize.ts ':target=_blank')
 
 ### Option 2: Override in `tailwind.config.js` File
 
@@ -55,14 +55,14 @@ module.exports = {
 ## Step 3: Define Colors for Site
 
 The Vital Design System defines the following
-[colors](https://xd.adobe.com/view/fd6e4dde-2ecf-480a-aaaf-f5043cb04bf0-a83d/screen/96d7b2f3-6afb-45fb-b808-075a24af2434/specs/).
+[colors](https://zeroheight.com/98a659433/p/658354-colors-final ':target=_blank').
 
 ### Option 1: Shadow `vitalColor` (*Preferred Solution)
 
-Define a Shadowing token collection as defined in [Shadow](./Shadow).
+Define a Shadowing token collection as defined in [Shadowing Tokens](./ShadowingTokens).
 
 File to shadow:
-[`vitalColor`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Element/Color/tokens/vitalColor.ts)
+[`vitalColor`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Color/tokens/vitalColor.ts ':target=_blank')
 
 ### Option 2: Override in `tailwind.config.js` File
 
@@ -97,12 +97,13 @@ recommended way of changing, adding, or redefining tokens at a package/site leve
 
 ### Option 1: Shadowing (*Preferred Solution)
 
-Define a Shadowing token collection as defined in [Shadow](./Shadow).
+Define a Shadowing token collection as defined in [Shadowing Tokens](./ShadowingTokens).
 
 Files to shadow:
 
-- [`vitalTypography`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Element/Typography/tokens/vitalTypography.ts)
-- [`vitalTextDecoration`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Element/TextDecoration/tokens/vitalTextDecoration.ts)
+- [`vitalTypography`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Typography/tokens/vitalTypography.ts ':target=_blank')
+- [`vitalTextDecoration`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/TextDecoration/tokens/vitalTextDecoration.ts ':target=_blank')
+- [`vitalSpacing`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Spacing/tokens/vitalSpacing.ts ':target=_blank')
 
 ### Option 2: Define Custom Tokens at Package Level
 

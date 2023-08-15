@@ -13,12 +13,12 @@
  */
 
 import React, { ComponentType } from 'react';
-import { observer } from 'mobx-react';
 import {
   ifReadOnly,
   ifEditable,
   useEditToggle,
   ifToggledOn,
+  observer,
 } from '@bodiless/core';
 import { addProps } from '@bodiless/fclasses';
 import { Editor, Element } from 'slate';
@@ -101,7 +101,7 @@ const useIsEmptyEditor = () => {
 const useIsEditableAndEmpty = () => useEditToggle() && useIsEmptyEditor();
 
 /**
- * hoc that can be applied to Editable based component
+ * HOC that can be applied to Editable based component
  * adds styles to slate wrapper in order to solve a placeholder problem
  * described in https://github.com/johnsonandjohnson/Bodiless-JS/issues/481
  */

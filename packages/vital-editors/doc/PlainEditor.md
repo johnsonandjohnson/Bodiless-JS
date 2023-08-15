@@ -45,7 +45,16 @@ The first parameter is the list of characters that will be wrapped with a `<sup>
 defaults to "®™" (the _registered trademark_ and _trademark_ symbols). The second parameter allows
 you to apply a class to the `<sup>` tag. The token defaults to the `align-baseline` class.
 
+?> **Tip:** Some fonts have the trademark characters already raised to the correct position and do
+not need `<sup>` tags, while other fonts will need you to apply `<sup>` tags and raise the
+characters by styling. Please check your font and determine if you need `AutoSuperscript` on your
+plain text editor. Note the Content Editor doesn't have the ability to apply superscript when using
+the plain text editor, so it's important to apply this token if your font doesn't look
+superscripted.
+
 #### Usage
+
+##### Via Composing
 
 The following composes a default plain editor with a custom superscript token:
 
@@ -63,12 +72,31 @@ const EditorWithCustomAutoSuperscript = as(
 )(EditorPlainClean);
 ```
 
-?> **Tip:** Some fonts have the trademark characters already raised to the correct position and do
-not need `<sup>` tags, while other fonts will need you to apply `<sup>` tags and raise the
-characters by styling. Please check your font and determine if you need `AutoSuperscript` on your
-plain text editor. Note the Content Editor doesn't have the ability to apply superscript when using
-the plain text editor, so it's important to apply this token if your font doesn't look
-superscripted.
+##### Via Shadowing
+
+Define a Shadowing token collection as defined in [Shadowing Tokens](../../Guides/ShadowingTokens).
+
+File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-editors/EditorPlain.ts`
+
+For example, create the above file and add the following contents (which will apply superscripting
+of those characters with the style `align-baseline` to all uses of the Vital Plain Editor):
+
+```js
+import { asElementToken } from '@bodiless/vital-elements';
+import { vitalEditorPlainBase } from '@bodiless/vital-editors/lib/base';
+import { withAutoSuperscript } from '@bodiless/vital-editors';
+
+const Default = asElementToken(vitalEditorPlainBase.Default, {
+  Compose: {
+    _: withAutoSuperscript('®™©', 'align-baseline'),
+  },
+});
+
+export default {
+  ...vitalEditorPlainBase,
+  Default,
+};
+```
 
 ## Architectural Details
 

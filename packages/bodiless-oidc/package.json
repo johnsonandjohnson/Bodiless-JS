@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/oidc",
-  "version": "1.0.0-beta.12",
+  "version": "1.0.0-rc.42",
   "description": "Library to provide OpenID Connect (OIDC) and OAuth2 protocol support for client-side",
   "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",
   "license": "Apache-2.0",
@@ -19,20 +19,23 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
-    "build:watch": "npm run build -- --watch",
-    "build:api-doc": "typedoc --out doc/api src",
-    "lint": "tslint ./src/**/*.ts?x",
+    "build": "run-p build:lib",
+    "build:lib": "tsc -p ./tsconfig.json",
+    "build:watch": "npm run build:lib -- --watch",
+    "dev": "npm run build:watch",
+    "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api ./src",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-beta.12",
+    "@bodiless/cli": "^1.0.0-rc.42",
     "axios": "^0.21.0",
-    "enzyme": "^3.9.0",
     "oidc-client-ts": "2.0.0-rc.2"
   },
   "peerDependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "enzyme": "^3.9.0"
   }
 }

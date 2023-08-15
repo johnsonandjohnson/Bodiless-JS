@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import {
   designable,
   Div,
@@ -31,7 +31,7 @@ const AccordionBodyComponentsStart:AccordionBodyComponents = {
 type AccordionBodyBaseProps =
   Omit<AccordionBodyProps, 'design'> & DesignableComponentsProps<AccordionBodyComponents>;
 
-const AccordionBodyBase: FC<AccordionBodyBaseProps> = ({
+const AccordionBodyBase: FC<PropsWithChildren<AccordionBodyBaseProps>> = ({
   components, children, ...rest
 }) => {
   const { Wrapper, Content } = components;

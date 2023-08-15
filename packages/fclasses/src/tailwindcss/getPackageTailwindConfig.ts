@@ -13,17 +13,13 @@
  * limitations under the License.
  */
 import path from 'path';
-import type { Package, TailwindConfig } from './mergeConfigs';
+import type { Config as TailwindConfig } from 'tailwindcss';
+import type { Package } from './mergeConfigs';
 
 const { join } = path;
 
 type Config = Package & {
   name: string,
-};
-
-type ExtraOptions = {
-  prefer?: string[],
-  exclude?: string[],
 };
 
 type SortByPrecedence = (
@@ -36,15 +32,44 @@ type ApplyExtraOptions = (
   options?: ExtraOptions,
 ) => Config[];
 
+/**
+ * Options defining how tailwind configuration exported by dependencies
+ * should be assembled.
+ *
+ * @category Tailwind Utility
+ */
 export type GetTwConfigProps = {
+  /**
+   *
+   */
   pkgPath: string,
+  /**
+   * The tailwind configuration with which those of dependencies will be merged.
+   */
   twConfig: TailwindConfig,
+  /**
+   * A function which returns the absolute path to a module as resolved from
+   * the context of the current module.
+   * @example
+   * ```
+   * const resolver = module => require.resolve(module);
+   * ```
+   */
   resolver: (pkg: string) => string,
-} & ExtraOptions;
+  /**
+   * Array of package names used to control the order of precedence when merging
+   * tailwind configs.  Configs exported by packages earlier in the list will
+   * receive precedence.
+   */
+  prefer?: string[],
+  /**
+   * Array of package names to exculde when merging tailwind configs. Named packages
+   * will not be included, even if they have an exported `taiwind.config.js`.
+   */
+  exclude?: string[],
+};
 
-export type GetPackageTailwindConfig = (
-  props: GetTwConfigProps
-) => Config[] | [];
+type ExtraOptions = Pick<GetTwConfigProps, 'prefer'|'exclude'>;
 
 const sortByPrecedence: SortByPrecedence = (
   sourceArray,
@@ -80,17 +105,48 @@ const applyExtraOptions: ApplyExtraOptions = (configs, options) => {
   return configs$;
 };
 
-export const getPackageTailwindConfig: GetPackageTailwindConfig = props => {
+/**
+ * Builds a tailwind config by merging those exported from any dependent packages.
+ *
+ * If any dependencies of your package export a tailwind configuration which will be
+ * needed at site level, you must be sure it is exported from your package as well,
+ * in case the target site does not know about or include your transitive dependency.
+ * This utility makes this easier. Simply export a `tailwind.config.js` from
+ * you package like the following:
+ *
+ * @param props
+ * Options to use when creating the tailwind config.
+ *
+ * @example ** Package level tailwind config **
+ * ```
+ * import { getPackageTailwindConfig } from '@bodiless/fclasses';
+ *
+ * const resolver = (pkgName) => require.resolve(pkgName);
+ *
+ * const twConfig = {
+ *  // ...include your own tailwind configuration here.
+ *  // (be sure to add a `content` section to prevent purging of any classes used in your package)
+ * };
+ *
+ * module.exports = getPackageTailwindConfig({
+ *   twConfig,
+ *   resolver,
+ * });
+ * ```
+ *
+ * > Note: Be sure to list your package `taiwind.config.js` in the `files` section
+ * > of your `package.json`.
+ *
+ * @category Tailwind Utility
+ */
+export const getPackageTailwindConfig = (props: GetTwConfigProps): Config[] => {
   const {
     twConfig, resolver, ...extraOptions
   } = props;
   try {
     const pkgPath = join(resolver('./package.json'), '..');
-    console.log(pkgPath);
     const pkgJson = require(join(pkgPath, 'package.json'));
-    console.log(pkgJson.dependencies);
     const deps = Object.keys(pkgJson.dependencies);
-    console.log('deps', deps);
     const startingConfig: Config[] = twConfig === undefined ? [] : [{
       name: pkgJson.name,
       root: pkgPath,

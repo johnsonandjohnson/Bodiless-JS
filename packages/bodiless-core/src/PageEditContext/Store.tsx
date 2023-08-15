@@ -12,15 +12,15 @@
  * limitations under the License.
  */
 
-import {
-  action, computed, observable, extendObservable, makeObservable,
-} from 'mobx';
 import type { ObservableMap } from 'mobx';
 import type {
   PageEditContextInterface,
   PageEditStoreInterface,
   TPageOverlayStore,
 } from './types';
+import {
+  action, computed, observable, extendObservable, makeObservable,
+} from '../mobx.bl-edit';
 import type { TMenuOption } from '../Types/ContextMenuTypes';
 import {
   getFromSessionStorage,
@@ -43,6 +43,8 @@ export const defaultOverlaySettings: TOverlaySettings = {
  * Holds the current UI state for the editor.
  */
 export class PageEditStore implements PageEditStoreInterface {
+  @observable localContextMenuKey = new Date();
+
   @observable activeContext: PageEditContextInterface | undefined = undefined;
 
   @observable isEdit = getFromSessionStorage('isEdit', false);
@@ -58,6 +60,11 @@ export class PageEditStore implements PageEditStoreInterface {
 
   @observable
   optionMap = new Map() as ObservableMap<string, ObservableMap<string, TMenuOption>>;
+
+  @action
+  refreshLocalContextMenu() {
+    this.localContextMenuKey = new Date();
+  }
 
   @action reset() {
     this.activeContext = undefined;

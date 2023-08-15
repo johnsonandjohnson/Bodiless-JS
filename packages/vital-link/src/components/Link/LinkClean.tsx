@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import { withoutHydrationInline } from '@bodiless/hydration';
 import {
   A, Span, Fragment, designable,
@@ -20,27 +20,32 @@ import {
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { LinkComponents, LinkBaseProps } from './types';
 
-const linkComponents: LinkComponents = {
+export const linkComponents: LinkComponents = {
   Wrapper: A,
   Icon: Fragment,
   Body: Span,
   ExternalSRText: Fragment,
 };
 
-const LinkBase: FC<LinkBaseProps> = ({ components: C, children, ...rest }) => (
+const LinkBase: FC<PropsWithChildren<LinkBaseProps>> = ({ components: C, children, ...rest }) => (
   <C.Wrapper {...rest}>
     <C.ExternalSRText />
     <C.Icon />
-    <C.Body>
-      {children}
-    </C.Body>
+    {children
+      ? <C.Body>{children}</C.Body>
+      : <C.Body />}
   </C.Wrapper>
 );
 
 const asLinkToken = asVitalTokenSpec<LinkComponents>();
+
+const linkToken = asLinkToken();
+type LinkToken = typeof linkToken;
 
 const LinkClean = designable(linkComponents, 'Link')(LinkBase);
 const LinkStatic = withoutHydrationInline()(LinkClean);
 
 export default LinkClean;
 export { asLinkToken, LinkStatic };
+
+export type { LinkToken };

@@ -12,36 +12,53 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { ComponentType, PropsWithChildren } from 'react';
 import { graphql } from 'gatsby';
 import {
   A,
   H3,
   flowHoc,
+  Div,
 } from '@bodiless/fclasses';
-import { withNode, withNodeKey, withDefaultContent } from '@bodiless/core';
+import { withNode, withNodeKey, withDefaultContent } from '@bodiless/data';
 import { asBodilessLink } from '@bodiless/components-ui';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
+import { asEditable } from '@bodiless/components';
 import Layout from '../../../../components/Layout';
 import { asHeader3, asLink } from '../../../../components/Elements.token';
 
-const SubTitle = asHeader3(H3);
+const SubTitle: ComponentType<PropsWithChildren> = asHeader3(H3);
 
 const DefaultContentLink = flowHoc(
   asBodilessLink(),
   withDefaultContent({
-    '': { href: 'https://www.gatsbyjs.com/' },
+    '': { href: 'https://www.bodiless-js.org/' },
   }),
   withNode,
   withNodeKey('link'),
   asLink,
 )(A);
 
+const DefaultContentEditable = asEditable('editable', 'Default editable')(Div);
+
+const PageContent$ = () => (
+  <>
+    <SubTitle>Default content from current node</SubTitle>
+    <DefaultContentLink>Test Link</DefaultContentLink>
+    <DefaultContentEditable />
+  </>
+);
+
+const PageContent = withDefaultContent({
+  editable: {
+    text: 'This is the default content for an editable',
+  },
+})(PageContent$);
+
 export default (props: any) => (
   <Page {...props}>
     <Layout>
-      <SubTitle>Default content from current node</SubTitle>
-      <DefaultContentLink>Test Link</DefaultContentLink>
+      <PageContent />
     </Layout>
   </Page>
 );

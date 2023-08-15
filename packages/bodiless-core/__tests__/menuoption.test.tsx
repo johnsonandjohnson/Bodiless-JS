@@ -14,12 +14,12 @@
 
 import React, { FC } from 'react';
 // import { observable, action } from 'mobx';
-import { observer } from 'mobx-react';
 import { mount } from 'enzyme';
 import flowRight from 'lodash/flowRight';
+import { observer } from '../src/mobx.bl-edit';
 import { withMenuOptions } from '../src/PageContextProvider';
 import { useEditContext } from '../src/hooks';
-import { withContextActivator } from '../src/hoc';
+import { withContextActivator } from '../src/hoc.bl-edit';
 import PageEditContext from '../src/PageEditContext';
 
 describe('useMemo for getMenuOptions', () => {

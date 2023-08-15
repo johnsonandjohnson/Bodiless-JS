@@ -13,15 +13,15 @@
  */
 
 import React, { ComponentType, FC } from 'react';
-import { createHash } from 'crypto';
+import MD5 from 'crypto-js/md5';
 import {
-  useMenuOptionUI, WithNodeKeyProps, withNodeKey, withNode, ifEditable,
-  withLocalContextMenu, withContextActivator, withEditButton, withNodeDataHandlers,
-  EditButtonProps,
-  EditButtonOptions,
-  UseBodilessOverrides,
+  useMenuOptionUI, ifEditable, withLocalContextMenu, withContextActivator, withEditButton,
+  EditButtonProps, EditButtonOptions, UseBodilessOverrides,
 } from '@bodiless/core';
 import type { HOC, ComponentOrTag, TokenCollection } from '@bodiless/fclasses';
+import {
+  WithNodeKeyProps, withNodeKey, withNode, withNodeDataHandlers,
+} from '@bodiless/data';
 import flowRight from 'lodash/flowRight';
 import pick from 'lodash/pick';
 import { v4 } from 'uuid';
@@ -57,7 +57,7 @@ const submitValueHandler = (data: { [field: string]: boolean }) => ({
 //   const { ComponentFormLabel, ComponentFormCheckBox } = useMenuOptionUI();
 //   return (
 //     <ComponentFormLabel>
-//       <ComponentFormCheckBox field={name} />
+//       <ComponentFormCheckBox  name={name} />
 //       {name}
 //     </ComponentFormLabel>
 //   );
@@ -70,7 +70,7 @@ const useCategoryCheckboxes = (map: TokenMap) => {
       <ComponentFormLabel>{cat}</ComponentFormLabel>
       {map.namesFor(cat).map(name => (
         <ComponentFormLabel>
-          <ComponentFormCheckBox field={name} />
+          <ComponentFormCheckBox name={name} />
           {name}
         </ComponentFormLabel>
       ))}
@@ -141,7 +141,7 @@ export const withKeyFromData = <P extends { componentData: any }>(Component: Com
   const WithKeyFromData = (props: P) => {
     const { componentData } = props;
     const json = JSON.stringify(componentData);
-    const key = createHash('md5').update(json).digest('hex');
+    const key = MD5(json).toString();
     return <Component {...props} key={key} />;
   };
   return WithKeyFromData;

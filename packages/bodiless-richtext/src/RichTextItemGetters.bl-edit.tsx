@@ -18,7 +18,7 @@ import type { Range } from 'slate';
 import { withoutProps } from '@bodiless/fclasses';
 import {
   NodeProvider, DefaultContentNode, useNode,
-} from '@bodiless/core';
+} from '@bodiless/data';
 import { useSlate } from 'slate-react';
 import flow from 'lodash/flow';
 import {

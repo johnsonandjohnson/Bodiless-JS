@@ -36,13 +36,12 @@ gives a light gray header and footer.
 
 #### Via Shadowing (*Preferred Method)
 
-Define a Shadowing token collection as defined in [Shadow](./VitalElements/Shadow).
+Define a Shadowing token collection as defined in [Shadowing Tokens](../Guides/ShadowingTokens).
 
-File to shadow:
-[`Table`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-table/src/components/Table/tokens/vitalTable.ts ':target=_blank')
+File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-table/Table.ts`
 
 ```js
-import { vitalTableBase } from '@bodiless/vital-table';
+import { vitalTableBase } from '@bodiless/vital-table/lib/base';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { addProps } from '@bodiless/fclasses';
 
@@ -50,7 +49,7 @@ const Default = asFluidToken({
   ...vitalTableBase.Default,
   Components: {
     ...vitalTableBase.Default.Components,
-    Wrapper: addProps({ 'data-shadowed-by': '__vitalstarter_:Table' }),
+    Wrapper: addProps({ 'data-shadowed-by': '__vital__:Table' }),
   },
   /* The following is an example that overrides full width and uses
    * fixed widths for columns. The width of the first row will set the

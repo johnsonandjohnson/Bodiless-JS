@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/richtext",
-  "version": "1.0.0-beta.12",
+  "version": "1.0.0-rc.42",
   "description": "Provide Rich Text Component",
   "author": "Erik Summerfield <esummer3@its.jnj.com>",
   "license": "Apache-2.0",
@@ -23,21 +23,23 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc --version && tsc -p ./tsconfig.json && npm run build:api-doc",
-    "build:watch": "npm run build -- --watch",
-    "build:api-doc": "typedoc --out doc/api src",
-    "lint": "tslint ./src/**/*.ts?x",
+    "build": "run-p build:lib",
+    "build:lib": "tsc -p ./tsconfig.json",
+    "build:watch": "npm run build:lib -- --watch",
+    "dev": "npm run build:watch",
+    "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api ./src",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
     "postinstall": "node bin/apply-patches.js"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-beta.12",
-    "@bodiless/core": "^1.0.0-beta.12",
-    "@bodiless/fclasses": "^1.0.0-beta.12",
-    "@bodiless/hydration": "^1.0.0-beta.12",
-    "@emotion/core": "^10.0.14",
-    "@emotion/css": "^10.0.14",
-    "@emotion/styled": "^10.0.14",
+    "@bodiless/cli": "^1.0.0-rc.42",
+    "@bodiless/core": "^1.0.0-rc.42",
+    "@bodiless/data": "^1.0.0-rc.42",
+    "@bodiless/fclasses": "^1.0.0-rc.42",
+    "@bodiless/hydration": "^1.0.0-rc.42",
+    "@emotion/core": "^11.0.0",
+    "@emotion/css": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "is-hotkey": "^0.1.6",
     "lodash": "^4.17.19",
     "rc-tooltip": "^5.1.1",
@@ -50,10 +52,8 @@
     "uuid": "^3.3.2"
   },
   "peerDependencies": {
-    "mobx": "^6.0.0",
-    "mobx-react": "^7.2.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/rc-tooltip": "^3.7.1",

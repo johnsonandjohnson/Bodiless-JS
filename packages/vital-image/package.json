@@ -1,7 +1,7 @@
 {
   "name": "@bodiless/vital-image",
   "sideEffects": false,
-  "version": "1.0.0-beta.12",
+  "version": "1.0.0-rc.42",
   "description": "Clean, designable Image components for Vital Design System based projects",
   "author": "Marco Pagliarulo <mpaglia1@its.jnj.com>",
   "license": "UNLICENSED",
@@ -22,26 +22,30 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
-    "build:watch": "npm run build -- --watch",
-    "build:api-doc": "typedoc --out doc/api ./src",
-    "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx ./src",
-    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
+    "build": "run-s build:lib copy build:api-doc",
+    "build:lib": "tsc -p ./tsconfig.json",
+    "build:watch": "npm run build:lib -- --watch",
+    "dev": "npm run build:watch",
+    "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api src",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
+    "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
   },
   "peerDependencies": {
-    "react": "^17.0.2"
+    "react": "^18.2.0"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-beta.12",
-    "@bodiless/components": "^1.0.0-beta.12",
-    "@bodiless/components-ui": "^1.0.0-beta.12",
-    "@bodiless/core": "^1.0.0-beta.12",
-    "@bodiless/fclasses": "^1.0.0-beta.12",
-    "@bodiless/gatsby-theme-bodiless": "^1.0.0-beta.12",
-    "@bodiless/hydration": "^1.0.0-beta.12",
-    "@bodiless/layouts": "^1.0.0-beta.12",
-    "@bodiless/layouts-ui": "^1.0.0-beta.12",
-    "@bodiless/vital-elements": "^1.0.0-beta.12",
+    "@bodiless/cli": "^1.0.0-rc.42",
+    "@bodiless/components": "^1.0.0-rc.42",
+    "@bodiless/components-ui": "^1.0.0-rc.42",
+    "@bodiless/core": "^1.0.0-rc.42",
+    "@bodiless/data": "^1.0.0-rc.42",
+    "@bodiless/fclasses": "^1.0.0-rc.42",
+    "@bodiless/gatsby-theme-bodiless": "^1.0.0-rc.42",
+    "@bodiless/hydration": "^1.0.0-rc.42",
+    "@bodiless/layouts": "^1.0.0-rc.42",
+    "@bodiless/layouts-ui": "^1.0.0-rc.42",
+    "@bodiless/next": "^1.0.0-rc.42",
+    "@bodiless/vital-elements": "^1.0.0-rc.42",
     "lodash": "^4.17.19"
   }
 }

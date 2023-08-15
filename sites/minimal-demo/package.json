@@ -1,0 +1,69 @@
+{
+  "name": "@sites/minimal-demo",
+  "version": "1.0.0-rc.42",
+  "description": "Demo site for a Bodiless site using the __minimal__ starter site",
+  "author": "James Jones <jjone119@its.jnj.com>",
+  "homepage": "https://bodiless-js.org",
+  "license": "Apache-2.0",
+  "private": true,
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "dependencies": {
+    "@bodiless/backend": "^1.0.0-rc.42",
+    "@bodiless/cli": "^1.0.0-rc.42",
+    "@bodiless/components": "^1.0.0-rc.42",
+    "@bodiless/components-ui": "^1.0.0-rc.42",
+    "@bodiless/core": "^1.0.0-rc.42",
+    "@bodiless/data": "^1.0.0-rc.42",
+    "@bodiless/documentation": "^1.0.0-rc.42",
+    "@bodiless/fclasses": "^1.0.0-rc.42",
+    "@bodiless/gatsby-theme-bodiless": "^1.0.0-rc.42",
+    "@bodiless/layouts-ui": "^1.0.0-rc.42",
+    "@bodiless/page": "^1.0.0-rc.42",
+    "@bodiless/richtext-ui": "^1.0.0-rc.42",
+    "@bodiless/ui": "^1.0.0-rc.42",
+    "autoprefixer": "^10.4.2",
+    "docsify-cli": "^4.3.0",
+    "dotenv": "^8.2.0",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "gatsby": "^4.11.2",
+    "postcss": "^8.4.12",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
+    "tailwindcss": "^3.0.23",
+    "tailwindcss-dir": "^4.0.0"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
+  },
+  "scripts": {
+    "build": "npm-run-all build:env-vars build:lib build:docs",
+    "build:docs": "bl-docs-build",
+    "build:env-vars": "bodiless generate-env-vars",
+    "build:lib": "bl-clear-logs && gatsby build && bl-validate-logs",
+    "build:stats": "BODILESS_BUILD_STATS=1 npm run build",
+    "check": "tsc -p ./tsconfig.check.json",
+    "clean": "gatsby clean",
+    "dev": "run-p -r dev-frontend dev-backend",
+    "dev-backend": "bodiless-backend",
+    "dev-frontend": "gatsby develop",
+    "predev": "run-s build:env-vars build:docs",
+    "serve": "gatsby serve",
+    "serve:docs": "docsify serve ./doc",
+    "start": "gatsby serve"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "npm-run-all": "^4.1.5",
+    "tsconfig-paths-webpack-plugin": "^3.2.0",
+    "typescript": "^4.0.0"
+  }
+}

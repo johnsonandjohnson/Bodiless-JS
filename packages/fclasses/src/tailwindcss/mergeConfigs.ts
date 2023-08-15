@@ -15,25 +15,28 @@
 import merge from 'lodash/merge';
 import flatten from 'lodash/flatten';
 import path from 'path';
+import type { Config as TailwindConfig } from 'tailwindcss';
+import type { RawFile } from 'tailwindcss/types/config';
 
-type TailwindConfig = {
-  content?: string[],
-  theme?: object,
-  plugins?: string[],
-};
-
-type Package = {
+export type Package = {
   root: string,
-  tailwindConfig: TailwindConfig,
+  tailwindConfig: Partial<TailwindConfig>,
 };
 
+/**
+ * @internal
+ * @param packages
+ */
 const getTailwindConfigs = (packages: Package[]) => packages
   .map(({ root, tailwindConfig }) => ({
     ...tailwindConfig,
     ...(
       tailwindConfig.content !== undefined && Array.isArray(tailwindConfig.content)
         ? {
-          content: tailwindConfig.content.map((rule: string) => path.join(root, rule)),
+          content: tailwindConfig.content.map((rule: string | RawFile) => {
+            const { raw = null } = rule as RawFile;
+            return raw ? path.join(root, raw) : path.join(root, rule.toString());
+          }),
         }
         : {}
     ),
@@ -65,8 +68,4 @@ const mergeConfigs = (
 
 export {
   mergeConfigs,
-};
-export type {
-  TailwindConfig,
-  Package,
 };

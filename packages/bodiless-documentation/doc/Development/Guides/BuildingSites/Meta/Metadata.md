@@ -1,101 +1,72 @@
-# Metadata Component
+# Metadata
 
-Bodiless provides a set of HOCs which work with [React
-Helmet](https://github.com/nfl/react-helmet#readme) to place editable meta-tags in the document
-`head`. Site Builders can find a few examples on how to place editable and static metadata into a
-site's head section at
-[`src/components/Layout/meta.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/sites/test-site/src/components/Layout/meta.tsx).
+For additional metadata information, please see: [Meta Component](/Components/Meta).
 
-See below for instructions on how to add metadata to a page's head and make it editable for Content
-Editors.
+## Set Metadata for a Page
 
-## Add SEO Form to Editor Interface
+In your site's `.env.site` file, configure the following:
 
-The `withMetaForm` provides the ability to insert an SEO form within the editor interface for the
-Content Editor to manipulate metadata per page.
+01. Your site's absolute production URL, for use in generating the canonical URL and `sitemap.xml`:
 
-01. First, import `withMetaForm` from the `@bodiless/components` package:
+    ```shell
+    SITE_URL='https://www.example.com/'
+    ```
+
+01. To add `sitemap.xml` to your `robots.txt` file, set the `ROBOTSTXT_SITEMAP` env variable to your
+    site's `sitemap.xml`:
+
+    ```shell
+    ROBOTSTXT_SITEMAP='https://www.example.com/sitemap/sitemap-index.xml'
+    ```
+
+    **Note:** As per the [How to
+    Use](https://www.gatsbyjs.com/plugins/gatsby-plugin-sitemap/#how-to-use ':target=_blank')
+    section of the `gatsby-plugin-sitemap` documentation, the path listed above is where the
+    generated sitemap will be located.
+    - While a _sitemap_ file lists URLs of _pages_, a _sitemap index_ file lists URLs of _sitemaps_,
+      allowing you to manage multiple sitemap files.
+
+01. Anything you want to exclude from your sitemap can be configured in your site's
+    `gatsby-config.js` file:
 
     ```js
-    import withMetaForm from @bodiless/components;
+    plugins: [
+      {
+        resolve: 'gatsby-plugin-sitemap',
+        options: {   },
+      },
+    ]
     ```
 
-01. Prepare your arguments; `withMetaForm` takes 2 parameters:
+    For additional information, see: [`gatsby-plugin-sitemap` |
+    Gatsby](https://www.gatsbyjs.com/plugins/gatsby-plugin-sitemap/ ':target=_blank').
 
-    01. `useMenuOptions`: Defines SEO form menu button appearance.
-
-        ```js
-        const useMenuOptions = () => [
-          {
-            name: 'seo',                     // Menu item name
-            isHidden: () => !context.isEdit, // Hide the button in preview mode
-            icon: 'category',                // Button icon
-            label: 'SEO',                    // Button label
-            group: 'page-group',             // Name of a group to which this option belongs
-          },
-        ];
-        ```
-
-    01. `seoFormHeader`: [Optional] Defines SEO form title and description for users.
-
-        ```js
-        const seoFormHeader = {
-          title: 'SEO Data form',
-          description: `Enter the page level data used for SEO ...`
-        };
-        ```
-
-01. Then, apply this HOC to the Helmet component:
+01. Anything you want to customize for canonical URLs can be configured in your site's
+    `gatsby-config.js` file:
 
     ```js
-    const SeoHelmet = withMetaForm(useMenuOptions, seoFormHeader)(Helmet);
+    plugins: [
+      {
+        resolve: 'gatsby-plugin-canonical-urls',
+        options: {
+          siteUrl: SITEURL,
+        },
+      },
+    ]
     ```
 
-## Add Metadata Fields to Editor Interface
+    For additional information, see: [`gatsby-plugin-canonical-urls` |
+    Gatsby](https://www.gatsbyjs.com/plugins/gatsby-plugin-canonical-urls/ ':target=_blank').
 
-Next, define the form fields so the Content Editor can update the content of the metadata displayed
-in the head section of each page.  
-For example, to add an editable meta description field:
-
-01. Import `withMeta` from `@bodiless/components`.
-01. Create an HOC `withMetaPageDescription`, with meta field name `description`, form
-    field label `Description`, and placeholder text.  
-    For example:
+01. Anything you want to adjust for your `robots.txt` file can be customized in your site's
+    `gatsby-config.js` file by updating the `robots.txt` policy:
 
     ```js
-    import { withMeta } from '@bodiless/components';
-    import { useMenuOptionUI } from '@bodiless/core';
-
-    const withMetaPageDescription = withMeta({
-      name: 'description',
-      useFormElement: () => useMenuOptionUI().ComponentFormTextArea,
-      label: 'Description',
-      placeholder: 'Rec < 160 char',
-    });
+    const robotsTxtPolicy = [
+      { userAgent: '*', allow: '/', },
+    ];
+    process.env.ROBOTSTXT_POLICY = JSON.stringify(robotsTxtPolicy);
     ```
 
-    `useFormElement` accepts a function that returns a UI input component (e.g.,
-    `ComponentFormText`, `ComponentFormTextArea`, etc.).
-
-01. To apply this field to the meta form previously created, you can use `flowRight`:
-
-    ``` js
-    const SeoHelmet = flowRight(
-      withMetaForm(useMenuOptions, seoFormHeader),
-      asBodilessHelmet('meta'),
-      withMetaPageDescription('description', ''),
-    )(Helmet);
-    ```
-
-    `asBodilessHelmet` HOC specifies `meta` as a nodeKey for server-side storage, and the
-    description content will be saved in a data file named `meta$description.json`.
-
-### Metadata Rendering
-
-In addition to defining the form fields, the calls to `withMeta*` also render the meta-tags to the
-page document head, using data from the JSON files which were written by the editor.
-
-The recommendation is the Content Editor can set the metadata per page, but the site-level meta is
-not exposed to Content Editor for modification. The reason being the site-level metadata is set once
-per site on the site build and changes very infrequently to never, so there is little need to allow
-a Content Editor to change this data.
+    For additional information, see: [`gatsby-plugin-robots-txt` |
+    Gatsby](https://www.gatsbyjs.com/plugins/gatsby-plugin-robots-txt/ ':target=_blank').

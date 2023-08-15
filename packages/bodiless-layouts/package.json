@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/layouts",
-  "version": "1.0.0-beta.12",
+  "version": "1.0.0-rc.42",
   "description": "Layout managers for BodilessJS.",
   "author": "Erik Summerfield <esummer3@its.jnj.com>",
   "homepage": "",
@@ -27,31 +27,37 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
-    "build:watch": "npm run build -- --watch",
-    "build:api-doc": "typedoc --out doc/api src",
+    "build": "run-p build:lib && npm run build:api-doc",
+    "build:lib": "tsc -p ./tsconfig.json",
+    "build:watch": "npm run build:lib -- --watch",
+    "dev": "npm run build:watch",
+    "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api ./src",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "peerDependencies": {
-    "mobx-react": "^7.2.1",
-    "react": "^17.0.2"
+    "react": "^18.2.0"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-beta.12",
-    "@bodiless/core": "^1.0.0-beta.12",
-    "@bodiless/fclasses": "^1.0.0-beta.12",
+    "@bodiless/cli": "^1.0.0-rc.42",
+    "@bodiless/core": "^1.0.0-rc.42",
+    "@bodiless/data": "^1.0.0-rc.42",
+    "@bodiless/fclasses": "^1.0.0-rc.42",
+    "@dnd-kit/core": "^6.0.8",
+    "@dnd-kit/sortable": "^7.0.1",
+    "@dnd-kit/utilities": "^3.2.1",
     "axios": "^0.21.0",
+    "crypto-js": "^4.1.1",
     "html2canvas": "^1.0.0-rc.3",
-    "informed": "^3.34.0",
+    "informed": "^4.44.0",
     "lodash": "^4.17.19",
     "md5-hex": "^4.0.0",
     "prop-types": "^15.7.2",
     "rc-tooltip": "^5.1.1",
     "re-resizable": "^4.11.0",
-    "react-sortable-hoc": "^2.0.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "@types/crypto-js": "4.1.1",
     "@types/rc-tooltip": "^3.7.1",
     "enzyme": "^3.9.0"
   }

@@ -12,7 +12,8 @@
  * limitations under the License.
  */
 
-import { mergeConfigs } from '../src/tailwindcss';
+import { Config as TailwindConfig } from 'tailwindcss';
+import { mergeConfigs, Package } from '../src/tailwindcss/mergeConfigs';
 
 describe('tailwindcss', () => {
   describe('mergeConfigs', () => {
@@ -51,56 +52,68 @@ describe('tailwindcss', () => {
       expect(mergeConfigs([packageA, packageB])).toMatchObject(expected);
     });
     it('merges plugins settings', () => {
-      const packageA = {
+      const pluginA = { handler: () => null };
+      const pluginB1 = { handler: () => null };
+      const pluginB2 = { handler: () => null };
+      const packageA: Package = {
         root: '',
         tailwindConfig: {
           plugins: [
-            'pluginA',
+            pluginA,
           ],
         },
       };
-      const packageB = {
+      const packageB: Package = {
         root: '',
         tailwindConfig: {
           plugins: [
-            'pluginB1',
-            'pluginB2',
+            pluginB1,
+            pluginB2,
           ],
         },
       };
-      const expected = {
+      const expected: Partial<TailwindConfig> = {
         plugins: [
-          'pluginA',
-          'pluginB1',
-          'pluginB2',
+          pluginA,
+          pluginB1,
+          pluginB2,
         ],
       };
       expect(mergeConfigs([packageA, packageB])).toMatchObject(expected);
     });
     it('merges theme settings', () => {
-      const packageA = {
+      const packageA: Package = {
         root: '',
         tailwindConfig: {
           theme: {
-            foo: 1,
+            padding: {
+              foo: '1',
+            },
           },
         },
       };
-      const packageB = {
+      const packageB: Package = {
         root: '',
         tailwindConfig: {
           theme: {
-            bar: 2,
+            margin: {
+              foo: '1',
+            },
           },
         },
       };
-      const expected = {
+      const expected: Partial<TailwindConfig> = {
         theme: {
-          foo: 1,
-          bar: 2,
+          padding: {
+            foo: '1',
+          },
+          margin: {
+            foo: '1',
+          },
         },
       };
-      expect(mergeConfigs([packageA, packageB])).toMatchObject(expected);
+      expect(mergeConfigs([packageA, packageB]).theme)
+        .toMatchObject(expected.theme || {});
     });
   });
 });

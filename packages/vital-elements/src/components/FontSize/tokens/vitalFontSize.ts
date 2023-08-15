@@ -15,14 +15,9 @@
 import { addProps } from '@bodiless/fclasses';
 import { asElementToken, asTokenGroup } from '../../../util';
 
-const meta = {
-  categories: {
-    Type: ['Element'],
-    Group: ['FontSize'],
-  },
-};
+import { FontSizeMeta } from '../meta';
 
-const vitalFontSize = asTokenGroup(meta)({
+const vitalFontSize = asTokenGroup(FontSizeMeta)({
   Base: 'text-m-base lg:text-base',
   XXXL: 'text-m-3xl lg:text-3xl',
   XXL: 'text-m-2xl lg:text-2xl',

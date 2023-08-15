@@ -1,0 +1,74 @@
+{
+  "name": "@bodiless/next",
+  "version": "1.0.0-rc.42",
+  "description": "Bodiless integration with NextJS.",
+  "author": "Marco Pagliarulo <mpaglia1@its.jnj.com>",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "sideEffects": false,
+  "typings": "lib/index.d.ts",
+  "files": [
+    "/lib",
+    "build-css.js",
+    "bodiless.next.config.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "run-p copy build:lib",
+    "build:lib": "tsc -b ./tsconfig.json ./tsconfig.cjs.json",
+    "build:watch": "npm run build:lib -- --watch",
+    "dev": "npm run build:watch",
+    "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api ./src",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
+    "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\" && copyfiles \"bodiless.next.config.js\" \"./lib/\""
+  },
+  "dependencies": {
+    "@bodiless/components": "^1.0.0-rc.42",
+    "@bodiless/components-ui": "^1.0.0-rc.42",
+    "@bodiless/core": "^1.0.0-rc.42",
+    "@bodiless/core-ui": "^1.0.0-rc.42",
+    "@bodiless/data": "^1.0.0-rc.42",
+    "@bodiless/fclasses": "^1.0.0-rc.42",
+    "@bodiless/git": "^1.0.0-rc.42",
+    "@bodiless/page": "^1.0.0-rc.42",
+    "@bodiless/webpack": "^1.0.0-rc.42",
+    "autoprefixer": "^10.4.2",
+    "css-loader": "^6.5.1",
+    "dotenv": "^8.2.0",
+    "fast-glob": "^3.2.5",
+    "file-loader": "^6.2.0",
+    "find-up": "^4.1.0",
+    "generate-robotstxt": "^8.0.3",
+    "glob": "^7.1.6",
+    "isomorphic-git": "^1.10.1",
+    "lodash": "^4.17.19",
+    "mini-css-extract-plugin": "^2.7.2",
+    "minimatch": "^3.0.4",
+    "next": "^13.3.4",
+    "node-cache": "^5.1.2",
+    "null-loader": "^4.0.1",
+    "path-browserify": "^1.0.1",
+    "plaiceholder": "^2.5.0",
+    "postcss-loader": "^6.2.1",
+    "postcss-url": "^10.1.3",
+    "react-helmet": "^6.1.0",
+    "sharp": "^0.30.7",
+    "sitemap": "^7.1.1",
+    "style-loader": "^3.3.1",
+    "tailwindcss": "^3.0.23",
+    "webpack": "^5.69.1"
+  },
+  "devDependencies": {
+    "@types/react-helmet": "^6.1.0",
+    "@types/uuid": "^3.4.4"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  }
+}

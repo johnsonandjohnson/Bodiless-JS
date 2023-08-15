@@ -16,12 +16,12 @@ import React from 'react';
 import {
   EditButtonOptions,
   getUI,
-  withData,
   withEditButton,
   withContextActivator,
   withLocalContextMenu,
   ifEditable,
 } from '@bodiless/core';
+import { withData } from '@bodiless/data';
 import flowRight from 'lodash/flowRight';
 import { DataType as BVNodeDataType, withBVDataHandlers } from './asBodilessBV';
 
@@ -41,7 +41,7 @@ export const editButtonOptions: EditButtonOptions<any, BVNodeDataType> = {
       <>
         <ComponentFormTitle>Bazaarvoice</ComponentFormTitle>
         <ComponentFormLabel htmlFor="bv-product-id">BV Product External ID</ComponentFormLabel>
-        <ComponentFormText field="productId" id="bv-product-id" />
+        <ComponentFormText name="productId" id="bv-product-id" />
       </>
     );
   },

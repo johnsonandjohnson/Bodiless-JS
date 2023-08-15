@@ -83,8 +83,23 @@ export const LayoutCleanBase: FC<LayoutProps> = (layoutProps: LayoutProps) => {
   );
 };
 
-export const LayoutClean = designable(layoutComponents, 'Layout')(LayoutCleanBase);
+/**
+ * This is the base component for layout.
+ *
+ * @category Component
+ *
+ */
+const LayoutClean = designable(layoutComponents, 'Layout')(LayoutCleanBase);
 
+/**
+ * A token modifier that respects the Layout Components.
+ *
+ * @category Token Collection
+ */
 const asLayoutToken = asVitalTokenSpec<LayoutComponents>();
 
-export { asLayoutToken };
+// These are used in defining the VitalLayout interface.
+const layoutToken = asLayoutToken();
+export type LayoutToken = typeof layoutToken;
+
+export { LayoutClean, asLayoutToken };

@@ -13,7 +13,7 @@
  */
 
 import { v4 } from 'uuid';
-import { useNode } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import { ListData, ListBaseProps } from './types';
 
 /**
@@ -24,7 +24,7 @@ export const useItemsAccessors = () => {
   const { node } = useNode<ListData>();
   return {
     // We provide a default element for top level lists.
-    getItems: () => node.data.items || ['default'],
+    getItems: () => node?.data?.items || ['default'],
     setItems: (items: string[]) => node.setData({ ...node.data, items }),
     deleteSubnode: (item?: string) => {
       const path$ = item ? node.path.concat(item) : node.path;
@@ -69,21 +69,39 @@ const useAddItem = () => {
   return (item: string) => {
     const items = getItems();
     const index = items.findIndex(item$ => item$ === item);
+    const newItemId = v4();
     const newItems = [
       ...items.slice(0, index + 1),
-      v4(),
+      newItemId,
       ...items.slice(index + 1),
     ];
+    setItems(newItems);
+
+    return newItemId;
+  };
+};
+
+const useMoveItem = () => {
+  const { getItems, setItems } = useItemsAccessors();
+  return (item: string, offset: number) => {
+    const items = getItems();
+    const newItems: Array<string> = items.filter(i => i !== item);
+    const index = items.findIndex(i => i === item);
+    const newIndex = index + offset;
+    if (newIndex <= 0) newItems.splice(0, 0, item);
+    else if (newIndex >= items.length - 1) newItems.push(item);
+    else newItems.splice(newIndex, 0, item);
     setItems(newItems);
   };
 };
 
 /**
- * Returns a pair of functions which can be used to insert
+ * Returns a set of functions which can be used to insert, move
  * or delete items.
  */
 export const useItemsMutators = (props?: Pick<ListBaseProps, 'unwrap' | 'onDelete'>) => ({
   addItem: useAddItem(),
   deleteItem: useDeleteItem(props || { unwrap: undefined, onDelete: undefined }),
+  moveItem: useMoveItem(),
   deleteSublist: useDeleteSublist(),
 });

@@ -47,13 +47,6 @@ JSON properties across two files:
 01. [Configure `.env.site`](Configure#configure-envsite).
 01. [Configure `search.config.json`](Configure#configure-searchconfigjson).
 
-?> **Note:** For backward-compatibility, search configured _solely_ in your `.env.site` file is
-still supported. However, some newer features aren't configurable with environment variables (e.g.,
-exclude a path/page), and must be configured via the `search.config.json` file.  
-<br>
-For more information on this, see [Backward-Compatibility
-Support](Configure#backward-compatibility-support).
-
 ### 3. Support Search Indexing
 
 In this step, you will update `package.json` to build the search index. In addition, you will add a
@@ -77,7 +70,7 @@ Make the following changes (Steps 3a, 3b, 3c) in the `scripts` section of `packa
 #### 3c. Add `build:search` step to the build task
 
 ```json
-"build": "npm-run-all build:env-vars build:lib build:doc build:search",
+"build": "npm-run-all build:env-vars build:lib build:docs build:search",
 ```
 
 #### Usage of Building Search Index
@@ -93,10 +86,6 @@ This will create the search index under the path specified by
 [`languages[x].indexFilePath`](Configure#languages) in your
 [`search.config.json`](Configure#configure-searchconfigjson) file (where `x` is the index of a
 language in the `languages` array).
-
-?> **Note:** If you're [only using `.env.site`](Configure#backward-compatibility-support) for
-configuring search, then this will create the search index under the path specified by the
-`BODILESS_SEARCH_INDEX_PATH` environment variable.
 
 ### 4. Create Search HOCs
 
@@ -132,7 +121,7 @@ The "`SearchClean`" alias given to imported components is a Bodiless convention 
 components. The Site Builder will need to format them before adding to pages.
 
 For guidance on how to add design to clean components, please refer to the [Bodiless Design
-System](/Design/DesignSystem) documentation.
+System](/VitalDesignSystem/) documentation.
 
 Here's a quick example of applying design to `SearchBox` and `SearchResult`:
 
@@ -279,10 +268,6 @@ set it to the body of your content or the body of your articles. It accepts clas
 selectors; and is comma-separated. If you want to index all items in the body of your page use
 "`body *`", and all content within the body will be indexed.
 
-?> **Note:** If you're [only using `.env.site`](Configure#backward-compatibility-support) for
-configuring search, then indexing on your site is defined by the `BODILESS_SEARCH_INDEX_SELECTOR`
-environment variable.
-
 For example, if you want to index article content, you can use "`.article-content *`" to target
 article content specifically.
 
@@ -291,17 +276,13 @@ In addition, you can exclude items from search via the
 [`search.config.json`](Configure#configure-searchconfigjson) file. By default, we suggest adding
 `script`, `noscript`, and `style`, so they aren't indexed.
 
-?> **Note:** If you're [only using `.env.site`](Configure#backward-compatibility-support) for
-configuring search, then excluded items from search are defined by the
-`BODILESS_SEARCH_INDEX_EXCLUDE_SELECTOR` environment variable.
-
 #### Add a `no-search` Class
 
 You can use a `no-search` HOC around anything you don't want indexed.
 
 **Example:**
 
-Build an HOC component that can be used to wrap any content/components:
+Build a HOC component that can be used to wrap any content/components:
 
 ```tsx
 type Props = DesignableComponentsProps<NoSearchComponents> & HTMLProps<HTMLElement>;

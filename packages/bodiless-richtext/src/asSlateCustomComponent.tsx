@@ -15,7 +15,7 @@
 import React, { ComponentType as CT } from 'react';
 import {
   WithNodeProps, DefaultContentNode, NodeProvider, useNode,
-} from '@bodiless/core';
+} from '@bodiless/data';
 import { CustomComponentProps } from './Type';
 
 const asSlateCustomComponent = <P extends WithNodeProps>(Component: CT<P>) => {

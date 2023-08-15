@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 import { flowHoc, addProps } from '@bodiless/fclasses';
-import { withNodeKey } from '@bodiless/core';
+import { withNodeKey } from '@bodiless/data';
 // @ts-ignore Could not find a declaration file
 import resolvedConfigs from
   '@bodiless/fclasses/src/tailwindcss/resolveConfig';

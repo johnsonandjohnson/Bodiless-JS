@@ -2,7 +2,7 @@
 
 The Rich Text Editor allows you to easily add text content to your site. By
 default there are three options for the Rich Text Editor: Simple, Basic, and
-Full. The Rich Text Editor is also a sub component of many higher order components. 
+Full. The Rich Text Editor is also a sub component of many higher-order components. 
 You can add text to a page on your site via the editor component or you
 can add a component or components that contain text, which make use of the
 editor (e.g. Card, Accordion, etc).
@@ -236,7 +236,7 @@ The RichText Component is built on the [SlateJS](https://docs.slatejs.org/) fram
 (see @bodiless/Design System) that contain HOC to build out the component that are 
 available in the RichText Editor. Those are then presented to the user using both a 
 contextual hover menu as well as the standard menu. These items can be used by using 
-a set of HOC's. 
+a set of HOCs. 
 
 `startWith(Component)` lets us know which component should be part of the item
 

@@ -12,22 +12,55 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import union from 'lodash/union';
 import difference from 'lodash/difference';
 import capitalize from 'lodash/capitalize';
-import type { ComponentOrTag, Enhancer, Condition } from './types';
+import type {
+  ComponentOrTag, Enhancer, Condition, DesignableProps
+} from './types';
 
-type Classes = string | string[];
+/**
+ * A single CSS class string or an array of them.
+ *
+ * @category FClasses API
+ */
+export type Classes = string|string[];
 
-type FClasses = {
+/**
+ * Type of the className aggregator prop received by [[stylable]] component.
+ *
+ * An `FClasses` object is an operation to be performed on the `className`
+ * prop. Each contains refers to the previous operation. When applied, the
+ * chain will be traversed and operations performed for each.
+ *
+ * @category FClasses API
+ */
+export type FClasses = {
+  /**
+   * Whether classes should be added or removed.
+   */
   operation?: 'add' | 'remove',
+  /**
+   * The classes to be added or removed.
+   */
   classes?: Classes,
+  /**
+   * The previous operation, if one exists.
+   */
   parentFClasses?: FClasses,
 };
 
+/**
+ * Type of the props created by [[stylable]].
+ * @category FClasses API
+ */
 export type StylableProps = {
+  /**
+   * The accumulated classes which should be added to the component.
+   */
   fClasses?: FClasses;
+  children?: ReactNode;
 };
 
 type Classable = {
@@ -36,6 +69,9 @@ type Classable = {
 
 const alwaysTrueCondition = () => true;
 
+/**
+ * The basic functionality for all class manipulation.
+ */
 const modifyClassesIf = (operation: 'add' | 'remove') => <A extends object>(
   condition: Condition<A>,
 ) => (classes?: Classes) => {
@@ -58,34 +94,59 @@ const modifyClassesIf = (operation: 'add' | 'remove') => <A extends object>(
   };
 
 /**
- * Allows to add classes to a component conditionally.
+ * Add classes to a component conditionally.
+ *
+ * @param
+ * A custom condition hook which will be evaluated at render time
+ * to determine whether the classes should be added. You may use
+ * React hooks.
+ *
+ * @returns
+ * A HOC factory function with the same signature as [[addClasses]].
+ *
+ * @cateogry FClasses API
  *
  * @param condition A function that is evaluated to determine whether classes should be added.
  * @returns HOC that can be used for adding classes to a component
+ * @category FClasses API
  */
 const addClassesIf = modifyClassesIf('add');
 
 /**
- * HOC which specifies that a list of classes should be added to the wrapped component's className.
+ * HOC factory which specifies that a list of classes should be added to the
+ * wrapped component's className.
  *
- * @param classes A string or array of classes to add.
+ * @param classes
+ * A string or array of classes to add.
+ *
+ * @returns
+ * A HOC which adds the specified classes to a [[stylable]] component.
+ *
+ * @category FClasses API
  */
 const addClasses = addClassesIf(alwaysTrueCondition);
 
 /**
- * Allows to remove classes from a component conditionally.
+ * Remove classes from a stylable component conditionally.
  *
  * @param condition A function that is evaluated to determine whether classes should be removed.
  * @returns HOC that can be used for removing classes from a component
+ *
+ * @category FClasses API
  */
 const removeClassesIf = modifyClassesIf('remove');
 
 /**
- * HOC which specifies that a list of classes shoudl be removed from the wrapped component's
- * className.
+ * Remove classes from a stylable component.
  *
- * @param classes A string or array of classes to remove. If not specified, then *all* classes will
+ * @param classes
+ * A string or array of classes to remove. If not specified, then *all* classes will
  * be removed.
+ *
+ * @returns
+ * HOC which removes the specified classes.
+ *
+ * @category FClasses API
  */
 const removeClasses = removeClassesIf(alwaysTrueCondition);
 
@@ -117,14 +178,27 @@ type ForwardRefProps = {
 };
 
 /**
- * Makes any component or intrinsic element stylable using FClasses. When the component is
- * wrapped by `addClasses()` or `removeClasses()`, the specified operations will be applied
- * in reverse order up the component tree, so that the outermost operations take precedence.
+ * HOC which makes any component or intrinsic element stylable using FClasses.
+ * When the component is * wrapped by `addClasses()` or `removeClasses()`, the
+ * specified operations will be applied in reverse order up the component tree,
+ * so that the outermost operations take precedence.
  *
- * @param Component The component to be made stylable.
+ * Adds [[StylableProps]] to the component.
+ *
+ * > When making a plain HTML tag stylable, use a type parameter to ensure
+ * > the resulting component has the correct prop types.
+ *
+ * @example ** Create a stylable `div` and apply some classes **
+ * ```ts
+ * const Div = stylable<HTMLProps<HTMLDivElement>>('div');
+ * const StyledDiv = addClasses('bg-black text-white')(Div);
+ * const BlueDiv = flowHoc(removeClasses('bg-black'), addClasses('bg-blue')(StyledDiv);
+ * ```
+ *
+ * @category FClasses API
  */
-const stylable:Enhancer<StylableProps> = (Component: ComponentOrTag<any>) => {
-  const Stylable = (props: StylableProps & ForwardRefProps & Classable) => {
+const stylable: Enhancer<StylableProps> = (Component: ComponentOrTag<any>) => {
+  const Stylable = (props: StylableProps & ForwardRefProps & Classable & DesignableProps) => {
     const {
       fClasses,
       className,
@@ -133,6 +207,12 @@ const stylable:Enhancer<StylableProps> = (Component: ComponentOrTag<any>) => {
     } = props;
     const classes = apply(fClasses);
     const newClassName = asClassName(className ? apply(asFClasses(className), classes) : classes);
+
+    if (rest.design && !Object.keys(rest.design).length) {
+      // This prevents empty design objects from being rendered to the DOM.
+      delete rest.design;
+    }
+
     return <Component {...rest as any} className={newClassName} ref={forwardRef} />;
   };
   Stylable.displayName = 'Stylable';

@@ -14,7 +14,11 @@
  */
 
 import React, { useCallback, useEffect } from 'react';
-import { useFormApi, useFormState } from 'informed';
+import {
+  useFormApi,
+  Multistep,
+  useMultistepApi,
+} from 'informed';
 import {
   DefaultNormalHref,
   withToolsButton,
@@ -26,10 +30,12 @@ import {
   useEditContext,
   useMenuOptionUI,
   withMenuOptions,
+} from '@bodiless/core';
+import {
   withNode,
   withNodeKey,
   useNode,
-} from '@bodiless/core';
+} from '@bodiless/data';
 import type {
   ContextMenuFormProps,
 } from '@bodiless/core';
@@ -43,8 +49,6 @@ import {
 import { ComponentFormDefaultPanelSize } from '@bodiless/ui';
 import { useGetRedirectAliases } from './hooks';
 import type { AliasItem } from './types';
-
-enum Steps { Edit, Confirmation }
 
 const REDIRECT_ALIASES = 'Redirect Aliases';
 const REDIRECT_ALIASES_PLACEHOLDER = '/page-1/ /page-2/ 301'
@@ -140,27 +144,11 @@ const FormBodyBase = () => {
   const {
     setValue,
     setValues,
-    setStep,
+    getFormState
   } = useFormApi();
-  const { values: formValues, step } = useFormState();
+  const { values: formValues } = getFormState();
   const { node } = useNode();
   const initialAliases = convertAliasJsonToText(useGetRedirectAliases(node));
-
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-
-    const { aliases } = formValues;
-    if (!isTextValid(aliases as string)) {
-      setValue('isValid', false);
-      return;
-    }
-
-    setValue('isValid', true);
-
-    // Saves json file.
-    node.setData(convertAliasTextToJson(aliases as string));
-    setStep(Steps.Confirmation);
-  };
 
   const EditForm = useCallback(() => {
     useEffect(() => {
@@ -169,21 +157,40 @@ const FormBodyBase = () => {
         aliases: initialAliases,
         isValid: true,
       };
-
       setValues(values);
     }, []);
+    const { next } = useMultistepApi();
+    const handleSubmit = (e: any) => {
+      e.preventDefault();
+      const { values: formValues } = getFormState();
+
+      // @ts-ignore
+      const { Edit: { aliases = ''} = {} } = formValues;
+
+      if (!isTextValid(aliases as string)) {
+        setValue('isValid', false);
+        return;
+      }
+
+      setValue('isValid', true);
+
+      // Saves json file.
+      node.setData(convertAliasTextToJson(aliases as string));
+      next();
+    };
 
     // If validation fails, clears error message when the user focus
     // on the form to type again.
     return (
-      <>
+      <Multistep.Step step="Edit">
         <CustomComponentFormTextArea
           keepState
-          field="aliases"
+          name="aliases"
           onFocus={() => setValue('isValid', true)}
           placeholder={REDIRECT_ALIASES_PLACEHOLDER}
+          initialValue={initialAliases}
         />
-        <ComponentFormIsValid keepState field="isValid" />
+        <ComponentFormIsValid keepState name="isValid" />
         <i>{ !formValues.isValid && INVALIDATED }</i>
         <p>
           If your page that you are redirecting from exists,
@@ -194,24 +201,26 @@ const FormBodyBase = () => {
           aria-label="Submit"
           onClick={handleSubmit}
         />
-      </>
+      </Multistep.Step>
     );
   }, [formValues]);
 
   const ConfirmationForm = () => (
-    <ComponentFormDescription>
-      {CONFIRMATION}
-    </ComponentFormDescription>
+    <Multistep.Step step="Confirmation">
+      <ComponentFormDescription>
+        {CONFIRMATION}
+      </ComponentFormDescription>
+    </Multistep.Step>
   );
 
   return (
-    <>
+    <Multistep>
       <ComponentFormTitle>
         { REDIRECT_ALIASES }
       </ComponentFormTitle>
-      { step === Steps.Edit && <EditForm /> }
-      { step === Steps.Confirmation && <ConfirmationForm /> }
-    </>
+      <EditForm />
+      <ConfirmationForm />
+    </Multistep>
   );
 };
 

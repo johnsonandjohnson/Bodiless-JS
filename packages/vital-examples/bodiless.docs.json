@@ -1,0 +1,30 @@
+{
+  "VitalDesignSystem": {
+    "Curriculum": {
+      "README.md": "./doc/README.md",
+      "Introduction": {
+        "README.md": "./doc/Introduction/README.md",
+        "CoreConcepts.md": "./doc/Introduction/CoreConcepts.md",
+        "ComponentsAndTokens.md": "./doc/Introduction/ComponentsAndTokens.md",
+        "ComposingFromOutside.md": "./doc/Introduction/ComposingFromOutside.md",
+        "ReachingInside.md": "./doc/Introduction/ReachingInside.md",
+        "AnatomyOfA_Token.md": "./doc/Introduction/AnatomyOfAToken.md",
+        "FunctionalClasses.md": "./doc/Introduction/FunctionalClasses.md",
+        "WorkingWithContent.md": "./doc/Introduction/WorkingWithContent.md",
+        "WhyVital.md": "./doc/Introduction/WhyVital.md"
+      },
+      "Lessons": {
+        "README.md": "./doc/Curriculum/Lessons/README.md",
+        "ShadowA_SimpleComponent.md": "./doc/Curriculum/Lessons/ShadowASimpleComponent.md",
+        "CustomizeDesignTokens.md": "./doc/Curriculum/Lessons/CustomizeDesignTokens.md",
+        "BackgroundImages.md": "./doc/Curriculum/Lessons/BackgroundImages.md",
+        "DevelopA_NewComponent.md": "./doc/Curriculum/Lessons/DevelopANewComponent.md",
+        "ReusableTokens.md": "./doc/Curriculum/Lessons/ReusableTokens.md",
+        "ComponentSlots.md": "./doc/Curriculum/Lessons/ComponentSlots.md"
+      }
+    },
+    "Guides": {
+      "ShadowingTokens.md": "./doc/Guides/ShadowingTokens.md"
+    }
+  }
+}

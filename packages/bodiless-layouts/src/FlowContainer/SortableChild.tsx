@@ -15,7 +15,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import throttle from 'lodash/throttle';
 import { ResizeCallback } from 're-resizable';
-import { observer } from 'mobx-react';
+import { observer } from '@bodiless/core';
 import SlateSortableResizable, { getUI } from '../SlateSortableResizable';
 import { defaultSnapData } from './utils/appendTailwindWidthClass';
 import { SortableChildProps } from './types';

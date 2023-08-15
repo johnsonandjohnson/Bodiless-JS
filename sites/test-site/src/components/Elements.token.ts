@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { WithNodeKeyProps } from '@bodiless/core';
+import { WithNodeKeyProps } from '@bodiless/data';
 import {
   addClasses, removeClasses, flowHoc, HOC,
 } from '@bodiless/fclasses';

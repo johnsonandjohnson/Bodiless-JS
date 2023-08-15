@@ -12,18 +12,18 @@
  * limitations under the License.
  */
 
-import { BodilessMobxStore } from '../src/Store/BodilessMobxStore';
-import { StoreItem } from '../src/Store/StoreItem';
+import { BodilessMobxStore } from '../src/Store/BodilessMobxStore.bl-edit';
+import { StoreItem } from '../src/Store/StoreItem.bl-edit';
 
 const deleteItemMock = jest.fn();
 
-jest.mock('../src/Store/StoreItem', () => (
+jest.mock('../src/Store/StoreItem.bl-edit', () => (
   jest.fn().mockImplementation(() => ({
     delete: deleteItemMock,
   }))
 ));
 
-jest.mock('../src/Store/StoreItem', () => ({
+jest.mock('../src/Store/StoreItem.bl-edit', () => ({
   StoreItem: jest.fn().mockImplementation(() => ({
     delete: deleteItemMock,
   })),
@@ -45,7 +45,7 @@ describe('BodilessMobxStore', () => {
     jest.clearAllMocks();
   });
   describe('getChildrenNodes', () => {
-    jest.doMock('../src/Store/StoreItem');
+    jest.doMock('../src/Store/StoreItem.bl-edit');
     describe('when node has children', () => {
       it('should return a collection of all children keys', () => {
         const store = new TestStore(dataSource);

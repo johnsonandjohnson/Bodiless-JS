@@ -14,6 +14,7 @@
 
 import React, {
   FC,
+  PropsWithChildren,
   useContext,
 } from 'react';
 import type {
@@ -29,7 +30,7 @@ const defaultPageData: PageDataContextProps = {
 
 const PageDataContext = React.createContext<PageDataContextProps>(defaultPageData);
 
-const PageDataProvider: FC<PageDataContextProviderProps> = ({
+const PageDataProvider: FC<PropsWithChildren<PageDataContextProviderProps>> = ({
   children,
   pageData,
 }) => (

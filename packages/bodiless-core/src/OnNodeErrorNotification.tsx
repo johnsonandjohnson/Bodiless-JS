@@ -13,9 +13,9 @@
  */
 
 import React from 'react';
-import { observer } from 'mobx-react';
+import { useNode } from '@bodiless/data';
+import { observer } from './mobx.bl-edit';
 import { useNotify } from './NotificationProvider';
-import { useNode } from './NodeProvider';
 
 const NODE_ERROR_NOTIFICATION_ID = 'STORE_ERROR_NOTIFICATION_ID';
 

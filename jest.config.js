@@ -11,19 +11,23 @@ module.exports = {
     '.+\\.(css|styl|less|sass|scss)$': 'identity-obj-proxy',
     '.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
       '<rootDir>/config/__mocks__/fileMock.js',
+    '^gatsby-page-utils/(.*)$': 'gatsby-page-utils/dist/$1', // Workaround for https://github.com/facebook/jest/issues/9771
   },
   testMatch: ['**/?(*.)+(spec|test).ts?(x)', '**/?(*.)+(spec|test).js?(x)'],
-  testPathIgnorePatterns: ['node_modules', '.cache', 'cypress',
+  testPathIgnorePatterns: ['node_modules', '.cache', 'playwright',
     // @todo: remove skipped tests below after jest-resolve issue resolved.
     // https://github.com/johnsonandjohnson/Bodiless-JS/issues/1533
     'create-preview-pages.test.ts',
     'create-pages.test.ts',
     'gatsby-node.test.ts',
+    'js-data-type-stringify-utils.test.ts',
+    'renderer-bodiless.test.ts',
   ],
   transformIgnorePatterns: ['node_modules/(?!(gatsby)/)'],
   testResultsProcessor: 'jest-sonar-reporter',
   globals: {
     __PATH_PREFIX__: '',
+    BL_IS_EDIT: JSON.stringify(process.env.NODE_ENV !== 'production'),
     'ts-jest': {
       tsconfig: './config/tsconfig.test.json',
     },

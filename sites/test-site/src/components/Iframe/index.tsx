@@ -27,7 +27,7 @@ import {
 } from '@bodiless/fclasses';
 
 import { ComponentType } from 'react';
-import { WithNodeProps } from '@bodiless/core';
+import { WithNodeProps } from '@bodiless/data';
 import {
   asResponsive21By9Embed,
   asResponsive16By9Embed,

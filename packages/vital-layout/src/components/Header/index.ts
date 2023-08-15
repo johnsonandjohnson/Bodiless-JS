@@ -13,7 +13,7 @@
  */
 
 import type { TokenDemoSpec } from '@bodiless/tokens';
-import HeaderClean, { asHeaderToken } from './HeaderClean';
+import HeaderClean, { asHeaderToken, HeaderStatic } from './HeaderClean';
 import vitalHeader from './tokens';
 import vitalHeaderBase from './tokens/vitalHeader';
 
@@ -27,6 +27,9 @@ const vitalHeaderSpec: TokenDemoSpec = {
 };
 
 export {
-  HeaderClean, asHeaderToken, vitalHeader, vitalHeaderBase, vitalHeaderSpec,
+  HeaderClean, asHeaderToken, vitalHeader, vitalHeaderBase, vitalHeaderSpec, HeaderStatic
 };
+
 export type { HeaderComponents, HeaderProps } from './types';
+import type { VitalHeader } from './tokens/vitalHeader';
+export type { VitalHeader };

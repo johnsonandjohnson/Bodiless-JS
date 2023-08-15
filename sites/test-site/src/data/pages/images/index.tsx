@@ -21,7 +21,7 @@ import {
   GatsbyImagePresets,
   withGatsbyImagePreset,
 } from '@bodiless/gatsby-theme-bodiless';
-import { withNode, withNodeKey } from '@bodiless/core';
+import { withNode, withNodeKey } from '@bodiless/data';
 import {
   A,
   H1,

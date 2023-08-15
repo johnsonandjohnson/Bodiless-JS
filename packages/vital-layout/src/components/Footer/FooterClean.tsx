@@ -13,61 +13,66 @@
  */
 
 import React, { FC } from 'react';
-import { Div, designable, Footer } from '@bodiless/fclasses';
-import { RichTextClean } from '@bodiless/vital-editors';
+import {
+  Div, designable, Footer, Fragment
+} from '@bodiless/fclasses';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { MenuClean } from '@bodiless/vital-navigation';
-import { RewardsClean } from './Rewards';
-import { SocialLinksClean } from './SocialLinks';
+import { CopyrightRowClean } from './CopyrightRow';
 import type { FooterComponents, FooterProps } from './types';
 
 const footerComponents: FooterComponents = {
   Wrapper: Footer,
   Container: Div,
-  Column: Div,
-  Row: Div,
-  RewardsWrapper: Div,
-  Rewards: RewardsClean,
+  Column1Wrapper: Fragment,
+  Column2Wrapper: Div,
+  MenuRow: Div,
+  CopyrightRow: CopyrightRowClean,
+  RewardsWrapper: Fragment,
+  Rewards: Fragment,
   FooterMenuWrapper: Div,
   FooterMenu: MenuClean,
-  CopyrightWrapper: Div,
-  Copyright: RichTextClean,
-  SocialLinksWrapper: Div,
-  SocialLinks: SocialLinksClean,
+  CopyrightRowOutsideColumns: Fragment,
 };
 
 const FooterCleanBase: FC<FooterProps> = ({ components: C, ...rest }) => (
   <C.Wrapper {...rest}>
     <C.Container>
-      <C.Column>
+      <C.Column1Wrapper>
         <C.RewardsWrapper>
           <C.Rewards />
         </C.RewardsWrapper>
-      </C.Column>
-      <C.Column>
-        <C.Row>
+      </C.Column1Wrapper>
+      <C.Column2Wrapper>
+        <C.MenuRow>
           <C.FooterMenuWrapper>
             <C.FooterMenu />
           </C.FooterMenuWrapper>
-        </C.Row>
-        <C.Row>
-          <C.CopyrightWrapper>
-            <C.Copyright />
-          </C.CopyrightWrapper>
-          <C.SocialLinksWrapper>
-            <C.SocialLinks />
-          </C.SocialLinksWrapper>
-        </C.Row>
-      </C.Column>
+        </C.MenuRow>
+        <C.CopyrightRow />
+      </C.Column2Wrapper>
+      <C.CopyrightRowOutsideColumns />
     </C.Container>
   </C.Wrapper>
 );
 
 /**
- * A clean footer to be used in pages layouts.
+ * A clean footer to be used in pages layouts following vital design.
+ *
+ * @category Component
+ *
  */
 const FooterClean = designable(footerComponents, 'Footer')(FooterCleanBase);
 
+/**
+ * A token modifier that respects the Footer Components.
+ *
+ * @category Token Collection
+ */
 export const asFooterToken = asVitalTokenSpec<FooterComponents>();
+
+// These are used in defining the VitalFooter interface.
+const footerToken = asFooterToken();
+export type FooterToken = typeof footerToken;
 
 export default FooterClean;

@@ -19,11 +19,11 @@ import union from 'lodash/union';
 import flow from 'lodash/flow';
 import identity from 'lodash/identity';
 import type {
-  TokenDef, HOCBase, ComponentOrTag, ComponentWithMeta, TokenMeta,
-  HOC, TokenFilterTest, FlowHoc as AsTokenBase,
+  HOCDef, ComponentOrTag, ComponentWithMeta, TokenMeta,
+  HOC, TokenFilterTest, FlowHoc, HOCWithMeta,
 } from './types';
 
-const isToken = (def: TokenDef<any, any, any>) => typeof def === 'function';
+const isToken = (def: HOCDef<any, any, any>) => typeof def === 'function';
 
 // Custom merge behavior for token categories.
 function mergeMeta(objValue:any, srcValue:any) {
@@ -34,10 +34,9 @@ function mergeMeta(objValue:any, srcValue:any) {
 }
 
 /**
- * @private
- * Enhances an HOC so as to reserve metadata attached to the component it wraps.
+ * Enhances a HOC so as to reserve metadata attached to the component it wraps.
  */
-const preserveMeta = (hoc: HOCBase): HOCBase => <P extends object, Q extends object = P>(
+const preserveMeta = (hoc: HOC): HOC => <P extends object, Q extends object = P>(
   Component: ComponentOrTag<P>,
 ): ComponentWithMeta<Q> => {
   try {
@@ -46,36 +45,42 @@ const preserveMeta = (hoc: HOCBase): HOCBase => <P extends object, Q extends obj
     return Object.assign(NewComponent, finalMeta);
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.log(e);
+    // console.warn(`KNOWN ISSUE: ${(e as Error).message}`);
     return Component as ComponentWithMeta;
   }
 };
 
 /**
- * @private
- * Attaches metadata to a component.
+ * Creates a HOC which attaches metadata to a component.
  *
- * @param meta The metadata to attach.
+ * @param meta
+ * The metadata to attach.
+ *
+ * @returns
+ * A HOC which attaches the supplied metadata as properties of the component.
+ *
+ * @category Token API
  */
-export const withMeta = (meta: TokenMeta): HOCBase => Component => {
-  const WithMeta = (props: any) => <Component {...props} />;
-  return Object.assign(WithMeta, meta);
+export const withMeta = (meta: TokenMeta): HOC => Component => {
+  const WithMeta = typeof Component === 'string'
+    ? (props: any) => <Component {...props} />
+    : Component;
+  // const WithMeta = (props: any) => <Component {...props} />;
+  return mergeWith(WithMeta, meta, mergeMeta);
 };
 
-type TokenWithParents = HOC & {
+type TokenWithParents = HOCWithMeta & {
   parents?: HOC[],
 };
 
 /**
- * @private
- *
  * Flattens an array of tokens recursively. Each token in the flattened array has
  * an additional "parents" property listing the tokens to which it belongs.
  * @param tokens The list of tokens to flatten
  * @param parents The current list of parents
  */
 const flattenTokens = <P extends object>(
-  tokens: HOC[] = [], parents: HOC[] = [],
+  tokens: HOCWithMeta[] = [], parents: HOC[] = [],
 ): TokenWithParents[] => tokens.reduce(
     (acc, token) => [
       ...acc,
@@ -87,8 +92,6 @@ const flattenTokens = <P extends object>(
   );
 
 /**
- * @private
- *
  * Generates a token fliter which applies to a token and any of its parents.
  * Used to ensure that a token is removed if any of its parents match
  * the filter criteria.
@@ -113,7 +116,7 @@ const createTokenAndParentFilter = <P extends object>(
  * @return A flat list of filtered tokens
  */
 const filterMembers = <P extends object>(tokens: HOC[]): HOC[] => {
-  const filtered: HOCBase[] = [];
+  const filtered: HOCWithMeta[] = [];
   let rest = flattenTokens(tokens).reverse();
   while (rest.length > 0) {
     const [next, ...nextRest] = rest;
@@ -126,11 +129,16 @@ const filterMembers = <P extends object>(tokens: HOC[]): HOC[] => {
   return filtered.reverse();
 };
 
-type FlowHoc<B = {}> = AsTokenBase<B> & {
-  meta: {
-    term: (c: string) => (t: string) => TokenMeta;
-    cat: (c: string) => TokenMeta;
-  };
+/**
+ * Type of the helper functions provided for generating token metadata.
+ *
+ * @category HOC Utility
+ */
+export type FlowHocMeta = {
+  /**
+   * Creates a metadata object from a category and term.
+   */
+  term: (c: string) => (t: string) => TokenMeta;
 };
 
 /**
@@ -142,15 +150,17 @@ type FlowHoc<B = {}> = AsTokenBase<B> & {
  * objects as arguments in addition to tokens.
  *
  * @see TokenProps
- * @see TokenDefinition
+ * @see HOCDefinition
  *
  * @param tokens
  * List of tokens and token metadata objects to compose.
  *
  * @return
  * A composed token.
+ *
+ * @category HOC Utility
  */
-const flowHoc: FlowHoc = (...args) => {
+const flowHoc: FlowHoc<{}> & { meta: FlowHocMeta } = (...args) => {
   // We allow "undefined" in args and simply ignore them.
   const args$ = args.filter(a => a !== undefined);
   const metaBits: TokenMeta[] = args$.filter(a => !isToken(a)) as TokenMeta[];
@@ -174,6 +184,9 @@ const flowHoc: FlowHoc = (...args) => {
  *
  * @returns
  * A token filter.
+ *
+ * @hidden
+ * @deprecated
  */
 const withTokenFilter = <P extends object>(test: TokenFilterTest): HOC => (
   Object.assign(identity, { filter: test })
@@ -188,11 +201,6 @@ flowHoc.meta = {
       [c]: [t],
     },
   }),
-  cat: (c: string) => ({
-    categories: {
-      [c]: [],
-    },
-  }),
 };
 
 /**
@@ -204,6 +212,8 @@ flowHoc.meta = {
    *
    * @returns
    * A single token meta object which merges the arguments.
+   *
+   * @category Token API
    */
 const extendMeta = (
   ...args: (TokenMeta|undefined)[]
@@ -214,4 +224,8 @@ const extendMeta = (
   return undefined;
 });
 
-export { flowHoc, withTokenFilter, extendMeta };
+const noop: HOC = C => C as ComponentWithMeta;
+
+export {
+  flowHoc, withTokenFilter, extendMeta, noop
+};

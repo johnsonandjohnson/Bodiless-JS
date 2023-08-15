@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/webpack",
-  "version": "1.0.0-beta.12",
+  "version": "1.0.0-rc.42",
   "description": "Portable webpack configuration for bodiless sites",
   "author": "Chris Oden <coden@its.jnj.com>",
   "homepage": "",
@@ -23,20 +23,21 @@
     "access": "public"
   },
   "scripts": {
-    "build": "run-p build:lib build:api-doc",
-    "build:api-doc": "typedoc --out doc/api src",
+    "build": "run-p build:lib",
     "build:lib": "tsc -p ./tsconfig.json",
     "build:watch": "npm run build:lib -- --watch",
+    "dev": "npm run build:watch",
+    "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api ./src",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
     "prepack": "npm run clean && npm run build"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-beta.12",
+    "@bodiless/cli": "^1.0.0-rc.42",
+    "@statoscope/webpack-plugin": "^5.20.1",
     "lodash": "^4.17.19",
     "webpack": "^5.69.1"
   },
   "devDependencies": {
-    "@statoscope/webpack-plugin": "^5.20.1",
     "@types/node": "^16"
   }
 }

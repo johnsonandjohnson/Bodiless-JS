@@ -12,29 +12,37 @@
  * limitations under the License.
  */
 
-import { useIsBurgerMenuHidden, withBurgerMenuProvider } from '@bodiless/vital-navigation';
+import { withNodeKey } from '@bodiless/data';
+import { useIsBurgerMenuHidden, withBurgerMenuProvider, withBreadcrumbStore } from '@bodiless/vital-navigation';
 import {
   addProps,
   as,
   flowIf,
   not,
 } from '@bodiless/fclasses';
+import { WithStructuredDataProvider } from '@bodiless/schema-org';
 import { asLayoutToken } from '../LayoutClean';
+import type { LayoutToken } from '../LayoutClean';
 import { vitalFooter } from '../../Footer';
 import { vitalHeader } from '../../Header';
 import { vitalHelmet } from '../../Helmet';
 import { LayoutIds } from './constants';
 import { StyleGuide } from './StyleGuide';
 
-/**
-  * Token that defines a basic layout.
-  */
-const Base = asLayoutToken({
+const Default = asLayoutToken({
   Core: {
-    _: withBurgerMenuProvider,
+    _: as(withBurgerMenuProvider, withBreadcrumbStore),
   },
   Components: {
     Helmet: vitalHelmet.Default,
+    Header: vitalHeader.Default,
+    Footer: vitalFooter.Default,
+  },
+  Analytics: {
+    Container: addProps({ 'data-layer-region': 'body' }),
+  },
+  SEO: {
+    _: WithStructuredDataProvider,
   },
   Behavior: {
     Container: addProps({ id: LayoutIds.Content }),
@@ -47,30 +55,91 @@ const Base = asLayoutToken({
     ),
   },
   Layout: {
+    OuterContainer: 'flex flex-col',
+    ContainerWrapper: 'flex-grow',
     Helmet: flowIf(
       not(useIsBurgerMenuHidden),
-    )(as(vitalHelmet.WithFixedBody, vitalHelmet.WithDesktopStatickBody)),
+    )(as(vitalHelmet.WithFixedBody, vitalHelmet.WithDesktopStaticBody)),
   },
   Theme: {
-    OuterContainer: 'flex flex-col h-screen',
-    ContainerWrapper: 'flex-grow',
+    OuterContainer: 'h-screen',
   },
   Content: {
     Header: addProps({ id: LayoutIds.HeaderContent }),
   },
+  Schema: {
+    Header: withNodeKey({ nodeKey: 'header', nodeCollection: 'site' }),
+    Footer: withNodeKey({ nodeKey: 'footer', nodeCollection: 'site' }),
+  }
 });
 
-const Default = asLayoutToken({
-  ...Base,
-  Components: {
-    ...Base.Components,
-    Header: vitalHeader.Default,
-    Footer: vitalFooter.Default,
-  },
-});
+/**
+ * Tokens for the vital layout
+ *
+ * @category Token Collection
+ * @see [[LayoutClean]]
+ */
+export interface VitalLayout {
+  /**
+   * Inherits from Base & assigns the components vitalHeader.Default & vitalFooter.FootWithRewards
+   *
+   * @example Override default to use custom Footer.
+   * ```js
+   * import { asLayoutToken, vitalHeader, vitalLayoutBase } from '@bodiless/vital-layout';
+   * import asMyFooter from '../../../components/Footer';
+   *
+   * const Default = asLayoutToken(vitalLayoutBase.Default, {
+   *   Components: {
+   *     Header: vitalHeader.Default,
+   *     Footer: asMyFooter,
+   *   },
+   * });
+   *
+   * export default {
+   *   ...vitalLayoutBase,
+   *   Default,
+   * };
+   * ```
+   *
+   * @example override the Skip To Main content with language specific
+   * ```js
+   * import { vitalLayoutBase, asLayoutToken } from '@bodiless/vital-layout';
+   * import { addProps, as } from '@bodiless/fclasses';
+   *
+   * const Default = asLayoutToken(vitalLayoutBase.Default, {
+   *   Behavior: {
+   *     SkipToMainContent: as(
+   *       addProps({
+   *         children: 'Passer au contenu principal',
+   *       }),
+   *     ),
+   *   },
+   * });
+   *
+   * export default {
+   *   ...vitalLayoutBase,
+   *   Default,
+   * };
+   * ```
+   *
+   */
+  Default: LayoutToken,
+  /**
+   * Special layout to demonstrate components.  Only used for testing purposing.
+   */
+  StyleGuide: LayoutToken,
+}
 
-export default {
-  Base,
+/**
+ * Tokens for Vital Layout
+ *
+ * @category Token Collection
+ * @see [[VitalLayout]]
+ * @see [[LayoutClean]]
+ */
+const vitalLayout: VitalLayout = {
   Default,
   StyleGuide,
 };
+
+export default vitalLayout;

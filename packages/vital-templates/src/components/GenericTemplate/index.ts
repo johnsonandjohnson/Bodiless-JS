@@ -13,7 +13,6 @@
  */
 
 export { default as GenericTemplateClean, asGenericTemplateToken } from './GenericTemplateClean';
-export { default as vitalGenericTemplateBase } from './tokens/vitalGenericTemplate';
 export { default as vitalGenericTemplate } from './tokens';
+export { knapsackGenericTemplateSpec } from './GenericTemplate.knapsackSpec';
 export type { GenericTemplateComponents } from './types';
-export { GenericTemplateNodeKeys } from './constants';

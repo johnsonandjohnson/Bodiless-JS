@@ -3,14 +3,11 @@
     "Components": {
       "VitalLayout": {
         "README.md": "./doc/README.md",
-        "Footer.md": "./doc/Footer.md",
-        "Header.md": "./doc/Header.md",
-        "Helmet.md": "./doc/Helmet.md",
         "Layout.md": "./doc/Layout.md",
-        "Logo.md": "./doc/Logo.md",
-        "MenuToggler.md": "./doc/MenuToggler.md",
-        "Responsiveness.md": "./doc/Responsiveness.md",
-        "SearchToggler.md": "./doc/Search.md"
+        "Helmet.md": "./doc/Helmet.md",
+        "Header.md": "./doc/Header.md",
+        "Footer.md": "./doc/Footer.md",
+        "Logo.md": "./doc/Logo.md"
       }
     }
   }

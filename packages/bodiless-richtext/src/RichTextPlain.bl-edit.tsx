@@ -14,7 +14,7 @@
 
 import React, { ComponentType } from 'react';
 import flowRight from 'lodash/flowRight';
-import { useNode, withNode } from '@bodiless/core';
+import { useNode, withNode } from '@bodiless/data';
 import { Node } from 'slate';
 import type { Value } from './Type';
 

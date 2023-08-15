@@ -1,0 +1,9 @@
+{
+  "VitalDesignSystem": {
+    "Components": {
+      "Vital_Content_Listing": {
+        "README.md": "./doc/Vital_Content_Listing.md"
+      }
+    }
+  }
+}

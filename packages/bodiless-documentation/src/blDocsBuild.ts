@@ -44,7 +44,7 @@ const buildSubTree = async (toc: any, namespace: string) => {
 
 const blDocsBuild = async () => {
   const copier = process.env.BODILESS_DOCS_COPYFILES ? copyFile : symlinkFile;
-  const docPath = './doc';
+  const docPath = process.env.BODILESS_DOCS_DESTINATION_PATH || './doc';
   const { toc } = readSettings();
 
   console.log('Building documentation tree');
@@ -65,6 +65,7 @@ const blDocsBuild = async () => {
 
   // Validate the paths for letter-case typos.
   try {
+    console.log('Validating paths');
     validatePaths(getSimplePaths(paths));
   } catch (error) {
     console.warn('Error validating paths', error);

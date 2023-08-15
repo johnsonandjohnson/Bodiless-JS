@@ -17,45 +17,39 @@ import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
 import {
   EditorPlainClean, vitalEditorPlain, RichTextClean, vitalRichText
 } from '@bodiless/vital-editors';
-import { withNodeKey } from '@bodiless/core';
+import { withNodeKey } from '@bodiless/data';
 import {
   on, replaceWith, Fragment, as
 } from '@bodiless/fclasses';
 import { vitalLayout, LayoutClean } from '@bodiless/vital-layout';
 import { asStyleGuideTemplateToken } from '../StyleGuideTemplateClean';
 
-const Base = asStyleGuideTemplateToken({
-  Components: {
-    Wrapper: on(LayoutClean)(vitalLayout.Default),
-  },
+const Default = asStyleGuideTemplateToken({
   Theme: {
     TitleWrapper: vitalTypography.H1,
-  },
-  Editors: {
-    Title: on(EditorPlainClean)(vitalEditorPlain.Default),
-    Description: on(RichTextClean)(vitalRichText.Default),
-  },
-  Schema: {
-    Title: withNodeKey('title'),
-    Description: withNodeKey('description'),
-    Examples: withNodeKey('exmples'),
-  },
-});
-
-const Default = asStyleGuideTemplateToken({
-  ...Base,
-  Theme: {
-    ...Base.Theme,
     Container: as(
       vitalSpacing.WithSiteMargin,
       vitalSpacing.WithSiteXLConstraint
     ),
   },
+  Components: {
+    Title: on(EditorPlainClean)(vitalEditorPlain.Default),
+    Description: on(RichTextClean)(vitalRichText.Default),
+    Wrapper: on(LayoutClean)(vitalLayout.Default),
+  },
+  Schema: {
+    Title: withNodeKey('title'),
+    Description: withNodeKey('description'),
+    Examples: withNodeKey('examples'),
+  },
+  Meta: {
+    title: 'Default',
+  },
 });
 
-const NoLayout = asStyleGuideTemplateToken(omit(Base, 'Components'), {
+const NoLayout = asStyleGuideTemplateToken(omit(Default, 'Components'), {
   Components: {
-    ...Base.Components,
+    ...Default.Components,
     Wrapper: replaceWith(Fragment),
   },
   Layout: {

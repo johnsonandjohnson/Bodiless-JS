@@ -13,7 +13,7 @@
  */
 
 import React, { FC, ComponentType, HTMLProps } from 'react';
-import { withSidecarNodes } from '@bodiless/core';
+import { withSidecarNodes } from '@bodiless/data';
 import {
   designable,
   DesignableComponentsProps,

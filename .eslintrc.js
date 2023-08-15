@@ -66,6 +66,10 @@ module.exports = {
     "browser": true,
     "node": true
   },
-  "ignorePatterns": [".eslintrc.js"],
+  "ignorePatterns": [
+    ".eslintrc.js",
+    '**/design-tokens.js', // Exclude design-tokens.js
+    '**/design-tokens.d.ts', // Exclude design-tokens.d.ts
+  ],
 };
 

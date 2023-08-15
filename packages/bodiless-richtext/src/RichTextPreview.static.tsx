@@ -13,9 +13,12 @@
  */
 
 import { staticHOC } from '@bodiless/hydration';
+import identity from 'lodash/identity';
 
 const asPreview = staticHOC;
+const withPreview = identity;
 
 export {
+  withPreview,
   asPreview,
 };

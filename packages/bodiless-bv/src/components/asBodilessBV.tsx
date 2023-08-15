@@ -13,13 +13,13 @@
  */
 
 import { withoutProps } from '@bodiless/fclasses';
+import { ifReadOnly } from '@bodiless/core';
 import {
   withNode,
   withNodeDataHandlers,
-  ifReadOnly,
   withNodeKey,
-  withData,
-} from '@bodiless/core';
+  withData
+} from '@bodiless/data';
 import flowRight from 'lodash/flowRight';
 
 const emptyValue = {

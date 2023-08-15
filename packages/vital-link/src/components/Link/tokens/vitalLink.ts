@@ -21,15 +21,12 @@ import {
   flowIf,
   on,
   replaceWith,
-  startWith,
-  withProps,
 } from '@bodiless/fclasses';
-import { withSidecarNodes, withNodeKey } from '@bodiless/core';
-import { vitalColor, vitalTextDecoration, vitalTypography } from '@bodiless/vital-elements';
+import { withSidecarNodes, withNodeKey } from '@bodiless/data';
+import { vitalLinkElement } from '@bodiless/vital-elements';
 import { asLinkToken } from '../LinkClean';
 import { useExternalLinkToggle, asEditableLink, useIsDownloadLink } from '../util';
-import { CartIcon } from '../assets/CartIcon';
-
+import type { LinkToken } from '../LinkClean';
 /**
    * Token which causes link to display as an external link.
    */
@@ -64,16 +61,9 @@ const WithDownloadStyles = asLinkToken({
 });
 
 /**
-   * Token which produces a default VitalDS editable link.
-   */
-const Default = asLinkToken({
-  /**
-     * VitalDS typography and colors.
-     */
-  Theme: {
-    _: as(WithDownloadStyles, WithExternalStyles),
-    Wrapper: as(vitalTypography.Link),
-  },
+  * Token which produces a base editable link.
+  */
+const Base = asLinkToken({
   /**
      * Makes the link editable. Nodekey must be provided separately.
      * Editor token should be applied after all composed tokens to ensure
@@ -83,6 +73,51 @@ const Default = asLinkToken({
     _: asEditableLink(),
   },
 });
+
+/**
+   * Token which produces a default VitalDS editable link.
+   */
+const Default = asLinkToken(Base, {
+  /**
+     * VitalDS typography and colors.
+     */
+  Theme: {
+    // Turning Download & External styles off Default until we need it.
+    // _: as(WithDownloadStyles, WithExternalStyles),
+    Wrapper: as(
+      vitalLinkElement.TextLightThemeIdle,
+      vitalLinkElement.TextLightThemePressed,
+      vitalLinkElement.TextLightThemeHover,
+      vitalLinkElement.TextLightThemeFocus,
+      'hover:underline active:underline',
+      // @TODO: Manually adding for now, but outline color
+      // should be coming in via generated tokens. Rework parsetokens script
+      // to correctly import.
+      'outline-signal-informational'
+    ),
+  },
+});
+
+/**
+   * Token which produces a Disabled VitalDS link.
+   */
+const Disabled = asLinkToken(Base, {
+  Components: {
+    Wrapper: replaceWith(Span)
+  },
+  Theme: {
+    Wrapper: vitalLinkElement.TextDarkThemeDisabled,
+  },
+});
+
+// PrimaryLink is deprecated but saving if we want hover arrow option in future
+// const PrimaryLink = asLinkToken(Default, {
+//   Theme: {
+//     Wrapper: 'hover:vital-arrow hover:pr-1 hover:w-6 hover:h-2',
+//     Body: vitalColor.TextPrimaryInteractiveNoHover,
+//   },
+//   Meta: flowHoc.meta.term('Style')('With Hover Arrow'),
+// });
 
 const Sidecar = asLinkToken({
   ...Default,
@@ -94,55 +129,51 @@ const Sidecar = asLinkToken({
   },
 });
 
-const WhereToBuy = asLinkToken({
-  Components: {
-    Icon: startWith(CartIcon),
-  },
-  Layout: {
-    Wrapper: 'w-full flex justify-center items-center max-w-64 h-12 lg:w-full',
-  },
-  Spacing: {
-    Wrapper: 'mx-auto p-3',
-    Icon: 'mr-3 xl:mr-0 2xl:mr-3',
-  },
-  Theme: {
-    Wrapper: as(
-      vitalColor.BgPrimaryInteractive,
-      vitalColor.TextPrimaryFooterCopy,
-      vitalTextDecoration.Bold,
-      vitalTextDecoration.Uppercase,
-      // @TODO: Create token? It should be same size for both mobile and desktop...
-      'text-m-base',
-      'rounded',
-    ),
-    Icon: 'w-6 h-6',
-    Body: 'leading xl:hidden 2xl:block',
-  },
-  Content: {
-    _: withProps({
-      children: 'Where to Buy',
-    }),
-    Wrapper: withProps({
-      href: '/where-to-buy',
-    }),
-  },
-});
+/**
+ * Tokens for the vital link
+ *
+ * @category Token Collection
+ */
+export interface VitalLink {
+  /**
+   * Unstyled Link Token.
+   */
+  Base: LinkToken,
+  /**
+   * Styled Link Token.
+   */
+  Default: LinkToken,
+  /**
+   * Disabled Link Token.
+   */
+  Disabled: LinkToken
+  /**
+   * Add External Icon add end of the link
+   */
+  WithExternalStyles: LinkToken,
+  /**
+   * Add Downloadable Icon add end of the link
+   */
+  WithDownloadStyles: LinkToken,
+  /**
+   * Attaches a node to the link for saving link value
+   */
+  Sidecar: LinkToken,
+}
 
 /**
- * Token that provides the Where To Buy button without an icon.
+ * Tokens for Vital Image
+ *
+ * @category Token Collection
+ * @see [[VitalLink]]
  */
-const WhereToBuyWithoutIcon = asLinkToken({
-  ...WhereToBuy,
-  Components: {
-    Icon: replaceWith(() => null),
-  },
-});
-
-export default {
+const vitalLink: VitalLink = {
+  Base,
   Default,
+  Disabled,
   WithExternalStyles,
   WithDownloadStyles,
   Sidecar,
-  WhereToBuy,
-  WhereToBuyWithoutIcon,
 };
+
+export default vitalLink;

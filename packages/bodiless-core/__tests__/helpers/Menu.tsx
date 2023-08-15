@@ -13,7 +13,7 @@
  */
 
 import React, { ComponentType } from 'react';
-import { observer } from 'mobx-react';
+import { observer } from '../../src/mobx.bl-edit';
 import { TMenuOption } from '../../src/Types/ContextMenuTypes';
 import { useEditContext } from '../../src/hooks';
 
@@ -37,13 +37,14 @@ const Item = observer(({
       [key]: typeof option[next] === 'string' ? option[next] : option[next].toString(),
     };
   }, {});
+  const children = (typeof option.label === 'function' ? option.label() : option.label) || option.name;
   return (
     <span
       {...rest}
       {...optionAttributes}
       id={option.name}
     >
-      {option.label || option.name}
+      {children}
     </span>
   );
 });

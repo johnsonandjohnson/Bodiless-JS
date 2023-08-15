@@ -2,8 +2,11 @@
   "VitalDesignSystem": {
     "Components": {
       "VitalImage": {
-        "README.md": "./doc/Image.md",
-        "ImageConfigurations.md": "./doc/ImageConfigurations.md"
+        "README.md": "./doc/README.md",
+        "ImageGuidelines.md": "./doc/ImageGuidelines.md",
+        "assets": {
+          "HeroSwapImage.jpg": "./doc/assets/HeroSwapImage.jpg"
+        }
       }
     }
   }

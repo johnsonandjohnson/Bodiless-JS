@@ -13,7 +13,7 @@
  */
 
 import {
-  HOC, Token, TokenMeta, TokenSpec, TokenCollection, as
+  HOC, Token, TokenMeta, TokenSpec, TokenCollection, as,
 } from '@bodiless/fclasses';
 
 export type Tokens = {
@@ -52,6 +52,16 @@ class TokenMap {
     );
     this.add(tokens);
     return this;
+    // TBD Conflict resolution
+    // Currently on main... looks like change was for typesafing : HOCWithMeta 
+    // constructor(groupsFor?: (token?: HOC) => string[]) {
+    //   this.groupsFor = groupsFor
+    //     || ((token?: HOCWithMeta) => token?.meta?.categories?.Category || []);
+    // }
+    // Currently on main in 2022
+    // constructor(groupsFor?: (token?: HOC) => string[]) {
+    //   this.groupsFor = groupsFor || ((token?: HOC) => token?.meta?.categories?.Category || []);
+    // }
   }
 
   get names() {

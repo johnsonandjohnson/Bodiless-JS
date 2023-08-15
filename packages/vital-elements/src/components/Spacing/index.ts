@@ -13,4 +13,4 @@
  */
 
 export { default as vitalSpacing } from './tokens';
-export { default as vitalSpacingBase } from './tokens/vitalSpacing';
+export { SpacingMeta } from './meta';

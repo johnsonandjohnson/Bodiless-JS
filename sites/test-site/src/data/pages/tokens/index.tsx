@@ -24,10 +24,12 @@ import {
   asAccordionBody, asAccordionTitle, asAccordionWrapper,
 } from '@bodiless/accordion';
 import {
-  withActivateOnEffect, withNodeKey, withNode,
-  withNodeDataHandlers, useNode, WithNodeProps,
-  withReactivateOnRemount,
+  withActivateOnEffect, withReactivateOnRemount
 } from '@bodiless/core';
+import {
+  withNodeKey, withNode, withNodeDataHandlers, useNode, WithNodeProps,
+} from '@bodiless/data';
+
 import { FlowContainer } from '@bodiless/layouts-ui';
 import { withTitle, withDesc } from '@bodiless/layouts';
 import {

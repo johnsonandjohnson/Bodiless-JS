@@ -1,0 +1,70 @@
+{
+  "name": "@bodiless/vital-product",
+  "sideEffects": false,
+  "version": "1.0.0-rc.42",
+  "description": "",
+  "author": "",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "/lib",
+    "/bodiless.docs.json",
+    "/getDocs.js",
+    "/tailwind.config.js",
+    "/doc"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "content-model": "./bin/content-model",
+    "fetch-products": "./bin/fetch-products"
+  },
+  "scripts": {
+    "build": "run-p build:lib",
+    "build:lib": "tsc -b ./tsconfig.cjs.json ./tsconfig.json",
+    "build:watch": "npm run build:lib -- --watch",
+    "fetch": "node ./src/scripts/fetch-products.ts",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
+  "dependencies": {
+    "@bodiless/components": "^1.0.0-rc.42",
+    "@bodiless/core": "^1.0.0-rc.42",
+    "@bodiless/data": "^1.0.0-rc.42",
+    "@bodiless/fclasses": "^1.0.0-rc.42",
+    "@bodiless/hydration": "^1.0.0-rc.42",
+    "@bodiless/layouts": "^1.0.0-rc.42",
+    "@bodiless/layouts-ui": "^1.0.0-rc.42",
+    "@bodiless/vital-elements": "^1.0.0-rc.42",
+    "@bodiless/vital-templates": "^1.0.0-rc.42",
+    "@bodiless/vital-accordion": "^1.0.0-rc.42",
+    "@bodiless/vital-list": "^1.0.0-rc.42",
+    "@bodiless/vital-image": "^1.0.0-rc.42",
+    "@bodiless/vital-navigation": "^1.0.0-rc.42",
+    "@bodiless/vital-flowcontainer": "^1.0.0-rc.42",
+    "@bodiless/vital-layout": "^1.0.0-rc.42",
+    "@bodiless/vital-editors": "^1.0.0-rc.42",
+    "@bodiless/vital-card": "^1.0.0-rc.42",
+    "@bodiless/schema-org": "^1.0.0-rc.42",
+    "@bodiless/vital-link": "^1.0.0-rc.42",
+    "@bodiless/vital-button": "^1.0.0-rc.42",
+    "@bodiless/vital-section": "^1.0.0-rc.42",
+    "contentful": "^9.3.3",
+    "contentful-management": "^10.30.0",
+    "lodash": "^4.17.19",
+    "dotenv": "^8.2.0",
+    "fs-extra": "^8.1.0",
+    "yargs": "^17.7.1"
+  },
+  "devDependencies": {
+    "@types/yargs": "^17.0.22"
+  }
+}

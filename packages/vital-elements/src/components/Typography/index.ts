@@ -25,4 +25,7 @@ const vitalTypographySpec: TokenDemoSpec = {
   tokensExportName: 'vitalTypography',
 };
 
-export { vitalTypography, vitalTypographyBase, vitalTypographySpec };
+export { vitalTypographyBase, vitalTypographySpec };
+export { default as vitalTypography } from './tokens';
+export { TypographyMeta } from './meta';
+// export { knapsackTypographySpec, knapsackVitalTypographySpec } from './Typography.knapsackSpec';

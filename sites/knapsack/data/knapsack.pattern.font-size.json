@@ -1,0 +1,49 @@
+{
+  "id": "font-size",
+  "title": "Font Size",
+  "description": "",
+  "statuses": {
+    "KIRz-iaKhz": "ready",
+    "main": "ready"
+  },
+  "templates": [
+    {
+      "id": "bodiless-6GKNPvcRI8",
+      "title": "Code",
+      "path": "@bodiless/vital-elements",
+      "alias": "knapsackFontSizeSpec",
+      "templateLanguageId": "bodiless",
+      "spec": {
+        "isInferred": true
+      },
+      "demoIds": ["5El4ojBTcF", "8oblO5r52L"],
+      "blockIds": []
+    }
+  ],
+  "tabs": [
+    {
+      "id": "auBxbVg_em",
+      "type": "subPage"
+    },
+    {
+      "id": "WYxIzh9Dcn",
+      "type": "subPage"
+    },
+    {
+      "id": "bodiless-6GKNPvcRI8",
+      "type": "template"
+    }
+  ],
+  "subPages": [
+    {
+      "id": "auBxbVg_em",
+      "title": "Guidelines",
+      "blockIds": []
+    },
+    {
+      "id": "WYxIzh9Dcn",
+      "title": "Figma",
+      "blockIds": ["OujmOy7hzr"]
+    }
+  ]
+}

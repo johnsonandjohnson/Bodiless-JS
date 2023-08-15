@@ -20,8 +20,8 @@ import {
   contextMenuForm,
   handleBackendResponse,
   useEditContext,
-  useNode,
 } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import { usePageMenuOptionUI } from '../MenuOptionUI';
 import { verifyPage } from '../Operations';
 import {
@@ -61,7 +61,7 @@ const menuFormPageClone = (client: PageClient) => contextMenuForm({
 })(({ formState, formApi } : any) => {
   const { ComponentFormText } = usePageMenuOptionUI();
   const {
-    submits, invalid, values,
+    submitted, invalid, values,
   } = formState;
   const [state, setState] = useState<PageState>({
     status: PageStatus.Init,
@@ -72,7 +72,7 @@ const menuFormPageClone = (client: PageClient) => contextMenuForm({
 
   useEffect(() => {
     // If the form is submitted and valid then lets try to clone a page.
-    if (submits && destination && invalid === false) {
+    if (submitted && destination && invalid === false) {
       context.showPageOverlay({ hasSpinner: false });
       setState({ status: PageStatus.Pending });
       clonePage({ origin, destination, client })
@@ -89,11 +89,11 @@ const menuFormPageClone = (client: PageClient) => contextMenuForm({
           formApi.setValue('keepOpen', false);
         });
     }
-  }, [submits]);
+  }, [submitted]);
   const { status, errorMessage, pagePath } = state;
   return (
     <>
-      <ComponentFormText type="hidden" field="keepOpen" initialValue />
+      <ComponentFormText type="hidden" name="keepOpen" initialValue />
       <MenuFormPage
         formTitle="Clone (this) Page"
         status={status}

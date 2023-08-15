@@ -13,4 +13,3 @@
  */
 
 export { isStaticClientSide, withoutHydration, withoutHydrationInline } from './withoutHydration';
-export { WithoutHydrationProps } from './types';

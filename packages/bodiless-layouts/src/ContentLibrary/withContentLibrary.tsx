@@ -14,12 +14,13 @@
 
 import React, { ComponentType } from 'react';
 import {
-  useNode, ContentNode, useContextMenuForm,
-  createMenuOptionGroup, withMenuOptions, NodeProvider,
+  useNode, ContentNode, NodeProvider,
+} from '@bodiless/data';
+import {
+  useContextMenuForm, createMenuOptionGroup, withMenuOptions, observer,
 } from '@bodiless/core';
 import type { OptionGroupDefinition } from '@bodiless/core';
 import type { ComponentOrTag } from '@bodiless/fclasses';
-import { observer } from 'mobx-react';
 import flow from 'lodash/flow';
 import ComponentSelector from '../ComponentSelector';
 import type { ComponentSelectorProps, Meta, ComponentWithMeta } from '../ComponentSelector/types';

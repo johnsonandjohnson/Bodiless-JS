@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/vital-elements",
-  "version": "1.0.0-beta.12",
+  "version": "1.0.0-rc.42",
   "description": "Layout components for the bodiless vital design system",
   "author": "Chris Odem <coden@its.jnj.com>",
   "license": "Apache-2.0",
@@ -22,20 +22,23 @@
     "access": "public"
   },
   "scripts": {
-    "build": "run-p build:lib copy build:api-doc",
-    "build:api-doc": "typedoc --out doc/api src",
-    "build:lib": "tsc -p ./tsconfig.json",
+    "build": "run-p build:lib copy",
+    "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api src",
+    "build:lib": "tsc -b ./tsconfig.json  ./tsconfig.cjs.json",
     "build:watch": "npm run build:lib -- --watch",
+    "dev": "npm run build:watch",
     "copy": "copyfiles -u 1 \"./src/*.css\" \"./lib/\"",
-    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
+    "tokens:clean": "rimraf \"src/generated/*\"",
+    "tokens:find": "node ./lib/cjs/scripts/find-tokens.js",
+    "tokens:parse": "node ./lib/cjs/scripts/parse-tokens.js"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-beta.12",
-    "@bodiless/components": "^1.0.0-beta.12",
-    "@bodiless/core": "^1.0.0-beta.12",
-    "@bodiless/fclasses": "^1.0.0-beta.12",
-    "@bodiless/hydration": "^1.0.0-beta.12",
-    "@bodiless/tokens": "^1.0.0-beta.12",
+    "@bodiless/cli": "^1.0.0-rc.42",
+    "@bodiless/components": "^1.0.0-rc.42",
+    "@bodiless/fclasses": "^1.0.0-rc.42",
+    "@bodiless/hydration": "^1.0.0-rc.42",
+    "@bodiless/tokens": "^1.0.0-rc.42",
     "@types/webpack": "^5.0.0",
     "lodash": "^4.17.19",
     "mobx": "^6.0.0",
@@ -43,7 +46,9 @@
     "react-contenteditable": "^3.2.6",
     "react-dropzone": "^10.1.5",
     "react-id-generator": "^3.0.1",
-    "uuid": "^3.3.2"
+    "react-test-renderer": "^18.0.0",
+    "uuid": "^3.3.2",
+    "webpack": "^5.69.1"
   },
   "devDependencies": {
     "@types/uuid": "^3.4.4",
@@ -52,8 +57,8 @@
   },
   "peerDependencies": {
     "@types/react-helmet": "^6.1.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0"
   }
 }

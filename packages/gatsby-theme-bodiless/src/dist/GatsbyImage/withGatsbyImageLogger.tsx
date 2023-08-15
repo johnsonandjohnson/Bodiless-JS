@@ -13,20 +13,25 @@
  */
 
 import React, { FC } from 'react';
-import { useNode } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import { HOC } from '@bodiless/fclasses';
-import { log } from '../fsLogHandler';
+import { log } from '../fsLogger';
 import GatsbyImagePresets from './GatsbyImagePresets';
 
 type Props = {
   preset: GatsbyImagePresets
 };
 
+/**
+ * `withGatsbyImageLogger` is a HOF that fails Gatsby build and logs errors when there
+ * is a mismatch between the image preset passed as an argument to the Gatsby Image node
+ * and the corresponding image preset stored in the image node JSON file.
+ */
 const withGatsbyImageLogger = (preset?: GatsbyImagePresets): HOC => Component => {
   const WithGatsbyImageLogger: FC<any> = props => {
     const { node } = useNode<any>();
     const { preset: presetFromProps } = props as Props;
-    const { canonicalPreset } = node.data;
+    const { data: { canonicalPreset } = {} } = node;
     const expectedPreset = preset || canonicalPreset || undefined;
     if (expectedPreset !== presetFromProps && presetFromProps !== undefined) {
       log(`

@@ -17,7 +17,7 @@ import React, { ComponentType, FC, useCallback } from 'react';
 import flowRight from 'lodash/flowRight';
 import { ChameleonButtonProps } from './types';
 import { DEFAULT_KEY, useChameleonContext } from './withChameleonContext';
-import { withUnwrap } from './withChameleonButton';
+import { withUnwrap } from './withChameleonButton.bl-edit';
 
 const withWrapOnSubmit = <P extends object>(Component: ComponentType<P>) => {
   const WithWrapOnSubmit: FC<P & ChameleonButtonProps> = props => {

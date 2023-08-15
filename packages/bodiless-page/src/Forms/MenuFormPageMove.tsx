@@ -21,8 +21,8 @@ import {
   contextMenuForm,
   handleBackendResponse,
   useEditContext,
-  useNode,
 } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import { ComponentFormSpinner } from '@bodiless/ui';
 import { usePageMenuOptionUI } from '../MenuOptionUI';
 import { createRedirect } from '../Operations';
@@ -120,12 +120,11 @@ const MovePageComp = (props : PageState) => {
             <ComponentFormDescription>{basePathValue}</ComponentFormDescription>
             <MovePageURLField
               required
-              validateOnChange
-              validateOnBlur
+              validateOn="change-blur"
             />
             <ComponentFormLabel>
               <ComponentFormCheckBox
-                field="redirectEnabled"
+                name="redirectEnabled"
                 initialValue
                 keepState
               />
@@ -194,7 +193,7 @@ const menuFormPageMove = (client: PageClient) => contextMenuForm({
   const origin = usePagePath();
 
   const {
-    submits, invalid, values,
+    submitted, invalid, values,
   } = formState;
   const [state, setState] = useState<PageState>({
     status: PageStatus.Init,
@@ -220,7 +219,7 @@ const menuFormPageMove = (client: PageClient) => contextMenuForm({
         });
     }
 
-    if (submits && path && invalid === false) {
+    if (submitted && path && invalid === false) {
       let destination = '';
       if (values.pagePath[0] === '/') {
         destination = values.pagePath;
@@ -264,11 +263,11 @@ const menuFormPageMove = (client: PageClient) => contextMenuForm({
           });
       }
     }
-  }, [submits]);
+  }, [submitted]);
   const { status, errorMessage } = state;
   return (
     <>
-      <ComponentFormText type="hidden" field="keepOpen" initialValue />
+      <ComponentFormText type="hidden" name="keepOpen" initialValue />
       <MovePageComp
         status={status}
         errorMessage={errorMessage}

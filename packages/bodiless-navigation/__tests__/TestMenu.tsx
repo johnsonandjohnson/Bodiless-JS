@@ -13,9 +13,11 @@
  */
 
 /* eslint-disable quote-props */
-import flow from 'lodash/flow';
-import { withDefaultContent } from '@bodiless/core';
-import { withDesign, addProps } from '@bodiless/fclasses';
+import identity from 'lodash/identity';
+import { withDefaultContent, WithNodeKeyProps, WithNodeProps } from '@bodiless/data';
+import {
+  withDesign, addProps, flowHoc, Injector
+} from '@bodiless/fclasses';
 import { asBodilessMenu } from '../src';
 
 const withMainMenuItems = (...items: string[]) => {
@@ -178,9 +180,12 @@ const withTopMenuDesign = withDesign({
   Title: addProps({ 'data-test': 'menu-title' }),
 });
 
-const MenuBase = flow(
+const withOptionalNodeKey: Injector<WithNodeProps> = identity;
+
+const MenuBase = flowHoc(
   asBodilessMenu('testMenu'),
   withTopMenuDesign,
+  withOptionalNodeKey,
 )('ul');
 
 const withListSubmenuItems = withSubmenuItems('List');

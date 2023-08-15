@@ -12,10 +12,10 @@
  * limitations under the License.
  */
 
-const { useNode } = require('@bodiless/core');
+const { useNode } = require('@bodiless/data');
 const { useItemHandlers, useFlowContainerDataHandlers } = require('../../src/FlowContainer/model');
 
-jest.mock('@bodiless/core');
+jest.mock('@bodiless/data');
 
 const setMockNode = (items?: any) => {
   const defaultItems = [

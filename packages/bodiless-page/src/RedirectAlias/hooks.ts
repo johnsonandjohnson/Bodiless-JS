@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { ContentNode } from '@bodiless/core';
+import { ContentNode } from '@bodiless/data';
 
 /**
  * Gets a list of redirect aliases.

@@ -12,7 +12,8 @@
  * limitations under the License.
  */
 
-import { WithNodeProps, TMenuOptionGetter } from '@bodiless/core';
+import { TMenuOptionGetter } from '@bodiless/core';
+import { WithNodeProps } from '@bodiless/data';
 import {
   DesignableComponents, ComponentOrTag, DesignableProps,
 } from '@bodiless/fclasses';
@@ -87,7 +88,21 @@ export type FlowContainerWrapperProps = {
   itemCount: number,
 };
 
-export type FlowContainerComponents = {
+/**
+ * Design keys available for the flow container.
+ *
+ * @category Component
+ */
+export interface FlowContainerComponents extends DesignableComponents {
+  /**
+   * The outer wrapper of the flow container.  Usually a `Div`.
+   * This will have `flex` and `flex-row` classes by default to manage
+   * the layout of its children.
+   */
   Wrapper: ComponentOrTag<any>,
+  /**
+   * The wrapper for each component placed in the flow container.  Usually a `Div`.
+   * Width classes are applied to this wrapper dynamically to control layout.
+   */
   ComponentWrapper: ComponentOrTag<any>,
-};
+}

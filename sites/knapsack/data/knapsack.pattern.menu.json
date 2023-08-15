@@ -1,0 +1,31 @@
+{
+  "id": "menu",
+  "tabs": [
+    {
+      "id": "overview",
+      "type": "subPage"
+    },
+    {
+      "id": "kBehkWZUbd",
+      "type": "subPage"
+    }
+  ],
+  "title": "Menu",
+  "statuses": {
+    "main": "needsDev"
+  },
+  "subPages": [
+    {
+      "id": "overview",
+      "title": "Guidelines",
+      "blockIds": []
+    },
+    {
+      "id": "kBehkWZUbd",
+      "title": "Figma",
+      "blockIds": []
+    }
+  ],
+  "templates": [],
+  "description": ""
+}

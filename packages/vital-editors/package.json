@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/vital-editors",
-  "version": "1.0.0-beta.12",
+  "version": "1.0.0-rc.42",
   "description": "Editor components for the bodiless vital design system",
   "author": "Chris Odem <coden@its.jnj.com>",
   "license": "Apache-2.0",
@@ -22,29 +22,31 @@
     "access": "public"
   },
   "scripts": {
-    "build": "run-p build:lib build:api-doc",
-    "build:api-doc": "typedoc --out doc/api src",
+    "build": "run-p build:lib",
+    "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api src",
     "build:lib": "tsc -p ./tsconfig.json",
     "build:watch": "npm run build:lib -- --watch",
+    "dev": "npm run build:watch",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "peerDependencies": {
-    "react": "^17.0.2"
+    "react": "^18.2.0"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-beta.12",
-    "@bodiless/components": "^1.0.0-beta.12",
-    "@bodiless/components-ui": "^1.0.0-beta.12",
-    "@bodiless/core": "^1.0.0-beta.12",
-    "@bodiless/fclasses": "^1.0.0-beta.12",
-    "@bodiless/hydration": "^1.0.0-beta.12",
-    "@bodiless/layouts": "^1.0.0-beta.12",
-    "@bodiless/layouts-ui": "^1.0.0-beta.12",
-    "@bodiless/richtext": "^1.0.0-beta.12",
-    "@bodiless/richtext-ui": "^1.0.0-beta.12",
-    "@bodiless/tokens": "^1.0.0-beta.12",
-    "@bodiless/vital-elements": "^1.0.0-beta.12",
-    "@bodiless/vital-link": "^1.0.0-beta.12",
+    "@bodiless/cli": "^1.0.0-rc.42",
+    "@bodiless/components": "^1.0.0-rc.42",
+    "@bodiless/components-ui": "^1.0.0-rc.42",
+    "@bodiless/core": "^1.0.0-rc.42",
+    "@bodiless/data": "^1.0.0-rc.42",
+    "@bodiless/fclasses": "^1.0.0-rc.42",
+    "@bodiless/hydration": "^1.0.0-rc.42",
+    "@bodiless/layouts": "^1.0.0-rc.42",
+    "@bodiless/layouts-ui": "^1.0.0-rc.42",
+    "@bodiless/richtext": "^1.0.0-rc.42",
+    "@bodiless/richtext-ui": "^1.0.0-rc.42",
+    "@bodiless/tokens": "^1.0.0-rc.42",
+    "@bodiless/vital-elements": "^1.0.0-rc.42",
+    "@bodiless/vital-link": "^1.0.0-rc.42",
     "lodash": "^4.17.19"
   }
 }

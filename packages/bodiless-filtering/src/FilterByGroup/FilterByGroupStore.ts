@@ -21,23 +21,23 @@ import { FilterTagType } from './types';
 const TAG_ANY_KEY = 'any';
 
 class Tag implements FilterTagType {
-  id: string;
+  value: string;
 
   categoryId: string;
 
-  name: string;
+  label: string;
 
   categoryName: string;
 
   constructor(id: string, name: string, categoryId?: string, categoryName?: string) {
-    this.id = id;
-    this.name = name;
+    this.value = id;
+    this.label = name;
     this.categoryId = categoryId || '';
     this.categoryName = categoryName || '';
   }
 
   isEqual(tag: TagType) {
-    return tag.id === this.id && (tag as FilterTagType).categoryName === this.categoryName;
+    return tag.value === this.value && (tag as FilterTagType).categoryName === this.categoryName;
   }
 }
 
@@ -66,9 +66,9 @@ const updateUrlQueryParams = (tags: FilterTagType[]) => {
   const queryParams = new URLSearchParams();
   tags.forEach(tag => {
     const {
-      categoryId, id, name, categoryName,
+      categoryId, value, label, categoryName,
     } = tag;
-    queryParams.append(categoryId || '', `${id}~${name}~${categoryName}`);
+    queryParams.append(categoryId || '', `${value}~${label}~${categoryName}`);
   });
   const query = tags.length > 0 ? `?${queryParams}` : '';
   const newurl = `${protocol}//${host}${pathname}${query}`;
@@ -79,7 +79,7 @@ const useStateCallback = (initialState: any) => {
   const [state, setState] = useState(initialState);
   const cbRef = useRef<Function | null>(null); // init mutable ref container for callbacks
 
-  const setStateCallback = useCallback((newState, cb) => {
+  const setStateCallback = useCallback((newState: any, cb: Function) => {
     cbRef.current = cb; // store current, passed callback in ref
     setState(newState);
   }, []); // keep object reference stable, exactly like `useState`
@@ -131,7 +131,7 @@ const useFilterByGroupStore = (settings: FilterByGroupStoreSettings) => {
   };
 
   const isTagSelected = (tag: Tag) => {
-    if (!multipleAllowedTags && tag.id === TAG_ANY_KEY) {
+    if (!multipleAllowedTags && tag.value === TAG_ANY_KEY) {
       // For radios, return true for ANY tag if no other tags are selected.
       const tagsInCategory = selectedTags.filter((t: Tag) => t.categoryId === tag.categoryId);
       if (tagsInCategory.length === 0) return true;

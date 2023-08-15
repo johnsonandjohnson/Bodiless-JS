@@ -12,7 +12,10 @@
  * limitations under the License.
  */
 
-export { default as vitalHelmetBase } from './tokens/vitalHelmet';
+import type { VitalHelmet } from './tokens/vitalHelmet';
+
 export { default as vitalHelmet } from './tokens';
 export { default as HelmetClean, asHelmetToken } from './HelmetClean';
-export { HelmetComponents, HelmetProps } from './types';
+export type { HelmetComponents, HelmetProps } from './types';
+
+export type { VitalHelmet };

@@ -48,7 +48,7 @@ describe('bodiless-core', () => {
 //   (props: BasicFormProps<Values>) => (
 //     <Form {...props}>
 //       <label htmlFor="left-form-txt">Please enter something:</label>
-//       <Text field="text" id="left-form-txt" />
+//       <Text name="text" id="left-form-txt" />
 //       <button type="submit">
 //         done
 //       </button>

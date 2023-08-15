@@ -1,11 +1,12 @@
 {
   "extends": "./tsconfig.settings.json",
   "include": [
+    "./@types/*",
     "./scripts/*",
     "./packages/*/src/**/*",
     "./sites/*/src/**/*",
-   "./sites/*/scripts/*",
-   "./sites/*/*"
+    "./sites/*/scripts/*",
+    "./sites/*/*",
   ],
 }
 

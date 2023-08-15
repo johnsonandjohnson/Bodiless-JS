@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import { mount } from 'enzyme';
 import ContextWrapper from '../src/components/ContextWrapper';
 import PageEditContext from '../src/PageEditContext';
@@ -99,7 +99,7 @@ describe('ContextWrapper', () => {
 
   it('activates the current context on click', () => {
     const mockActivate = jest.fn();
-    const MockContext: FC = ({ children }) => {
+    const MockContext: FC<PropsWithChildren> = ({ children }) => {
       const context = useEditContext();
       // eslint-disable-next-line react/destructuring-assignment
       const newContext = context.spawn({

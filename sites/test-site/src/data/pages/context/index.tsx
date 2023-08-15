@@ -18,7 +18,6 @@
 import React, { HTMLProps, FC } from 'react';
 import { graphql } from 'gatsby';
 
-import { observer } from 'mobx-react';
 import {
   flowIf, hasProp, addClasses, withoutProps, StylableProps,
   removeClasses, flowHoc,
@@ -28,15 +27,18 @@ import { Div } from '@bodiless/ui';
 import {
   TMenuOptionGetter,
   PageContextProvider,
-  withNode,
-  useNodeDataHandlers,
   useEditContext,
   contextMenuForm,
   getUI,
   LocalContextMenu,
   ContextWrapper,
   ContextWrapperProps,
+  observer
 } from '@bodiless/core';
+import {
+  withNode,
+  useNodeDataHandlers,
+} from '@bodiless/data';
 import { Editable } from '@bodiless/components';
 import { Image } from '@bodiless/components-ui';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
@@ -57,7 +59,7 @@ const demoForm = (text: string) => contextMenuForm<Values>({
     return (
       <>
         <ComponentFormLabel htmlFor="left-form-txt">{text}</ComponentFormLabel>
-        <ComponentFormText field="text" id="left-form-txt" />
+        <ComponentFormText name="text" id="left-form-txt" />
       </>
     );
   },

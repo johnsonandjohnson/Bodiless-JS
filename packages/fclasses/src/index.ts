@@ -16,7 +16,6 @@ export * from './withDesignAt';
 export * from './addClasses';
 export * from './Design';
 export * from './replaceable';
-export * from './withHocDesign';
 export * from './StyledHTML';
 export * from './addProps';
 export * from './flowIf';

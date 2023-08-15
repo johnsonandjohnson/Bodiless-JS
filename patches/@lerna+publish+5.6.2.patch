@@ -1,0 +1,13 @@
+diff --git a/node_modules/@lerna/publish/index.js b/node_modules/@lerna/publish/index.js
+index 16d12a2..3233564 100644
+--- a/node_modules/@lerna/publish/index.js
++++ b/node_modules/@lerna/publish/index.js
+@@ -361,7 +361,7 @@ class PublishCommand extends Command {
+ 
+       // semver.inc() starts a new prerelease at .0, git describe starts at .1
+       // and build metadata is always ignored when comparing dependency ranges
+-      return `${nextVersion}-${preid}.${Math.max(0, refCount - 1)}+${sha}`;
++      return `${nextVersion}-${preid}.${Math.max(0, refCount - 1)}.${sha}`;
+     };
+ 
+     if (this.project.isIndependent()) {

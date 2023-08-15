@@ -14,6 +14,7 @@
 
 import path from 'path';
 import request from 'supertest';
+import Backend from '../src/backend';
 
 const backendPrefix = '/prefix';
 const backendFilePath = '/files';
@@ -27,8 +28,6 @@ jest.mock('../src/page', () => (pagePath: any) => ({
 }));
 
 const getApp = () => {
-  // eslint-disable-next-line global-require
-  const Backend = require('../src/backend');
   const backend = new Backend();
   return backend.getApp();
 };
@@ -43,7 +42,7 @@ describe('Create page endpoint', () => {
     mockPageWrite.mockReset();
   });
 
-  describe('when the page is created succefully', () => {
+  describe('when the page is created successfully', () => {
     const page = 'products';
     const template = '_default';
     const performRequest = (app$: any) => request(app$)
@@ -53,7 +52,7 @@ describe('Create page endpoint', () => {
         template,
       });
     describe('index.json containing template', () => {
-      it('should be writen to file system', async () => {
+      it('should be written to file system', async () => {
         const app = getApp();
         await performRequest(app);
         expect(mockPageWrite).toHaveBeenCalledTimes(1);

@@ -63,7 +63,7 @@ const menuFormPageNew = (client: PageClient) => contextMenuForm({
 })(({ formState, formApi } : any) => {
   const { ComponentFormText } = usePageMenuOptionUI();
   const {
-    submits, invalid, values,
+    submitted, invalid, values,
   } = formState;
   const [state, setState] = useState<PageState>({
     status: PageStatus.Init,
@@ -73,7 +73,7 @@ const menuFormPageNew = (client: PageClient) => contextMenuForm({
   const path = getPathValue(values);
   useEffect(() => {
     // If the form is submitted and valid then lets try to create a page.
-    if (submits && path && invalid === false) {
+    if (submitted && path && invalid === false) {
       context.showPageOverlay({ hasSpinner: false });
       setState({ status: PageStatus.Pending });
       // Create the page.
@@ -91,7 +91,7 @@ const menuFormPageNew = (client: PageClient) => contextMenuForm({
           formApi.setValue('keepOpen', false);
         });
     }
-  }, [submits]);
+  }, [submitted]);
 
   const { status, errorMessage, pagePath } = state;
   const { subPageTemplate } = usePageDataContext();
@@ -99,7 +99,7 @@ const menuFormPageNew = (client: PageClient) => contextMenuForm({
 
   return (
     <>
-      <ComponentFormText type="hidden" field="keepOpen" initialValue />
+      <ComponentFormText type="hidden" name="keepOpen" initialValue />
       <MenuFormPage
         formTitle="Add a Blank Page"
         status={status}
@@ -112,7 +112,7 @@ const menuFormPageNew = (client: PageClient) => contextMenuForm({
           <>
             <Label>Template</Label>
             <ComponentFormText
-              field="template"
+              name="template"
               disabled
               initialValue={currentTemplate}
             />

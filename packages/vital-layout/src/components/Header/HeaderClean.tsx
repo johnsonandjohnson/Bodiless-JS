@@ -22,13 +22,12 @@ import {
 } from '@bodiless/fclasses';
 import { withoutHydration } from '@bodiless/hydration';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
-import { LinkClean } from '@bodiless/vital-link';
+import { ButtonClean } from '@bodiless/vital-button';
 import {
   BurgerMenuClean,
   MenuClean,
 } from '@bodiless/vital-navigation';
 import { LogoClean } from '../Logo';
-import { SearchTogglerClean, DesktopSearchClean } from '../Search';
 import type { HeaderComponents, HeaderProps } from './types';
 
 const headerComponents: HeaderComponents = {
@@ -43,17 +42,24 @@ const headerComponents: HeaderComponents = {
   BurgerMenu: BurgerMenuClean,
   Logo: LogoClean,
   ActionMenuContainer: Div,
+  OuterUtilityMenuWrapper: Fragment,
+  OuterUtilityMenu: Fragment,
   UtilityMenuWrapper: Fragment,
   UtilityMenu: MenuClean,
-  DesktopSearch: DesktopSearchClean,
-  SearchToggler: SearchTogglerClean,
-  LanguageButton: Fragment,
+  DesktopSearch: Fragment,
+  MobileSearch: Fragment,
+  SearchToggler: Fragment,
+  LanguageSelectorWrapper: Fragment,
+  LanguageSelector: Fragment,
   WhereToBuyWrapper: Fragment,
-  WhereToBuy: LinkClean,
+  WhereToBuy: ButtonClean,
 };
 
 const HeaderCleanBase: FC<HeaderProps> = ({ components: C, ...rest }) => (
   <C.Wrapper {...rest}>
+    <C.OuterUtilityMenuWrapper>
+      <C.OuterUtilityMenu />
+    </C.OuterUtilityMenuWrapper>
     <C.Container>
       <C.MenuTogglerWrapper>
         <C.MenuToggler />
@@ -69,7 +75,9 @@ const HeaderCleanBase: FC<HeaderProps> = ({ components: C, ...rest }) => (
           <C.UtilityMenuWrapper>
             <C.UtilityMenu />
           </C.UtilityMenuWrapper>
-          <C.LanguageButton />
+          <C.LanguageSelectorWrapper>
+            <C.LanguageSelector />
+          </C.LanguageSelectorWrapper>
           <C.WhereToBuyWrapper>
             <C.WhereToBuy />
           </C.WhereToBuyWrapper>
@@ -79,16 +87,36 @@ const HeaderCleanBase: FC<HeaderProps> = ({ components: C, ...rest }) => (
         <C.BurgerMenu />
       </C.BurgerMenuWrapper>
     </C.Container>
+    <C.MobileSearch />
   </C.Wrapper>
 );
 
 /**
- * A clean header to be used in pages layouts.
+ * A clean header to be used in pages layouts following vital design.
+ *
+ * @category Component
+ *
  */
 const HeaderClean = designable(headerComponents, 'Header')(HeaderCleanBase);
+
+/**
+ * Use this version of the header when all components are static.
+ *
+ * @category Component
+ *
+ */
 const HeaderStatic = withoutHydration()(HeaderClean);
 
+/**
+ * A token modifier that respects the Header Components.
+ *
+ * @category Token Collection
+ */
 const asHeaderToken = asVitalTokenSpec<HeaderComponents>();
+
+// These are used in defining the VitalHeader interface.
+const headerToken = asHeaderToken();
+export type HeaderToken = typeof headerToken;
 
 export default HeaderClean;
 

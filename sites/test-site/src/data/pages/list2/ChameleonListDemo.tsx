@@ -13,14 +13,13 @@
  */
 
 import {
-  addClasses, withDesign, HOC, replaceWith, stylable, flowHoc,
+  addClasses, withDesign, HOC, replaceWith, stylable, flowHoc, A,
 } from '@bodiless/fclasses';
 import {
   asBodilessList,
   withSubListDesign, withSubLists, asBodilessChameleon, asEditable,
 } from '@bodiless/components';
-import { withNode } from '@bodiless/core';
-import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
+import { withNode } from '@bodiless/data';
 import { asLink, asEditableLink } from '../../../components/Elements.token';
 import { asToggledSubList } from './ListDemo';
 import { withItemMargin } from './SimpleListDemo';
@@ -30,7 +29,7 @@ import { withItemMargin } from './SimpleListDemo';
  */
 export const withLinkTitle = withDesign({
   Title: flowHoc(
-    replaceWith(GatsbyLink),
+    replaceWith(A),
     asLink,
     asEditableLink('link'),
     asEditable('text', 'List Item'),

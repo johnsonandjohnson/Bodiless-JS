@@ -12,12 +12,17 @@
  * limitations under the License.
  */
 
-import React, { ComponentType, Fragment, FC } from 'react';
+import React, {
+  ComponentType,
+  Fragment,
+  FC,
+  PropsWithChildren
+} from 'react';
 import {
   Div, designable, addClasses, replaceWith, DesignableComponentsProps, flowHoc, flowIf,
   HOC,
 } from '@bodiless/fclasses';
-import { useNode, withNodeKey } from '@bodiless/core';
+import { useNode, withNodeKey } from '@bodiless/data';
 import { withSearchResult } from '@bodiless/search';
 import { withBurgerMenuProvider, withBreadcrumbStore } from '@bodiless/navigation';
 import { withOidcProvider } from '@bodiless/oidc';
@@ -61,7 +66,7 @@ type LayoutComponents = {
 
 type LayoutProps = DesignableComponentsProps<LayoutComponents>;
 
-const BaseLayout: FC<LayoutProps> = ({ children, components }) => {
+const BaseLayout: FC<PropsWithChildren<LayoutProps>> = ({ children, components }) => {
   const { Breadcrumbs } = components;
   return (
     <>

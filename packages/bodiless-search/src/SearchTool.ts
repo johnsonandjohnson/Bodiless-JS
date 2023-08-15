@@ -31,20 +31,6 @@ import type {
 } from './types';
 import LunrSearch from './LunrSearch';
 
-const env2string = (envVar: string, defaultVar?: string): string => {
-  if (typeof process.env[envVar] === 'undefined') {
-    return defaultVar || '';
-  }
-  return process.env[envVar] || '';
-};
-
-const env2array = (envVar: string, defaultVar?: string[]): string[] => {
-  if (typeof process.env[envVar] === 'undefined') {
-    return defaultVar || [];
-  }
-  return process.env[envVar]!.split('|');
-};
-
 /**
  * Search function helper class
  *
@@ -88,7 +74,7 @@ class SearchTool implements SearchToolInterface {
       const exclude = (typeof source !== 'string' && source.exclude) || excludePaths;
 
       if (!fs.existsSync(folderPath)) {
-        throw new Error(`Invalid source path for the ${settings.name} language: ${folderPath}`);
+        throw new Error(`${settings.name} source path not found: ${folderPath}. Did you forget to build your site before attempting to create a search index?`);
       }
 
       const pattern = `**/+(${this.config.sourceTypes.map(v => `*.${v}`).join('|')})`;
@@ -125,16 +111,20 @@ class SearchTool implements SearchToolInterface {
         .filter(filePath => fs.statSync(filePath).isFile())
         .forEach(filePath => {
           const mimeType = mime.getType(filePath);
+          const sourcePath = path.join(process.cwd(), source.path);
 
           switch (mimeType) {
             case 'text/html': {
               const html = fs.readFileSync(filePath).toString();
               const doc = this.htmlToDocument(html, selectors, excluders);
-              const filePathClean = filePath.replace(/index.html$/i, '');
-              const link = path.relative(path.join(process.cwd(), source.path), filePathClean);
+              const filePathClean = filePath.replace(/index.html$/i, '').replace(/.html$/i, '');
+              const link = path.relative(sourcePath, filePathClean);
 
               if (!doc.title) {
-                doc.title = link;
+                // An empty link means this file is the site home page, since the file
+                // is located at the source root folder. If the home page has no title,
+                // we use '/' as a fallback.
+                doc.title = link.length ? link : '/';
               }
 
               documents.push({
@@ -145,7 +135,7 @@ class SearchTool implements SearchToolInterface {
               break;
             }
             default:
-              throw new Error(`Only HTML is supported for indexing, ${mimeType} is given.`);
+              throw new Error(`Only HTML is supported for indexing, ${mimeType} was given.`);
           }
         });
     });
@@ -179,90 +169,26 @@ class SearchTool implements SearchToolInterface {
 }
 
 /**
- * Utility class for loading search related configuration.
- *
- * Search setting parameters are used for build index and frontend
- * search process. It's collected from environment variables, i.e.
- *   - BODILESS_SEARCH_PAGE
- *   - BODILESS_SEARCH_EXPIRES
- *  etc.
- *
- * or search configuration file specified with environment variable
- *   - BODILESS_SEARCH_CONFIG
- */
-
-/**
- * load setting parameters from environment variables. If BODILESS_SEARCH_CONFIG
- * json configure file is defined, overrides all other search env variables.
+ * Load search settings by searching for a `search.config.json` file on the
+ * current execution directory. Returns false if the file isn't found.
  */
 export class SearchConfig {
-  static getConfig = (): TSearchConf => {
-    const configFile = path.resolve(process.cwd(), env2string('BODILESS_SEARCH_CONFIG', ''));
+  static getConfig = (configFile: string): TSearchConf | false => {
+    if (!configFile || !fs.statSync(configFile, { throwIfNoEntry: false })?.isFile()) return false;
 
-    if (configFile && fs.statSync(configFile).isFile()) {
-      const {
-        sourceTypes,
-        contentSelectors,
-        contentExcluders,
-        languages,
-        indexConfig,
-      } = JSON.parse(fs.readFileSync(configFile, 'utf8'));
-
-      return {
-        sourceTypes,
-        contentSelectors,
-        contentExcluders,
-        languages,
-        indexConfig,
-      };
-    }
-
-    let searchEngine: SearchEngineInterface;
-    const engine = env2string('BODILESS_SEARCH_ENGINE', '');
-
-    switch (engine) {
-      case 'lunr':
-      default:
-        searchEngine = new LunrSearch();
-        break;
-    }
-
-    const sourcePaths = env2array('BODILESS_SEARCH_SOURCE_PATH', ['./public']);
-    const sourceTypes = env2array('BODILESS_SEARCH_SOURCE_TYPE', ['html', 'htm']);
-    const indexFilePath = env2string('BODILESS_SEARCH_INDEX_PATH', './public');
-    const indexUrlName = '';
-    const indexFileName = env2string('BODILESS_SEARCH_INDEX_NAME', 'lunr.json');
-    const excludePaths = env2array('BODILESS_SEARCH_EXCLUDE_PATH', []);
-    const contentSelectors = env2array('BODILESS_SEARCH_INDEX_SELECTOR', ['body *']);
-    const contentExcluders = env2array(
-      'BODILESS_SEARCH_INDEX_EXCLUDE_SELECTOR',
-      ['script', 'noscript', 'style'],
-    );
-    const searchPath = env2string('BODILESS_SEARCH_PAGE', 'search');
-    const indexConfig = {
-      ref: 'id',
-      fields: [
-        { name: 'title', attributes: { boost: 2 } },
-        { name: 'body' },
-      ],
-    };
-    const languageSettings = {
-      name: 'English',
-      code: 'en',
-      sourcePaths,
-      excludePaths,
-      indexFilePath,
-      indexUrlName,
-      indexFileName,
-      searchPath,
-    };
-
-    return {
-      searchEngine,
+    const {
       sourceTypes,
       contentSelectors,
       contentExcluders,
-      languages: [languageSettings],
+      languages,
+      indexConfig,
+    } = JSON.parse(fs.readFileSync(configFile, 'utf8'));
+
+    return {
+      sourceTypes,
+      contentSelectors,
+      contentExcluders,
+      languages,
       indexConfig,
     };
   };

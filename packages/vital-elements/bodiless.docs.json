@@ -1,18 +1,24 @@
 {
   "VitalDesignSystem": {
-    "README.md": "./doc/VitalDesignSystem.md",
+    "README.md": "./doc/README.md",
+    "Guides": {
+      "README.md": "./doc/Guides.md",
+      "RepositoryStructure.md": "./doc/RepositoryStructure.md",
+      "ComponentTemplate.md": "./doc/ComponentTemplate.md",
+      "Tokens": {
+        "README.md": "./doc/Tokens.md",
+        "TokenDomains.md": "./doc/TokenDomains.md"
+      },
+      "ExtendingAndComposingTokens.md": "./doc/ExtendingAndComposing.md",
+      "ShadowingTokens.md": "",
+      "TailwindGuide.md": "./doc/TailwindGuide.md",
+      "SiteTypography.md": "./doc/SiteTypography.md",
+      "StaticReplacement.md": "./doc/StaticReplacement.md"
+    },
     "Components": {
       "README.md": "./doc/Components.md",
       "VitalElements": {
-        "README.md": "./doc/VitalElements.md",
-        "ComponentTemplate.md": "./doc/ComponentTemplate.md",
-        "SiteTypography.md": "./doc/SiteTypography.md",
-        "Shadow.md": "./doc/Shadow.md",
-        "StaticReplacement.md": "./doc/StaticReplacement.md",
-        "Tokens": {
-          "README.md": "./doc/Tokens.md",
-          "TokenDomains.md": "./doc/TokenDomains.md"
-        }
+        "README.md": "./doc/VitalElements.md"
       },
       "assets": {
         "PXtoREMTemplate.xlsx": "./doc/assets/PXtoREMTemplate.xlsx"

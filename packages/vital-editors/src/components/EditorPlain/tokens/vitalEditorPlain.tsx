@@ -15,7 +15,7 @@
 import React from 'react';
 import {
   NodeProvider, useNode,
-} from '@bodiless/core';
+} from '@bodiless/data';
 import { HOC } from '@bodiless/fclasses';
 import { asElementToken } from '@bodiless/vital-elements';
 import { withPlaceholder } from '@bodiless/components';

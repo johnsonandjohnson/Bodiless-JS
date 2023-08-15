@@ -14,8 +14,11 @@
 // @ts-nocheck
 import flowRight from 'lodash/flowRight';
 import {
-  ifEditable, withNode, ifReadOnly, withOnlyProps,
+  ifEditable, ifReadOnly, withOnlyProps,
 } from '@bodiless/core';
+import {
+  withNode,
+} from '@bodiless/data';
 import {
   replaceWith, addProps, stylable,
 } from '@bodiless/fclasses';

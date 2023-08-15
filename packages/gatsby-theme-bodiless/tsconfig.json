@@ -1,19 +1,22 @@
 {
   "extends": "../../tsconfig.settings.json",
   "compilerOptions": {
-    "module": "commonjs",
     "rootDir": "src",
     "outDir": ".",
-    "baseUrl": ".",
-    "allowJs": false
+    "baseUrl": "."
   },
   "include": [
-    "src"
+    "src",
+    "../../@types/*"
   ],
   "exclude": [
+    "./src/dist/fsLogger.ts",
+    "./src/dist/fsLogHandler.ts",
+    "./src/dist/DefaultContent",
     "lib",
+    "src/**/scripts/**/*.*",
     "node_modules",
     "__tests__/**/*.*",
     "src/**/__tests__/**/*.*"
-   ]
+  ]
 }

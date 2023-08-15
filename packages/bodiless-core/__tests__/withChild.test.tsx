@@ -11,8 +11,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// @ts-nocheck
 
-import React, { ComponentType as CT } from 'react';
+import React, { ComponentType as CT, PropsWithChildren } from 'react';
 import { mount } from 'enzyme';
 import {
   designable,
@@ -27,7 +28,9 @@ import flow from 'lodash/flow';
 import withChild from '../src/withChild';
 
 type FooComponents = { Wrapper: CT };
-const BaseFoo: CT<DesignableComponentsProps<FooComponents>> = ({ components, children }) => {
+const BaseFoo: CT<PropsWithChildren<DesignableComponentsProps<FooComponents>>> = (
+  { components, children }
+) => {
   const { Wrapper } = components;
   return (<Wrapper>{children}</Wrapper>);
 };
@@ -105,7 +108,9 @@ describe('withChild', () => {
   });
   it('removes child design from parent design', () => {
     type BarComponents = { Wrapper: CT, Child: CT };
-    const BaseBar: CT<DesignableComponentsProps<BarComponents>> = ({ components, children }) => {
+    const BaseBar: CT<PropsWithChildren<DesignableComponentsProps<BarComponents>>> = (
+      { components, children }
+    ) => {
       const { Wrapper, Child } = components;
       return (
         <Wrapper>

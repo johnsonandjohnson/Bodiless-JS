@@ -15,11 +15,11 @@
 import { vitalRichText } from '@bodiless/vital-editors';
 import { vitalImage } from '@bodiless/vital-image';
 import { addProps } from '@bodiless/fclasses';
-import { withNodeKey } from '@bodiless/core';
+import { withNodeKey } from '@bodiless/data';
 import { asTitleInfographicToken } from '../TitleInfographicClean';
 
 const Default = asTitleInfographicToken({
-  Editors: {
+  Components: {
     Title: vitalRichText.Default,
     Image: vitalImage.Plain,
   },

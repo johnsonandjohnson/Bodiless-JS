@@ -13,15 +13,18 @@
  */
 import { vitalColor, vitalTextDecoration } from '@bodiless/vital-elements';
 import { vitalMetaHelmet } from '@bodiless/vital-meta';
-import { as } from '@bodiless/fclasses';
+import { as, replaceWith } from '@bodiless/fclasses';
+import { DefaultPageGA4DataLayerHelmet } from '@bodiless/ga4';
 import { asHelmetToken } from '../HelmetClean';
+import type { HelmetToken } from '../HelmetClean';
+// eslint-disable-next-line import/order
 
 const Default = asHelmetToken({
   Components: {
     SeoHelmet: vitalMetaHelmet.SEO,
     SocialShareHelmet: vitalMetaHelmet.Share,
     // LanguageHelmet: TBD,
-    // GtmHelmet: TBD,
+    GA4Helmet: replaceWith(DefaultPageGA4DataLayerHelmet),
   },
   Theme: {
     HTMLHelmet: as(
@@ -32,26 +35,71 @@ const Default = asHelmetToken({
   }
 });
 
-/**
- * WithDesktopStatickBody token applies static position on body.
- */
-const WithDesktopStatickBody = asHelmetToken({
+const WithDesktopStaticBody = asHelmetToken({
   Layout: {
     BodyHelmet: 'lg:static',
   },
 });
 
-/**
- * WithFixedBody token applies fixed position on body to prevent scrolling.
- */
 const WithFixedBody = asHelmetToken({
   Layout: {
     BodyHelmet: 'fixed',
   },
 });
 
-export default {
+/**
+ * Tokens for the vital helmet
+ *
+ * @category Token Collection
+ * @see [[HelmetClean]]
+ */
+export interface VitalHelmet {
+  /**
+   * Defines the default vital helmet with SEO, Share & Meta tokens.
+   *
+   * @example Sets the html `lang` and changes the html font & color for entire page
+   * ```js
+   * import { vitalHelmetBase, asHelmetToken } from '@bodiless/vital-layout';
+   * import { withLangDirProps } from '@bodiless/i18n';
+   * import { as, addProps } from '@bodiless/fclasses';
+   *
+   * const Default = asHelmetToken(vitalHelmetBase.Default, {
+   *   Core: {
+   *     LanguageHelmet: withLangDirProps,
+   *   },
+   *   Theme: {
+   *     HTMLHelmet: 'font-Inter text-gray-600',
+   *   },
+   * });
+   *
+   * export default {
+   *   ...vitalHelmetBase,
+   *   Default,
+   * };
+   * ```
+   */
+  Default: HelmetToken,
+  /**
+   * WithDesktopStaticBody token applies static position on body.
+   */
+  WithDesktopStaticBody: HelmetToken,
+  /**
+   * WithFixedBody token applies fixed position on body to prevent scrolling.
+   */
+  WithFixedBody: HelmetToken,
+}
+
+/**
+ * Tokens for Vital Helmet
+ *
+ * @category Token Collection
+ * @see [[VitalHelmet]]
+ * @see [[HelmetClean]]
+ */
+const vitalHelmet: VitalHelmet = {
   Default,
-  WithDesktopStatickBody,
+  WithDesktopStaticBody,
   WithFixedBody,
 };
+
+export default vitalHelmet;

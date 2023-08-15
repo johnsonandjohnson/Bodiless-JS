@@ -17,7 +17,7 @@ import { flow } from 'lodash';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { BVRatingsSummary, BVReviews } from '@bodiless/bv';
-import { withNode } from '@bodiless/core';
+import { withNode } from '@bodiless/data';
 import {
   addProps,
   withDesign,
@@ -40,7 +40,6 @@ import {
 import { FlowContainerDefault } from '../components/FlowContainer';
 import { withEditorBasic } from '../components/Editors';
 import { asSingleAccordionDefaultStyle } from '../components/SingleAccordion/token';
-import GTMDataLayerProductHelmet from '../components/GTM/productViewed';
 import SocialShare from '../components/SocialShare';
 
 // Do not allow editors to set accordion titles.
@@ -99,7 +98,6 @@ const ProductFlowContainer = asTestableFlowContainer(FlowContainerDefault);
 const main = props => (
   <Page {...props}>
     <Layout>
-      <GTMDataLayerProductHelmet />
       <SectionMargin>
         <div className="flex flex-wrap md:items-end md:flex-row-reverse">
           <SocialShare />

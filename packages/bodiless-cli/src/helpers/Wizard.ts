@@ -125,7 +125,7 @@ abstract class Wizard<O extends WizardOptions> extends Command implements Wizard
     // Throw error for invalid flags in automation mode or if prompt is disabled.
     } else if (flagValues.automation || prompt === false) {
       throw new Error(
-        typeof validated === 'string' ? validated : `Invalid value "${arg}" for option "--${flag}"`,
+        typeof validated === 'string' ? validated : `Invalid value "${arg}" for option "--${flag.toString()}"`,
       );
     }
 

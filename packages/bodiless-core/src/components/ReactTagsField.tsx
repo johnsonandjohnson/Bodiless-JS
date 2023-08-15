@@ -14,54 +14,55 @@
 
 import React from 'react';
 import { v4 } from 'uuid';
-import { useFormApi, Text } from 'informed';
-import ReactTags, { ReactTagsProps, Tag as TagType } from 'react-tag-autocomplete';
+import { useFieldApi, Input, useFieldState } from 'informed';
+import { ReactTags, ReactTagsProps, Tag as TagType } from 'react-tag-autocomplete';
 
 class Tag {
-  readonly id: string = v4();
+  readonly value: string = v4();
 
-  name: string = '';
+  label: string = '';
 
-  constructor(name: string = '') {
-    this.name = name;
+  constructor(label: string = '') {
+    this.label = label;
   }
 }
 
 export type ReactTagsFieldProps = {
   allowMultipleTags?: boolean,
-} & Omit<ReactTagsProps, 'onDelete' | 'onAddition'>;
+} & Omit<ReactTagsProps, 'onDelete' | 'onAdd'>;
 
 const ReactTagsField = (props: ReactTagsFieldProps) => {
-  const formApi = useFormApi();
-  const currentTags = formApi.getValue<TagType[]>('tags') || [];
+  const { setValue } = useFieldApi('tags');
+  const { value } = useFieldState('tags');
+  const currentTags = value as TagType[] || [];
   const { allowMultipleTags, ...rest } = props;
 
   const handleAddition = (tag: TagType) => {
     let tagToAdd = tag;
 
-    if (!tag.id) {
-      tagToAdd = new Tag(tag.name);
+    if (!tag.value) {
+      tagToAdd = new Tag(tag.label);
     }
-    if (!currentTags.some(currentTag => currentTag.name === tagToAdd.name)) {
+    if (!currentTags.some(currentTag => currentTag.label === tagToAdd.label)) {
       const newTags = allowMultipleTags ? [...currentTags, tagToAdd] : [tagToAdd];
-      formApi.setValue('tags', newTags);
+      setValue(newTags);
     }
   };
 
   const handleDelete = (i: number) => {
     const newTags = currentTags.slice(0);
     newTags.splice(i, 1);
-    formApi.setValue('tags', newTags);
+    setValue(newTags);
   };
 
   return (
     <>
-      <Text type="hidden" field="tags" />
+      <Input type="hidden" name="tags" />
       <ReactTags
         {...rest}
-        tags={currentTags}
+        selected={currentTags}
         onDelete={handleDelete}
-        onAddition={handleAddition}
+        onAdd={handleAddition}
       />
     </>
   );

@@ -12,22 +12,68 @@
  * limitations under the License.
  */
 
-import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
+import { ComponentOrTag, DesignableComponents, DesignableComponentsProps } from '@bodiless/fclasses';
 
-type FooterComponents = {
+/**
+ * Type of the design element in the VitalDS `Footer` component which
+ * consists of:
+ * - Two columns:
+ *   - First column is Rewards which can be displayed above footer on larger viewports
+ *   - Second column as Menus where each menu is in its own column
+ * - CopyrightRow: which can go in under columns (CopyrightRowOutsideColumns)
+ *   or in second column (CopyrightRow) and consists of:
+ *   - Copyright Editor
+ *   - Social Links
+ *
+ * @category Component
+ */
+interface FooterComponents extends DesignableComponents {
+  /**
+   * Wrapper around entire Footer
+   */
   Wrapper: ComponentOrTag<any>,
+  /**
+   * Container to hold the specific footer components
+   */
   Container: ComponentOrTag<any>,
-  Column: ComponentOrTag<any>,
-  Row: ComponentOrTag<any>,
+  /**
+   * Wrapper for the a container in the first column
+   */
+  Column1Wrapper: ComponentOrTag<any>,
+  /**
+   * Wrapper for the a container in the second column
+   */
+  Column2Wrapper: ComponentOrTag<any>,
+  /**
+   * Used for the menus
+   */
+  MenuRow: ComponentOrTag<any>,
+  /**
+   * Used for Copyright in the second column
+   */
+  CopyrightRow: ComponentOrTag<any>,
+  /**
+   * Used for Copyright after the columns
+   * By Default this a Fragment and not rendered
+   */
+  CopyrightRowOutsideColumns: ComponentOrTag<any>,
+  /**
+   * Wrapper for the Rewards
+   */
   RewardsWrapper: ComponentOrTag<any>,
+  /**
+   * Used for Rewards/Special component and is in the first column
+   */
   Rewards: ComponentOrTag<any>,
+  /**
+   * Wrapper around footer menus.
+   */
   FooterMenuWrapper: ComponentOrTag<any>,
+  /**
+   * Used for the footer menus.
+   */
   FooterMenu: ComponentOrTag<any>,
-  CopyrightWrapper: ComponentOrTag<any>,
-  Copyright: ComponentOrTag<any>,
-  SocialLinksWrapper: ComponentOrTag<any>,
-  SocialLinks: ComponentOrTag<any>,
-};
+}
 
 type FooterProps = DesignableComponentsProps<FooterComponents>;
 

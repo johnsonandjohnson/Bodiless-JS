@@ -16,7 +16,7 @@ import React, { ComponentType } from 'react';
 import type { FC } from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-import { withNode } from '@bodiless/core';
+import { withNode } from '@bodiless/data';
 
 import { ComponentSelector, ComponentDisplayMode } from '@bodiless/layouts';
 import { componentSelectorUi } from '@bodiless/layouts-ui';

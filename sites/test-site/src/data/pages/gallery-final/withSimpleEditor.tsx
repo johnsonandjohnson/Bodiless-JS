@@ -23,7 +23,8 @@ import {
 } from '@bodiless/fclasses';
 import { withPlaceholder } from '@bodiless/components';
 import { asBodilessLink } from '@bodiless/components-ui';
-import { withNodeKey, withChild } from '@bodiless/core';
+import { withChild } from '@bodiless/core';
+import { withNodeKey } from '@bodiless/data';
 
 const asBold = startWith(Strong);
 const asItalic = addClasses('');

@@ -12,14 +12,15 @@
  * limitations under the License.
  */
 
-import { withDefaultContent, withResetButton } from '@bodiless/core';
-import type { DefaultNodeContent } from '@bodiless/core';
-import { flowHoc } from '@bodiless/fclasses';
+import { withResetButton } from '@bodiless/core';
+import { withDefaultContent } from '@bodiless/data';
+import type { DefaultNodeContent } from '@bodiless/data';
+import { flowHoc, HOCWithMeta } from '@bodiless/fclasses';
 import identity from 'lodash/identity';
 import type { AsBodilessImage, Data } from './Image';
 
 /**
- * Adds default content to an asEditableImage hoc
+ * Adds default content to an `asEditableImage` HOC.
  */
 const withDefaultImageContent = (
   asEditableImage: AsBodilessImage,
@@ -28,7 +29,7 @@ const withDefaultImageContent = (
   placeholder,
   useOverrides,
 ) => {
-  const asImageHoc = asEditableImage(nodeKey, placeholder, useOverrides);
+  const asImageHoc: HOCWithMeta = asEditableImage(nodeKey, placeholder, useOverrides);
   return flowHoc(
     asImageHoc.meta,
     flowHoc.meta.term('Category')('Contentful'),

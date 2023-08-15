@@ -13,7 +13,7 @@
  */
 
 import React, {
-  FC, ReactElement, ReactNode, ComponentType,
+  FC, ReactElement, ReactNode, ComponentType, PropsWithChildren
 } from 'react';
 import flow from 'lodash/flow';
 import type { IContextMenuItemProps } from '../Types/ContextMenuTypes';
@@ -64,7 +64,7 @@ export const cloneChildren = (props: any = {}) => (tree: GroupTree): ReactElemen
   }, []);
 
 const buildChildren = (
-  DefaultGroupComponent: ComponentType<IContextMenuItemProps> = React.Fragment,
+  DefaultGroupComponent: ComponentType<PropsWithChildren<IContextMenuItemProps>> = React.Fragment,
   props: any = {},
 ) => flow(
   asElementArray,

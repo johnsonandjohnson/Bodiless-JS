@@ -14,7 +14,7 @@
 
 import React, { ComponentType } from 'react';
 import ReactDOMServer from 'react-dom/server';
-import { useNode, NodeProvider } from '@bodiless/core';
+import { useNode, NodeProvider } from '@bodiless/data';
 import { HOC } from '@bodiless/fclasses';
 import type { BreadcrumbStoreType } from './BreadcrumbStore';
 

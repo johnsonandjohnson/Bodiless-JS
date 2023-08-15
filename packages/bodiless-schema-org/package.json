@@ -1,0 +1,53 @@
+{
+  "name": "@bodiless/schema-org",
+  "sideEffects": false,
+  "version": "1.0.0-rc.42",
+  "description": "Provides a Schema.org component that injects metadata into a page.",
+  "author": "Lucas Varela <lvarelab@its.jnj.com>",
+  "contributors": [
+    "Aécio Tenório <atenorio2@its.jnj.com>",
+    "Adrian Visnieski <avisnies@its.jnj.com>",
+    "Charles Fernandes <cdossan3@its.jnj.com>",
+    "Guilherme Pessoa <ggoncal8@its.jnj.com>",
+    "Guilherme Almeida Zeni <gzeni@its.jnj.com>"
+  ],
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "/lib",
+    "/bodiless.docs.json",
+    "/getDocs.js",
+    "/doc"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "npm run build:lib && npm run build:api-doc",
+    "build:lib": "tsc -p ./tsconfig.json",
+    "build:watch": "npm run build:lib -- --watch",
+    "dev": "npm run build:watch",
+    "build:api-doc": "typedoc --out doc/api ./src",
+    "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx ./src",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
+  },
+  "dependencies": {
+    "@bodiless/cli": "^1.0.0-rc.42",
+    "@bodiless/components": "^1.0.0-rc.42",
+    "@bodiless/core": "^1.0.0-rc.42",
+    "@bodiless/data": "^1.0.0-rc.42",
+    "@bodiless/fclasses": "^1.0.0-rc.42",
+    "@bodiless/organisms": "^1.0.0-rc.42",
+    "lodash": "^4.17.19"
+  },
+  "peerDependencies": {
+    "@types/react-helmet": "^6.1.0",
+    "react": "^18.2.0",
+    "react-helmet": "^6.1.0"
+  }
+}

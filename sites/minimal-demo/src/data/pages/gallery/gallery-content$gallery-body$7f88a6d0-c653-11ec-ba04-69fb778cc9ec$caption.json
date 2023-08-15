@@ -1,0 +1,28 @@
+[
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "In "
+      },
+      {
+        "data": {
+          "openModal": true,
+          "slatenode": {
+            "href": "/___docs/#/ContentEditorUserGuide/?id=the-edit-interface",
+            "aria-label": "Edit Interface documentation"
+          }
+        },
+        "type": "Link",
+        "children": [
+          {
+            "text": "Edit Mode"
+          }
+        ]
+      },
+      {
+        "text": ", click on the placeholder image to select and configure your own."
+      }
+    ]
+  }
+]

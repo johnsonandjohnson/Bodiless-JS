@@ -13,8 +13,8 @@
  */
 
 import GatsbyMobxStore from './dist/GatsbyMobxStore';
-import GatsbyNodeProvider from './dist/GatsbyNodeProvider';
-import Page from './dist/Page';
+import GatsbyNodeProvider from './dist/GatsbyNodeProvider.bl-edit';
+import Page from './dist/Page.bl-edit';
 
 export {
   GatsbyMobxStore,
@@ -22,6 +22,6 @@ export {
   Page,
 };
 
-export type { PageProps } from './dist/Page';
+export type { PageProps } from './dist/types';
 export * from './dist/GatsbyLink';
 export * from './dist/GatsbyImage';

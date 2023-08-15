@@ -3,60 +3,10 @@
 ?> **Note:** Before configuring search, ensure that you have [Bodiless Search
 installed](../Search/#_1-install-bodiless-search).
 
-## Configure `.env.site`
-
-Based on your site's search requirements, in your `.env.site` file, configure the environment
-variables described below.
-
-### Environment Variables Breakdown
-
-#### `BODILESS_SEARCH_CONFIG`
-
-This is for defining an external JSON file to use for your site's search configuration. Typically,
-this external file is named `search.config.json`.
-
-Example:
-
-```shell
-BODILESS_SEARCH_CONFIG='search.config.json'
-```
-
-?> Previously, _all_ search options were configured in `.env.site`; many of them are now configured
-in the external JSON file. Using an external JSON file is recommended, and some newer features
-aren't configurable with environment variables (e.g., exclude a path/page) and must be configured
-via the JSON file.  
-<br>
-If `BODILESS_SEARCH_CONFIG` is defined, and the associated JSON file is configured, that
-configuration will override all the equivalent search-related environment variables set in
-`.env.site`.  
-For a list of the environment variables that will be overridden, see
-[Backward-Compatibility Support](#backward-compatibility-support).
-
-#### `BODILESS_SEARCH_EXPIRES`
-
-The in-browser search index expiration period in seconds.  
-By default, the index expires in one hour (86,400 seconds) from time of load.
-
-```shell
-BODILESS_SEARCH_EXPIRES='86400'
-```
-
-#### `BODILESS_SEARCH_INDEX_PREVIEW_LENGTH`
-
-The number of characters displayed in the preview section.
-
-```shell
-BODILESS_SEARCH_INDEX_PREVIEW_LENGTH='300'
-```
-
 ## Configure `search.config.json`
 
-After defining a JSON file via the [`BODILESS_SEARCH_CONFIG`](#bodiless_search_config) variable in
-your `.env.site` file, you'll need to create and configure the file under your site's root
-directory. Typically, this file is named `search.config.json`.
-
-Based on your site's search requirements, in your JSON file, configure the properties described
-below.
+Based on your site's search requirements, create a file named `search.config.json` in the root
+directory of your site, and configure its properties as described below.
 
 Example:
 
@@ -69,8 +19,7 @@ Example:
   "contentExcluders": [
     "script",
     "noscript",
-    "style",
-    ".bg-gray-200"
+    "style"
   ],
   "indexConfig": {
     "ref": "id",
@@ -292,62 +241,55 @@ Example:
 }
 ```
 
-## Backward-Compatibility Support
+## Configure `.env.site`
 
-For backward-compatibility, search configured in your `.env.site` file for configuration options
-that have been moved to `search.config.json` is still supported. However, using a
-`search.config.json` file is preferred, and some newer features aren't configurable with environment
-variables (e.g., exclude a path/page) and must be configured via the `search.config.json` file.
+Based on your site's search requirements, in your `.env.site` file, configure the environment
+variables described below. 
 
-The following is a list of the environment variables supported by BodilessJS for search
-configuration in `.env.site` alongside their equivalent properties in `search.config.json`:
+> Note: all variables are optional.
+### Environment Variables Breakdown
 
-| Environment Variable                     | JSON Property                            |
-| ---------------------------------------- | ---------------------------------------- |
-| `BODILESS_SEARCH_PAGE`                   | `languages[x].searchPath`<sup>*</sup>    |
-| `BODILESS_SEARCH_SOURCE_PATH`            | `languages[x].sourcePaths`<sup>*</sup>   |
-| `BODILESS_SEARCH_SOURCE_TYPE`            | `sourceTypes`                            |
-| `BODILESS_SEARCH_INDEX_NAME`             | `languages[x].indexFileName`<sup>*</sup> |
-| `BODILESS_SEARCH_INDEX_PATH`             | `languages[x].indexFilePath`<sup>*</sup> |
-| `BODILESS_SEARCH_INDEX_SELECTOR`         | `contentSelectors`                       |
-| `BODILESS_SEARCH_INDEX_EXCLUDE_SELECTOR` | `contentExcluders`                       |
-| `BODILESS_SEARCH_EXCLUDE_PATH`           | `languages[x].excludePaths`<sup>*</sup>  |
+#### `BODILESS_SEARCH_CONFIG`
 
-<sup>*</sup> _Where `x` is the index of a language in the `languages` array._
+By default, Bodiless will try to find a `search.config.json` file in the root of you site to load
+your search configuration. You can set this variable to change the name of this file.
 
-Example Configuration:
+Example:
 
 ```shell
-BODILESS_SEARCH_PAGE='search'
-BODILESS_SEARCH_SOURCE_PATH='./public'
-BODILESS_SEARCH_SOURCE_TYPE='html|htm'
-BODILESS_SEARCH_INDEX_NAME='lunr.json'
-BODILESS_SEARCH_INDEX_PATH='./public'
-BODILESS_SEARCH_INDEX_SELECTOR='body *'
-BODILESS_SEARCH_INDEX_EXCLUDE_SELECTOR='script,noscript,style,.bg-gray-200'
-BODILESS_SEARCH_EXCLUDE_PATH='404/*|404.*'
+BODILESS_SEARCH_CONFIG='my-custom.search.config.json'
 ```
 
-<div class="warn">
-<strong>Note:</strong> For properties that expect path values, you may use glob patterns to define
-your paths.
+#### `BODILESS_SEARCH_INDEX_URL`
 
-For variables defining exclusionary paths (i.e., `BODILESS_SEARCH_EXCLUDE_PATH`), you **must** use
-glob patterns.
+The public URL of your search index file, which your front-end will access when a search occurs. 
 
-For example:
+For instance, in the examples above, we've created an English index file called `lunr.en.json`, 
+which will be placed into our `public` folder. Since this folder represents the root of our site 
+(using the Gatsby framework), our search index URL would be `/lunr.en.json`.
+
+If you don't set this variable, Bodiless will try to access `/default.idx` by default.
+
+Example:
 
 ```shell
-BODILESS_SEARCH_EXCLUDE_PATH='foo/**|bar/index.html|baz/qux/index.*|quuz/!(index.*)/**'
+BODILESS_SEARCH_INDEX_URL='/lunr.en.json' # using the English file created in the examples above
 ```
 
-- `foo/**`: `/foo/`, as a parent page, and all its children are excluded.
-- `bar/index.html`: Only the specific page is excluded.
-- `baz/qux/index.*`: Only the specific page is excluded.
-- `quuz/!(index.*)/**`: All child pages of `/quuz/` — but not `/quuz/` — are excluded.
+#### `BODILESS_SEARCH_EXPIRES`
 
-</div>
+The in-browser search index expiration period in seconds.  
+By default, the index expires in one day (86,400 seconds) from time of load.
 
-?> **Note:** If [`BODILESS_SEARCH_CONFIG`](#bodiless_search_config) is defined, and the associated
-JSON file is configured (e.g., `search.config.json`), that configuration will override the
-environment variables listed above.
+```shell
+BODILESS_SEARCH_EXPIRES='21600' # 6 hours
+```
+
+#### `BODILESS_SEARCH_INDEX_PREVIEW_LENGTH`
+
+The number of characters displayed in the preview section. By default, only the first 100
+characters are shown.
+
+```shell
+BODILESS_SEARCH_INDEX_PREVIEW_LENGTH='300'
+```

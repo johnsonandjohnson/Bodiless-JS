@@ -70,6 +70,7 @@ export interface CanBeActivated {
 }
 
 export interface PageEditStoreInterface extends CanControlLocalTooltipsVisibility {
+  localContextMenuKey: Date;
   activeContext: PageEditContextInterface | undefined;
   updateMenuOptions: (contexts: PageEditContextInterface) => string[];
   contextMenuOptions: TMenuOption[];
@@ -78,6 +79,7 @@ export interface PageEditStoreInterface extends CanControlLocalTooltipsVisibilit
   setActiveContext(context?: PageEditContextInterface): void;
   toggleEdit: (on?: boolean) => void;
   togglePosition: (on?: boolean) => void;
+  refreshLocalContextMenu: () => void;
   contextTrail: string[];
   pageOverlay: TPageOverlayStore;
   optionMap: Map<string, Map<string, TMenuOption>>;
@@ -96,6 +98,8 @@ export interface PageEditContextInterface extends
   readonly id: string;
   readonly name: string;
   readonly parent?: PageEditContextInterface;
+  readonly localContextMenuKey: Date;
+  refreshLocalContextMenu: () => void;
   /**
    * The "peer" contexts registered with this context.  Peer contexts contribute their menu
    * options when the context wo which they are registered becomes active.

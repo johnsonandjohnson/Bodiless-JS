@@ -1,10 +1,20 @@
 {
   "VitalDesignSystem": {
     "Components": {
-      "SEO": {
-        "Metadata": {
-          "vitalMeta.md": "./doc/README.md"
-        }
+      "VitalList.md": "./doc/README.md",
+      "assets": {
+        "AddVitalListComponent.jpg": "./doc/assets/AddVitalListComponent.jpg",
+        "InfographicList.jpg": "./doc/assets/InfographicList.jpg",
+        "LinksBulletsList.jpg": "./doc/assets/LinksBulletsList.jpg",
+        "LinksNumbersList.jpg": "./doc/assets/LinksNumbersList.jpg",
+        "LinksUndecoratedList.jpg": "./doc/assets/LinksUndecoratedList.jpg",
+        "PlainTextBulletsList.jpg": "./doc/assets/PlainTextBulletsList.jpg",
+        "PlainTextNumbersList.jpg": "./doc/assets/PlainTextNumbersList.jpg",
+        "PlainTextUndecoratedList.jpg": "./doc/assets/PlainTextUndecoratedList.jpg",
+        "RichTextBulletsList.jpg": "./doc/assets/RichTextBulletsList.jpg",
+        "RichTextNumbersList.jpg": "./doc/assets/RichTextNumbersList.jpg",
+        "RichTextUndecoratedList.jpg": "./doc/assets/RichTextUndecoratedList.jpg",
+        "RTEToolbar.jpg": "./doc/assets/RTEToolbar.jpg"
       }
     }
   }

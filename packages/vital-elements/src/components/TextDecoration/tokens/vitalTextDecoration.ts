@@ -13,15 +13,9 @@
  */
 
 import { asTokenGroup } from '../../../util';
+import { TextDecorationMeta } from '../meta';
 
-const meta = {
-  categories: {
-    Type: ['Element'],
-    Group: ['FontDecoration'],
-  },
-};
-
-export default asTokenGroup(meta)({
+export default asTokenGroup(TextDecorationMeta)({
   Underline: 'underline',
   Bold: 'font-bold',
   ExtraBold: 'font-extrabold',

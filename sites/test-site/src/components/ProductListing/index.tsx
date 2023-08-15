@@ -16,6 +16,7 @@ import {
   Img,
   addClasses,
   flowHoc,
+  HOC,
 } from '@bodiless/fclasses';
 import { withEditorSimple } from '../Editors';
 import { asLandscapeImage } from '../Image';
@@ -38,7 +39,7 @@ const asProductListingImage = flowHoc(
 );
 
 export const ProductListingImage = flowHoc(
-  asLandscapeImage('product_listing_image'),
+  asLandscapeImage('product_listing_image') as HOC,
   asImage,
   asProductListingImage,
 )(Img);

@@ -14,7 +14,7 @@
 
 import React, { ComponentType, HTMLProps } from 'react';
 import ReactDOM from 'react-dom';
-import { observer } from 'mobx-react';
+import { observer } from '../mobx.bl-edit';
 import { useEditContext } from '../hooks';
 import { TOverlaySettings } from '../Types/PageOverlayTypes';
 

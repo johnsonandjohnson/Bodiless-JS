@@ -14,14 +14,16 @@
 
 import React from 'react';
 import {
-  WithNodeKeyProps,
-  withSidecarNodes,
-  withNode,
-  withNodeKey,
   withChild,
   asReadOnly,
   ifToggledOn,
 } from '@bodiless/core';
+import {
+  WithNodeKeyProps,
+  withSidecarNodes,
+  withNode,
+  withNodeKey,
+} from '@bodiless/data';
 import { withoutLinkWhenLinkDataEmpty } from '@bodiless/components';
 import {
   withBreadcrumbStartingTrail,
@@ -38,8 +40,8 @@ import {
   withDesign,
   replaceWith,
   remove,
+  A,
 } from '@bodiless/fclasses';
-import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import {
   asBold,
   asEditableLink,
@@ -65,7 +67,7 @@ const withStartingTrailIcon = (
         addProps({ href: '/' }),
         withNode,
         withNodeKey(nodeKeys),
-      )(GatsbyLink),
+      )(A),
     ),
   }),
 );

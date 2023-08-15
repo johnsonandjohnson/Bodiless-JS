@@ -22,7 +22,8 @@ import { Page } from '@bodiless/gatsby-theme-bodiless';
 // @ts-ignore Could not find declaration file.
 import resolvedConfigs from
   '@bodiless/fclasses/src/tailwindcss/resolveConfig';
-import { withDefaultContent, withNodeKey, withResetButton } from '@bodiless/core';
+import { withResetButton } from '@bodiless/core';
+import { withDefaultContent, withNodeKey } from '@bodiless/data';
 import {
   H2 as BaseH2, addClasses, flowHoc, addProps, withDesign, startWith,
 } from '@bodiless/fclasses';
@@ -185,11 +186,19 @@ const FlowContainerPage = (props: any) => (
         getDefaultWidth={() => 'w-full lg:w-3/4'}
       />
       <H2>Contentful Flow Container</H2>
-      <ContentfulFlowContainer />
+      <ContentfulFlowContainer
+        id="contentfulFlowContainer"
+      />
       <H2>Limited Flow Container</H2>
-      <FlowContainerLimited nodeKey="limited" />
+      <FlowContainerLimited
+        id="flowContainerLimited"
+        nodeKey="limited"
+      />
       <H2>Nested Flow Container with Default Items</H2>
-      <RegionContainer nodeKey="region" />
+      <RegionContainer
+        id="regionContainer"
+        nodeKey="region"
+      />
     </Layout>
   </Page>
 );

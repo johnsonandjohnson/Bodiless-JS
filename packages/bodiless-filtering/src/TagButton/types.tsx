@@ -14,8 +14,13 @@
 
 import { TagType } from '@bodiless/core';
 
+export type LegacyTagType = {
+  id?: string | number | symbol | null,
+  name?: string
+};
+
 export type TagsNodeType = {
-  tags: TagType[],
+  tags: (TagType & LegacyTagType)[],
 };
 
 export type InputAttributes = {
@@ -25,8 +30,7 @@ export type InputAttributes = {
 export type TagButtonProps = {
   getSuggestions?: () => TagType[],
   placeholder?: string,
-  noSuggestionsText?: string,
-  minQueryLength?: number,
+  noOptionsText?: string,
   allowNew?: boolean,
   allowMultipleTags?: boolean,
   inputAttributes?: InputAttributes,

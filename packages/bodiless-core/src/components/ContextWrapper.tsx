@@ -13,8 +13,8 @@
  */
 
 import React, { FC, HTMLProps } from 'react';
-import { observer } from 'mobx-react';
 import { withoutProps } from '@bodiless/fclasses';
+import { observer } from '../mobx.bl-edit';
 import { useContextActivator, useEditContext } from '../hooks';
 import { Props } from '../Types/ContextWrapperTypes';
 

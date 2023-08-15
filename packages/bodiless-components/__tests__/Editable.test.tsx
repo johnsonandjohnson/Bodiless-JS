@@ -15,9 +15,70 @@
 import React from 'react';
 import flow from 'lodash/flow';
 
-import { render } from 'enzyme';
+import { render, mount } from 'enzyme';
+import { PageEditContext } from '@bodiless/core';
 import { withMockNode } from './helpers/MockContentNode';
-import { asEditable } from '../src';
+import { Editable, asEditable } from '../src';
+
+describe('Editable', () => {
+  describe('When editable', () => {
+    let mockIsEdit: jest.SpyInstance;
+
+    beforeAll(() => {
+      mockIsEdit = jest.spyOn(PageEditContext.prototype, 'isEdit', 'get').mockReturnValue(true);
+    });
+
+    afterAll(() => {
+      mockIsEdit.mockRestore();
+    });
+
+    it('Passes props to span', () => {
+      const wrapper = mount(<Editable data-foo="bar" nodeKey="bar">Now is the time</Editable>);
+      expect(wrapper.find('span').prop('data-foo')).toBe('bar');
+    });
+
+    it('Passes classname to span', () => {
+      const wrapper = mount(<Editable nodeKey="bar" className="baz">Now is the time</Editable>);
+      expect(wrapper.find('span').prop('className')?.split(' ')).toContain('baz');
+    });
+
+    it('Adds inline-editable class when className provided', () => {
+      const wrapper = mount(<Editable nodeKey="bar" className="baz">Now is the time</Editable>);
+      expect(wrapper.find('span').prop('className')?.split(' ')).toContain('bodiless-inline-editable');
+    });
+
+    it('Adds inline-editable class when no className provided', () => {
+      const wrapper = mount(<Editable nodeKey="bar">Now is the time</Editable>);
+      expect(wrapper.find('span').prop('className')).toBe('bodiless-inline-editable');
+    });
+
+    it('Adds test id for playwright', () => {
+      const wrapper = mount(<Editable nodeKey="bar">Now is the time</Editable>);
+      expect(wrapper.find('span').prop('data-test-id')).toBe('bodiless-inline-editable');
+    });
+
+    it('Accepts a custom tag', () => {
+      const wrapper = mount(<Editable data-foo="bar" nodeKey="bar" tagName="h1">Now is the time</Editable>);
+      expect(wrapper.find('h1').prop('data-foo')).toBe('bar');
+    });
+  });
+
+  describe('When not editable', () => {
+    it('Passes props to span', () => {
+      const wrapper = mount(<Editable data-foo="bar" nodeKey="bar">Now is the time</Editable>);
+      expect(wrapper.find('span').prop('data-foo')).toBe('bar');
+    });
+    it('Passes classname to span', () => {
+      const wrapper = mount(<Editable nodeKey="bar" className="baz">Now is the time</Editable>);
+      expect(wrapper.find('span').prop('className')?.split(' ')).toContain('baz');
+    });
+
+    it('Accepts a custom tag', () => {
+      const wrapper = mount(<Editable data-foo="bar" nodeKey="bar" tagName="h1">Now is the time</Editable>);
+      expect(wrapper.find('h1').prop('data-foo')).toBe('bar');
+    });
+  });
+});
 
 describe('asEditable', () => {
   describe('When not editable', () => {
@@ -30,7 +91,7 @@ describe('asEditable', () => {
       const Test = flow(
         asEditable('foo', 'Foo', useOverrides),
         withMockNode(data),
-      )('apan');
+      )('span');
       const wrapper = render(<Test />);
       expect(wrapper.text()).toBe('Now *s the t*me');
     });

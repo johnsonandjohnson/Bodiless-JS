@@ -13,7 +13,7 @@
  */
 
 import React, { ComponentType, HTMLProps } from 'react';
-import { withNode } from '@bodiless/core';
+import { withNode } from '@bodiless/data';
 import {
   designable,
   DesignableComponentsProps,

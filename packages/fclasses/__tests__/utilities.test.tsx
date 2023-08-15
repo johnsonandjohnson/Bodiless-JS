@@ -12,9 +12,9 @@
  * limitations under the License.
  */
 
-import React, { useContext, FC } from 'react';
+import React, { useContext, FC, ComponentType } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { shallow, mount, ComponentType } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { addPropsIf, addProps } from '../src';
 
 describe('addProps', () => {

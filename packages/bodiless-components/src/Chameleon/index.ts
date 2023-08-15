@@ -15,7 +15,7 @@
 import asBodilessChameleon, { withDeleteNodeOnUnwrap } from './asBodilessChameleon';
 import applyChameleon from './applyChameleon';
 import withChameleonComponentFormControls from './withChameleonComponentFormControls';
-import withChameleonButton, { useChameleonSelectorForm, useChameleonSwapForm } from './withChameleonButton';
+import withChameleonButton, { useChameleonSelectorForm, useChameleonSwapForm } from './withChameleonButton.bl-edit';
 import withChameleonContext, { useChameleonContext } from './withChameleonContext';
 
 export {

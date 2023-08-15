@@ -4,7 +4,7 @@ const express = require('express');
 //   createDefaultContentPlugins,
 //   getSampleDefaultContentConfig,
 // } = require('@bodiless/gatsby-theme-bodiless/dist/DefaultContent');
-const { getDisabledPages } = require('@bodiless/components/node-api');
+const { getDisabledPages } = require('@bodiless/page/lib/cjs/NodeApi');
 // const getSSIEntities = require('@bodiless/gatsby-plugin-ssi/read-ssi-entities');
 // const {
 //   getConfig: getSiteDefaultContentConfig,
@@ -60,7 +60,22 @@ const plugins = [
         include: true,
         // Pass false to disable logging all resolving operations. Defaults to true.
         logging: true,
+        // You can pass a RegExp which will be matched against the **absolute** path of every
+        // .bl-edit file being imported. If it matches, the file will not be replaced.
+        // For instance, if you want to replace all static but `vital-editors` and
+        // `vital-link` files, you may pass true to the option include and
+        //  `/vital-editors|vital-link/` to this option.
+        //
+        // Defaults to false.
+        exclude: false,
       }
+    },
+  },
+  {
+    resolve: 'gatsby-plugin-manifest',
+    options: {
+      icon: 'src/images/vitalds-favicon.png',
+      legacy: false,
     },
   },
   // {
@@ -84,7 +99,14 @@ const plugins = [
   //   ...getSiteDefaultContentConfig(),
   // ),
   {
-    resolve: '--vital--',
+    resolve: 'gatsby-plugin-google-tagmanager',
+    options: {
+      id: 'GTM-N3M9LLD',
+      dataLayerName: 'globalDataLayer',
+    },
+  },
+  {
+    resolve: '@bodiless/vital-demo',
   }
 ];
 

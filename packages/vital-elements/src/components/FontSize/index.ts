@@ -27,4 +27,7 @@ const vitalFontSizeSpec: TokenDemoSpec = {
   tokensExportName: 'vitalFontSize',
 };
 
-export { vitalFontSize, vitalFontSizeBase, vitalFontSizeSpec };
+export { vitalFontSizeBase, vitalFontSizeSpec };
+export { default as vitalFontSize } from './tokens';
+export { FontSizeMeta } from './meta';
+// export { knapsackFontSizeSpec } from './FontSize.knapsackSpec';

@@ -18,8 +18,8 @@ import React, {
   useMemo,
 } from 'react';
 import flow from 'lodash/flow';
-import { observer } from 'mobx-react';
-import { withNode } from '@bodiless/core';
+import { observer, useActivateOnEffect } from '@bodiless/core';
+import { withNode } from '@bodiless/data';
 import {
   designable, addProps, withDesign, Fragment,
 } from '@bodiless/fclasses';
@@ -53,8 +53,9 @@ const ListBase: FC<ListBaseProps> = ({
     Title,
   } = components;
 
-  const { addItem, deleteItem } = useItemsMutators({ unwrap, onDelete });
+  const { addItem, deleteItem, moveItem } = useItemsMutators({ unwrap, onDelete });
   const { getItems } = useItemsAccessors();
+  const { setId } = useActivateOnEffect();
   const dataItems = getItems();
 
   const items = [
@@ -71,7 +72,10 @@ const ListBase: FC<ListBaseProps> = ({
       if (dataItems.includes(currentItem)
         || currentItem === prependItems[prependItems.length - 1]
       ) {
-        value.addItem = () => addItem(currentItem);
+        value.addItem = () => {
+          const newItem = addItem(currentItem);
+          setId(newItem);
+        };
       }
       // Can only delete items which are not static and only if it would not empty the list.
       if (dataItems.includes(currentItem)
@@ -79,7 +83,11 @@ const ListBase: FC<ListBaseProps> = ({
       ) {
         value.deleteItem = () => deleteItem(currentItem);
       }
-
+      if (dataItems.includes(currentItem)) {
+        value.moveItem = (offset: number) => {
+          moveItem(currentItem, offset);
+        };
+      }
       return value;
     }),
     [dataItems, prependItems, appendItems],

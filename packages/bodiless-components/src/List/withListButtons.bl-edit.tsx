@@ -1,0 +1,136 @@
+/**
+ * Copyright © 2019 Johnson & Johnson
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import React, { useMemo } from 'react';
+import {
+  withMenuOptions,
+  withLocalContextMenu,
+  withContextActivator,
+  ifEditable,
+  PageEditContextInterface,
+  TMenuOption,
+  useEditContext,
+  useActivateOnEffectActivator,
+} from '@bodiless/core';
+import { v1 } from 'uuid';
+
+import { withFinalDesign, flowHoc, HOC } from '@bodiless/fclasses';
+import { UseListOverrides } from './types';
+import { useListContext } from './List';
+
+const useMenuOptions = (useOverrides: UseListOverrides = () => ({})) => (props: any) => {
+  const {
+    addItem, deleteItem, items = [], currentItem, moveItem,
+  } = useListContext();
+
+  // Search for parent lists to set the default group label
+  const context = useEditContext();
+  let n = 0;
+  for (let c:PageEditContextInterface|undefined = context; c; c = c.parent) {
+    if (c.type === 'list-item') n += 1;
+  }
+  const sublistLabel = n > 1 ? `Sub-List ${n} Item` : 'Sub-List Item';
+  const defaultGroupLabel = n > 0 ? sublistLabel : 'List Item';
+
+  const { groupLabel = defaultGroupLabel, global = false, local = true } = useOverrides(props);
+  const id = v1();
+  const group = `list-item-group-${id}`;
+
+  const menuOptions:TMenuOption[] = useMemo(() => ([
+    {
+      name: `move-left-${id}`,
+      icon: 'chevron_left',
+      label: 'Move',
+      isDisabled: !moveItem || !items.length || currentItem === items[0],
+      handler: () => {
+        if (moveItem) moveItem(-1);
+        context.refreshLocalContextMenu();
+        // PageEditContext.root.lastActivated = new Date();
+      },
+      global,
+      local,
+      group,
+    },
+    {
+      name: `add-${id}`,
+      icon: 'add',
+      label: 'Add',
+      isDisabled: !addItem,
+      handler: () => (addItem ? addItem() : undefined),
+      global,
+      local,
+      group,
+    },
+    {
+      name: `remove-${id}`,
+      icon: 'delete',
+      label: 'Delete',
+      isDisabled: !deleteItem,
+      handler: () => (deleteItem ? deleteItem() : undefined),
+      global,
+      local,
+      group,
+    },
+    {
+      name: `move-right-${id}`,
+      icon: 'chevron_right',
+      label: 'Move',
+      isDisabled: !moveItem || !items.length || currentItem === items[items.length - 1],
+      handler: () => {
+        if (moveItem) moveItem(1);
+        context.refreshLocalContextMenu();
+        // PageEditContext.root.lastActivated = new Date();
+      },
+      global,
+      local,
+      group,
+    },
+    {
+      name: group,
+      label: groupLabel,
+      global,
+      local,
+      Component: 'group',
+    },
+  ]), [addItem, deleteItem]);
+
+  return menuOptions;
+};
+
+const withActivateContextOnCreate: HOC = Component => props => {
+  const { currentItem } = useListContext();
+  useActivateOnEffectActivator(currentItem);
+
+  return <Component {...props} />;
+};
+
+/**
+ * HOC which adds list edit buttons (Add and Delete Item).
+ */
+const withListButtons = (useOverrides?: UseListOverrides) => ifEditable(
+  withFinalDesign({
+    Item: flowHoc(
+      withContextActivator('onClick'),
+      withLocalContextMenu,
+      withMenuOptions({
+        useMenuOptions: useMenuOptions(useOverrides),
+        name: 'List Item',
+        type: 'list-item',
+      }),
+    ),
+    Title: withActivateContextOnCreate,
+  }),
+);
+
+export default withListButtons;

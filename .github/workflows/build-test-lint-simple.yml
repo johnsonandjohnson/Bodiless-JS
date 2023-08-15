@@ -2,69 +2,113 @@ name: Build, Test, Lint for Pull Requests
 env:
   CI: true
   FORCE_COLOR: 1
+  NODE_OPTIONS: --max_old_space_size=4096
 
 on:
-  pull_request:
-    branches:
-      - main
+  workflow_call:
+  schedule:
+    - cron: "0 3 * * *"
 
 jobs:
   setup:
     name: Setup, Build, Lint and Test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
-          fetch-depth: 0
-      # install a specific version of Node using
-      # https://github.com/actions/setup-node
-      - name: Use Node.js v16.13
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16.13
-      # just so we learn about available environment variables GitHub provides
-      - name: Print CI env variables
-        run: |
-          npm i -g @bahmutov/print-env@2
-          print-env BODILESS GITHUB BUILD ACTIONS || true
-
-      - name: Print Git Version
-        run: git --version
-
-      - name: Setup git user
-        run: |
-          git config --global user.name "$(git --no-pager log --format=format:'%an' -n 1)"
-          git config --global user.email "$(git --no-pager log --format=format:'%ae' -n 1)"
-
-      - name: Git Info
-        run: |
-          git log  --pretty=oneline | head -n 10
-          git config --get user.name
-          git config --get user.email
-
-        #- name: Install dependencies
-        #  run: npm ci
-
-        # npm workspace approach
-        #- name: Check dependency sync
-        #  run: npm run sync:check
-        #
-        #- name: Build packages
-        #  run: npm run build:packages
-
-      - name: Build
-        run: npm run setup
-
+          ref: ${{ github.event_name == 'schedule' && 'main' || github.event.pull_request.head.sha }}
+      - name: Build	
+        uses: ./.github/actions/build
       - name: Lint
         run: npm run lint
-
       - name: Check
         run: npm run check
-
       - name: Test
+        if: ${{ github.event_name == 'schedule' || github.event.label.name == 'ready-to-test' }}
         run: npm run test --quiet --colors
+      - name: Run deprecated playwright tests
+        if: ${{ github.event_name == 'schedule' || github.event.label.name == 'ready-to-test' }}
+        uses: ./.github/actions/playwright
+        with:
+          node-test-script: test:pw-functional
+          test-results-name: Deprecated tests for editing functionality
+    
+  smoke-vital:
+    name: Smoke tests for vital components
+    if: ${{ github.event_name == 'schedule' || github.event.label.name == 'ready-to-test' }}
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event_name == 'schedule' && 'main' || github.event.pull_request.head.sha }}
+      - name: Build
+        uses: ./.github/actions/build
+      - name: Run vital playwright tests
+        env:
+          APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
+          APPLITOOLS_BATCH_NAME: ${{ github.event_name == 'schedule' && 'Regression Test Run' || format('{0} ({1})', github.event.pull_request.title, github.event.pull_request.number) }}
+          PW_INCLUDE_ALL_RENDERERS: ${{ github.event_name == 'schedule' }}
+        uses: ./.github/actions/playwright
+        with:
+          node-test-script: test:playwright
+          test-results-name: Smoke tests for vital components
+      - name: Upload Accessibility results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Accessibility
+          path: accessibility-reports/
+          retention-days: 30
+  
+  lhci:
+    name: Lighthouse
+    if: ${{ github.event_name == 'schedule' || github.event.label.name == 'ready-to-test' }}
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event_name == 'schedule' && 'main' || github.event.pull_request.head.sha }}
+      - name: Build
+        uses: ./.github/actions/build
+      - name: Lighthouse audit
+        if: always()
+        uses: treosh/lighthouse-ci-action@v10
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          APP_SITE_NAME: vital-demo-next
+        with:
+          configPath: ./lighthouserc.js
+          uploadArtifacts: true
+          temporaryPublicStorage: true
 
-      # Temp using monorepo since standalone is breaking cypress tests.
-      # - name: Cypress tests
-        # run: npm run test:monorepo
-        # run: npm run test:ci
+  cleanup:
+    if: always() && github.event_name != 'schedule'
+    runs-on: ubuntu-20.04
+    needs: [ setup, smoke-vital ]
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions-ecosystem/action-remove-labels@v1
+        if: always()
+        with:
+          labels: ${{ github.event.label.name }}
+          fail_on_error: false
+
+  test-results:
+    name: Test Results
+    if: always() && github.event.label.name == 'ready-to-test'
+    runs-on: ubuntu-latest
+    needs: [ setup, smoke-vital ]
+    permissions:
+      checks: write
+      pull-requests: write
+    steps:
+      - name: Download file
+        uses: actions/download-artifact@v3
+        with:
+          path: playwright-report/
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        with:
+          check_name: 'Playwright Test Results'
+          files: "playwright-report/**/*.xml"

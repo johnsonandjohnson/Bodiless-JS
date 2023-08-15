@@ -21,11 +21,44 @@ import React, {
   Fragment,
 } from 'react';
 import pick from 'lodash/pick';
-import { HOCBase, ComponentOrTag, HOC } from './types';
+import { ComponentOrTag, HOC } from './types';
 import { flowHoc } from './flowHoc';
 
 const designContextDefault = undefined as undefined | ComponentType<any>;
 const DesignContext = React.createContext(designContextDefault);
+
+/**
+ * HOC which makes a component capable of replacement via [[startWith]].
+ *
+ * This is used under the hood by [[designable]] to make all starting
+ * components replaceable.  If you want to use [[startWith]] outside
+ * of the design, you must use this yourself.
+ *
+ * You can also use this to reset the "base" so that some modifications
+ * made by HOCs are also replaced.
+ *
+ * @example
+ * ```ts
+ * const withBase = withDesign({
+ *   Wrapper: as(
+ *     'bg-black-700',
+ *     replaceabe,
+ *     'text-green-700',
+ *   ),
+ * });
+ * const withRepl = withDesign({
+ *   Wrapper: startWith(Section),
+ * });
+ * const BlackAndGreenDiv = withBase(Div); // A 'div' with black bg and green text
+ * const GreenSection = withRepl(BlackAndGreenDiv); // A 'section' with green text.
+ * ```
+ * Because of the addition of `replaceable`, the resulting `GreenSection` will not
+ * have the black background, though it will have the green text.
+ *
+ * @see startWith
+ *
+ * @category HOC Utility
+ */
 export const replaceable: HOC = Component => {
   const Replaceable: FC<any> = props => {
     const UpstreamComponent = React.useContext(DesignContext);
@@ -38,9 +71,10 @@ export const replaceable: HOC = Component => {
   };
   return Replaceable;
 };
+
 /**
- * Creates an HOC which replaces a base component with a specified replacement.
- * Unlike `replaceWith`, this function replaces the base component but leaves
+ * Creates a HOC which replaces a base component with a specified replacement.
+ * Unlike [[replaceWith]], this function replaces the base component but leaves
  * any previously applied tokens intact.
  *
  * > **Important Note** `startWith` can only be used in the context of `withDesign`
@@ -48,7 +82,7 @@ export const replaceable: HOC = Component => {
  * @param ReplacementComponent
  * The component to use as a replacement
  *
- * @return
+ * @returns
  * HOC which removes the original component and renders the replacement instead.
  *
  * @see `replaceWith`
@@ -66,9 +100,10 @@ export const replaceable: HOC = Component => {
  *    Tag: replaceWith(Div),
  *  })(Example) // <div />
  *  ```
+ * @category HOC Utility
  */
 
-export const startWith = (ReplacementComponent: ComponentType<any>): HOCBase => Component => {
+export const startWith = (ReplacementComponent: ComponentType<any>): HOC => Component => {
   const StartWith: FC<any> = props => {
     const UpstreamComponent = useContext(DesignContext);
     return UpstreamComponent
@@ -83,14 +118,14 @@ export const startWith = (ReplacementComponent: ComponentType<any>): HOCBase => 
 };
 /**
  * Returns a HOC which replaces the component to which it is applied with another.
- * Unlike `startWith`, this replaces the component along with any hoc's which
+ * Unlike `startWith`, this replaces the component along with any HOCs which
  * had previously been applied.
  *
  * @param Replacement
  * The component or tag to use as a replacement.
  *
  * @returns
- * An HOC which renders the replacement in place of the target.
+ * A HOC which renders the replacement in place of the target.
  *
  * @see `startWith`
  *
@@ -101,6 +136,8 @@ export const startWith = (ReplacementComponent: ComponentType<any>): HOCBase => 
  * const Start = addClasses('text-blue')(Start); // <div className="text-blue" />
  * const Replaced = replaceWith('span')(Start); // <span />
  * ```
+ *
+ * @category HOC Utility
  */
 
 export const replaceWith = <P extends object>(Replacement: ComponentOrTag<P>) => flowHoc(
@@ -112,6 +149,7 @@ export const replaceWith = <P extends object>(Replacement: ComponentOrTag<P>) =>
     return ReplaceWith;
   }) as HOC
 );
+
 /**
  * HOC which replaces the component with a fragment.  Note that the children of
  * the component (if any) will still be rendered.  If you want to completely remove
@@ -122,6 +160,8 @@ export const replaceWith = <P extends object>(Replacement: ComponentOrTag<P>) =>
  *
  * @returns
  * A fragment.
+ *
+ * @category HOC Utility
  */
 
 export const remove = <P extends React.HTMLAttributes<HTMLBaseElement>>() => (props: P) => {
@@ -130,11 +170,13 @@ export const remove = <P extends React.HTMLAttributes<HTMLBaseElement>>() => (pr
 };
 
 /**
- * Like replaceWith, but performs the replacement on effect. Useful when you need to
+ * Like [[replaceWith]], but performs the replacement on effect. Useful when you need to
  * ensure that both versions of a component are rendered during SSR, but want to
  * remove one when displayed in the browser (eg for responsive design).
  *
  * @param Replacement The component to replace with.
+ *
+ * @category HOC Utility
  */
 export const replaceOnEffect = <P extends object>(
   Replacement: ComponentType<P>,

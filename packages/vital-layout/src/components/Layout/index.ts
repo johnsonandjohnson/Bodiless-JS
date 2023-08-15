@@ -12,6 +12,10 @@
  * limitations under the License.
  */
 
+import type { VitalLayout } from './tokens/vitalLayout';
+
 export { LayoutClean, asLayoutToken } from './LayoutClean';
-export { vitalLayout } from './tokens';
+export { default as vitalLayout } from './tokens';
 export type { LayoutComponents, LayoutProps } from './types';
+
+export type { VitalLayout };

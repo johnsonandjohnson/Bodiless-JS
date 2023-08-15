@@ -1,7 +1,14 @@
-import React, { useState, useEffect, FC } from 'react';
-import { WithoutHydrationFunction } from '../src/withoutHydration/types';
+import React, {
+  useState,
+  useEffect,
+  FC,
+  PropsWithChildren
+} from 'react';
+import { HOC } from '@bodiless/fclasses';
 
-export const createWithoutHydration = (env = 'development'): WithoutHydrationFunction => {
+import { WithoutHydrationWrapperFunction } from '../src/withoutHydration/types';
+
+export const createWithoutHydration = (env = 'development'): WithoutHydrationWrapperFunction => {
   let withoutHydration;
 
   jest.isolateModules(() => {
@@ -10,7 +17,7 @@ export const createWithoutHydration = (env = 'development'): WithoutHydrationFun
     withoutHydration = require('../src').withoutHydration;
   });
 
-  return withoutHydration as unknown as WithoutHydrationFunction;
+  return withoutHydration as unknown as WithoutHydrationWrapperFunction;
 };
 
 type InteractiveComponentProps = {
@@ -32,7 +39,7 @@ export const InteractiveComponent: FC<InteractiveComponentProps> = () => {
   );
 };
 
-export const RemountingComponent: FC = ({ children }) => {
+export const RemountingComponent: FC<PropsWithChildren> = ({ children }) => {
   const [hasHydrated, setHasHydrated] = useState(false);
   const [isClientSide, setIsClientSide] = useState(false);
 
@@ -59,4 +66,14 @@ export const RemountingComponent: FC = ({ children }) => {
       My children are gone!
     </aside>
   );
+};
+
+export const RerenderingComponent: HOC = Component => {
+  const withRerenderingComponent: FC<any> = (props: any) => {
+    const isDisplayed = true;
+    return isDisplayed
+      ? <Component {...props} />
+      : <></>;
+  };
+  return withRerenderingComponent;
 };

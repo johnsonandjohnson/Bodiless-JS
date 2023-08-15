@@ -14,7 +14,7 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import { useEditToggle } from '../src/withEditToggle';
+import { useEditToggle } from '../src/withEditToggle.bl-edit';
 import { withFlowToggle } from '../src';
 import PageEditContext from '../src/PageEditContext';
 

@@ -13,4 +13,5 @@
  */
 
 export { default as vitalColor } from './tokens';
-export { default as vitalColorBase } from './tokens/vitalColor';
+export { ColorMeta } from './meta';
+export { knapsackColorSpec } from './Color.knapsackSpec';

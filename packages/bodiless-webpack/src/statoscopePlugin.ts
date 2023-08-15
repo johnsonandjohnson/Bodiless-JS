@@ -16,18 +16,22 @@ export const createStatoscopePlugin = ({
 }: StatoscopePluginOptions) => {
   if (!enabled) return () => null;
 
+  if (!fs.existsSync(sitePath)) {
+    fs.mkdirSync(sitePath, { recursive: true });
+  }
+
   // Check if baseline json exists.
   if (fs.existsSync(`${sitePath}/stats-${name}-baseline.json`)) {
     additionalStats.push(`${sitePath}/stats-${name}-baseline.json`);
   }
 
   // Auto discover previous stats.
-  const previousStats = fs.readdirSync(`${sitePath}/public/`).filter(fn => fn.startsWith(`stats-${name}-`) && fn.endsWith('.json'));
-  additionalStats.push(...previousStats.map(fn => `${sitePath}/public/${fn}`));
+  const previousStats = fs.readdirSync(`${sitePath}/`).filter(fn => fn.startsWith(`stats-${name}-`) && fn.endsWith('.json'));
+  additionalStats.push(...previousStats.map(fn => `${sitePath}/${fn}`));
 
   return new StatoscopeWebpackPlugin({
-    saveReportTo: `${sitePath}/public/stats-[name].html`,
-    saveStatsTo: `${sitePath}/public/stats-[name]-[hash].json`,
+    saveReportTo: `${sitePath}/stats-[name].html`,
+    saveStatsTo: `${sitePath}/stats-[name]-[hash].json`,
     normalizeStats: true,
     additionalStats,
     statsOptions: {

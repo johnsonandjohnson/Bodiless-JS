@@ -17,8 +17,8 @@ import { shallow, mount } from 'enzyme';
 import { observable } from 'mobx';
 import type { Tag } from '@bodiless/fclasses';
 import {
-  withContextActivator, withLocalContextMenu, withNodeDataHandlers, withOnlyProps,
-} from '../src/hoc';
+  withContextActivator, withLocalContextMenu, withOnlyProps,
+} from '../src/hoc.bl-edit';
 
 const TestComponent = ({ element: Element }: any) => (
   <Element><div>Test Component</div></Element>
@@ -43,23 +43,11 @@ describe('withContextActivator', () => {
   });
 });
 
-describe('withLocalContextMenu', () => {
+describe.skip('withLocalContextMenu', () => {
   it('should wrap component and suffix its name with `WithLocalContextMenu`', () => {
     const ContextMenuChild = withLocalContextMenu('div' as Tag);
     const withMenu = mount(<ContextMenuChild id="testDiv" />);
     expect(withMenu.find('#testDiv')).toHaveLength(2);
     expect(withMenu.name()).toEqual('WithLocalContextMenu');
-  });
-});
-
-describe('withNodeDataHandlers', () => {
-  it('should have componentData', () => {
-    const values = {
-      some: Math.random(),
-    };
-    const data = observable(values);
-    const DataComponent = withNodeDataHandlers(data)(TestComponent);
-    const withProps = shallow(<DataComponent />);
-    expect(withProps.props().componentData).toEqual(values);
   });
 });

@@ -12,33 +12,37 @@
  * limitations under the License.
  */
 
-import React, { useCallback, useEffect } from 'react';
-import { useFormState, useFormApi } from 'informed';
+import React, { useEffect } from 'react';
+import { useFormApi, Multistep, useMultistepApi} from 'informed';
 import {
   withEditButton,
-  withNodeDataHandlers,
   EditButtonOptions,
+  ifEditable,
+  withLocalContextMenu,
+  withContextActivator,
+  ContextMenuFormProps,
+  getUI,
+  useEditContext,
+  ContextMenuUI,
+} from '@bodiless/core';
+import {
+  withNodeDataHandlers,
   withSidecarNodes,
   withNode,
   withNodeKey,
-  ifEditable,
-  ifReadOnly,
-  withLocalContextMenu,
-  withContextActivator,
   useNode,
-  ContextMenuFormProps,
-  getUI,
-} from '@bodiless/core';
+  ContentNode,
+} from '@bodiless/data';
 import {
   flowHoc,
   withDesign,
   withoutProps,
-  addProps,
   ComponentOrTag,
+  addProps,
   flowIf,
 } from '@bodiless/fclasses';
 import { useFilterByGroupContext } from './FilterByGroupContext';
-import type { NodeTagType, FilterTagType } from './types';
+import type { NodeTagType, DefaultFilterData } from './types';
 
 enum FilterSelectionAction {
   reset,
@@ -55,21 +59,129 @@ const MSG_RESET_CLEAR = 'The Saved State is filtering this Page for the End User
 const MSG_RESET_SUCCESS = 'UI Filter reset to Saved State.';
 const MSG_CLEAR_SUCCESS = 'The Saved State has been cleared.';
 
-const defaultFiltersPath = [
-  'Page',
-  'default-filters',
-];
+const SaveForm = ({node, ui} : {node: ContentNode<DefaultFilterData>, ui?: ContextMenuUI}) => {
+  const {
+    ComponentFormText,
+    ComponentFormDescription,
+    ComponentFormSubmitButton,
+  } = getUI(ui);
+  const { getFormState } = useFormApi();
+  const { setCurrent } = useMultistepApi();
+  const { getSelectedTags, updateSelectedTags } = useFilterByGroupContext();
+  const { tags: defaultTags = [] } = node.data;
 
-/**
- * Custom hook to retrieves default filter data on current page.
- *
- * @private
- */
-const useDefaultFiltersData = () => {
-  const { node } = useNode();
-  const defaultFilters = node.peer(defaultFiltersPath);
-  const { tags = [] } = defaultFilters.data as { tags?: FilterTagType[] };
-  return { tags };
+  useEffect(() => {
+    if (defaultTags.length) {
+      setCurrent('clear');
+    }
+  }, []);
+
+  // eslint-disable-next-line consistent-return
+  const handleSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    const { values } = getFormState();
+    // @ts-ignore
+    const v = values[Object.keys(values)[0]] as any;
+    // eslint-disable-next-line default-case
+    switch (v.save.filterSelectionAction) {
+      case FilterSelectionAction.save: {
+        const currentTags = getSelectedTags();
+        updateSelectedTags(currentTags);
+        node.setData({ tags: currentTags });
+        setCurrent('saveSuccess');
+        return currentTags;
+      }
+    }
+  };
+
+  return (
+    <>
+      <ComponentFormDescription>
+        {MSG_SAVE}
+      </ComponentFormDescription>
+      <ComponentFormText
+        type="hidden"
+        name="filterSelectionAction"
+        keepState
+        initialValue={FilterSelectionAction.save}
+      />
+      <ComponentFormSubmitButton
+        aria-label="Submit"
+        onClick={handleSubmit}
+      />
+    </>
+  );
+};
+
+const RestClearForm = ({node, ui} : {node: ContentNode<DefaultFilterData>, ui?: ContextMenuUI}) => {
+  const {
+    ComponentFormDescription,
+    ComponentFormLabel,
+    ComponentFormRadioGroup,
+    ComponentFormRadio,
+    ComponentFormSubmitButton,
+  } = getUI(ui);
+
+  const { getFormState } = useFormApi();
+  const { setCurrent } = useMultistepApi();
+  const { updateSelectedTags } = useFilterByGroupContext();
+  const { tags: defaultTags = [] } = node.data;
+
+  // eslint-dis
+  useEffect(() => {
+    if (!defaultTags.length) {
+      setCurrent('save');
+    }
+  }, []);
+
+  // eslint-disable-next-line consistent-return
+  const handleSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    const { values } = getFormState();
+    // @ts-ignore
+    const v = values[Object.keys(values)[0]] as any;
+    // eslint-disable-next-line default-case
+    switch (v.clear.filterSelectionAction) {
+      case FilterSelectionAction.clear: {
+        const submitValues = { tags: [] };
+        updateSelectedTags(submitValues.tags);
+        node.setData(submitValues);
+        setCurrent('clearSuccess');
+        return submitValues;
+      }
+      case FilterSelectionAction.reset: {
+        updateSelectedTags(defaultTags);
+        setCurrent('resetSuccess');
+        return { tags: defaultTags };
+      }
+    }
+  };
+
+  return (
+    <>
+      <ComponentFormDescription>
+        {MSG_RESET_CLEAR}
+      </ComponentFormDescription>
+      <ComponentFormRadioGroup
+        name="filterSelectionAction"
+        keepState
+        initialValue={FilterSelectionAction.reset}
+      >
+        <ComponentFormLabel key={FilterSelectionAction.reset}>
+          <ComponentFormRadio value={FilterSelectionAction.reset.toString()} />
+          Reset Local Filter UI to Saved State
+        </ComponentFormLabel>
+        <ComponentFormLabel key={FilterSelectionAction.clear}>
+          <ComponentFormRadio value={FilterSelectionAction.clear.toString()} />
+          Clear Saved State from Page
+        </ComponentFormLabel>
+      </ComponentFormRadioGroup>
+      <ComponentFormSubmitButton
+        aria-label="Submit"
+        onClick={handleSubmit}
+      />
+    </>
+  );
 };
 
 /**
@@ -84,142 +196,42 @@ const useDefaultFiltersData = () => {
  * @params props Default filter form properties.
  * @returns void
  */
-const renderForm = (props: ContextMenuFormProps) => {
-  const { node } = useNode();
-  const { getSelectedTags, updateSelectedTags } = useFilterByGroupContext();
+const getRenderForm = (node: ContentNode<DefaultFilterData>) => (props: ContextMenuFormProps) => {
   const { ui } = props;
   const {
-    ComponentFormText,
     ComponentFormDescription,
-    ComponentFormLabel,
-    ComponentFormRadioGroup,
-    ComponentFormRadio,
-    ComponentFormSubmitButton,
   } = getUI(ui);
-  const { tags: defaultTags = [] } = useDefaultFiltersData();
-  const { setStep } = useFormApi();
-  const { values, step } = useFormState();
 
-  useEffect(() => {
-    if (!defaultTags.length) {
-      setStep(FilterSelectionAction.save);
-    } else {
-      setStep(FilterSelectionAction.reset);
-    }
-  }, []);
-
-  // eslint-disable-next-line consistent-return
-  const handleSubmit = useCallback((e: React.SyntheticEvent) => {
-    e.preventDefault();
-    const v = values[Object.keys(values)[0]] as any;
-    // eslint-disable-next-line default-case
-    switch (v.filterSelectionAction) {
-      case FilterSelectionAction.clear: {
-        const submitValues = { tags: [] };
-        updateSelectedTags(submitValues.tags);
-        node.peer(defaultFiltersPath).setData(submitValues);
-        setStep(FilterSelectionAction.clear_success);
-        return submitValues;
-      }
-      case FilterSelectionAction.reset: {
-        updateSelectedTags(defaultTags);
-        setStep(FilterSelectionAction.reset_success);
-        return { tags: defaultTags };
-      }
-      case FilterSelectionAction.save: {
-        const currentTags = getSelectedTags();
-        updateSelectedTags(currentTags);
-        node.peer(defaultFiltersPath).setData({ tags: currentTags });
-        setStep(FilterSelectionAction.save_success);
-        return currentTags;
-      }
-    }
-  }, [values]);
-
-  const SaveForm = useCallback(() => {
-    if (step === FilterSelectionAction.save_success) {
-      return (
+  return (
+    <Multistep>
+      <Multistep.Step step="save">
+        <SaveForm ui={ui} node={node} />
+      </Multistep.Step>
+      <Multistep.Step step="saveSuccess">
         <ComponentFormDescription>
           {MSG_SAVE_SUCCESS}
         </ComponentFormDescription>
-      );
-    }
-
-    return (
-      <>
-        <ComponentFormDescription>
-          {MSG_SAVE}
-        </ComponentFormDescription>
-        <ComponentFormText
-          type="hidden"
-          field="filterSelectionAction"
-          keepState
-          initialValue={FilterSelectionAction.save}
-        />
-        <ComponentFormSubmitButton
-          aria-label="Submit"
-          onClick={handleSubmit}
-        />
-      </>
-    );
-  }, [step]);
-
-  const RestClearForm = useCallback(() => {
-    if (step === FilterSelectionAction.clear_success) {
-      return (
+      </Multistep.Step>
+      <Multistep.Step step="clear">
+        <RestClearForm ui={ui} node={node} />
+      </Multistep.Step>
+      <Multistep.Step step="clearSuccess">
         <ComponentFormDescription>
           {MSG_CLEAR_SUCCESS}
         </ComponentFormDescription>
-      );
-    }
-
-    if (step === FilterSelectionAction.reset_success) {
-      return (
+      </Multistep.Step>
+      <Multistep.Step step="resetSuccess">
         <ComponentFormDescription>
           {MSG_RESET_SUCCESS}
         </ComponentFormDescription>
-      );
-    }
-
-    return (
-      <>
-        <ComponentFormDescription>
-          {MSG_RESET_CLEAR}
-        </ComponentFormDescription>
-        <ComponentFormRadioGroup
-          field="filterSelectionAction"
-          keepState
-          initialValue={FilterSelectionAction.reset}
-        >
-          <ComponentFormLabel key={FilterSelectionAction.reset}>
-            <ComponentFormRadio value={FilterSelectionAction.reset} />
-            Reset Local Filter UI to Saved State
-          </ComponentFormLabel>
-          <ComponentFormLabel key={FilterSelectionAction.clear}>
-            <ComponentFormRadio value={FilterSelectionAction.clear} />
-            Clear Saved State from Page
-          </ComponentFormLabel>
-        </ComponentFormRadioGroup>
-        <ComponentFormSubmitButton
-          aria-label="Submit"
-          onClick={handleSubmit}
-        />
-      </>
-    );
-  }, [step, values]);
-
-  return (
-    <>
-      {(step === FilterSelectionAction.save
-        || step === FilterSelectionAction.save_success)
-        && <SaveForm />}
-      {(step === FilterSelectionAction.reset
-        || step === FilterSelectionAction.reset_success
-        || step === FilterSelectionAction.clear
-        || step === FilterSelectionAction.clear_success)
-        && <RestClearForm />}
-    </>
+      </Multistep.Step>
+    </Multistep>
   );
+};
+
+const useRenderForm = () => {
+  const { node } = useNode();
+  return getRenderForm(node);
 };
 
 /**
@@ -239,24 +251,27 @@ const useFilterSelectionMenuOptions = () => {
     global: false,
     formTitle: 'Filter Page',
     isHidden: false,
-    renderForm,
+    renderForm: useRenderForm(),
     hasSubmit: false,
   };
   return filterSelectionMenuOptions;
 };
 
+const useIsDisabled = (props: any) => {
+  const { node } = useNode<DefaultFilterData>();
+  const { tags } = node.data;
+  const { isEdit } = useEditContext();
+  return !!tags?.length && !isEdit;
+};
+
 const withTagListDesign = withDesign({
   Title: withDesign({
-    FilterGroupItemInput: ifReadOnly(
-      flowIf(() => useDefaultFiltersData().tags.length !== 0)(
-        addProps({ disabled: true })
-      ),
-    )
+    FilterGroupItemInput: addProps({ disabled: true }),
   }),
 });
-export const asDefaultFilter = withDesign({
+export const asDefaultFilter = flowIf(useIsDisabled)(withDesign({
   TagList: withTagListDesign,
-});
+}));
 
 /**
  * HOC applies page default filter to Filter component.
@@ -267,10 +282,11 @@ export const asDefaultFilter = withDesign({
  */
 const withFilterDefaultSelection = <P extends object>(Component: ComponentOrTag<P>) => {
   const WithFilterDefaultSelection = (props: P) => {
-    const { updateSelectedTags, hasTagFromQueryParams } = useFilterByGroupContext();
-    const { tags = [] } = useDefaultFiltersData();
+    const { updateSelectedTags } = useFilterByGroupContext();
+    const { node } = useNode<DefaultFilterData>();
+    const { tags = [] } = node.data;
     useEffect(() => {
-      if (!hasTagFromQueryParams()) {
+      if (tags.length > 0) {
         updateSelectedTags(tags);
       }
     }, []);
@@ -282,17 +298,37 @@ const withFilterDefaultSelection = <P extends object>(Component: ComponentOrTag<
 };
 
 /**
- * HOC adds default filter form and data to filter list. Selected filter data has
- * default nodeKey as 'default-filters'.
+ * Creates a HOC which allows a content editor to specify a set of default
+ * filter selections which will be applied whenever a filterable content
+ * listing is displayed.
  *
- * @param nodeKey Default filter nodeKey for page level storage.
- * @param defaultData default data for default filter selection.
- * @return
- * A composed token.
+ * This adds a button to the local context menu which, when clicked, saves
+ * the current state of the filter selection as the default.
+ *
+ * For example, imagine your filters consisted a single "Color" category
+ * with "Red", "Blue" and "Green" terms. A content editor could select
+ * "Blue", and use the button to save this choice as the default
+ * filter selection for this page. Whenever a site visitor viewed the
+ * page in the browser, this filter would be pre-selected.
+ *
+ * If the filtered items themselves were stored at site level, then multiple
+ * such pages could be created, each with a different set of defautl filters,
+ * and these could be used as the basis for category landing pages.
+ *
+ * @param nodeKey
+ * The node key defining where the default filter selection will be stored.
+ * Should usually be a page-level node.
+ *
+ * @param defaultData
+ * Initial defaults for the default filter selections.
+ *
+ * @returns
+ * HOC which adds the functionality. This HOC must be applied to the
+ * [[FilterClean]] component.
  */
 const withFilterSelection = (
-  nodeKey = 'default-filters',
-  defaultData = { tags: [] },
+  nodeKey: Parameters<typeof withNodeKey>[0] = 'content-listing',
+  defaultData: Parameters<typeof withNodeDataHandlers>[0] = { tags: [] },
 ) => flowHoc(
   withoutProps(['componentData', 'setComponentData']),
   withSidecarNodes(
@@ -305,8 +341,8 @@ const withFilterSelection = (
       withContextActivator('onClick'),
       withLocalContextMenu,
     ),
+    asDefaultFilter,
   ),
-  asDefaultFilter,
 );
 
 export default withFilterSelection;

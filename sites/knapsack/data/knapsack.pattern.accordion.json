@@ -1,0 +1,53 @@
+{
+  "id": "accordion",
+  "title": "Accordion",
+  "description": "",
+  "statuses": {
+    "KIRz-iaKhz": "needsReview"
+  },
+  "templates": [
+    {
+      "id": "bodiless-6GKNPvcRI0",
+      "title": "Code",
+      "path": "@bodiless/vital-accordion",
+      "alias": "knapsackAccordionSpec",
+      "templateLanguageId": "bodiless",
+      "spec": {
+        "isInferred": true
+      },
+      "demoIds": ["ZN0BmRl_69", "Tb6vk8upkF"],
+      "blockIds": []
+    }
+  ],
+  "tabs": [
+    {
+      "id": "-B2_y9vfMT",
+      "type": "subPage"
+    },
+    {
+      "id": "WChWwAUpai",
+      "type": "subPage"
+    },
+    {
+      "id": "bodiless-6GKNPvcRI0",
+      "type": "template"
+    }
+  ],
+  "subPages": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "blockIds": []
+    },
+    {
+      "id": "-B2_y9vfMT",
+      "title": "Guidelines",
+      "blockIds": []
+    },
+    {
+      "id": "WChWwAUpai",
+      "title": "Figma",
+      "blockIds": []
+    }
+  ]
+}

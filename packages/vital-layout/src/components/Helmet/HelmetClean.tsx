@@ -41,13 +41,13 @@ const createTagHelmet = <P extends object>(Tag: ComponentOrTag<P>) => {
  */
 const HelmetBase: FC<HelmetProps> = ({ components }) => {
   const {
-    HreflangHelmet, GtmHelmet, SeoHelmet, SocialShareHelmet, LanguageHelmet,
+    HreflangHelmet, GA4Helmet, SeoHelmet, SocialShareHelmet, LanguageHelmet,
     HTMLHelmet, BodyHelmet,
   } = components;
   return (
     <>
       <HreflangHelmet />
-      <GtmHelmet />
+      <GA4Helmet />
       <SeoHelmet />
       <SocialShareHelmet />
       <LanguageHelmet />
@@ -63,10 +63,10 @@ const HelmetBase: FC<HelmetProps> = ({ components }) => {
  */
 const helmetComponents: HelmetComponents = {
   HreflangHelmet: Helmet,
-  GtmHelmet: Helmet,
+  GA4Helmet: Helmet,
   SeoHelmet: Helmet,
   SocialShareHelmet: Helmet,
-  LanguageHelmet: Helmet,
+  LanguageHelmet: createTagHelmet<HTMLProps<HTMLHtmlElement>>('html'),
   HTMLHelmet: createTagHelmet<HTMLProps<HTMLHtmlElement>>('html'),
   BodyHelmet: createTagHelmet<HTMLProps<HTMLBodyElement>>('body'),
 };
@@ -74,14 +74,21 @@ const helmetComponents: HelmetComponents = {
 /**
  * A designable component which can be used to add different elements to the
  * head section, html or body tags.
+ *
+ * @category Component
+ *
  */
 const HelmetClean = designable(helmetComponents, 'Helmet')(HelmetBase);
 
 export default HelmetClean;
 
 /**
- * Use this to define a token applicable to the VitalDS `HelmetClean` component.
+ * A token modifier that respects the Helmet Components.
  *
- * @see HelmetClean
+ * @category Token Collection
  */
 export const asHelmetToken = asVitalTokenSpec<HelmetComponents>();
+
+// These are used in defining the VitalLayout interface.
+const helmetToken = asHelmetToken();
+export type HelmetToken = typeof helmetToken;

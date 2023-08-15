@@ -23,7 +23,6 @@ import {
   H4,
   H5,
   startWith,
-  removeClasses,
 } from '@bodiless/fclasses';
 import {
   asBlock,
@@ -31,7 +30,6 @@ import {
   withHtmlDeserializer,
   asPreview,
   withBoldMeta,
-  withUnderlineMeta,
   withSuperScriptMeta,
   withHeader1Meta,
   withHeader2Meta,
@@ -45,8 +43,6 @@ import {
 import { ifComponentSelector } from '@bodiless/layouts';
 import {
   asVitalTokenSpec,
-  vitalColor,
-  vitalFontSize,
   vitalTextDecoration,
   vitalTypography,
 } from '@bodiless/vital-elements';
@@ -73,7 +69,6 @@ const Default = asVitalTokenSpec()({
   Core: {
     paragraph: as(replaceWith(P), asBlock as HOC),
     Bold: withBoldMeta,
-    Underline: withUnderlineMeta,
     Link: replaceWith(LinkClean),
     SuperScript: withSuperScriptMeta,
     H1: withHeader1Meta,
@@ -94,7 +89,6 @@ const Default = asVitalTokenSpec()({
   Theme: {
     paragraph: vitalTypography.Body,
     Bold: vitalTextDecoration.Bold,
-    Underline: vitalTextDecoration.Underline,
     SuperScript: vitalTextDecoration.Superscript,
     H1: vitalTypography.H1,
     H2: vitalTypography.H2,
@@ -113,37 +107,20 @@ const Default = asVitalTokenSpec()({
 
 const Basic = asVitalTokenSpec()({
   ...Default,
-  Core: pick(Default.Core, 'paragraph', 'Bold', 'Underline', 'Link', 'SuperScript'),
-  Theme: pick(Default.Theme, 'paragraph', 'Bold', 'Underline', 'Link', 'SuperScript'),
+  Core: pick(Default.Core, 'paragraph', 'Bold', 'Link', 'SuperScript'),
+  Theme: pick(Default.Theme, 'paragraph', 'Bold', 'Link', 'SuperScript'),
 });
 
-const Copyright = asVitalTokenSpec()({
+const BasicNoLink = asVitalTokenSpec()({
   ...Basic,
-  Theme: {
-    ...Basic.Theme,
-    paragraph: as(
-      vitalColor.TextPrimaryFooterCopy,
-      vitalFontSize.XS,
-      vitalTextDecoration.Normal,
-    ),
-    Link: as(
-      vitalLink.Default,
-      vitalColor.TextPrimaryFooterCopy,
-      vitalColor.TextPrimaryInteractive,
-      vitalFontSize.XS,
-      vitalTextDecoration.Bold,
-      vitalTextDecoration.Underline,
-      removeClasses('text-m-base lg:text-base'),
-    ),
-  },
-  Content: {
-    _: addProps({ placeholder: 'Insert Copyright' }),
-  },
+  Core: pick(Basic.Core, 'paragraph', 'Bold', 'SuperScript'),
+  Theme: pick(Basic.Theme, 'paragraph', 'Bold', 'SuperScript'),
+  Behavior: {},
 });
 
 export default {
   Default,
   Basic,
+  BasicNoLink,
   AsFlowContainerItem,
-  Copyright,
 };

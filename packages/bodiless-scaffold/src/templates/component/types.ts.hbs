@@ -1,0 +1,38 @@
+import type { ComponentOrTag, DesignableProps, TokenSpec } from '@bodiless/fclasses';
+import type { DefaultDomains } from '@bodiless/vital-elements';
+
+/**
+ * Type representing the "slots" exposed by the {{properCase componentName}}Clean component.
+ */
+export type {{properCase componentName}}Components = {
+  Wrapper: ComponentOrTag<any>,
+  Slot1Wrapper: ComponentOrTag<any>,
+  Slot1: ComponentOrTag<any>,
+  Slot2Wrapper: ComponentOrTag<any>,
+  Slot2: ComponentOrTag<any>,
+};
+
+/**
+ * The props accepted by the {{properCase componentName}}Clean component
+ */
+export type {{properCase componentName}}Props = DesignableProps<{{properCase componentName}}Components>;
+
+/**
+ * The type of a token spec which applies to the {{properCase componentName}}Clean component.
+ */
+export type {{properCase componentName}}Token = TokenSpec<{{properCase componentName}}Components, DefaultDomains>;
+
+/**
+ * Tokens for the {{properCase componentName}}Clean component.
+ *
+ * @category Token Collection
+ * @see [[{{properCase componentName}}Clean]]
+ */
+export interface {{properCase libraryName}}{{properCase componentName}} {
+  /**
+   * Default styling and behavior.
+   */
+  Default: {{properCase componentName}}Token;
+
+  // Document other tokens here.
+};

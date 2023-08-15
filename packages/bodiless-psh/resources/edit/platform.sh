@@ -55,6 +55,8 @@ check_vars () {
     -o -z "${APP_GIT_PW}" \
     -o -z "${PLATFORM_APP_DIR}" \
     -o -z "${PLATFORM_BRANCH}" \
+    -o -z "${APP_SITE_NAME}" \
+    -o -z "${APP_SITE_DIR_NAME}" \
   ]; then
     echo Missing required environment variables.
     exit 1
@@ -134,15 +136,95 @@ incremental_deploy () {
   fi
 }
 
+# Check if the given command available in shell, with mute output.
+# @param string command name, i.e git, curl etc.
+shell_command_exist() {
+  type ${1} > /dev/null 2>&1
+}
+
+# Get the source branch and repo info of given PR.
+#
+# - This function retrieves PR info via github API with given PR ID. 
+# - It exits with error code in following cases:
+#     code:
+#       [1] A non-github https remote url provided. 
+#       [2] `curl` command is not available
+#       [3] `jq` command is not available
+#       [4] Failed on GitHub API request, i.e. authentication failure, invalid PR id, etc
+#     
+# @param string pull request id
+# @param string git remote https url
+# @param string github PAT (Personal Access Token)
+#
+# This function prints PR `head ref`, `head repo id`, `base repo id` as string.
+get_pr_source_branch() {
+  set +e
+  # get function arguments
+  GIT=${1}
+  PR_ID=${2}
+  REMOTE_URL=${3}
+  PAT=${4}
+
+  GIT_HOST=$(echo ${REMOTE_URL} | awk -F/ '{print $3}')
+  if [ ${GIT_HOST} != "github.com" ]; then
+    echo 'upstream branch setup is only available for github'
+    return 1
+  fi
+  GIT_OWNER=$(echo ${REMOTE_URL} | awk -F/ '{print $4}')
+  GIT_REPO=$(echo ${REMOTE_URL} | awk -F/ '{print $5}' | cut -d'.' -f1)
+  if ! (shell_command_exist curl); then
+    echo '"curl" is required to set upstream branch'
+    return 2
+  fi
+  if ! (shell_command_exist jq); then
+    echo '"jq" is required to set upstream branch'
+    return 3
+  fi
+
+  # Get PR info using github API.
+  ${GIT} fetch origin
+  PR_INFO=$(curl \
+    -s -f -H "Accept: application/vnd.github+json" \
+    -H "Authorization: Bearer ${PAT}" \
+    https://api.github.com/repos/${GIT_OWNER}/${GIT_REPO}/pulls/${PR_ID})
+  RESULT=$?
+  if [ ${RESULT} -ne 0 ];then
+    echo 'Failed to get PR info, please check github Pull Request number and PAT(personal access token) are valid'
+    return 4
+  fi
+  # Get branch info from json response.
+  HEAD=$(echo ${PR_INFO} | jq -r '.head.ref,.head.repo.id,.base.repo.id')
+  echo ${HEAD}
+  set -e
+  return 0
+}
+
 full_deploy () {
   echo "Full deploy, branch is ${PLATFORM_BRANCH}"
   rm -rf ${ROOT_DIR}
   if [[ ${PLATFORM_BRANCH} =~ ^pr- ]]; then
     ${CMD_GIT} -c credential.helper="!f() { sleep 5; echo username=${APP_GIT_USER}; echo password=${APP_GIT_PW}; }; f" clone ${APP_GIT_REMOTE_URL} ${ROOT_DIR}
     cd ${ROOT_DIR}
+    CHECKOUT=0
     ID=$(echo $PLATFORM_BRANCH | sed s/pr-//g)
-    git fetch origin pull/${ID}/head:${PLATFORM_BRANCH}
-    git checkout ${PLATFORM_BRANCH}
+    PR_BRANCH_INFO=$(get_pr_source_branch ${CMD_GIT} ${ID} ${APP_GIT_REMOTE_URL} ${APP_GIT_PW})
+    if [ $? == 0 ];then
+      # Success on retrieving PR source branch info, then parse the branch and repo names.
+      read -r SOURCE_BRANCH HEAD_REPO_ID BASE_REPO_ID <<< ${PR_BRANCH_INFO}
+      echo ${SOURCE_BRANCH}
+      if [ ${HEAD_REPO_ID} == ${BASE_REPO_ID} ]; then
+        # Checkout PR source branch instead of PR head ref.
+        ${CMD_GIT} checkout -b ${SOURCE_BRANCH} origin/${SOURCE_BRANCH}
+        CHECKOUT=1
+      fi
+    fi
+    if [ ${CHECKOUT} == 0 ];then
+      # If failed to checkout by source branch, i.e. non-github repo, github API error,
+      # missing shell commands, or this is a cross repo PR, then checkout by head ref.
+      ${CMD_GIT} fetch origin pull/${ID}/head:${PLATFORM_BRANCH}
+      ${CMD_GIT} checkout ${PLATFORM_BRANCH}
+    fi
+    ${CMD_GIT} status
   else
     ${CMD_GIT} -c credential.helper="!f() { sleep 5; echo username=${APP_GIT_USER}; echo password=${APP_GIT_PW}; }; f" clone -b ${PLATFORM_BRANCH} ${APP_GIT_REMOTE_URL} ${ROOT_DIR}
     cd ${ROOT_DIR}
@@ -245,7 +327,7 @@ default_deploy () {
 # Default implementation of finalize psh deploy hook.
 default_finalize_deploy () {
   npm ci
-  npm run prestart
+  npm run predev
 }
 
 # Final step after p.sh deploy hook.

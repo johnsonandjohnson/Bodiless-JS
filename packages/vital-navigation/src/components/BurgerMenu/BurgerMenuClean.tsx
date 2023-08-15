@@ -17,7 +17,7 @@ import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import {
   Div, Fragment, A, designable,
 } from '@bodiless/fclasses';
-import { LinkClean } from '@bodiless/vital-link';
+import { ButtonClean } from '@bodiless/vital-button';
 import { MenuClean } from '../Menu';
 import type { BurgerMenuComponents, BurgerMenuProps } from './types';
 
@@ -30,11 +30,11 @@ const burgerMenuComponents: BurgerMenuComponents = {
   Menu: MenuClean,
   FooterWrapper: Div,
   WhereToBuyWrapper: Fragment,
-  WhereToBuy: LinkClean,
+  WhereToBuy: ButtonClean,
   ActionFooterContainer: Div,
   UtilityMenuWrapper: Fragment,
   UtilityMenu: MenuClean,
-  LanguageButton: Fragment,
+  LanguageSelector: Fragment,
   Overlay: Div,
 };
 
@@ -56,7 +56,7 @@ const BurgerMenuCleanBase: FC<BurgerMenuProps> = ({ components: C, ...rest }) =>
             <C.UtilityMenuWrapper>
               <C.UtilityMenu />
             </C.UtilityMenuWrapper>
-            <C.LanguageButton />
+            <C.LanguageSelector />
           </C.ActionFooterContainer>
         </C.FooterWrapper>
       </C.Container>

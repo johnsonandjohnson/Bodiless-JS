@@ -13,3 +13,6 @@
  */
 
 export * from './tokenSpec';
+export * from './testing';
+export * from './shadow';
+export * from './designSpec';

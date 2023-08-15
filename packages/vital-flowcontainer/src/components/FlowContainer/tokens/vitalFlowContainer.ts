@@ -14,30 +14,27 @@
 
 import omit from 'lodash/omit';
 import {
-  addProps, replaceWith, as, on, flowHoc,
+  addProps, replaceWith, as, flowHoc,
 } from '@bodiless/fclasses';
 import {
-  withMandatoryCategories, withAllTitlesFromTerms, ifComponentSelector,
+  withMandatoryCategories,
+  withAllTitlesFromTerms,
+  ifComponentSelector,
+  withLibraryComponents,
 } from '@bodiless/layouts';
 import { asFluidToken, vitalSpacing } from '@bodiless/vital-elements';
-import { vitalImageFlowContainer } from '@bodiless/vital-image';
-import { vitalEditorsFlowContainer } from '@bodiless/vital-editors';
-import { vitalListFlowContainer } from '@bodiless/vital-list';
-import { vitalTableFlowContainer } from '@bodiless/vital-table';
+import type { FluidToken } from '@bodiless/vital-elements';
 
-import FlowContainerClean, { FlowContainerPreview } from '../FlowContainerClean';
+import { FlowContainerPreview } from '../FlowContainerClean';
 
 const blacklistCategories = ['Group'];
-const mandatoryCateogries = ['Type'];
+const mandatoryCategories = ['Type'];
 
-/**
- * Token which creates the VitalDS Default Base for a Flow Container
- */
 const Base = asFluidToken({
   Core: {
     _: as(
       withAllTitlesFromTerms({ blacklistCategories }),
-      withMandatoryCategories(mandatoryCateogries),
+      withMandatoryCategories(mandatoryCategories),
       addProps({ blacklistCategories }),
     ),
     // @todo restore tools and component id badge
@@ -59,38 +56,25 @@ const snapData = () => ({
   }],
 });
 
-/**
- * Token which constrains a flow container to full width.
- */
 const WithFullWidthConstraint = asFluidToken({
   Core: {
     _: addProps({ snapData }),
   },
 });
 
-/**
- * Token which constrains to a single component.
- */
 const WithSingleConstraint = asFluidToken({
   Core: {
     _: addProps({ maxComponents: 1, minComponents: 1 }),
   },
 });
 
-/**
-   * Token which constrains a flow container so that items are 1/3 width on tablet.
-   */
 const WithTabletOneThirdConstraint = asFluidToken({
-  Core: {
+  Layout: {
     Wrapper: 'w-full',
     ComponentWrapper: 'w-full md:w-1/3',
   },
 });
 
-/**
-   * Token which defines a "ContentRegion" (a default nested flow container).
-   * another flow contaienr.
-   */
 const AsFlowContainerItem = asFluidToken({
   Meta: flowHoc.meta.term('Type')('Content Region'),
   Core: {
@@ -103,20 +87,8 @@ const AsFlowContainerItem = asFluidToken({
   },
 });
 
-const WithBaseVariations = asFluidToken(
-  vitalImageFlowContainer.WithImageVariations,
-  vitalEditorsFlowContainer.WithEditorVariations,
-  vitalListFlowContainer.WithListVariations,
-  vitalTableFlowContainer.WithTableVariations,
-);
-
-/**
- * A content region is a flow container designed to be nested
- * inside another flow container.
- */
 const ContentRegion = asFluidToken(
   omit(Base, 'Spacing'),
-  WithBaseVariations,
   {
     Compose: {
       AsFlowContainerItem,
@@ -128,15 +100,6 @@ const ContentRegion = asFluidToken(
   },
 );
 
-/**
- * Adds a content region to a flow container.
- */
-const WithContentRegionVariations = asFluidToken({
-  Components: {
-    ContentRegion: on(FlowContainerClean)(ContentRegion),
-  },
-});
-
 const Default = asFluidToken(
   {
     ...Base,
@@ -145,8 +108,6 @@ const Default = asFluidToken(
       ComponentWrapper: vitalSpacing.Gutter,
     },
   },
-  WithBaseVariations,
-  WithContentRegionVariations,
 );
 
 const Hero = asFluidToken(
@@ -156,17 +117,140 @@ const Hero = asFluidToken(
       WithFullWidthConstraint,
     },
   },
-  WithBaseVariations,
 );
 
-export default {
+const WithContentLibrary = asFluidToken(
+  {
+    Core: {
+      _: withLibraryComponents()
+    },
+  },
+);
+
+/**
+ * Tokens for the vital flow container
+ *
+ * @category Token Collection
+ * @see [[FlowContainerClean]]
+ */
+export interface VitalFlowContainer {
+  /**
+   * Token which creates the VitalDS Default Base for a Flow Container.
+   * This only applies the mandatory categories to category and is using in
+   * composing new tokens and not a functional FlowContainer.
+   */
+  Base: FluidToken,
+  /**
+   * Defines the default flow container for the Vital DS.
+   * - Core domain defines constraints on categories.
+   * - Spacing domain defines gutters
+   * - Components domain adds the following basic Vital components:
+   *   - Images, Editors, Lists, Content Region (nested flow container).
+   *
+   * #### Customizing:
+   *
+   * @example Add a custom component to Vital's Default Flow Container via shadowing
+   * ```js
+   * import { vitalFlowContainerBase } from '@bodiless/vital-flowcontainer';
+   *
+   * const Default = asFluidToken(vitalFlowContainerBase.Default, {
+   *   Components: {
+   *     MyComponent: on(MyComponentClean)(myComponent.Default),
+   *   }
+   * });
+   * ```
+   *
+   * @example Modifying the Vital's Default Flow Container component spacing via shadowing
+   * ```js
+   * import { vitalFlowContainerBase } from '@bodiless/vital-flowcontainer';
+   *
+   * const Default = asFluidToken(vitalFlowContainerBase.Default, {
+   *   Spacing: {
+   *     ComponentWrapper: 'my-8',
+   *   },
+   * });
+   * ```
+   *
+   *  @example Add a Content Library to Vital's Default Flow Container via shadowing
+   * ```js
+   * import { asFluidToken } from '@bodiless/vital-elements';
+   * import { vitalFlowContainerBase } from '@bodiless/vital-flowcontainer';
+   * import { addProps } from '@bodiless/fclasses';
+   *
+   * const Default = asFluidToken(
+   *   vitalFlowContainerBase.Default,
+   *   vitalFlowContainerBase.WithContentLibrary,
+   * );
+   *
+   * export default {
+   *   ...vitalFlowContainerBase,
+   *   Default,
+   * };
+   * ```
+   */
+  Default: FluidToken,
+  /**
+   * @deprecated
+   * Flow container which can be used in the Hero slot.
+   */
+  Hero: FluidToken,
+  /**
+   * Defines a flow container which is to be used as a content region (that is,
+   * nested within another flow container). This contains all components
+   * defined in the `Default` flow container with the exception of
+   * the Content Region itself (i.e. you can't have double nesting).
+   *
+   * @example change the components which are available in a content region via shadowing
+   * ```js
+   * const ContentRegion = asFluidToken({
+   *    ...vitalContentRegionBase.ContentRegion,
+   *    Components: {
+   *      ...vitalContentRegionBase.ContentRegion.Components,
+   *      SomethingNew: on(MyComponentClean)(myComponent.Default),
+   *   },
+   * });
+   * ```
+   */
+  ContentRegion: FluidToken,
+  /**
+   * Composable token which enables a flow container to be nested inside another.
+   */
+  AsFlowContainerItem: FluidToken,
+  /**
+   * Composable token which constrains all items to full width.
+   */
+  WithFullWidthConstraint: FluidToken,
+  /**
+   * Composable token which constrains all items to 1/3 width on tablet.
+   */
+  WithTabletOneThirdConstraint: FluidToken,
+  /**
+   * Allows only a single item in the flow container.
+   */
+  WithSingleConstraint: FluidToken,
+  /**
+   * Composable token which adds content library functionality.
+   */
+  WithContentLibrary: FluidToken,
+}
+
+/**
+ * Tokens for flow containers.
+ *
+ * @category Token Collection
+ * @see [[VitalFlowContainer]]
+ * @see [[FlowContainerClean]]
+ */
+const vitalFlowContainer: VitalFlowContainer = {
   Base,
   Default,
   Hero,
   ContentRegion,
-  WithContentRegionVariations,
   AsFlowContainerItem,
   WithFullWidthConstraint,
   WithTabletOneThirdConstraint,
   WithSingleConstraint,
+  WithContentLibrary,
 };
+
+export default vitalFlowContainer;

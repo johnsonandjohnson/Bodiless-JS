@@ -12,6 +12,10 @@
  * limitations under the License.
  */
 
+import type { VitalLogo } from './tokens/vitalLogo';
+
 export { default as LogoClean, asLogoToken } from './LogoClean';
 export { default as vitalLogo } from './tokens';
-export { default as vitalLogoBase } from './tokens/vitalLogo';
+export type { LogoComponents } from './LogoClean';
+
+export type { VitalLogo };

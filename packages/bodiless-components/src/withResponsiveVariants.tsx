@@ -28,7 +28,7 @@ type FinalComponents = {
 };
 
 /**
- * Generates an HOC which makes the underlying component designable at different
+ * Generates a HOC which makes the underlying component designable at different
  * breakpoints. This allows responsive rendering or swapping a component entirely
  * depending on viewport size.
  *

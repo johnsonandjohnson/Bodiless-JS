@@ -12,20 +12,23 @@
  * limitations under the License.
  */
 
-import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
+import { ComponentOrTag, DesignableComponents, DesignableComponentsProps } from '@bodiless/fclasses';
 
 /**
- * Type of the design element in the VitalDS `Helmet` component.
+ * Type of the design element in the VitalDS `Helmet` component which consists of Helmet
+ * slots for Meta data, adding tags to HTML, Body, and adding analytics data.
+ *
+ * @category Component
  */
-export type HelmetComponents = {
+export interface HelmetComponents extends DesignableComponents {
   /**
    * Used to add hreflang alternate links.
    */
   HreflangHelmet: ComponentOrTag<any>,
   /**
-   * Used to add GTM datalayer scripts.
+   * Used to add GA4 datalayer scripts.
    */
-  GtmHelmet: ComponentOrTag<any>,
+  GA4Helmet: ComponentOrTag<any>,
   /**
    * Use to add SEO related metatags.
    */
@@ -46,6 +49,6 @@ export type HelmetComponents = {
    * Used to add arbitrary attributes or classes to the BODY tag.
    */
   BodyHelmet: ComponentOrTag<any>,
-};
+}
 
 export type HelmetProps = DesignableComponentsProps<HelmetComponents>;

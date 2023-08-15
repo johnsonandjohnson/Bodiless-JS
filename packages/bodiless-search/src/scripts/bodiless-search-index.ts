@@ -14,18 +14,23 @@
  */
 
 // @todo: use oclif/command
+import path from 'path';
 import dotenv from 'dotenv';
 import SearchTool, { SearchConfig } from '../SearchTool';
-import type { TSearchConf } from '../types';
 
 dotenv.config({
   path: '.env.development',
 });
 
-// @todo: combine search config and settings into one param object.
-const config: TSearchConf = SearchConfig.getConfig();
+const configFileName = !process.env.BODILESS_SEARCH_CONFIG ? 'search.config.json' : process.env.BODILESS_SEARCH_CONFIG;
+const configPath = path.resolve(process.cwd(), configFileName);
+const config = SearchConfig.getConfig(configPath);
 
-const tool = new SearchTool(config);
+if (config) {
+  const tool = new SearchTool(config);
 
-// Create and save index to target path.
-tool.generateIndex();
+  tool.generateIndex();
+} else {
+  // eslint-disable-next-line no-console
+  console.warn(`"${configFileName}" file not found, skipping search index build.`);
+}

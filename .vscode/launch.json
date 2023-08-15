@@ -2,6 +2,8 @@
     // Use IntelliSense to learn about possible attributes.
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    // Ref:
+    //      https://code.visualstudio.com/docs/editor/variables-reference
     "version": "0.2.0",
     "compounds": [
         // Launches the Gatsby stack and opens Chrome.
@@ -103,7 +105,7 @@
             "sourceMaps": false
         },
         {
-            "name": "Jest Current File",
+            "name": "Jest Current File (Windows)",
             "type": "node",
             "request": "launch",
             "program": "${workspaceFolder}/node_modules/.bin/jest",
@@ -115,6 +117,17 @@
             "windows": {
                 "program": "${workspaceFolder}/node_modules/jest/bin/jest",
             }
+        },
+        {
+            "name": "Jest Current File (Mac/Linux)",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/node_modules/.bin/jest",
+            "args": [
+                "${relativeFile}"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
         },
         {
             "name": "Launch Chrome",

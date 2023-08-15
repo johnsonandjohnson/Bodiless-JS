@@ -16,7 +16,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Helmet from 'react-helmet';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-import { withNodeKey } from '@bodiless/core';
+import { withNodeKey } from '@bodiless/data';
 import {
   H1 as BaseH1,
   H2 as BaseH2,

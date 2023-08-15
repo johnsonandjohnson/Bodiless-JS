@@ -12,7 +12,5 @@
  * limitations under the License.
  */
 
-export * from './getPackageRoot';
-export * from './mergeConfigs';
 export * from './getPackageTailwindConfig';
 export * from './buildTailwindConfig';

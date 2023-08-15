@@ -1,0 +1,47 @@
+{
+  "name": "@bodiless/vital-search",
+  "version": "1.0.0-rc.42",
+  "description": "Provide search VitalDS components and tokens for site builders.",
+  "author": "Dewen Li <dli94@its.jnj.com>",
+  "license": "UNLICENSED",
+  "main": "lib/index.js",
+  "sideEffects": false,
+  "typings": "lib/index.d.ts",
+  "files": [
+    "/lib",
+    "/bodiless.docs.json",
+    "/getDocs.js",
+    "/tailwind.config.js",
+    "/doc"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
+    "build:required": "npm run build",
+    "build:watch": "npm run build -- --watch",
+    "dev": "npm run build:watch",
+    "build:api-doc": "typedoc --out doc/api ./src",
+    "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx ./src",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
+  "dependencies": {
+    "@bodiless/cli": "^1.0.0-rc.42",
+    "@bodiless/core": "^1.0.0-rc.42",
+    "@bodiless/fclasses": "^1.0.0-rc.42",
+    "@bodiless/ga4": "^1.0.0-rc.42",
+    "@bodiless/search": "^1.0.0-rc.42",
+    "@bodiless/vital-elements": "^1.0.0-rc.42",
+    "@bodiless/vital-layout": "^1.0.0-rc.42",
+    "@bodiless/vital-templates": "^1.0.0-rc.42",
+    "lodash": "^4.17.19"
+  }
+}

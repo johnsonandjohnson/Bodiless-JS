@@ -15,9 +15,9 @@
 import React, {
   createContext, useContext, FC, useLayoutEffect,
 } from 'react';
-import { useNode, useEditContext } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import type { LinkData } from '@bodiless/components';
-import { observer } from 'mobx-react';
+import { observer } from '@bodiless/core';
 import type { HOC } from '@bodiless/fclasses';
 import { BreadcrumbItem } from './BreadcrumbStore';
 import type { BreadcrumbItemType } from './BreadcrumbStore';
@@ -55,21 +55,20 @@ export type BreadcrumbSettings = {
 };
 
 /**
- * Creates an HOC which specifies that a wrapped component is a breadcrumb. The HOC
+ * Creates a HOC which specifies that a wrapped component is a breadcrumb. The HOC
  * will read link and title from the specified nodekeys and will push link and title
  * to the breadcrumb store. Once the wrapped component is unmounted, the corresponding link
  * and title are deleted from the breadcrumb store
  *
  * @param settings The title and link nodekeys defining where to locate the link and title nodes.
  *
- * @return An HOC which defines the wrapped component as a breadcrumb.
+ * @return A HOC which defines the wrapped component as a breadcrumb.
  */
 const asBreadcrumb = ({
   linkNodeKey,
   titleNodeKey,
 }: BreadcrumbSettings): HOC => Component => {
   const AsBreadcrumb = observer((props: any) => {
-    const { isEdit } = useEditContext();
     const current = useBreadcrumbContext();
     const store = useBreadcrumbStore();
     if (store === undefined) return <Component {...props} />;
@@ -95,27 +94,20 @@ const asBreadcrumb = ({
       store,
     });
 
-    if (!isEdit) {
+    if (!BL_IS_EDIT) {
       // To avoid flicker, we need to populate the store on render
       // otherwise the breadcrumbs render with no items before
       // a layout effect is executed.
       store.setItem(item);
     }
-
-    useLayoutEffect(() => {
-      if (!isSSR()) {
+    if (typeof window !== 'undefined') {
+      useLayoutEffect(() => {
         store.setItem(item);
-      }
-    }, [titleNode.data, linkNode.data]);
-
-    // Deleting item from store on unmount.
-    useLayoutEffect(() => () => {
-      // Only necessary in edit mode since items are not added or removed
-      // under any other circumstances.
-      if (isEdit) {
-        store.deleteItem(id);
-      }
-    }, []);
+        return () => {
+          store.deleteItem(item);
+        };
+      }, [titleNode.data, linkNode.data]);
+    }
 
     return (
       <BreadcrumbContextProvider value={item}>

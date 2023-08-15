@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Spacing Matches snapshot for Gutter 1`] = `
+<div
+  className="p-1 md:p-2 lg:p-3"
+/>
+`;
+
+exports[`Spacing Matches snapshot for GutterBottom 1`] = `
+<div
+  className="mb-4"
+/>
+`;
+
+exports[`Spacing Matches snapshot for GutterOffset 1`] = `
+<div
+  className="-mx-1 md:-mx-2 lg:-mx-3"
+/>
+`;
+
+exports[`Spacing Matches snapshot for GutterTop 1`] = `
+<div
+  className="mt-4"
+/>
+`;
+
+exports[`Spacing Matches snapshot for GuttonLeft 1`] = `
+<div
+  className="ml-4"
+/>
+`;
+
+exports[`Spacing Matches snapshot for GuttonRight 1`] = `
+<div
+  className="mr-4"
+/>
+`;
+
+exports[`Spacing Matches snapshot for MarginLarge 1`] = `
+<div
+  className="m-36px md:48px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for MarginMedium 1`] = `
+<div
+  className="m-36px md:48px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for MarginSmall 1`] = `
+<div
+  className="m-36px md:48px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for MarginXLarge 1`] = `
+<div
+  className="m-36px md:48px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for MarginXSmall 1`] = `
+<div
+  className="m-36px md:48px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for PaddingBottomLarge 1`] = `
+<div
+  className="pb-24px md:pb-36px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for PaddingBottomMedium 1`] = `
+<div
+  className="pb-20px md:pb-24px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for PaddingBottomSmall 1`] = `
+<div
+  className="pb-16px md:pb-20px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for PaddingBottomXLarge 1`] = `
+<div
+  className="pb-36px md:pb-48px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for PaddingBottomXSmall 1`] = `
+<div
+  className="pb-8px md:pb-16px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for PaddingLarge 1`] = `
+<div
+  className="p-24px md:p-36px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for PaddingMedium 1`] = `
+<div
+  className="p-20px md:p-24px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for PaddingSmall 1`] = `
+<div
+  className="p-16px md:p-20px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for PaddingXLarge 1`] = `
+<div
+  className="p-36px md:p-48px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for PaddingXSmall 1`] = `
+<div
+  className="p-8px md:p-16px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for WithSiteMargin 1`] = `
+<div
+  className="mx-2 xl:mx-6 xxl:px-20"
+/>
+`;
+
+exports[`Spacing Matches snapshot for WithSiteXLConstraint 1`] = `
+<div
+  className="xxl:container xxl:mx-auto"
+/>
+`;

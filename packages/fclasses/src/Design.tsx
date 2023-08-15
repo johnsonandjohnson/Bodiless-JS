@@ -31,8 +31,15 @@ import { withTransformer } from './Transformer';
 import { as, extendDesign } from './tokenSpec';
 
 /**
- * is an HOC that will attach a displayName to an object
- * @param name the name of the displayName.
+ * Creates a HOC that will attach a displayName to an object.
+ *
+ * @param name
+ * The displayName to add.
+ *
+ * @returns
+ * HOC which attaches the display name.
+ *
+ * @category HOC Utility
  */
 export const withDisplayName = <P extends Object> (name: string) => (
   Component: ComponentType<P>,
@@ -56,6 +63,8 @@ export const withDisplayName = <P extends Object> (name: string) => (
  * A function which accepts a design and applies each key in the
  * design to the set of starting components (or to the default component
  * if the key does not exist in the starting components).
+ *
+ * @category Design API
  */
 export const applyDesign = <C extends DesignableComponents> (
   components: C,
@@ -105,8 +114,10 @@ export const applyDesign = <C extends DesignableComponents> (
  * The design to apply
  *
  * @return
- * An HOC which applies the speciried design to the wrapped component after
- * all other designes
+ * A HOC which applies the speciried design to the wrapped component after
+ * all other designes.
+ *
+ * @category Design API
  */
 export const withFinalDesign = <C extends DesignableComponents>(
   design: Design<C>,
@@ -134,6 +145,8 @@ type TransformDesign = (design?: Design<any>) => Design<any>|undefined;
  *   function returns `undefined`, the design will be removed from the underlying component.
  *
  * @return A function with the same signature as `designable`.
+ *
+ * @category Design API
  */
 export const extendDesignable = (transformDesign: TransformDesign = identity) => (
   <C extends DesignableComponents> (
@@ -180,14 +193,18 @@ export const extendDesignable = (transformDesign: TransformDesign = identity) =>
 
 /**
  * Makes a component "designable". A designable component defines a set of constituent
- * sub-components which can be modified by applying one or more HOC's.  You specify the
- * HOC's to apply to each sub-component via the `withDesign` HOC.
+ * sub-components which can be modified by applying one or more HOCs.  You specify the
+ * HOCs to apply to each sub-component via the `withDesign` HOC.
  *
- * @param startComponents An object defining the set of constituent subcomponents. Each key
+ * @param startComponents
+ * An object defining the set of constituent subcomponents. Each key
  *   is a string which identifies the component. Each value is the component itself, which
- *   will be modified by any HOC's provided by withDesign.
+ *   will be modified by any HOCs provided by withDesign.
  *
- * @return An HOC which yields a designable version of the component to which it is applied.
+ * @return
+ * A HOC which yields a designable version of the component to which it is applied.
+ *
+ * @category Design API
  */
 export const designable = extendDesignable(() => undefined);
 
@@ -226,9 +243,10 @@ const flowDesignsWith = <C extends DesignableComponents> (func: (d:Design<C>) =>
     )(baseDesign)
   )
 );
+
 /**
  * @deprecated
- * @private
+ * @hidden
  */
 export const varyDesign = flowDesignsWith(varyDesign$);
 
@@ -237,6 +255,12 @@ export const varyDesign = flowDesignsWith(varyDesign$);
  * design keys of the specified designs.
  *
  * @param designs
+ * The designs which should be varied together.
+ *
+ * @returns
+ * A design.
+ *
+ * @category Design API
  */
 export const varyDesigns = <C extends DesignableComponents = DesignableComponents>(
   ...designs: DesignOrHod<C>[]
@@ -248,5 +272,11 @@ export const varyDesigns = <C extends DesignableComponents = DesignableComponent
  * design will compose the tokens for that key from all matching designs.
  *
  * @param designs
+ * The designs to be combined.
+ *
+ * @returns
+ * The combined designs.
+ *
+ * @category Design API
  */
 export const extendDesigns = extendDesign;

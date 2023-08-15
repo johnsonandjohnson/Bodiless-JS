@@ -1,0 +1,16 @@
+{
+  "VitalDesignSystem": {
+    "Components": {
+      "VitalCard": {
+        "README.md": "./doc/README.md",
+        "assets": {
+          "AddCardComponent.jpg": "./doc/assets/AddCardComponent.jpg",
+          "CardDescriptionRTE.jpg": "./doc/assets/CardDescriptionRTE.jpg",
+          "CardVariants.jpg": "./doc/assets/CardVariants.jpg",
+          "HeroCard.jpg": "./doc/assets/HeroCard.jpg",
+          "HeroSwapHeroCard.jpg": "./doc/assets/HeroSwapHeroCard.jpg"
+        }
+      }
+    }
+  }
+}

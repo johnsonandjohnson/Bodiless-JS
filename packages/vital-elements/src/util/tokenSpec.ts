@@ -12,18 +12,17 @@
  * limitations under the License.
  */
 
-import type {
+import {
+  asTokenSpec,
   DesignableComponents,
+  extendMeta,
   TokenMeta,
   Token,
   TokenSpec,
-} from '@bodiless/fclasses';
-import {
-  extendMeta,
-  asTokenSpec,
+  as,
 } from '@bodiless/fclasses';
 
-const defaultDomains = {
+const vitalTokenSpecDomains = {
   Core: {},
   Components: {},
   A11y: {},
@@ -32,14 +31,13 @@ const defaultDomains = {
   Layout: {},
   Spacing: {},
   Theme: {},
-  Editors: {},
   A11yContent: {},
   Content: {},
   Behavior: {},
   Schema: {},
 };
 
-type DefaultDomains = typeof defaultDomains;
+export type DefaultDomains = typeof vitalTokenSpecDomains;
 
 /**
  * Creates a token definition utility for a clean component.
@@ -49,18 +47,22 @@ type DefaultDomains = typeof defaultDomains;
  */
 const asVitalTokenSpec = <
   C extends DesignableComponents
->() => asTokenSpec<C, DefaultDomains>(defaultDomains);
+>() => asTokenSpec<C, DefaultDomains>(vitalTokenSpecDomains);
 
 /**
  * Creates an element level token (one in which only the _ design key is allowed);
  */
 const asElementToken = asVitalTokenSpec<{}>();
+const elementToken = asElementToken();
+type ElementToken = typeof elementToken;
 
 /**
  * Creates a token for a component with a fluid design (one in which any
  * design key is allowed).
  */
 const asFluidToken = asVitalTokenSpec<any>();
+const fluidToken = asFluidToken();
+type FluidToken = typeof fluidToken;
 
 /**
  * Creates a token which applies the given metadata.
@@ -107,7 +109,16 @@ const asTokenGroup = (...m: TokenMeta[]) => <K extends string>(
     {},
   ) as TC<K>;
 
+const asSimpleToken = (...tokens: Token[]) => asElementToken({
+  Core: {
+    _: Array.isArray(tokens) ? as(...tokens) : tokens,
+  },
+});
+
 export {
   asVitalTokenSpec, asMetaToken, asElementToken, asFluidToken,
-  asTokenGroup,
+  asTokenGroup, asSimpleToken, vitalTokenSpecDomains,
+};
+export type {
+  ElementToken, FluidToken,
 };

@@ -12,5 +12,5 @@
  * limitations under the License.
  */
 
-export * from './components/Img';
+export * from './components/Image';
 export * from './components/FlowContainer';

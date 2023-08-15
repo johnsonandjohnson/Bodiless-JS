@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, PropsWithChildren } from 'react';
 import { v4 } from 'uuid';
 import { HOC } from '@bodiless/fclasses';
 import { useContextActivator, useEditContext } from './hooks';
@@ -30,7 +30,7 @@ const defaultActivateOnEffectState: ActivateOnEffectState = {
  * it is created
  */
 const activateOnEffect = React.createContext(defaultActivateOnEffectState);
-export const ActivateOnEffectProvider:React.FunctionComponent = ({ children }) => {
+export const ActivateOnEffectProvider:FC<PropsWithChildren> = ({ children }) => {
   const [id, setId] = React.useState('');
   const value = { id, setId };
   return <activateOnEffect.Provider value={value}>{children}</activateOnEffect.Provider>;
@@ -59,7 +59,7 @@ export const useActivateOnEffect = () => React.useContext(activateOnEffect);
  * if it is it will run the useContextActivator hook
  * @param uuid id of the component to check
  */
-export const useActivateOnEffectActivator = (uuid: string) => {
+export const useActivateOnEffectActivator = (uuid?: string) => {
   // Cast is necessary bc useContextActivator returns a boolean for 'data-bl-activator'
   const { onClick } = useContextActivator() as any as { onClick: Function };
   const { id, setId } = useActivateOnEffect();

@@ -13,13 +13,14 @@
  */
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { ComponentType } from 'react';
-import { withNode } from '@bodiless/core';
-import type { WithNodeProps } from '@bodiless/core';
+import React, { ComponentType, PropsWithChildren } from 'react';
+import { withNode, useNode } from '@bodiless/data';
+import { LinkData } from '@bodiless/components';
+import type { WithNodeProps } from '@bodiless/data';
 import {
-  designable, addProps, Fragment, withDesign, replaceWith, withoutProps, ComponentOrTag,
+  designable, addProps, Fragment, withDesign, replaceWith, withoutProps, ComponentOrTag, flowIf,
 } from '@bodiless/fclasses';
-import { observer } from 'mobx-react';
+import { observer } from '@bodiless/core';
 import flowRight from 'lodash/flowRight';
 import { asStylableBreadcrumbs } from './Breadcrumb.token';
 
@@ -33,7 +34,12 @@ import type {
   CleanBreadcrumbItemType,
 } from './types';
 
-const ItemNodeProvider = withNode(Fragment) as ComponentType<WithNodeProps>;
+const ItemNodeProvider = withNode(Fragment) as ComponentType<PropsWithChildren<WithNodeProps>>;
+const useIsLink = (linkNodeKey: string) => {
+  const { node } = useNode();
+  const linkHref = node.child<LinkData>(linkNodeKey);
+  return Boolean(linkHref.data.href);
+};
 
 const BreadcrumbsClean$ = (props: CleanBreadcrumbsProps) => {
   const {
@@ -67,11 +73,15 @@ const BreadcrumbsClean$ = (props: CleanBreadcrumbsProps) => {
         </React.Fragment>
       );
     }
+    // Replace Link with Fragment if no link data found.
+    const Title = withDesign({
+      Link: flowIf(() => !(useIsLink('link')))(replaceWith(Fragment)),
+    })(C.Title);
     return (
       <React.Fragment key={item.uuid}>
         <C.Item position={position$} isCurrentPage={isCurrentPage}>
           <ItemNodeProvider nodeKey={item.nodeKey} nodeCollection={item.nodeCollection}>
-            <C.Title isCurrentPage={isCurrentPage} />
+            <Title isCurrentPage={isCurrentPage} />
           </ItemNodeProvider>
         </C.Item>
         {!isLastItem && <C.Separator key={`separator${item.uuid}`} />}

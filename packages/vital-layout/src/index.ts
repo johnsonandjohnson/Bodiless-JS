@@ -15,3 +15,5 @@
 export * from './components/Layout';
 export * from './components/Header';
 export * from './components/Footer';
+export * from './components/Logo';
+export * from './components/Helmet';

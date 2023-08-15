@@ -34,7 +34,7 @@ import {
 } from '../../../components/Card/token';
 
 /**
- * hoc to disable gatsby image for a card
+ * HOC to disable gatsby image for a card
  */
 const withDisabledGatsbyImage = flow(
   withDesign({

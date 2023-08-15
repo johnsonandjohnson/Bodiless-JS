@@ -25,7 +25,10 @@ type CuratorData = {
   feedId: string;
 };
 
-type CuratorProps = DesignableComponentsProps<CuratorComponents>;
+type CuratorProps = DesignableComponentsProps<CuratorComponents> & {
+  containerId?: string,
+  curatorSrc?: string,
+};
 
 type CuratorContextData = {
   isLoaded: boolean;

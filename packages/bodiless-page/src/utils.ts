@@ -14,13 +14,9 @@
 
 import {
   handleBackendResponse,
-  useNode,
 } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import { useField } from 'informed';
-import type {
-  FormValue,
-  FormValues,
-} from 'informed';
 import path from 'path';
 import {
   BASE_PATH_EMPTY_VALUE,
@@ -37,25 +33,28 @@ import type {
   FieldValidate,
 } from './types';
 
+type FormValues = Record<string, unknown>;
+type FormValue = unknown;
 const usePagePath = () => useNode().node.pagePath;
 
 const useBasePathField = () => {
   const basePath = usePagePath();
   const {
-    fieldState, fieldApi, ref, userProps,
+    fieldState, fieldApi, ref, informed, userProps
   } = useField({
-    field: BASE_PATH_FIELD_NAME,
+    type: 'string',
+    name: BASE_PATH_FIELD_NAME,
     initialValue: basePath,
   });
   const { value } = fieldState;
   const { setValue } = fieldApi;
-  const { onChange, onBlur, ...rest } = userProps;
+  const { onChange } = informed;
   return {
     ref,
     value,
     setValue,
     onChange,
-    ...rest,
+    ...userProps as Object,
   };
 };
 
@@ -106,11 +105,11 @@ const getPageUrlValidator = (
   validate?: FieldValidate,
   required?: boolean,
   simpleValidation?: boolean,
-) => (value: FormValue, values: FormValues) => (
+) => (value: FormValue) => (
   (required && validateEmptyField(value))
   || (simpleValidation && validatePageSimple(value))
   || (!simpleValidation && validatePageUrl(value))
-  || (validate && validate(value, values))
+  || (validate && validate(value))
 );
 
 const hasPageChild = async ({ pagePath, client }: any) => {

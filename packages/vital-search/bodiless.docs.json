@@ -1,0 +1,9 @@
+{
+  "VitalDesignSystem": {
+    "Components": {
+      "VitalSearch": {
+        "README.md": "./doc/Search.md"
+      }
+    }
+  }
+}

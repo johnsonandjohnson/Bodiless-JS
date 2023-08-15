@@ -13,6 +13,12 @@
  */
 
 export enum LayoutIds {
+  /**
+   * Header ID
+   */
   HeaderContent = 'header-content',
+  /**
+   * Content ID, used by Skip To Main content.
+   */
   Content = 'main-content',
 }

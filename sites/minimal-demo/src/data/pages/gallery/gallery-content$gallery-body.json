@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "uuid": "7f88a6d0-c653-11ec-ba04-69fb778cc9ec",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/3"
+      },
+      "type": "BlueImageTile"
+    },
+    {
+      "uuid": "39cb4ca0-c654-11ec-ba04-69fb778cc9ec",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/3"
+      },
+      "type": "TealImageTile"
+    },
+    {
+      "uuid": "4016eec0-c654-11ec-ba04-69fb778cc9ec",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/3"
+      },
+      "type": "OrangeImageTile"
+    }
+  ]
+}

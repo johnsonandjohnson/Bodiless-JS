@@ -24,10 +24,17 @@ FClassesContext.displayName = 'DesignKeys';
 
 /**
  * Enable or disable printing of design keys in markup for a component and
- * all children.
+ * all children. When enabled, the design key of the component which renders
+ * an HTML element will be shown in the markup as an attribute.
  *
- * @param {boolean} [showDesignKeys].
- * @param {string} [designKeysAttributeName].
+ * @param showDesignKeys
+ * Whether or not to show the design keys in the markup.
+ *
+ * @param designKeysAttributeName
+ * The name of the data attribute to use to show the design keys.
+ * Defualt is bl-design-key`.
+ *
+ * @category Design API
  */
 export const withShowDesignKeys = (
   showDesignKeys = true,
@@ -58,8 +65,16 @@ export const withShowDesignKeys = (
   );
 };
 
+/**
+ * @hidden
+ * Hook which can be used to determine whether or not design keys should be printed.
+ */
 export const useShowDesignKeys = () => Boolean(
   useContext(FClassesContext).showDesignKeys,
 );
 
+/**
+ * @hidden
+ * Hook which can be used to retrieve the design key attribute name.
+ */
 export const useDesignKeysAttribute = () => useContext(FClassesContext).designKeysAttributeName;

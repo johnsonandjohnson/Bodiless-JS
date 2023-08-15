@@ -18,7 +18,7 @@ import React from 'react';
 import { mount, render } from 'enzyme';
 import flow from 'lodash/flow';
 import { withDesign, replaceWith } from '@bodiless/fclasses';
-import { useNode } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import List, { useListContext } from '../src/List/List';
 import { withMockNode } from './helpers/MockContentNode';
 

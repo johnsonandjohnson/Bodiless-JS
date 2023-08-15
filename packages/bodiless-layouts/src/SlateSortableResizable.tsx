@@ -14,7 +14,6 @@
 
 import React, { ComponentType, FC, HTMLProps } from 'react';
 import { ResizeCallback } from 're-resizable';
-import { SortableElementProps } from 'react-sortable-hoc';
 import {
   PageContextProvider,
   TMenuOptionGetter,
@@ -23,15 +22,15 @@ import {
   useActivateOnEffectActivator,
   withContextActivator,
   withLocalContextMenu,
+  observer
 } from '@bodiless/core';
-import { observer } from 'mobx-react';
 import flow from 'lodash/flow';
 import CleanWrapper, { Props as WrapperProps } from './SortableResizableWrapper';
 
 export const FC_ITEM_CONTEXT_TYPE = 'flow-container-item';
 
 export type FinalUI = {
-  Wrapper: ComponentType<WrapperProps & SortableElementProps>,
+  Wrapper: ComponentType<WrapperProps>,
   SnapIndicator: ComponentType<HTMLProps<HTMLDivElement>>|string,
 };
 export type UI = Partial<FinalUI>;
@@ -94,6 +93,7 @@ const SortableResizable$: FC<SortableResizableProps> = ({
 
   return (
     <Wrapper
+      sortId={uuid}
       isEnabled={isEnabled}
       {...useContextActivator()}
       {...props}

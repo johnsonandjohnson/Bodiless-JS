@@ -12,10 +12,11 @@
  * limitations under the License.
  */
 
+import Git from '../src/tools/git';
+import GitCmd from '../src/gitCmd';
 import { cloneGitFixture, cleanGitFixture } from './tools';
 
-const { getChanges } = require('../src/git');
-const GitCmd = require('../src/GitCmd');
+const { getChanges } = Git;
 
 describe('getChanges', () => {
   beforeEach(cloneGitFixture('get-changes', 'test-upstream-changes'));
@@ -32,12 +33,16 @@ describe('getChanges', () => {
 
   it('lists no changes when there is no upstream branch', async () => {
     jest.setTimeout(30000);
-    await GitCmd.cmd().add('reset', '--hard', 'test-upstream-changes-local').exec();
-    await GitCmd.cmd().add('checkout', '-b', 'foo').exec();
-    const result = await getChanges();
-    expect(result.upstream.branch).toBeNull();
-    expect(result.upstream.commits).toHaveLength(0);
-    expect(result.upstream.files).toHaveLength(0);
+    try {
+      await GitCmd.cmd().add('reset', '--hard', 'test-upstream-changes-local').exec();
+      await GitCmd.cmd().add('checkout', '-b', 'foo').exec();
+      const result = await getChanges();
+      expect(result.upstream.branch).toBeNull();
+      expect(result.upstream.commits).toHaveLength(0);
+      expect(result.upstream.files).toHaveLength(0);
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
   });
 
   it('lists upstream changes when they exist', async () => {

@@ -11,43 +11,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import { asFluidToken } from '@bodiless/vital-elements';
-import { on, varyDesigns, flowHoc, } from '@bodiless/fclasses';
-import {
-  asListToken, ListClean, ListStatic, vitalList, vitalListStatic
-} from '../List';
-
-const BaseVariation = {
-  List: on(ListClean)(vitalList.Base),
-};
-
-const TitleVariations = {
-  Linked: vitalList.WithLinkedTitle,
-  RichText: vitalList.WithRichTitle,
-  PlainText: vitalList.WithPlainTitle,
-};
-
-const DecorationVariations = {
-  Bulleted: vitalList.WithBullets,
-  Numbered: vitalList.WithNumbers,
-  Plain: asListToken({
-    Meta: flowHoc.meta.term('Decoration')('Undecorated'),
-  }),
-};
-
-/**
- * Token which adds image variations to a flow container.
- */
-const WithListVariations = asFluidToken({
-  Components: {
-    ListInfographic: on(ListStatic)(vitalListStatic.Base, vitalListStatic.WithInfographicTitle),
-    ...varyDesigns(
-      BaseVariation,
-      DecorationVariations,
-      TitleVariations,
-    ),
-  }
-});
-
-export const vitalListFlowContainer = { WithListVariations };
+export { vitalListFlowContainer } from './tokens';

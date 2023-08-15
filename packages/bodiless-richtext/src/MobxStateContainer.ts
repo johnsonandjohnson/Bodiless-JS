@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { observable, action, makeObservable } from 'mobx';
+import { observable, action, makeObservable } from '@bodiless/core';
 
 type NewState = {
   [index:string]: any,

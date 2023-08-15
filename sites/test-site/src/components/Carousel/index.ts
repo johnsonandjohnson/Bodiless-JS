@@ -14,7 +14,7 @@
 
 import {
   withNode,
-} from '@bodiless/core';
+} from '@bodiless/data';
 import { flowHoc } from '@bodiless/fclasses';
 import {
   CarouselClean,

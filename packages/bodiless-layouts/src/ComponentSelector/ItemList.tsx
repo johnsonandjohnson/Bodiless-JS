@@ -16,7 +16,6 @@ import React, {
   useContext,
   ReactNode,
   useState,
-  Fragment,
 } from 'react';
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap.css';
@@ -158,9 +157,7 @@ const ItemList: React.FC<ItemListProps> = props => {
         <finalUI.GridListBoxInner style={transformStyle} id="gridlistboxinner">
           {elems}
           {
-            components.length > maxComponents
-              ? <MoreItems />
-              : Fragment
+            components.length > maxComponents && <MoreItems />
           }
         </finalUI.GridListBoxInner>
       </finalUI.GridListBoxWrapper>

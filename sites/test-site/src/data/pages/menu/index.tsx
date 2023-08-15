@@ -12,15 +12,15 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
+import React, { ComponentType, PropsWithChildren } from 'react';
 import { graphql } from 'gatsby';
 import Helmet from 'react-helmet';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
   withDesign, flowHoc, addClasses, H1 as H1$, H2 as H2$, Ul, Div,
 } from '@bodiless/fclasses';
-import { observer } from 'mobx-react';
-import { useNode, withNode, withNodeKey } from '@bodiless/core';
+import { observer } from '@bodiless/core';
+import { useNode, withNode, withNodeKey } from '@bodiless/data';
 import {
   withBurgerMenuProvider, withOverviewLink, withMenuDesign,
   asBodilessMenu, asTopNav, withListSubMenu, withColumnSubMenu,
@@ -39,7 +39,7 @@ const $withMenuOverviewLink = withMenuDesign(['List', 'Columns', 'Cards'])(
   withOverviewLink('Custom Overview Link'),
 );
 
-const BurgerMenuProvider = withBurgerMenuProvider(Div) as ComponentType;
+const BurgerMenuProvider = withBurgerMenuProvider(Div) as ComponentType<PropsWithChildren>;
 
 const DemoMenu = flowHoc(
   withNodeKey({ nodeKey: 'DemoMenu' }),

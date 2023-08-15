@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/psh",
-  "version": "1.0.0-beta.12",
+  "version": "1.0.0-rc.42",
   "description": "Provides cli tool for initializing a bodiless project on platform.sh",
   "author": "Chris Oden <coden@its.jnj.com>",
   "homepage": "",
@@ -9,8 +9,10 @@
     "bodiless-psh-init": "./lib/bodiless-psh-init.js"
   },
   "scripts": {
-    "build": "tsc --version && tsc -p ./tsconfig.json ",
-    "build:watch": "npm run build -- --watch",
+    "build": "run-p build:lib",
+    "build:lib": "tsc -p ./tsconfig.json",
+    "build:watch": "npm run build:lib -- --watch",
+    "dev": "npm run build:watch",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
   },
   "directories": {
@@ -30,7 +32,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-beta.12",
+    "@bodiless/cli": "^1.0.0-rc.42",
     "copyfiles": "^2.1.1",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.19",

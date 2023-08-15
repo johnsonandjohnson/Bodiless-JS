@@ -15,7 +15,9 @@
 import React, { ComponentType, FC } from 'react';
 import flow from 'lodash/flow';
 import { AsBodiless, asBodilessComponent, useEditContext } from '@bodiless/core';
-import { designable, A, Div } from '@bodiless/fclasses';
+import {
+  designable, A, Div, flowHoc, ComponentWithMeta
+} from '@bodiless/fclasses';
 import { useCuratorFormOptions, withCuratorFormSnippet } from './CuratorFormOptions';
 import CuratorProvider from './CuratorProvider';
 import { CuratorComponents, CuratorData, CuratorProps } from './types';
@@ -42,7 +44,7 @@ const CuratorBase: FC<CuratorProps> = ({
   const { isEdit } = useEditContext();
   const { Container } = components;
   // @ts-ignore non-defined props.
-  const { curatorSrc, containerId } = props;
+  const { curatorSrc, containerId, ...rest } = props;
 
   const script = (
     `(function(){
@@ -53,7 +55,7 @@ const CuratorBase: FC<CuratorProps> = ({
   );
   if (isEdit) {
     return (
-      <CuratorPlaceholder {...props} />
+      <CuratorPlaceholder {...rest} />
     );
   }
   return (
@@ -75,7 +77,7 @@ const asBodilessCurator: AsBodiless<CuratorProps, CuratorData> = (
   asBodilessComponent(useCuratorFormOptions())(nodeKeys, defaultData, useOverrides),
 );
 
-const CuratorClean = flow(
+const CuratorClean: ComponentWithMeta = flowHoc(
   designable(CuratorComponentsStart, 'Curator'),
   asBodilessCurator(),
 )(CuratorBase);

@@ -1,0 +1,40 @@
+{
+  "sourceTypes": ["html", "htm"],
+  "contentSelectors": [
+    "body *"
+  ],
+  "contentExcluders": [
+    "script",
+    "noscript",
+    "style",
+    "h1",
+    "[data-layer-region=\"Layout:Header\"]",
+    "[data-layer-region=\"Layout:Footer\"]",
+    "[data-layer-region=\"Layout:SkipToMainContent\"]"
+  ],
+  "indexConfig": {
+    "ref": "id",
+    "fields": [
+      { "name": "title", "attributes": { "boost": 2 }},
+      { "name": "body" }
+    ]
+  },
+  "languages": [
+    {
+      "code": "en",
+      "name": "English",
+      "sourcePaths": [
+        ".next/server/pages"
+      ],
+      "excludePaths": [
+        "404*/**",
+        "search/**",
+        "styleguide/**"
+      ],
+      "indexFileName": "lunr.en.json",
+      "indexUrlName": "",
+      "indexFilePath": "public/generated",
+      "searchPath": "search"
+    }
+  ]
+}

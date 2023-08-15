@@ -3,12 +3,14 @@ env:
   CI: true
   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
 jobs:
   prerelease:
     runs-on: ubuntu-latest
+    if: ${{ !contains(github.event.head_commit.message, '[no-release]') }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -17,7 +19,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version: '16.13'
+          node-version: '18.16'
       - name: Setup git user
         run: |
           git config user.name "GitHub Actions Bot"
@@ -31,20 +33,21 @@ jobs:
           route: DELETE /repos/${{ github.repository }}/branches/main/protection
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      # In order to disable common version line remove the --force-publish flag in lerna command below
       - name: Prerelease
         run: |
-          npx lerna version --conventional-commits --conventional-prerelease --preid=beta --include-merged-tags --yes
+          npx lerna version --conventional-commits --conventional-prerelease --preid=rc --include-merged-tags --force-publish --yes
       - name: Enable branch protection
         uses: octokit/request-action@v2.x
         with:
           route: PUT /repos/${{ github.repository }}/branches/main/protection
           required_pull_request_reviews: |
             dismiss_stale_reviews: true
-            required_approving_review_count: 2
+            required_approving_review_count: 1
           required_status_checks: |
             strict: true
             checks:
-              - context: 'Setup, Build, Lint and Test'
+              - context: 'on-label / Setup, Build, Lint and Test'
           enforce_admins: true
           restrictions: 'null'
         env:

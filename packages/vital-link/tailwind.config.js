@@ -45,23 +45,34 @@ const twConfig = {
     plugin(({ addUtilities }) => {
       addUtilities(
         {
-          '.vital-download-link::after': {
+          '.vital-arrow::after': {
             content: '"\\e800"',
             'font-family': '"linkicons"',
             'text-decoration': 'none',
             'line-height': '1',
             'vertical-align': 'text-top',
+            display: 'inline-block',
+            'margin-left': '.25rem',
+          },
+          '.vital-download-link::after': {
+            content: '"\\e801"',
+            'font-family': '"linkicons"',
+            'text-decoration': 'none',
+            'line-height': '1',
+            'vertical-align': 'text-top',
+            'margin-right': '.25rem',
             'margin-left': '.25rem',
             display: 'inline-block',
           },
           '.vital-external-link::after': {
-            content: '"\\e801"',
+            content: '"\\e802"',
             'font-family': '"linkicons"',
             'font-style': 'normal',
             'line-height': '1',
             'text-decoration': 'none',
             'text-transform': 'none',
             'vertical-align': 'text-top',
+            'margin-right': '.25rem',
             'margin-left': '.25rem',
             display: 'inline-block',
           },

@@ -1,0 +1,7 @@
+{
+  "Components": {
+    "Internationalization": {
+      "README.md": "./doc/README.md"
+    }
+  }
+}

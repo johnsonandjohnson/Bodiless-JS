@@ -14,30 +14,30 @@
 
 import ContextMenu from './ContextMenu';
 import ContextWrapper from './ContextWrapper';
-import LocalContextMenu from './LocalContextMenu';
-import PageEditor from './PageEditor';
+import PageEditor, { useDocsButton, useEditButton } from './PageEditor';
 import StaticPage from './StaticPage';
 import PageOverlay from './PageOverlay';
-import ContextMenuProvider, { getUI } from './ContextMenuContext';
+import ContextMenuProvider, { getUI } from './ContextMenuContext.bl-edit';
 import type {
   IContextMenuProps as ContextMenuProps,
   ButtonVariantProps,
   ContextMenuUI,
 } from '../Types/ContextMenuTypes';
 import type { Props as ContextWrapperProps } from '../Types/ContextWrapperTypes';
-import ReactTagsField, { ReactTagsFieldProps, TagType, BodilessTag } from './ReactTagsField';
+import ReactTagsField, { TagType, BodilessTag } from './ReactTagsField';
+import type { ReactTagsFieldProps } from './ReactTagsField';
 
 export {
   ContextMenu,
   ContextMenuProvider,
   getUI,
   ContextWrapper,
-  LocalContextMenu,
   PageEditor,
+  useDocsButton,
+  useEditButton,
   StaticPage,
   PageOverlay,
   ReactTagsField,
-  ReactTagsFieldProps,
   BodilessTag,
   TagType,
 };
@@ -47,4 +47,5 @@ export type {
   ContextMenuUI,
   ButtonVariantProps,
   ContextWrapperProps,
+  ReactTagsFieldProps,
 };

@@ -289,7 +289,7 @@ const SocialShareFormImage = () => {
   const fieldApi = useFieldApi(metaSocialShareImageName);
   return (
     <DropZoneWrapper>
-      <ComponentFormText field={metaSocialShareImageName} id="social-share-img-src" />
+      <ComponentFormText name={metaSocialShareImageName} id="social-share-img-src" />
       <ImageDropZone fieldApi={fieldApi} ui={dropZoneUI} />
     </DropZoneWrapper>
   );

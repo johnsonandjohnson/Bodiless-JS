@@ -13,7 +13,7 @@
  */
 
 import React, { ComponentType, useRef } from 'react';
-import { useNode } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import { HOC } from '@bodiless/fclasses';
 import { BreadcrumbStore } from './BreadcrumbStore';
 import { MenuBreadcrumbs } from './Breadcrumbs';

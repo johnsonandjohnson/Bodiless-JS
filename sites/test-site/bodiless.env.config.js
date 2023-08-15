@@ -34,7 +34,7 @@ module.exports = {
       }
     }
     if (await getCurrentGitBranch() === 'main') {
-      finalConfig.BODILESS_BACKEND_SAVE_ENABLED = '0';
+      finalConfig.BODILESS_BACKEND_COMMIT_ENABLED = '0';
     } else {
       finalConfig.BODILESS_BACKEND_COMMIT_ENABLED = '1';
     }

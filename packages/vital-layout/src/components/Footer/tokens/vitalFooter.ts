@@ -12,25 +12,61 @@
  * limitations under the License.
  */
 
-import { withNode, withNodeKey } from '@bodiless/core';
-import { vitalRichText } from '@bodiless/vital-editors';
+import { withNode, withNodeKey } from '@bodiless/data';
 import { vitalColor, vitalSpacing } from '@bodiless/vital-elements';
 import { vitalMenu } from '@bodiless/vital-navigation';
-import { as } from '@bodiless/fclasses';
-import { vitalRewards } from '../Rewards';
-import { vitalSocialLinks } from '../SocialLinks';
-import { asFooterToken } from '../FooterClean';
+import {
+  as, Div, on, replaceWith, addProps
+} from '@bodiless/fclasses';
+import { vitalRewards, RewardsClean } from '../Rewards';
+import { vitalCopyrightRow } from '../CopyrightRow';
+import { asFooterToken, FooterToken } from '../FooterClean';
 
-const Base = asFooterToken({
+const Default = asFooterToken({
   Components: {
-    Rewards: vitalRewards.Default,
     FooterMenu: vitalMenu.Footer,
-    SocialLinks: vitalSocialLinks.Default,
+    CopyrightRow: vitalCopyrightRow.Default,
+  },
+  Analytics: {
+    Wrapper: addProps({ 'data-layer-region': 'footer' }),
   },
   Layout: {
     Wrapper: 'w-full',
     Container: '2xl:flex',
-    Column: 'w-full 2xl:first:w-1/4 2xl:w-3/4',
+    MenuRow: 'w-full xl:flex xl:space-between',
+    CopyrightRow: 'w-full xl:flex xl:space-between',
+    FooterMenuWrapper: 'w-full',
+  },
+  Spacing: {
+    Wrapper: 'mt-10',
+    Container: as(
+      vitalSpacing.WithSiteMargin,
+      vitalSpacing.WithSiteXLConstraint,
+      '2xl:pt-16 2xl:pb-10',
+    ),
+    MenuRow: 'md:mb-8 2xl:mb-9',
+    CopyrightRow: 'md:mb-0',
+    Column2Wrapper: 'md:py-9',
+    FooterMenuWrapper: 'py-9 md:p-0',
+  },
+  Theme: {
+    Wrapper: vitalColor.BgSecondaryFooter,
+  },
+  Schema: {
+    FooterMenu: withNodeKey('footer-menu'),
+    _: withNode,
+  },
+},);
+
+const WithRewardsExpanding2XL = asFooterToken({
+  Components: {
+    Column1Wrapper: replaceWith(Div),
+    RewardsWrapper: replaceWith(Div),
+    Rewards: on(RewardsClean)(vitalRewards.Default),
+  },
+  Layout: {
+    Column1Wrapper: 'w-full 2xl:w-1/4',
+    Column2Wrapper: 'w-full 2xl:w-3/4',
     RewardsWrapper: as(
       // This makes RewardsWrapper full screen on mobile. This is necessary
       // because we have to flow specific white background inside a container
@@ -39,52 +75,65 @@ const Base = asFooterToken({
       // Reset RewardsWrapper to follow container from 2xl device and on.
       '2xl:w-full 2xl:static 2xl:inset-x-0 2xl:mx-0 2xl:p-0',
     ),
-    Row: 'w-full xl:flex xl:space-between',
-    FooterMenuWrapper: 'w-full',
-    CopyrightWrapper: 'w-full xl:w-3/4',
-    SocialLinksWrapper: 'w-full xl:w-1/4',
   },
   Spacing: {
-    Wrapper: 'mt-10', // Vertical
-    Container: as(
-      vitalSpacing.WithSiteMargin,
-      vitalSpacing.WithSiteXLConstraint,
-      '2xl:pt-16 2xl:pb-10', // Vertical
-    ),
-    Column: as(
-      'md:last:py-9 2xl:py-9 2xl:first:pr-20',
-    ),
-    Row: 'md:mb-8 md:last:mb-0 2xl:mb-9', // Vertical
-    RewardsWrapper: as(
-      'md:mb-0', // Vertical
-    ),
-    FooterMenuWrapper: 'py-9 md:p-0', // Vertical
-    Copyright: 'py-6 md:mb-4 md:py-6 2xl:py-0 2xl:mb-0', // Vertical
-    SocialLinksWrapper: 'py-5 md:p-0',
+    Column1Wrapper: '2xl:py-9 2xl:pr-20',
+    Column2Wrapper: '2xl:py-9',
+    RewardsWrapper: 'md:mb-0',
   },
   Theme: {
     RewardsWrapper: 'bg-vital-primary-card-bg 2xl:bg-vital-secondary-footer-bg',
-    Copyright: as(
-      vitalColor.BorderSecondarySeparator,
-      'border-t border-b md:border-0',
-    ),
-    Wrapper: vitalColor.BgSecondaryFooter,
-  },
-  Editors: {
-    Copyright: vitalRichText.Copyright,
-  },
-  Schema: {
-    FooterMenu: withNodeKey({ nodeKey: 'footer', nodeCollection: 'site' }),
-    Copyright: withNodeKey({ nodeKey: 'copyright', nodeCollection: 'site' }),
-    _: withNode,
   },
 });
 
-const Default = asFooterToken({
-  ...Base,
-});
+/**
+ * Tokens for the vital footer
+ *
+ * @category Token Collection
+ * @see [[FooterClean]]
+ */
+export interface VitalFooter {
+  /**
+   * Inherits from Base
+   * @example Will remove Menu components
+   * ```js
+   * import { vitalFooterBase, asFooterToken, } from '@bodiless/vital-layout';
+   * import { replaceWith } from '@bodiless/fclasses';
+   *
+   * const Default = asFooterToken({
+   *   ...vitalFooterBase.Default,
+   *   Components: {
+   *     ...vitalFooterBase.Default.Components,
+   *     FooterMenuWrapper: replaceWith(() => null),
+   *     FooterMenu: replaceWith(() => null),
+   *     MenuRow: replaceWith(() => null),
+   *   },
+   * }),
+   *
+   * export default {
+   *   ...vitalFooterBase,
+   *   Default,
+   * };
+   * ```
+   *
+   */
+  Default: FooterToken,
+  /**
+   * An extendable token to move rewards above footer on 2xl responsive viewports
+   */
+  WithRewardsExpanding2XL: FooterToken,
+}
 
-export default {
-  Base,
+/**
+ * Tokens for Vital Footer
+ *
+ * @category Token Collection
+ * @see [[VitalFooter]]
+ * @see [[FooterClean]]
+ */
+const vitalFooter: VitalFooter = {
   Default,
+  WithRewardsExpanding2XL,
 };
+
+export default vitalFooter;

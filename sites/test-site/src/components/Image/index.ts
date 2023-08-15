@@ -17,8 +17,10 @@
 import { ComponentType } from 'react';
 import {
   withChild,
-  withSidecarNodes,
 } from '@bodiless/core';
+import {
+  withSidecarNodes,
+} from '@bodiless/data';
 import flowRight from 'lodash/flowRight';
 import {
   withImagePlaceholder,
@@ -43,7 +45,9 @@ import {
 // @ts-ignore Cannotfind module
 import landscapeImage from './landscape_image.png';
 
-export const asBaseEditableImagePlain: AsBodilessImage = (nodeKey?, placeholder?, useOverrides?) => flowHoc(
+export const asBaseEditableImagePlain: AsBodilessImage = (
+  nodeKey?, placeholder?, useOverrides?
+) => flowHoc(
   flowHoc.meta.term('Component')('Image'),
   flowHoc.meta.term('Category')('Editors'),
   stylable,
@@ -52,7 +56,7 @@ export const asBaseEditableImagePlain: AsBodilessImage = (nodeKey?, placeholder?
 );
 
 /**
- * util function to build a hoc for rendering a non-responsive image.
+ * util function to build a HOC for rendering a non-responsive image.
  */
 export const asEditableImagePlain: AsBodilessImage = (
   nodeKey?, placeholder?, useOverrides?,
@@ -63,7 +67,7 @@ export const asEditableImagePlain: AsBodilessImage = (
 );
 
 /**
- * util function to build a hoc for rendering a responsive image.
+ * util function to build a HOC for rendering a responsive image.
  */
 const asEditableImage = withGatsbyImagePreset(GatsbyImagePresets.FluidWithWebp)(asBaseEditableImagePlain);
 

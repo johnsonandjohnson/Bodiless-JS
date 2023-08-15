@@ -14,7 +14,10 @@
 
 // @TODO: As Rewards is implemented, move it outside Footer component into
 // a more appropriate place.
-// Also requires component structure reorganization for new static pattern.
+import type { VitalRewards } from './tokens/vitalRewards';
+
 export { RewardsClean, asRewardsToken } from './RewardsClean';
 export { default as vitalRewards } from './tokens';
 export type { RewardsComponents, RewardsProps } from './types';
+
+export type { VitalRewards };

@@ -15,16 +15,19 @@
 import React, { FC, HTMLProps } from 'react';
 import flow from 'lodash/flow';
 import {
-  Text as BaseText,
+  Input as BaseText,
   TextArea as BaseTextArea,
   RadioGroup as BaseRadioGroup,
   Radio as BaseRadio,
   Checkbox as BaseCheckBox,
   Select as BaseSelect,
-  Option as BaseOption,
   FieldProps,
-  ChildFieldProps,
-  SelectFieldProps,
+  InputProps,
+  TextAreaProps,
+  RadioGroupProps,
+  SelectProps,
+  CheckboxProps,
+  RadioProps
 } from 'informed';
 import {
   Li, Ul, stylable, addClasses, StylableProps, withoutProps, flowIf, hasProp, addProps,
@@ -35,6 +38,15 @@ import { ButtonVariantProps, withChild } from '@bodiless/core';
 import './bodiless.index.css';
 import 'rc-tooltip/assets/bootstrap.css';
 
+const BaseOption = ({
+  value,
+  ...rest
+}: HTMLProps<HTMLOptionElement>) => (
+  <option value={value} {...rest}>
+    {value}
+  </option>
+);
+
 export const Title = stylable<HTMLProps<HTMLHeadingElement>>('h3');
 export const Label = stylable<HTMLProps<HTMLLabelElement>>('label');
 export const Img = stylable<HTMLProps<HTMLImageElement>>('img');
@@ -44,13 +56,13 @@ export const Span = stylable<HTMLProps<HTMLSpanElement>>('span');
 export const Button = stylable<HTMLProps<HTMLButtonElement>>('button');
 export const Hr = stylable<HTMLProps<HTMLHRElement>>('hr');
 export const Form = stylable<HTMLProps<HTMLFormElement>>('form');
-export const Text = stylable<FieldProps<any, any>>(BaseText);
-export const TextArea = stylable<FieldProps<any, any>>(BaseTextArea);
-export const RadioGroup = stylable<FieldProps<any, any>>(BaseRadioGroup);
-export const Radio = stylable<ChildFieldProps<any, any>>(BaseRadio);
-export const CheckBox = stylable<FieldProps<any, any>>(BaseCheckBox);
-export const Select = stylable<SelectFieldProps<any, any>>(BaseSelect);
-export const Option = stylable<ChildFieldProps<any, any>>(BaseOption);
+export const Text = stylable<FieldProps<InputProps>>(BaseText);
+export const TextArea = stylable<FieldProps<TextAreaProps>>(BaseTextArea);
+export const RadioGroup = stylable<FieldProps<RadioGroupProps>>(BaseRadioGroup);
+export const Radio = stylable<RadioProps>(BaseRadio);
+export const CheckBox = stylable<FieldProps<CheckboxProps>>(BaseCheckBox);
+export const Select = stylable<FieldProps<SelectProps>>(BaseSelect);
+export const Option = stylable<HTMLProps<HTMLOptionElement>>(BaseOption);
 export const Anchor = stylable<HTMLProps<HTMLAnchorElement>>('a');
 
 export const Icon = flow(
@@ -165,6 +177,14 @@ export const HorizontalToolbarButton = flow(
   removeClasses('bl-mb-3'),
   addClasses('bl-mr-grid-2 last:bl-mr-grid-0'),
 )(ToolbarButton);
+
+export const ToolbarBase = flow(
+  addClasses('bl-text-white bl-bg-black bl-rounded bl-z-50 bl-flex'),
+  addProps({ role: 'toolbar' }),
+)(Div);
+
+export const ToolbarHorizontal = addClasses('bl-py-2 bl-px-grid-2')(ToolbarBase);
+export const ToolbarVertical = addClasses('bl-px-2 bl-py-grid-2 bl-flex-col')(ToolbarBase);
 
 export const ToolbarButtonLabel = addClasses('bl-text-center bl-text-base')(Span);
 

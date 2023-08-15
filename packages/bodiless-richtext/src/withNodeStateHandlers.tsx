@@ -13,7 +13,7 @@
  */
 
 import React, { ComponentType } from 'react';
-import { observer } from 'mobx-react';
+import { observer } from '@bodiless/core';
 import useNodeStateHandlers from './useNodeStateHandlers';
 import type { RichTextProps } from './Type';
 import useInitialValue from './useInitialValue';

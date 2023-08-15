@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 
-const bodilessSearchIndex = require('../lib/scripts/bodiless-search-index');
+const bodilessSearchIndex = require('../lib/cjs/scripts/bodiless-search-index');

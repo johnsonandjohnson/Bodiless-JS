@@ -13,8 +13,8 @@
  # limitations under the License.
  ##
 finalize_deploy () {
-  npm run bootstrap -- --ci
+  npm ci
   npm run build:packages -- --concurrency 1
-  npm run build:env-vars -- --scope=@sites/${APP_SITE_NAME}
-  npm run build:doc -- --scope=@sites/${APP_SITE_NAME}
+  npm run build:env-vars -- --workspace=@sites/${APP_SITE_NAME} --if-present
+  npm run build:docs -- --workspace=@sites/${APP_SITE_NAME} --if-present
 }

@@ -14,9 +14,12 @@
 
 import {
   withChild,
+} from '@bodiless/core';
+import {
   withNode,
   withNodeKey,
-} from '@bodiless/core';
+} from '@bodiless/data';
+
 import { vitalColor, vitalSpacing } from '@bodiless/vital-elements';
 import {
   vitalBurgerMenu,
@@ -24,55 +27,33 @@ import {
   asBurgerMenuToggler,
 } from '@bodiless/vital-navigation';
 import {
-  Span,
   as,
   flowHoc,
-  replaceWith,
-  withDesign,
-  withProps,
+  addProps
 } from '@bodiless/fclasses';
-import { vitalLink } from '@bodiless/vital-link';
+import { vitalButton } from '@bodiless/vital-button';
 import { vitalLogo } from '../../Logo';
-import { vitalDesktopSearch, vitalSearchToggler } from '../../Search';
 import { asHeaderToken } from '../HeaderClean';
+import type { HeaderToken } from '../HeaderClean';
 import BurgerIcon from '../assets/BurgerIcon';
 
-// @TODO: Get rid of this after language button is implemented.
-const WithLanguageButton = flowHoc(
-  replaceWith(Span),
-  withProps({
-    children: 'Español',
-    // @TODO: Create divider tokens.
-    // @TODO: Use existing tokens.
-    className: 'text-m-base pl-5 lg:mr-5 lg:px-5 lg:py-2',
-  }),
-);
-
-/**
- * Token that defines a basic header.
- */
-const Base = asHeaderToken({
+const Default = asHeaderToken({
   Core: {
     MenuToggler: asBurgerMenuToggler,
   },
   Components: {
-    SearchToggler: vitalSearchToggler.Default,
     Logo: vitalLogo.Default,
     Menu: vitalMenu.TopNav,
     BurgerMenu: flowHoc(
       as(vitalBurgerMenu.Default),
       // @TODO: Is there a better way to inject WhereToBuy and (future) LanguageButton
       // components into the menu? Maybe, move the components to another package...
-      withDesign({
-        // @TODO: Replace LanguageButton placeholder.
-        LanguageButton: WithLanguageButton,
-      }),
     ),
-    DesktopSearch: vitalDesktopSearch.Default,
-    UtilityMenu: vitalMenu.Utility,
-    // @TODO: Replace LanguageButton placeholder.
-    LanguageButton: WithLanguageButton,
-    WhereToBuy: vitalLink.WhereToBuy,
+    // UtilityMenu: vitalMenu.Utility,
+    WhereToBuy: vitalButton.WhereToBuy,
+  },
+  Analytics: {
+    Wrapper: addProps({ 'data-layer-region': 'header' }),
   },
   Layout: {
     Container: 'flex justify-between items-center',
@@ -88,13 +69,12 @@ const Base = asHeaderToken({
       'py-3 lg:py-0',
     ),
     ActionMenuContainer: 'pl-5',
-    // @todo perhaps this should be an element spcing token ike "LargeIconSize".
-    MenuToggler: 'w-6 h-6',
     MenuTogglerWrapper: 'my-4',
   },
   Theme: {
+    // @todo perhaps this should be an element spcing token ike "LargeIconSize".
+    MenuToggler: 'w-6 h-6',
     Wrapper: vitalColor.BgPrimaryPage,
-    LanguageButton: 'lg:border-vital-primary-divider lg:border-r-2',
   },
   Schema: {
     Logo: withNodeKey({ nodeKey: 'Logo' }),
@@ -105,13 +85,67 @@ const Base = asHeaderToken({
   },
 });
 
-const Default = asHeaderToken({
-  ...Base,
+const WithLanguageSelector = asHeaderToken({
+  Theme: {
+    LanguageSelectorWrapper: 'lg:border-vital-primary-divider lg:border-r-2',
+  },
+  Spacing: {
+    LanguageSelectorWrapper: 'pl-5 lg:mr-5 lg:px-5 lg:py-2',
+  }
 });
 
-const vitalHeader = {
-  Base,
+/**
+ * Tokens for the vital header
+ *
+ * @category Token Collection
+ * @see [[HeaderClean]]
+ */
+export interface VitalHeader {
+  /**
+   * Default applies the following as defaults:
+   * - Logo
+   * - Togglers: BurgerMenu, Search
+   * - Defines the components: Logo, Menu, BurgerMenu, Search, WhereToBuy
+   *
+   * @example Will remove Search components & Where to Buy components
+   * ```js
+   * import { vitalHeaderBase, asHeaderToken, } from '@bodiless/vital-layout';
+   * import { replaceWith } from '@bodiless/fclasses';
+   *
+   * const Default = asHeaderToken({
+   *   ...vitalHeaderBase.Default,
+   *   Components: {
+   *     ...vitalHeaderBase.Default.Components,
+   *     DesktopSearch: replaceWith(() => null),
+   *     MobileSearch: replaceWith(() => null),
+   *     WhereToBuy: replaceWith(() => null),
+   *     SearchToggler: replaceWith(() => null),
+   *   },
+   * }),
+   *
+   * export default {
+   *   ...vitalHeaderBase,
+   *   Default,
+   * };
+   * ```
+   */
+  Default: HeaderToken,
+  /**
+   * Extendable token that adds language selector
+   */
+  WithLanguageSelector: HeaderToken,
+}
+
+/**
+ * Tokens for Vital Header
+ *
+ * @category Token Collection
+ * @see [[VitalHeader]]
+ * @see [[HeaderClean]]
+ */
+const vitalHeader: VitalHeader = {
   Default,
+  WithLanguageSelector,
 };
 
 export default vitalHeader;

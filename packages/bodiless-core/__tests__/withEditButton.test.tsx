@@ -16,10 +16,10 @@ import React, {
   HTMLProps, useEffect,
 } from 'react';
 import { shallow, mount } from 'enzyme';
-import { Text } from 'informed';
-import { observer } from 'mobx-react';
+import { Input } from 'informed';
 import omit from 'lodash/omit';
-import withEditButton from '../src/withEditButton';
+import { observer } from '../src/mobx.bl-edit';
+import withEditButton from '../src/withEditButton.bl-edit';
 import { useEditContext } from '../src/hooks';
 import ContextMenuItem from '../src/components/ContextMenuItem';
 import {
@@ -80,7 +80,7 @@ describe('withEditButton', () => {
       label: itemRendered,
       activateContext: false,
       renderForm: () => (
-        <Text field="foo" />
+        <Input type="text" name="foo" />
       ),
     };
 
@@ -102,16 +102,16 @@ describe('withEditButton', () => {
     const wrapper = mount(<Test componentData={{ foo: 'foo' }} />);
     expect(itemRendered).toBeCalledTimes(1);
     wrapper.find('div[aria-label="Foo"]').simulate('click');
-    expect(wrapper.find('input[name="foo"]').prop('value')).toEqual('foo');
+    expect(wrapper.find('input[name$="foo"]').prop('value')).toEqual('foo');
     expect(itemRendered).toBeCalledTimes(2);
     wrapper.find('button[aria-label="Cancel"]').simulate('click');
     expect(itemRendered).toBeCalledTimes(3);
-    expect(wrapper.find('input[name="foo"]')).toHaveLength(0);
+    expect(wrapper.find('input[name$="foo"]')).toHaveLength(0);
     wrapper.setProps({ componentData: { foo: 'bar' } });
     // @TODO: investigate why it is triggering extra render.
     // expect(itemRendered).toBeCalledTimes(3);
     wrapper.find('div[aria-label="Foo"]').simulate('click');
-    expect(wrapper.find('input[name="foo"]').prop('value')).toEqual('bar');
+    expect(wrapper.find('input[name$="foo"]').prop('value')).toEqual('bar');
     // @TODO: investigate why it is triggering extra render.
     // expect(itemRendered).toBeCalledTimes(4);
   });

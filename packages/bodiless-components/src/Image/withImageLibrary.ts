@@ -16,14 +16,14 @@ import {
   useNode,
   withNode,
   withNodeKey,
-} from '@bodiless/core';
-import type { ContentNode } from '@bodiless/core';
-import { flowHoc } from '@bodiless/fclasses';
+} from '@bodiless/data';
+import type { ContentNode } from '@bodiless/data';
+import { flowHoc, HOCWithMeta } from '@bodiless/fclasses';
 import { withContentLibrary, ComponentSelector } from '@bodiless/layouts';
 import path from 'path';
 import type { AsBodilessImage } from './Image';
 
-// Adds image library to an asEditableImage hoc.
+// Adds image library to an `asEditableImage` HOC.
 const withImageLibrary = (
   asEditableImage: AsBodilessImage,
   Selector = ComponentSelector,
@@ -46,7 +46,7 @@ const withImageLibrary = (
     };
   };
 
-  const asImageHoc = asEditableImage(undefined, placeholder, useOverrides);
+  const asImageHoc: HOCWithMeta = asEditableImage(undefined, placeholder, useOverrides);
   return flowHoc(
     asImageHoc.meta,
     asImageHoc,

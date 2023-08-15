@@ -17,18 +17,10 @@ import { asElementToken } from '../../../util';
 import { vitalColor } from '../../Color';
 import { vitalFontSize } from '../../FontSize';
 import { vitalTextDecoration } from '../../TextDecoration';
-
-const Meta = {
-  categories: {
-    Type: ['Element'],
-    Group: ['Typography'],
-  },
-};
+import { TypographyMeta } from '../meta';
+import vitalTypographyV2 from './vitalTypographyV2';
 
 const Link = asElementToken({
-  Core: {
-    _: vitalFontSize.Base,
-  },
   Theme: {
     _: as(
       vitalTextDecoration.Bold,
@@ -36,87 +28,121 @@ const Link = asElementToken({
       vitalColor.TextPrimaryInteractive,
     ),
   },
-  Meta,
+  Meta: TypographyMeta,
 });
 
 const H1 = asElementToken({
   Core: {
-    _: vitalFontSize.XXXL,
+    /**
+     * Note that in scope of a Typography Token, we consider
+     * `font-size` and `font-weight` as an attribute of the 'Core' Domain
+     * since they are likely to be preserved when changing H1 Theme.
+     */
+    _: as(
+      vitalFontSize.XXXL,
+      vitalTextDecoration.Bold,
+    ),
   },
   Theme: {
-    _: as(
-      vitalTextDecoration.Bold,
-      vitalColor.TextPrimaryHeaderCopy,
-    ),
+    _: vitalColor.TextPrimaryHeaderCopy,
   },
   Spacing: {
     _: 'mt-10 mb-5 lg:mb-6',
   },
-  Meta,
+  Meta: TypographyMeta,
 });
 
 const H2 = asElementToken({
   Core: {
-    _: vitalFontSize.XXL,
-  },
-  Theme: {
+    /**
+     * Note that in scope of a Typography Token, we consider
+     * `font-size` and `font-weight` as an attribute of the 'Core' Domain
+     * since they are likely to be preserved when changing H1 Theme.
+     */
     _: as(
       vitalTextDecoration.Bold,
-      vitalColor.TextPrimaryHeaderCopy,
+      vitalFontSize.XXL,
     ),
+  },
+  Theme: {
+    _: vitalColor.TextPrimaryHeaderCopy,
   },
   Spacing: {
     _: 'mb-5',
   },
-  Meta,
+  Meta: TypographyMeta,
 });
 
 const H3 = asElementToken({
   Core: {
-    _: vitalFontSize.XL,
+    /**
+     * Note that in scope of a Typography Token, we consider
+     * `font-size` and `font-weight` as an attribute of the 'Core' Domain
+     * since they are likely to be preserved when changing H1 Theme.
+     */
+    _: as(
+      vitalFontSize.XL,
+      vitalTextDecoration.Medium,
+    ),
   },
   Theme: {
-    _: as(
-      vitalTextDecoration.Medium,
-      vitalColor.TextPrimaryHeaderCopy,
-    ),
+    _: vitalColor.TextPrimaryHeaderCopy,
   },
   Spacing: {
     _: 'mb-5',
   },
-  Meta,
+  Meta: TypographyMeta,
 });
 
 const H4 = asElementToken({
   Core: {
-    _: vitalFontSize.XL,
+    /**
+     * Note that in scope of a Typography Token, we consider
+     * `font-size` and `font-weight` as an attribute of the 'Core' Domain
+     * since they are likely to be preserved when changing H1 Theme.
+     */
+    _: as(
+      vitalFontSize.XL,
+      vitalTextDecoration.Normal,
+    ),
   },
   Theme: {
-    _: as(
-      vitalTextDecoration.Normal,
-      vitalColor.TextPrimaryHeaderCopy,
-    ),
+    _: vitalColor.TextPrimaryHeaderCopy,
   },
   Spacing: {
     _: 'mb-5.75 lg:mb-9',
   },
-  Meta,
+  Meta: TypographyMeta,
 });
 
 const H5 = asElementToken({
   Core: {
-    _: vitalFontSize.Base,
+    /**
+     * Note that in scope of a Typography Token, we consider
+     * `font-size` and `font-weight` as an attribute of the 'Core' Domain
+     * since they are likely to be preserved when changing H1 Theme.
+     */
+    _: as(
+      vitalFontSize.Base,
+      vitalTextDecoration.Medium,
+    ),
   },
   Theme: {
-    _: as(
-      vitalTextDecoration.Medium,
-      vitalColor.TextPrimaryHeaderCopy,
-    ),
+    _: vitalColor.TextPrimaryHeaderCopy,
   },
   Spacing: {
     _: 'mb-5 lg:mb-4.5',
   },
-  Meta,
+  Meta: TypographyMeta,
+});
+
+const HeaderLink = asElementToken({
+  Theme: {
+    _: as(
+      vitalColor.TextPrimaryInteractive,
+      vitalTextDecoration.Underline,
+    )
+  }
 });
 
 const Body = asElementToken({
@@ -132,7 +158,7 @@ const Body = asElementToken({
   Spacing: {
     _: 'mb-6',
   },
-  Meta,
+  Meta: TypographyMeta,
 });
 
 const Eyebrow = asElementToken({
@@ -149,7 +175,11 @@ const Eyebrow = asElementToken({
   Spacing: {
     _: 'mb-3',
   },
-  Meta,
+  Meta: TypographyMeta,
+});
+const EyebrowNoSpacing = asElementToken({
+  ...Eyebrow,
+  Spacing: {},
 });
 
 // This probably will need a better name as Design team defines the uses of this token.
@@ -164,7 +194,7 @@ const Rest = asElementToken({
       vitalColor.TextPrimaryBodyCopy,
     ),
   },
-  Meta,
+  Meta: TypographyMeta,
 });
 
 const WithDemoContent = asElementToken({
@@ -174,15 +204,38 @@ const WithDemoContent = asElementToken({
   },
 });
 
+// Variant testing autoprefixer
+const Gradient = asElementToken({
+  Core: {
+    _: vitalFontSize.L,
+  },
+  Theme: {
+    _: as('bg-clip-text text-transparent bg-gradient-to-r',
+      'from-vital-secondary-eyebrow via-vital-primary-interactive to-vital-secondary-eyebrow',),
+  },
+  Meta: TypographyMeta,
+});
+
+/**
+* Vital Typography
+* @todo: All V 2.0 tokens are exported as part of vitalTypography, New Tokens from version 2
+* are suffixed with 'V2' where conflict exists with version 1. As soon as V1 tokens are deprecated,
+* vitalTypographyV2 can be moved here. 'V2' suffix must be removed.
+* Eventually it will just replace the vitalTypography.
+*/
 export default {
+  ...vitalTypographyV2,
   Link,
   H1,
   H2,
   H3,
   H4,
   H5,
+  HeaderLink,
   Body,
   Eyebrow,
+  EyebrowNoSpacing,
   Rest,
   WithDemoContent,
+  Gradient,
 };

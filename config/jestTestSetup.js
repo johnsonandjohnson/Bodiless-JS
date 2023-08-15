@@ -13,9 +13,15 @@
  */
 
 const enzyme = require('enzyme');
-const EnzymeAdapter = require('@wojtekmaj/enzyme-adapter-react-17');
+const EnzymeAdapter = require('@cfaester/enzyme-adapter-react-18').default;
 
 enzyme.configure({ adapter: new EnzymeAdapter() });
+
+const util = require('util');
+
+Object.defineProperty(global, 'TextEncoder', {
+  value: util.TextEncoder,
+});
 
 if (global.window && global.window.getSelection) {
   global.window.getSelection = () => ({

@@ -17,13 +17,13 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Use Node.js v16.9
+      - name: Use Node.js v18.16
         uses: actions/setup-node@v1
         with:
-          node-version: 16.9
+          node-version: 18.16
       - name: Build
         run: npm run setup
       - name: Publish npm packages
         run: |
           echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
-          npm run lerna:publish
+          npm run publish:from-git

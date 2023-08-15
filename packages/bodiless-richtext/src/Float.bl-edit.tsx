@@ -18,10 +18,10 @@ import {
   withContextActivator,
   withLocalContextMenu,
   ifEditable,
-  useNode,
   withMenuOptions,
+  observer,
 } from '@bodiless/core';
-import { observer } from 'mobx-react';
+import { useNode } from '@bodiless/data';
 
 type Data = {
   float: string,

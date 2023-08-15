@@ -19,6 +19,7 @@ import withGatsbyImageLogger from './withGatsbyImageLogger';
 import withGatsbyImagePreset from './withGatsbyImagePreset';
 import withGatsbyImageLibrary from './withGatsbyImageLibrary';
 import getImageContentFrom from './getImageContentFrom';
+import type { BodilessImageComponents } from './asGatsbyImage';
 
 export {
   asGatsbyImage,
@@ -30,4 +31,5 @@ export {
   withGatsbyImagePreset,
   withGatsbyImageLibrary,
   getImageContentFrom,
+  BodilessImageComponents,
 };

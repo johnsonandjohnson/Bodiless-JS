@@ -12,10 +12,16 @@
  * limitations under the License.
  */
 
-import React, { useContext, useState, FC } from 'react';
+import React, {
+  useContext,
+  useState,
+  FC,
+  PropsWithChildren
+} from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-import { withNodeKey, withResetButton, withNode } from '@bodiless/core';
+import { withResetButton } from '@bodiless/core';
+import { withNodeKey, withNode } from '@bodiless/data';
 import {
   H3 as BaseH3,
   Textarea as BaseTextArea,
@@ -95,7 +101,7 @@ const HtmlStorageContext = React.createContext<HtmlStorage>({
   setHtml: () => {},
 });
 
-const HtmlStorageProvider: FC = ({ children }) => {
+const HtmlStorageProvider: FC<PropsWithChildren> = ({ children }) => {
   const [html, setHtml] = useState(defaultHtml);
   return (
     <HtmlStorageContext.Provider value={{ html, setHtml }}>

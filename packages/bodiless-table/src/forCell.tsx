@@ -31,6 +31,8 @@ const useIsLastRow = () => (
 const useIsEvenColumn = () => useTableColumnContext().index % 2 === 1;
 const useIsOddColumnn = () => useTableColumnContext().index % 2 === 0;
 const useIsFirstColumn = () => useTableColumnContext().index === 0;
+const useIsSecondColumn = () => useTableColumnContext().index === 1;
+const useIsThirdColumn = () => useTableColumnContext().index === 2;
 const useIsLastColumn = () => (
   useTableColumnContext().index === (useTableContext().columns.length - 1)
 );
@@ -41,6 +43,8 @@ export {
   useIsEvenRow,
   useIsOddRow,
   useIsFirstColumn,
+  useIsSecondColumn,
+  useIsThirdColumn,
   useIsFirstRow,
   useIsLastColumn,
   useIsLastRow,

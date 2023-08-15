@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/ui",
-  "version": "1.0.0-beta.12",
+  "version": "1.0.0-rc.42",
   "description": "Common default UI elements for BodilessJS",
   "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",
   "license": "Apache-2.0",
@@ -25,30 +25,32 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json && npm run build:css && npm run copy && npm run build:api-doc",
+    "build": "npm run build:lib && npm run build:css && npm run copy",
+    "build:lib": "tsc -p ./tsconfig.json",
+    "build:watch": "npm run build:lib -- --watch",
+    "dev": "npm run build:watch",
+    "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api ./src",
     "build:css": "postcss index.tailwind.css -o ./src/bodiless.index.css",
-    "build:watch": "npm run build -- --watch",
-    "build:api-doc": "typedoc --out doc/api src",
     "copy": "copyfiles -u 1 \"./src/*.css\" \"./lib/\"",
-    "lint": "tslint ./src/**/*.ts?x",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-beta.12",
-    "@bodiless/core": "^1.0.0-beta.12",
-    "@bodiless/fclasses": "^1.0.0-beta.12",
+    "@bodiless/cli": "^1.0.0-rc.42",
+    "@bodiless/core": "^1.0.0-rc.42",
+    "@bodiless/fclasses": "^1.0.0-rc.42",
     "autoprefixer": "^10.4.2",
-    "informed": "^3.34.0",
+    "informed": "^4.44.0",
     "lodash": "^4.17.19",
     "postcss": "^8.4.12"
   },
   "devDependencies": {
+    "postcss-cli": "9.1.0",
     "tailwindcss": "^3.0.23",
     "tailwindcss-dir": "^4.0.0"
   },
   "peerDependencies": {
     "rc-tooltip": "^5.1.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }

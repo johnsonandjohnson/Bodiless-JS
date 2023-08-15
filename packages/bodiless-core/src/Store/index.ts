@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-export * from './BodilessMobxStore';
-export * from './BodilessStoreProvider';
+export * from './BodilessMobxStore.bl-edit';
+export * from './BodilessStoreProvider.bl-edit';
 export * from './types';
 export { getResourcePathFromStoreKey, getStoreKeyFromResourcePath } from './util';

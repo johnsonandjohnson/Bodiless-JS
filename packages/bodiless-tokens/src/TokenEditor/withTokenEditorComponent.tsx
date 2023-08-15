@@ -12,14 +12,17 @@
  * limitations under the License.
  */
 
-import { createHash } from 'crypto';
+import MD5 from 'crypto-js/md5';
 import {
   addClasses, withDesign, HOC,
   addProps, flowHoc, startWith, Design,
 } from '@bodiless/fclasses';
 import {
-  withDefaultContent, useNode, withContextActivator, withActivatorWrapper,
+  withContextActivator, withActivatorWrapper,
 } from '@bodiless/core';
+import {
+  withDefaultContent, useNode,
+} from '@bodiless/data';
 import { ifComponentSelector } from '@bodiless/layouts';
 import withTokensFromProps from '../withTokensFromProps';
 import { withTokenPanelPane } from '../TokenPanelPane';
@@ -36,11 +39,11 @@ import { TokenEditorComponentDef } from './types';
  */
 const useNodeKeyHash = () => {
   const { node } = useNode();
-  return createHash('md5').update(node.path.join('$')).digest('hex');
+  return MD5(node.path.join('$')).toString();
 };
 
 /**
- * Creates an HOC which sets the target component for a token editor.
+ * Creates a HOC which sets the target component for a token editor.
  * This is the component to which the tokens in the editor will apply.
  *
  * @param def
@@ -50,7 +53,7 @@ const useNodeKeyHash = () => {
  * Optional design to apply to the token panel for this component.
  *
  * @returns
- * An HOC which adds the specifie component
+ * A HOC which adds the specifie component
  */
 const withTokenEditorComponent = (
   def: TokenEditorComponentDef,
@@ -92,7 +95,7 @@ const withTokenEditorComponent = (
 };
 
 /**
- * Creates an HOC which can be used to add a token editor to a flow container.
+ * Creates a HOC which can be used to add a token editor to a flow container.
  *
  * @param def
  * The definition of the component to be added.

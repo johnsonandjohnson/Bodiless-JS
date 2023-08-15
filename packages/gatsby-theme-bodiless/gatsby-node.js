@@ -20,12 +20,23 @@
  */
 const pathUtil = require('path');
 const fs = require('fs');
-const { getDisabledPages } = require('@bodiless/components/node-api');
+const webpack = require('webpack');
+const {
+  getDisabledPages,
+  findComponentPath,
+  findSubPageTemplateTemplate,
+  findTemplate,
+} = require('@bodiless/page/lib/cjs/NodeApi');
+const {
+  createGitInfo,
+} = require('@bodiless/git/lib/cjs/NodeApi');
 const { createFilePath } = require('gatsby-source-filesystem');
 const { addStaticReplacementPlugin } = require('@bodiless/webpack');
-const { onCreateNode, createSlug, createGitInfo } = require('./create-node');
+const { onCreateNode, createSlug } = require('./create-node');
 const createRedirectAlias = require('./create-redirect-alias');
 const Logger = require('./Logger');
+// eslint-disable-next-line import/order
+const gatsbyPluginImageOnCreateWebpackConfig= require('gatsby-plugin-image/gatsby-node').onCreateWebpackConfig;
 
 const logger = new Logger('gatsby');
 
@@ -48,74 +59,6 @@ exports.onCreateBabelConfig = args => {
   setBabelPlugin({
     name: 'babel-plugin-preval',
   });
-};
-
-/**
- * Helper function to find page component.
- * @param  {...any} pathSegments Path to component directory.
- */
-const findComponentPath = (...pathSegments) => {
-  let componentPath;
-  // Allowed component extensions are jsx, tsx and json.
-  ['index.jsx', 'index.tsx', 'index.json'].some(item => {
-    const path = pathUtil.resolve(...pathSegments, item);
-    if (fs.existsSync(path)) {
-      componentPath = path;
-      return true;
-    }
-    return false;
-  });
-  return componentPath || null;
-};
-
-const cachedTemplates = [];
-
-const readTemplateFile = indexPath => {
-  if (cachedTemplates.includes(indexPath)) {
-    return cachedTemplates[indexPath];
-  }
-  if (!fs.existsSync(indexPath)) {
-    cachedTemplates[indexPath] = false;
-    return cachedTemplates[indexPath];
-  }
-  const contents = fs.readFileSync(indexPath);
-  try {
-    const parsedContent = JSON.parse(contents);
-    cachedTemplates[indexPath] = {
-      template: parsedContent['#template'],
-      subpage_template: parsedContent['#subpage_template'],
-      path: parsedContent.path,
-    };
-  } catch (exception) {
-    cachedTemplates[indexPath] = false;
-  }
-  return cachedTemplates[indexPath];
-};
-
-const findSubPageTemplateTemplate = (indexPath, basePath) => {
-  const templates = readTemplateFile(indexPath);
-  if (templates.subpage_template) return templates.subpage_template;
-  if (templates.template) return templates.template;
-  const parentPath = pathUtil.dirname(pathUtil.dirname(indexPath));
-  if (parentPath <= basePath) {
-    return '_default';
-  }
-  return findSubPageTemplateTemplate(`${parentPath}/index.json`, basePath);
-};
-
-const findTemplate = (indexPath, basePath, isFirst = true) => {
-  const templates = readTemplateFile(indexPath);
-  if (isFirst && templates.template) {
-    return templates.template;
-  }
-  if (!isFirst && templates.subpage_template) {
-    return templates.subpage_template;
-  }
-  const parentPath = pathUtil.dirname(pathUtil.dirname(indexPath));
-  if (parentPath <= basePath) {
-    return '_default';
-  }
-  return findTemplate(`${parentPath}/index.json`, basePath, false);
 };
 
 const createPagesFromFS = async ({ actions, graphql, getNode }) => {
@@ -250,6 +193,33 @@ exports.createPages = async ({ actions, graphql, getNode }) => {
 exports.onCreateWebpackConfig = ({
   stage, actions, plugins
 }, pluginOptions) => {
+  let commonTags = '';
+  try {
+    const commonTagsPath = require.resolve('common-tags');
+    commonTags = pathUtil.join(commonTagsPath.split('common-tags')[0], 'common-tags');
+  } catch (error) {
+    // Empty catch.
+  }
+  actions.setWebpackConfig({
+    plugins: [
+      new webpack.DefinePlugin({
+        BL_IS_EDIT: JSON.stringify(process.env.NODE_ENV !== 'production')
+      })
+    ],
+  });
+  if (commonTags) {
+    // Force common-tags to be tree shakeable. Issue submitted to common-tags https://github.com/zspecza/common-tags/issues/219.
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            include: commonTags,
+            sideEffects: false
+          }
+        ]
+      }
+    });
+  }
   if (stage === 'build-javascript') {
     actions.setWebpackConfig({
       resolve: {
@@ -271,12 +241,14 @@ exports.onCreateWebpackConfig = ({
       ],
       resolve: {
         fallback: {
-          crypto: require.resolve('crypto-browserify'),
-          // stream is required for crypto
-          stream: require.resolve('stream-browserify'),
           path: require.resolve('path-browserify'),
         },
       },
     });
+  }
+  if (stage === 'build-html' && process.env.BODILESS_GATSBY_PLUGIN_IMAGE_OMIT) {
+    // Call onCreateWebpackConfig from gatsby-plugin-image.
+    // It sets two environment variables used then to generate the HTML.
+    gatsbyPluginImageOnCreateWebpackConfig({stage, plugins, actions});
   }
 };

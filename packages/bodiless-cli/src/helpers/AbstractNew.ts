@@ -36,6 +36,8 @@ const ora = require('ora');
 
 const NO_TEMPLATE = '*** NONE';
 
+const kebabToCamel = (n: string) => n.replace(/-([a-z])/g, g => g[1].toUpperCase());
+
 const abstractNewFlags: Flags<AbstractNewOptions> = {
   ...Wizard.flags,
 
@@ -60,7 +62,7 @@ const abstractNewFlags: Flags<AbstractNewOptions> = {
       },
     }),
     validator: (arg: string) => {
-      if (!arg) return 'Desitination is required';
+      if (!arg) return 'Destination is required';
       if (fs.existsSync(arg)) return 'Destination already exists';
       return true;
     },
@@ -93,7 +95,7 @@ const abstractNewFlags: Flags<AbstractNewOptions> = {
 
   'sites-dir': {
     ...commandFlags.string({
-      description: 'Directory in source monorepo containg sites',
+      description: 'Directory in source monorepo containing sites',
       parse: d => d.trim(),
       default: 'sites',
     }),
@@ -103,7 +105,7 @@ const abstractNewFlags: Flags<AbstractNewOptions> = {
   'packages-dir': {
     ...commandFlags.string({
       parse: d => d.trim(),
-      description: 'Directory in source monorepo containg packages',
+      description: 'Directory in source monorepo containing packages',
       default: 'packages',
     }),
     prompt: false,
@@ -112,7 +114,7 @@ const abstractNewFlags: Flags<AbstractNewOptions> = {
   setup: {
     ...commandFlags.string({
       description: 'Name of setup script',
-      default: 'setup',
+      default: 'npm run setup',
       parse: d => d.trim(),
     }),
     prompt: false,
@@ -178,7 +180,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     const sitesDir = await this.getArg('sites-dir');
     const name = await this.getArg('name');
     const newName = await this.getArg('name');
-    const newTokenName = newName.replace(/-([a-z])/g, g => g[1].toUpperCase());
+    const newTokenName = kebabToCamel(newName);
     const ns = await this.getNamespace();
     const cwd = path.resolve(await this.getArg('dest'));
     const commonOptions = {
@@ -220,7 +222,22 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
       from: new RegExp(jsTemplateName, 'g'),
       to: newName,
     };
-    return Promise.all([replaceInFile(conf2), replaceInFile(conf3)]);
+    // Replace default site name from scripts
+    const conf4 = {
+      ...commonOptions,
+      files: [
+        `${cwd}/edit/ecosystem.config.js`,
+        `${cwd}/postinstall.sh`,
+        `${cwd}/edit/.platform.app.yaml`,
+      ].filter(f => fs.existsSync(f)),
+      from: 'test-site',
+      to: newName,
+    };
+    return Promise.all([
+      replaceInFile(conf2),
+      replaceInFile(conf3),
+      replaceInFile(conf4),
+    ]);
   }
 
   async cloneSourceRepo(): Promise<string> {
@@ -343,7 +360,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
         promises.push(recursiveRename({
           rootPath: path.join(sitesDir, name),
           search: template,
-          replace: name,
+          replace: kebabToCamel(name),
           exclude: pathName => /node_modules/.test(pathName) || /lib/.test(pathName),
         }));
       }
@@ -373,11 +390,19 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
       data.name = `${name}-monorepo`;
       if (!fs.existsSync(templatePackageDir)) {
         delete data.scripts['build:packages'];
-        data.scripts.setup = 'npm run bootstrap';
+        data.scripts.setup = 'npm install';
+        data.scripts.fix = 'eslint --cache --ext .js,.jsx,.ts,.tsx sites -- ';
       }
-      data.scripts.start = `lerna run start --stream --scope ${siteName}`;
-      data.scripts.serve = `lerna run serve --stream --scope ${siteName}`;
-      data.scripts.docs = `lerna run build:doc --stream --scope ${siteName} && docsify serve ./${sitesDir}/${name}/doc`;
+      delete data.scripts['vital-check'];
+      delete data.scripts['test:pw-functional'];
+      delete data.scripts['test:playwright'];
+      delete data.scripts.copyright;
+      data.scripts.lint = 'eslint --fix  --cache --ext .js,.jsx,.ts,.tsx sites -- ';
+      data.scripts.start = `npm run start --workspace=${siteName}`;
+      data.scripts.dev = `cross-env NODE_ENV=development npx -y turbo dev --filter=./packages/* --filter=${siteName}`;
+      data.scripts.serve = `npm run serve --workspace=${siteName}`;
+      data.scripts.docs = `npm run build:docs --workspace=${siteName} && docsify serve ./${sitesDir}/${name}/doc`;
+      data.husky.hooks['pre-push'] = 'npm run sync:check && npm run lint && npm run check';
     } else if (type === 'site') {
       data.name = siteName;
       // Find the old dependency on the template package (if any) and delete it.
@@ -424,6 +449,26 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     return fs.writeFile(file, JSON.stringify(data, undefined, 2));
   }
 
+  async updatePshConfig() {
+    const dest = await this.getArg('dest');
+    const file = path.join(dest, 'edit/platform.custom.sh');
+
+    const hasLocalPackages = (dir = './packages') => {
+      if (!fs.existsSync(dir)) return false;
+      if (fs.readdirSync(dir).filter(sub => !sub.includes('.')).length > 0) {
+        return true;
+      }
+      return false;
+    };
+
+    if (!fs.existsSync(file) || hasLocalPackages()) return Promise.resolve();
+    const data = await fs.readFile(file);
+    const content = data.toString();
+    // Remove "npm run build:packages"
+    const updatedContent = content.replace(/\n.*npm run build:packages.*$/gm, '');
+    return fs.writeFile(file, updatedContent);
+  }
+
   async cleanMisc() {
     const dest = await this.getArg('dest');
     const packagesDir = await this.getArg('sites-dir');
@@ -431,12 +476,19 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     const name = await this.getArg('name');
     const files = [
       path.join(dest, 'jenkins'),
-      path.join(dest, 'cypress'),
-      path.join(dest, 'github'),
+      path.join(dest, 'playwright'),
+      path.join(dest, 'playwright.config.ts'),
+      path.join(dest, '.github'),
+      path.join(dest, '.vscode'),
+      path.join(dest, 'sonar-project.properties.'),
+      path.join(dest, 'Dockerfile'),
+      path.join(dest, 'UPGRADE.md'),
+      path.join(dest, 'CONTRIBUTING.md'),
+      path.join(dest, 'CHANGELOG.md'),
       // remove the starter eslintrcs.  They exist only to disable
       // rules which flag the underscores in the __starter__ template.
-      path.join(dest, packagesDir, name, 'eslintrc.js'),
-      path.join(dest, sitesDir, name, 'eslintrc.js'),
+      path.join(dest, packagesDir, name, '.eslintrc.js'),
+      path.join(dest, sitesDir, name, '.eslintrc.js'),
     ];
     return Promise.all(files.map(f => fs.remove(f)));
   }
@@ -460,8 +512,37 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
   // eslint-disable-next-line class-methods-use-this
   async validate() {
     const v = process.version;
-    if (!v.match(/^v16\./)) {
-      throw new Error(`Unsupported node version: ${v}.  Must be v16.x`);
+    if (!v.match(/^v18\./)) {
+      throw new Error(`Unsupported node version: ${v}.  Must be v18.x`);
+    }
+  }
+
+  /**
+   * Update the new site package-lock.json to remove any references to
+   * local packages. This is necessary because the package-lock
+   * file is copied from bodiless monorepo to the new site.
+   * It contains references to local packages which will not exist
+   * in the new site.
+   */
+  async updateLockFile() {
+    const dest = await this.getArg('dest');
+    const lockFilename = path.join(dest, 'package-lock.json');
+    try {
+      const lockFile = await fs.readFile(lockFilename, 'utf8');
+      const lockData = JSON.parse(lockFile);
+      const removed = Object.keys(lockData.packages).filter(
+        key => {
+          if (lockData?.packages[key]?.link || !!key.match(/^(packages|sites)\//)) {
+            delete lockData.packages[key];
+            return true;
+          }
+          return false;
+        }
+      );
+      console.log('Package keys removed: ', removed);
+      await fs.writeFile(lockFilename, JSON.stringify(lockData, undefined, 2));
+    } catch (error: any) {
+      throw new Error(`Failed to update package-lock: ${lockFilename}.  ${error.message}`);
     }
   }
 
@@ -472,8 +553,10 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     await this.updatePackageJson('root');
     await this.updatePackageJson('site');
     await this.updatePackageJson('package');
+    await this.updatePshConfig();
     await this.updateTsConfig();
     await this.moveReadMe();
+    await this.updateLockFile();
     await this.replaceTemplatePackageName();
   }
 
@@ -484,13 +567,14 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     spawner.options.cwd = dest;
     await spawner.spawn('git', 'init');
     await spawner.spawn('git', 'checkout', '-b', 'main');
+    if (!await this.getArg('no-setup')) {
+      const setup = await this.getArg('setup');
+      const command = setup ? setup.split(' ') : ['npm', 'run', 'setup'];
+      this.log(`Running ${setup}...`);
+      await spawner.spawn(...command);
+    }
     await spawner.spawn('git', 'add', '.');
-    await spawner.spawn('git', 'commit', '-m', '"Initial Commit"');
-    if (await this.getArg('no-setup')) return Promise.resolve();
-    const setup = await this.getArg('setup');
-    const command = setup === 'install' ? ['npm', 'install'] : ['npm', 'run', 'setup'];
-    this.log(`Running ${setup}...`);
-    return spawner.spawn(...command);
+    return spawner.spawn('git', 'commit', '-m', '"Initial Commit"');
   }
 
   async run() {

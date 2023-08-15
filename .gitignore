@@ -3,7 +3,7 @@ node_modules
 
 # Temporary files
 .DS_Store
-.swp
+*.swp
 .eslintcache
 *.tsbuildinfo
 # jetbrains files:
@@ -11,6 +11,7 @@ node_modules
 # Lerna git ignore items
 lerna-debug.log
 packages/**/lib
+packages/**/dist
 !packages/headless-chrome-crawler/lib
 packages/**/bodiless.index.css
 sites/**/lib
@@ -28,9 +29,15 @@ test-report.xml
 
 /starters
 
-/cypress/videos
-/cypress/screenshots
+# Test tools
 /sites-test
+playwright-report
+accessibility-reports
 
 # API doc
 **/doc/api
+test-results/
+playwright-report/
+
+.turbo
+.vercel

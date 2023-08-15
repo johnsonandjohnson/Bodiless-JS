@@ -61,6 +61,9 @@ const asGatsbyLink$: HOC<BodilessLinkProps, DesignableProps<Components>> = Compo
   return designable(startComponents, 'GatsbyLink')(AsGatsbyLink) as ComponentType<any>;
 };
 
+/**
+ * @deprecated
+ */
 const asGatsbyLink = flowHoc(
   ifReadOnly(
     withDesign({

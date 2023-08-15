@@ -25,7 +25,7 @@ import {
   withListSubMenu,
   asTopNav,
 } from '@bodiless/navigation';
-import { withNodeKey } from '@bodiless/core';
+import { withNodeKey } from '@bodiless/data';
 import { vitalColor, vitalFontSize, vitalTextDecoration } from '@bodiless/vital-elements';
 import {
   useHasSubMenu,

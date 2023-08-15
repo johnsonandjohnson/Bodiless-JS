@@ -14,9 +14,10 @@
 
 import React, { useState, FC } from 'react';
 import flow from 'lodash/flow';
+import { TagType } from '@bodiless/core';
 import {
-  withNode, DefaultContentNode, NodeProvider, TagType,
-} from '@bodiless/core';
+  withNode, DefaultContentNode, NodeProvider,
+} from '@bodiless/data';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
 import type { TagsNodeType } from '../src/TagButton/types';
@@ -25,10 +26,10 @@ import withFilterByTags from '../src/FilterByGroup/withFilterByTags';
 type TestData = { [key: string]: TagsNodeType };
 
 const testTags: TestData = {
-  foo: { tags: [{ id: 'fooID', name: 'foo' }] },
-  bar: { tags: [{ id: 'barID', name: 'bar' }] },
-  baz: { tags: [{ id: 'batID', name: 'bat' }] },
-  bat: { tags: [{ id: 'bazID', name: 'baz' }] },
+  foo: { tags: [{ value: 'fooID', label: 'foo' }] },
+  bar: { tags: [{ value: 'barID', label: 'bar' }] },
+  baz: { tags: [{ value: 'batID', label: 'bat' }] },
+  bat: { tags: [{ value: 'bazID', label: 'baz' }] },
 };
 
 const getMockNode = () => {
@@ -59,16 +60,16 @@ const TestFilterSelector = () => {
     <div>
       <div>
         <h2>Select a tag to filter by</h2>
-        <button id="show-foo" type="button" onClick={() => setTags([{ id: 'fooID', name: 'foo' }])}>
+        <button id="show-foo" type="button" onClick={() => setTags([{ value: 'fooID', label: 'foo' }])}>
           foo
         </button>
-        <button id="show-bar" type="button" onClick={() => setTags([{ id: 'barID', name: 'bar' }])}>
+        <button id="show-bar" type="button" onClick={() => setTags([{ value: 'barID', label: 'bar' }])}>
           bar
         </button>
-        <button id="show-baz" type="button" onClick={() => setTags([{ id: 'barID', name: 'bat' }])}>
+        <button id="show-baz" type="button" onClick={() => setTags([{ value: 'barID', label: 'bat' }])}>
           baz
         </button>
-        <button id="show-bat" type="button" onClick={() => setTags([{ id: 'bazID', name: 'baz' }])}>
+        <button id="show-bat" type="button" onClick={() => setTags([{ value: 'bazID', label: 'baz' }])}>
           bat
         </button>
       </div>
@@ -96,9 +97,9 @@ describe('withFilterByTags', () => {
   it('Hides all items which do not match selected tags', () => {
     const wrapper = mount(<TestFilterSelector />);
     wrapper.find('#show-foo').simulate('click');
-    expect(wrapper.find('div#foo')).toHaveLength(1);
-    expect(wrapper.find('div#bar')).toHaveLength(0);
-    expect(wrapper.find('div#baz')).toHaveLength(0);
-    expect(wrapper.find('div#bat')).toHaveLength(0);
+    expect(wrapper.find('div#foo')?.prop('style')?.display).toBeUndefined();
+    expect(wrapper.find('div#bar')?.prop('style')?.display).toBe('none');
+    expect(wrapper.find('div#baz')?.prop('style')?.display).toBe('none');
+    expect(wrapper.find('div#bat')?.prop('style')?.display).toBe('none');
   });
 });

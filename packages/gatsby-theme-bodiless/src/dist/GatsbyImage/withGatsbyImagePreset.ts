@@ -14,7 +14,7 @@
 
 import { flowHoc, HOC } from '@bodiless/fclasses';
 import type { TokenMeta } from '@bodiless/fclasses';
-import { withNodeKey } from '@bodiless/core';
+import { withNodeKey } from '@bodiless/data';
 import type { AsBodilessImage } from '@bodiless/components';
 import asGatsbyImage from './asGatsbyImage';
 import withGatsbyImageLogger from './withGatsbyImageLogger';

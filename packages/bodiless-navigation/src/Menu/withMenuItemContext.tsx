@@ -17,8 +17,9 @@ import React, {
   createContext,
   useContext,
   ComponentType,
+  PropsWithChildren,
 } from 'react';
-import { useNode } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import { DEFAULT_NODE_KEYS } from './MenuTitles';
 
 type SubmenuContextType = {
@@ -41,7 +42,7 @@ const SubmenuContext = createContext<SubmenuContextType>({
 
 const useSubmenuContext = () => useContext(SubmenuContext);
 
-const SubmenuProvider: FC<SubmenuProviderType> = ({
+const SubmenuProvider: FC<PropsWithChildren<SubmenuProviderType>> = ({
   children, hasSubmenu, menuItemId, menuItemTitle,
 }) => (
   <SubmenuContext.Provider value={{ hasSubmenu, menuItemId, menuItemTitle }}>

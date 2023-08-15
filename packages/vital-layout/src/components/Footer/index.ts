@@ -12,6 +12,14 @@
  * limitations under the License.
  */
 
+import type { VitalFooter } from './tokens/vitalFooter';
+
 export { default as FooterClean, asFooterToken } from './FooterClean';
 export { default as vitalFooter } from './tokens';
 export type { FooterComponents, FooterProps } from './types';
+
+export * from './Rewards';
+export * from './CopyrightRow';
+export * from './SocialLinks';
+
+export type { VitalFooter };

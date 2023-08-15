@@ -1,0 +1,5 @@
+export * from './index.bl-edit';
+{{#unless sourcePackageName}}
+export * from './types';
+export { as{{properCase componentName}}Token } from './{{properCase componentName}}Clean';
+{{/unless}}

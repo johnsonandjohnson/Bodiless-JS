@@ -1,0 +1,1 @@
+# `@bodiless/knapsack-edit-provider`

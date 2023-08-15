@@ -3,8 +3,9 @@
     "Components": {
       "VitalEditors": {
           "README.md": "./doc/README.md",
+          "PlainEditor.md": "./doc/PlainEditor.md",
           "RTE_Editor.md": "./doc/RichText.md",
-          "PlainEditor.md": "./doc/PlainEditor.md"
+          "RichTextCustomizing.md": "./doc/RichTextCustomizing.md"
       }
     }
   }

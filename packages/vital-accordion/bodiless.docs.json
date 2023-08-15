@@ -1,0 +1,9 @@
+{
+  "VitalDesignSystem": {
+    "Components": {
+      "VitalAccordion": {
+        "README.md": "./doc/Accordion.md"
+      }
+    }
+  }
+}

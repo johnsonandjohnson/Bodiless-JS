@@ -1,0 +1,10 @@
+{
+  "Components": {
+    "Analytics": {
+      "README.md": "./doc/README.md",
+      "About_GTM_and_GA4.md": "./doc/AboutGTM.md",
+      "GA4Activation.md": "./doc/GA4Activation.md",
+      "AddingTracking.md": "./doc/AddingTracking.md"
+    }
+  }
+}

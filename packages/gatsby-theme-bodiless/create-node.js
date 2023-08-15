@@ -17,14 +17,11 @@
 
 const pathUtil = require('path');
 const slash = require('slash');
-const crypto = require('crypto');
-const fs = require('fs');
+const MD5 = require('crypto-js/md5');
 const fse = require('fs-extra');
 const md5File = require('md5-file');
 const { fluid: sharpFluid, fixed: sharpFixed } = require('gatsby-plugin-sharp');
-const git = require('isomorphic-git');
-const findUp = require('find-up');
-const GatsbyImagePresets = require('./dist/GatsbyImage/GatsbyImagePresets').default;
+const GatsbyImagePresets = require('./cjs/dist/GatsbyImage/GatsbyImagePresets').default;
 
 const Logger = require('./Logger');
 
@@ -37,8 +34,6 @@ const srcSetBreakpoints = [
   834,
   1024,
 ];
-
-const findGitFolder = async () => await findUp('.git', { type: 'directory' }) || '';
 
 const getDefaultSharpArgs = () => ({
   quality: 90,
@@ -64,65 +59,6 @@ const findFilesystemNode = ({ node, getNode }) => {
     }
   }
   return fsNode;
-};
-
-/**
- * Get git info from local fs .git directory.
- *
- * @returns {
- *  repo: string,
- *  sha: string,
- *  branch: string,
- * }
- */
-const getGitInfoFromFs = async () => {
-  let repo = '';
-  let sha = '';
-  let branch = '';
-
-  const gitDir = await findGitFolder();
-  if (gitDir) {
-    try {
-      const projectRoot = pathUtil.dirname(gitDir);
-      const remotes = await git.listRemotes({ fs, dir: projectRoot });
-      const origin = remotes.find(v => v.remote === 'origin');
-      repo = origin?.url ?? '';
-      branch = await git.currentBranch({ fs, dir: projectRoot }) || '';
-      sha = await git.resolveRef({ fs, dir: projectRoot, ref: 'HEAD' }) || '';
-      return { repo, sha, branch };
-    } catch (err) {
-      logger.log('Failed to retrieve git info from fs. ', err);
-      return null;
-    }
-  }
-  return null;
-};
-
-/**
- * Get current git repo info.
- *
- * @returns Promise<{
- *  repo: string,
- *  sha: string,
- *  branch: string,
- * }>
- */
-const createGitInfo = async () => {
-  try {
-    const gitInfoFs = await getGitInfoFromFs();
-    if (gitInfoFs) {
-      logger.log('Git info from fs. ', gitInfoFs);
-      return gitInfoFs;
-    }
-  } catch (err) {
-    logger.log('Failed to create git info. ', err);
-  }
-
-  return {
-    repo: '',
-    sha: '',
-    branch: '',
-  };
 };
 
 // Adapted from create-file-path.
@@ -157,10 +93,8 @@ const addSlugField = ({ node, getNode, actions }) => {
   });
 };
 
-const generateStringDigest = content => crypto
-  .createHash('md5')
-  .update(content)
-  .digest('hex');
+const generateStringDigest = content => MD5(content)
+  .toString();
 
 const generateFileDigest = absolutePath => md5File.sync(absolutePath);
 
@@ -410,23 +344,22 @@ const copyFileToStatic = (node, reporter, pathPrefix = '') => {
   );
 
   if (!fse.existsSync(publicPath)) {
-    fse.copySync(
-      fileAbsolutePath,
-      publicPath,
-      { dereference: true },
-      err => {
-        if (err) {
-          reporter.panic(
-            {
-              context: {
-                sourceMessage: `error copying file from ${fileAbsolutePath} to ${publicPath}`,
-              },
-            },
-            err,
-          );
-        }
-      },
-    );
+    try {
+      fse.copySync(
+        fileAbsolutePath,
+        publicPath,
+        { dereference: true },
+      );
+    } catch (err) {
+      reporter.warn(
+        {
+          context: {
+            sourceMessage: `error copying file from ${fileAbsolutePath} to ${publicPath}`,
+          },
+        },
+        err,
+      );
+    }
   }
 
   return `${pathPrefix}/static/${fileName}`;
@@ -438,6 +371,8 @@ const createImageNode = ({ node, content }) => {
     return undefined;
   }
   const imgSrc = parsedContent.src;
+  // Don't create an image node for external images.
+  if (/^http/i.test(imgSrc)) return undefined;
   const fileExtension = pathUtil.extname(imgSrc).substr(1);
   if (!supportedExtensions[fileExtension]) {
     return undefined;
@@ -569,5 +504,3 @@ exports.onCreateNode = ({
 };
 
 exports.createSlug = createSlug;
-
-exports.createGitInfo = createGitInfo;

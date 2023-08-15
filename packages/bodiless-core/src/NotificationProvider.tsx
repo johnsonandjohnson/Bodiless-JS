@@ -19,6 +19,7 @@ import React, {
   useEffect,
   useRef,
   useMemo,
+  PropsWithChildren,
 } from 'react';
 import { v1 } from 'uuid';
 
@@ -56,7 +57,7 @@ const NotifyContext = React.createContext<NotifyContextType>({
  * @param children
  * @constructor
  */
-const NotificationProvider: FC = ({ children }) => {
+const NotificationProvider: FC<PropsWithChildren> = ({ children }) => {
   const [notifications, setNotifications] = useState<NotificationProviderItem[]>([]);
   const notify = (owner: string, newNotifications: Notification[]) => setNotifications(
     (oldNotifications: NotificationProviderItem[]) => oldNotifications

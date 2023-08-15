@@ -1,10 +1,11 @@
 const fs = require('fs');
 const express = require('express');
+const { execSync } = require('child_process');
 // const {
 //   createDefaultContentPlugins,
 //   getSampleDefaultContentConfig,
 // } = require('@bodiless/gatsby-theme-bodiless/dist/DefaultContent');
-const { getDisabledPages } = require('@bodiless/components/node-api');
+const { getDisabledPages } = require('@bodiless/page/lib/cjs/NodeApi');
 // const getSSIEntities = require('@bodiless/gatsby-plugin-ssi/read-ssi-entities');
 // const {
 //   getConfig: getSiteDefaultContentConfig,
@@ -12,6 +13,8 @@ const { getDisabledPages } = require('@bodiless/components/node-api');
 
 const activeEnv = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
 
+// @todo This should be an api, not an npm command
+execSync('npm run build:env-vars');
 require('dotenv').config({
   path: `.env.${activeEnv}`,
 });

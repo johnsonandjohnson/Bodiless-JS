@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import { graphql } from 'gatsby';
 import { PageContextProvider, contextMenuForm, getUI } from '@bodiless/core';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
@@ -39,17 +39,17 @@ const ExampleForm = () => contextMenuForm()(
 
         <ComponentFormFieldWrapper>
           <ComponentFormFieldTitle>Text</ComponentFormFieldTitle>
-          <ComponentFormText field="text-field" placeholder="Name" />
+          <ComponentFormText name="text-field" placeholder="Name" />
         </ComponentFormFieldWrapper>
 
         <ComponentFormFieldWrapper>
           <ComponentFormFieldTitle>Text Area</ComponentFormFieldTitle>
-          <ComponentFormTextArea field="text-area" placeholder="Comments" />
+          <ComponentFormTextArea name="text-area" placeholder="Comments" />
         </ComponentFormFieldWrapper>
 
         <ComponentFormFieldWrapper>
           <ComponentFormFieldTitle>Radio Button Group</ComponentFormFieldTitle>
-          <ComponentFormRadioGroup field="gender" style={{ backgroundColor: 'blue' }}>
+          <ComponentFormRadioGroup name="gender" style={{ backgroundColor: 'blue' }}>
             <ComponentFormLabel>
               <ComponentFormRadio value="male" />
               Male
@@ -68,14 +68,14 @@ const ExampleForm = () => contextMenuForm()(
         <ComponentFormFieldWrapper>
           <ComponentFormFieldTitle>Checkbox</ComponentFormFieldTitle>
           <ComponentFormLabel>
-            <ComponentFormCheckBox field="checkbox" />
+            <ComponentFormCheckBox name="checkbox" />
             I agree
           </ComponentFormLabel>
         </ComponentFormFieldWrapper>
 
         <ComponentFormFieldWrapper>
           <ComponentFormFieldTitle>Select</ComponentFormFieldTitle>
-          <ComponentFormSelect field="city">
+          <ComponentFormSelect name="city">
             <ComponentFormOption value="" disabled>
               Select
             </ComponentFormOption>
@@ -88,7 +88,7 @@ const ExampleForm = () => contextMenuForm()(
         <ComponentFormFieldWrapper>
           <ComponentFormFieldTitle>Multi-Select</ComponentFormFieldTitle>
           <ComponentFormSelect
-            field="colors"
+            name="colors"
             id="select-colors"
             multiple
           >
@@ -103,14 +103,14 @@ const ExampleForm = () => contextMenuForm()(
 
         <ComponentFormFieldWrapper>
           <ComponentFormFieldTitle>Number</ComponentFormFieldTitle>
-          <ComponentFormText field="number-text-field" type="number" placeholder="100" />
+          <ComponentFormText name="number-text-field" type="number" placeholder="100" />
         </ComponentFormFieldWrapper>
       </>
     );
   },
 );
 
-const ExampleFormButtonProvider: FC = ({ children }) => {
+const ExampleFormButtonProvider: FC<PropsWithChildren> = ({ children }) => {
   const getMenuOptions = () => [{
     name: 'Example Form',
     label: 'Test',

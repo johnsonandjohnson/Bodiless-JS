@@ -19,6 +19,7 @@ import {
   withProps,
 } from '@bodiless/fclasses';
 import { asRewardsToken } from '../RewardsClean';
+import type { RewardsToken } from '../RewardsClean';
 
 /*
  * @TODO
@@ -33,7 +34,7 @@ const RewardsFormElement = as(
 );
 const RewardColorCopy = 'text-vital-primary-header-copy 2xl:text-vital-primary-footer-copy';
 
-const Base = asRewardsToken({
+const Default = asRewardsToken({
   Components: {
     Wrapper: startWith(Div),
   },
@@ -101,11 +102,28 @@ const Base = asRewardsToken({
   },
 });
 
-const Default = asRewardsToken({
-  ...Base,
-});
+/**
+ * Tokens for the vital Rewards PLACEHOLDER
+ *
+ * @category Token Collection
+ * @see [[RewardsClean]]
+ */
+export interface VitalRewards {
+  /**
+   * Defines the default Rewards placeholder
+   */
+  Default: RewardsToken,
+}
 
-export default {
-  Base,
+/**
+ * Tokens for Vital Copyright Row
+ *
+ * @category Token Collection
+ * @see [[VitalRewards]]
+ * @see [[RewardsClean]]
+ */
+const vitalRewards: VitalRewards = {
   Default,
 };
+
+export default vitalRewards;

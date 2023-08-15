@@ -13,7 +13,7 @@
  */
 
 import React, {
-  FC, useState, useEffect, useRef, ComponentType,
+  FC, useState, useEffect, useRef, ComponentType, PropsWithChildren
 } from 'react';
 import { User, UserManager } from 'oidc-client-ts';
 import type { SigninRedirectArgs } from 'oidc-client-ts';
@@ -29,7 +29,7 @@ import type { AuthProviderProps, SignOutRedirectArgs } from './types';
  * @param props AuthProviderProps
  * @see AuthProviderProps
  */
-export const AuthProvider: FC<AuthProviderProps> = ({
+export const AuthProvider: FC<PropsWithChildren<AuthProviderProps>> = ({
   children,
   autoSignIn = false,
   onBeforeSignIn,

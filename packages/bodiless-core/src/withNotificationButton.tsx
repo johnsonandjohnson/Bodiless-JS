@@ -13,10 +13,10 @@
  */
 
 import React from 'react';
-import { ContextMenuForm } from './contextMenuForm';
+import { ContextMenuForm } from './contextMenuForm.bl-edit';
 import { withMenuOptions } from './PageContextProvider';
 import { useNotifications } from './NotificationProvider';
-import { useMenuOptionUI } from './components/ContextMenuContext';
+import { useMenuOptionUI } from './components/ContextMenuContext.bl-edit';
 import type { ContextMenuFormProps } from './Types/ContextMenuTypes';
 
 const NotificationList = () => {

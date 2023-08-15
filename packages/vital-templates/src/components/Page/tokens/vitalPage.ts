@@ -12,27 +12,31 @@
  * limitations under the License.
  */
 
-import { as, Token, withShowDesignKeys } from '@bodiless/fclasses';
+import { as, on, Token } from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
-import { asElementToken } from '@bodiless/vital-elements';
+import { asFluidToken } from '@bodiless/vital-elements';
+import { WithGA4DesignKeys } from '@bodiless/ga4';
 import { asBodilessPage } from '../asBodilessPage';
-// import { vitalGenericTemplate, GenericTemplateClean } from '../../Generic';
-// import { vitalStyleGuideTemplate, StyleGuideTemplateClean } from '../../StyleGuideTemplate';
+import { GenericTemplateClean, vitalGenericTemplate } from '../../GenericTemplate';
 
-// @todo token to GTM package when created
-const withGTMDesignKeys = withShowDesignKeys(true, 'layer-region');
-
-const Default = asElementToken({
+const Default = asFluidToken({
   Core: {
     _: as(
-      asBodilessChameleon('template', undefined, () => ({
-        root: true,
-        label: 'Template',
-        icon: 'grid_view',
-        group: 'page-group',
-        formTitle: 'Choose a template for this page',
-      })),
+      asBodilessChameleon(
+        'template',
+        {},
+        () => ({
+          root: true,
+          label: 'Template',
+          icon: 'grid_view',
+          group: 'page-group',
+          formTitle: 'Choose a template for this page',
+        }),
+      ),
     ),
+  },
+  Components: {
+    _default: on(GenericTemplateClean)(vitalGenericTemplate.Default),
   },
   // @todo restore tools
   // Behavior: {
@@ -47,12 +51,10 @@ const Default = asElementToken({
   //   _: withPageDimensionsContext({ breakpoints }),
   // },
   Compose: {
-    _: as(withGTMDesignKeys as Token),
-  },
-  Components: {
-    // _default: on(GenericTemplateClean)(vitalGenericTemplate.Default),
-    // StyleGuide: on(StyleGuideTemplateClean)(vitalStyleGuideTemplate.Default),
+    WithGA4DesignKeys: as(WithGA4DesignKeys as Token),
   },
 });
 
-export default { Default };
+export default {
+  Default,
+};

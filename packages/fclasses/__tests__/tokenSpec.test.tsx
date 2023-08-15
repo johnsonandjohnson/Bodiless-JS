@@ -13,14 +13,14 @@
  */
 
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import React, { ComponentType, FC } from 'react';
+import React, { ComponentType, FC, HTMLProps } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount, shallow } from 'enzyme';
 import { identity, flow, omit } from 'lodash';
 import {
   DesignableComponentsProps, Span, designable, Div, addClasses, removeClasses,
   withDesign, HOC, flowHoc, flowIf, withoutProps,
-  asTokenSpec, as, extendMeta, $TokenSpec,
+  asTokenSpec, as, extendMeta, $TokenSpec, ComponentOrTag,
 } from '../src';
 
 const defaultDomains = {
@@ -31,7 +31,6 @@ const defaultDomains = {
   Layout: {},
   Spacing: {},
   Theme: {},
-  Editors: {},
   Content: {},
   Behavior: {},
   Schema: {},
@@ -87,6 +86,48 @@ describe('extendMeta', () => {
 });
 
 describe('asTokenSpec', () => {
+  it('Supplies core domain by default', () => {
+    const test = asTokenSpec()({
+      Meta: {
+        title: 'Test',
+      },
+    });
+    expect(test.Core).toBeDefined();
+    // Check that core domain and default domains are allowed
+    const test1 = asTokenSpec()({
+      Core: {
+        _: 'test',
+      },
+      Flow: flowHoc,
+      Compose: {},
+    });
+    // Check that other domains are disalloed.
+    const test2 = asTokenSpec()({
+      // @ts-expect-error
+      Theme: {
+        _: 'test',
+      },
+    });
+  });
+
+  it('Assigns HOCs to core domain', () => {
+    const hoc: HOC<any> = C => props => <C {...props} foo="bar" />;
+    const H = asTestTokenSpec(hoc);
+    const hoc$ = H.Core._ as HOC<any>;
+    const Div: ComponentOrTag<HTMLProps<HTMLDivElement>> = 'div';
+    const D1 = hoc(Div);
+    const D2 = hoc$(Div);
+    const w1 = mount(<D1 id="d1" />);
+    expect(w1.find('div#d1').prop('foo')).toBe('bar');
+    const w2 = mount(<D2 id="d2" />);
+    expect(w2.find('div#d2').prop('foo')).toBe('bar');
+  });
+
+  it('Assigns strings to core domain', () => {
+    const H = asTestTokenSpec('foo');
+    expect(H.Core._).toBe('foo');
+  });
+
   it('Does not alter tokens when extending them', () => {
     const Inner1 = asTestTokenSpec({
       Core: {

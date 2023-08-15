@@ -14,13 +14,13 @@
 
 /* eslint-disable no-nested-ternary */
 import React, {
-  FC, createContext, useContext, ReactNode,
+  FC, createContext, useContext, ReactNode, PropsWithChildren
 } from 'react';
 import { addProps, Div } from '@bodiless/fclasses';
 import ContextMenuItem from '../components/ContextMenuItem';
 import { ContextMenuBase } from '../components/ContextMenu';
-import { useMenuOptionUI } from '../components/ContextMenuContext';
-import { FormChrome } from '../contextMenuForm';
+import { useMenuOptionUI } from '../components/ContextMenuContext.bl-edit';
+import { FormChrome } from '../contextMenuForm.bl-edit';
 import type { IContextMenuItemProps, ContextMenuFormProps } from '../Types/ContextMenuTypes';
 
 // A context to hold the child menu items.
@@ -30,7 +30,7 @@ const SubMenuChildren = () => {
   return <>{children}</>;
 };
 
-const ContextSubMenu: FC<IContextMenuItemProps> = props => {
+const ContextSubMenu: FC<PropsWithChildren<IContextMenuItemProps>> = props => {
   const {
     option: option$, name, children, ...rest
   } = props;
