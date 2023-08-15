@@ -13,6 +13,7 @@ import { asVitalCarouselToken, withCarouselInit } from '../VitalCarouselClean';
 import type { VitalCarousel } from '../types';
 import { CAROUSEL_NODE_KEY } from '../../utils/constants';
 import CarouselSlide from '../../utils/CarouselSlide';
+import CarouselCounter from '../../utils/CarouselCounter';
 import { CarouselThumbClean, vitalCarouselThumb } from '../../CarouselThumb';
 import { CarouselDotClean, vitalCarouselDot } from '../../CarouselDot';
 import PrevIcon from '../../assets/PrevIcon';
@@ -125,6 +126,14 @@ const WithCarouselDots = asVitalCarouselToken(
   }
 );
 
+const WithCarouselDotsNums = asVitalCarouselToken(
+  {
+    Components: {
+      Counter: replaceWith(stylable(CarouselCounter)),
+    },
+  },
+);
+
 const WithCarouselDotsAllViewports = asVitalCarouselToken({
   Layout: {
     Slider: as(
@@ -163,18 +172,19 @@ const WithVerticalThumbs = asVitalCarouselToken({
   },
   Layout: {
     Wrapper: 'lg:flex lg:flex-row-reverse',
-    SliderWrapper: 'lg:w-5/6',
-    ControlsWrapper: 'lg:w-1/6 flex-col',
+    SliderWrapper: 'lg:w-full',
+    ControlsWrapper: 'lg:w-[122px] flex-col',
     Indicator: 'flex flex-col list-item',
-    NavWrapper: 'flex flex-row justify-between thumbcontrols',
+    NavWrapper: 'flex flex-row justify-center thumbcontrols',
     Prev: 'arrow -prev',
     Next: 'arrow -next',
   },
   Spacing: {
-    ControlsWrapper: 'pr-16px',
+    SliderWrapper: 'pl-24px',
     Indicator: withDesign({
-      Item: 'pb-8px',
+      Item: 'pb-24px',
     }),
+    NavWrapper: 'pb-24px',
   },
 });
 
@@ -298,6 +308,7 @@ const vitalCarousel: VitalCarousel = {
   WithVerticalThumbs,
   WithControls,
   WithCarouselDots,
+  WithCarouselDotsNums,
   WithCarouselDotsAllViewports,
   WithCarouselDotsMobileTablet,
   WithThumbnail,
