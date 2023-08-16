@@ -12,6 +12,7 @@
       ],
       "dependsOn": ["^build"]
     },
+    "build:watch": {},
     "check": {},
     "dev": {
       "cache": false,

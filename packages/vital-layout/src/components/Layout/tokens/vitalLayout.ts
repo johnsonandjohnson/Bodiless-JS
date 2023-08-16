@@ -38,6 +38,9 @@ const Default = asLayoutToken({
     Header: vitalHeader.Default,
     Footer: vitalFooter.Default,
   },
+  Analytics: {
+    Container: addProps({ 'data-layer-region': 'body' }),
+  },
   SEO: {
     _: WithStructuredDataProvider,
   },

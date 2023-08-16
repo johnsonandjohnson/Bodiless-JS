@@ -1,0 +1,506 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VitalCarousel Tokens Matches snapshot for Default 1`] = `
+<div
+  aria-label="carousel"
+  className="slider"
+  role="region"
+>
+  <div>
+    <ul
+      className="scrollbar scroll-smooth snap-always snap-x pb-20px md:pb-24px flex flex-nowrap justify-normal overflow-x-auto"
+    >
+      <li
+        className="snap-start scroll-snap-slide shrink-0 grow-0 items-center flex flex-col justify-center max-w-none"
+        data-index={0}
+        name="slide_switch"
+        role="list"
+      />
+    </ul>
+  </div>
+  <div />
+</div>
+`;
+
+exports[`VitalCarousel Tokens Matches snapshot for DesktopOnly 1`] = `
+<div
+  className="hidden lg:flex"
+>
+  <div>
+    <ul />
+  </div>
+  <div />
+</div>
+`;
+
+exports[`VitalCarousel Tokens Matches snapshot for MobileOnly 1`] = `
+<div
+  className="md:hidden"
+>
+  <div>
+    <ul />
+  </div>
+  <div />
+</div>
+`;
+
+exports[`VitalCarousel Tokens Matches snapshot for MobileTabletOnly 1`] = `
+<div
+  className="lg:hidden"
+>
+  <div>
+    <ul />
+  </div>
+  <div />
+</div>
+`;
+
+exports[`VitalCarousel Tokens Matches snapshot for TabletDesktopOnly 1`] = `
+<div
+  className="hidden md:flex"
+>
+  <div>
+    <ul />
+  </div>
+  <div />
+</div>
+`;
+
+exports[`VitalCarousel Tokens Matches snapshot for TabletOnly 1`] = `
+<div
+  className="hidden md:flex lg:hidden"
+>
+  <div>
+    <ul />
+  </div>
+  <div />
+</div>
+`;
+
+exports[`VitalCarousel Tokens Matches snapshot for WithCardSlide 1`] = `
+<div>
+  <div>
+    <ul
+      design={
+        Object {
+          "Title": [Function],
+        }
+      }
+    />
+  </div>
+  <div />
+</div>
+`;
+
+exports[`VitalCarousel Tokens Matches snapshot for WithCarouselDots 1`] = `
+<div>
+  <div>
+    <ul
+      className="scroll-snap-dot-slider scrollbar-hide lg:scrollbar-default"
+      design={
+        Object {
+          "Item": [Function],
+        }
+      }
+    />
+  </div>
+  <div
+    className="pt-2 flex"
+  >
+    <div
+      aria-label="Navigation Controls"
+      className="ps-2 flex items-center dots -simple lg:hidden align-center justify-center opacity-100 controls indicators list-none"
+      role="list"
+    >
+      <div
+        data-no-hydrate={true}
+        id="c89d2b4890105bf8d2e48cb608de0a29"
+        style={
+          Object {
+            "display": "contents",
+          }
+        }
+      >
+        <div
+          className="indicator pe-2"
+          data-index={0}
+          tabIndex="-1"
+        >
+          <span
+            className="bg-kenvue-neutrals-light-grey rounded-full border-none dot block w-[8px] h-[8px]"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VitalCarousel Tokens Matches snapshot for WithCarouselDotsAllViewports 1`] = `
+<div>
+  <div>
+    <ul
+      className="w-screen md:w-full"
+      design={
+        Object {
+          "Item": [Function],
+        }
+      }
+    />
+  </div>
+  <div />
+</div>
+`;
+
+exports[`VitalCarousel Tokens Matches snapshot for WithCarouselDotsMobileTablet 1`] = `
+<div>
+  <div>
+    <ul
+      className="w-screen md:w-full"
+      design={
+        Object {
+          "Item": [Function],
+        }
+      }
+    />
+  </div>
+  <div />
+</div>
+`;
+
+exports[`VitalCarousel Tokens Matches snapshot for WithControls 1`] = `
+<div>
+  <div>
+    <ul />
+  </div>
+  <div>
+    <div
+      aria-label="Navigation Controls"
+      className="align-center justify-center opacity-100 controls indicators list-none"
+      role="list"
+    >
+      <li />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VitalCarousel Tokens Matches snapshot for WithHorizontalThumbs 1`] = `
+<div
+  className="lg:flex-col"
+>
+  <div>
+    <ul />
+  </div>
+  <div
+    className="pt-6 flex-row"
+  >
+    <div
+      className="p-8px flex flex-col justify-between thumbcontrols"
+    >
+      <div
+        className="text-vital-primary-interactive hover:opacity-70 active:text-vital-primary-interactive-active arrow -prev"
+      >
+        <svg
+          fill="none"
+          height="24"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <mask
+            height="16"
+            id="mask0_3721_63618"
+            maskUnits="userSpaceOnUse"
+            style={
+              Object {
+                "maskType": "alpha",
+              }
+            }
+            width="24"
+            x="0"
+            y="4"
+          >
+            <path
+              d="M8.04428 19L1.04878 11.9954L8.05339 5"
+              stroke="#0C0C36"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M1.47635 12.0409L22.8811 12.0409"
+              stroke="#0C0C36"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+          </mask>
+          <g
+            mask="url(#mask0_3721_63618)"
+            style={
+              Object {
+                "maskType": "alpha",
+              }
+            }
+          >
+            <rect
+              fill="currentColor"
+              height="24"
+              transform="rotate(-180 23.9299 24)"
+              width="24"
+              x="23.9299"
+              y="24"
+            />
+          </g>
+        </svg>
+      </div>
+      <div
+        className="text-vital-primary-interactive hover:opacity-70 active:text-vital-primary-interactive-active arrow -next"
+      >
+        <svg
+          fill="none"
+          height="24"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <mask
+            height="16"
+            id="mask0_3721_63619"
+            maskUnits="userSpaceOnUse"
+            style={
+              Object {
+                "maskType": "alpha",
+              }
+            }
+            width="24"
+            x="0"
+            y="4"
+          >
+            <path
+              d="M15.8856 5L22.8811 12.0046L15.8765 19"
+              stroke="#0C0C36"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M22.4535 11.9591H1.04875"
+              stroke="#0C0C36"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+          </mask>
+          <g
+            mask="url(#mask0_3721_63619)"
+            style={
+              Object {
+                "maskType": "alpha",
+              }
+            }
+          >
+            <rect
+              fill="currentColor"
+              height="24"
+              width="24"
+            />
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VitalCarousel Tokens Matches snapshot for WithImageSlide 1`] = `
+<div>
+  <div>
+    <ul
+      design={
+        Object {
+          "Title": [Function],
+        }
+      }
+    />
+  </div>
+  <div />
+</div>
+`;
+
+exports[`VitalCarousel Tokens Matches snapshot for WithThumbnail 1`] = `
+<div>
+  <div>
+    <ul
+      className="scroll-snap-thumb-slider scrollbar-hide"
+      design={
+        Object {
+          "Item": [Function],
+        }
+      }
+    />
+  </div>
+  <div
+    className="flex justify-left"
+  >
+    <div
+      aria-label="Navigation Controls"
+      className="flex align-center justify-center opacity-100 controls indicators list-none"
+      role="list"
+    >
+      <div
+        className="border-none thumbs indicator block"
+        data-index={0}
+        tabIndex="0"
+        type="button"
+      >
+        <div
+          data-no-hydrate={true}
+          id="c978b232fb0971ffe490b7c4ae4e9e44"
+          style={
+            Object {
+              "display": "contents",
+            }
+          }
+        >
+          <img
+            alt=""
+            className="cursor-pointer w-[94px] h-[94px]"
+            src="test-file-stub"
+            title=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VitalCarousel Tokens Matches snapshot for WithVerticalThumbs 1`] = `
+<div
+  className="lg:flex lg:flex-row-reverse"
+>
+  <div
+    className="lg:w-5/6"
+  >
+    <ul />
+  </div>
+  <div
+    className="pr-16px lg:w-1/6 flex-col"
+  >
+    <div
+      className="flex flex-row justify-between thumbcontrols"
+    >
+      <div
+        className="text-vital-primary-interactive hover:opacity-70 active:text-vital-primary-interactive-active arrow -prev"
+      >
+        <svg
+          fill="none"
+          height="24"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <mask
+            height="24"
+            id="mask0_5803_792"
+            maskUnits="userSpaceOnUse"
+            style={
+              Object {
+                "maskType": "alpha",
+              }
+            }
+            width="16"
+            x="4"
+            y="0"
+          >
+            <path
+              d="M5 8.04436L12.0046 1.04886L19 8.05347"
+              stroke="#0C0C36"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M11.959 1.47632L11.959 22.8811"
+              stroke="#0C0C36"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+          </mask>
+          <g
+            mask="url(#mask0_5803_792)"
+            style={
+              Object {
+                "maskType": "alpha",
+              }
+            }
+          >
+            <rect
+              fill="currentColor"
+              height="24"
+              transform="rotate(-90 0 23.9299)"
+              width="24"
+              y="23.9299"
+            />
+          </g>
+        </svg>
+      </div>
+      <div
+        className="text-vital-primary-interactive hover:opacity-70 active:text-vital-primary-interactive-active arrow -next"
+      >
+        <svg
+          fill="none"
+          height="24"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <mask
+            height="24"
+            id="mask0_5803_806"
+            maskUnits="userSpaceOnUse"
+            style={
+              Object {
+                "maskType": "alpha",
+              }
+            }
+            width="16"
+            x="4"
+            y="0"
+          >
+            <path
+              d="M19 15.8856L11.9954 22.8811L5 15.8765"
+              stroke="#0C0C36"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M12.041 22.4536L12.041 1.04883"
+              stroke="#0C0C36"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+          </mask>
+          <g
+            mask="url(#mask0_5803_806)"
+            style={
+              Object {
+                "maskType": "alpha",
+              }
+            }
+          >
+            <rect
+              fill="currentColor"
+              height="24"
+              transform="rotate(90 24 0)"
+              width="24"
+              x="24"
+            />
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+`;

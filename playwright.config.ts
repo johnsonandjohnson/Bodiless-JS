@@ -24,7 +24,7 @@ const configurators = {
     baseConfig.testDir = './playwright/tests/smoke';
     baseConfig.webServer = {
       ...defaultServerConfig,
-      command: 'cd sites/vital-demo && npm run serve:test',
+      command: 'cd sites/vital-demo-next && npm run serve:test',
     };
     baseConfig.globalSetup = require.resolve('./playwright/tests/setup/setup.ts');
   },

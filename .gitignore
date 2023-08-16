@@ -3,7 +3,7 @@ node_modules
 
 # Temporary files
 .DS_Store
-.*.swp
+*.swp
 .eslintcache
 *.tsbuildinfo
 # jetbrains files:
@@ -32,6 +32,7 @@ test-report.xml
 # Test tools
 /sites-test
 playwright-report
+accessibility-reports
 
 # API doc
 **/doc/api
@@ -39,3 +40,4 @@ test-results/
 playwright-report/
 
 .turbo
+.vercel

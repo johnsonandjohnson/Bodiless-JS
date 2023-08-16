@@ -7,7 +7,7 @@
   },
   "include": [
     "src",
-    "../../@types/*"
+    "../../@types/*",
   ],
   "exclude": [
     "lib",

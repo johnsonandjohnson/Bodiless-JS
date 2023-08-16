@@ -43,11 +43,11 @@ const parsedDesignTokens = JSON.parse(JSON.stringify(designTokens));
  * to avoid TW config issues.
  */
 const {
-  colors,
-  spacing,
-  typography,
+  // colors,
+  // spacing,
+  // typography,
   opacity,
-  border,
+  // border,
 } = parsedDesignTokens;
 
 const resolver = (pkgName) => require.resolve(pkgName);
@@ -96,38 +96,114 @@ const twConfig = {
         'button-selected': '#000041',
       },
       white: '#FFFFFF',
+      kenvue: {
+        'neutrals-white': '#FFFFFF',
+        'neutrals-lightest-grey': '#F8F8F8',
+        'neutrals-light-grey': '#BFBFBF',
+        'neutrals-grey': '#999999',
+        'neutrals-dark-grey': '#616161',
+        'neutrals-darkest-grey': '#2B2B2B',
+        'neutrals-black': '#000000',
+        'green-tint-20': '#CCEAE6',
+        'green-tint-40': '#99D6CD',
+        'green-tint-60': '#67C1B3',
+        'green-green': '#019881',
+        'green-shade-40': '#003D34',
+        'green-shade-60': '#015B4D',
+        'green-shade-80': '#017A67',
+        'purple-purple': '#D3BDF2',
+        'red-red': '#FF6B6B',
+        'yellow-yellow': '#FFB000',
+      },
+      signal: {
+        informational: '#428BF1',
+      }
     },
     extend: {
       /**
        * Vital 2.0 Tokens coming from Figma plugin.
        */
-      colors: {
-        ...colors,
-      },
       fontFamily: {
         DMSans: ['DM Sans', 'sans-serif'],
-        ...typography['font-family'],
+        // ...typography['font-family'],
+        1: 'DM Sans',
+        2: 'DM Sans',
       },
       fontWeights: {
-        ...typography.font,
+        // ...typography.font,
       },
-      leading: {
-        ...typography.leading,
+      fontSize: {
+        '11.67px': '11.67px',
+        '13.33px': '13.33px',
+        '14px': '14px',
+        '15.2px': '15.2px',
+        '16px': '16px',
+        '19.2px': '19.2px',
+        '20.16px': '20.16px',
+        '23.04px': '23.04px',
+        '24.19px': '24.19px',
+        '27.65px': '27.65px',
+        '29.03px': '29.03px',
+        '33.18px': '33.18px',
+        '34.84px': '34.84px',
+        '39.81px': '39.81px',
+      },
+      lineHeight: {
+        // ...typography.leading,
+        5: '120%',
+        6: '150%'
       },
       textSizes: {
-        ...typography.text,
+        // ...typography.text,
       },
       spacing: {
-        ...spacing,
+        // ...spacing,
+        '0px': '0px',
+        '1px': '1px',
+        '2px': '2px',
+        '3px': '3px',
+        '4px': '4px',
+        '5px': '5px',
+        '6px': '6px',
+        '7px': '7px',
+        '8px': '8px',
+        '9px': '9px',
+        '10px': '10px',
+        '12px': '12px',
+        '14px': '14px',
+        '16px': '16px',
+        '18px': '18px',
+        '20px': '20px',
+        '24px': '24px',
+        '32px': '32px',
+        '36px': '36px',
+        '40px': '40px',
+        '48px': '48px',
+        '64px': '64px',
       },
       borderWidth: {
-        ...border.width,
+        // ...border.width,
+        '1px': '1px',
+        '2px': '2px',
+        '3px': '3px',
+        '4px': '4px',
       },
       borderRadius: {
-        ...border.rounded,
+        // ...border.rounded,
+        '0px': '0px',
+        '2px': '2px',
+        '4px': '4px',
+        '6px': '6px',
+        '8px': '8px',
+        '10px': '10px',
+        '12px': '12px',
+        '20px': '20px',
+        '150px': '150px',
+        '600px': '600px',
+        pill: '9999px',
       },
       opacity: {
-        ...opacity,
+        // ...opacity,
       },
       margin: {
         4.5: '1.125rem',

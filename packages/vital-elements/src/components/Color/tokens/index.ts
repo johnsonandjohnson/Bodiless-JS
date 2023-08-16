@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import vitalColor from './vitalColor';
+import tokens from './vitalColor';
 
-export default vitalColor;
+export default tokens;

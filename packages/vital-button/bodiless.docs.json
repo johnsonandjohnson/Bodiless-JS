@@ -1,0 +1,13 @@
+{
+  "VitalDesignSystem": {
+    "Components": {
+      "VitalButton": {
+        "README.md": "./doc/README.md",
+        "assets": {
+          "AddVitalButtonComponent.jpg": "./doc/assets/AddVitalButtonComponent.jpg",
+          "ButtonsAndHoverStates.jpg": "./doc/assets/ButtonsAndHoverStates.jpg"
+        }
+      }
+    }
+  }
+}

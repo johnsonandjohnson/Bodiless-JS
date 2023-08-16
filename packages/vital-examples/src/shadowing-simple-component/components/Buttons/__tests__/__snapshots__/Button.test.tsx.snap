@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Buttons Matches snapshot for Default 1`] = `
+exports[`Button Matches snapshot for Plain 1`] = `
 <a
-  className="hover:opacity-80 leading-tight uppercase focus:outline-none focus:ring-0 rounded transition duration-150 ease-in-out px-6 py-3.5 flex group justify-center"
+  className="rounded-8px group justify-center"
   href="#"
   role="button"
 >
@@ -16,9 +16,10 @@ exports[`Buttons Matches snapshot for Default 1`] = `
     }
   >
     <span
+      className="text-14px lg:text-16px leading-6 font-bold font-2"
       dangerouslySetInnerHTML={
         Object {
-          "__html": "Link",
+          "__html": "BUTTON",
         }
       }
     />
@@ -26,113 +27,41 @@ exports[`Buttons Matches snapshot for Default 1`] = `
 </a>
 `;
 
-exports[`Buttons Matches snapshot for Primary 1`] = `
-<a
-  className="text-white bg-vital-primary-interactive hover:opacity-80 leading-tight uppercase focus:outline-none focus:ring-0 rounded transition duration-150 ease-in-out px-6 py-3.5 flex group justify-center"
-  href="#"
-  role="button"
+exports[`Button Matches snapshot for PrimaryDisabled 1`] = `
+<button
+  className="px-24px py-16px bg-kenvue-neutrals-grey"
+  disabled="true"
 >
   <span
-    data-no-hydrate={true}
-    id="123b58b4a9e4407d42b2606d912b6deb"
-    style={
-      Object {
-        "display": "contents",
-      }
-    }
-  >
-    <span
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "Link",
-        }
-      }
-    />
-  </span>
-</a>
+    className="text-kenvue-neutrals-white"
+  />
+</button>
 `;
 
-exports[`Buttons Matches snapshot for PrimarySelected 1`] = `
-<a
-  className="text-white bg-vital-secondary-button-selected hover:opacity-80 leading-tight uppercase focus:outline-none focus:ring-0 rounded transition duration-150 ease-in-out px-6 py-3.5 flex group justify-center"
-  href="#"
-  role="button"
+exports[`Button Matches snapshot for SecondaryDisabled 1`] = `
+<button
+  className="px-24px py-16px border-solid border-1px border-kenvue-neutrals-grey"
+  disabled="true"
 >
   <span
-    data-no-hydrate={true}
-    id="123b58b4a9e4407d42b2606d912b6deb"
-    style={
-      Object {
-        "display": "contents",
-      }
-    }
-  >
-    <span
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "Link",
-        }
-      }
-    />
-  </span>
-</a>
+    className="text-kenvue-neutrals-grey"
+  />
+</button>
 `;
 
-exports[`Buttons Matches snapshot for Secondary 1`] = `
-<a
-  className="border-vital-primary-interactive text-vital-primary-interactive hover:opacity-70 active:text-vital-primary-interactive-active border-2 hover:opacity-80 leading-tight uppercase focus:outline-none focus:ring-0 rounded transition duration-150 ease-in-out px-6 py-3.5 flex group justify-center"
-  href="#"
-  role="button"
+exports[`Button Matches snapshot for TertiaryDisabled 1`] = `
+<button
+  disabled="true"
 >
   <span
-    data-no-hydrate={true}
-    id="123b58b4a9e4407d42b2606d912b6deb"
-    style={
-      Object {
-        "display": "contents",
-      }
-    }
-  >
-    <span
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "Link",
-        }
-      }
-    />
-  </span>
-</a>
+    className="text-kenvue-neutrals-grey"
+  />
+</button>
 `;
 
-exports[`Buttons Matches snapshot for SecondarySelected 1`] = `
+exports[`Button Matches snapshot for WhereToBuy 1`] = `
 <a
-  className="border-vital-secondary-button-selected text-vital-secondary-button-selected border-2 hover:opacity-80 leading-tight uppercase focus:outline-none focus:ring-0 rounded transition duration-150 ease-in-out px-6 py-3.5 flex group justify-center"
-  href="#"
-  role="button"
->
-  <span
-    data-no-hydrate={true}
-    id="123b58b4a9e4407d42b2606d912b6deb"
-    style={
-      Object {
-        "display": "contents",
-      }
-    }
-  >
-    <span
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "Link",
-        }
-      }
-    />
-  </span>
-</a>
-`;
-
-exports[`Buttons Matches snapshot for WhereToBuy 1`] = `
-<a
-  className="rounded text-m-base lg:text-base uppercase font-bold text-vital-primary-footer-copy bg-vital-primary-interactive mx-auto p-3 w-full flex justify-center items-center max-w-64 h-12 lg:w-full"
+  className="rounded text-m-base lg:text-base uppercase font-bold text-vital-primary-footer-copy bg-vital-primary-interactive disabled:bg-vital-primary-button-disabled mx-auto p-3 w-full flex justify-center items-center max-w-64 h-12 lg:w-full"
   href="/where-to-buy"
 >
   <svg
@@ -186,9 +115,9 @@ exports[`Buttons Matches snapshot for WhereToBuy 1`] = `
 </a>
 `;
 
-exports[`Buttons Matches snapshot for WhereToBuyWithoutIcon 1`] = `
+exports[`Button Matches snapshot for WhereToBuyWithoutIcon 1`] = `
 <a
-  className="rounded text-m-base lg:text-base uppercase font-bold text-vital-primary-footer-copy bg-vital-primary-interactive mx-auto p-3 w-full flex justify-center items-center max-w-64 h-12 lg:w-full"
+  className="rounded text-m-base lg:text-base uppercase font-bold text-vital-primary-footer-copy bg-vital-primary-interactive disabled:bg-vital-primary-button-disabled mx-auto p-3 w-full flex justify-center items-center max-w-64 h-12 lg:w-full"
   href="/where-to-buy"
 >
   <span
@@ -199,20 +128,9 @@ exports[`Buttons Matches snapshot for WhereToBuyWithoutIcon 1`] = `
 </a>
 `;
 
-exports[`Buttons Matches snapshot for WithArrow 1`] = `
+exports[`Button Matches snapshot for WithBigButton 1`] = `
 <a
-  className="pl-12 pr-6 py-3.5 group flex-row-reverse"
->
-  <span
-    className="w-6 h-2 vital-arrow group-hover:text-current text-transparent pr-1 inline-block"
-  />
-  <span />
-</a>
-`;
-
-exports[`Buttons Matches snapshot for WithBigButton 1`] = `
-<a
-  className="hover:opacity-80 leading-tight uppercase focus:outline-none focus:ring-0 rounded transition duration-150 ease-in-out px-12 py-6 flex group justify-center"
+  className="rounded-8px px-12 py-6 group justify-center"
   href="#"
   role="button"
 >
@@ -226,9 +144,10 @@ exports[`Buttons Matches snapshot for WithBigButton 1`] = `
     }
   >
     <span
+      className="text-14px lg:text-16px leading-6 font-bold font-2"
       dangerouslySetInnerHTML={
         Object {
-          "__html": "Link",
+          "__html": "BUTTON",
         }
       }
     />
@@ -236,37 +155,50 @@ exports[`Buttons Matches snapshot for WithBigButton 1`] = `
 </a>
 `;
 
-exports[`Buttons Matches snapshot for WithDisabled 1`] = `
+exports[`Button Matches snapshot for WithDisabled 1`] = `
 <button
-  className="opacity-50 hover:opacity-50"
   disabled="true"
 >
   <span />
 </button>
 `;
 
-exports[`Buttons Matches snapshot for WithPrimary 1`] = `
+exports[`Button Matches snapshot for WithPrimary 1`] = `
 <a
-  className="rounded hover:bg-vital-primary-interactive transition-colors duration-400 text-m-base lg:text-base uppercase font-bold text-white bg-vital-primary-brand px-6 py-3.5 flex group justify-center"
-  href="#"
-  role="button"
+  className="rounded hover:bg-vital-primary-interactive transition-colors duration-400 text-m-base lg:text-base uppercase font-bold text-white bg-vital-primary-brand"
 >
   <span
-    data-no-hydrate={true}
-    id="123b58b4a9e4407d42b2606d912b6deb"
-    style={
-      Object {
-        "display": "contents",
-      }
-    }
-  >
-    <span
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "Link",
-        }
-      }
-    />
-  </span>
+    className="text-kenvue-neutrals-white"
+  />
+</a>
+`;
+
+exports[`Button Matches snapshot for WithPrimaryStyle 1`] = `
+<a
+  className="active:bg-kenvue-green-shade-60 focus:bg-kenvue-green-shade-80 hover:bg-kenvue-green-shade-80 bg-kenvue-green-green px-24px py-16px focus:drop-shadow-button focus:outline-none active:drop-shadow-none"
+>
+  <span
+    className="text-kenvue-neutrals-white"
+  />
+</a>
+`;
+
+exports[`Button Matches snapshot for WithSecondaryStyle 1`] = `
+<a
+  className="active:border-kenvue-green-shade-60 focus:border-kenvue-green-shade-80 hover:border-kenvue-green-shade-80 border-kenvue-green-green px-24px py-16px border-solid border-1px focus:shadow-button focus:outline-none active:shadow-none"
+>
+  <span
+    className="group-active:text-kenvue-green-shade-60 focus:text-kenvue-green-shade-80 group-hover:text-kenvue-green-shade-80 text-kenvue-green-green"
+  />
+</a>
+`;
+
+exports[`Button Matches snapshot for WithTertiaryStyle 1`] = `
+<a
+  className="focus:drop-shadow-button focus:outline-none active:drop-shadow-none"
+>
+  <span
+    className="active:text-kenvue-green-shade-60 focus:text-kenvue-green-shade-80 hover:text-kenvue-green-shade-80 text-kenvue-green-green"
+  />
 </a>
 `;

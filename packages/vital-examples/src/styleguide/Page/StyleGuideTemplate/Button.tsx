@@ -20,7 +20,7 @@ import {
   varyDesigns,
   addProps,
 } from '@bodiless/fclasses';
-import { ButtonClean } from '@bodiless/vital-buttons';
+import { ButtonClean } from '@bodiless/vital-button';
 import { asFluidToken, vitalTypography } from '@bodiless/vital-elements';
 import {
   asStyleGuideTemplateToken,
@@ -43,15 +43,13 @@ const Default = on(ButtonClean)(withDefaultContent(label));
 // Generate the Button Varations
 const ButtonStyleVariations = varyDesigns(
   {
-    Primary: exampleButtons.Primary,
-    Secondary: exampleButtons.Secondary,
-    PrimarySelected: exampleButtons.PrimarySelected,
-    SecondarySelected: exampleButtons.SecondarySelected,
+    Primary: exampleButtons.WithPrimaryStyle,
+    Secondary: exampleButtons.WithSecondaryStyle,
   },
   {
     '': '', // vary on itself and produce default button variation
     AsDisabled: exampleButtons.WithDisabled,
-    WithArrow: exampleButtons.WithArrow,
+    // WithArrow: exampleButtons.WithArrow,
     WithBigButton: exampleButtons.WithBigButton,
   },
   {
@@ -63,7 +61,6 @@ const ButtonStyleVariations = varyDesigns(
 const LinkVariations = varyDesigns(
   {
     Default: vitalLink.Default,
-    Primary: vitalLink.PrimaryLink,
   },
   {
     '': '', // vary on itself and produce plain link variation

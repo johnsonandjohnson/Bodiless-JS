@@ -8,7 +8,13 @@ exports[`Typography Matches snapshot for Body 1`] = `
 
 exports[`Typography Matches snapshot for BodyBold 1`] = `
 <span
-  className="text-base leading-6 font-bold font-2"
+  className="text-14px lg:text-16px leading-6 font-bold font-2"
+/>
+`;
+
+exports[`Typography Matches snapshot for BodyBoldUnderlined 1`] = `
+<span
+  className="text-14px lg:text-16px leading-6 font-bold underline font-2"
 />
 `;
 
@@ -20,7 +26,13 @@ exports[`Typography Matches snapshot for BodyInlineLink 1`] = `
 
 exports[`Typography Matches snapshot for BodyLargeBold 1`] = `
 <span
-  className="text-lg leading-6 font-bold font-2"
+  className="text-15.2px lg:text-19.2px leading-6 font-bold font-2"
+/>
+`;
+
+exports[`Typography Matches snapshot for BodyLargeBoldUnderlined 1`] = `
+<span
+  className="text-15.2px lg:text-19.2px leading-6 font-bold underline font-2"
 />
 `;
 
@@ -32,13 +44,49 @@ exports[`Typography Matches snapshot for BodyLargeInlineLink 1`] = `
 
 exports[`Typography Matches snapshot for BodyLargeRegular 1`] = `
 <span
-  className="text-lg leading-6 font-normal font-2"
+  className="text-15.2px lg:text-19.2px leading-6 font-normal font-2"
+/>
+`;
+
+exports[`Typography Matches snapshot for BodyLargeUnderlined 1`] = `
+<span
+  className="text-15.2px lg:text-19.2px leading-6 font-normal underline font-2"
 />
 `;
 
 exports[`Typography Matches snapshot for BodyRegular 1`] = `
 <span
-  className="text-base leading-6 font-normal font-2"
+  className="text-14px lg:text-16px leading-6 font-normal font-2"
+/>
+`;
+
+exports[`Typography Matches snapshot for BodySmallBold 1`] = `
+<span
+  className="text-11.67px lg:text-13.33px leading-6 font-bold font-2"
+/>
+`;
+
+exports[`Typography Matches snapshot for BodySmallBoldUnderlined 1`] = `
+<span
+  className="text-11.67px lg:text-13.33px leading-6 font-bold underline font-2"
+/>
+`;
+
+exports[`Typography Matches snapshot for BodySmallRegular 1`] = `
+<span
+  className="text-11.67px lg:text-13.33px leading-6 font-normal font-2"
+/>
+`;
+
+exports[`Typography Matches snapshot for BodySmallUnderlined 1`] = `
+<span
+  className="text-11.67px lg:text-13.33px leading-6 font-normal underline font-2"
+/>
+`;
+
+exports[`Typography Matches snapshot for BodyUnderlined 1`] = `
+<span
+  className="text-14px lg:text-16px leading-6 font-normal underline font-2"
 />
 `;
 
@@ -54,9 +102,21 @@ exports[`Typography Matches snapshot for Eyebrow 1`] = `
 />
 `;
 
+exports[`Typography Matches snapshot for EyebrowBold 1`] = `
+<span
+  className="text-11.67px lg:text-13.33px leading-6 font-bold font-2 underline uppercase"
+/>
+`;
+
 exports[`Typography Matches snapshot for EyebrowNoSpacing 1`] = `
 <span
   className="text-vital-secondary-eyebrow font-extrabold uppercase text-m-xs lg:text-xs"
+/>
+`;
+
+exports[`Typography Matches snapshot for EyebrowRegular 1`] = `
+<span
+  className="text-11.67px lg:text-13.33px leading-6 font-normal font-2 underline uppercase"
 />
 `;
 
@@ -135,6 +195,36 @@ exports[`Typography Matches snapshot for H5V2 1`] = `
 exports[`Typography Matches snapshot for HeaderLink 1`] = `
 <span
   className="underline text-vital-primary-interactive hover:opacity-70 active:text-vital-primary-interactive-active"
+/>
+`;
+
+exports[`Typography Matches snapshot for HeadlineLarge 1`] = `
+<span
+  className="text-24.19px lg:text-27.65px leading-5 font-normal font-2"
+/>
+`;
+
+exports[`Typography Matches snapshot for HeadlineMedium 1`] = `
+<span
+  className="text-20.16px lg:text-23.04px leading-5 font-normal font-2"
+/>
+`;
+
+exports[`Typography Matches snapshot for HeadlineSmall 1`] = `
+<span
+  className="text-15.2px lg:text-19.2px leading-5 font-normal font-2"
+/>
+`;
+
+exports[`Typography Matches snapshot for HeadlineXLarge 1`] = `
+<span
+  className="text-29.03px lg:text-33.18px leading-5 font-normal font-2"
+/>
+`;
+
+exports[`Typography Matches snapshot for HeadlineXXLarge 1`] = `
+<span
+  className="text-34.84px lg:text-39.81px leading-5 font-normal font-2"
 />
 `;
 

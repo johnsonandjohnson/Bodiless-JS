@@ -63,7 +63,6 @@ export const vitalTestParameters: VitalTestParameters[] = [
     suite: 'Layout',
     page: new VitalLayoutPage(),
     switchToItemContent: false,
-    disabledRules: ['list'],
   },
   {
     suite: 'Product',
@@ -74,7 +73,6 @@ export const vitalTestParameters: VitalTestParameters[] = [
     suite: 'Generic Template',
     page: new VitalGenericTemplatePage(),
     switchToItemContent: false,
-    disabledRules: ['list'],
   }
 ];
 

@@ -12,13 +12,30 @@
  * limitations under the License.
  */
 
-import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
+import { ComponentOrTag, DesignableComponents, DesignableComponentsProps } from '@bodiless/fclasses';
 
-export type LinkComponents = {
+/**
+ * Design keys available for the vital card.
+ *
+ * @category Component
+ */
+export interface LinkComponents extends DesignableComponents {
+  /**
+   * Wrapper
+   */
   Wrapper: ComponentOrTag<any>,
+  /**
+   * Icon that can be displayed with the link
+   */
   Icon: ComponentOrTag<any>,
+  /**
+   * Text of the link
+   */
   Body: ComponentOrTag<any>,
+  /**
+   * Accessibility to add 'Open link in new window'
+   */
   ExternalSRText: ComponentOrTag<any>,
-};
+}
 
 export type LinkBaseProps = DesignableComponentsProps<LinkComponents>;

@@ -24,7 +24,7 @@
     "@bodiless/knapsack-edit-provider": "^1.0.0-rc.42",
     "@bodiless/knapsack-renderer": "^1.0.0-rc.42",
     "@bodiless/vital-accordion": "^1.0.0-rc.42",
-    "@bodiless/vital-buttons": "^1.0.0-rc.42",
+    "@bodiless/vital-button": "^1.0.0-rc.42",
     "@bodiless/vital-card": "^1.0.0-rc.42",
     "@bodiless/vital-elements": "^1.0.0-rc.42",
     "@bodiless/vital-layout": "^1.0.0-rc.42",

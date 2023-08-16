@@ -16,7 +16,7 @@ import { withNode, withNodeKey } from '@bodiless/data';
 import { vitalColor, vitalSpacing } from '@bodiless/vital-elements';
 import { vitalMenu } from '@bodiless/vital-navigation';
 import {
-  as, Div, on, replaceWith
+  as, Div, on, replaceWith, addProps
 } from '@bodiless/fclasses';
 import { vitalRewards, RewardsClean } from '../Rewards';
 import { vitalCopyrightRow } from '../CopyrightRow';
@@ -26,6 +26,9 @@ const Default = asFooterToken({
   Components: {
     FooterMenu: vitalMenu.Footer,
     CopyrightRow: vitalCopyrightRow.Default,
+  },
+  Analytics: {
+    Wrapper: addProps({ 'data-layer-region': 'footer' }),
   },
   Layout: {
     Wrapper: 'w-full',

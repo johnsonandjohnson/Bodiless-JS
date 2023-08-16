@@ -54,6 +54,6 @@ site.
 ## Next Steps
 
 - [Step-by-step walkthrough of site-building](/Development/Guides/BuildingSites/)
-- [Building and testing Bodiless sites](/Development/LocalSites)
+- [Building and testing Bodiless sites](../Development/LocalSites/)
 - [Read our Core Principles](./CorePrinciples)
 - [Understand our Platform Architecture](/Development/Architecture/Data)
