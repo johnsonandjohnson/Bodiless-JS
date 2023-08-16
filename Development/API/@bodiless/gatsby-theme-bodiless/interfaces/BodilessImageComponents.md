@@ -27,7 +27,7 @@ Gatsby Image
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx:55](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8207f8a8d/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx#L55)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx:55](https://github.com/johnsonandjohnson/Bodiless-JS/blob/d31a584a2/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx#L55)
 
 ___
 
@@ -39,4 +39,4 @@ Plain Image
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx:59](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8207f8a8d/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx#L59)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx:59](https://github.com/johnsonandjohnson/Bodiless-JS/blob/d31a584a2/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx#L59)

@@ -36,7 +36,7 @@ Tokens for Vital Image
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:326](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8207f8a8d/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L326)
+[vital-image/src/components/Image/tokens/vitalImage.ts:326](https://github.com/johnsonandjohnson/Bodiless-JS/blob/d31a584a2/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L326)
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 #### Defined in
 
-[vital-image/src/components/FlowContainer/tokens/vitalImageFlowContainer.ts:87](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8207f8a8d/packages/vital-image/src/components/FlowContainer/tokens/vitalImageFlowContainer.ts#L87)
+[vital-image/src/components/FlowContainer/tokens/vitalImageFlowContainer.ts:87](https://github.com/johnsonandjohnson/Bodiless-JS/blob/d31a584a2/packages/vital-image/src/components/FlowContainer/tokens/vitalImageFlowContainer.ts#L87)
 
 ## Token Collection Functions
 
