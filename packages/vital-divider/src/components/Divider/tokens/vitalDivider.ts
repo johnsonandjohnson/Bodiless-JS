@@ -15,7 +15,7 @@ const WithPrimaryDivider = asDividerToken({
   }
 });
 
-const WithSecondaryDivider = asDividerToken( {
+const WithSecondaryDivider = asDividerToken({
   Theme: {
     Divider: as(vitalDividerElement.LightThemeSecondary)
   }
