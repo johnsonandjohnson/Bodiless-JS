@@ -2,9 +2,9 @@ name: bodiless-js
 services:
   node:
     type: node:18
-    build:
+    #build:
       #- npm run clean
-      - npm run setup
+      # - npm run setup
     globals:
       npm: latest
       rimraf: latest
@@ -13,7 +13,10 @@ services:
         APP_GATSBY_HOST: 0.0.0.0
         # HOSTNAME: bodiless-js # @todo not working anyway https://github.com/lando/lando/issues/1511
       ports:
-        - '8000:8000' # nextjs frotend port
+        - '9000:9000' # nextjs fe:serve port 
+        - '8000:8000' # nextjs fe:dev port
+        - '3000:3000' # port 3000
+        - '35729:35729' # port 35729
         - '8020:8020' #knapsack
         - '3999:3999' #knapsack
     scanner: false
@@ -32,9 +35,14 @@ tooling:
     service: node
   build:
     service: node
+    dir: /app
+    cmd:
+      - npm run setup
+  build-cleanup:
+    service: node
+    dir: /app
     cmd:
       - npm run clean
-      - npm run setup
   start-vital-demo-next:
     service: node
     cmd: npm run dev
@@ -42,3 +50,4 @@ tooling:
 proxy:
   node:
     - vital-demo-next.sites.bodiless-js.lndo.site:8000 # vital-ne
+    - serve-vital-demo-next.sites.bodiless-js.lndo.site:9000 # vital-next serer
