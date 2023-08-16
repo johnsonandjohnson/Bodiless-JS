@@ -1,0 +1,197 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ArticleCard Tokens Matches snapshot for Default 1`] = `
+<a
+  className="w-full flex flex-col"
+  href="#"
+>
+  <div>
+    <div
+      data-no-hydrate={true}
+      id="f64e1b3016f7c8d0d277ce020d98ee0d"
+      style={
+        Object {
+          "display": "contents",
+        }
+      }
+    >
+      <img
+        alt=""
+        src="test-file-stub"
+        title=""
+      />
+    </div>
+  </div>
+  <div>
+    <h3
+      className="text-kenvue-neutrals-black text-24.19px lg:text-27.65px leading-5 font-normal font-2 py-8px md:py-16px"
+    >
+      <span
+        data-no-hydrate={true}
+        id="6e5e36380662b0a36aed30babe228408"
+        style={
+          Object {
+            "display": "contents",
+          }
+        }
+      >
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "Article Title",
+            }
+          }
+        />
+      </span>
+    </h3>
+    <div
+      className="py-8px md:py-16px"
+    >
+      <a
+        className="focus:drop-shadow-button focus:outline-none active:drop-shadow-none rounded-8px group justify-center"
+        href="#"
+        role="button"
+      >
+        <span
+          data-no-hydrate={true}
+          id="123b58b4a9e4407d42b2606d912b6deb"
+          style={
+            Object {
+              "display": "contents",
+            }
+          }
+        >
+          <span
+            className="active:text-kenvue-green-shade-60 focus:text-kenvue-green-shade-80 hover:text-kenvue-green-shade-80 text-kenvue-green-green text-14px lg:text-16px leading-6 font-bold font-2"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "READ MORE",
+              }
+            }
+          />
+        </span>
+      </a>
+    </div>
+  </div>
+</a>
+`;
+
+exports[`ArticleCard Tokens Matches snapshot for WithDescription 1`] = `
+<a>
+  <div>
+    <img />
+  </div>
+  <div>
+    <h3 />
+    <p>
+      <span
+        data-no-hydrate={true}
+        id="63a9f0ea7bb98050796b649e85481845"
+        style={
+          Object {
+            "display": "contents",
+          }
+        }
+      >
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "Description Text",
+            }
+          }
+        />
+      </span>
+    </p>
+    <div>
+      <a>
+        <span />
+      </a>
+    </div>
+  </div>
+</a>
+`;
+
+exports[`ArticleCard Tokens Matches snapshot for WithEyebrow 1`] = `
+<a>
+  <div>
+    <img />
+  </div>
+  <div>
+    <div
+      className="text-kenvue-neutrals-black text-11.67px lg:text-13.33px leading-6 font-bold font-2 underline uppercase"
+    >
+      <span
+        data-no-hydrate={true}
+        id="63a9f0ea7bb98050796b649e85481845"
+        style={
+          Object {
+            "display": "contents",
+          }
+        }
+      >
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "Eyebrow",
+            }
+          }
+        />
+      </span>
+    </div>
+    <h3 />
+    <div>
+      <a>
+        <span />
+      </a>
+    </div>
+  </div>
+</a>
+`;
+
+exports[`ArticleCard Tokens Matches snapshot for WithHorizontalOrientation 1`] = `
+<a
+  className="flex-col md:flex-row w-full flex"
+>
+  <div
+    className="py-0 md:py-0 md:w-1/2 flex flex-col"
+  >
+    <img
+      className="w-full"
+    />
+  </div>
+  <div
+    className="px-4 md:content-center md:justify-center md:grow md:w-1/2 flex flex-col"
+  >
+    <h3 />
+    <div>
+      <a>
+        <span />
+      </a>
+    </div>
+  </div>
+</a>
+`;
+
+exports[`ArticleCard Tokens Matches snapshot for WithVerticalOrientation 1`] = `
+<a
+  className="w-full flex h-full flex-col"
+>
+  <div
+    className="py-4 md:py-8"
+  >
+    <img
+      className="w-full"
+    />
+  </div>
+  <div
+    className="py-4"
+  >
+    <h3 />
+    <div>
+      <a>
+        <span />
+      </a>
+    </div>
+  </div>
+</a>
+`;
