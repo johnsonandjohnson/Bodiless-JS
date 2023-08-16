@@ -1,3 +1,4 @@
+import { dirname, join } from "path";
 /**
  * Copyright © 2022 Johnson & Johnson
  *
@@ -13,16 +14,34 @@
  */
 
 module.exports = {
+  features: {
+    // ERROR:  CSF: missing default export
+    // GITHUB: https://github.com/storybookjs/storybook/issues/16598
+    // RESOLUTION:  Opt out of on-demand story loading
+    storyStoreV7: false, 
+  },
   "stories": [
     "../src/stories/**/*.stories.mdx",
     "../src/stories/**/*.stories.tsx",
   ],
+
   "addons": [
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/addon-postcss",
+    getAbsolutePath("@storybook/addon-links"),
+    getAbsolutePath("@storybook/addon-essentials"),
+    getAbsolutePath("@storybook/addon-postcss"),
+    getAbsolutePath("@storybook/addon-mdx-gfm")
   ],
-  "core": {
-    "builder": "webpack5"
+
+  framework: {
+    name: getAbsolutePath("@storybook/nextjs"),
+    options: {}
+  },
+
+  docs: {
+    autodocs: true
   }
+}
+
+function getAbsolutePath(value) {
+  return dirname(require.resolve(join(value, "package.json")));
 }

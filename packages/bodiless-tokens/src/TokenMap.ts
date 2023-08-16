@@ -55,7 +55,7 @@ class TokenMap {
     this.add(tokens);
     return this;
     // TBD Conflict resolution
-    // Currently on main... looks like change was for typesafing : HOCWithMeta 
+    // Currently on main... looks like change was for typesafing : HOCWithMeta
     // constructor(groupsFor?: (token?: HOC) => string[]) {
     //   this.groupsFor = groupsFor
     //     || ((token?: HOCWithMeta) => token?.meta?.categories?.Category || []);

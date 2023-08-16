@@ -20,7 +20,10 @@ import omit from 'lodash/omit';
 // this addon is included in @storybook/addon-essentials
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { DocsContext } from '@storybook/addon-docs';
-import type { Story } from '@storybook/react/types-6-0';
+// @TODO Use StoryFn instead. Use StoryObj if you want to migrate to CSF3, which uses objects
+// instead of functions to represent stories. You can read more about the CSF3 format here:
+// https://storybook.js.org/blog/component-story-format-3-0/
+import type { Story } from '@storybook/react';
 import union from 'lodash/union';
 import withTokensFromProps from './withTokensFromProps';
 import TokenMap from './TokenMap';

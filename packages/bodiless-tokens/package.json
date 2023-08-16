@@ -48,8 +48,8 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^6.3.12",
-    "@storybook/react": "^6.3.12",
+    "@storybook/addon-essentials": "^7.3.1",
+    "@storybook/react": "^7.3.1",
     "@types/crypto-js": "4.1.1"
   },
   "peerDependencies": {

@@ -15,7 +15,7 @@
 import type {
   TokenCollection,
 } from '@bodiless/fclasses';
-import type { Meta } from '@storybook/react/types-6-0';
+import type { Meta } from '@storybook/react';
 
 /**
  * Defines how token examples should be generated.
