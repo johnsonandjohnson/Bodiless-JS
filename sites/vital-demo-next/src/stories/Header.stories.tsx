@@ -12,10 +12,10 @@
  * limitations under the License.
  */
 
-// import { vitalHeaderSpec } from '@bodiless/vital-layout';
-// import { createTokenStories } from '@bodiless/tokens';
+import { vitalHeaderSpec } from '@bodiless/vital-layout';
+import { createTokenStories } from '@bodiless/tokens';
 
-// const { meta, story } = createTokenStories(vitalHeaderSpec);
+const { meta, story } = createTokenStories(vitalHeaderSpec);
 
-// export default meta;
-// export const Clean = story();
+export default meta;
+export const Clean = story();

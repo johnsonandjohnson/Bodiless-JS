@@ -12,23 +12,25 @@
  * limitations under the License.
  */
 
-// import type { TokenDemoSpec } from '@bodiless/tokens';
+import type { TokenDemoSpec } from '@bodiless/tokens';
+import { TokenCollection } from '@bodiless/fclasses/lib/types';
 import HeaderClean, { asHeaderToken, HeaderStatic } from './HeaderClean';
 import vitalHeader from './tokens';
 import vitalHeaderBase from './tokens/vitalHeader';
 import type { VitalHeader } from './tokens/vitalHeader';
 
-// const vitalHeaderSpec: TokenDemoSpec = {
-//   title: 'Global Components/Header',
-//   component: HeaderClean,
-//   tokens: vitalHeader,
-//   defaultTokens: ['Default'],
-//   componentExportName: 'HeaderClean',
-//   tokensExportName: 'vitalHeader',
-// };
+const vitalHeaderSpec: TokenDemoSpec = {
+  title: 'Global Components/Header',
+  component: HeaderClean,
+  //  error TS2322: Type 'VitalHeader' is not assignable to type 'TokenCollection<any, {}, any>'.
+  tokens: vitalHeader as any as TokenCollection<any, {}, any>,
+  defaultTokens: ['Default'],
+  componentExportName: 'HeaderClean',
+  tokensExportName: 'vitalHeader',
+};
 
 export {
-  HeaderClean, asHeaderToken, vitalHeader, vitalHeaderBase, HeaderStatic
+  HeaderClean, asHeaderToken, vitalHeader, vitalHeaderBase, HeaderStatic, vitalHeaderSpec
 };
 
 export type { HeaderComponents, HeaderProps } from './types';
