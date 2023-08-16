@@ -2,7 +2,13 @@
   "tags": [
     {
       "id": "ebfc9404-01b1-4a6f-af49-4307f0e92b41",
-      "name": "Templates"
+      "name": "Templates",
+      "value": "ebfc9404-01b1-4a6f-af49-4307f0e92b41",
+      "label": "Templates"
+    },
+    {
+      "value": "Vital 1.0",
+      "label": "Vital 1.0"
     }
   ]
 }
