@@ -39,7 +39,6 @@
     "@bodiless/vital-templates": "^1.0.0-rc.42",
     "@bodiless/vital-youtube": "^1.0.0-rc.42",
     "@bodiless/webpack": "^1.0.0-rc.42",
-    "@mdx-js/react": "^2.3.0",
     "@uiw/react-md-editor": "^3.19.7",
     "autoprefixer": "^10.4.2",
     "docsify-cli": "^4.3.0",
@@ -86,7 +85,7 @@
     "predev": "run-s build:env-vars",
     "serve": "gatsby serve",
     "serve:docs": "docsify serve ./doc",
-    "start": "run-p -r dev-frontend dev-backend",
+    "start": "gatsby serve",
     "serve:test": "npm run build && gatsby serve -p 8005"
   },
   "devDependencies": {

@@ -76,7 +76,7 @@
     "predev": "run-s build:env-vars build:docs",
     "serve": "gatsby serve",
     "serve:docs": "docsify serve ./doc",
-    "start": "run-p -r dev-frontend dev-backend"
+    "start": "gatsby serve"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.4.0",
