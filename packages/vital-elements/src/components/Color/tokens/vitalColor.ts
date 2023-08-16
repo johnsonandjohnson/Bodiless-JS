@@ -68,7 +68,7 @@ const legacyColors = asTokenGroup(ColorMeta)({
   SignalError: 'error-700',
   SignalWarning: 'warning-300',
   SignalSuccess: 'success-400',
-  SignalInformational: 'informational-500',
+  SignalInformational: 'signal-informational',
 
 });
 
