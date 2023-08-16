@@ -1,6 +1,6 @@
 import { asDividerToken } from '../DividerClean';
 import type { VitalDividers } from '../types';
-import { vitalColor } from '@bodiless/vital-elements';
+import { vitalDividerElement } from '@bodiless/vital-elements';
 import { as } from '@bodiless/fclasses';
 
 
@@ -65,16 +65,15 @@ const Default = asDividerToken({
   // },
 });
 
-
 const BorderDividerLight = asDividerToken(Default, {
   Theme: {
-    Divider: as(vitalColor.BorderLight, 'border-solid border-1')
+    Divider: as(vitalDividerElement.LightThemePrimary, 'border-solid border-1')
   }
 });
 
 const BorderDividerDark = asDividerToken(Default, {
   Theme: {
-    Divider: as(vitalColor.BorderDark, 'border-solid border-1')
+    Divider: as(vitalDividerElement.LightThemeSecondary, 'border-solid border-1')
   }
 });
 
