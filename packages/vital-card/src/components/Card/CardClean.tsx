@@ -121,7 +121,7 @@ export const cardComponentStart: CardComponents = {
 export type CardProps = DesignableProps<CardComponents> & HTMLProps<HTMLElement>;
 type CardBaseProps = DesignableComponentsProps<CardComponents> & HTMLProps<HTMLElement>;
 
-const CardBase: FC<CardBaseProps> = ({ components, ...rest }) => {
+export const CardBase: FC<CardBaseProps> = ({ components, ...rest }) => {
   const {
     Wrapper,
     Image,
