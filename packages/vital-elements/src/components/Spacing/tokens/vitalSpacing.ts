@@ -41,6 +41,7 @@ export default asTokenGroup(SpacingMeta)({
   PaddingLarge: 'p-24px md:p-36px',
   PaddingXLarge: 'p-36px md:p-48px',
   // @TODO Add Padding Top when needed
+  PaddingYXSmall: 'py-8px md:py-16px',
   PaddingBottomXSmall: 'pb-8px md:pb-16px',
   PaddingBottomSmall: 'pb-16px md:pb-20px',
   PaddingBottomMedium: 'pb-20px md:pb-24px',
