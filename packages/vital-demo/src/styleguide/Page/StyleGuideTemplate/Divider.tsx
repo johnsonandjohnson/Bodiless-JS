@@ -26,10 +26,9 @@ import { StyleGuideExamplesClean } from '../../Examples';
 const DemoFlowContainer =
   asFluidToken({
     Components: {
-      Default: on(DividerClean)(vitalDividers.Default),
-      BorderDividerLight: on(DividerClean)(vitalDividers.BorderDividerLight),
-      BorderDividerDark: on(DividerClean)(vitalDividers.BorderDividerDark),
-      SpacingDividerPadding: on(DividerClean)(vitalDividers.SpacingDividerPadding),
+      Default: on(DividerClean)(vitalDividers.Base),
+      Primary: on(DividerClean)(vitalDividers.Base, vitalDividers.WithPrimaryDivider),
+      Secondary: on(DividerClean)(vitalDividers.Base, vitalDividers.WithSecondaryDivider),
     },
 });
 

@@ -27,25 +27,25 @@ export type DividerToken = TokenSpec<DividerComponents, DefaultDomains>;
  */
 export interface VitalDividersBase {
   /**
-   * Default styling and behavior.
+   * Divider styling and behavior.
    */
-  Default: DividerToken;
+  Base: DividerToken;
 
   /**
-   * Divider Border Light
+   * Divider Primary Color
    */
-  BorderDividerLight: DividerToken;
+  WithPrimaryDivider: DividerToken;
 
   /**
-   * Divider Border Dark
+   * Divider Secondary Color
    */
-  BorderDividerDark: DividerToken;
+  WithSecondaryDivider: DividerToken;
 
   /**
-   * Divider Spacing Padding
+   * Divider Vertical Orientation
    */
-  SpacingDividerPadding: DividerToken;
-
+  WithVerticalOrientation: DividerToken;
+  
 };
 
 export interface VitalDividers extends
