@@ -126,6 +126,12 @@ exports[`Spacing Matches snapshot for PaddingXSmall 1`] = `
 />
 `;
 
+exports[`Spacing Matches snapshot for PaddingYXSmall 1`] = `
+<div
+  className="py-8px md:py-16px"
+/>
+`;
+
 exports[`Spacing Matches snapshot for WithSiteMargin 1`] = `
 <div
   className="mx-2 xl:mx-6 xxl:px-20"
