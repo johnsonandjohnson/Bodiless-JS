@@ -4,6 +4,7 @@
 * [@bodiless/gatsby-theme-bodiless](/Development/API/@bodiless/gatsby-theme-bodiless/README)
 * [@bodiless/knapsack-renderer](/Development/API/@bodiless/knapsack-renderer/README)
 * [@bodiless/vital-card](/Development/API/@bodiless/vital-card/README)
+* [@bodiless/vital-carousel](/Development/API/@bodiless/vital-carousel/README)
 * [@bodiless/vital-flowcontainer](/Development/API/@bodiless/vital-flowcontainer/README)
 * [@bodiless/vital-image](/Development/API/@bodiless/vital-image/README)
 * [@bodiless/vital-layout](/Development/API/@bodiless/vital-layout/README)
