@@ -1,7 +1,7 @@
-import { asDividerToken } from '../DividerClean';
-import type { VitalDividers } from '../types';
 import { vitalDividerElement } from '@bodiless/vital-elements';
 import { flowHoc } from '@bodiless/fclasses';
+import { asDividerToken } from '../DividerClean';
+import type { VitalDividers } from '../types';
 
 const Base = asDividerToken({
   Spacing: {
