@@ -30,12 +30,12 @@ const DemoFlowContainer =
       Primary: on(DividerClean)(vitalDividers.Base, vitalDividers.WithPrimaryDivider),
       Secondary: on(DividerClean)(vitalDividers.Base, vitalDividers.WithSecondaryDivider),
     },
-});
+  });
 
 export const Divider = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
   Meta: flowHoc.meta.term('Token')('Dividers'),
   Content: {
     Title: replaceWith(() => <>Divider</>),
-    Examples: on(StyleGuideExamplesClean)( DemoFlowContainer ),
+    Examples: on(StyleGuideExamplesClean)(DemoFlowContainer),
   },
 });
