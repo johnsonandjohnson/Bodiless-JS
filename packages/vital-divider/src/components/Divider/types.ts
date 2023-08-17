@@ -47,8 +47,8 @@ export interface VitalDividersBase {
    * Divider Vertical Orientation
    */
   WithVerticalOrientation: DividerToken;
-  
-};
+
+}
 
 export interface VitalDividers extends
   VitalDividersBase,
