@@ -23,14 +23,13 @@ import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vi
 import { asFluidToken } from '@bodiless/vital-elements';
 import { StyleGuideExamplesClean } from '../../Examples';
 
-const DemoFlowContainer =
-  asFluidToken({
-    Components: {
-      Default: on(DividerClean)(vitalDividers.Base),
-      Primary: on(DividerClean)(vitalDividers.Base, vitalDividers.WithPrimaryDivider),
-      Secondary: on(DividerClean)(vitalDividers.Base, vitalDividers.WithSecondaryDivider),
-    },
-  });
+const DemoFlowContainer = asFluidToken({
+  Components: {
+    Default: on(DividerClean)(vitalDividers.Base),
+    Primary: on(DividerClean)(vitalDividers.Base, vitalDividers.WithPrimaryDivider),
+    Secondary: on(DividerClean)(vitalDividers.Base, vitalDividers.WithSecondaryDivider),
+  },
+});
 
 export const Divider = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
   Meta: flowHoc.meta.term('Token')('Dividers'),
