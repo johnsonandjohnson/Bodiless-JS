@@ -2,8 +2,8 @@ import React, { FC, ComponentType } from 'react';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { designable, Div, Hr } from '@bodiless/fclasses';
 import type { DesignableComponentsProps } from '@bodiless/fclasses';
-import type { DividerComponents, DividerProps } from './types';
 import { withoutHydration } from '@bodiless/hydration';
+import type { DividerComponents, DividerProps } from './types';
 
 type DividerBaseProps = DesignableComponentsProps<DividerComponents>;
 
