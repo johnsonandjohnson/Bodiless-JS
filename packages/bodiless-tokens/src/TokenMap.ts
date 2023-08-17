@@ -21,8 +21,6 @@ export type Tokens = {
 };
 
 const extractMeta = (token?: Token): TokenMeta => {
-  // TODO  error TS2339: Property 'meta' does not exist on type 'HOC<{}, {}, {}>'.
-  // if (typeof token === 'function') return token?.meta || {};
   if (typeof token === 'function') return (token as HOCWithMeta)?.meta || {};
   if (typeof token === 'string') return {};
   return (token as unknown as TokenSpec<any, any>)?.Meta || {};
@@ -54,16 +52,6 @@ class TokenMap {
     );
     this.add(tokens);
     return this;
-    // TBD Conflict resolution
-    // Currently on main... looks like change was for typesafing : HOCWithMeta
-    // constructor(groupsFor?: (token?: HOC) => string[]) {
-    //   this.groupsFor = groupsFor
-    //     || ((token?: HOCWithMeta) => token?.meta?.categories?.Category || []);
-    // }
-    // Currently on main in 2022
-    // constructor(groupsFor?: (token?: HOC) => string[]) {
-    //   this.groupsFor = groupsFor || ((token?: HOC) => token?.meta?.categories?.Category || []);
-    // }
   }
 
   get names() {
