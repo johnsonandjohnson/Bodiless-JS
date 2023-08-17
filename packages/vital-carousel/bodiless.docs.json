@@ -1,7 +1,14 @@
 {
   "VitalDesignSystem": {
     "Components": {
-      "VitalCarousel.md": "./doc/README.md"
+      "VitalCarousel.md": "./doc/README.md",
+      "assets": {
+        "CarouselContextMenu.jpg": "./doc/assets/CarouselContextMenu.jpg",
+        "DesktopPDPVertical.jpg": "./doc/assets/DesktopPDPVertical.jpg",
+        "MobilePDPHorizontal.jpg": "./doc/assets/MobilePDPHorizontal.jpg",
+        "ProductCardHorizontal.jpg": "./doc/assets/ProductCardHorizontal.jpg",
+        "SlideContextMenu.jpg": "./doc/assets/SlideContextMenu.jpg"
+      }
     }
   }
 }

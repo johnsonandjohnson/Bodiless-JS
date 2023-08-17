@@ -1,6 +1,5 @@
-/* eslint-disable import/no-dynamic-require, global-require */
 /**
- * Copyright © 2021 Johnson & Johnson
+ * Copyright © 2023 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,10 +11,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { getPackageDocs } from '@bodiless/cli';
+const { getPackageDocs } = require('@bodiless/cli');
 
-export const getDocs = (nameSpace, depth) => getPackageDocs({
+const getDocs = (nameSpace, depth) => getPackageDocs({
   resolver: p => require.resolve(p),
   nameSpace,
   depth,
 });
+
+module.exports = {
+  getDocs,
+};

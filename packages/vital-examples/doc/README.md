@@ -27,7 +27,7 @@ understand the bigger picture:
   scaffolding tool to help you create code which conforms to these conventions. You can and should
   use it when building each example:
   ```
-  npx @bodiless/vital-scaffold@next
+  npx @bodiless/scaffold@next
   ```
 
 Ready to go?  Head over to the [Introduction](./Introduction/) to begin.

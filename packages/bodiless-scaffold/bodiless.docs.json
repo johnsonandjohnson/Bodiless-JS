@@ -1,0 +1,7 @@
+{
+  "Tools": {
+    "CLI": {
+      "BodilessScaffold.md": "./doc/README.md"
+    }
+  }
+}
