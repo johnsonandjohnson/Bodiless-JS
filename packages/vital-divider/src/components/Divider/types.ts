@@ -1,4 +1,6 @@
-import type { ComponentOrTag, DesignableProps, TokenSpec, TokenCollection } from '@bodiless/fclasses';
+import type {
+  ComponentOrTag, DesignableProps, TokenSpec, TokenCollection
+} from '@bodiless/fclasses';
 import type { DefaultDomains } from '@bodiless/vital-elements';
 
 /**
