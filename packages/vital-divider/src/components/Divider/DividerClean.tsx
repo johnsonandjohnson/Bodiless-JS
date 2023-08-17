@@ -1,8 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC, ComponentType } from 'react';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { designable, Div, Hr } from '@bodiless/fclasses';
 import type { DesignableComponentsProps } from '@bodiless/fclasses';
-import type { DividerComponents } from './types';
+import type { DividerComponents, DividerProps } from './types';
+import { withoutHydration } from '@bodiless/hydration';
 
 type DividerBaseProps = DesignableComponentsProps<DividerComponents>;
 
@@ -23,10 +24,20 @@ const DividerBase: FC<DividerBaseProps> = ({ components: C, ...rest }) => (
 const DividerClean = designable(dividerComponents, 'Divider')(DividerBase);
 
 /**
+ * Use this version of the card when all components are static.
+ *
+ * @category Component
+ */
+const DividerStatic: ComponentType<DividerProps> = withoutHydration()(DividerClean);
+
+/**
  * A token creator that respects the Divider slots.
  *
  * @category Token Collection
  */
-export const asDividerToken = asVitalTokenSpec<DividerComponents>();
+const asDividerToken = asVitalTokenSpec<DividerComponents>();
 
 export default DividerClean;
+export {
+  asDividerToken, DividerStatic
+};

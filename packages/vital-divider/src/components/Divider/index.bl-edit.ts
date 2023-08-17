@@ -1,21 +1,32 @@
-import type { ComponentType } from 'react';
-import { withoutHydration, /* withoutHydrationInline */ } from '@bodiless/hydration';
-import type { DividerProps } from './types';
-import Divider from './DividerClean';
+/**
+ * Copyright © 2022 Johnson & Johnson
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import { DividerStatic } from './DividerClean';
+import vitalDividers from './tokens';
 
 /**
- * This clean component is always static.  That means it is never hydrated
- * in the browser, and must not contain any client-side interactivity.
+ * Use this version of the token collection when all sub-components are static.
+ * Be sure to use it with `CardStatic` (not `CardClean`).
+ *
+ * @see [[DividerStatic]]
+ * @see [[vitalDividers]]
+ *
+ * @category Token Collection
  */
-const DividerClean: ComponentType<DividerProps> = withoutHydration()(
-  Divider
-);
-// @TODO Use withoutHydrationInline if your component renders inline
-// const DividerClean: ComponentType<DividerProps> = withoutHydrationInline()(
-//   Divider
-// );
+const vitalDividerStatic = vitalDividers;
 
 export {
-  DividerClean,
+  DividerStatic,
+  vitalDividerStatic
 };
-export { default as vitalDividers } from './tokens';
