@@ -50,5 +50,5 @@ export interface VitalDividersBase {
 
 export interface VitalDividers extends
   VitalDividersBase,
-  TokenCollection<DividerComponents, {}>
+  TokenCollection<DividerComponents, DefaultDomains>
 {}
