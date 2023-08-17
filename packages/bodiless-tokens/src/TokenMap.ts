@@ -13,7 +13,7 @@
  */
 
 import {
-  HOC, Token, TokenMeta, TokenSpec, TokenCollection, as,
+  HOC, Token, TokenMeta, TokenSpec, TokenCollection, as, HOCWithMeta,
 } from '@bodiless/fclasses';
 
 export type Tokens = {
@@ -23,7 +23,7 @@ export type Tokens = {
 const extractMeta = (token?: Token): TokenMeta => {
   // TODO  error TS2339: Property 'meta' does not exist on type 'HOC<{}, {}, {}>'.
   // if (typeof token === 'function') return token?.meta || {};
-  if (typeof token === 'function') return {};
+  if (typeof token === 'function') return (token as HOCWithMeta)?.meta || {};
   if (typeof token === 'string') return {};
   return (token as TokenSpec<any, any>)?.Meta || {};
 };

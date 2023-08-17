@@ -13,7 +13,9 @@
  */
 import { Span } from '@bodiless/fclasses';
 import type { TokenDemoSpec } from '@bodiless/tokens';
-import vitalTypography from './tokens';
+// @todo: All V 2.0 tokens are exported as part of vitalTypography, once removed switch import.
+// import vitalTypography from './tokens';
+import vitalTypography from './tokens/vitalTypographyV2';
 import vitalTypographyBase from './tokens/vitalTypography';
 
 const vitalTypographySpec: TokenDemoSpec = {
