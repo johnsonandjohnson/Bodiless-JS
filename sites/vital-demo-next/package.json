@@ -36,6 +36,7 @@
     "@bodiless/ui": "^1.0.0-rc.42",
     "@bodiless/vital-button": "^1.0.0-rc.42",
     "@bodiless/vital-card": "^1.0.0-rc.42",
+    "@bodiless/vital-carousel": "^1.0.0-rc.42",
     "@bodiless/vital-demo": "^1.0.0-rc.42",
     "@bodiless/vital-editors": "^1.0.0-rc.42",
     "@bodiless/vital-elements": "^1.0.0-rc.42",
