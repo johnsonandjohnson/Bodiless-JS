@@ -26,4 +26,4 @@
 
 #### Defined in
 
-[packages/bodiless-layouts/src/SortableResizableWrapper/index.tsx:135](https://github.com/johnsonandjohnson/Bodiless-JS/blob/0f671adef/packages/bodiless-layouts/src/SortableResizableWrapper/index.tsx#L135)
+[packages/bodiless-layouts/src/SortableResizableWrapper/index.tsx:135](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5b1df0766/packages/bodiless-layouts/src/SortableResizableWrapper/index.tsx#L135)

@@ -38,7 +38,7 @@ Token which creates the VitalDS Base Image. Defines the Base as:
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:202](https://github.com/johnsonandjohnson/Bodiless-JS/blob/0f671adef/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L202)
+[vital-image/src/components/Image/tokens/vitalImage.ts:202](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5b1df0766/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L202)
 
 ___
 
@@ -66,7 +66,7 @@ export default {
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:279](https://github.com/johnsonandjohnson/Bodiless-JS/blob/0f671adef/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L279)
+[vital-image/src/components/Image/tokens/vitalImage.ts:279](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5b1df0766/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L279)
 
 ___
 
@@ -78,7 +78,7 @@ Token which recomposes the base image as NoEffect Image.
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:287](https://github.com/johnsonandjohnson/Bodiless-JS/blob/0f671adef/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L287)
+[vital-image/src/components/Image/tokens/vitalImage.ts:287](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5b1df0766/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L287)
 
 ___
 
@@ -90,7 +90,7 @@ Token which recomposes the base image as Traced Image.
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:283](https://github.com/johnsonandjohnson/Bodiless-JS/blob/0f671adef/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L283)
+[vital-image/src/components/Image/tokens/vitalImage.ts:283](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5b1df0766/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L283)
 
 ___
 
@@ -126,7 +126,7 @@ export default {
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:317](https://github.com/johnsonandjohnson/Bodiless-JS/blob/0f671adef/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L317)
+[vital-image/src/components/Image/tokens/vitalImage.ts:317](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5b1df0766/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L317)
 
 ___
 
@@ -138,7 +138,7 @@ Token which recomposes the Base image as Plain Image.
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:260](https://github.com/johnsonandjohnson/Bodiless-JS/blob/0f671adef/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L260)
+[vital-image/src/components/Image/tokens/vitalImage.ts:260](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5b1df0766/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L260)
 
 ___
 
@@ -150,7 +150,7 @@ Composable Token which adds the `loading: eager` property for performance.
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:291](https://github.com/johnsonandjohnson/Bodiless-JS/blob/0f671adef/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L291)
+[vital-image/src/components/Image/tokens/vitalImage.ts:291](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5b1df0766/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L291)
 
 ___
 
@@ -166,7 +166,7 @@ Composable Token which apply the following tokens/features to an image:
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:218](https://github.com/johnsonandjohnson/Bodiless-JS/blob/0f671adef/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L218)
+[vital-image/src/components/Image/tokens/vitalImage.ts:218](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5b1df0766/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L218)
 
 ___
 
@@ -182,7 +182,7 @@ Composable Token which apply the following tokens/features to an image:
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:234](https://github.com/johnsonandjohnson/Bodiless-JS/blob/0f671adef/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L234)
+[vital-image/src/components/Image/tokens/vitalImage.ts:234](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5b1df0766/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L234)
 
 ___
 
@@ -198,7 +198,7 @@ Composable Token which apply the following tokens/features to an image:
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:210](https://github.com/johnsonandjohnson/Bodiless-JS/blob/0f671adef/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L210)
+[vital-image/src/components/Image/tokens/vitalImage.ts:210](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5b1df0766/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L210)
 
 ___
 
@@ -214,7 +214,7 @@ Composable Token which apply the following tokens/features to an image:
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:226](https://github.com/johnsonandjohnson/Bodiless-JS/blob/0f671adef/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L226)
+[vital-image/src/components/Image/tokens/vitalImage.ts:226](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5b1df0766/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L226)
 
 ___
 
@@ -234,7 +234,7 @@ page after placing it.
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:256](https://github.com/johnsonandjohnson/Bodiless-JS/blob/0f671adef/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L256)
+[vital-image/src/components/Image/tokens/vitalImage.ts:256](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5b1df0766/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L256)
 
 ___
 
@@ -247,7 +247,7 @@ Composable Token which apply the landscape placeholder image.
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:239](https://github.com/johnsonandjohnson/Bodiless-JS/blob/0f671adef/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L239)
+[vital-image/src/components/Image/tokens/vitalImage.ts:239](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5b1df0766/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L239)
 
 ___
 
@@ -260,4 +260,4 @@ Composable Token which wraps the image in a link
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:244](https://github.com/johnsonandjohnson/Bodiless-JS/blob/0f671adef/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L244)
+[vital-image/src/components/Image/tokens/vitalImage.ts:244](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5b1df0766/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L244)

@@ -22,10 +22,9 @@ Note that this technique does not apply to components which _always_ need to be 
 _search_, _product filters_, etc.).
 
 ?> Both supported use-cases are implemented for you when you create a new Vital site via the
-`@bodiless/cli new` command, or scaffold a component in that site using the
-`@bodiless/vital-scaffold` command. See [ComponentTemplate](./ComponentTemplate.md) for more
-information.  Read on if you are interested in understanding how to implement the technique
-manually.
+`@bodiless/cli new` command, or scaffold a component in that site using the `@bodiless/scaffold`
+command. See [ComponentTemplate](./ComponentTemplate.md) for more information.  Read on if you are
+interested in understanding how to implement the technique manually.
 
 To implement static replacement manually, follow these steps:
 

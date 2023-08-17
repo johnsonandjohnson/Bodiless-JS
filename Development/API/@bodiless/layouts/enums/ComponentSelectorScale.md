@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[packages/bodiless-layouts/src/ComponentSelector/types.tsx:19](https://github.com/johnsonandjohnson/Bodiless-JS/blob/0f671adef/packages/bodiless-layouts/src/ComponentSelector/types.tsx#L19)
+[packages/bodiless-layouts/src/ComponentSelector/types.tsx:19](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5b1df0766/packages/bodiless-layouts/src/ComponentSelector/types.tsx#L19)
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/ComponentSelector/types.tsx:20](https://github.com/johnsonandjohnson/Bodiless-JS/blob/0f671adef/packages/bodiless-layouts/src/ComponentSelector/types.tsx#L20)
+[packages/bodiless-layouts/src/ComponentSelector/types.tsx:20](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5b1df0766/packages/bodiless-layouts/src/ComponentSelector/types.tsx#L20)
 
 ___
 
@@ -38,4 +38,4 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/ComponentSelector/types.tsx:21](https://github.com/johnsonandjohnson/Bodiless-JS/blob/0f671adef/packages/bodiless-layouts/src/ComponentSelector/types.tsx#L21)
+[packages/bodiless-layouts/src/ComponentSelector/types.tsx:21](https://github.com/johnsonandjohnson/Bodiless-JS/blob/5b1df0766/packages/bodiless-layouts/src/ComponentSelector/types.tsx#L21)
