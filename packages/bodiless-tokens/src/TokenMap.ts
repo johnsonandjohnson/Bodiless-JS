@@ -12,39 +12,84 @@
  * limitations under the License.
  */
 
-import { HOC, flowHoc, HOCWithMeta } from '@bodiless/fclasses';
+import {
+  HOC, Token, TokenMeta, TokenSpec, TokenCollection, as, HOCWithMeta,
+} from '@bodiless/fclasses';
 
 export type Tokens = {
   [key: string]: HOC,
 };
 
-class TokenMap<P> {
-  protected map = new Map<string, HOC>();
+const extractMeta = (token?: Token): TokenMeta => {
+  if (typeof token === 'function') return (token as HOCWithMeta)?.meta || {};
+  if (typeof token === 'string') return {};
+  return (token as unknown as TokenSpec<any, any>)?.Meta || {};
+};
 
-  protected groupsFor: (token?: HOC) => string[];
+class TokenMap {
+  protected map = new Map<string, Token>();
 
-  constructor(groupsFor?: (token?: HOC) => string[]) {
-    this.groupsFor = groupsFor
-      || ((token?: HOCWithMeta) => token?.meta?.categories?.Category || []);
+  protected extractGroupsFromToken: (token?: Token) => string[];
+
+  constructor(extractGroupsFromToken?: (token?: Token) => string[]) {
+    this.extractGroupsFromToken = extractGroupsFromToken || (
+      (token?: Token) => extractMeta(token).categories?.Group || []
+    );
+  }
+
+  /**
+   * Builds a token map from a token collection.
+   *
+   * @param collection
+   */
+  addCollection<D extends object>(collection: TokenCollection<any, D>) {
+    const tokens = Object.keys(collection).reduce(
+      (toks, key) => ({
+        ...toks,
+        [key]: as(collection[key] as Token),
+      }),
+      {}
+    );
+    this.add(tokens);
+    return this;
   }
 
   get names() {
     return Array.from(this.map.keys());
   }
 
+  /**
+   * All the groups defined in this collection.
+   */
   get groups() {
     const groups = new Set<string>();
     this.map.forEach(value => {
-      const g = this.groupsFor(value);
+      const g = this.extractGroupsFromToken(value);
       if (g.length === 0) groups.add('Other');
       else g.forEach(c => groups.add(c));
     });
     return Array.from(groups.values());
   }
 
+  /**
+   * Returns all the groups to which a particular token belongs.
+   *
+   * @param name
+   * The name of the token.
+   *
+   * @returns
+   * An array of the groups to which the token belongs.
+   */
+  groupsFor(name: string): string[] {
+    return this.groups.reduce(
+      (groups, group) => (this.namesFor(group).includes(name) ? [...groups, group] : groups),
+      [] as string[],
+    );
+  }
+
   namesFor(group: string) {
     return Array.from(this.map.keys()).reduce((acc, key) => {
-      const groups = this.groupsFor(this.map.get(key));
+      const groups = this.extractGroupsFromToken(this.map.get(key));
       if (groups.includes(group) || (groups.length === 0 && group === 'Other')) {
         return [...acc, key];
       }
@@ -52,30 +97,28 @@ class TokenMap<P> {
     }, [] as string[]);
   }
 
-  set(name: string, token: HOC) {
+  set(name: string, token: Token) {
     this.map.set(name, token);
   }
 
-  add(tokens: Tokens) {
+  add<D extends object>(tokens: TokenCollection<any, D>) {
     Object.keys(tokens).forEach(
-      key => this.set(key, tokens[key]),
+      key => this.set(key, tokens[key] as Token),
     );
+    return this;
   }
 
   delete(name: string) {
     this.map.delete(name);
   }
 
-  flow<P>(tokens: string[] = []) {
-    const tokenHOCs = tokens.reduce((hocs, name) => {
-      const hoc = this.map.get(name);
-      if (!hoc) return [...hocs];
-      return [...hocs, hoc];
-    }, [] as HOC[]);
-    return flowHoc(
-      {}, // see https://github.com/microsoft/TypeScript/issues/28010
-      ...tokenHOCs,
-    );
+  flow<P>(tokenNames: string[] = []) {
+    const tokens = tokenNames.reduce((toks, name) => {
+      const tok = this.map.get(name);
+      if (!tok) return [...toks];
+      return [...toks, tok];
+    }, [] as Token[]);
+    return as(...tokens);
   }
 }
 

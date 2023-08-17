@@ -17,7 +17,7 @@ import {
 } from 'mobx';
 import { StoreItem } from './StoreItem.bl-edit';
 import type { BodilessStoreConfig } from './types';
-import addPageLeaver from './addPageLeaver';
+import { addPageLeaver } from './util';
 import { BodilessMobxStore as StaticBodilessMobxStore } from './BodilessMobxStore.static';
 
 export type DataSource = {

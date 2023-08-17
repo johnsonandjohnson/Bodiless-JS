@@ -23,6 +23,7 @@ import TokenMap from './TokenMap';
 import type { TokenSelectorProps } from './withTokenSelector';
 import type { TokenPanelComponents } from './TokenPanel';
 import type { TokenPanelPaneComponents } from './TokenPanelPane';
+import type { TokenDemoSpec } from './types';
 
 export {
   withTokensFromProps,
@@ -41,6 +42,8 @@ export type {
   TokenSelectorProps,
   TokenPanelComponents,
   TokenPanelPaneComponents,
+  TokenDemoSpec,
 };
 
 export * from './TokenEditor';
+export * from './tokenStories';

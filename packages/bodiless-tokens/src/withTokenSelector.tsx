@@ -18,10 +18,10 @@ import {
   useMenuOptionUI, ifEditable, withLocalContextMenu, withContextActivator, withEditButton,
   EditButtonProps, EditButtonOptions, UseBodilessOverrides,
 } from '@bodiless/core';
+import type { HOC, ComponentOrTag, TokenCollection } from '@bodiless/fclasses';
 import {
   WithNodeKeyProps, withNodeKey, withNode, withNodeDataHandlers,
 } from '@bodiless/data';
-import type { HOC, ComponentOrTag } from '@bodiless/fclasses';
 import flowRight from 'lodash/flowRight';
 import pick from 'lodash/pick';
 import { v4 } from 'uuid';
@@ -63,7 +63,7 @@ const submitValueHandler = (data: { [field: string]: boolean }) => ({
 //   );
 // });
 
-const useCategoryCheckboxes = (map: TokenMap<any>) => {
+const useCategoryCheckboxes = (map: TokenMap) => {
   const { ComponentFormLabel, ComponentFormCheckBox } = useMenuOptionUI();
   return map.groups.map(cat => (
     <>
@@ -82,8 +82,8 @@ const useEditButtonOptions = (
   useOverrides: UseBodilessOverrides<any, any> = () => ({}),
 ) => <P extends object>(props: P & TokenSelectorProps): EditButtonOptions<any, any> => {
   const { availableTokens } = props;
-  const map = new TokenMap<P>();
-  map.add(availableTokens);
+  const map = new TokenMap();
+  map.add(availableTokens as any as TokenCollection<any, any>);
   const renderForm = () => {
     const { ComponentFormTitle } = useMenuOptionUI();
     return (

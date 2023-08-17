@@ -18,6 +18,7 @@ import {
 } from '../mobx.bl-edit';
 import type { BodilessStoreConfig } from './types';
 import { ItemState, ItemStateEvent } from './types';
+import { getResourcePathFromStoreKey } from './util';
 
 export const DEFAULT_REQUEST_DELAY = 2000;
 const MAXIMUM_REQUEST_DELAY = 5 * 60 * 1000; // 5 minutes
@@ -51,7 +52,7 @@ export class StoreItem {
     const saveEnabled = (process.env.BODILESS_BACKEND_SAVE_ENABLED || '1') === '1';
     // Determine if the resource path is for a page created for preview purposes
     // we do not want to save data for these pages
-    const resourcePath = this.getResoucePath();
+    const resourcePath = this.getResourcePath();
     const isPreviewTemplatePage = resourcePath.includes(path.join('pages', '___templates'));
     return saveEnabled && !isPreviewTemplatePage;
   }
@@ -108,28 +109,16 @@ export class StoreItem {
     }
   }
 
-  private getResoucePath() {
-    // Extract the collection name (query alias) from the left-side of the key name.
-    const [collection, ...rest] = this.key.split('$');
-    // Re-join the rest of the key's right-hand side.
-    const fileName = rest.join('$');
-
-    // The query alias (collection) determines the filesystem location
-    // where to store the JSON data files.
-    // TODO: Don't hardcode 'pages' and provide mechanism for shared (cross-page) content.
-    // const resourcePath = path.join('pages', this.store.slug || '', fileName);
-    const resourcePath = collection === 'Page'
-      ? path.join('pages', this.storeConfig.slug || '', fileName)
-      : path.join('site', fileName);
-    return resourcePath;
+  private getResourcePath() {
+    return getResourcePathFromStoreKey(this.key, this.storeConfig.slug || '');
   }
 
   private request() {
     this.updateState(ItemStateEvent.OnRequestStart);
     if (this.storeConfig.client && this.shouldSave()) {
       const requestPromise = this.isDeleted
-        ? this.storeConfig.client.deletePath(this.getResoucePath())
-        : this.storeConfig.client.savePath(this.getResoucePath(), this.data);
+        ? this.storeConfig.client.deletePath(this.getResourcePath())
+        : this.storeConfig.client.savePath(this.getResourcePath(), this.data);
       requestPromise
         .then(() => this.updateState(ItemStateEvent.OnRequestEnd))
         .catch(() => this.updateState(ItemStateEvent.OnRequestError));

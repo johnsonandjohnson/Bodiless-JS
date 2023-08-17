@@ -24,7 +24,7 @@ import React, {
 } from 'react';
 import {
   DesignableComponentsProps, designable, Div, H4, H5,
-  Label as StylableLabel, Input, withoutProps, DesignableProps,
+  Label as StylableLabel, Input, withoutProps, DesignableProps, TokenCollection,
 } from '@bodiless/fclasses';
 import flow from 'lodash/flow';
 import flowRight from 'lodash/flowRight';
@@ -68,8 +68,8 @@ const TokenPanelPaneBase: FC<TokenPanelPaneBaseProps> = props => {
   const {
     node, availableTokens, components, title = 'Tokens',
   } = props;
-  const map = new TokenMap<any>();
-  map.add(availableTokens);
+  const map = new TokenMap();
+  map.add(availableTokens as any as TokenCollection<any, any>);
   const {
     Wrapper, Title, Label, Category, CheckBox, Body, CategoryWrapper,
   } = components;

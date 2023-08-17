@@ -18,6 +18,8 @@ const plugin = require('tailwindcss/plugin');
 
 const resolver = (pkgName) => require.resolve(pkgName);
 
+const fontPath = require.resolve('@bodiless/vital-button/assets/font/buttonicons.woff2');
+
 const twConfig = {
   content: [
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
@@ -48,7 +50,7 @@ const twConfig = {
           fontFamily: 'buttonicons',
           fontWeight: 400,
           fontStyle: 'normal',
-          src: 'url(\'@bodiless/vital-button/assets/font/buttonicons.woff2\')',
+          src: `url('${fontPath}')`,
         },
       });
     }),

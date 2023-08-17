@@ -15,3 +15,4 @@
 export { addTokenShadowPlugin, createTokenShadowPlugin } from './tokenShadowPlugin';
 export { addStatoscopePlugin, createStatoscopePlugin } from './statoscopePlugin';
 export { addStaticReplacementPlugin, createStaticReplacementPlugin } from './staticReplacementPlugin';
+export { createNoGatsbyWebpackPlugin, createNoGatsbyRules, addNoGatsbyWebpackConfig } from './noGatsby';

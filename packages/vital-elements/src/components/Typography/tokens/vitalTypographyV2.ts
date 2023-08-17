@@ -11,8 +11,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { asTokenGroup } from '../../../util';
+import { addProps } from '@bodiless/fclasses';
+import { asElementToken, asTokenGroup } from '../../../util';
 import { TypographyMeta } from '../meta';
+
+const WithDemoContent = asElementToken({
+  Meta: {
+    categories: {
+      Type: ['Element'],
+      Group: ['Demo'],
+    },
+  },
+  Core: {
+    _: addProps({ children: 'Lorem ipsum dolor sit amet' }),
+  },
+});
 
 export default asTokenGroup(TypographyMeta)({
   H1V2: 'text-4xl leading-5 font-normal font-2',
@@ -54,4 +67,5 @@ export default asTokenGroup(TypographyMeta)({
   BodySmallUnderlined: 'text-11.67px lg:text-13.33px leading-6 font-normal underline font-2',
   BodySmallBold: 'text-11.67px lg:text-13.33px leading-6 font-bold font-2',
   BodySmallBoldUnderlined: 'text-11.67px lg:text-13.33px leading-6 font-bold underline font-2',
+  WithDemoContent,
 });

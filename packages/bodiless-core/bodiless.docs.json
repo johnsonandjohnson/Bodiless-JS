@@ -2,6 +2,9 @@
   "Development": {
     "Architecture": {
       "Context.md" : "./README.md"
+    },
+    "Guides": {
+      "CustomDataStores.md": "./doc/CustomDataStores.md"
     }
   }
 }

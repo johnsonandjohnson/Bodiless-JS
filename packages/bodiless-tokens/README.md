@@ -1,6 +1,4 @@
-# FClasses Design API
-
-## Introduction
+# `@bodiless/tokens`
 
 The Bodiless FClasses Design API is designed to facilitate the implementation of
 a *Design System* in a React application. Before diving into the technical
@@ -593,8 +591,12 @@ A few notes:
   the generic `withoutProps()`. This ensures that the type of the resulting
   component will include these props.
 
-  ## Design Variants
+## Design Variants
 
   One of the most powerful features of the Design API is the ability to
   create multiple variants of a component by composing different tokens
   onto it.
+
+## StoryBook
+
+[Using Storybook](./doc/Storybook.md)
