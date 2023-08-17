@@ -25,7 +25,7 @@ const extractMeta = (token?: Token): TokenMeta => {
   // if (typeof token === 'function') return token?.meta || {};
   if (typeof token === 'function') return (token as HOCWithMeta)?.meta || {};
   if (typeof token === 'string') return {};
-  return (token as TokenSpec<any, any>)?.Meta || {};
+  return (token as unknown as TokenSpec<any, any>)?.Meta || {};
 };
 
 class TokenMap {
