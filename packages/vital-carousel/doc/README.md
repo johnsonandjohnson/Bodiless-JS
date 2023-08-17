@@ -30,13 +30,14 @@ via a vertical strip of thumbnails and two opposing arrow buttons.
 
 This type of Carousel would be good for displaying Product Images on a Product Display Page (PDP).
 
-### Image Slides with Horizontal Dots Navigation
+### Image Slides with Horizontal Dot Indicators
 
 ![Mobile PDP Horizontal Carousel](./assets/MobilePDPHorizontal.jpg)
 
 This Carousel, like the previous example, also uses [Image](./VitalImage/) slides. Here, horizontal
 overflow is used to show a portion of the next slide (a _peek_ to indicate that there's more
-content), and navigation is handled via clickable dots.
+content), and a row of dots serve as progress indicators, communicating how far into the slideshow
+the user is.
 
 This variation would be ideal for a mobile layout, especially when paired with using something like
 the [previous example](#image-slides-with-vertical-thumbnails-navigation) as the corresponding
