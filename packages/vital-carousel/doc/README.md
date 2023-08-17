@@ -7,8 +7,9 @@ more complex components — like Linkable Images, Videos, and Cards.
 
 ## Component Variations
 
-Using the tokens provided in the Vital Carousel package, a Site Builder can construct a number of
-Carousel variations to meet your site's needs. Showcased below are a few examples:
+Using the [tokens provided in the Vital Carousel
+package](../../Development/API/@bodiless/vital-carousel/README), a Site Builder can construct a
+number of Carousel variations to meet your site's needs. Showcased below are a few examples:
 
 ### Horizontal Cards
 
@@ -17,7 +18,8 @@ Carousel variations to meet your site's needs. Showcased below are a few example
 This Carousel displays a horizontal lineup of [Cards](./VitalCard/), with a horizontal scrollbar to
 handle any overflow.
 
-A great use case for a Carousel like this would be for Product Cards in a "Product" section.
+A great use case for a Carousel like this would be for Product Cards in a "Bestselling Products"
+section.
 
 ### Image Slides with Vertical Thumbnails Navigation
 
@@ -28,12 +30,13 @@ via a vertical strip of thumbnails and two opposing arrow buttons.
 
 This type of Carousel would be good for displaying Product Images on a Product Display Page (PDP).
 
-### Image Slides with Vertical Dots Navigation
+### Image Slides with Horizontal Dots Navigation
 
 ![Mobile PDP Horizontal Carousel](./assets/MobilePDPHorizontal.jpg)
 
 This Carousel, like the previous example, also uses [Image](./VitalImage/) slides. Here, horizontal
-overflow is used to show a portion of the next slide, and navigation is handled via clickable dots.
+overflow is used to show a portion of the next slide (a _peek_ to indicate that there's more
+content), and navigation is handled via clickable dots.
 
 This variation would be ideal for a mobile layout, especially when paired with using something like
 the [previous example](#image-slides-with-vertical-thumbnails-navigation) as the corresponding
@@ -41,8 +44,13 @@ variation for the desktop layout.
 
 ## Content Editor Details
 
-The Vital Carousel Component Edit UI allows you to add, move, and delete slides, as well as swap the
-type of component used for the slides in the Carousel (e.g., Card, Video, etc.).
+The Vital Carousel Component Edit UI allows you to add, move, and delete slides, as well as edit the
+individual slides/components.
+
+?> **Note:** By default, the Vital Carousel Component Edit UI doesn't allow you to edit (i.e.,
+_swap_) the type of component used for the slides in the Carousel (e.g., Image, Card, Video, etc.);
+in order to enable that, you will need to contact a Site Builder to make the necessary
+[configuration](#configure-slide-component-type).
 
 ### Add a Carousel
 
@@ -70,6 +78,10 @@ be able to edit Carousels that have been added by a Site Builder.
 As mentioned, a Vital Carousel displays a collection of components as sequential slides in a
 slideshow; with this in mind, when editing a Carousel, you'll either be editing individual slides
 (i.e., components) or the slideshow itself (i.e., adding, deleting, or removing slides).
+
+?> **Note:** When selecting a Vital Carousel to make edits, you'll often want to select a specific
+slide/component; to do this, you will have to use the Carousel's user navigation mechanism to bring
+the desired slide into view, as there's no way to do so within the context menu.
 
 #### Edit a Slide/Component
 
@@ -112,6 +124,9 @@ To edit a Vital Carousel's slideshow itself:
 
 ### Usage
 
+See the API docs for more technical information on the Vital Carousel Component:
+[`@bodiless/vital-carousel` API Documentation](../../Development/API/@bodiless/vital-carousel/README).
+
 For examples of using the Vital Carousel, please see:
 
 - [`packages/vital-demo/src/styleguide/Page/StyleGuideTemplate/Carousel.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-demo/src/styleguide/Page/StyleGuideTemplate/Carousel.tsx ':target=_blank')
@@ -121,3 +136,66 @@ For examples of using the Vital Carousel, please see:
     cd sites/vital-demo-next
     npm run dev
     ```
+
+### Configure Slide Component Type
+
+As a Site Builder, using tokens, you're able to configure the type of component used for the slides
+within a Vital Carousel. There are two pre-configured types to choose from: [Images](./VitalImage/)
+(`WithImageSlide`) and [Cards](./VitalCard/) (`WithCardSlide`).
+
+Using these defaults as a jumping-off point, you can configure slides with whatever type your
+Carousel requires by swapping out the `Title`.  
+Take `WithCardSlide`, for example—
+
+```js
+const WithCardSlide = asVitalCarouselToken({
+  Components: {
+    Slider: withDesign({
+      Title: on(CardClean)(
+        vitalCard.Product,
+        withNodeKey('card'),
+      ),
+    }),
+  },
+});
+```
+
+—using this as a template, you could configure a Vital Carousel token for YouTube video slides:
+
+```js
+const WithYouTubeVideoSlide = asVitalCarouselToken({
+  Components: {
+    Slider: withDesign({
+      Title: on(YouTubeClean)(
+        vitalYouTube.Default,
+        withNodeKey('video'),
+      ),
+    }),
+  },
+});
+```
+
+You can get more complex with your configuration and allow Content Editors to choose the type of
+slide component via the [Chameleon Component](../../Components/Chameleon).
+
+### Responsive Tokens
+
+As mentioned under the [Component Variations](#component-variations) section, some Vital Carousel
+variations are better suited for particular responsive layouts (e.g., desktop, mobile). Knowing that
+some Carousels variations are better suited for different devices, you can swap different variations
+in and out depending on the responsive size.
+
+To perform the swap between Carousel variations for different responsive sizes, we use the CSS
+display/hide mechanism. This means that to responsively switch between Carousel variations for, say,
+mobile and desktop layouts, there are, effectively, two Carousels on the page at once. Provided the
+Images in your slides are reasonably sized, this should have a negligible impact on performance.
+This method was chosen over the alternative — completely swapping the Carousel component when
+switching between responsive layouts — because that method demonstrated a non-trivial performance
+impact with noticeable UX lag.
+
+Here is an example of configuring a Vital Carousel to switch between variations for responsive
+layout triggers:
+
+```tsx
+// @TODO: Example pending...
+```
