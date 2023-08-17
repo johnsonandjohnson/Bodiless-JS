@@ -1,23 +1,23 @@
 import { asDividerToken } from '../DividerClean';
 import type { VitalDividers } from '../types';
 import { vitalDividerElement } from '@bodiless/vital-elements';
-import { as, flowHoc } from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 
 const Base = asDividerToken({
   Spacing: {
-    Divider: as('border-1px border-solid')
+    Divider: 'border-1px border-solid'
   }
 });
 
 const WithPrimaryDivider = asDividerToken({
   Spacing: {
-    Divider: as(vitalDividerElement.LightThemePrimary)
+    Divider: vitalDividerElement.LightThemePrimary
   }
 });
 
 const WithSecondaryDivider = asDividerToken({
   Theme: {
-    Divider: as(vitalDividerElement.LightThemeSecondary)
+    Divider: vitalDividerElement.LightThemeSecondary
   }
 });
 
