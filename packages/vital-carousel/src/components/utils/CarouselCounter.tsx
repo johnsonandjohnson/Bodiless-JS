@@ -13,21 +13,21 @@
 //  */
 
 import React from 'react';
-import { Span } from '@bodiless/fclasses';
+import { Div } from '@bodiless/fclasses';
 import { useCarouselSlideIndex, useCarouselSlideTotal } from './hooks';
 
 // Simple Component that adds Slide Index controls to Li
 const CarouselCounter = (props: any) => {
-  const slideIndex = useCarouselSlideIndex() + 1;
+  const slideIndex = useCarouselSlideIndex();
   const totalSlides = useCarouselSlideTotal();
   return (
-    <Span {...props}>
-      {slideIndex}
+    <Div data-index={slideIndex} {...props}>
+      {slideIndex + 1}
       {' '}
       /
       {' '}
       {totalSlides}
-    </Span>
+    </Div>
   );
 };
 

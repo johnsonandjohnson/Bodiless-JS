@@ -1,5 +1,7 @@
-import { addProps, as } from '@bodiless/fclasses';
-
+import {
+  addProps, as, replaceWith, stylable
+} from '@bodiless/fclasses';
+import CarouselCounter from '../../utils/CarouselCounter';
 import { asCarouselDotToken } from '../CarouselDotClean';
 import type { VitalCarouselDot } from '../types';
 
@@ -26,6 +28,17 @@ const Default = asCarouselDotToken({
   },
 });
 
+const Counter = asCarouselDotToken({
+  Components: {
+    Counter: replaceWith(
+      stylable(CarouselCounter),
+    ),
+  },
+  Behavior: {
+    Counter: 'counter',
+  }
+});
+
 // Add additional variant tokens or variators here.
 // ...
 
@@ -38,7 +51,7 @@ const Default = asCarouselDotToken({
  */
 const vitalCarouselDot: VitalCarouselDot = {
   Default,
-  // ...
+  Counter,
 };
 
 export default vitalCarouselDot;

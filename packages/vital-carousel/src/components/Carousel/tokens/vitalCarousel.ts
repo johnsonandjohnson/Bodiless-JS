@@ -13,7 +13,6 @@ import { asVitalCarouselToken, withCarouselInit } from '../VitalCarouselClean';
 import type { VitalCarousel } from '../types';
 import { CAROUSEL_NODE_KEY } from '../../utils/constants';
 import CarouselSlide from '../../utils/CarouselSlide';
-import CarouselCounter from '../../utils/CarouselCounter';
 import { CarouselThumbClean, vitalCarouselThumb } from '../../CarouselThumb';
 import { CarouselDotClean, vitalCarouselDot } from '../../CarouselDot';
 import PrevIcon from '../../assets/PrevIcon';
@@ -120,19 +119,20 @@ const WithCarouselDots = asVitalCarouselToken(
       Indicator: 'ps-2',
     },
     Layout: {
-      ControlsWrapper: 'flex',
+      ControlsWrapper: 'flex justify-center',
       Indicator: 'flex items-center dots -simple lg:hidden',
     }
   }
 );
 
-const WithCarouselDotsNums = asVitalCarouselToken(
-  {
-    Components: {
-      Counter: replaceWith(stylable(CarouselCounter)),
-    },
+const WithCarouselDotsNums = asVitalCarouselToken({
+  Components: {
+    Indicator: withDesign({
+      // Replace list items with styled dots
+      Item: on(CarouselDotClean)(vitalCarouselDot.Default, vitalCarouselDot.Counter),
+    }),
   },
-);
+});
 
 const WithCarouselDotsAllViewports = asVitalCarouselToken({
   Layout: {

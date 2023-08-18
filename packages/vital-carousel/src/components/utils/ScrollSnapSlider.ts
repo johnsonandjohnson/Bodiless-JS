@@ -8,6 +8,7 @@ type ScrollSnapSliderOptions = {
   element: Element
 };
 
+// IMPORTANT If you edit this script, edit the carouselScrollSnapSliderScript() below
 export class ScrollSnapSlider {
   /**
    * Base element of this slider
@@ -226,6 +227,7 @@ export class ScrollSnapSlider {
   };
 }
 
+// Repeat of above.....  if above is edited, update this version without typescript
 export const carouselScrollSnapSliderScript = `
 
 class ScrollSnapSlider {

@@ -6,6 +6,7 @@
  */
 import { ScrollSnapSlider } from './ScrollSnapSlider';
 
+// IMPORTANT If you edit this script, edit the sliderSimpleInitScript() below
 export const sliderSimpleInit = (sliderSimpleElement: HTMLElement) => {
   try {
     const sliderDotCarousel = sliderSimpleElement.getElementsByClassName('scroll-snap-dot-slider');
@@ -15,6 +16,8 @@ export const sliderSimpleInit = (sliderSimpleElement: HTMLElement) => {
 
       // Make the Indicators active or not
       const buttons = sliderSimpleElement.querySelectorAll('.indicators .indicator');
+      const counters = sliderSimpleElement.querySelectorAll('.indicators .counter');
+      counters[0].classList.toggle('-active');
       const setSelected = function (event: CustomEvent) {
         const slideElementIndex = event.detail;
         const slideElement = slidesDot[slideElementIndex];
@@ -23,6 +26,12 @@ export const sliderSimpleInit = (sliderSimpleElement: HTMLElement) => {
           button.classList.toggle(
             '-active',
             (button as HTMLElement).dataset.index === (slideElement as HTMLElement).dataset.index
+          );
+        }
+        for (const counter of Array.from(counters)) {
+          counter.classList.toggle(
+            '-active',
+            (counter as HTMLElement).dataset.index === (slideElement as HTMLElement).dataset.index
           );
         }
       };
@@ -104,7 +113,7 @@ export const sliderSimpleInit = (sliderSimpleElement: HTMLElement) => {
   }
 };
 
-// Repeat of above.....  not great as change above won't change on
+// Repeat of above.....  if above is edited, update this version without typescript
 export const sliderSimpleInitScript = `
 const sliderSimpleInit = (sliderSimpleElement) => {
   try {
@@ -115,6 +124,8 @@ const sliderSimpleInit = (sliderSimpleElement) => {
 
       // Make the Indicators active or not
       const buttons = sliderSimpleElement.querySelectorAll('.indicators .indicator');
+      const counters = sliderSimpleElement.querySelectorAll('.indicators .counter');
+      counters[0].classList.toggle('-active');
       const setSelected = function (event) {
         const slideElementIndex = event.detail;
         const slideElement = slidesDot[slideElementIndex];
@@ -123,6 +134,12 @@ const sliderSimpleInit = (sliderSimpleElement) => {
           button.classList.toggle(
             '-active',
             button.dataset.index === slideElement.dataset.index
+          );
+        }
+        for (const counter of Array.from(counters)) {
+          counter.classList.toggle(
+            '-active',
+            (counter as HTMLElement).dataset.index === (slideElement as HTMLElement).dataset.index
           );
         }
       };

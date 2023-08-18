@@ -67,6 +67,12 @@ const twConfig = {
           '.indicators.-hidden': {
             opacity: '0',
           },
+          '.indicators .counter.-active': {
+            display: 'block',
+          },
+          '.indicators .counter:not(.-active)': {
+            display: 'none',
+          },
           '.indicators .indicator.-active .dot': {
             'background-color': theme('colors.ScrollIndicatorActive'),
           },

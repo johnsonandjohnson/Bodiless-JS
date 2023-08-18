@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
-import { designable, Div, Span } from '@bodiless/fclasses';
+import {
+  designable, Div, Span, Fragment
+} from '@bodiless/fclasses';
 import type { DesignableComponentsProps } from '@bodiless/fclasses';
 import type { CarouselDotComponents } from './types';
 import { useCarouselSlideIndex } from '../utils/hooks';
@@ -13,6 +15,7 @@ type CarouselDotBaseProps = DesignableComponentsProps<CarouselDotComponents>;
 const carouselDotComponents: CarouselDotComponents = {
   Wrapper: Div,
   Dot: Span,
+  Counter: Fragment,
 };
 
 const CarouselDotBase: FC<CarouselDotBaseProps> = ({ components: C, ...rest }) => {
@@ -20,6 +23,7 @@ const CarouselDotBase: FC<CarouselDotBaseProps> = ({ components: C, ...rest }) =
 
   return (
     <C.Wrapper data-index={slideIndex} {...rest}>
+      <C.Counter />
       <C.Dot />
     </C.Wrapper>
   );

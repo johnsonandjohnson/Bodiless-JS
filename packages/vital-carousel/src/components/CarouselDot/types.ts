@@ -7,6 +7,7 @@ import type { DefaultDomains } from '@bodiless/vital-elements';
 export type CarouselDotComponents = {
   Wrapper: ComponentOrTag<any>,
   Dot: ComponentOrTag<any>,
+  Counter: ComponentOrTag<any>,
 };
 
 /**
@@ -30,6 +31,6 @@ export interface VitalCarouselDot {
    * Default styling and behavior.
    */
   Default: CarouselDotToken;
-
+  Counter: CarouselDotToken;
   // Document other tokens here.
 }
