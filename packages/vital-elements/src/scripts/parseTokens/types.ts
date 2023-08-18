@@ -1,20 +1,69 @@
-export interface FigmaVariableInterface extends Variable {
+/**
+ * A normalized variable with all attributes calculated.
+ */
+export type NormalVariable = {
+  /**
+   * The token level (Core, Semantic or Component)
+   */
+  level?: string,
+  /**
+   * For component tokens, the component/subcomponent/variant to which the token applies, eg
+   * `CardPrimaryTitle`.  For Semantic tokens this is "All".
+   */
+  component?: string,
+  /**
+   * The token category (eg Color, Spacing, Radius)
+   */
+  category?: string,
+  /**
+   * The specific css property to which the token applies
+   * eg. Text/Background/Border (for colors) or Padding/Margin for Spacing.
+   */
+  target?: string,
+  /**
+   * Some properties can be further qualified
+   * eg Spacing can be Top/Bottom/etc
+   */
+  subTarget?: string,
+  /**
+   * The interactive state to which the variable applies
+   * eg Active/Hover/etc...
+   */
+  state?: string,
+  /**
+   * The device size at which the token applies
+   * eg Mobile/Tablet/Desktop
+   */
+  viewport?: string,
+  /**
+   * The theme for which the token applies (used only for color variables)
+   * Light/Dark
+   */
+  theme?: string,
+  /**
+   * The value of the token suitable for use in code
+   */
+  parsedValue?: string,
+};
+
+export type FigmaVariableInterface = NormalVariable & RawVariable & {
   isColor: boolean,
   isSpacing: boolean,
   isRadius: boolean,
-  target?: ColorTargets | SpacingTargets | typeof BORDER_RADIUS;
   isInteractive: boolean,
-  toVitalTokenName: (target?: ColorTargets) => string,
   isSemantic: boolean,
   isComponent: boolean,
   errors: Set<string>,
+  setErrors: (errors: string|Set<string>|string[]) => void,
   level?: Levels,
-  validate: () => boolean,
-  parsedValue?: string,
+  theme?: Themes,
   validatedValue: (allowedValues?: string[]) => string|undefined;
   longName: string,
   resolveSemanticAlias: (variables: FigmaVariableInterface[]) => FigmaVariableInterface|undefined;
-}
+  validate: () => boolean,
+  vitalName: string,
+  createInteractiveVariants: () => FigmaVariableInterface[],
+};
 
 export const BORDER_RADIUS = 'Border Radius';
 
@@ -27,9 +76,8 @@ export const isComponentVariable = (
 
 export interface ColorVariable extends FigmaVariableInterface {
   target: ColorTargets,
-  alias: ColorVariable,
   state: States,
-  toTwColorName: (target: ColorTargets, state?: States) => string,
+  theme: Themes,
 }
 
 export const isColorVariable = (
@@ -39,7 +87,6 @@ export const isColorVariable = (
 export interface SpacingVariable extends FigmaVariableInterface {
   target: SpacingTargets,
   side: Sides,
-  alias: FigmaVariableInterface,
 }
 
 export const isSpacingVariable = (
@@ -49,12 +96,40 @@ export const isSpacingVariable = (
 export interface RadiusVariable extends FigmaVariableInterface {
   target: typeof BORDER_RADIUS,
   corner: Corners,
-  alias: FigmaVariableInterface,
 }
 
 export const isRadiusVariable = (
   v?: FigmaVariableInterface
 ): v is RadiusVariable => Boolean(v && v.isRadius);
+
+export enum Viewports {
+  Mobile = 'Mobile',
+  Tablet = 'Tablet',
+  Desktop = 'Desktop',
+}
+
+export const isViewport = (
+  s?: string
+): s is Viewports => Boolean(s && Object.values(Viewports).includes(s as Viewports));
+
+export enum Categories {
+  Spacing = 'Spacing',
+  Color = 'Color',
+  Radius = 'BorderRadius',
+}
+
+export const isCategory = (
+  s?: string
+): s is Categories => Boolean(s && Object.values(Categories).includes(s as Categories));
+
+export enum Themes {
+  Light = 'Light Theme',
+  Dark = 'Dark Theme',
+}
+
+export const isTheme = (
+  s?: string
+): s is Themes => Boolean(s && Object.values(Themes).includes(s as Themes));
 
 export enum Collections {
   Core = 'Core Values',
@@ -67,9 +142,6 @@ export enum Brands {
   Motrin = 'Motrin',
 }
 
-/**
- * Figma variable types.
- */
 export enum Types {
   Color = 'color',
   Number = 'number',
@@ -93,6 +165,13 @@ export const isColorTarget = (
   t?: string
 ): t is ColorTargets => !!t && Object.values(ColorTargets).includes(t as ColorTargets);
 
+export const TwColorTargetPrefixes: Record<ColorTargets, string> = {
+  Border: 'border-',
+  Background: 'bg-',
+  Text: 'text-',
+  Scrollbar: 'scrollbar-',
+};
+
 export enum States {
   Idle = 'Idle',
   Hover = 'Hover',
@@ -108,8 +187,7 @@ export const isState = (s?: string): s is States => Boolean(
 export const TwStatePrefixes: Partial<Record<States, string>> = {
   Idle: '',
   Hover: 'hover:',
-  // @todo Is there a tw resposive variant for disabled?
-  Disabled: 'aria-disabled:',
+  Disabled: 'disabled:',
   Pressed: 'active:',
   Focus: 'focus:',
 };
@@ -126,6 +204,22 @@ export const isSpacingTarget = (
 export const TwSpacingPrefixes: Record<SpacingTargets, string> = {
   Padding: 'p',
   Margin: 'm',
+};
+
+export enum Devices {
+  Mobile = 'Mobile',
+  Tablet = 'Tablet',
+  Desktop = 'Desktop',
+}
+
+export const isDevice = (
+  d?: string
+): d is Devices => Boolean(d && Object.values(Devices).includes(d as Devices));
+
+export const TwDevicePrefixes: Record<Devices, string> = {
+  Mobile: '',
+  Tablet: 'md:',
+  Desktop: 'lg:',
 };
 
 export enum Corners {
@@ -161,9 +255,9 @@ export enum Sides {
   Right = 'Right',
   Top = 'Top',
   Bottom = 'Bottom',
-  X = 'X',
-  Y = 'Y',
-  ALL = 'ALL',
+  X = 'SidesX',
+  Y = 'SidesY',
+  ALL = 'All',
 }
 
 export const TwSides: Record<Sides, string> = {
@@ -171,30 +265,45 @@ export const TwSides: Record<Sides, string> = {
   Right: 'r',
   Top: 't',
   Bottom: 'b',
-  X: 'x',
-  Y: 'y',
-  ALL: '',
+  SidesX: 'x',
+  SidesY: 'y',
+  All: '',
 };
 
 export const isSide = (
   s?: string
 ): s is Sides => Boolean(s && Object.values(Sides).includes(s as Sides));
 
-export const TwColorTargetPrefixes: Record<ColorTargets, string> = {
-  Border: 'border-',
-  Background: 'bg-',
-  Text: 'text-',
-  Scrollbar: 'scrollbar-',
-};
+export type Targets = ColorTargets|SpacingTargets|typeof BORDER_RADIUS;
+
+export const isTarget = (
+  s?: string
+): s is Targets => isColorTarget(s) || isSpacingTarget(s) || s === BORDER_RADIUS;
+
+export type SubTargets = Sides|Corners;
+export const isSubTarget = (
+  s?: string
+): s is SubTargets => isSide(s) || isCorner(s);
+
+export const isReserved = (
+  s?: string
+): boolean => isSubTarget(s) || isTarget(s) || isTheme(s) || isState(s) || isViewport(s);
+
+// RAW DATA DEFINITIONS
 
 export type Data = {
   version: string;
   collections: Collection[];
 };
 
+type Collection = {
+  name: string;
+  modes: Mode[];
+};
+
 export type Mode = {
   name: string;
-  variables: Variable[];
+  variables: RawVariable[];
 };
 
 export type AliasValue = {
@@ -202,7 +311,7 @@ export type AliasValue = {
   name: string;
 };
 
-export type Variable = {
+export type RawVariable = {
   name: string;
   type?: string;
   isAlias?: boolean;
@@ -211,13 +320,8 @@ export type Variable = {
   value?: any;
 };
 
-export type AliasVariable = Omit<Variable, 'value'> & {
+export type AliasVariable = Omit<RawVariable, 'value'> & {
   value: AliasValue;
 };
 
-export const isAliasVariable = (v?: Variable): v is AliasVariable => Boolean(v?.isAlias);
-
-type Collection = {
-  name: string;
-  modes: Mode[];
-};
+export const isAliasVariable = (v?: RawVariable): v is AliasVariable => Boolean(v?.isAlias);

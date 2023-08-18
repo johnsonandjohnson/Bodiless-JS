@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { Data, FigmaVariableInterface, Variable } from './types';
+import { Data, FigmaVariableInterface, RawVariable } from './types';
 import FigmaVariable from './FigmaVariable';
 
 export const logErrors = (
@@ -30,7 +30,7 @@ export const findVariables = (data: Data, condition: (
   data.collections.forEach(collection => {
     collection.modes.forEach(mode => {
       const vars = mode.variables.map(
-        (v: Variable): FigmaVariableInterface => new FigmaVariable(
+        (v: RawVariable): FigmaVariableInterface => new FigmaVariable(
           { ...v, collection: collection.name, mode: mode.name }
         )
       ).filter(v => condition(v));

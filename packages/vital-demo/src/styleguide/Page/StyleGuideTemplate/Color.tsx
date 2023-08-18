@@ -35,16 +35,16 @@ const BaseColorVariation = {
 };
 
 const ColorVariations = {
-  BackgroundInteractiveLightThemeIdle: vitalColor.BackgroundInteractiveLightThemeIdle,
+  BackgroundInteractiveLightThemeIdle: vitalColor.BackgroundInteractiveLightIdle,
   BackgroundInteractiveLightThemeHover: 'bg-kenvue-green-shade-80',
   BackgroundInteractiveLightThemeFocus: 'bg-kenvue-green-shade-80',
   BackgroundInteractiveLightThemePressed: 'bg-kenvue-green-shade-60',
-  BackgroundInteractiveLightThemeDisabled: vitalColor.BackgroundInteractiveLightThemeDisabled,
-  BackgroundInteractiveDarkThemeIdle: vitalColor.BackgroundInteractiveDarkThemeIdle,
+  BackgroundInteractiveLightThemeDisabled: vitalColor.BackgroundInteractiveLightDisabled,
+  BackgroundInteractiveDarkThemeIdle: vitalColor.BackgroundInteractiveDarkIdle,
   BackgroundInteractiveDarkThemeHover: 'bg-kenvue-green-tint-60',
   BackgroundInteractiveDarkThemeFocus: 'bg-kenvue-green-tint-60',
   BackgroundInteractiveDarkThemePressed: 'bg-kenvue-green-tint-20',
-  BackgroundInteractiveDarkThemeDisabled: vitalColor.BackgroundInteractiveDarkThemeDisabled,
+  BackgroundInteractiveDarkThemeDisabled: vitalColor.BackgroundInteractiveDarkDisabled,
 };
 
 const BaseTextVariation = {
@@ -57,19 +57,19 @@ const BaseTextVariation = {
 };
 
 const TextVariations = {
-  TextInteractiveDarkThemeIdle: vitalColor.TextInteractiveDarkThemeIdle,
-  TextInteractiveLightThemeIdle: vitalColor.TextInteractiveLightThemeIdle,
+  TextInteractiveDarkThemeIdle: vitalColor.TextInteractiveDarkIdle,
+  TextInteractiveLightThemeIdle: vitalColor.TextInteractiveLightIdle,
   TextInteractiveDarkThemeHover: 'text-kenvue-green-tint-60',
-  TextInteractiveDarkThemeDisabled: vitalColor.TextInteractiveDarkThemeDisabled,
+  TextInteractiveDarkThemeDisabled: vitalColor.TextInteractiveDarkDisabled,
   TextInteractiveDarkThemePressed: 'text-kenvue-green-tint-20',
   TextInteractiveDarkThemeFocus: 'text-kenvue-green-tint-60',
-  TextInteractiveLightThemeDisabled: vitalColor.TextInteractiveLightThemeDisabled,
+  TextInteractiveLightThemeDisabled: vitalColor.TextInteractiveLightDisabled,
   BorderInteractiveLightThemeFocus: 'text-kenvue-green-shade-80',
   TextInteractiveLightThemeFocus: 'text-kenvue-green-shade-80',
   TextInteractiveLightThemePressed: 'text-kenvue-green-shade-60',
   // eslint-disable-next-line max-len
-  TextDarkThemeBase: as(vitalColor.TextDarkThemeBase, vitalColor.BackgroundInteractiveLightThemeDisabled, 'p-8px'),
-  TextLightThemeBase: vitalColor.TextLightThemeBase,
+  TextDarkThemeBase: as(vitalColor.TextDarkBase, vitalColor.BackgroundInteractiveLightDisabled, 'p-8px'),
+  TextLightThemeBase: vitalColor.TextLightBase,
   TextInteractiveLightThemeHover: 'text-kenvue-green-shade-80',
 };
 

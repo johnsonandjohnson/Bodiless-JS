@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CategoryCard Tokens Matches snapshot for Default 1`] = `
+<a
+  className="w-full flex flex-col"
+  href="#"
+>
+  <div>
+    <div
+      data-no-hydrate={true}
+      id="f64e1b3016f7c8d0d277ce020d98ee0d"
+      style={
+        Object {
+          "display": "contents",
+        }
+      }
+    >
+      <img
+        alt=""
+        src="test-file-stub"
+        title=""
+      />
+    </div>
+  </div>
+  <div
+    className="pb-16px md:pb-16px lg:pb-24px pt-16px md:pt-16px lg:pt-24px items-start"
+  >
+    <div>
+      <a
+        className="focus:drop-shadow-button focus:outline-none active:drop-shadow-none rounded-8px group justify-center"
+        href="#"
+        role="button"
+      >
+        <span
+          data-no-hydrate={true}
+          id="123b58b4a9e4407d42b2606d912b6deb"
+          style={
+            Object {
+              "display": "contents",
+            }
+          }
+        >
+          <span
+            className="active:text-kenvue-green-shade-60 focus:text-kenvue-green-shade-80 hover:text-kenvue-green-shade-80 text-kenvue-green-green text-14px lg:text-16px leading-6 font-bold font-2"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "CATEGORY LINK",
+              }
+            }
+          />
+        </span>
+      </a>
+    </div>
+  </div>
+</a>
+`;
+
+exports[`CategoryCard Tokens Matches snapshot for WithTitle 1`] = `
+<a>
+  <div>
+    <img />
+  </div>
+  <div>
+    <h3
+      className="text-kenvue-neutrals-black text-15.2px lg:text-19.2px leading-5 font-normal font-2"
+    >
+      <span
+        data-no-hydrate={true}
+        id="63a9f0ea7bb98050796b649e85481845"
+        style={
+          Object {
+            "display": "contents",
+          }
+        }
+      >
+        <span
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "Category Title",
+            }
+          }
+        />
+      </span>
+    </h3>
+    <div
+      className="mt-20px md:mt-24px"
+    >
+      <a>
+        <span />
+      </a>
+    </div>
+  </div>
+</a>
+`;

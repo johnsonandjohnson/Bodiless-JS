@@ -9,8 +9,10 @@ export const meta = {
 };
 
 export default asTokenGroup(meta)({
-  LightThemeActive: vitalColor.ScrollbarInteractiveLightThemeIdle,
-  LightThemeInactive: vitalColor.BorderLightThemeBase,
-  DarkThemeActive: vitalColor.ScrollbarInteractiveDarkThemeIdle,
-  DarkThemeInactive: vitalColor.BorderDarkThemeBase,
+  BackgroundActive: vitalColor.ScrollbarInteractiveDarkIdle,
+  BackgroundInactive: vitalColor.BorderDarkBase,
+  BackgroundLightThemeActive: vitalColor.ScrollbarInteractiveDarkIdle,
+  BackgroundLightThemeInactive: vitalColor.BorderDarkBase,
+  BackgroundDarkThemeActive: vitalColor.ScrollbarInteractiveLightIdle,
+  BackgroundDarkThemeInactive: vitalColor.BorderLightBase,
 });

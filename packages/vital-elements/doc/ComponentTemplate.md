@@ -6,14 +6,14 @@ Shadowing](./ShadowingTokens) and [Static Replacement](./StaticReplacement).
 
 ## Component Scaffolding
 
-Vital provides a tool for scaffolding new components which makes it easier to ensure the standards
-are met. You should use it anytime you are creating a new component or extending an existing token
-collection.
+Bodiless provides a tool for scaffolding new components which makes it easier to ensure the
+standards are met. You should use it anytime you are creating a new component or extending an
+existing token collection.
 
 To use it, run the following command from a local directory:
 
 ```bash
-npx @bodiless/vital-scaffold@next
+npx @bodiless/scaffold@next
 ```
 
 Follow the prompts to create the new component. The tool will generate the file structure based on

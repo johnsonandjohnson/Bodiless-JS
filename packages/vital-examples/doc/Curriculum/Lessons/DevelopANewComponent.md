@@ -490,7 +490,7 @@ a personalized component with enhanced features.
   component built in this lesson started, run the following command from a local directory:
 
   ```shell
-  npx @bodiless/vital-scaffold@next
+  npx @bodiless/scaffold@next
   ```
 
   Follow the prompts to create the new component. The tool will generate the file structure based on
@@ -507,7 +507,7 @@ a personalized component with enhanced features.
 
   ```shell
   $ mkdir -p packages/vital-article/src/
-  $ npx @bodiless/vital-scaffold@next
+  $ npx @bodiless/scaffold@next
   ? Path to "src" directory where component should be created [Required],
   e.g. "./", "./src/", "/absolute/path/to/[package name]/src" etc. Default to current directory.
   >  ./packages/vital-article/src/

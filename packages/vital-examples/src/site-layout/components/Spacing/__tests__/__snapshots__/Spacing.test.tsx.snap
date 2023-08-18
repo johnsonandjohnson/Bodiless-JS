@@ -54,6 +54,12 @@ exports[`Spacing Matches snapshot for MarginSmall 1`] = `
 />
 `;
 
+exports[`Spacing Matches snapshot for MarginTopMedium 1`] = `
+<div
+  className="mt-20px md:mt-24px"
+/>
+`;
+
 exports[`Spacing Matches snapshot for MarginXLarge 1`] = `
 <div
   className="m-36px md:48px"
@@ -123,6 +129,12 @@ exports[`Spacing Matches snapshot for PaddingXLarge 1`] = `
 exports[`Spacing Matches snapshot for PaddingXSmall 1`] = `
 <div
   className="p-8px md:p-16px"
+/>
+`;
+
+exports[`Spacing Matches snapshot for PaddingYXSmall 1`] = `
+<div
+  className="py-8px md:py-16px"
 />
 `;
 

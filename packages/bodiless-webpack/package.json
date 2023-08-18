@@ -11,9 +11,7 @@
     "test": "__tests__"
   },
   "files": [
-    "/lib",
-    "/bodiless.docs.json",
-    "/getDocs.js"
+    "/lib"
   ],
   "repository": {
     "type": "git",
@@ -32,7 +30,6 @@
     "prepack": "npm run clean && npm run build"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.42",
     "@statoscope/webpack-plugin": "^5.20.1",
     "lodash": "^4.17.19",
     "webpack": "^5.69.1"
