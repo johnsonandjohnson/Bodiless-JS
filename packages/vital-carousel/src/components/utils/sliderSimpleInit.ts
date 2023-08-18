@@ -72,6 +72,10 @@ export const sliderSimpleInit = (sliderSimpleElement: HTMLElement) => {
       for (const button of Array.from(buttonsThumbs)) {
         const buttonindex = (button as HTMLElement).dataset.index;
         button.classList.toggle(
+          '-peek',
+          Number(buttonindex) === (NumThumbs)
+        );
+        button.classList.toggle(
           '-hide',
           Number(buttonindex) > (NumThumbs - 1)
         );
@@ -85,13 +89,13 @@ export const sliderSimpleInit = (sliderSimpleElement: HTMLElement) => {
         const slideElementIndex = event.detail;
 
         if (buttonsThumbs.length > NumThumbs) {
-          if (slideElementIndex + NumThumbs < buttonsThumbs.length) {
-            if (slideElementIndex === 0) {
-              buttonsThumbs[slideElementIndex+NumThumbs].classList.toggle('-hide');
-            } else {
-              buttonsThumbs[slideElementIndex-1].classList.toggle('-hide');
+          if (slideElementIndex + NumThumbs <= buttonsThumbs.length) {
+            buttonsThumbs[slideElementIndex-1]?.classList.toggle('-hide');
+            if (slideElementIndex !== 0) {
+              buttonsThumbs[slideElementIndex+NumThumbs-1]?.classList.toggle('-hide');
+              buttonsThumbs[slideElementIndex+NumThumbs]?.classList.toggle('-peek');
+              buttonsThumbs[slideElementIndex+NumThumbs-1]?.classList.toggle('-peek');
             }
-            buttonsThumbs[slideElementIndex+NumThumbs].classList.toggle('-hide');
           }
         }
 
@@ -180,6 +184,10 @@ const sliderSimpleInit = (sliderSimpleElement) => {
       for (const button of buttonsThumbs) {
         const buttonindex = button.dataset.index;
         button.classList.toggle(
+          '-peek',
+          Number(buttonindex) === (NumThumbs)
+        );
+        button.classList.toggle(
           '-hide',
           Number(buttonindex) > (NumThumbs - 1)
         );
@@ -193,13 +201,13 @@ const sliderSimpleInit = (sliderSimpleElement) => {
         const slideElementIndex = event.detail;
 
         if (buttonsThumbs.length > NumThumbs) {
-          if (slideElementIndex + NumThumbs < buttonsThumbs.length) {
-            if (slideElementIndex === 0) {
-              buttonsThumbs[slideElementIndex+NumThumbs].classList.toggle('-hide');
-            } else {
-              buttonsThumbs[slideElementIndex-1].classList.toggle('-hide');
+          if (slideElementIndex + NumThumbs <= buttonsThumbs.length) {
+            buttonsThumbs[slideElementIndex-1]?.classList.toggle('-hide');
+            if (slideElementIndex !== 0) {
+              buttonsThumbs[slideElementIndex+NumThumbs-1]?.classList.toggle('-hide');
+              buttonsThumbs[slideElementIndex+NumThumbs]?.classList.toggle('-peek');
+              buttonsThumbs[slideElementIndex+NumThumbs-1]?.classList.toggle('-peek');
             }
-            buttonsThumbs[slideElementIndex+NumThumbs].classList.toggle('-hide');
           }
         }
 

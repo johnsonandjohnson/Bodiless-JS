@@ -79,6 +79,12 @@ const twConfig = {
           '.indicator.-hide': {
             display: 'none',
           },
+          '.indicator.-hide.-peek': {
+            display: 'block',
+            height: '10px',
+            overflow: 'hidden',
+            'margin-bottom': '24px',
+          },
           '.arrow.-disabled': {
             color: theme('colors.ScrollIndicatorInActive'),
           }

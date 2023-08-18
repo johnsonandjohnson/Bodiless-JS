@@ -14,7 +14,9 @@ type CarouselDotBaseProps = DesignableComponentsProps<CarouselDotComponents>;
  */
 const carouselDotComponents: CarouselDotComponents = {
   Wrapper: Div,
+  DotWrapper: Div,
   Dot: Span,
+  CounterWrapper: Div,
   Counter: Fragment,
 };
 
@@ -22,9 +24,13 @@ const CarouselDotBase: FC<CarouselDotBaseProps> = ({ components: C, ...rest }) =
   const slideIndex = useCarouselSlideIndex();
 
   return (
-    <C.Wrapper data-index={slideIndex} {...rest}>
-      <C.Counter />
-      <C.Dot />
+    <C.Wrapper {...rest}>
+      <C.CounterWrapper data-index={slideIndex}>
+        <C.Counter />
+      </C.CounterWrapper>
+      <C.DotWrapper data-index={slideIndex}>
+        <C.Dot />
+      </C.DotWrapper>
     </C.Wrapper>
   );
 };

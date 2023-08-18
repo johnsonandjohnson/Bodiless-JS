@@ -18,18 +18,17 @@ import { stylable } from '@bodiless/fclasses';
 const Down = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
+    width="14"
+    height="8"
+    viewBox="0 0 14 8"
     fill="none"
     {...props}
   >
-    <mask style={{ maskType: 'alpha' }} id="mask0_5803_806" maskUnits="userSpaceOnUse" x="4" y="0" width="16" height="24">
-      <path d="M19 15.8856L11.9954 22.8811L5 15.8765" stroke="#0C0C36" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M12.041 22.4536L12.041 1.04883" stroke="#0C0C36" strokeWidth="2" strokeLinecap="round" />
+    <mask id="mask0_10315_18015" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="14" height="8">
+      <path d="M13 1L7 7L1 1" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </mask>
-    <g mask="url(#mask0_5803_806)" style={{ maskType: 'alpha' }}>
-      <rect x="24" width="24" height="24" transform="rotate(90 24 0)" fill="currentColor" />
+    <g mask="url(#mask0_10315_18015)" style={{ maskType: 'alpha' }}>
+      <rect x="25" y="-14" width="36" height="36" transform="rotate(90 25 -14)" fill="currentColor" />
     </g>
   </svg>
 );

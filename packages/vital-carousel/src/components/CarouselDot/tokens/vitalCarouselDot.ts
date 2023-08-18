@@ -1,6 +1,7 @@
 import {
   addProps, as, replaceWith, stylable
 } from '@bodiless/fclasses';
+import { vitalSpacing } from '@bodiless/vital-elements';
 import CarouselCounter from '../../utils/CarouselCounter';
 import { asCarouselDotToken } from '../CarouselDotClean';
 import type { VitalCarouselDot } from '../types';
@@ -36,7 +37,13 @@ const Counter = asCarouselDotToken({
   },
   Behavior: {
     Counter: 'counter',
-  }
+  },
+  Layout: {
+    CounterWrapper: 'min-h-[50px]',
+  },
+  Spacing: {
+    CounterWrapper: vitalSpacing.PaddingBottomSmall,
+  },
 });
 
 // Add additional variant tokens or variators here.

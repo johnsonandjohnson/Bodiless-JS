@@ -71,7 +71,7 @@ const Default = asVitalCarouselToken({
   },
   Spacing: {
     // Padding under slider above controls
-    Slider: vitalSpacing.PaddingBottomMedium,
+    Slider: vitalSpacing.PaddingBottomSmall,
   },
 });
 
@@ -182,9 +182,9 @@ const WithVerticalThumbs = asVitalCarouselToken({
   Spacing: {
     SliderWrapper: 'pl-24px',
     Indicator: withDesign({
-      Item: 'pb-24px',
+      Item: vitalSpacing.PaddingBottomMedium,
     }),
-    NavWrapper: 'pb-24px',
+    NavWrapper: vitalSpacing.PaddingBottomMedium,
   },
 });
 
