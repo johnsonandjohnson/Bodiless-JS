@@ -24,4 +24,4 @@ Default styling and behavior.
 
 #### Defined in
 
-[vital-carousel/src/components/CarouselThumb/types.ts:32](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-carousel/src/components/CarouselThumb/types.ts#L32)
+[vital-carousel/src/components/CarouselThumb/types.ts:32](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-carousel/src/components/CarouselThumb/types.ts#L32)

@@ -81,7 +81,7 @@ const CustomCard = on(CardClean)(myBrandCard.Custom)
 
 #### Defined in
 
-[vital-card/src/components/Card/CardClean.tsx:187](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-card/src/components/Card/CardClean.tsx#L187)
+[vital-card/src/components/Card/CardClean.tsx:187](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-card/src/components/Card/CardClean.tsx#L187)
 
 ___
 
@@ -93,7 +93,7 @@ Use this version of the card when all components are static.
 
 #### Defined in
 
-[vital-card/src/components/Card/CardClean.tsx:210](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-card/src/components/Card/CardClean.tsx#L210)
+[vital-card/src/components/Card/CardClean.tsx:210](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-card/src/components/Card/CardClean.tsx#L210)
 
 ___
 
@@ -105,7 +105,7 @@ ___
 
 #### Defined in
 
-[vital-card/src/components/ArticleCard/ArticleCardClean.tsx:29](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-card/src/components/ArticleCard/ArticleCardClean.tsx#L29)
+[vital-card/src/components/ArticleCard/ArticleCardClean.tsx:29](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-card/src/components/ArticleCard/ArticleCardClean.tsx#L29)
 
 ___
 
@@ -115,7 +115,7 @@ ___
 
 #### Defined in
 
-[vital-card/src/components/CategoryCard/CategoryCardClean.tsx:30](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-card/src/components/CategoryCard/CategoryCardClean.tsx#L30)
+[vital-card/src/components/CategoryCard/CategoryCardClean.tsx:30](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-card/src/components/CategoryCard/CategoryCardClean.tsx#L30)
 
 ___
 
@@ -133,7 +133,7 @@ ___
 
 #### Defined in
 
-[vital-card/src/components/ProductCardTokens/index.ts:4](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-card/src/components/ProductCardTokens/index.ts#L4)
+[vital-card/src/components/ProductCardTokens/index.ts:4](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-card/src/components/ProductCardTokens/index.ts#L4)
 
 ___
 
@@ -143,7 +143,7 @@ ___
 
 #### Defined in
 
-[vital-card/src/components/Card/Card.knapsackSpec.ts:31](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-card/src/components/Card/Card.knapsackSpec.ts#L31)
+[vital-card/src/components/Card/Card.knapsackSpec.ts:31](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-card/src/components/Card/Card.knapsackSpec.ts#L31)
 
 ___
 
@@ -162,7 +162,7 @@ vitalArticleCard
 
 #### Defined in
 
-[vital-card/src/components/ArticleCard/tokens/vitalArticleCard.ts:176](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-card/src/components/ArticleCard/tokens/vitalArticleCard.ts#L176)
+[vital-card/src/components/ArticleCard/tokens/vitalArticleCard.ts:176](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-card/src/components/ArticleCard/tokens/vitalArticleCard.ts#L176)
 
 ___
 
@@ -174,7 +174,7 @@ Tokens for cards.
 
 #### Defined in
 
-[vital-card/src/components/Card/tokens/vitalCard.ts:202](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-card/src/components/Card/tokens/vitalCard.ts#L202)
+[vital-card/src/components/Card/tokens/vitalCard.ts:202](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-card/src/components/Card/tokens/vitalCard.ts#L202)
 
 ___
 
@@ -190,7 +190,7 @@ Use this version of the vital card tokens when extending or shadowing.
 
 #### Defined in
 
-[vital-card/src/components/Card/index.ts:27](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-card/src/components/Card/index.ts#L27)
+[vital-card/src/components/Card/index.ts:27](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-card/src/components/Card/index.ts#L27)
 
 ___
 
@@ -200,7 +200,7 @@ ___
 
 #### Defined in
 
-[vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts:256](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts#L256)
+[vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts:256](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts#L256)
 
 ___
 
@@ -218,7 +218,7 @@ Be sure to use it with `CardStatic` (not `CardClean`).
 
 #### Defined in
 
-[vital-card/src/components/Card/index.bl-edit.ts:27](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-card/src/components/Card/index.bl-edit.ts#L27)
+[vital-card/src/components/Card/index.bl-edit.ts:27](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-card/src/components/Card/index.bl-edit.ts#L27)
 
 ___
 
@@ -236,7 +236,7 @@ vitalCategoryCard
 
 #### Defined in
 
-[vital-card/src/components/CategoryCard/tokens/vitalCategoryCard.ts:109](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-card/src/components/CategoryCard/tokens/vitalCategoryCard.ts#L109)
+[vital-card/src/components/CategoryCard/tokens/vitalCategoryCard.ts:109](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-card/src/components/CategoryCard/tokens/vitalCategoryCard.ts#L109)
 
 ## Token Collection Functions
 

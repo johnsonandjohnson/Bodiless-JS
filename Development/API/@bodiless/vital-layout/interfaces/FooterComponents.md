@@ -44,7 +44,7 @@ Wrapper for the a container in the first column
 
 #### Defined in
 
-[vital-layout/src/components/Footer/types.ts:42](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-layout/src/components/Footer/types.ts#L42)
+[vital-layout/src/components/Footer/types.ts:42](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-layout/src/components/Footer/types.ts#L42)
 
 ___
 
@@ -56,7 +56,7 @@ Wrapper for the a container in the second column
 
 #### Defined in
 
-[vital-layout/src/components/Footer/types.ts:46](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-layout/src/components/Footer/types.ts#L46)
+[vital-layout/src/components/Footer/types.ts:46](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-layout/src/components/Footer/types.ts#L46)
 
 ___
 
@@ -68,7 +68,7 @@ Container to hold the specific footer components
 
 #### Defined in
 
-[vital-layout/src/components/Footer/types.ts:38](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-layout/src/components/Footer/types.ts#L38)
+[vital-layout/src/components/Footer/types.ts:38](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-layout/src/components/Footer/types.ts#L38)
 
 ___
 
@@ -80,7 +80,7 @@ Used for Copyright in the second column
 
 #### Defined in
 
-[vital-layout/src/components/Footer/types.ts:54](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-layout/src/components/Footer/types.ts#L54)
+[vital-layout/src/components/Footer/types.ts:54](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-layout/src/components/Footer/types.ts#L54)
 
 ___
 
@@ -93,7 +93,7 @@ By Default this a Fragment and not rendered
 
 #### Defined in
 
-[vital-layout/src/components/Footer/types.ts:59](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-layout/src/components/Footer/types.ts#L59)
+[vital-layout/src/components/Footer/types.ts:59](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-layout/src/components/Footer/types.ts#L59)
 
 ___
 
@@ -105,7 +105,7 @@ Used for the footer menus.
 
 #### Defined in
 
-[vital-layout/src/components/Footer/types.ts:75](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-layout/src/components/Footer/types.ts#L75)
+[vital-layout/src/components/Footer/types.ts:75](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-layout/src/components/Footer/types.ts#L75)
 
 ___
 
@@ -117,7 +117,7 @@ Wrapper around footer menus.
 
 #### Defined in
 
-[vital-layout/src/components/Footer/types.ts:71](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-layout/src/components/Footer/types.ts#L71)
+[vital-layout/src/components/Footer/types.ts:71](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-layout/src/components/Footer/types.ts#L71)
 
 ___
 
@@ -129,7 +129,7 @@ Used for the menus
 
 #### Defined in
 
-[vital-layout/src/components/Footer/types.ts:50](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-layout/src/components/Footer/types.ts#L50)
+[vital-layout/src/components/Footer/types.ts:50](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-layout/src/components/Footer/types.ts#L50)
 
 ___
 
@@ -141,7 +141,7 @@ Used for Rewards/Special component and is in the first column
 
 #### Defined in
 
-[vital-layout/src/components/Footer/types.ts:67](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-layout/src/components/Footer/types.ts#L67)
+[vital-layout/src/components/Footer/types.ts:67](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-layout/src/components/Footer/types.ts#L67)
 
 ___
 
@@ -153,7 +153,7 @@ Wrapper for the Rewards
 
 #### Defined in
 
-[vital-layout/src/components/Footer/types.ts:63](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-layout/src/components/Footer/types.ts#L63)
+[vital-layout/src/components/Footer/types.ts:63](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-layout/src/components/Footer/types.ts#L63)
 
 ___
 
@@ -165,4 +165,4 @@ Wrapper around entire Footer
 
 #### Defined in
 
-[vital-layout/src/components/Footer/types.ts:34](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-layout/src/components/Footer/types.ts#L34)
+[vital-layout/src/components/Footer/types.ts:34](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-layout/src/components/Footer/types.ts#L34)
