@@ -127,6 +127,11 @@ const squareimage9 = {
   alt: 'aqua',
   title: 'aqua'
 };
+const squareimage10 = {
+  src: 'https://placehold.co/800x800/884EA0/FFF?text=10',
+  alt: 'darkpurple',
+  title: 'darkpurple'
+};
 const data = {
   examples$ProductCardSection$slides: {
     items: ['card1', 'card2', 'card3', 'card4', 'card5'],
@@ -141,7 +146,7 @@ const data = {
   examples$MobilePDPCarousel$slides$image5$image: squareimage5,
   examples$MobilePDPCarousel$slides$image6$image: squareimage6,
   examples$DesktopTabletPDPCarousel$slides: {
-    items: ['image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7', 'image8', 'image9'],
+    items: ['image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7', 'image8', 'image9', 'image10'],
   },
   examples$DesktopTabletPDPCarousel$slides$image1$image: squareimage1,
   examples$DesktopTabletPDPCarousel$slides$image2$image: squareimage2,
@@ -152,8 +157,9 @@ const data = {
   examples$DesktopTabletPDPCarousel$slides$image7$image: squareimage7,
   examples$DesktopTabletPDPCarousel$slides$image8$image: squareimage8,
   examples$DesktopTabletPDPCarousel$slides$image9$image: squareimage9,
+  examples$DesktopTabletPDPCarousel$slides$image10$image: squareimage10,
   examples$DesktopPDPVerticalCarousel$slides: {
-    items: ['image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7', 'image8', 'image9'],
+    items: ['image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7', 'image8', 'image9', 'image10'],
   },
   examples$DesktopPDPVerticalCarousel$slides$image1$image: squareimage1,
   examples$DesktopPDPVerticalCarousel$slides$image2$image: squareimage2,
@@ -164,6 +170,7 @@ const data = {
   examples$DesktopPDPVerticalCarousel$slides$image7$image: squareimage7,
   examples$DesktopPDPVerticalCarousel$slides$image8$image: squareimage8,
   examples$DesktopPDPVerticalCarousel$slides$image9$image: squareimage9,
+  examples$DesktopPDPVerticalCarousel$slides$image10$image: squareimage10,
 };
 
 export const Carousel = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {

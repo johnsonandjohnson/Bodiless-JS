@@ -7,7 +7,7 @@ import {
 import { vitalImage } from '@bodiless/vital-image';
 import { vitalCard, CardClean } from '@bodiless/vital-card';
 import { asBodilessList } from '@bodiless/components';
-import { vitalColor, vitalSpacing } from '@bodiless/vital-elements';
+import { vitalColor, vitalImageCarouselElement, vitalSpacing } from '@bodiless/vital-elements';
 import { withChild } from '@bodiless/core';
 import { asVitalCarouselToken, withCarouselInit } from '../VitalCarouselClean';
 import type { VitalCarousel } from '../types';
@@ -167,8 +167,11 @@ const WithVerticalThumbs = asVitalCarouselToken({
     Next: replaceWith(as(withChild(DownIcon))(Div)),
   },
   Theme: {
-    Prev: vitalColor.TextPrimaryInteractive,
-    Next: vitalColor.TextPrimaryInteractive,
+    // @todo TOKEN PROBLEM IMPORT/VARIABLE NAME
+    // icons need to be text color to fill ImageThumbnailBorderLightThemeActive
+    // vitalImageCarouselElement.ImageThumbnailBorderLightThemeActive,
+    Prev: vitalColor.TextInteractiveDarkIdle,
+    Next: vitalColor.TextInteractiveDarkIdle,
   },
   Layout: {
     Wrapper: 'lg:flex lg:flex-row-reverse',
