@@ -67,7 +67,7 @@ bodiless-table/lib/types.d.ts:21
 
 #### Defined in
 
-[vital-table/src/components/Table/TableClean.tsx:23](https://github.com/johnsonandjohnson/Bodiless-JS/blob/e22f7895e/packages/vital-table/src/components/Table/TableClean.tsx#L23)
+[vital-table/src/components/Table/TableClean.tsx:23](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-table/src/components/Table/TableClean.tsx#L23)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[vital-table/src/components/Table/TableClean.tsx:25](https://github.com/johnsonandjohnson/Bodiless-JS/blob/e22f7895e/packages/vital-table/src/components/Table/TableClean.tsx#L25)
+[vital-table/src/components/Table/TableClean.tsx:25](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-table/src/components/Table/TableClean.tsx#L25)
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 #### Defined in
 
-[vital-table/src/components/Table/tokens/vitalTable.ts:171](https://github.com/johnsonandjohnson/Bodiless-JS/blob/e22f7895e/packages/vital-table/src/components/Table/tokens/vitalTable.ts#L171)
+[vital-table/src/components/Table/tokens/vitalTable.ts:171](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-table/src/components/Table/tokens/vitalTable.ts#L171)
 
 ___
 
@@ -120,7 +120,7 @@ ___
 
 #### Defined in
 
-[vital-table/src/components/FlowContainer/tokens/vitalTableFlowContainer.ts:62](https://github.com/johnsonandjohnson/Bodiless-JS/blob/e22f7895e/packages/vital-table/src/components/FlowContainer/tokens/vitalTableFlowContainer.ts#L62)
+[vital-table/src/components/FlowContainer/tokens/vitalTableFlowContainer.ts:62](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-table/src/components/FlowContainer/tokens/vitalTableFlowContainer.ts#L62)
 
 ## Token API Functions
 

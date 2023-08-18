@@ -29,7 +29,7 @@ Text of the link
 
 #### Defined in
 
-[vital-link/src/components/Link/types.ts:34](https://github.com/johnsonandjohnson/Bodiless-JS/blob/e22f7895e/packages/vital-link/src/components/Link/types.ts#L34)
+[vital-link/src/components/Link/types.ts:34](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-link/src/components/Link/types.ts#L34)
 
 ___
 
@@ -41,7 +41,7 @@ Accessibility to add 'Open link in new window'
 
 #### Defined in
 
-[vital-link/src/components/Link/types.ts:38](https://github.com/johnsonandjohnson/Bodiless-JS/blob/e22f7895e/packages/vital-link/src/components/Link/types.ts#L38)
+[vital-link/src/components/Link/types.ts:38](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-link/src/components/Link/types.ts#L38)
 
 ___
 
@@ -53,7 +53,7 @@ Icon that can be displayed with the link
 
 #### Defined in
 
-[vital-link/src/components/Link/types.ts:30](https://github.com/johnsonandjohnson/Bodiless-JS/blob/e22f7895e/packages/vital-link/src/components/Link/types.ts#L30)
+[vital-link/src/components/Link/types.ts:30](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-link/src/components/Link/types.ts#L30)
 
 ___
 
@@ -65,4 +65,4 @@ Wrapper
 
 #### Defined in
 
-[vital-link/src/components/Link/types.ts:26](https://github.com/johnsonandjohnson/Bodiless-JS/blob/e22f7895e/packages/vital-link/src/components/Link/types.ts#L26)
+[vital-link/src/components/Link/types.ts:26](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-link/src/components/Link/types.ts#L26)

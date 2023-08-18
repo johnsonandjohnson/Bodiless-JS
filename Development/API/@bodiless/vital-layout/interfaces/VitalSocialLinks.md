@@ -24,4 +24,4 @@ Setups social links with some styling.
 
 #### Defined in
 
-[vital-layout/src/components/Footer/SocialLinks/tokens/vitalSocialLinks.ts:43](https://github.com/johnsonandjohnson/Bodiless-JS/blob/e22f7895e/packages/vital-layout/src/components/Footer/SocialLinks/tokens/vitalSocialLinks.ts#L43)
+[vital-layout/src/components/Footer/SocialLinks/tokens/vitalSocialLinks.ts:43](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9271098af/packages/vital-layout/src/components/Footer/SocialLinks/tokens/vitalSocialLinks.ts#L43)
