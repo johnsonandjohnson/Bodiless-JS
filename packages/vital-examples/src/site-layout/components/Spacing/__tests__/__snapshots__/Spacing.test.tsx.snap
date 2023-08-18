@@ -54,6 +54,12 @@ exports[`Spacing Matches snapshot for MarginSmall 1`] = `
 />
 `;
 
+exports[`Spacing Matches snapshot for MarginTopMedium 1`] = `
+<div
+  className="mt-20px md:mt-24px"
+/>
+`;
+
 exports[`Spacing Matches snapshot for MarginXLarge 1`] = `
 <div
   className="m-36px md:48px"
