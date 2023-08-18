@@ -46,6 +46,7 @@
     "@bodiless/vital-elements": "^1.0.0-rc.42",
     "@bodiless/vital-templates": "^1.0.0-rc.42",
     "@bodiless/vital-accordion": "^1.0.0-rc.42",
+    "@bodiless/vital-carousel": "^1.0.0-rc.42",
     "@bodiless/vital-list": "^1.0.0-rc.42",
     "@bodiless/vital-image": "^1.0.0-rc.42",
     "@bodiless/vital-navigation": "^1.0.0-rc.42",

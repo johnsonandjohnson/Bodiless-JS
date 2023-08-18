@@ -22,13 +22,13 @@ import { asSchemaSource, WithProductSchema } from '@bodiless/schema-org';
 import { vitalGenericTemplate, TemplateNodeKeys } from '@bodiless/vital-templates';
 import { vitalEditorPlain, withAutoSuperscript } from '@bodiless/vital-editors';
 import { vitalButton, asButtonToken } from '@bodiless/vital-button';
-import { vitalImage } from '@bodiless/vital-image';
 import {
   vitalColor, vitalTextDecoration, vitalTypography, vitalFontSize,
 } from '@bodiless/vital-elements';
 import { asBreadcrumbsToken } from '@bodiless/vital-navigation';
 import { vitalLayout } from '@bodiless/vital-layout';
 
+import { vitalCarouselStatic } from '@bodiless/vital-carousel';
 import { asPDPTemplateToken } from '../PDPTemplateClean';
 import { withPDPContextProvider } from '../PDPTemplateContext';
 import vitalSection from './vitalPDPSection';
@@ -85,7 +85,13 @@ const Default = asPDPTemplateToken({
     ...vitalGenericTemplate.Default.Components,
     PageWrapper: vitalLayout.Default,
     TopContent: replaceWith(Fragment),
-    ProductImage: vitalImage.Plain,
+    ProductImage: as(
+      vitalCarouselStatic.Default,
+      vitalCarouselStatic.WithImageSlide,
+      vitalCarouselStatic.WithThumbnail,
+      vitalCarouselStatic.DesktopOnly,
+      vitalCarouselStatic.WithVerticalThumbs,
+    ),
     ProductDescription: vitalFlowContainer.Default,
     ProductTitle: vitalEditorPlain.Default,
     JumpLinks: vitalJumpLinks.PDPJumpLinks,

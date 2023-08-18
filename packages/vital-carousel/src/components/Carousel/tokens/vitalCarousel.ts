@@ -7,7 +7,7 @@ import {
 import { vitalImage } from '@bodiless/vital-image';
 import { vitalCard, CardClean } from '@bodiless/vital-card';
 import { asBodilessList } from '@bodiless/components';
-import { vitalColor, vitalImageCarouselElement, vitalSpacing } from '@bodiless/vital-elements';
+import { vitalColor, vitalSpacing } from '@bodiless/vital-elements';
 import { withChild } from '@bodiless/core';
 import { asVitalCarouselToken, withCarouselInit } from '../VitalCarouselClean';
 import type { VitalCarousel } from '../types';

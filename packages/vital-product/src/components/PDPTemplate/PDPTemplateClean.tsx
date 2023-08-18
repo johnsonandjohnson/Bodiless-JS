@@ -16,7 +16,6 @@ import React from 'react';
 import {
   designable,
   Div,
-  Img,
   Fragment,
 } from '@bodiless/fclasses';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
@@ -26,6 +25,7 @@ import { FlowContainerClean } from '@bodiless/vital-flowcontainer';
 import { BreadcrumbsClean } from '@bodiless/vital-navigation';
 import { ButtonClean } from '@bodiless/vital-button';
 import { SectionClean } from '@bodiless/vital-section';
+import { CarouselStatic } from '@bodiless/vital-carousel';
 
 import { JumpLinksClean } from '../JumpLinks';
 import { PDPTemplateComponents, BasePDPTemplateProps } from './types';
@@ -39,7 +39,7 @@ const pdpTemplateComponents: PDPTemplateComponents = {
   TopContent: Fragment,
   ContentWrapper: Div,
   ProductImageWrapper: Div,
-  ProductImage: Img,
+  ProductImage: CarouselStatic,
   ProductDetailWrapper: Div,
   ProductDescriptionWrapper: Div,
   ProductDescription: FlowContainerClean,

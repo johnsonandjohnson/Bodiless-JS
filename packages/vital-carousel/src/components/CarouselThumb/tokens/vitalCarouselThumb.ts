@@ -9,8 +9,6 @@ const Default = asCarouselThumbToken({
   },
   Theme: {
     Wrapper: 'border-none thumbs indicator',
-    // @todo TOKEN PROBLEM IMPORT/VARIABLE NAME
-    
   },
   A11y: {
     Wrapper: addProps({ tabIndex: '0' }),
