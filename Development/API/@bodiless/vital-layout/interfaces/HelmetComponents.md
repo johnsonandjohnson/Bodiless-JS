@@ -33,7 +33,7 @@ Used to add arbitrary attributes or classes to the BODY tag.
 
 #### Defined in
 
-[vital-layout/src/components/Helmet/types.ts:51](https://github.com/johnsonandjohnson/Bodiless-JS/blob/16f777aa8/packages/vital-layout/src/components/Helmet/types.ts#L51)
+[vital-layout/src/components/Helmet/types.ts:51](https://github.com/johnsonandjohnson/Bodiless-JS/blob/e22f7895e/packages/vital-layout/src/components/Helmet/types.ts#L51)
 
 ___
 
@@ -45,7 +45,7 @@ Used to add GA4 datalayer scripts.
 
 #### Defined in
 
-[vital-layout/src/components/Helmet/types.ts:31](https://github.com/johnsonandjohnson/Bodiless-JS/blob/16f777aa8/packages/vital-layout/src/components/Helmet/types.ts#L31)
+[vital-layout/src/components/Helmet/types.ts:31](https://github.com/johnsonandjohnson/Bodiless-JS/blob/e22f7895e/packages/vital-layout/src/components/Helmet/types.ts#L31)
 
 ___
 
@@ -57,7 +57,7 @@ Used to add arbirary attributes or classes to the HTML tag.
 
 #### Defined in
 
-[vital-layout/src/components/Helmet/types.ts:47](https://github.com/johnsonandjohnson/Bodiless-JS/blob/16f777aa8/packages/vital-layout/src/components/Helmet/types.ts#L47)
+[vital-layout/src/components/Helmet/types.ts:47](https://github.com/johnsonandjohnson/Bodiless-JS/blob/e22f7895e/packages/vital-layout/src/components/Helmet/types.ts#L47)
 
 ___
 
@@ -69,7 +69,7 @@ Used to add hreflang alternate links.
 
 #### Defined in
 
-[vital-layout/src/components/Helmet/types.ts:27](https://github.com/johnsonandjohnson/Bodiless-JS/blob/16f777aa8/packages/vital-layout/src/components/Helmet/types.ts#L27)
+[vital-layout/src/components/Helmet/types.ts:27](https://github.com/johnsonandjohnson/Bodiless-JS/blob/e22f7895e/packages/vital-layout/src/components/Helmet/types.ts#L27)
 
 ___
 
@@ -81,7 +81,7 @@ Used to set the language and direction attributes of the HTML tag.
 
 #### Defined in
 
-[vital-layout/src/components/Helmet/types.ts:43](https://github.com/johnsonandjohnson/Bodiless-JS/blob/16f777aa8/packages/vital-layout/src/components/Helmet/types.ts#L43)
+[vital-layout/src/components/Helmet/types.ts:43](https://github.com/johnsonandjohnson/Bodiless-JS/blob/e22f7895e/packages/vital-layout/src/components/Helmet/types.ts#L43)
 
 ___
 
@@ -93,7 +93,7 @@ Use to add SEO related metatags.
 
 #### Defined in
 
-[vital-layout/src/components/Helmet/types.ts:35](https://github.com/johnsonandjohnson/Bodiless-JS/blob/16f777aa8/packages/vital-layout/src/components/Helmet/types.ts#L35)
+[vital-layout/src/components/Helmet/types.ts:35](https://github.com/johnsonandjohnson/Bodiless-JS/blob/e22f7895e/packages/vital-layout/src/components/Helmet/types.ts#L35)
 
 ___
 
@@ -105,4 +105,4 @@ Used to add social share related metatags.
 
 #### Defined in
 
-[vital-layout/src/components/Helmet/types.ts:39](https://github.com/johnsonandjohnson/Bodiless-JS/blob/16f777aa8/packages/vital-layout/src/components/Helmet/types.ts#L39)
+[vital-layout/src/components/Helmet/types.ts:39](https://github.com/johnsonandjohnson/Bodiless-JS/blob/e22f7895e/packages/vital-layout/src/components/Helmet/types.ts#L39)
