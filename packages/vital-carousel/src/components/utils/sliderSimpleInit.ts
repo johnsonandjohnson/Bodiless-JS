@@ -140,10 +140,10 @@ const sliderSimpleInit = (sliderSimpleElement) => {
             button.dataset.index === slideElement.dataset.index
           );
         }
-        for (const counter of Array.from(counters)) {
+        for (const counter of counters) {
           counter.classList.toggle(
             '-active',
-            (counter as HTMLElement).dataset.index === (slideElement as HTMLElement).dataset.index
+            counter.dataset.index === slideElement.dataset.index
           );
         }
       };
