@@ -70,6 +70,7 @@ module.exports = {
     ".eslintrc.js",
     '**/design-tokens.js', // Exclude design-tokens.js
     '**/design-tokens.d.ts', // Exclude design-tokens.d.ts
+    '**/generated/*.ts', // Exclude design-tokens.d.ts
   ],
 };
 

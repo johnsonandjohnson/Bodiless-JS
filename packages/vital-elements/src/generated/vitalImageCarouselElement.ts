@@ -9,11 +9,14 @@ export const meta = {
 };
 
 export default asTokenGroup(meta)({
-  ImageBorderDarkThemeIdle: vitalColor.BorderDarkThemeBase,
-  ImageThumbnailBorderDarkThemeIdle: vitalColor.BorderDarkThemeBase,
-  ImageThumbnailBorderLightThemeActive: vitalColor.BorderInteractiveLightThemeIdle,
-  ImageBorderLightThemeBorder: vitalColor.BorderLightThemeBase,
+  ImageThumbnailBorderActive: vitalColor.BorderInteractiveDarkIdle,
+  ImageBorderBorder: vitalColor.BorderDarkBase,
+  ImageThumbnailBorderIdle: vitalColor.BorderDarkBase,
+  ImageBorderDarkThemeIdle: vitalColor.BorderLightBase,
+  ImageThumbnailBorderDarkThemeIdle: vitalColor.BorderLightBase,
+  ImageThumbnailBorderLightThemeActive: vitalColor.BorderInteractiveDarkIdle,
+  ImageBorderLightThemeBorder: vitalColor.BorderDarkBase,
   ImageBorderRadiusBorderRadius: 'rounded-0px',
-  ImageThumbnailBorderLightThemeIdle: vitalColor.BorderLightThemeBase,
-  ImageThumbnailBorderDarkThemeActive: vitalColor.BorderInteractiveDarkThemeIdle,
+  ImageThumbnailBorderLightThemeIdle: vitalColor.BorderDarkBase,
+  ImageThumbnailBorderDarkThemeActive: vitalColor.BorderInteractiveLightIdle,
 });

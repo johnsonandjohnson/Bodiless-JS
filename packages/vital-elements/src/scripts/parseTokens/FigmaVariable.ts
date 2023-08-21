@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import {
   ColorTargets, TwColorTargetPrefixes, States, TwStatePrefixes,
-  Levels, isLevel, Variable, Collections, AliasValue, isColorTarget, SpacingTargets,
+  Levels, RawVariable, Collections, AliasValue, isColorTarget, SpacingTargets,
   isSpacingTarget,
   isSide,
   TwSpacingPrefixes,
@@ -18,9 +18,20 @@ import {
   isState,
   isRadiusVariable,
   TwCorners,
+  isComponentVariable,
+  isReserved,
+  Categories,
+  SubTargets,
+  Viewports,
+  isViewport,
+  isTheme,
+  Themes,
+  isDevice,
+  TwDevicePrefixes,
+  NormalVariable,
 } from './types';
 
-class FigmaVariable implements Variable, FigmaVariableInterface {
+class FigmaVariable implements FigmaVariableInterface {
   protected segments: string[];
 
   readonly name: string;
@@ -35,13 +46,22 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
 
   readonly value?: string|AliasValue;
 
-  readonly errors = new Set<string>();
+  readonly errors: Set<string> = new Set<string>();
 
-  constructor(variable$: string|Variable) {
-    const variable: Variable = typeof variable$ === 'string' ? { name: variable$ } : variable$;
+  protected interactiveTarget?: ColorTargets;
+
+  static sanitize(s: string) {
+    return s.replace(/[ -/.]/g, '').replace(/-/g, '_');
+  }
+
+  constructor(variable$: string|RawVariable) {
+    const variable: RawVariable = typeof variable$ === 'string' ? { name: variable$ } : variable$;
     Object.assign(this, variable);
     this.name = variable.name;
     this.segments = this.name.split('/');
+    // Copy errors to a new set.
+    const { errors } = this;
+    this.errors = new Set<string>(errors.values());
   }
 
   get isInteractive() {
@@ -74,101 +94,50 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
   }
 
   get alias(): FigmaVariable|undefined {
-    if (!isAliasVariable(this)) return undefined;
-    return new FigmaVariable(this.value);
+    if (!isAliasVariable(this)) {
+      this.errors.add(`KNOWN ISSUE: Non-core value "${this.value}" is not an alias`);
+      return undefined;
+    }
+    const alias = new FigmaVariable(this.value);
+    if (this.collection === Collections.Device && !alias.isCore) {
+      // @TODO Handle this case. Sometimes device variables may point to brand variables
+      // if a brand needs to customized them.
+      // Also - some device tokens point to other device tokens which appear to be
+      // semantic - eg /Spacing/X Small'.  Is this real?
+      this.errors.add(`Device alias collection "${alias.longName}" is not core`);
+    }
+    if (this.category === Categories.Radius) {
+      if (!alias.isCore) this.errors.add(`Radius alias collection "${alias.longName}" is not core`);
+    }
+    if (this.category === Categories.Spacing) {
+      if (!alias.isCore) {
+        this.errors.add(`Spcaing alias collection "${alias.longName}" is not core`);
+      }
+    }
+    if (this.isColor) {
+      if (this.level === Levels.Component) {
+        // @TODO Sometimes component color variables point to core:
+        // eg `Components/Form Field/Border/Error` points to `Core/Color/Signal/Error/Error`
+        // This currently raises an error but we need to handle it
+        if (!alias.isSemantic) this.errors.add(`Component color alias "(${alias.longName}" is not semantic`);
+        if (!alias.isBrand) this.errors.add(`Component color alias "(${alias.longName}" is not brand`);
+      } else if (!alias.isCore) {
+        this.errors.add(`Semantic color alias "(${alias.longName}" is not core`);
+      }
+    }
+    return alias;
   }
 
   get isColor(): boolean {
-    return (this.type === Types.Color);
-  }
-
-  validate(): boolean {
-    // @todo validation for core variables.
-    if (this.isCore) return true;
-    if (this.isComponent) {
-      if (!this.componentName) {
-        this.errors.add('Component variable has no component');
-        return false;
-      }
-    }
-    if (!isAliasVariable(this)) {
-      this.errors.add(`Non-core value "${this.value}" is not an alias`);
-      return false;
-    }
-    if (isRadiusVariable(this)) {
-      if (this.alias?.collection !== Collections.Core) {
-        this.errors.add(`Radius alias collection "${this.alias.collection}" is not core`);
-        return false;
-      }
-      return true;
-    }
-    if (isSpacingVariable(this)) {
-      if (this.alias?.collection !== Collections.Core) {
-        this.errors.add(`Spaing alias collection "${this.alias.collection}" is not core`);
-        return false;
-      }
-      if (!isSpacingTarget(this.target)) {
-        this.errors.add(`Invalid spacing target ${this.target}`);
-      }
-      return true;
-    }
-    if (isColorVariable(this)) {
-      if (this.isComponent) {
-        if (!this.alias.isSemantic) {
-          this.errors.add(`Component color alias "(${this.alias.name}" is not semantic`);
-          return false;
-        }
-        if (!isColorTarget(this.target)) {
-          this.errors.add(`Component color target "${this.target}" invalid`);
-          return false;
-        }
-      } else if (!isColorTarget(this.target) && !this.isInteractive) {
-        this.errors.add(`Semantic color target "${this.target}" invalid`);
-        return false;
-      }
-      return true;
-    }
-    this.errors.add('Could not determine variable tupe');
-    return false;
-  }
-
-  get isComponent(): boolean {
-    if (this.collection !== Collections.Brand || this.level !== Levels.Component) return false;
-    return true;
-  }
-
-  get isCore(): Boolean {
-    return this.collection === Collections.Core;
-  }
-
-  get isSemantic(): boolean {
-    return this.collection === Collections.Brand && this.level === Levels.Semantic;
-  }
-
-  toString() {
-    return JSON.stringify(this);
-  }
-
-  get isSpacing(): boolean {
-    return this.isComponent && isSpacingTarget(this.target);
-  }
-
-  get isRadius(): boolean {
-    return this.isComponent && this.target === BORDER_RADIUS;
-  }
-
-  get level(): Levels|undefined {
-    return isLevel(this.segments[0]) ? this.segments[0] : undefined;
-  }
-
-  get componentName(): string {
-    return this.segments[1]?.replace(/ /g, '').replace(/-/g, '_');
+    return this.category === Categories.Color;
   }
 
   protected findTarget(): [
     number,
     ColorTargets | SpacingTargets | typeof BORDER_RADIUS | undefined
   ] {
+    // IMPORTANT NOTE! THIS METHOD MUST NOT CALL ANY TYPE GUARDS AS IT IS USED BY THEM!!!
+
     // Special cases for some components
     if (this.componentName === 'ScrollIndicator') return [-1, ColorTargets.Scrollbar];
     if (this.componentName === 'Divider') return [-2, ColorTargets.Border];
@@ -185,58 +154,94 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
     return [-1, undefined];
   }
 
+  get isComponent(): boolean {
+    return this.level === Levels.Component;
+  }
+
+  get isCore(): Boolean {
+    return this.level === Levels.Core;
+  }
+
+  get isBrand(): Boolean {
+    return this.collection === Collections.Brand;
+  }
+
+  get isSemantic(): boolean {
+    return this.level === Levels.Semantic;
+  }
+
+  get isSpacing(): boolean {
+    return this.category === Categories.Spacing;
+  }
+
+  get isRadius(): boolean {
+    return this.category === Categories.Radius;
+  }
+
+  get level(): Levels|undefined {
+    if (this.collection === Collections.Core) return Levels.Core;
+    const level = this.segments[0];
+    if (level === Levels.Semantic) {
+      if (this.collection !== Collections.Brand) {
+        this.errors.add(`Semantic variable in "${this.collection}" collection.`);
+      }
+      return Levels.Semantic;
+    }
+    if (level === Levels.Component) return Levels.Component;
+    return undefined;
+  }
+
+  get componentName(): string|undefined {
+    if (!isComponentVariable(this)) return undefined;
+    const componentName = this.segments[1]?.replace(/ /g, '').replace(/-/g, '_');
+    if (isComponentVariable(this)) {
+      if (!componentName) {
+        this.errors.add('Component variable has no component');
+      } else if (isReserved(componentName)) {
+        this.errors.add(`Reserved component name "${componentName}`);
+      }
+    }
+    return componentName;
+  }
+
   get target(): ColorTargets | SpacingTargets | typeof BORDER_RADIUS | undefined {
     const [_, target] = this.findTarget();
+    if (isColorVariable(this)) {
+      if (this.isInteractive) {
+        if (this.interactiveTarget) return this.interactiveTarget;
+      } else if (!isColorTarget(target)) {
+        this.errors.add(`Component color target "${target}" invalid`);
+      }
+    }
+    if (isSpacingVariable(this) && !isSpacingTarget(target)) {
+      this.errors.add(`Invalid spacing target ${target}`);
+    }
+    if (isRadiusVariable(this) && target !== BORDER_RADIUS) {
+      this.errors.add(`Invalid radius target ${target}`);
+    }
     return target;
   }
 
   get state(): States | undefined {
-    const state = this.findSegment('State', isState);
-    if (!state) {
-      this.errors.add('Could not find a valid state');
-    }
+    const state = this.segments.find(isState);
+    if (!state && this.isInteractive) this.errors.add('Could not find a valid state');
     return state;
   }
 
-  toVitalTokenName(target?: ColorTargets) {
-    const cleanedName = this.segments.slice(2).map(s => s.replace(/[ \-,]/g, '')).join('');
-    return `${target || ''}${cleanedName}`;
-  }
-
-  toTwColorName(target: ColorTargets, state: States = States.Idle): string {
-    const cleanedName = this.segments.slice(1).join('/').replace(/[/ ]/g, '-').replace(/%/g, '')
-      .toLowerCase();
-    const statePrefix = TwStatePrefixes[state];
-    const typePrefix = TwColorTargetPrefixes[target];
-    return `'${statePrefix}${typePrefix}${cleanedName}'`;
-  }
-
-  findSegment<T extends string>(
-    label: string,
-    condition: (s: string) => s is T,
-    after: number = 1,
-  ): T|undefined {
-    const candidates = this.segments.map((s, ix) => (condition(s) ? ix : -1))
-      .filter(ix => ix >= 0)
-      .filter(ix => ix! > after);
-    if (candidates.length === 0) {
-      this.errors.add(`Could not find ${label} segment`);
-      return undefined;
-    }
-    if (candidates.length > 1) {
-      this.errors.add(`Found mmultiple ${label} segments`);
-    }
-    return this.segments[candidates[0]] as T;
-  }
-
   get side(): Sides|undefined {
-    const side = this.findSegment('Side', isSide);
+    const side = this.segments.find(isSide);
     return isSide(side) ? side : Sides.ALL;
   }
 
   get corner(): Corners|undefined {
-    const corner = this.findSegment('Corner', isCorner);
+    const corner = this.segments.find(isCorner);
     return isCorner(corner) ? corner: Corners.ALL;
+  }
+
+  get vitalName(): string {
+    const cleanedName = this.segments.slice(2).map(s => s.replace(/[ \-,]/g, '')).join('');
+    return this.isInteractive && isColorVariable(this)
+      ? `${this.target}${cleanedName}` : cleanedName;
   }
 
   /**
@@ -247,6 +252,7 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
    * @returns
    */
   validatedValue(allowedValues?: string[]): string|undefined {
+    if (!this.validate()) return undefined;
     if (this.parsedValue) {
       const simpleValue = this.isColor
         ? this.parsedValue.replace('vitalColor.', '')
@@ -259,15 +265,133 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
     return this.parsedValue;
   }
 
+  /**
+   * The component name with any variants or subcomponents attached.
+   */
+  get longComponentName() {
+    if (!isComponentVariable(this)) return undefined;
+    const longComponentSegments: string[] = [this.componentName];
+    for (let s = 1; s < this.segments.length - 1; s += 1) {
+      if (isReserved(this.segments[s])) break;
+      longComponentSegments.push(this.segments[s]);
+    }
+    return longComponentSegments.join('-');
+  }
+
+  get category(): Categories|undefined {
+    if (this.type === Types.Color || (!this.type && this.segments[1] === Categories.Color)) {
+      return Categories.Color;
+    }
+    const [_, target] = this.findTarget();
+    if (this.isComponent && isSpacingTarget(target)) return Categories.Spacing;
+    if (this.isComponent && target === BORDER_RADIUS) return Categories.Radius;
+    return undefined;
+  }
+
+  get component(): string|undefined {
+    if (isComponentVariable(this)) return this.longComponentName;
+    return undefined;
+  }
+
+  validate() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    this.normalName && this.parsedValue;
+    return this.errors.size === 0;
+  }
+
+  get subTarget(): SubTargets|undefined {
+    if (isSpacingVariable(this)) return this.side;
+    if (isRadiusVariable(this)) return this.corner;
+    return undefined;
+  }
+
+  get viewport(): Viewports|undefined {
+    if (this.collection === Collections.Device) {
+      if (isViewport(this.mode)) return this.mode;
+      this.errors.add(`Non-viewport mode "${this.mode}" for device variable`);
+    }
+    return this.segments.find(isViewport);
+  }
+
+  get normalJson(): Required<NormalVariable> {
+    const {
+      level = 'undefined',
+      component = 'undefined',
+      category = 'undefined',
+      viewport = 'undefined',
+      theme = 'undefined',
+      target = 'undefined',
+      subTarget = 'undefined',
+      state = 'undefined',
+      parsedValue = 'undefined',
+    } = this;
+    return {
+      level,
+      component,
+      category,
+      viewport,
+      theme,
+      target,
+      subTarget,
+      state,
+      parsedValue,
+    };
+  }
+
+  get normalName(): string {
+    const segments = [
+      this.level,
+      this.component,
+      this.category,
+      this.target,
+      this.subTarget,
+      this.state,
+      this.viewport,
+    ];
+    return segments.join('/');
+  }
+
+  protected setInteractiveTarget(target: ColorTargets) {
+    this.interactiveTarget = target;
+  }
+
+  setErrors(errors: string|Set<string>|string[]) {
+    if (typeof errors === 'string') this.errors.add(errors);
+    else errors.forEach(e => this.errors.add(e));
+  }
+
+  createInteractiveVariants(): FigmaVariable[] {
+    if (!this.isInteractive) return [this];
+    return Object.values(ColorTargets).map(target => {
+      const variant = new FigmaVariable(this);
+      variant.setInteractiveTarget(target);
+      return variant;
+    });
+  }
+
+  // @TODO add createThemeVariants to add a dark version of any semantic color
+  // which does not have a theme
+  // createThemeVariants(): FigmaVariable[] {
+  //   if (!this.isSemantic || !this.isColor || this.theme) return [this];
+  //   ...
+  // }
+
+  get theme(): Themes|undefined {
+    return this.segments.find(isTheme);
+  }
+
   get parsedValue(): string|undefined {
-    if (!this.validate()) return undefined;
+    let devicePrefix = '';
+    if (this.collection === Collections.Device && isDevice(this.mode)) {
+      devicePrefix = TwDevicePrefixes[this.mode];
+    }
     if (isRadiusVariable(this)) {
       const prefix = `rounded${TwCorners[this.corner]}`;
-      const valueSegments = this.alias.name.split('/');
+      const valueSegments = this.alias?.name.split('/') || [];
       const rawValue = valueSegments[valueSegments.length - 1];
       try {
         const iValue = parseInt(rawValue.replace('Rounded ', ''), 10);
-        return `'${prefix}-${iValue}px'`;
+        return `'${devicePrefix}${prefix}-${iValue}px'`;
       } catch (e) {
         this.errors.add(`Could not convert "${rawValue}" to number`);
         return undefined;
@@ -275,17 +399,52 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
     }
     if (isSpacingVariable(this)) {
       const prefix = `${TwSpacingPrefixes[this.target]}${TwSides[this.side]}`;
-      const valueSegments = this.alias.name.split('/');
+      const valueSegments = this.alias?.name.split('/') || [];
       const value = valueSegments[valueSegments.length - 1];
-      return `'${prefix}-${value}px'`;
+      return `'${devicePrefix}${prefix}-${value}px'`;
     }
-    if (isColorVariable(this) && this.isComponent) {
-      const value = this.alias.toVitalTokenName(
-        this.alias.isInteractive ? this.target : undefined
-      );
-      return `vitalColor.${value}`;
+    if (isColorVariable(this)) {
+      if (this.isComponent) {
+        // @TODO Check with Jordan to see if this is expected.  Current understanding
+        // is that Brand variables should always have a theme, and that Theme variables
+        // point to both the Light and Dark versions of the Brand variable. If this is
+        // expected, remove the check.
+        if (this.collection === Collections.Brand && !this.theme) {
+          this.errors.add('Brand variable has no theme');
+        }
+        const { alias } = this;
+        // @TODO Dark Theme support
+        // Ensure that all dark theme component variables point to dark theme semantic ones,
+        // and that all light theme component variables point to light (or unthemed) semantic ones
+        // bc dark theme tailwind classes use the 'dark:' prefix.
+        // if (this.theme === Themes.Dark) {
+        //   if (!this.alias?.theme) {
+        //     // @TODO Force the alias to dark theme if it has no theme
+        //   } else if (this.alias.theme !== Themes.Dark) {
+        //     // @TODO Raise an error if the alias has a light theme.
+        //   }
+        // } else if (this.alias?.theme === Themes.Dark) {
+        //    // @TODO Raise an error if a
+        // }
+        if (alias?.isInteractive) alias.setInteractiveTarget(this.target);
+        const value = alias?.vitalName;
+        return value && `vitalColor.${value}`;
+      }
+      if (this.alias) {
+        const replacements: { [key:string]: string } = { '%': '', '/': '-', ' ': '-' };
+        const cleanedName = this.alias.segments
+          .slice(1)
+          .join('/')
+          .replace(/[/% ]/g, m => replacements[m])
+          .toLowerCase();
+        const statePrefix = TwStatePrefixes[this.state || States.Idle];
+        const targetPrefix = TwColorTargetPrefixes[this.target];
+        const themePrefix = this.theme === Themes.Dark ? 'dark:' : '';
+        return `'${statePrefix}${themePrefix}${targetPrefix}${cleanedName}'`;
+      }
+      return undefined;
     }
-    this.errors.add('Could not parse value');
+    this.errors.add('Unknown variable type');
     return undefined;
   }
 }
