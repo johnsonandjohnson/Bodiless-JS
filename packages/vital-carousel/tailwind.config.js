@@ -70,6 +70,11 @@ const twConfig = {
           '.indicators .counter.-active': {
             display: 'block',
           },
+          '.indicators .thumbs.-active img': {
+            'border-width': '1px',
+            'border-style': 'solid',
+            'border-color': theme('colors.ScrollIndicatorActive'),
+          },
           '.indicators .counter:not(.-active)': {
             display: 'none',
           },

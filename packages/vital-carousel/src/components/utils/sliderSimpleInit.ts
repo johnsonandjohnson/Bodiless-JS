@@ -72,6 +72,10 @@ export const sliderSimpleInit = (sliderSimpleElement: HTMLElement) => {
       for (const button of Array.from(buttonsThumbs)) {
         const buttonindex = (button as HTMLElement).dataset.index;
         button.classList.toggle(
+          '-active',
+          Number(buttonindex) === 0
+        );
+        button.classList.toggle(
           '-peek',
           Number(buttonindex) === (NumThumbs)
         );
@@ -87,6 +91,14 @@ export const sliderSimpleInit = (sliderSimpleElement: HTMLElement) => {
 
       const updateArrows = function (event: CustomEvent) {
         const slideElementIndex = event.detail;
+
+        for (const button of Array.from(buttonsThumbs)) {
+          const buttonindex = (button as HTMLElement).dataset.index;
+          button.classList.toggle(
+            '-active',
+            Number(buttonindex) === Number(slideElementIndex)
+          );
+        }
 
         if (buttonsThumbs.length > NumThumbs) {
           if (slideElementIndex + NumThumbs <= buttonsThumbs.length) {
@@ -184,6 +196,10 @@ const sliderSimpleInit = (sliderSimpleElement) => {
       for (const button of buttonsThumbs) {
         const buttonindex = button.dataset.index;
         button.classList.toggle(
+          '-active',
+          Number(buttonindex) === 0
+        );
+        button.classList.toggle(
           '-peek',
           Number(buttonindex) === (NumThumbs)
         );
@@ -199,6 +215,14 @@ const sliderSimpleInit = (sliderSimpleElement) => {
 
       const updateArrows = function (event) {
         const slideElementIndex = event.detail;
+
+        for (const button of buttonsThumbs) {
+          const buttonindex = button.dataset.index;
+          button.classList.toggle(
+            '-active',
+            Number(buttonindex) === Number(slideElementIndex)
+          );
+        }
 
         if (buttonsThumbs.length > NumThumbs) {
           if (slideElementIndex + NumThumbs <= buttonsThumbs.length) {
