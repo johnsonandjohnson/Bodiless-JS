@@ -30,7 +30,7 @@ runs:
         path: |
           ./node_modules
           ./packages
-          ./sites
+          ./sites/vital-demo-next
         key: ${{ runner.os }}-build-${{ hashFiles('package-lock.json') }}-${{ hashFiles('packages/**/src') }}
     - name: Build
       # Temporarily removed cache hit check
