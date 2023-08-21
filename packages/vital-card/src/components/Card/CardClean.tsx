@@ -62,13 +62,21 @@ export interface CardComponents extends DesignableComponents {
    */
   ContentWrapper: ComponentType<StylableProps>,
   /**
-   * A wrapper to style the Description. By default is a H3.
+   * A wrapper to style the Title. By default is a H3.
    */
   TitleWrapper: ComponentType<StylableProps>,
   /**
    * The text title of the card.  By default this a plain editor.
    */
   Title: ComponentType<StylableProps>,
+  /**
+   * A wrapper to style the subtitle. By default is a H3.
+   */
+  SubtitleWrapper: ComponentType<StylableProps>,
+  /**
+   * The text subtitle of the card.  By default this a plain editor.
+   */
+  Subtitle: ComponentType<StylableProps>,
   /**
    * A wrapper to style the Description. By default is a Fragment.
    */
@@ -108,6 +116,8 @@ export const cardComponentStart: CardComponents = {
   ContentWrapper: Div,
   TitleWrapper: H3,
   Title: Fragment,
+  SubtitleWrapper: Fragment,
+  Subtitle: Fragment,
   DescriptionWrapper: Fragment,
   Description: Div,
   Rating: Fragment,
@@ -131,6 +141,8 @@ export const CardBase: FC<CardBaseProps> = ({ components, ...rest }) => {
     Eyebrow,
     TitleWrapper,
     Title,
+    SubtitleWrapper,
+    Subtitle,
     DescriptionWrapper,
     Description,
     RatingWrapper,
@@ -152,6 +164,9 @@ export const CardBase: FC<CardBaseProps> = ({ components, ...rest }) => {
         <TitleWrapper>
           <Title />
         </TitleWrapper>
+        <SubtitleWrapper>
+          <Subtitle />
+        </SubtitleWrapper>
         <DescriptionWrapper>
           <Description />
         </DescriptionWrapper>
