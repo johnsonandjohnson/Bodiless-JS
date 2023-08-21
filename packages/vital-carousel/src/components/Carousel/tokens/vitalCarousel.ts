@@ -7,8 +7,9 @@ import {
 import { vitalImage } from '@bodiless/vital-image';
 import { vitalCard, CardClean } from '@bodiless/vital-card';
 import { asBodilessList } from '@bodiless/components';
-import { vitalColor, vitalSpacing } from '@bodiless/vital-elements';
+import { vitalColor, vitalPDPProductOverviewElement, vitalSpacing } from '@bodiless/vital-elements';
 import { withChild } from '@bodiless/core';
+import CarouselCounter from '../../utils/CarouselCounter';
 import { asVitalCarouselToken, withCarouselInit } from '../VitalCarouselClean';
 import type { VitalCarousel } from '../types';
 import { CAROUSEL_NODE_KEY } from '../../utils/constants';
@@ -119,18 +120,42 @@ const WithCarouselDots = asVitalCarouselToken(
       Indicator: 'ps-2',
     },
     Layout: {
-      ControlsWrapper: 'flex justify-center',
       Indicator: 'flex items-center dots -simple lg:hidden',
     }
   }
 );
 
-const WithCarouselDotsNums = asVitalCarouselToken({
+const WithCarouselCounterDots = asVitalCarouselToken({
   Components: {
+    CounterWrapper: replaceWith(Div),
+    Counter: as(
+      replaceWith(Div),
+      // Convert Counter to List and use the same node key as slides to keep in sync
+      asBodilessList(CAROUSEL_NODE_KEY, undefined, () => ({ groupLabel: 'Slide' })),
+      withDesign({
+        Item: replaceWith(stylable(CarouselCounter)),
+      }),
+    ),
     Indicator: withDesign({
-      // Replace list items with styled dots
-      Item: on(CarouselDotClean)(vitalCarouselDot.Default, vitalCarouselDot.Counter),
+      Item: on(CarouselDotClean)(vitalCarouselDot.Default),
     }),
+  },
+  Behavior: {
+    Counter: as(
+      'indicators',
+      withDesign({
+        Item: 'counter',
+      }),
+    ),
+  },
+  Theme: {
+    CounterWrapper: vitalPDPProductOverviewElement.TextLightThemeIndicator,
+  },
+  Layout: {
+    CounterWrapper: 'flex justify-center',
+  },
+  Spacing: {
+    CounterWrapper: vitalSpacing.PaddingBottomSmall,
   },
 });
 
@@ -311,7 +336,7 @@ const vitalCarousel: VitalCarousel = {
   WithVerticalThumbs,
   WithControls,
   WithCarouselDots,
-  WithCarouselDotsNums,
+  WithCarouselCounterDots,
   WithCarouselDotsAllViewports,
   WithCarouselDotsMobileTablet,
   WithThumbnail,
