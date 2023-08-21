@@ -6,7 +6,7 @@ import type { VitalCarouselDot } from '../types';
 
 const Default = asCarouselDotToken({
   Theme: {
-    DotWrapper: 'indicator',
+    Wrapper: 'indicator',
     Dot: as(
       'rounded-full border-none',
       // @todo TOKEN PROBLEM IMPORT/VARIABLE NAME
@@ -16,15 +16,15 @@ const Default = asCarouselDotToken({
     ),
   },
   A11y: {
-    DotWrapper: addProps({ tabIndex: '-1' }),
+    Wrapper: addProps({ tabIndex: '-1' }),
   },
   Layout: {
     // Hardcoded for now, site builders can override this.
     Dot: 'dot block w-[8px] h-[8px]',
-    DotWrapper: 'flex justify-center align-center',
+    Wrapper: 'flex justify-center align-center',
   },
   Spacing: {
-    DotWrapper: 'pe-2',
+    Wrapper: 'pe-2',
   },
 });
 
