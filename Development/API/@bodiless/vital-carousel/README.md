@@ -69,7 +69,7 @@ Type representing the "slots" exposed by the CarouselDotClean component.
 
 #### Defined in
 
-[vital-carousel/src/components/CarouselDot/types.ts:7](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-carousel/src/components/CarouselDot/types.ts#L7)
+[vital-carousel/src/components/CarouselDot/types.ts:7](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-carousel/src/components/CarouselDot/types.ts#L7)
 
 ___
 
@@ -81,7 +81,7 @@ The props accepted by the CarouselDotClean component
 
 #### Defined in
 
-[vital-carousel/src/components/CarouselDot/types.ts:15](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-carousel/src/components/CarouselDot/types.ts#L15)
+[vital-carousel/src/components/CarouselDot/types.ts:15](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-carousel/src/components/CarouselDot/types.ts#L15)
 
 ___
 
@@ -93,7 +93,7 @@ The type of a token spec which applies to the CarouselDotClean component.
 
 #### Defined in
 
-[vital-carousel/src/components/CarouselDot/types.ts:20](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-carousel/src/components/CarouselDot/types.ts#L20)
+[vital-carousel/src/components/CarouselDot/types.ts:20](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-carousel/src/components/CarouselDot/types.ts#L20)
 
 ___
 
@@ -112,7 +112,7 @@ Type representing the "slots" exposed by the CarouselThumbClean component.
 
 #### Defined in
 
-[vital-carousel/src/components/CarouselThumb/types.ts:7](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-carousel/src/components/CarouselThumb/types.ts#L7)
+[vital-carousel/src/components/CarouselThumb/types.ts:7](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-carousel/src/components/CarouselThumb/types.ts#L7)
 
 ___
 
@@ -124,7 +124,7 @@ The props accepted by the CarouselThumbClean component
 
 #### Defined in
 
-[vital-carousel/src/components/CarouselThumb/types.ts:15](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-carousel/src/components/CarouselThumb/types.ts#L15)
+[vital-carousel/src/components/CarouselThumb/types.ts:15](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-carousel/src/components/CarouselThumb/types.ts#L15)
 
 ___
 
@@ -136,7 +136,7 @@ The type of a token spec which applies to the CarouselThumbClean component.
 
 #### Defined in
 
-[vital-carousel/src/components/CarouselThumb/types.ts:20](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-carousel/src/components/CarouselThumb/types.ts#L20)
+[vital-carousel/src/components/CarouselThumb/types.ts:20](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-carousel/src/components/CarouselThumb/types.ts#L20)
 
 ___
 
@@ -163,7 +163,7 @@ Type representing the "slots" exposed by the VitalCarouselClean component.
 
 #### Defined in
 
-[vital-carousel/src/components/Carousel/types.ts:7](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-carousel/src/components/Carousel/types.ts#L7)
+[vital-carousel/src/components/Carousel/types.ts:7](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-carousel/src/components/Carousel/types.ts#L7)
 
 ___
 
@@ -175,7 +175,7 @@ The props accepted by the VitalCarouselClean component
 
 #### Defined in
 
-[vital-carousel/src/components/Carousel/types.ts:23](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-carousel/src/components/Carousel/types.ts#L23)
+[vital-carousel/src/components/Carousel/types.ts:23](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-carousel/src/components/Carousel/types.ts#L23)
 
 ___
 
@@ -187,7 +187,7 @@ The type of a token spec which applies to the VitalCarouselClean component.
 
 #### Defined in
 
-[vital-carousel/src/components/Carousel/types.ts:28](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-carousel/src/components/Carousel/types.ts#L28)
+[vital-carousel/src/components/Carousel/types.ts:28](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-carousel/src/components/Carousel/types.ts#L28)
 
 ## Other Variables
 
@@ -197,7 +197,7 @@ The type of a token spec which applies to the VitalCarouselClean component.
 
 #### Defined in
 
-[vital-carousel/src/components/utils/constants.ts:1](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-carousel/src/components/utils/constants.ts#L1)
+[vital-carousel/src/components/utils/constants.ts:1](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-carousel/src/components/utils/constants.ts#L1)
 
 ___
 
@@ -210,7 +210,7 @@ in the browser, and must not contain any client-side interactivity.
 
 #### Defined in
 
-[vital-carousel/src/components/CarouselDot/index.bl-edit.ts:10](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-carousel/src/components/CarouselDot/index.bl-edit.ts#L10)
+[vital-carousel/src/components/CarouselDot/index.bl-edit.ts:10](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-carousel/src/components/CarouselDot/index.bl-edit.ts#L10)
 
 ___
 
@@ -226,7 +226,7 @@ interactivity, Use VitalCarouselClean instead.
 
 #### Defined in
 
-[vital-carousel/src/components/Carousel/index.bl-edit.ts:29](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-carousel/src/components/Carousel/index.bl-edit.ts#L29)
+[vital-carousel/src/components/Carousel/index.bl-edit.ts:29](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-carousel/src/components/Carousel/index.bl-edit.ts#L29)
 
 ___
 
@@ -236,7 +236,7 @@ ___
 
 #### Defined in
 
-[vital-carousel/src/components/CarouselThumb/CarouselThumbClean.tsx:28](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-carousel/src/components/CarouselThumb/CarouselThumbClean.tsx#L28)
+[vital-carousel/src/components/CarouselThumb/CarouselThumbClean.tsx:28](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-carousel/src/components/CarouselThumb/CarouselThumbClean.tsx#L28)
 
 ___
 
@@ -252,7 +252,7 @@ interactivity, Use CarouselThumbClean instead.
 
 #### Defined in
 
-[vital-carousel/src/components/CarouselThumb/index.bl-edit.ts:13](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-carousel/src/components/CarouselThumb/index.bl-edit.ts#L13)
+[vital-carousel/src/components/CarouselThumb/index.bl-edit.ts:13](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-carousel/src/components/CarouselThumb/index.bl-edit.ts#L13)
 
 ___
 
@@ -271,7 +271,7 @@ Tokens for CarouselDotClean
 
 #### Defined in
 
-[vital-carousel/src/components/CarouselDot/tokens/vitalCarouselDot.ts:39](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-carousel/src/components/CarouselDot/tokens/vitalCarouselDot.ts#L39)
+[vital-carousel/src/components/CarouselDot/tokens/vitalCarouselDot.ts:39](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-carousel/src/components/CarouselDot/tokens/vitalCarouselDot.ts#L39)
 
 ___
 
@@ -288,7 +288,7 @@ Tokens for VitalCarouselClean
 
 #### Defined in
 
-[vital-carousel/src/components/Carousel/tokens/vitalCarousel.ts:294](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-carousel/src/components/Carousel/tokens/vitalCarousel.ts#L294)
+[vital-carousel/src/components/Carousel/tokens/vitalCarousel.ts:294](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-carousel/src/components/Carousel/tokens/vitalCarousel.ts#L294)
 
 ___
 
@@ -305,7 +305,7 @@ Tokens for CarouselThumbClean
 
 #### Defined in
 
-[vital-carousel/src/components/CarouselThumb/tokens/vitalCarouselThumb.ts:36](https://github.com/johnsonandjohnson/Bodiless-JS/blob/b886960f7/packages/vital-carousel/src/components/CarouselThumb/tokens/vitalCarouselThumb.ts#L36)
+[vital-carousel/src/components/CarouselThumb/tokens/vitalCarouselThumb.ts:36](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-carousel/src/components/CarouselThumb/tokens/vitalCarouselThumb.ts#L36)
 
 ## Token Collection Functions
 
