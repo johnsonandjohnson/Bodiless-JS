@@ -35,9 +35,9 @@ const BaseVariation = {
 };
 
 const BorderColorVariations = {
-  BorderLightThemeBase: vitalColor.BorderLightThemeBase,
-  BorderInteractiveLightThemeIdle: vitalColor.BorderInteractiveLightThemeIdle,
-  BorderInteractiveLightThemeDisabled: vitalColor.BorderInteractiveLightThemeDisabled,
+  BorderLightThemeBase: vitalColor.BorderLightBase,
+  BorderInteractiveLightThemeIdle: vitalColor.BorderInteractiveLightIdle,
+  BorderInteractiveLightThemeDisabled: vitalColor.BorderInteractiveLightDisabled,
   BorderInteractiveLightThemeFocus: 'border-kenvue-green-shade-80',
   BorderInteractiveLightThemePressed: 'border-kenvue-green-shade-60',
   BorderInteractiveLightThemeHover: 'border-kenvue-green-shade-80',
@@ -50,11 +50,11 @@ const BorderColorVariations = {
         'flex justify-center items-center w-[150px]',
       ),
     }),
-    vitalColor.BorderDarkThemeBase,
+    vitalColor.BorderDarkBase,
   ),
-  BorderInteractiveDarkThemeIdle: vitalColor.BorderInteractiveDarkThemeIdle,
+  BorderInteractiveDarkThemeIdle: vitalColor.BorderInteractiveDarkIdle,
   BorderInteractiveDarkThemeHover: 'border-kenvue-green-tint-60',
-  BorderInteractiveDarkThemeDisabled: vitalColor.BorderInteractiveDarkThemeDisabled,
+  BorderInteractiveDarkThemeDisabled: vitalColor.BorderInteractiveDarkDisabled,
   BorderInteractiveDarkThemePressed: 'border-kenvue-green-tint-20',
   BorderInteractiveDarkThemeFocus: 'border-kenvue-green-tint-60',
   // Ignoring Alts
@@ -91,7 +91,7 @@ const vitalWidthVariations = varyDesigns(
   BaseVariation,
   BorderWidthVariations,
   {
-    '': vitalColor.BorderLightThemeBase
+    '': vitalColor.BorderLightBase
   }
 );
 const vitalRoundingVariations = varyDesigns(
@@ -99,7 +99,7 @@ const vitalRoundingVariations = varyDesigns(
   BorderRoundingVariations,
   {
     '': as(
-      vitalColor.BackgroundInteractiveLightThemeIdle,
+      vitalColor.BackgroundInteractiveLightIdle,
       'border-none',
     ),
   }

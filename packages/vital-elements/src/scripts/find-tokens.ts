@@ -1,11 +1,11 @@
 /* eslint-disable no-console */
 import fs from 'fs';
 import {
-  Collections, Types, Variable, isAliasVariable
+  Collections, Types, RawVariable, isAliasVariable
 } from './parseTokens/types';
 import { readData, findVariables } from './parseTokens/util';
 
-const FILTERS: Record<string, ((v: Variable) => boolean)> = {
+const FILTERS: Record<string, ((v: RawVariable) => boolean)> = {
   'brand-no-alias': v => !v.isAlias && v.collection === Collections.Brand,
   'component-color-core-alias': v => Boolean(v.collection === Collections.Brand
     && v.isAlias && v.value.collection === Collections.Core
@@ -16,7 +16,7 @@ const FILTERS: Record<string, ((v: Variable) => boolean)> = {
 
 export const main = async () => {
   const filterName = process.argv[2];
-  let filter: (v: Variable) => boolean = () => true;
+  let filter: (v: RawVariable) => boolean = () => true;
   if (filterName) {
     if (!FILTERS[filterName]) {
       if (filterName !== 'help') console.error('Filter', filterName, 'not found');

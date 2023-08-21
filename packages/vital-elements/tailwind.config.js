@@ -220,6 +220,11 @@ const twConfig = {
   plugins: [
     tailwindcssDir,
   ],
+  variants: {
+    extend: {
+      backgroundColor: ['disabled'],
+    }
+  },
 };
 
 module.exports = getPackageTailwindConfig({

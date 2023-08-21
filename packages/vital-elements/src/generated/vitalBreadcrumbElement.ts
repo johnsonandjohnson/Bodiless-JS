@@ -9,10 +9,13 @@ export const meta = {
 };
 
 export default asTokenGroup(meta)({
-  TextDarkThemeActive: vitalColor.TextDarkThemeBase,
-  TextDarkThemeHover: vitalColor.TextInteractiveDarkThemeIdle,
-  TextDarkThemeIdle: vitalColor.TextDarkThemeBase,
-  TextLightThemeActive: vitalColor.TextLightThemeBase,
-  TextLightThemeHover: vitalColor.TextInteractiveLightThemeIdle,
-  TextLightThemeIdle: vitalColor.TextLightThemeBase,
+  TextActive: vitalColor.TextDarkBase,
+  TextHover: vitalColor.TextInteractiveDarkIdle,
+  TextIdle: vitalColor.TextDarkBase,
+  TextDarkThemeActive: vitalColor.TextLightBase,
+  TextDarkThemeHover: vitalColor.TextInteractiveLightIdle,
+  TextDarkThemeIdle: vitalColor.TextLightBase,
+  TextLightThemeActive: vitalColor.TextDarkBase,
+  TextLightThemeHover: vitalColor.TextInteractiveDarkIdle,
+  TextLightThemeIdle: vitalColor.TextDarkBase,
 });

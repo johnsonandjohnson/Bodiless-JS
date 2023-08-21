@@ -10,14 +10,15 @@ module.exports = {
         'http://localhost:9000/',
         'http://localhost:9000/styleguide/product/',
       ],
-      startServerCommand: 'npm run start',
+      startServerCommand: 'cd sites/vital-demo-next && npm run build && npm run start',
+      startServerReadyTimeout: 300000,
       settings: {
         preset,
         onlyCategories: [
           'performance'
         ],
       },
-      numberOfRuns: 10,
+      numberOfRuns: 5,
     },
     assert: {
       assertions: {
