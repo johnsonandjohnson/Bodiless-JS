@@ -85,12 +85,20 @@ const Default = asPDPTemplateToken({
     ...vitalGenericTemplate.Default.Components,
     PageWrapper: vitalLayout.Default,
     TopContent: replaceWith(Fragment),
-    ProductImage: as(
+    ProductCarousel: as(
       vitalCarouselStatic.Default,
       vitalCarouselStatic.WithImageSlide,
       vitalCarouselStatic.WithThumbnail,
       vitalCarouselStatic.DesktopOnly,
       vitalCarouselStatic.WithVerticalThumbs,
+    ),
+    MobileProductCarousel: as(
+      vitalCarouselStatic.Default,
+      vitalCarouselStatic.WithImageSlide,
+      vitalCarouselStatic.WithCarouselDots,
+      vitalCarouselStatic.MobileTabletOnly,
+      vitalCarouselStatic.WithCarouselCounter,
+      vitalCarouselStatic.WithCarouselDotsMobileTablet,
     ),
     ProductDescription: vitalFlowContainer.Default,
     ProductTitle: vitalEditorPlain.Default,
@@ -109,14 +117,15 @@ const Default = asPDPTemplateToken({
   },
   Layout: {
     ContentWrapper: 'flex flex-wrap',
-    ProductImageWrapper: 'flex justify-center w-full lg:w-1/2',
+    ProductCarouselWrapper: 'lg:w-1/2',
+    MobileProductCarouselWrapper: 'lg:hidden',
     ProductDetailWrapper: 'w-full lg:w-1/2 lg:grow',
     JumpLinksWrapper: 'w-full',
   },
   Spacing: {
     ...vitalGenericTemplate.Default.Spacing,
     JumpLinksWrapper: 'py-2 mt-10',
-    ProductImageWrapper: 'lg:pr-2',
+    ProductCarouselWrapper: 'lg:pr-2',
     ProductDetailWrapper: 'lg:pl-2 pt-4 lg:pt-0',
     ProductTitleWrapper: 'mb-4',
     PageWrapper: withDesign({
@@ -135,19 +144,20 @@ const Default = asPDPTemplateToken({
   },
   Schema: {
     ...vitalGenericTemplate.Default.Schema,
-    ProductImage: withNodeKey(TemplateNodeKeys.Image),
+    ProductCarousel: withNodeKey(TemplateNodeKeys.Image),
+    MobileProductCarousel: withNodeKey(TemplateNodeKeys.Image),
     ProductDescription: withNodeKey(TemplateNodeKeys.Description),
     ProductTitle: withNodeKey(TemplateNodeKeys.Title),
     ProductEyebrow: withNodeKey(TemplateNodeKeys.Eyebrow),
   },
   SEO: {
     ContentWrapper: WithProductSchema,
-    ProductImage: asSchemaSource('product-image'),
+    ProductCarousel: asSchemaSource('product-image'),
     ProductTitleWrapper: asSchemaSource('product-name'),
     ProductDescriptionWrapper: asSchemaSource('product-description'),
   },
   Content: {
-    ProductImage: withDefaultContent(useProductImageContent),
+    ProductCarousel: withDefaultContent(useProductImageContent),
     ProductTitle: withDefaultContent(useProductTitleContent),
     ProductDescription: withDefaultContent(useProductDescriptionContent),
   }
