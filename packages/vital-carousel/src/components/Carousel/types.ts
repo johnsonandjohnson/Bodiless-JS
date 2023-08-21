@@ -55,7 +55,7 @@ export interface VitalCarousel {
   /**
    * WithCarouselDots: Show dots and numbers
    */
-  WithCarouselCounterDots: VitalCarouselToken;
+  WithCarouselCounter: VitalCarouselToken;
   /**
    * WithCarouselDotsAllViewports: Show carousel dots on all viewports (Usage: Product carousel)
    */

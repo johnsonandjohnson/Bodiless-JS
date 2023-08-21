@@ -51,7 +51,7 @@ const vitalPDPVariations = varyDesigns(
     MobilePDPCarousel: as(
       vitalCarouselStatic.WithCarouselDots,
       vitalCarouselStatic.MobileTabletOnly,
-      vitalCarouselStatic.WithCarouselCounterDots,
+      vitalCarouselStatic.WithCarouselCounter,
       vitalCarouselStatic.WithCarouselDotsMobileTablet,
     ),
     // DesktopTabletPDPCarousel: as(

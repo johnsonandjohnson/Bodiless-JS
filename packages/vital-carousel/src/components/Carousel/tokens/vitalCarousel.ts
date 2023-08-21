@@ -125,7 +125,7 @@ const WithCarouselDots = asVitalCarouselToken(
   }
 );
 
-const WithCarouselCounterDots = asVitalCarouselToken({
+const WithCarouselCounter = asVitalCarouselToken({
   Components: {
     CounterWrapper: replaceWith(Div),
     Counter: as(
@@ -136,9 +136,6 @@ const WithCarouselCounterDots = asVitalCarouselToken({
         Item: replaceWith(stylable(CarouselCounter)),
       }),
     ),
-    Indicator: withDesign({
-      Item: on(CarouselDotClean)(vitalCarouselDot.Default),
-    }),
   },
   Behavior: {
     Counter: as(
@@ -336,7 +333,7 @@ const vitalCarousel: VitalCarousel = {
   WithVerticalThumbs,
   WithControls,
   WithCarouselDots,
-  WithCarouselCounterDots,
+  WithCarouselCounter,
   WithCarouselDotsAllViewports,
   WithCarouselDotsMobileTablet,
   WithThumbnail,
