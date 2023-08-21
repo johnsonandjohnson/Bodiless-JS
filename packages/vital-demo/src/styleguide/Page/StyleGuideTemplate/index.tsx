@@ -25,6 +25,7 @@ import { Editors, EditorsMonoFont } from './Editors';
 import { FlowContainer } from './FlowContainer';
 import { Footer } from './Footer';
 import { Header } from './Header';
+import { HeroCard } from './HeroCard';
 import { Images } from './Images';
 import { Link } from './Link';
 import { List } from './List';
@@ -50,6 +51,7 @@ export const VitalDemoStyleGuideTemplate = {
   FlowContainer,
   Footer,
   Header,
+  HeroCard,
   Images,
   Link,
   List,
