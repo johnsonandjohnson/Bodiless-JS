@@ -22,6 +22,8 @@ import {
   varyDesigns,
   addProps,
   as,
+  startWith,
+  Button,
 } from '@bodiless/fclasses';
 import { asFluidToken, vitalColor } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
@@ -36,15 +38,23 @@ const BaseColorVariation = {
 
 const ColorVariations = {
   BackgroundInteractiveLightThemeIdle: vitalColor.BackgroundInteractiveLightIdle,
-  BackgroundInteractiveLightThemeHover: 'bg-kenvue-green-shade-80',
-  BackgroundInteractiveLightThemeFocus: 'bg-kenvue-green-shade-80',
-  BackgroundInteractiveLightThemePressed: 'bg-kenvue-green-shade-60',
-  BackgroundInteractiveLightThemeDisabled: vitalColor.BackgroundInteractiveLightDisabled,
+  BackgroundInteractiveLightThemeHover: 'bg-kenvue-green-tint-60',
+  BackgroundInteractiveLightThemeFocus: 'bg-kenvue-green-tint-60',
+  BackgroundInteractiveLightThemePressed: 'bg-kenvue-green-tint-20',
+  BackgroundInteractiveLightThemeDisabled: as(
+    startWith(Button),
+    addProps({ disabled: true }),
+    vitalColor.BackgroundInteractiveLightDisabled,
+  ),
   BackgroundInteractiveDarkThemeIdle: vitalColor.BackgroundInteractiveDarkIdle,
-  BackgroundInteractiveDarkThemeHover: 'bg-kenvue-green-tint-60',
-  BackgroundInteractiveDarkThemeFocus: 'bg-kenvue-green-tint-60',
-  BackgroundInteractiveDarkThemePressed: 'bg-kenvue-green-tint-20',
-  BackgroundInteractiveDarkThemeDisabled: vitalColor.BackgroundInteractiveDarkDisabled,
+  BackgroundInteractiveDarkThemeHover: 'bg-kenvue-green-shade-80',
+  BackgroundInteractiveDarkThemeFocus: 'bg-kenvue-green-shade-80',
+  BackgroundInteractiveDarkThemePressed: 'bg-kenvue-green-shade-60',
+  BackgroundInteractiveDarkThemeDisabled: as(
+    startWith(Button),
+    addProps({ disabled: true }),
+    vitalColor.BackgroundInteractiveDarkDisabled,
+  ),
 };
 
 const BaseTextVariation = {
@@ -58,19 +68,27 @@ const BaseTextVariation = {
 
 const TextVariations = {
   TextInteractiveDarkThemeIdle: vitalColor.TextInteractiveDarkIdle,
+  TextInteractiveDarkThemeHover: 'text-kenvue-green-shade-80',
+  TextInteractiveDarkThemeFocus: 'text-kenvue-green-shade-80',
+  TextInteractiveDarkThemePressed: 'text-kenvue-green-shade-60',
+  TextInteractiveDarkThemeDisabled: as(
+    startWith(Button),
+    addProps({ disabled: 'true'}),
+    vitalColor.TextInteractiveDarkDisabled,
+  ),
   TextInteractiveLightThemeIdle: vitalColor.TextInteractiveLightIdle,
-  TextInteractiveDarkThemeHover: 'text-kenvue-green-tint-60',
-  TextInteractiveDarkThemeDisabled: vitalColor.TextInteractiveDarkDisabled,
-  TextInteractiveDarkThemePressed: 'text-kenvue-green-tint-20',
-  TextInteractiveDarkThemeFocus: 'text-kenvue-green-tint-60',
-  TextInteractiveLightThemeDisabled: vitalColor.TextInteractiveLightDisabled,
-  BorderInteractiveLightThemeFocus: 'text-kenvue-green-shade-80',
-  TextInteractiveLightThemeFocus: 'text-kenvue-green-shade-80',
-  TextInteractiveLightThemePressed: 'text-kenvue-green-shade-60',
+  TextInteractiveLightThemeHover: 'text-kenvue-green-tint-60',
+  TextInteractiveLightThemeFocus: 'text-kenvue-green-tint-60',
+  TextInteractiveLightThemePressed: 'text-kenvue-green-tint-20',
+  TextInteractiveLightThemeDisabled: as(
+    startWith(Button),
+    addProps({ disabled: 'true'}),
+    vitalColor.TextInteractiveLightDisabled,
+  ),
   // eslint-disable-next-line max-len
-  TextDarkThemeBase: as(vitalColor.TextDarkBase, vitalColor.BackgroundInteractiveLightDisabled, 'p-8px'),
-  TextLightThemeBase: vitalColor.TextLightBase,
-  TextInteractiveLightThemeHover: 'text-kenvue-green-shade-80',
+  TextDarkThemeBase: vitalColor.TextDarkBase,
+  TextLightThemeBase: as(vitalColor.TextLightBase, vitalColor.BackgroundInteractiveDarkIdle, 'p-8px'),
+  BorderInteractiveLightThemeFocus: 'text-kenvue-green-tint-60',
 };
 
 // const SpecialColors = {
