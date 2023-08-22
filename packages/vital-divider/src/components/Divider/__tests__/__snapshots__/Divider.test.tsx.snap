@@ -27,7 +27,7 @@ exports[`Divider Tokens Matches snapshot for WithSecondaryDivider 1`] = `
 exports[`Divider Tokens Matches snapshot for WithVerticalOrientation 1`] = `
 <div>
   <hr
-    className="rotate-90 h-0px"
+    className="w-1px h-32px"
   />
 </div>
 `;
