@@ -12,9 +12,9 @@
  * limitations under the License.
  */
 
-import React, { ComponentType as CT, PropsWithChildren } from 'react';
+import React, { ComponentType as CT, PropsWithChildren, FC } from 'react';
 import { stripIndent } from 'common-tags';
-import { HelmetProps } from 'react-helmet';
+import { Helmet, HelmetProps } from 'react-helmet';
 import set from 'lodash/set';
 import { WithNodeKeyProps } from '@bodiless/data';
 import { withHeadElement, HeadBaseOptions as BaseOptions } from '@bodiless/components';
@@ -153,38 +153,49 @@ const withDataLayerItem: (
   defaultContent?: string,
 ) => (...args: any[]) => any = withHeadElement(withDataLayerItem$);
 
-const generateGTMScript = (
-  id: string,
-  dataLayerName: string = 'dataLayer',
-) => (
-  <script
-    key="google-tagmanager-script"
-    dangerouslySetInnerHTML={{
-      __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','${dataLayerName}', '${id}');`
-    }}
-  />
-);
+const GTMScript: FC = () => {
+  if (process.env.NODE_ENV !== 'production') {
+    return null;
+  }
+  const id = process.env.BODILESS_GTM_ID || null;
+  const dataLayerName = process.env.BODILESS_GTM_DATA_LAYER || null;
+  if (!id && !dataLayerName) return null;
 
-const generateGTMNoScript = (
-  id: string,
-) => (
-  <noscript
-    key="google-tagmanager-noscript"
-    dangerouslySetInnerHTML={{
-      __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${id}" \
-height="0" width="0" style="display: none; visibility: hidden" aria-hidden="true"></iframe>`
-    }}
-  />
-);
+  return (
+    <Helmet>
+      <script key="google-tagmanager-script">
+        {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','${dataLayerName}', '${id}');`}
+      </script>
+    </Helmet>
+  );
+};
+
+const GTMNoScript: FC = () => {
+  if (process.env.NODE_ENV !== 'production') {
+    return null;
+  }
+  const id = process.env.BODILESS_GTM_ID || null;
+  if (!id) return null;
+
+  return (
+    <noscript
+      key="google-tagmanager-noscript"
+      dangerouslySetInnerHTML={{
+        __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${id}" \
+  height="0" width="0" style="display: none; visibility: hidden" aria-hidden="true"></iframe>`
+      }}
+    />
+  );
+};
 
 export default withDataLayerItem;
 export {
   withDataLayerScript,
   withDefaultDataLayer,
-  generateGTMScript,
-  generateGTMNoScript,
+  GTMScript,
+  GTMNoScript,
 };

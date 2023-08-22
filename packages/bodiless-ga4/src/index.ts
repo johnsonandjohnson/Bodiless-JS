@@ -12,15 +12,15 @@
  * limitations under the License.
  */
 import withDataLayerItem, {
-  withDefaultDataLayer, withDataLayerScript, generateGTMScript, generateGTMNoScript,
+  withDefaultDataLayer, withDataLayerScript, GTMScript, GTMNoScript,
 } from './gtm';
 
 export {
   withDataLayerItem,
   withDefaultDataLayer,
   withDataLayerScript,
-  generateGTMScript,
-  generateGTMNoScript,
+  GTMScript,
+  GTMNoScript,
 };
 
 export * from './GA4-events';

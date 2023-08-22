@@ -22,7 +22,7 @@ const getExistingVariables = (obj: any) => Object.fromEntries(
 const getPublicEnv = () => {
   const envSite = './.env.site';
   let envSiteConfig = {};
-  // Try to load environment variables from .env.site which must be alwais available at build.
+  // Try to load environment variables from .env.site which must be always available at build.
   try {
     const buffer = readFileSync(envSite);
     envSiteConfig = parse(buffer);
@@ -31,23 +31,25 @@ const getPublicEnv = () => {
   }
 
   const variables = {
-    BODILESS_NEXT_TRAILING_SLASH: true,
-    BODILESS_GOOGLE_YOUTUBE_API_KEY: null,
-    BODILESS_SEARCH_EXPIRES: null,
-    BODILESS_SEARCH_PARAMS: null,
-    BODILESS_SEARCH_PAGE: null,
-    BODILESS_SEARCH_INDEX_URL: null,
-    BODILESS_SEARCH_INDEX_PREVIEW_LENGTH: null,
     BODILESS_DOCS_URL: null,
+    BODILESS_GENERATED_DESTINATION_PATH: null,
+    BODILESS_GOOGLE_YOUTUBE_API_KEY: null,
+    BODILESS_GTM_DATA_LAYER: null,
+    BODILESS_GTM_ID: null,
+    BODILESS_NEXT_TRAILING_SLASH: true,
+    BODILESS_SEARCH_EXPIRES: null,
+    BODILESS_SEARCH_INDEX_PREVIEW_LENGTH: null,
+    BODILESS_SEARCH_INDEX_URL: null,
+    BODILESS_SEARCH_PAGE: null,
+    BODILESS_SEARCH_PARAMS: null,
     BODILESS_SHOWDESIGNKEYS: null,
     BV_API_VERSION: null,
-    BV_HOST: null,
-    BV_SCRIPT: null,
     BV_CLIENT_NAME: null,
-    BV_SITE_ID: null,
     BV_ENVIRONMENT: null,
+    BV_HOST: null,
     BV_LOCALE: null,
-    BODILESS_GENERATED_DESTINATION_PATH: null
+    BV_SCRIPT: null,
+    BV_SITE_ID: null,
   };
 
   const editVariables = {
