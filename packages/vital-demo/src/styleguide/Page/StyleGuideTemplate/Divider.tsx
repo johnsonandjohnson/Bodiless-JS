@@ -25,9 +25,10 @@ import { StyleGuideExamplesClean } from '../../Examples';
 
 const DemoFlowContainer = asFluidToken({
   Components: {
-    Default: on(DividerClean)(vitalDividers.Base),
     Primary: on(DividerClean)(vitalDividers.Base, vitalDividers.WithPrimaryDivider),
     Secondary: on(DividerClean)(vitalDividers.Base, vitalDividers.WithSecondaryDivider),
+    VerticalPrimary: on(DividerClean)(vitalDividers.Base, vitalDividers.WithPrimaryDivider, vitalDividers.WithVerticalOrientation),
+    VerticalSecondary: on(DividerClean)(vitalDividers.Base, vitalDividers.WithSecondaryDivider, vitalDividers.WithVerticalOrientation),
   },
 });
 

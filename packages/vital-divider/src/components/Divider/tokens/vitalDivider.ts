@@ -23,13 +23,10 @@ const WithSecondaryDivider = asDividerToken({
 
 const WithVerticalOrientation = asDividerToken({
   Spacing: {
-    Divider: 'rotate-90 h-0px',
+    Divider: 'w-1px h-32px',
   },
   Meta: flowHoc.meta.term('Orientation')('Vertical'),
 });
-
-// Add additional variant tokens or variators here.
-// ...
 
 /**
  * Tokens for DividerClean
