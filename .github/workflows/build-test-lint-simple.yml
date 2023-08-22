@@ -64,6 +64,8 @@ jobs:
     name: Lighthouse
     if: ${{ github.event_name == 'schedule' || github.event.label.name == 'ready-to-test' }}
     runs-on: ubuntu-20.04
+    permissions:
+      statuses: write
     steps:
       - uses: actions/checkout@v3
         with:

@@ -29,6 +29,7 @@
     "dev": "npm run build:watch",
     "copy": "copyfiles -u 1 \"./src/*.css\" \"./lib/\"",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
+    "tokens": "npm run tokens:clean && npm run tokens:parse 2> src/generated/errors.txt",
     "tokens:clean": "rimraf \"src/generated/*\"",
     "tokens:find": "node ./lib/cjs/scripts/find-tokens.js",
     "tokens:parse": "node ./lib/cjs/scripts/parse-tokens.js"

@@ -29,7 +29,7 @@ exports[`Button Matches snapshot for Plain 1`] = `
 
 exports[`Button Matches snapshot for PrimaryDisabled 1`] = `
 <button
-  className="px-24px py-16px bg-kenvue-neutrals-grey"
+  className="px-24px py-16px disabled:bg-kenvue-neutrals-grey"
   disabled="true"
 >
   <span
@@ -40,11 +40,11 @@ exports[`Button Matches snapshot for PrimaryDisabled 1`] = `
 
 exports[`Button Matches snapshot for SecondaryDisabled 1`] = `
 <button
-  className="px-24px py-16px border-solid border-1px border-kenvue-neutrals-grey"
+  className="px-24px py-16px border-solid border-1px disabled:border-kenvue-neutrals-grey"
   disabled="true"
 >
   <span
-    className="text-kenvue-neutrals-grey"
+    className="disabled:text-kenvue-neutrals-grey"
   />
 </button>
 `;
@@ -54,7 +54,7 @@ exports[`Button Matches snapshot for TertiaryDisabled 1`] = `
   disabled="true"
 >
   <span
-    className="text-kenvue-neutrals-grey"
+    className="disabled:text-kenvue-neutrals-grey"
   />
 </button>
 `;
