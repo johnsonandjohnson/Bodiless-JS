@@ -68,7 +68,7 @@ export default {
 
 #### Defined in
 
-[vital-layout/src/components/Layout/tokens/vitalLayout.ts:126](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-layout/src/components/Layout/tokens/vitalLayout.ts#L126)
+[vital-layout/src/components/Layout/tokens/vitalLayout.ts:126](https://github.com/johnsonandjohnson/Bodiless-JS/blob/35c6b4145/packages/vital-layout/src/components/Layout/tokens/vitalLayout.ts#L126)
 
 ___
 
@@ -80,4 +80,4 @@ Special layout to demonstrate components.  Only used for testing purposing.
 
 #### Defined in
 
-[vital-layout/src/components/Layout/tokens/vitalLayout.ts:130](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-layout/src/components/Layout/tokens/vitalLayout.ts#L130)
+[vital-layout/src/components/Layout/tokens/vitalLayout.ts:130](https://github.com/johnsonandjohnson/Bodiless-JS/blob/35c6b4145/packages/vital-layout/src/components/Layout/tokens/vitalLayout.ts#L130)

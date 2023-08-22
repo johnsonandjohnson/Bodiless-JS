@@ -27,8 +27,10 @@
 
 - [ArticleCardClean](README.md#articlecardclean)
 - [CategoryCardClean](README.md#categorycardclean)
-- [ProductCardMeta](README.md#productcardmeta)
+- [ProductCardClean](README.md#productcardclean)
+- [ProductCardStatic](README.md#productcardstatic)
 - [knapsackCardSpec](README.md#knapsackcardspec)
+- [vitalProductCard](README.md#vitalproductcard)
 
 ### Token Collection Variables
 
@@ -38,12 +40,14 @@
 - [vitalCardFlowContainer](README.md#vitalcardflowcontainer)
 - [vitalCardStatic](README.md#vitalcardstatic)
 - [vitalCategoryCard](README.md#vitalcategorycard)
+- [vitalProductCardStatic](README.md#vitalproductcardstatic)
 
 ### Token Collection Functions
 
 - [asArticleCardToken](README.md#asarticlecardtoken)
 - [asCardToken](README.md#ascardtoken)
 - [asCategoryCardToken](README.md#ascategorycardtoken)
+- [asProductCardToken](README.md#asproductcardtoken)
 
 ## References
 
@@ -81,7 +85,7 @@ const CustomCard = on(CardClean)(myBrandCard.Custom)
 
 #### Defined in
 
-[vital-card/src/components/Card/CardClean.tsx:187](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-card/src/components/Card/CardClean.tsx#L187)
+[vital-card/src/components/Card/CardClean.tsx:215](https://github.com/johnsonandjohnson/Bodiless-JS/blob/35c6b4145/packages/vital-card/src/components/Card/CardClean.tsx#L215)
 
 ___
 
@@ -93,7 +97,7 @@ Use this version of the card when all components are static.
 
 #### Defined in
 
-[vital-card/src/components/Card/CardClean.tsx:210](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-card/src/components/Card/CardClean.tsx#L210)
+[vital-card/src/components/Card/CardClean.tsx:238](https://github.com/johnsonandjohnson/Bodiless-JS/blob/35c6b4145/packages/vital-card/src/components/Card/CardClean.tsx#L238)
 
 ___
 
@@ -105,7 +109,7 @@ ___
 
 #### Defined in
 
-[vital-card/src/components/ArticleCard/ArticleCardClean.tsx:29](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-card/src/components/ArticleCard/ArticleCardClean.tsx#L29)
+[vital-card/src/components/ArticleCard/ArticleCardClean.tsx:29](https://github.com/johnsonandjohnson/Bodiless-JS/blob/35c6b4145/packages/vital-card/src/components/ArticleCard/ArticleCardClean.tsx#L29)
 
 ___
 
@@ -115,25 +119,27 @@ ___
 
 #### Defined in
 
-[vital-card/src/components/CategoryCard/CategoryCardClean.tsx:30](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-card/src/components/CategoryCard/CategoryCardClean.tsx#L30)
+[vital-card/src/components/CategoryCard/CategoryCardClean.tsx:30](https://github.com/johnsonandjohnson/Bodiless-JS/blob/35c6b4145/packages/vital-card/src/components/CategoryCard/CategoryCardClean.tsx#L30)
 
 ___
 
-### ProductCardMeta
+### ProductCardClean
 
-• `Const` **ProductCardMeta**: `Object`
-
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `categories` | { `Group`: `string`[] ; `Type`: `string`[]  } |
-| `categories.Group` | `string`[] |
-| `categories.Type` | `string`[] |
+• `Const` **ProductCardClean**: `ComponentWithMeta`<`PP`<`CardBaseProps`, `any`, `any`\>\>
 
 #### Defined in
 
-[vital-card/src/components/ProductCardTokens/index.ts:4](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-card/src/components/ProductCardTokens/index.ts#L4)
+[vital-card/src/components/ProductCard/ProductCardClean.tsx:15](https://github.com/johnsonandjohnson/Bodiless-JS/blob/35c6b4145/packages/vital-card/src/components/ProductCard/ProductCardClean.tsx#L15)
+
+___
+
+### ProductCardStatic
+
+• `Const` **ProductCardStatic**: `ComponentType`<`CardProps`\> = `CardStatic`
+
+#### Defined in
+
+[vital-card/src/components/ProductCard/ProductCardClean.tsx:27](https://github.com/johnsonandjohnson/Bodiless-JS/blob/35c6b4145/packages/vital-card/src/components/ProductCard/ProductCardClean.tsx#L27)
 
 ___
 
@@ -143,7 +149,17 @@ ___
 
 #### Defined in
 
-[vital-card/src/components/Card/Card.knapsackSpec.ts:31](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-card/src/components/Card/Card.knapsackSpec.ts#L31)
+[vital-card/src/components/Card/Card.knapsackSpec.ts:31](https://github.com/johnsonandjohnson/Bodiless-JS/blob/35c6b4145/packages/vital-card/src/components/Card/Card.knapsackSpec.ts#L31)
+
+___
+
+### vitalProductCard
+
+• `Const` **vitalProductCard**: `VitalProductCard`
+
+#### Defined in
+
+[vital-card/src/components/ProductCard/tokens/vitalProductCard.ts:343](https://github.com/johnsonandjohnson/Bodiless-JS/blob/35c6b4145/packages/vital-card/src/components/ProductCard/tokens/vitalProductCard.ts#L343)
 
 ___
 
@@ -162,7 +178,7 @@ vitalArticleCard
 
 #### Defined in
 
-[vital-card/src/components/ArticleCard/tokens/vitalArticleCard.ts:176](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-card/src/components/ArticleCard/tokens/vitalArticleCard.ts#L176)
+[vital-card/src/components/ArticleCard/tokens/vitalArticleCard.ts:176](https://github.com/johnsonandjohnson/Bodiless-JS/blob/35c6b4145/packages/vital-card/src/components/ArticleCard/tokens/vitalArticleCard.ts#L176)
 
 ___
 
@@ -174,7 +190,7 @@ Tokens for cards.
 
 #### Defined in
 
-[vital-card/src/components/Card/tokens/vitalCard.ts:202](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-card/src/components/Card/tokens/vitalCard.ts#L202)
+[vital-card/src/components/Card/tokens/vitalCard.ts:199](https://github.com/johnsonandjohnson/Bodiless-JS/blob/35c6b4145/packages/vital-card/src/components/Card/tokens/vitalCard.ts#L199)
 
 ___
 
@@ -190,7 +206,7 @@ Use this version of the vital card tokens when extending or shadowing.
 
 #### Defined in
 
-[vital-card/src/components/Card/index.ts:27](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-card/src/components/Card/index.ts#L27)
+[vital-card/src/components/Card/index.ts:27](https://github.com/johnsonandjohnson/Bodiless-JS/blob/35c6b4145/packages/vital-card/src/components/Card/index.ts#L27)
 
 ___
 
@@ -200,7 +216,7 @@ ___
 
 #### Defined in
 
-[vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts:256](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts#L256)
+[vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts:261](https://github.com/johnsonandjohnson/Bodiless-JS/blob/35c6b4145/packages/vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts#L261)
 
 ___
 
@@ -218,7 +234,7 @@ Be sure to use it with `CardStatic` (not `CardClean`).
 
 #### Defined in
 
-[vital-card/src/components/Card/index.bl-edit.ts:27](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-card/src/components/Card/index.bl-edit.ts#L27)
+[vital-card/src/components/Card/index.bl-edit.ts:27](https://github.com/johnsonandjohnson/Bodiless-JS/blob/35c6b4145/packages/vital-card/src/components/Card/index.bl-edit.ts#L27)
 
 ___
 
@@ -236,7 +252,25 @@ vitalCategoryCard
 
 #### Defined in
 
-[vital-card/src/components/CategoryCard/tokens/vitalCategoryCard.ts:109](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c9773ba44/packages/vital-card/src/components/CategoryCard/tokens/vitalCategoryCard.ts#L109)
+[vital-card/src/components/CategoryCard/tokens/vitalCategoryCard.ts:109](https://github.com/johnsonandjohnson/Bodiless-JS/blob/35c6b4145/packages/vital-card/src/components/CategoryCard/tokens/vitalCategoryCard.ts#L109)
+
+___
+
+### vitalProductCardStatic
+
+• `Const` **vitalProductCardStatic**: `VitalProductCard` = `vitalProductCard`
+
+Use this version of the token collection when all sub-components are static.
+Be sure to use it with `CardStatic` (not `CardClean`).
+
+**`See`**
+
+ - [[ProductCardStatic]]
+ - [[vitalProductCard]]
+
+#### Defined in
+
+[vital-card/src/components/ProductCard/index.bl-edit.ts:26](https://github.com/johnsonandjohnson/Bodiless-JS/blob/35c6b4145/packages/vital-card/src/components/ProductCard/index.bl-edit.ts#L26)
 
 ## Token Collection Functions
 
@@ -289,6 +323,28 @@ ___
 ▸ **asCategoryCardToken**(`...specs`): `TokenSpec`<[`CardComponents`](interfaces/CardComponents.md), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\>
 
 A token creator that respects the CategoryCard slots.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `...specs` | (`string` \| `HOC`<{}, {}, {}\> \| `FinalDomains`<[`CardComponents`](interfaces/CardComponents.md), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\>)[] |
+
+#### Returns
+
+`TokenSpec`<[`CardComponents`](interfaces/CardComponents.md), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\>
+
+#### Defined in
+
+fclasses/lib/types.d.ts:400
+
+___
+
+### asProductCardToken
+
+▸ **asProductCardToken**(`...specs`): `TokenSpec`<[`CardComponents`](interfaces/CardComponents.md), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\>
+
+A token creator that respects the ProductCard slots.
 
 #### Parameters
 
