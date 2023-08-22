@@ -91,7 +91,7 @@ const vitalWidthVariations = varyDesigns(
   BaseVariation,
   BorderWidthVariations,
   {
-    '': vitalColor.BorderLightBase
+    '': vitalColor.BorderDarkBase
   }
 );
 const vitalRoundingVariations = varyDesigns(
