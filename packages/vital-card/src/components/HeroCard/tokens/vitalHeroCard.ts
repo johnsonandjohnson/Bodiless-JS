@@ -1,67 +1,64 @@
-// import { vitalHeroCardBase } from '@bodiless/vital-card/lib/base';
-// import { asHeroCardToken } from '@bodiless/vital-card';
 import { withPlaceholder } from '@bodiless/components';
 import {
   as, Div, flowHoc, H4, on, replaceWith, TokenCollection
 } from '@bodiless/fclasses';
-import { asButtonToken, ButtonClean, vitalButton } from '@bodiless/vital-button';
+import { ButtonClean, vitalButton } from '@bodiless/vital-button';
 import { EditorPlainClean, vitalEditorPlain } from '@bodiless/vital-editors';
 import {
   DefaultDomains, vitalHeroBannerElement, vitalSpacing, vitalTypography
 } from '@bodiless/vital-elements';
 import { CardComponents, CardToken } from 'src/components/Card/CardClean';
 import Base, {
-  WithHorizontalLeftOrientation,
+  WithHorizontalLeftOrientation as WithHorizontalLeftOrientationBase,
   WithHorizontalOrientationBase,
   WithHorizontalContentCentered,
-  WithHorizontalRightOrientation,
+  WithHorizontalRightOrientation as WithHorizontalRightOrientationBase,
   WithVerticalOrientation,
 } from '../../Card/tokens/Base';
 import { asHeroCardToken } from '../HeroCardClean';
 
-/**
- * Primary Hero Card Button.
- * Plain vital button with `WithPrimaryStyle` token and `READ MORE` placeholder.
- */
-const PrimaryHeroCardButton = asButtonToken(
-  vitalButton.Plain,
-  vitalButton.WithPrimaryStyle,
-  {
-    Content: {
-      Body: withPlaceholder('BUTTON'),
-    },
-  }
-);
+const WithButton = asHeroCardToken({
+  Components: {
+    CTALink: as(
+      replaceWith(ButtonClean),
+      on(ButtonClean)(vitalButton.Plain),
+    ),
+  },
+  Content: {
+    CTAText: withPlaceholder('BUTTON'),
+  },
+});
 
-/**
- * Secondary Hero Card Button.
- * Plain vital button with `WithSecondaryStyle` token and `READ MORE` placeholder.
- */
-const SecondaryHeroCardButton = asButtonToken(
-  vitalButton.Plain,
-  vitalButton.WithSecondaryStyle,
-  {
-    Content: {
-      Body: withPlaceholder('BUTTON'),
-    },
+const WithPrimaryButton = asHeroCardToken(WithButton, {
+  Theme: {
+    CTALink: vitalButton.WithPrimaryStyle,
   }
-);
+});
 
-/**
- * Tertiary Hero Card Button.
- * Plain vital button with `WithTertiaryStyle` token and `READ MORE` placeholder.
- */
-const TertiaryHeroCardButton = asButtonToken(
-  vitalButton.Plain,
-  vitalButton.WithTertiaryStyle,
-  {
-    Content: {
-      Body: withPlaceholder('BUTTON'),
-    },
+const WithSecondaryButton = asHeroCardToken(WithButton, {
+  Theme: {
+    CTALink: vitalButton.WithSecondaryStyle,
   }
-);
+});
 
-const DefaultHeroCardButton = as(TertiaryHeroCardButton);
+const WithTertiaryButton = asHeroCardToken(WithButton, {
+  Theme: {
+    CTALink: vitalButton.WithTertiaryStyle,
+  }
+});
+
+// /**
+//  * Primary Hero Card Button.
+//  * Plain vital button with `WithPrimaryStyle` token and `READ MORE` placeholder.
+//  */
+// const PrimaryHeroCardButton = asButtonToken(PlainButton, vitalButton.WithPrimaryStyle);
+// const SecondaryHeroCardButton = asButtonToken(PlainButton, vitalButton.WithSecondaryStyle);
+// const TertiaryHeroCardButton = asButtonToken(
+//   PlainButton,
+//   vitalButton.WithTertiaryStyle
+// );
+
+const DefaultHeroCardButton = as(WithTertiaryButton);
 
 const Default = asHeroCardToken(
   {
@@ -95,15 +92,15 @@ const WithHorizontalOrientation = asHeroCardToken({
     ImageWrapper: 'px-16px md:px-0px',
   },
 });
-const HorizontalWithImageLeft = asHeroCardToken(
+const WithHorizontalWithImageLeft = asHeroCardToken(
   WithHorizontalOrientation,
-  WithHorizontalLeftOrientation,
+  WithHorizontalLeftOrientationBase,
   WithHorizontalContentCentered,
 );
 
-const HorizontalWithImageRight = asHeroCardToken(
+const WithHorizontalWithImageRight = asHeroCardToken(
   WithHorizontalOrientation,
-  WithHorizontalRightOrientation,
+  WithHorizontalRightOrientationBase,
   WithHorizontalContentCentered,
 );
 
@@ -145,32 +142,35 @@ const WithDescriptionLineClamp = asHeroCardToken({
   },
 });
 
-const WithPrimaryButton = asHeroCardToken({
-  Components: {
-    CTALink: as(
-      replaceWith(ButtonClean),
-      on(ButtonClean)(PrimaryHeroCardButton)
-    ),
-  }
-});
+// const WithButton = asHeroCardToken({
+//   Components: {
+//     CTALink: as(
+//       replaceWith(ButtonClean),
+//       on(ButtonClean)(vitalButton.Plain),
+//     ),
+//   },
+//   Content: {
+//     CTAText: withPlaceholder('BUTTON'),
+//   },
+// });
 
-const WithSecondaryButton = asHeroCardToken({
-  Components: {
-    CTALink: as(
-      replaceWith(ButtonClean),
-      on(ButtonClean)(SecondaryHeroCardButton)
-    ),
-  }
-});
+// const WithPrimaryButton = asHeroCardToken(WithButton, {
+//   Theme: {
+//     CTALink: vitalButton.WithPrimaryStyle,
+//   }
+// });
 
-const WithTertiaryButton = asHeroCardToken({
-  Components: {
-    CTALink: as(
-      replaceWith(ButtonClean),
-      on(ButtonClean)(TertiaryHeroCardButton)
-    ),
-  }
-});
+// const WithSecondaryButton = asHeroCardToken(WithButton, {
+//   Theme: {
+//     CTALink: vitalButton.WithSecondaryStyle,
+//   }
+// });
+
+// const WithTertiaryButton = asHeroCardToken(WithButton, {
+//   Theme: {
+//     CTALink: vitalButton.WithTertiaryStyle,
+//   }
+// });
 
 const WithSubtitle = asHeroCardToken({
   Components: {
@@ -186,13 +186,6 @@ const WithSubtitle = asHeroCardToken({
   Spacing: {
     SubtitleWrapper: vitalSpacing.MarginBottomSmall,
   }
-});
-
-const WithNoSubtitle = asHeroCardToken({
-  Components: {
-    TitleWrapper: replaceWith(() => null),
-  },
-  Meta: flowHoc.meta.term('Features')('No Subtitle'),
 });
 
 const WithNoHeroImage = asHeroCardToken({
@@ -217,13 +210,6 @@ const WithNoDescription = asHeroCardToken({
   },
   Meta: flowHoc.meta.term('Features')('No Description'),
 });
-
-const WithNoEyebrow = asHeroCardToken({
-  Components: {
-    EyebrowWrapper: replaceWith(() => null),
-  },
-  Meta: flowHoc.meta.term('Features')('No Eyebrow'),
-});
 export interface VitalHeroCard extends TokenCollection<CardComponents, DefaultDomains> {
   /**
    * Defines the default Article card for the Vital DS.
@@ -236,7 +222,7 @@ export interface VitalHeroCard extends TokenCollection<CardComponents, DefaultDo
    *
    * Note: This token is meant to be layered on top of the `Article` token.
    */
-  HorizontalWithImageLeft: CardToken,
+  WithHorizontalWithImageLeft: CardToken,
   /**
    * Token that adds the Description slot to the Article Card.
    * Adds the `DescriptionWrapper` slot as `P` element and the `Description` slot
@@ -245,7 +231,7 @@ export interface VitalHeroCard extends TokenCollection<CardComponents, DefaultDo
   eslint-disable-next-line max-len
    * Note: This token is meant to be layered on top of the `vitalArticleCard.Default` Article token.
    */
-  HorizontalWithImageRight: CardToken,
+  WithHorizontalWithImageRight: CardToken,
   // /**
   //  * Token that sets Vertical Orientation for the Article Card.
   //  * Re-Exported directly unchanged from the `vitalCard`.
@@ -257,9 +243,7 @@ export interface VitalHeroCard extends TokenCollection<CardComponents, DefaultDo
 
   WithEyebrow: CardToken,
   WithSubtitle: CardToken,
-  WithNoEyebrow: CardToken,
   WithNoDescription: CardToken,
-  WithNoSubtitle: CardToken,
   WithNoHeroImage: CardToken,
   WithDescriptionLineClamp: CardToken,
   // VerticalOrientation: CardToken,
@@ -274,8 +258,8 @@ export interface VitalHeroCard extends TokenCollection<CardComponents, DefaultDo
  */
 const vitalHeroCard: VitalHeroCard = {
   Default,
-  HorizontalWithImageLeft,
-  HorizontalWithImageRight,
+  WithHorizontalWithImageLeft,
+  WithHorizontalWithImageRight,
   WithVerticalOrientation,
   WithEyebrow,
   WithPrimaryButton,
@@ -283,8 +267,6 @@ const vitalHeroCard: VitalHeroCard = {
   WithTertiaryButton,
   WithSubtitle,
   WithNoDescription,
-  WithNoEyebrow,
-  WithNoSubtitle,
   WithNoHeroImage,
   WithDescriptionLineClamp
   // VerticalOrientation

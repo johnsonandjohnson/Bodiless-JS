@@ -30,8 +30,8 @@ const OrientationVariations = varyDesigns(
     '': on(HeroCardClean)(vitalHeroCard.Default), // Use '' to not get a name for these
   },
   {
-    ImageLeft: vitalHeroCard.HorizontalWithImageLeft,
-    ImageRight: vitalHeroCard.HorizontalWithImageRight,
+    ImageLeft: vitalHeroCard.WithHorizontalWithImageLeft,
+    ImageRight: vitalHeroCard.WithHorizontalWithImageRight,
   },
 );
 
@@ -60,7 +60,7 @@ const ContentVariations = varyDesigns(
   {
     WithSubheading: vitalHeroCard.WithSubtitle,
     WithNoDescription: vitalHeroCard.WithNoDescription,
-    // WithNoHeroImage: vitalHeroCard.WithNoHeroImage
+    WithNoHeroImage: vitalHeroCard.WithNoHeroImage
   }
 );
 
