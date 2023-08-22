@@ -60,7 +60,7 @@ const ColorVariations = {
 const BaseTextVariation = {
   '': on(Span)(
     'w-[100px] h-[100px]',
-    'block',
+    'block flex',
     'text-24.2px',
     addProps({children: 'Text'}),
   ),
