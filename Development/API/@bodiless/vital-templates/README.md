@@ -65,7 +65,7 @@ Renames and re-exports [vitalHero](README.md#vitalhero)
 
 #### Defined in
 
-[vital-templates/src/components/GenericTemplate/types.ts:17](https://github.com/johnsonandjohnson/Bodiless-JS/blob/35c6b4145/packages/vital-templates/src/components/GenericTemplate/types.ts#L17)
+[vital-templates/src/components/GenericTemplate/types.ts:17](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/vital-templates/src/components/GenericTemplate/types.ts#L17)
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 #### Defined in
 
-[vital-templates/src/components/Page/asBodilessPage.tsx:20](https://github.com/johnsonandjohnson/Bodiless-JS/blob/35c6b4145/packages/vital-templates/src/components/Page/asBodilessPage.tsx#L20)
+[vital-templates/src/components/Page/asBodilessPage.tsx:20](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/vital-templates/src/components/Page/asBodilessPage.tsx#L20)
 
 ## Variables
 
@@ -85,7 +85,7 @@ ___
 
 #### Defined in
 
-[vital-templates/src/components/GenericTemplate/GenericTemplateClean.tsx:65](https://github.com/johnsonandjohnson/Bodiless-JS/blob/35c6b4145/packages/vital-templates/src/components/GenericTemplate/GenericTemplateClean.tsx#L65)
+[vital-templates/src/components/GenericTemplate/GenericTemplateClean.tsx:65](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/vital-templates/src/components/GenericTemplate/GenericTemplateClean.tsx#L65)
 
 ___
 
@@ -95,7 +95,7 @@ ___
 
 #### Defined in
 
-[vital-templates/src/components/StyleGuideTemplate/StyleGuideTemplateClean.tsx:63](https://github.com/johnsonandjohnson/Bodiless-JS/blob/35c6b4145/packages/vital-templates/src/components/StyleGuideTemplate/StyleGuideTemplateClean.tsx#L63)
+[vital-templates/src/components/StyleGuideTemplate/StyleGuideTemplateClean.tsx:63](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/vital-templates/src/components/StyleGuideTemplate/StyleGuideTemplateClean.tsx#L63)
 
 ___
 
@@ -105,7 +105,7 @@ ___
 
 #### Defined in
 
-[vital-templates/src/components/GenericTemplate/GenericTemplate.knapsackSpec.ts:33](https://github.com/johnsonandjohnson/Bodiless-JS/blob/35c6b4145/packages/vital-templates/src/components/GenericTemplate/GenericTemplate.knapsackSpec.ts#L33)
+[vital-templates/src/components/GenericTemplate/GenericTemplate.knapsackSpec.ts:33](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/vital-templates/src/components/GenericTemplate/GenericTemplate.knapsackSpec.ts#L33)
 
 ___
 
@@ -115,7 +115,7 @@ ___
 
 #### Defined in
 
-[vital-templates/src/components/GenericTemplate/tokens/vitalGenericTemplate.ts:95](https://github.com/johnsonandjohnson/Bodiless-JS/blob/35c6b4145/packages/vital-templates/src/components/GenericTemplate/tokens/vitalGenericTemplate.ts#L95)
+[vital-templates/src/components/GenericTemplate/tokens/vitalGenericTemplate.ts:95](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/vital-templates/src/components/GenericTemplate/tokens/vitalGenericTemplate.ts#L95)
 
 ___
 
@@ -131,7 +131,7 @@ ___
 
 #### Defined in
 
-[vital-templates/src/components/Hero/tokens/vitalHero.ts:27](https://github.com/johnsonandjohnson/Bodiless-JS/blob/35c6b4145/packages/vital-templates/src/components/Hero/tokens/vitalHero.ts#L27)
+[vital-templates/src/components/Hero/tokens/vitalHero.ts:27](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/vital-templates/src/components/Hero/tokens/vitalHero.ts#L27)
 
 ___
 
@@ -147,7 +147,7 @@ ___
 
 #### Defined in
 
-[vital-templates/src/components/Page/tokens/vitalPage.ts:58](https://github.com/johnsonandjohnson/Bodiless-JS/blob/35c6b4145/packages/vital-templates/src/components/Page/tokens/vitalPage.ts#L58)
+[vital-templates/src/components/Page/tokens/vitalPage.ts:58](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/vital-templates/src/components/Page/tokens/vitalPage.ts#L58)
 
 ___
 
@@ -164,7 +164,7 @@ ___
 
 #### Defined in
 
-[vital-templates/src/components/StyleGuideTemplate/tokens/vitalStyleGuideTemplate.ts:61](https://github.com/johnsonandjohnson/Bodiless-JS/blob/35c6b4145/packages/vital-templates/src/components/StyleGuideTemplate/tokens/vitalStyleGuideTemplate.ts#L61)
+[vital-templates/src/components/StyleGuideTemplate/tokens/vitalStyleGuideTemplate.ts:61](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/vital-templates/src/components/StyleGuideTemplate/tokens/vitalStyleGuideTemplate.ts#L61)
 
 ## HOC Utility Functions
 
