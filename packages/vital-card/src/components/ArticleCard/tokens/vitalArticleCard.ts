@@ -99,6 +99,8 @@ const Horizontal = asArticleCardToken({
   Layout: {
     Wrapper: 'items-center w-full flex',
     Image: 'w-full',
+    ImageWrapper: 'w-1/2',
+    ContentWrapper: 'w-1/2',
   },
 });
 
@@ -180,7 +182,7 @@ const WithBackground = asArticleCardToken({
     Wrapper: vitalArticleCardElement.BackgroundLightThemeBackground,
   },
   Spacing: {
-    ContentWrapper: vitalSpacing.MarginXSmall,
+    ContentWrapper: vitalSpacing.MarginSmall,
   },
 });
 
