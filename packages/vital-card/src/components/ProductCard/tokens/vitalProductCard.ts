@@ -102,8 +102,7 @@ const WithBackground = asProductCardToken({
 const WithPaddings = asProductCardToken({
   Spacing: {
     Wrapper: vitalSpacing.PaddingXSmall,
-    ContentWrapper: 'ml-0 mr-0',
-  }
+  },
 });
 
 /**
