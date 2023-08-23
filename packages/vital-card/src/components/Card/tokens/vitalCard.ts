@@ -39,8 +39,6 @@ import { Category } from './Category';
 import type { VitalCardCategory } from './Category';
 import { Topic } from './Topic';
 import type { VitalCardTopic } from './Topic';
-import { Product } from './Product';
-import type { VitalCardProduct } from './Product';
 
 const WithNoTitle = asCardToken({
   Components: {
@@ -189,7 +187,6 @@ export interface VitalCard extends
   VitalCardHero,
   VitalCardCategory,
   VitalCardTopic,
-  VitalCardProduct,
   VitalCardCore,
   TokenCollection<CardComponents, {}>
 {}
@@ -205,7 +202,6 @@ const vitalCard: VitalCard = {
   Hero,
   Category,
   Topic,
-  Product,
   WithPrimaryTextLink,
   WithPrimaryButton,
   WithSecondaryButton,

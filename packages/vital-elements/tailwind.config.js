@@ -219,6 +219,7 @@ const twConfig = {
   },
   plugins: [
     tailwindcssDir,
+    require('@tailwindcss/line-clamp'),
   ],
   variants: {
     extend: {

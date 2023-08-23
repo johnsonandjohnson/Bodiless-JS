@@ -26,6 +26,9 @@ import { vitalCardStatic, CardStatic } from './index.bl-edit';
  */
 const vitalCardBase = vitalCardBaseOrig;
 
+/**
+ * @TODO: These exports are not what we do for most vital components.
+ */
 export {
   asCardToken,
   CardClean,

@@ -21,6 +21,9 @@ import type { FluidToken } from '@bodiless/vital-elements';
 import {
   CardStatic, vitalCardStatic, asCardToken,
 } from '../../Card';
+import {
+  ProductCardStatic, vitalProductCardStatic, asProductCardToken,
+} from '../../ProductCard';
 
 /*
  * Content Variations to use all fields or remove specic fields.
@@ -172,10 +175,12 @@ const ProductContentVariations = {
 
 const ProductVariations = varyDesigns(
   {
-    Product: on(CardStatic)(vitalCardStatic.Product, vitalCardStatic.WithFlowContainerPreview),
+    Product: on(
+      ProductCardStatic
+    )(vitalProductCardStatic.Default, vitalCardStatic.WithFlowContainerPreview),
   },
   {
-    FullyClickable: asCardToken({ Meta: flowHoc.meta.term('CTA Type')('Fully Clickable'), }),
+    FullyClickable: asProductCardToken({ Meta: flowHoc.meta.term('CTA Type')('Fully Clickable'), }),
     ...LinkVariations,
   },
   ProductContentVariations,
