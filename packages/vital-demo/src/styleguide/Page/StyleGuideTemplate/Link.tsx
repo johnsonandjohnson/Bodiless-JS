@@ -45,7 +45,7 @@ const vitalLinkFlowContainer = asFluidToken({
 export const Link = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
   Meta: flowHoc.meta.term('Token')('Link'),
   Content: {
-    Title: replaceWith(() => <>Typography</>),
+    Title: replaceWith(() => <>Link</>),
     Description: replaceWith(() => <>The following are examples of Vital Link.</>),
     Examples: on(StyleGuideExamplesClean)(
       vitalStyleGuideExamples.Default,

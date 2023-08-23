@@ -17,7 +17,7 @@ import {
   Target, IosDeviceName, AndroidDeviceName, Region, CheckSettingsAutomation
 } from '@applitools/eyes-playwright';
 import { VitalTestParameters, vitalTestParameters } from '../config/vital-test-parameters';
-import { VitalPage } from '../../pages/vital-page';
+import { VitalElement, VitalPage } from '../../pages/vital-page';
 
 const test = baseTest.extend< { eyes: Eyes } >({
   eyes: async ({ page }, use) => {
@@ -52,11 +52,7 @@ const test = baseTest.extend< { eyes: Eyes } >({
     const runner: VisualGridRunner = new VisualGridRunner({ testConcurrency });
     const eyes: Eyes = new Eyes(runner, configuration);
 
-    await eyes.open(page, 'Bodiless JS', test.info().title);
-
     await use(eyes);
-
-    await eyes.close(true);
   }
 });
 
@@ -66,12 +62,18 @@ const runVisualTest = (data: VitalTestParameters[]) => {
   data.forEach((param) => {
     test.describe(param.suite, () => {
       const vitalPage: VitalPage = param.page;
-      vitalPage.getElements().forEach((element) => {
-        const elementId: string = element.id;
+      const elements: VitalElement[] = vitalPage.getElements();
 
-        /* eslint-disable jest/expect-expect */
-        test(`${param.suite} - ${element.name??elementId}`, async ({ page, eyes }) => {
-          await vitalPage.open(page);
+      /* eslint-disable jest/expect-expect, no-restricted-syntax, no-await-in-loop */
+      test(`${param.suite}`, async ({ page, eyes }) => {
+        await vitalPage.open(page);
+
+        await eyes.open(page, 'Bodiless JS', test.info().title);
+
+        for (const e of elements) {
+          const elementConfig: VitalElement = e as unknown as VitalElement;
+
+          const elementId: string = elementConfig.id;
 
           let element: Locator = page.getByTestId(elementId);
           if (param.switchToItemContent) {
@@ -84,11 +86,15 @@ const runVisualTest = (data: VitalTestParameters[]) => {
           }
 
           await eyes.check(elementId, settings);
-        });
-        /* eslint-enable jest/expect-expect */
+        }
+
+        await eyes.close(true);
       });
+      /* eslint-enable jest/expect-expect, no-restricted-syntax, no-await-in-loop */
     });
   });
 };
 
-runVisualTest(vitalTestParameters);
+runVisualTest(
+  vitalTestParameters.sort((l, r) => r.page.getElements().length - l.page.getElements().length)
+);
