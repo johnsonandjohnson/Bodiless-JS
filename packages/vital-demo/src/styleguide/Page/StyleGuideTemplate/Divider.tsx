@@ -37,6 +37,12 @@ export const Divider = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default
   Meta: flowHoc.meta.term('Token')('Dividers'),
   Content: {
     Title: replaceWith(() => <>Divider</>),
+    Description: replaceWith(() => (
+      <>
+        The following are examples of Divider elements.
+        {' '}
+      </>
+    )),
     Examples: on(StyleGuideExamplesClean)(DemoFlowContainer),
   },
 });
