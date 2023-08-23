@@ -104,7 +104,7 @@ exports[`Typography Matches snapshot for Eyebrow 1`] = `
 
 exports[`Typography Matches snapshot for EyebrowBold 1`] = `
 <span
-  className="text-11.67px lg:text-13.33px leading-6 font-bold font-2 underline uppercase"
+  className="text-11.67px lg:text-13.33px leading-6 font-bold font-2 uppercase"
 />
 `;
 
@@ -116,7 +116,7 @@ exports[`Typography Matches snapshot for EyebrowNoSpacing 1`] = `
 
 exports[`Typography Matches snapshot for EyebrowRegular 1`] = `
 <span
-  className="text-11.67px lg:text-13.33px leading-6 font-normal font-2 underline uppercase"
+  className="text-11.67px lg:text-13.33px leading-6 font-normal font-2 uppercase"
 />
 `;
 

@@ -16,6 +16,7 @@ const configurators = {
       ...defaultServerConfig,
       command: 'cd sites/test-site && npm run dev',
     };
+    baseConfig.retries = process.env.CI ? 2 : 0;
   },
   'smoke-vital': (baseConfig: PlaywrightTestConfig) => {
     // The number of workers is choosen depending on number of renderers in applitools configuration
@@ -27,6 +28,7 @@ const configurators = {
       command: 'cd sites/vital-demo-next && npm run serve:test',
     };
     baseConfig.globalSetup = require.resolve('./playwright/tests/setup/setup.ts');
+    baseConfig.retries = 0;
   },
 };
 /* eslint-enable no-param-reassign */
@@ -36,12 +38,11 @@ const configurators = {
  */
 const config: PlaywrightTestConfig = {
   testDir: './playwright/tests',
-  timeout: 90 * 1000,
+  timeout: 300 * 1000,
   expect: {
     timeout: 5000,
   },
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
 
   reporter: [

@@ -13,32 +13,8 @@
  */
 
 import {
-  flowHoc, extendMeta,
-} from '@bodiless/fclasses';
-import { asCardToken } from '../CardClean';
-import type { CardToken } from '../CardClean';
-import Base from './Base';
+  StaticBlock as ProductCardStatic,
+  staticTokenCollection as vitalProductCardStatic,
+} from '@bodiless/hydration';
 
-/**
-  * TBD: STUB Product Base Card Design.
-  */
-const Product = asCardToken(Base, {
-  Meta: extendMeta(
-    flowHoc.meta.term('Sub Type')('Product'),
-  ),
-});
-
-export interface VitalCardProduct {
-  /**
-   * Defines the Product card for the Vital DS.
-   * - Extends the Base card with vertical orientation.
-   *
-   * <b>NOTE</b> Not Fully Implemented.
-   *
-   */
-  Product: CardToken,
-}
-
-export {
-  Product,
-};
+export { ProductCardStatic, vitalProductCardStatic };

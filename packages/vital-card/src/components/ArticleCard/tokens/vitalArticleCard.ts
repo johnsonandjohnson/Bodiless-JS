@@ -19,14 +19,12 @@ import {
   vitalArticleCardElement, vitalTypography, vitalSpacing, DefaultDomains,
 } from '@bodiless/vital-elements';
 import {
-  flowHoc, extendMeta, TokenCollection, replaceWith, on, Div, P, as,
+  flowHoc, extendMeta, TokenCollection, replaceWith, on, Div, P, as, startWith, H2,
 } from '@bodiless/fclasses';
 
 import { CardComponents } from '../../Card/CardClean';
 import type { CardToken } from '../../Card/CardClean';
-import Base, {
-  WithVerticalOrientation, WithHorizontalLeftOrientation, WithHorizontalContentCentered,
-} from '../../Card/tokens/Base';
+import Base from '../../Card/tokens/Base';
 
 import { asArticleCardToken } from '../ArticleCardClean';
 
@@ -45,10 +43,10 @@ const ArticleCardButton = asButtonToken(
 );
 
 /**
- * Default Article Card Token.
- * By default Article Card has `Image`, `Title` and `Link` slots.
+ * Defines the default Vertical Article card for the Vital DS.
+ * - Extends the Base card. By default Article Card has `Image`, `Title` and `Link` slots.
  */
-const Default = asArticleCardToken({
+const Vertical = asArticleCardToken({
   ...Base,
   Components: {
     ...Base.Components,
@@ -57,16 +55,31 @@ const Default = asArticleCardToken({
     CTAWrapper: undefined,
     CTALink: on(ButtonClean)(ArticleCardButton),
   },
+  Layout: {
+    Wrapper: 'w-full flex flex-col',
+  },
   Theme: {
     TitleWrapper: as(
       vitalTypography.HeadlineLarge,
       vitalArticleCardElement.TextLightThemeHeadline,
     ),
     Description: vitalTypography.BodyRegular,
+    Image: as(
+      vitalArticleCardElement.ImageBorderRadiusTopLeft,
+      vitalArticleCardElement.ImageBorderRadiusBottomRight,
+      vitalArticleCardElement.ImageBorderRadiusBottomRight,
+      vitalArticleCardElement.ImageBorderRadiusBottomLeft,
+    ),
+    Wrapper: as(
+      vitalArticleCardElement.BorderRadiusTopLeft,
+      vitalArticleCardElement.BorderRadiusBottomRight,
+      vitalArticleCardElement.BorderRadiusBottomRight,
+      vitalArticleCardElement.BorderRadiusBottomLeft,
+    ),
   },
   Spacing: {
-    TitleWrapper: vitalSpacing.PaddingYXSmall,
-    CTAWrapper: vitalSpacing.PaddingYXSmall,
+    TitleWrapper: vitalSpacing.MarginYXSmall,
+    CTAWrapper: vitalSpacing.MarginTopMedium,
   },
   Content: {
     Title: withPlaceholder('Article Title'),
@@ -78,10 +91,47 @@ const Default = asArticleCardToken({
 });
 
 /**
+ * Defines the default Horizontal Article card for the Vital DS.
+ * - Extends Vertical card. By default Article Card has `Image`, `Title` and `Link` slots.
+ */
+const Horizontal = asArticleCardToken({
+  ...Vertical,
+  Layout: {
+    Wrapper: 'items-center w-full flex',
+    Image: 'w-full',
+  },
+});
+
+/**
+ * Token that sets Horizontal Orientation with Image on the Left for the Article Card.
+ *
+ * Note: This token is meant to be layered on top of the `vitalArticleCard.Horizontal` token.
+ */
+const WithHorizontalLeftOrientation = asArticleCardToken({
+  Spacing: {
+    ContentWrapper: vitalSpacing.MarginLeftMedium,
+  },
+});
+
+/**
+ * Token that sets Horizontal Orientation with Image on the Right for the Article Card.
+ *
+ * Note: This token is meant to be layered on top of the `vitalArticleCard.Horizontal` token.
+ */
+const WithHorizontalRightOrientation = asArticleCardToken({
+  Layout: {
+    Wrapper: 'flex-row-reverse',
+  },
+  Spacing: {
+    ContentWrapper: vitalSpacing.MarginRightMedium,
+  },
+});
+
+/**
  * Token that adds an Eyebrow slot to the Product Card.
  * Adds the `EyebrowWrapper` slot as a `Div` and the `Eyebrow` slot as default Plain Text Editor.
  *
- * Note: This token is meant to be layered on top of the `Product` token.
+ * Note: This token is meant to be layered on top of `Horizontal` or `Vertical` tokens.
  */
 const WithEyebrow = asArticleCardToken({
   Components: {
@@ -96,7 +146,10 @@ const WithEyebrow = asArticleCardToken({
       vitalTypography.EyebrowBold,
       vitalArticleCardElement.TextLightThemeEyebrow,
     ),
-  }
+  },
+  Spacing: {
+    ContentWrapper: vitalSpacing.MarginTopSmall,
+  },
 });
 
 /**
@@ -104,7 +157,7 @@ const WithEyebrow = asArticleCardToken({
  * Adds the `DescriptionWrapper` slot as `P` element and the `Description` slot
  * as default Plain Text Editor.
  *
- * Note: This token is meant to be layered on top of the `Product` token.
+ * Note: This token is meant to be layered on top of `Horizontal` or `Vertical` tokens.
  */
 const WithDescription = asArticleCardToken({
   Components: {
@@ -113,32 +166,64 @@ const WithDescription = asArticleCardToken({
   },
   Content: {
     Description: withPlaceholder('Description Text'),
-  }
+  },
 });
 
 /**
- * Token that sets Horizontal Orientation for the Article Card.
- * Re-Exported `WithHorizontalLeftOrientation` combined with the `WithHorizontalContentCentered`
- * unchanged from the `vitalCard` collection.
+ * Token that adds Background the Article Card Wrapper.
+ * Some Brands are expected to have a Article Card background.
  *
- * Note: This token is meant to be layered on top of the `vitalArticleCard.Default` Article token.
+ * Note: This token is meant to be layered on top of `Horizontal` or `Vertical` tokens.
  */
-const WithHorizontalOrientation = asArticleCardToken(
-  WithHorizontalLeftOrientation,
-  WithHorizontalContentCentered,
-);
+const WithBackground = asArticleCardToken({
+  Theme: {
+    Wrapper: vitalArticleCardElement.BackgroundLightThemeBackground,
+  },
+  Spacing: {
+    ContentWrapper: vitalSpacing.MarginXSmall,
+  },
+});
+
+/**
+ * Token that converts Article card Title into H2 element.
+ */
+const WithH2Title = asArticleCardToken({
+  Components: {
+    TitleWrapper: startWith(H2),
+  },
+  Theme: {
+    TitleWrapper: vitalTypography.HeadlineXLarge,
+  },
+});
 
 export interface VitalArticleCard extends TokenCollection<CardComponents, DefaultDomains> {
   /**
-   * Defines the default Article card for the Vital DS.
-   * - Extends the Base card.
+   * Defines the default Vertical Article card for the Vital DS.
+   * - Extends the Base card. By default Article Card has `Image`, `Title` and `Link` slots.
+  */
+  Vertical: CardToken,
+  /**
+   * Defines the default Horizontal Article card for the Vital DS.
+   * - Extends the Base card. By default Article Card has `Image`, `Title` and `Link` slots.
    */
-  Default: CardToken,
+  Horizontal: CardToken,
+  /**
+   * Token that sets Horizontal Orientation with Image on the Left for the Article Card.
+   *
+   * Note: This token is meant to be layered on top of the `vitalArticleCard.Horizontal` token.
+   */
+  WithHorizontalLeftOrientation: CardToken,
+  /**
+   * Token that sets Horizontal Orientation with Image on the Right for the Article Card.
+   *
+   * Note: This token is meant to be layered on top of the `vitalArticleCard.Horizontal` token.
+   */
+  WithHorizontalRightOrientation: CardToken,
   /**
    * Token that adds an Eyebrow to the Article Card.
    * Adds the `EyebrowWrapper` slot as a `Div` and the `Eyebrow` slot as default Plain Editor.
    *
-   * Note: This token is meant to be layered on top of the `Article` token.
+   * Note: This token is meant to be layered on top of the `Horizontal` or `Vertical` tokens.
    */
   WithEyebrow: CardToken,
   /**
@@ -146,24 +231,20 @@ export interface VitalArticleCard extends TokenCollection<CardComponents, Defaul
    * Adds the `DescriptionWrapper` slot as `P` element and the `Description` slot
    * as default Plain Text Editor.
    *
-   * Note: This token is meant to be layered on top of the `vitalArticleCard.Default` Article token.
+   * Note: This token is meant to be layered on top of the `Horizontal` or `Vertical` tokens.
    */
   WithDescription: CardToken,
   /**
-   * Token that sets Vertical Orientation for the Article Card.
-   * Re-Exported directly unchanged from the `vitalCard`.
+   * Token that adds Background the Product Card Wrapper.
+   * Some Brands are expected to have a Product Card background.
    *
-   * Note: This token is meant to be layered on top of the `vitalArticleCard.Default` Article token.
+   * Note: This token is meant to be layered on top of the `Horizontal` or `Vertical` tokens.
    */
-  WithVerticalOrientation: CardToken,
+  WithBackground: CardToken,
   /**
-   * Token that sets Horizontal Orientation for the Article Card.
-   * Re-Exported `WithHorizontalLeftOrientation` combined with the `WithHorizontalContentCentered`
-   * unchanged from the `vitalCard` collection.
-   *
-   * Note: This token is meant to be layered on top of the `vitalArticleCard.Default` Article token.
+   * Token that converts Article card Title into H2 element.
    */
-  WithHorizontalOrientation: CardToken,
+  WithH2Title: CardToken,
 }
 
 /**
@@ -174,11 +255,14 @@ export interface VitalArticleCard extends TokenCollection<CardComponents, Defaul
  * @see vitalArticleCard
  */
 const vitalArticleCard: VitalArticleCard = {
-  Default,
+  Vertical,
+  Horizontal,
+  WithHorizontalLeftOrientation,
+  WithHorizontalRightOrientation,
   WithEyebrow,
   WithDescription,
-  WithVerticalOrientation,
-  WithHorizontalOrientation,
+  WithBackground,
+  WithH2Title,
 };
 
 export default vitalArticleCard;

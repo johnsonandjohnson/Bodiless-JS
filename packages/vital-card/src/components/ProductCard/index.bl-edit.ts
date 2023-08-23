@@ -1,5 +1,5 @@
 /**
- * Copyright © 2022 Johnson & Johnson
+ * Copyright © 2023 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,9 +11,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { ProductCardStatic } from './ProductCardClean';
+import vitalProductCard from './tokens';
 
-export * from './components/Card';
-export * from './components/FlowContainer';
-export * from './components/ProductCard';
-export * from './components/ArticleCard';
-export * from './components/CategoryCard';
+/**
+ * Use this version of the token collection when all sub-components are static.
+ * Be sure to use it with `CardStatic` (not `CardClean`).
+ *
+ * @see [[ProductCardStatic]]
+ * @see [[vitalProductCard]]
+ *
+ * @category Token Collection
+ */
+const vitalProductCardStatic = vitalProductCard;
+
+export { ProductCardStatic, vitalProductCardStatic };

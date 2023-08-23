@@ -38,6 +38,11 @@ import { withoutHydration } from '@bodiless/hydration';
  */
 export interface CardComponents extends DesignableComponents {
   /**
+   * To prevent a TS error when using with `TokenCollection<CardComponents, {}>`:
+   * `Index signature for type 'string' is missing in type 'CardComponents'.ts(2344)`
+   */
+  [key: string]: ComponentType<StylableProps>,
+  /**
    * The outer wrapper of the card.  By default this is A to make entire card clickable.
    */
   Wrapper: ComponentType<StylableProps>,
@@ -97,6 +102,18 @@ export interface CardComponents extends DesignableComponents {
    * The text of link.  Recommended: a plain editor.
    */
   CTAText: ComponentType<StylableProps>,
+  /**
+   * A wrapper to style the Button. By default is a Fragment.
+   */
+  ButtonWrapper: ComponentType<StylableProps>,
+  /**
+   * The cta link. By default is a Fragment.
+   */
+  ButtonLink: ComponentType<StylableProps>,
+  /**
+   * The text of link. By default is a Fragment.
+   */
+  ButtonText: ComponentType<StylableProps>,
 }
 
 export const cardComponentStart: CardComponents = {
@@ -116,6 +133,9 @@ export const cardComponentStart: CardComponents = {
   // @todo: use LinkClean without as throws ts type error.
   CTALink: as()(LinkClean),
   CTAWrapper: Div,
+  ButtonWrapper: Fragment,
+  ButtonLink: Fragment,
+  ButtonText: Fragment
 };
 
 export type CardProps = DesignableProps<CardComponents> & HTMLProps<HTMLElement>;
@@ -138,6 +158,9 @@ export const CardBase: FC<CardBaseProps> = ({ components, ...rest }) => {
     CTAWrapper,
     CTALink,
     CTAText,
+    ButtonWrapper,
+    ButtonLink,
+    ButtonText
   } = components;
 
   return (
@@ -163,6 +186,11 @@ export const CardBase: FC<CardBaseProps> = ({ components, ...rest }) => {
             <CTAText />
           </CTALink>
         </CTAWrapper>
+        <ButtonWrapper>
+          <ButtonLink>
+            <ButtonText />
+          </ButtonLink>
+        </ButtonWrapper>
       </ContentWrapper>
     </Wrapper>
   );
