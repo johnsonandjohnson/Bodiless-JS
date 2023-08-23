@@ -14,7 +14,7 @@
 
 import React from 'react';
 import { asFluidToken } from '@bodiless/vital-elements';
-import { ProductCardClean, vitalProductCard } from '@bodiless/vital-card';
+import { ProductCardClean, vitalProductCard, asProductCardToken } from '@bodiless/vital-card';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import {
   flowHoc, replaceWith, on, varyDesigns, addProps, as,
@@ -66,10 +66,9 @@ const CoreVariations = varyDesigns(
 const BackgroundVariations = varyDesigns(
   RatingVariations,
   {
-    WithBackgroundAndPadding: as(
-      vitalProductCard.WithPaddings,
-      vitalProductCard.WithBackground,
-    )
+    WithBackgroundAndPadding: asProductCardToken(vitalProductCard.WithPaddings, {
+      Theme: { ...vitalProductCard.WithBackground.Theme },
+    }),
   },
 );
 
