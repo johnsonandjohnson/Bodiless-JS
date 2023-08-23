@@ -27,9 +27,9 @@ const DemoFlowContainer = asFluidToken({
   Components: {
     Primary: on(DividerClean)(vitalDividers.Base, vitalDividers.WithPrimaryDivider),
     Secondary: on(DividerClean)(vitalDividers.Base, vitalDividers.WithSecondaryDivider),
-// eslint-disable-next-line max-len
+    // eslint-disable-next-line max-len
     VerticalPrimary: on(DividerClean)(vitalDividers.Base, vitalDividers.WithPrimaryDivider, vitalDividers.WithVerticalOrientation),
-// eslint-disable-next-line max-len
+    // eslint-disable-next-line max-len
     VerticalSecondary: on(DividerClean)(vitalDividers.Base, vitalDividers.WithSecondaryDivider, vitalDividers.WithVerticalOrientation),
   },
 });
