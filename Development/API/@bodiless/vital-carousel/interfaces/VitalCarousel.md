@@ -38,7 +38,7 @@ Default styling and behavior.
 
 #### Defined in
 
-[vital-carousel/src/components/Carousel/types.ts:40](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/vital-carousel/src/components/Carousel/types.ts#L40)
+[vital-carousel/src/components/Carousel/types.ts:40](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/vital-carousel/src/components/Carousel/types.ts#L40)
 
 ___
 
@@ -50,7 +50,7 @@ DesktopOnly: Show only Desktop
 
 #### Defined in
 
-[vital-carousel/src/components/Carousel/types.ts:92](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/vital-carousel/src/components/Carousel/types.ts#L92)
+[vital-carousel/src/components/Carousel/types.ts:92](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/vital-carousel/src/components/Carousel/types.ts#L92)
 
 ___
 
@@ -62,7 +62,7 @@ MobileOnly: Show only on Mobile
 
 #### Defined in
 
-[vital-carousel/src/components/Carousel/types.ts:76](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/vital-carousel/src/components/Carousel/types.ts#L76)
+[vital-carousel/src/components/Carousel/types.ts:76](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/vital-carousel/src/components/Carousel/types.ts#L76)
 
 ___
 
@@ -74,7 +74,7 @@ MobileTabletOnly: Show only Mobile & Tablet
 
 #### Defined in
 
-[vital-carousel/src/components/Carousel/types.ts:84](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/vital-carousel/src/components/Carousel/types.ts#L84)
+[vital-carousel/src/components/Carousel/types.ts:84](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/vital-carousel/src/components/Carousel/types.ts#L84)
 
 ___
 
@@ -86,7 +86,7 @@ TabletDesktopOnly: Show only on Tablet/Desktop
 
 #### Defined in
 
-[vital-carousel/src/components/Carousel/types.ts:88](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/vital-carousel/src/components/Carousel/types.ts#L88)
+[vital-carousel/src/components/Carousel/types.ts:88](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/vital-carousel/src/components/Carousel/types.ts#L88)
 
 ___
 
@@ -98,7 +98,7 @@ TabletOnly: Show only on Tablet
 
 #### Defined in
 
-[vital-carousel/src/components/Carousel/types.ts:80](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/vital-carousel/src/components/Carousel/types.ts#L80)
+[vital-carousel/src/components/Carousel/types.ts:80](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/vital-carousel/src/components/Carousel/types.ts#L80)
 
 ___
 
@@ -110,7 +110,7 @@ WithCardSlide: Show Product Card for each slide
 
 #### Defined in
 
-[vital-carousel/src/components/Carousel/types.ts:72](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/vital-carousel/src/components/Carousel/types.ts#L72)
+[vital-carousel/src/components/Carousel/types.ts:72](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/vital-carousel/src/components/Carousel/types.ts#L72)
 
 ___
 
@@ -122,7 +122,7 @@ WithCarouselDots: Show dots
 
 #### Defined in
 
-[vital-carousel/src/components/Carousel/types.ts:52](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/vital-carousel/src/components/Carousel/types.ts#L52)
+[vital-carousel/src/components/Carousel/types.ts:52](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/vital-carousel/src/components/Carousel/types.ts#L52)
 
 ___
 
@@ -134,7 +134,7 @@ WithCarouselDotsAllViewports: Show carousel dots on all viewports (Usage: Produc
 
 #### Defined in
 
-[vital-carousel/src/components/Carousel/types.ts:56](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/vital-carousel/src/components/Carousel/types.ts#L56)
+[vital-carousel/src/components/Carousel/types.ts:56](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/vital-carousel/src/components/Carousel/types.ts#L56)
 
 ___
 
@@ -146,7 +146,7 @@ WithCarouselDotsMobileTablet: Show carousel dots on mobile/tablet viewports (Usa
 
 #### Defined in
 
-[vital-carousel/src/components/Carousel/types.ts:60](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/vital-carousel/src/components/Carousel/types.ts#L60)
+[vital-carousel/src/components/Carousel/types.ts:60](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/vital-carousel/src/components/Carousel/types.ts#L60)
 
 ___
 
@@ -158,7 +158,7 @@ WithControls: Use controls, must setup display of controls (WithCarouselDots or 
 
 #### Defined in
 
-[vital-carousel/src/components/Carousel/types.ts:48](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/vital-carousel/src/components/Carousel/types.ts#L48)
+[vital-carousel/src/components/Carousel/types.ts:48](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/vital-carousel/src/components/Carousel/types.ts#L48)
 
 ___
 
@@ -170,7 +170,7 @@ Show Thumbs as Horizontal on carousel
 
 #### Defined in
 
-[vital-carousel/src/components/Carousel/types.ts:96](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/vital-carousel/src/components/Carousel/types.ts#L96)
+[vital-carousel/src/components/Carousel/types.ts:96](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/vital-carousel/src/components/Carousel/types.ts#L96)
 
 ___
 
@@ -182,7 +182,7 @@ WithImageSlide: Show Image for each slide
 
 #### Defined in
 
-[vital-carousel/src/components/Carousel/types.ts:68](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/vital-carousel/src/components/Carousel/types.ts#L68)
+[vital-carousel/src/components/Carousel/types.ts:68](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/vital-carousel/src/components/Carousel/types.ts#L68)
 
 ___
 
@@ -194,7 +194,7 @@ WithThumbnail: Show dots as thumbnail images.
 
 #### Defined in
 
-[vital-carousel/src/components/Carousel/types.ts:64](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/vital-carousel/src/components/Carousel/types.ts#L64)
+[vital-carousel/src/components/Carousel/types.ts:64](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/vital-carousel/src/components/Carousel/types.ts#L64)
 
 ___
 
@@ -206,4 +206,4 @@ Show Thumbs as Vertical on carousel
 
 #### Defined in
 
-[vital-carousel/src/components/Carousel/types.ts:100](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/vital-carousel/src/components/Carousel/types.ts#L100)
+[vital-carousel/src/components/Carousel/types.ts:100](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/vital-carousel/src/components/Carousel/types.ts#L100)

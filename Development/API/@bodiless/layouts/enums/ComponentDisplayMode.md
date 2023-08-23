@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[packages/bodiless-layouts/src/FlowContainer/ComponentDisplayMode.tsx:20](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/bodiless-layouts/src/FlowContainer/ComponentDisplayMode.tsx#L20)
+[packages/bodiless-layouts/src/FlowContainer/ComponentDisplayMode.tsx:20](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/bodiless-layouts/src/FlowContainer/ComponentDisplayMode.tsx#L20)
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/FlowContainer/ComponentDisplayMode.tsx:21](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/bodiless-layouts/src/FlowContainer/ComponentDisplayMode.tsx#L21)
+[packages/bodiless-layouts/src/FlowContainer/ComponentDisplayMode.tsx:21](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/bodiless-layouts/src/FlowContainer/ComponentDisplayMode.tsx#L21)
 
 ___
 
@@ -38,4 +38,4 @@ ___
 
 #### Defined in
 
-[packages/bodiless-layouts/src/FlowContainer/ComponentDisplayMode.tsx:22](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c5fa43c72/packages/bodiless-layouts/src/FlowContainer/ComponentDisplayMode.tsx#L22)
+[packages/bodiless-layouts/src/FlowContainer/ComponentDisplayMode.tsx:22](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/bodiless-layouts/src/FlowContainer/ComponentDisplayMode.tsx#L22)
