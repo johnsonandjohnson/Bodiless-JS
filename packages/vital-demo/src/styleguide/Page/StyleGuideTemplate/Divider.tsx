@@ -21,16 +21,28 @@ import {
 import { vitalDividers, DividerClean } from '@bodiless/vital-divider';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { asFluidToken } from '@bodiless/vital-elements';
-import { StyleGuideExamplesClean } from '../../Examples';
+import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
 const DemoFlowContainer = asFluidToken({
   Components: {
     Primary: on(DividerClean)(vitalDividers.Base, vitalDividers.WithPrimaryDivider),
     Secondary: on(DividerClean)(vitalDividers.Base, vitalDividers.WithSecondaryDivider),
+// eslint-disable-next-line max-len
     VerticalPrimary: on(DividerClean)(vitalDividers.Base, vitalDividers.WithPrimaryDivider, vitalDividers.WithVerticalOrientation),
 // eslint-disable-next-line max-len
     VerticalSecondary: on(DividerClean)(vitalDividers.Base, vitalDividers.WithSecondaryDivider, vitalDividers.WithVerticalOrientation),
   },
+});
+
+const StyleGuideSpacing = asFluidToken({
+  ...vitalStyleGuideExamples.Default,
+  Layout: {
+    Wrapper: 'flex flex-wrap',
+    ItemWrapper: 'w-full md:w-1/2 p-4',
+  },
+  Spacing: {
+    Wrapper: 'my-32px',
+  }
 });
 
 export const Divider = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
