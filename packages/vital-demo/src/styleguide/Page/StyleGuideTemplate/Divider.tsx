@@ -43,6 +43,9 @@ export const Divider = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default
         {' '}
       </>
     )),
-    Examples: on(StyleGuideExamplesClean)(DemoFlowContainer),
+    Examples: on(StyleGuideExamplesClean)(
+      StyleGuideSpacing,
+      DemoFlowContainer
+    ),
   },
 });
