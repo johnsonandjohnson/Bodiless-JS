@@ -15,6 +15,7 @@ import { Region } from '@applitools/eyes-playwright';
 import {
   VitalCardsPage, VitalTypographyPage, VitalButtonsPage, VitalAccordionPage, VitalVideoPage,
   VitalLayoutPage, VitalProductPage, VitalGenericTemplatePage, VitalPage, VitalSectionPage,
+  VitalColorPage, VitalBorderPage, VitalLinkPage,
 } from '../../pages';
 
 /**
@@ -23,6 +24,22 @@ import {
  */
 
 export const vitalTestParameters: VitalTestParameters[] = [
+  {
+    suite: 'Color',
+    page: new VitalColorPage(),
+    switchToItemContent: true,
+    disabledRules: ['button-name', 'color-contrast'],
+  },
+  {
+    suite: 'Border',
+    page: new VitalBorderPage(),
+    switchToItemContent: true,
+  },
+  {
+    suite: 'Link',
+    page: new VitalLinkPage(),
+    switchToItemContent: true,
+  },
   {
     suite: 'Section',
     page: new VitalSectionPage(),

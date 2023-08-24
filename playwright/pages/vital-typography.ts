@@ -11,14 +11,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { VitalElement, VitalPage } from './vital-page';
+import { SimpleVitalPage } from './simple-vital-page';
 
-export class VitalTypographyPage extends VitalPage {
-  readonly typographyElements: string[];
-
+export class VitalTypographyPage extends SimpleVitalPage {
   constructor() {
-    super('/styleguide/typography/');
-    this.typographyElements = [
+    super('/styleguide/typography/', [
       'HeadlineXXLarge',
       'HeadlineXLarge',
       'HeadlineLarge',
@@ -38,10 +35,6 @@ export class VitalTypographyPage extends VitalPage {
       'BodySmallBoldUnderlined',
       'EyebrowRegular',
       'EyebrowBold'
-    ];
-  }
-
-  getElements(): VitalElement[] {
-    return this.typographyElements.map((tElement) => ({id: tElement}));
+    ]);
   }
 }
