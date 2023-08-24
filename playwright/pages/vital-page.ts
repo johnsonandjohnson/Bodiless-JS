@@ -11,6 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/* eslint-disable class-methods-use-this */
 import { Page } from '@playwright/test';
 
 export abstract class VitalPage {
@@ -29,9 +30,17 @@ export abstract class VitalPage {
   async open(page: Page): Promise<void> {
     await page.goto(this.relativeUrl);
     await page.waitForLoadState();
+    const lazyLoadElement = this.getLazyLoadElement();
+    if (lazyLoadElement) {
+      await page.locator(lazyLoadElement as string).first().waitFor();
+    }
   }
 
   abstract getElements(): VitalElement[];
+
+  getLazyLoadElement(): string|undefined {
+    return undefined;
+  }
 }
 
 export type VitalElement = {

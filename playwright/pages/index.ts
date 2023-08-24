@@ -21,6 +21,9 @@ import { VitalButtonsPage } from './vital-buttons';
 import { VitalAccordionPage } from './vital-accordion';
 import { VitalVideoPage } from './vital-video';
 import { VitalSectionPage } from './vital-section';
+import { VitalColorPage } from './vital-color';
+import { VitalBorderPage } from './vital-border';
+import { VitalLinkPage } from './vital-link';
 
 export {
   VitalPage,
@@ -33,4 +36,7 @@ export {
   VitalAccordionPage,
   VitalVideoPage,
   VitalSectionPage,
+  VitalColorPage,
+  VitalBorderPage,
+  VitalLinkPage,
 };

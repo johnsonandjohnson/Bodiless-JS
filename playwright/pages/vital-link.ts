@@ -11,21 +11,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* eslint-disable class-methods-use-this */
 import { VitalElement, VitalPage } from './vital-page';
 
-export class VitalLayoutPage extends VitalPage {
+export class VitalLinkPage extends VitalPage {
+  readonly link: string;
+
+  readonly disabledLink: string;
+
   constructor() {
-    super('/styleguide/layout/');
+    super('/styleguide/link/');
+    this.link = 'Link';
+    this.disabledLink = 'DisabledLink';
   }
 
   getElements(): VitalElement[] {
     return [
-      { id: this.mainContentSelector, name: 'Layout Element' }
+      {
+        id: this.link
+      },
+      {
+        id: this.disabledLink
+      }
     ];
-  }
-
-  getLazyLoadElement(): string {
-    return '[src*="4_column"]';
   }
 }
