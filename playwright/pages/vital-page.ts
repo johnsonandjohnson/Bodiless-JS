@@ -16,13 +16,19 @@ import { Page } from '@playwright/test';
 export abstract class VitalPage {
   readonly relativeUrl: string;
 
+  readonly headerContentSelector: string;
+
   readonly mainContentSelector: string;
+
+  readonly footerContentSelector: string;
 
   readonly linkWrapperSelector: string;
 
   constructor(relativeUrl: string) {
     this.relativeUrl = relativeUrl;
+    this.headerContentSelector = 'header-content';
     this.mainContentSelector = 'main-content';
+    this.footerContentSelector = '//footer';
     this.linkWrapperSelector = '[data-layer-component="Link:Wrapper"]';
   }
 
