@@ -5,7 +5,9 @@ exports[`ArticleCard Tokens Matches snapshot for Horizontal 1`] = `
   className="rounded-bl-0px rounded-br-0px rounded-tl-0px items-center w-full flex"
   href="#"
 >
-  <div>
+  <div
+    className="w-1/2"
+  >
     <div
       data-no-hydrate={true}
       id="f64e1b3016f7c8d0d277ce020d98ee0d"
@@ -23,7 +25,9 @@ exports[`ArticleCard Tokens Matches snapshot for Horizontal 1`] = `
       />
     </div>
   </div>
-  <div>
+  <div
+    className="w-1/2"
+  >
     <h3
       className="text-kenvue-neutrals-black text-24.19px lg:text-27.65px leading-5 font-normal font-2 my-8px md:my-16px"
     >
@@ -162,7 +166,7 @@ exports[`ArticleCard Tokens Matches snapshot for WithBackground 1`] = `
     <img />
   </div>
   <div
-    className="m-8px md:m-16px"
+    className="m-16px md:m-20px"
   >
     <h3 />
     <div>
