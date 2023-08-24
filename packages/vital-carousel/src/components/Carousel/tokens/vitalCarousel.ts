@@ -5,7 +5,7 @@ import {
   addProps,
 } from '@bodiless/fclasses';
 import { vitalImage } from '@bodiless/vital-image';
-import { vitalCard, CardClean } from '@bodiless/vital-card';
+import { vitalProductCard, ProductCardClean } from '@bodiless/vital-card';
 import { asBodilessList } from '@bodiless/components';
 import { vitalColor, vitalSpacing } from '@bodiless/vital-elements';
 import { withChild } from '@bodiless/core';
@@ -245,8 +245,8 @@ const WithImageSlide = asVitalCarouselToken({
 const WithCardSlide = asVitalCarouselToken({
   Components: {
     Slider: withDesign({
-      Title: on(CardClean)(
-        vitalCard.Product,
+      Title: on(ProductCardClean)(
+        vitalProductCard.Default,
         withNodeKey('card'),
       )
     }),
