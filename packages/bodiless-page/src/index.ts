@@ -20,3 +20,4 @@ export * from './Provider';
 export * from './RedirectAlias';
 export * from './types';
 export * from './utils';
+export * from './withPageTreeButton';

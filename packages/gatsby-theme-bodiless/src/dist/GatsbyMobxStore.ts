@@ -14,22 +14,37 @@
 
 import { BodilessMobxStore } from '@bodiless/core';
 
-type GatsbyNode = {
+type BodilessNode = {
   node: {
     content: string;
     name: string;
   };
 };
 
-export type GatsbyData = {
+type PageTreeNode = {
+  node: {
+    relativePath: string,
+  }
+};
+
+type PageTreeData = {
+  Pages?: {
+    edges: PageTreeNode[],
+  }
+};
+
+type BodilessData = {
   [collection: string]: {
-    edges: GatsbyNode[];
+    edges: BodilessNode[];
   };
 };
 
+type GatsbyData = BodilessData&PageTreeData;
+
 export default class GatsbyMobxStore extends BodilessMobxStore<GatsbyData> {
   // eslint-disable-next-line class-methods-use-this
-  protected parseData(gatsbyData: GatsbyData) {
+  protected parseData(gatsbyData$: GatsbyData) {
+    const { Pages = { edges: [] }, ...gatsbyData } = gatsbyData$;
     const result = new Map();
     Object.keys(gatsbyData).forEach(collection => {
       if (gatsbyData[collection] === null) return;
@@ -45,6 +60,10 @@ export default class GatsbyMobxStore extends BodilessMobxStore<GatsbyData> {
         }
       });
     });
+    const pages = Pages.edges.map(
+      ({ node }) => node.relativePath.split('/').slice(1).join('/'),
+    ).filter(p => !!p);
+    result.set('Site$_pages', pages);
     return result;
   }
 }

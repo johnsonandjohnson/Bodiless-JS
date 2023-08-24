@@ -15,7 +15,7 @@
 import webpack from 'webpack';
 import { dirname, join, resolve } from 'path';
 import { existsSync, readFileSync } from 'fs';
-import { addStaticReplacementPlugin } from '@bodiless/webpack';
+import { addStaticReplacementPlugin, createFrameworkReplacementPlugin } from '@bodiless/webpack';
 import { sync as globSync} from 'glob';
 import generateSitemapXml from './Sitemapxml';
 import generateRobotsTxt from './Robotstxt';
@@ -25,13 +25,6 @@ import type { BodilessNextConfig } from '../NextConfig/bodilessNextConfigLoader'
 
 type BodilessNextConfigWithNext = BodilessNextConfig & {
   nextWebpack: any
-};
-
-const REGEXP = /\.gatsby/;
-const REPLACEMENT = '.next';
-
-const createLogger = (log = true) => (message :string) => {
-  if (log) console.log(message);
 };
 
 const findPackageName = (resourcePath: string): string | undefined => {
@@ -48,39 +41,6 @@ const findPackageName = (resourcePath: string): string | undefined => {
     return undefined;
   }
   return findPackageName(dir);
-};
-
-/**
- *
- * Creates a webpack plugin which replaces files ending with .gatsby with the equivalent .next.
- * @param {boolean} logging
- *  Boolean whatever enable logging.
- */
-const createTokenNextPlugin = (
-  { logging }: { logging: boolean}
-) => {
-  const log = createLogger(logging || true);
-  return new webpack.NormalModuleReplacementPlugin(
-    REGEXP,
-    resource => {
-      const newRequest = resource.request.replace(REGEXP, REPLACEMENT);
-      const newResource = join(resource.context, newRequest);
-      try {
-        // Ensure that the replacement exists and is resolvable.
-        require.resolve(newResource);
-
-        log(`[Next component replacement] Replacing import in ${resource.contextInfo.issuer}`);
-        log(` ↳ ${resource.request} → ${newRequest}\n`);
-
-        // eslint-disable-next-line no-param-reassign
-        resource.request = newRequest;
-      } catch (e) {
-        if (logging) {
-          console.warn(`[Next component replacement] Not replacing ${resource.request}: unable to resolve ${newResource}`);
-        }
-      }
-    },
-  );
 };
 
 /**
@@ -306,7 +266,7 @@ const bodilessWepackConfig = (config: any, options: BodilessNextConfigWithNext) 
     plugins: [
       ...(config.plugins || []),
       ...(staticReplacement.plugins || []),
-      createTokenNextPlugin({logging: true}),
+      createFrameworkReplacementPlugin({logging: true, framework: 'next' }),
       new webpack.DefinePlugin({
         BL_IS_EDIT: JSON.stringify(process.env.NODE_ENV !== 'production')
       })

@@ -91,6 +91,10 @@ export const ComponentFormDescription = addClasses(
 )(Div);
 
 export const ComponentFormListItem = addClasses(
+  'bl-px-grid-4 bl-max-w-xl-grid-1',
+)(Li);
+
+export const ComponentFormNotification = addClasses(
   'first:bl-border-t-0 bl-border-t bl-py-grid-1 bl-px-grid-1 bl-max-w-xl-grid-1',
 )(Li);
 
@@ -228,7 +232,7 @@ const isDisabled = (props: any) => hasProp('disabled')(props);
 export const ComponentFormLink = flow(
   addClasses('bl-cursor-pointer bl-text-xs bl-block bl-underline'),
   addClassesIf(isDisabled)('bl-text-gray-600'),
-  removeClassesIf(isDisabled)('bl-cursor-pointer bl-text-gray-100 '),
+  removeClassesIf(isDisabled)('bl-cursor-pointer bl-text-gray-100 hover:bl-text-primary'),
 )(Anchor);
 
 export const ComponentFormDefaultPanelWidth = addClasses('bl-w-xl-grid-2');

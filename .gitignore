@@ -11,7 +11,6 @@ node_modules
 # Lerna git ignore items
 lerna-debug.log
 packages/**/lib
-packages/**/dist
 !packages/headless-chrome-crawler/lib
 packages/**/bodiless.index.css
 sites/**/lib

@@ -56,6 +56,7 @@ const defaultUI: Required<ContextMenuUI> = {
   ReactTags: ReactTagsField,
   ComponentFormList: 'ul',
   ComponentFormListItem: 'li',
+  ComponentFormNotification: 'li',
   ComponentFormDescription: 'div',
   ContextSubMenu: React.Fragment,
   HorizontalToolbarButton: DefaultToolbarButton,

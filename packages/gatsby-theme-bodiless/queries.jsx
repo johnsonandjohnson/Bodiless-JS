@@ -55,4 +55,13 @@ export const defaultQuery = graphql`
       }
     }
   }
+  fragment PageTreeQuery on Query {
+    Pages: allDirectory(filter: {relativePath: {regex: "/^pages/"}}) {
+      edges {
+        node {
+          relativePath
+        }
+      }
+    }
+  }
 `;

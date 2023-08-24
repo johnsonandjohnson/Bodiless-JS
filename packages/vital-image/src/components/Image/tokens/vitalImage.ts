@@ -39,7 +39,7 @@ import {
   asImage,
   withImageLogger,
   withImageNode,
-} from './vitalImage.gatsby';
+} from './vitalImage.bl-noframework';
 
 // @ts-ignore Cannot find module
 import landscapeImage from '../../../../assets/landscape_image.png';

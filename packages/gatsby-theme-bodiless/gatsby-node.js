@@ -31,7 +31,9 @@ const {
   createGitInfo,
 } = require('@bodiless/git/lib/cjs/NodeApi');
 const { createFilePath } = require('gatsby-source-filesystem');
-const { addStaticReplacementPlugin } = require('@bodiless/webpack');
+const {
+  addStaticReplacementPlugin, createFrameworkReplacementPlugin
+} = require('@bodiless/webpack');
 const { onCreateNode, createSlug } = require('./create-node');
 const createRedirectAlias = require('./create-redirect-alias');
 const Logger = require('./Logger');
@@ -202,6 +204,7 @@ exports.onCreateWebpackConfig = ({
   }
   actions.setWebpackConfig({
     plugins: [
+      createFrameworkReplacementPlugin({ logging: true, framework: 'gatsby' }),
       new webpack.DefinePlugin({
         BL_IS_EDIT: JSON.stringify(process.env.NODE_ENV !== 'production')
       })

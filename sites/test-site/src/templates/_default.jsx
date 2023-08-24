@@ -34,6 +34,7 @@ export const query = graphql`
     ...PageQuery
     ...SiteQuery
     ...DefaultContentQuery
+    ...PageTreeQuery
     allSite(filter: {pathPrefix: {eq: $slug}}) {
       edges {
         node {

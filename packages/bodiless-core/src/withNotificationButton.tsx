@@ -20,15 +20,15 @@ import { useMenuOptionUI } from './components/ContextMenuContext.bl-edit';
 import type { ContextMenuFormProps } from './Types/ContextMenuTypes';
 
 const NotificationList = () => {
-  const { ComponentFormList, ComponentFormListItem } = useMenuOptionUI();
+  const { ComponentFormList, ComponentFormNotification } = useMenuOptionUI();
   const { notifications } = useNotifications();
   if (notifications.length === 0) return (<p>There are no alerts.</p>);
   return (
     <ComponentFormList>
       {notifications.map(n => (
-        <ComponentFormListItem key={n.id}>
+        <ComponentFormNotification key={n.id}>
           {n.message}
-        </ComponentFormListItem>
+        </ComponentFormNotification>
       ))}
     </ComponentFormList>
   );

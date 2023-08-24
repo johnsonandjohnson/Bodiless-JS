@@ -197,6 +197,7 @@ export type ContextMenuUI = {
   ReactTags?: ComponentType<ReactTagsFieldProps>;
   ComponentFormList?: ComponentType<HTMLProps<HTMLUListElement>> | string;
   ComponentFormListItem?: ComponentType<HTMLProps<HTMLLIElement>> | string;
+  ComponentFormNotification?: ComponentType<HTMLProps<HTMLLIElement>> | string;
   ContextSubMenu?: ComponentType<HTMLProps<HTMLDivElement>> | string;
   ContextMenuGroup?: ComponentType<IContextMenuItemProps>;
   Spinner?: ComponentType<any>;

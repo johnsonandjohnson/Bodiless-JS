@@ -11,24 +11,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { asElementToken } from '@bodiless/vital-elements';
-import { withoutHydration } from '@bodiless/hydration';
-import { withNodeKey } from '@bodiless/data';
-import { withImageClientLoader } from './tokens/vitalImage.bl-noframework';
-
-export const vitalImage = new Proxy({}, {
-  get: (target, prop) => {
-    const nodeKey = prop === 'WithLink' ? 'link' : 'image';
-    return asElementToken({
-      Core: {
-        _: withoutHydration(),
-      },
-      Schema: {
-        _: withNodeKey(nodeKey),
-      },
-      Behavior: {
-        _: withImageClientLoader,
-      }
-    });
-  }
-});
+export * from './withPageTreeButton.bl-edit';

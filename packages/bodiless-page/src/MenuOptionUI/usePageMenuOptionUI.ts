@@ -22,6 +22,7 @@ import {
   flowHoc,
   removeClasses,
   StylableProps,
+  A,
 } from '@bodiless/fclasses';
 
 const usePageMenuOptionUI = () => {
@@ -52,6 +53,10 @@ const usePageMenuOptionUI = () => {
     addClasses('bl-italic'),
   )(ComponentFormLink as ComponentType<StylableProps>);
 
+  const PageTreeLink = addClasses(
+    'bl-cursor-pointer bl-text-xs bl-block hover:bl-underline hover:bl-text-yellow-500'
+  )(A);
+
   const Warning = flowHoc(
     removeClasses('bl-float-left'),
   )(ComponentFormWarning as ComponentType<StylableProps>);
@@ -63,6 +68,7 @@ const usePageMenuOptionUI = () => {
     ComponentFormLabelSmall: LabelSmall as ComponentType<HTMLProps<HTMLLabelElement>>,
     ComponentFormLinkEdit: Link as ComponentType<HTMLProps<HTMLAnchorElement>>,
     ComponentFormWarning: Warning as ComponentType<HTMLProps<HTMLDivElement>>,
+    PageTreeLink,
   };
 
   return ui;

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * Copyright © 2023 Johnson & Johnson
  *
@@ -166,6 +167,7 @@ const getStaticProps = async ({ params }: getServerSideProps) => {
   try {
     const indexPath = findComponentPath(...pagesBasePath, ...realSlug.split('/').filter(Boolean));
     if (indexPath === null) {
+      // eslint-disable-next-line no-console
       console.log('Skip folder ', realSlug, pageData.path, ' index file not found.');
     } else {
       const basePath = path.resolve(...pagesBasePath);
@@ -195,6 +197,15 @@ const getStaticProps = async ({ params }: getServerSideProps) => {
           path.join(...siteDataBasePath),
           path.join(...publicBasePath)
         );
+        const pages = await getPages();
+
+        // Get the list of all pages and put in site collection.
+        pageData.data.Site.push({
+          node: {
+            name: '_pages',
+            content: JSON.stringify(pages.filter(Boolean)),
+          }
+        });
         propsCache.set('pageDataSite', pageData.data.Site);
       }
 

@@ -38,6 +38,7 @@ import {
   withMovePageButton,
   withNewPageButton,
   withRedirectAliasButton,
+  withPageTreeButton,
 } from '@bodiless/page';
 import NextNodeProvider from './NextNodeProvider.bl-edit';
 import { FinalUI, UI, PageProps } from './types';
@@ -74,6 +75,8 @@ const EditButtons: FC = () => {
   return <></>;
 };
 
+const PageTreeButton = withPageTreeButton(Fragment);
+
 const EditPage: FC<PropsWithChildren<PageProps>> = observer(({ children, ui, ...rest }) => {
   const { PageEditor: Editor, ContextWrapper: Wrapper } = getUI(ui);
   const { pageContext } = rest;
@@ -100,6 +103,7 @@ const EditPage: FC<PropsWithChildren<PageProps>> = observer(({ children, ui, ...
               <NotificationButton />
               <Editor>
                 <EditButtons />
+                <PageTreeButton />
                 <OnNodeErrorNotification />
                 <NewPageButton />
                 <MovePageButton />

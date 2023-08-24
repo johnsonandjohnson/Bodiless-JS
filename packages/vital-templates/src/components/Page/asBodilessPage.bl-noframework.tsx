@@ -1,5 +1,5 @@
 /**
- * Copyright © 2022 Johnson & Johnson
+ * Copyright © 2023 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,8 +11,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-export { addTokenShadowPlugin, createTokenShadowPlugin } from './tokenShadowPlugin';
-export { addStatoscopePlugin, createStatoscopePlugin } from './statoscopePlugin';
-export { addStaticReplacementPlugin, createStaticReplacementPlugin } from './staticReplacementPlugin';
-export { addFrameworkReplacementPlugin, createFrameworkReplacementPlugin } from './frameworkReplacementPlugin';
+export { Fragment as BodilessPage } from 'react';
