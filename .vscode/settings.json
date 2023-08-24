@@ -34,7 +34,9 @@
   "editor.rulers": [
     100
   ],
+  "rewrap.wrappingColumn": 100,
   "cSpell.words": [
+    "fclasses",
     "tsbuildinfo",
     "typedoc"
   ],
