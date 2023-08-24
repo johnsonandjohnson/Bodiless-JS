@@ -64,7 +64,9 @@ exports[`ProductCard Tokens Matches snapshot for WithBackground 1`] = `
   <div>
     <img />
   </div>
-  <div>
+  <div
+    className="mr-8px md:mr-16px ml-8px md:ml-16px"
+  >
     <div />
     <h3 />
     <div />

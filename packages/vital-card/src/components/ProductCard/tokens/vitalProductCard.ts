@@ -83,11 +83,14 @@ const WithTitleLineClamp = asProductCardToken({
  */
 const WithBackground = asProductCardToken({
   Theme: {
-    /**
-     * @TODO: When token PR merges, `BackgroundLightThemeBackground` name will change.
-     */
     Wrapper: vitalProductCardElement.BackgroundLightThemeBackground,
-  }
+  },
+  Spacing: {
+    ContentWrapper: as(
+      vitalSpacing.MarginLeftXSmall,
+      vitalSpacing.MarginRightXSmall,
+    ),
+  },
 });
 
 /**
@@ -99,7 +102,7 @@ const WithBackground = asProductCardToken({
 const WithPaddings = asProductCardToken({
   Spacing: {
     Wrapper: vitalSpacing.PaddingXSmall,
-  }
+  },
 });
 
 /**
