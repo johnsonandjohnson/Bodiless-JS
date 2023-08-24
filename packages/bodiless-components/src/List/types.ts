@@ -52,6 +52,14 @@ export type ListBaseProps = {
    * the items.
    */
   appendItems?: string[],
+  /**
+   * Maximum number of items
+   */
+  maxItems?: number,
+  /**
+   * Minimum number of items
+   */
+  minItems?: number,
 } & DesignableComponentsProps<ListComponents> & HTMLProps<HTMLElement>;
 
 export type ListProps =

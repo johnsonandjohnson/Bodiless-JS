@@ -45,6 +45,8 @@ const ListBase: FC<ListBaseProps> = ({
   onDelete,
   prependItems = [],
   appendItems = [],
+  maxItems,
+  minItems,
   ...rest
 }) => {
   const {
@@ -69,8 +71,10 @@ const ListBase: FC<ListBaseProps> = ({
     () => items.map(currentItem => {
       const value: ListContextValue = { items, currentItem };
       // Can only insert items after items that come from data or after the final prepend item.
-      if (dataItems.includes(currentItem)
-        || currentItem === prependItems[prependItems.length - 1]
+      if (
+        (dataItems.includes(currentItem)
+          || currentItem === prependItems[prependItems.length - 1])
+        && (maxItems === undefined || items.length < maxItems)
       ) {
         value.addItem = () => {
           const newItem = addItem(currentItem);
@@ -78,8 +82,10 @@ const ListBase: FC<ListBaseProps> = ({
         };
       }
       // Can only delete items which are not static and only if it would not empty the list.
-      if (dataItems.includes(currentItem)
-        && (dataItems.length > 1 || unwrap || items.length > dataItems.length)
+      if (
+        (dataItems.includes(currentItem)
+          && (dataItems.length > 1 || unwrap || items.length > dataItems.length))
+        && (minItems === undefined || items.length > minItems)
       ) {
         value.deleteItem = () => deleteItem(currentItem);
       }
