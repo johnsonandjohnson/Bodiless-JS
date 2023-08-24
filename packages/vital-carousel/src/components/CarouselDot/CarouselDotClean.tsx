@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
-import { designable, Div, Span } from '@bodiless/fclasses';
+import {
+  designable, Div, Span,
+} from '@bodiless/fclasses';
 import type { DesignableComponentsProps } from '@bodiless/fclasses';
 import type { CarouselDotComponents } from './types';
 import { useCarouselSlideIndex } from '../utils/hooks';

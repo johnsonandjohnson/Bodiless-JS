@@ -30,6 +30,5 @@ export interface VitalCarouselDot {
    * Default styling and behavior.
    */
   Default: CarouselDotToken;
-
   // Document other tokens here.
 }

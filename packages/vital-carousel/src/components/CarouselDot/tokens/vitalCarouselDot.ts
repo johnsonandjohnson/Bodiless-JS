@@ -1,5 +1,6 @@
-import { addProps, as } from '@bodiless/fclasses';
-
+import {
+  addProps, as,
+} from '@bodiless/fclasses';
 import { asCarouselDotToken } from '../CarouselDotClean';
 import type { VitalCarouselDot } from '../types';
 
@@ -8,7 +9,7 @@ const Default = asCarouselDotToken({
     Wrapper: 'indicator',
     Dot: as(
       'rounded-full border-none',
-      // @TODO TOKEN PROBLEM IMPORT/VARIABLE NAME
+      // @todo TOKEN PROBLEM IMPORT/VARIABLE NAME
       // vitalScrollIndicatorElement.LightThemeInactive = vitalColor.BorderLightThemeBase,
       // Token needs to change vitalColor.BackgroundLightThemeBase,
       'bg-kenvue-neutrals-light-grey',
@@ -20,14 +21,12 @@ const Default = asCarouselDotToken({
   Layout: {
     // Hardcoded for now, site builders can override this.
     Dot: 'dot block w-[8px] h-[8px]',
+    Wrapper: 'flex justify-center align-center',
   },
   Spacing: {
     Wrapper: 'pe-2',
   },
 });
-
-// Add additional variant tokens or variators here.
-// ...
 
 /**
  * Tokens for CarouselDotClean
@@ -38,7 +37,6 @@ const Default = asCarouselDotToken({
  */
 const vitalCarouselDot: VitalCarouselDot = {
   Default,
-  // ...
 };
 
 export default vitalCarouselDot;

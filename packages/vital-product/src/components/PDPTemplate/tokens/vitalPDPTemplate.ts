@@ -22,13 +22,13 @@ import { asSchemaSource, WithProductSchema } from '@bodiless/schema-org';
 import { vitalGenericTemplate, TemplateNodeKeys } from '@bodiless/vital-templates';
 import { vitalEditorPlain, withAutoSuperscript } from '@bodiless/vital-editors';
 import { vitalButton, asButtonToken } from '@bodiless/vital-button';
-import { vitalImage } from '@bodiless/vital-image';
 import {
   vitalColor, vitalTextDecoration, vitalTypography, vitalFontSize,
 } from '@bodiless/vital-elements';
 import { asBreadcrumbsToken } from '@bodiless/vital-navigation';
 import { vitalLayout } from '@bodiless/vital-layout';
 
+import { vitalCarouselStatic } from '@bodiless/vital-carousel';
 import { asPDPTemplateToken } from '../PDPTemplateClean';
 import { withPDPContextProvider } from '../PDPTemplateContext';
 import vitalSection from './vitalPDPSection';
@@ -85,7 +85,21 @@ const Default = asPDPTemplateToken({
     ...vitalGenericTemplate.Default.Components,
     PageWrapper: vitalLayout.Default,
     TopContent: replaceWith(Fragment),
-    ProductImage: vitalImage.Plain,
+    ProductCarousel: as(
+      vitalCarouselStatic.Default,
+      vitalCarouselStatic.WithImageSlide,
+      vitalCarouselStatic.WithThumbnail,
+      vitalCarouselStatic.DesktopOnly,
+      vitalCarouselStatic.WithVerticalThumbs,
+    ),
+    MobileProductCarousel: as(
+      vitalCarouselStatic.Default,
+      vitalCarouselStatic.WithImageSlide,
+      vitalCarouselStatic.WithCarouselDots,
+      vitalCarouselStatic.MobileTabletOnly,
+      vitalCarouselStatic.WithCarouselCounter,
+      vitalCarouselStatic.WithCarouselDotsMobileTablet,
+    ),
     ProductDescription: vitalFlowContainer.Default,
     ProductTitle: vitalEditorPlain.Default,
     JumpLinks: vitalJumpLinks.PDPJumpLinks,
@@ -103,14 +117,15 @@ const Default = asPDPTemplateToken({
   },
   Layout: {
     ContentWrapper: 'flex flex-wrap',
-    ProductImageWrapper: 'flex justify-center w-full lg:w-1/2',
+    ProductCarouselWrapper: 'lg:w-1/2',
+    MobileProductCarouselWrapper: 'lg:hidden',
     ProductDetailWrapper: 'w-full lg:w-1/2 lg:grow',
     JumpLinksWrapper: 'w-full',
   },
   Spacing: {
     ...vitalGenericTemplate.Default.Spacing,
     JumpLinksWrapper: 'py-2 mt-10',
-    ProductImageWrapper: 'lg:pr-2',
+    ProductCarouselWrapper: 'lg:pr-2',
     ProductDetailWrapper: 'lg:pl-2 pt-4 lg:pt-0',
     ProductTitleWrapper: 'mb-4',
     PageWrapper: withDesign({
@@ -129,19 +144,20 @@ const Default = asPDPTemplateToken({
   },
   Schema: {
     ...vitalGenericTemplate.Default.Schema,
-    ProductImage: withNodeKey(TemplateNodeKeys.Image),
+    ProductCarousel: withNodeKey(TemplateNodeKeys.Image),
+    MobileProductCarousel: withNodeKey(TemplateNodeKeys.Image),
     ProductDescription: withNodeKey(TemplateNodeKeys.Description),
     ProductTitle: withNodeKey(TemplateNodeKeys.Title),
     ProductEyebrow: withNodeKey(TemplateNodeKeys.Eyebrow),
   },
   SEO: {
     ContentWrapper: WithProductSchema,
-    ProductImage: asSchemaSource('product-image'),
+    ProductCarousel: asSchemaSource('product-image'),
     ProductTitleWrapper: asSchemaSource('product-name'),
     ProductDescriptionWrapper: asSchemaSource('product-description'),
   },
   Content: {
-    ProductImage: withDefaultContent(useProductImageContent),
+    ProductCarousel: withDefaultContent(useProductImageContent),
     ProductTitle: withDefaultContent(useProductTitleContent),
     ProductDescription: withDefaultContent(useProductDescriptionContent),
   }

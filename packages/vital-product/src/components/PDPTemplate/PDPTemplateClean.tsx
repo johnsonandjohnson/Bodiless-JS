@@ -16,7 +16,6 @@ import React from 'react';
 import {
   designable,
   Div,
-  Img,
   Fragment,
 } from '@bodiless/fclasses';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
@@ -26,6 +25,7 @@ import { FlowContainerClean } from '@bodiless/vital-flowcontainer';
 import { BreadcrumbsClean } from '@bodiless/vital-navigation';
 import { ButtonClean } from '@bodiless/vital-button';
 import { SectionClean } from '@bodiless/vital-section';
+import { CarouselStatic } from '@bodiless/vital-carousel';
 
 import { JumpLinksClean } from '../JumpLinks';
 import { PDPTemplateComponents, BasePDPTemplateProps } from './types';
@@ -38,8 +38,10 @@ const pdpTemplateComponents: PDPTemplateComponents = {
   TopWrapper: Fragment,
   TopContent: Fragment,
   ContentWrapper: Div,
-  ProductImageWrapper: Div,
-  ProductImage: Img,
+  MobileProductCarouselWrapper: Div,
+  MobileProductCarousel: CarouselStatic,
+  ProductCarouselWrapper: Div,
+  ProductCarousel: CarouselStatic,
   ProductDetailWrapper: Div,
   ProductDescriptionWrapper: Div,
   ProductDescription: FlowContainerClean,
@@ -72,10 +74,14 @@ const PDPTemplateBase = (props: BasePDPTemplateProps) => {
         <C.TopContent />
       </C.TopWrapper>
       <C.ContentWrapper>
-        <C.ProductImageWrapper>
-          <C.ProductImage />
+        <C.ProductCarouselWrapper>
+          <C.ProductCarousel />
           <C.ProductMoreInfo />
-        </C.ProductImageWrapper>
+        </C.ProductCarouselWrapper>
+        <C.MobileProductCarouselWrapper>
+          <C.MobileProductCarousel />
+          <C.ProductMoreInfo />
+        </C.MobileProductCarouselWrapper>
         <C.ProductDetailWrapper>
           <C.ProductEyebrowWrapper>
             <C.ProductEyebrow />

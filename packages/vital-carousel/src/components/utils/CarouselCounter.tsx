@@ -1,5 +1,5 @@
 // /**
-//  * Copyright © 2023 Johnson & Johnson
+//  * Copyright © 2021 Johnson & Johnson
 //  *
 //  * Licensed under the Apache License, Version 2.0 (the "License");
 //  * you may not use this file except in compliance with the License.
@@ -12,19 +12,23 @@
 //  * limitations under the License.
 //  */
 
-import { useListContext } from '@bodiless/components';
+import React from 'react';
+import { Div } from '@bodiless/fclasses';
+import { useCarouselSlideIndex, useCarouselSlideTotal } from './hooks';
 
-const useCarouselSlideIndex = () => {
-  const { currentItem, items } = useListContext();
-  return items && currentItem ? items.indexOf(currentItem) : 0;
+// Simple Component that adds Slide Index controls to Li
+const CarouselCounter = (props: any) => {
+  const slideIndex = useCarouselSlideIndex();
+  const totalSlides = useCarouselSlideTotal();
+  return (
+    <Div data-index={slideIndex} {...props}>
+      {slideIndex + 1}
+      {' '}
+      /
+      {' '}
+      {totalSlides}
+    </Div>
+  );
 };
 
-const useCarouselSlideTotal = () => {
-  const { currentItem, items } = useListContext();
-  return items && currentItem ? items.length : 0;
-};
-
-export {
-  useCarouselSlideIndex,
-  useCarouselSlideTotal,
-};
+export default CarouselCounter;

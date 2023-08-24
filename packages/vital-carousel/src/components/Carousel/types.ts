@@ -11,6 +11,8 @@ export type VitalCarouselComponents = {
   Slider: ComponentOrTag<any>,
   Slide: ComponentOrTag<any>,
   ControlsWrapper: ComponentOrTag<any>,
+  CounterWrapper: ComponentOrTag<any>,
+  Counter: ComponentOrTag<any>,
   Indicator: ComponentOrTag<any>,
   NavWrapper: ComponentOrTag<any>,
   Prev: ComponentOrTag<any>,
@@ -50,6 +52,10 @@ export interface VitalCarousel {
    * WithCarouselDots: Show dots
    */
   WithCarouselDots: VitalCarouselToken;
+  /**
+   * WithCarouselDots: Show dots and numbers
+   */
+  WithCarouselCounter: VitalCarouselToken;
   /**
    * WithCarouselDotsAllViewports: Show carousel dots on all viewports (Usage: Product carousel)
    */

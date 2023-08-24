@@ -67,11 +67,28 @@ const twConfig = {
           '.indicators.-hidden': {
             opacity: '0',
           },
+          '.indicators .counter.-active': {
+            display: 'block',
+          },
+          '.indicators .thumbs.-active img': {
+            'border-width': '1px',
+            'border-style': 'solid',
+            'border-color': theme('colors.ScrollIndicatorActive'),
+          },
+          '.indicators .counter:not(.-active)': {
+            display: 'none',
+          },
           '.indicators .indicator.-active .dot': {
             'background-color': theme('colors.ScrollIndicatorActive'),
           },
           '.indicator.-hide': {
             display: 'none',
+          },
+          '.indicator.-hide.-peek': {
+            display: 'block',
+            height: '10px',
+            overflow: 'hidden',
+            'margin-bottom': '24px',
           },
           '.arrow.-disabled': {
             color: theme('colors.ScrollIndicatorInActive'),

@@ -18,20 +18,20 @@ import { stylable } from '@bodiless/fclasses';
 const Up = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
+    width="14"
+    height="8"
+    viewBox="0 0 14 8"
     fill="none"
     {...props}
   >
-    <mask style={{ maskType: 'alpha' }} id="mask0_5803_792" maskUnits="userSpaceOnUse" x="4" y="0" width="16" height="24">
-      <path d="M5 8.04436L12.0046 1.04886L19 8.05347" stroke="#0C0C36" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M11.959 1.47632L11.959 22.8811" stroke="#0C0C36" strokeWidth="2" strokeLinecap="round" />
+    <mask id="mask0_10315_17963" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="14" height="8">
+      <path d="M1 7L7 1L13 7" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </mask>
-    <g mask="url(#mask0_5803_792)" style={{ maskType: 'alpha' }}>
-      <rect y="23.9299" width="24" height="24" transform="rotate(-90 0 23.9299)" fill="currentColor" />
+    <g mask="url(#mask0_10315_17963)" style={{ maskType: 'alpha' }}>
+      <rect x="-11" y="22" width="36" height="36" transform="rotate(-90 -11 22)" fill="currentColor" />
     </g>
   </svg>
+
 );
 
 const UpIcon = stylable(Up);

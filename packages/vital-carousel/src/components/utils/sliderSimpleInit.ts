@@ -6,6 +6,7 @@
  */
 import { ScrollSnapSlider } from './ScrollSnapSlider';
 
+// IMPORTANT If you edit this script, edit the sliderSimpleInitScript() below
 export const sliderSimpleInit = (sliderSimpleElement: HTMLElement) => {
   try {
     const sliderDotCarousel = sliderSimpleElement.getElementsByClassName('scroll-snap-dot-slider');
@@ -15,6 +16,8 @@ export const sliderSimpleInit = (sliderSimpleElement: HTMLElement) => {
 
       // Make the Indicators active or not
       const buttons = sliderSimpleElement.querySelectorAll('.indicators .indicator');
+      const counters = sliderSimpleElement.querySelectorAll('.indicators .counter');
+      counters[0].classList.toggle('-active');
       const setSelected = function (event: CustomEvent) {
         const slideElementIndex = event.detail;
         const slideElement = slidesDot[slideElementIndex];
@@ -23,6 +26,12 @@ export const sliderSimpleInit = (sliderSimpleElement: HTMLElement) => {
           button.classList.toggle(
             '-active',
             (button as HTMLElement).dataset.index === (slideElement as HTMLElement).dataset.index
+          );
+        }
+        for (const counter of Array.from(counters)) {
+          counter.classList.toggle(
+            '-active',
+            (counter as HTMLElement).dataset.index === (slideElement as HTMLElement).dataset.index
           );
         }
       };
@@ -63,6 +72,14 @@ export const sliderSimpleInit = (sliderSimpleElement: HTMLElement) => {
       for (const button of Array.from(buttonsThumbs)) {
         const buttonindex = (button as HTMLElement).dataset.index;
         button.classList.toggle(
+          '-active',
+          Number(buttonindex) === 0
+        );
+        button.classList.toggle(
+          '-peek',
+          Number(buttonindex) === (NumThumbs)
+        );
+        button.classList.toggle(
           '-hide',
           Number(buttonindex) > (NumThumbs - 1)
         );
@@ -75,14 +92,22 @@ export const sliderSimpleInit = (sliderSimpleElement: HTMLElement) => {
       const updateArrows = function (event: CustomEvent) {
         const slideElementIndex = event.detail;
 
+        for (const button of Array.from(buttonsThumbs)) {
+          const buttonindex = (button as HTMLElement).dataset.index;
+          button.classList.toggle(
+            '-active',
+            Number(buttonindex) === Number(slideElementIndex)
+          );
+        }
+
         if (buttonsThumbs.length > NumThumbs) {
-          if (slideElementIndex + NumThumbs < buttonsThumbs.length) {
-            if (slideElementIndex === 0) {
-              buttonsThumbs[slideElementIndex+NumThumbs].classList.toggle('-hide');
-            } else {
-              buttonsThumbs[slideElementIndex-1].classList.toggle('-hide');
+          if (slideElementIndex + NumThumbs <= buttonsThumbs.length) {
+            buttonsThumbs[slideElementIndex-1]?.classList.toggle('-hide');
+            if (slideElementIndex !== 0) {
+              buttonsThumbs[slideElementIndex+NumThumbs-1]?.classList.toggle('-hide');
+              buttonsThumbs[slideElementIndex+NumThumbs]?.classList.toggle('-peek');
+              buttonsThumbs[slideElementIndex+NumThumbs-1]?.classList.toggle('-peek');
             }
-            buttonsThumbs[slideElementIndex+NumThumbs].classList.toggle('-hide');
           }
         }
 
@@ -104,7 +129,7 @@ export const sliderSimpleInit = (sliderSimpleElement: HTMLElement) => {
   }
 };
 
-// Repeat of above.....  not great as change above won't change on
+// Repeat of above.....  if above is edited, update this version without typescript
 export const sliderSimpleInitScript = `
 const sliderSimpleInit = (sliderSimpleElement) => {
   try {
@@ -115,6 +140,8 @@ const sliderSimpleInit = (sliderSimpleElement) => {
 
       // Make the Indicators active or not
       const buttons = sliderSimpleElement.querySelectorAll('.indicators .indicator');
+      const counters = sliderSimpleElement.querySelectorAll('.indicators .counter');
+      counters[0].classList.toggle('-active');
       const setSelected = function (event) {
         const slideElementIndex = event.detail;
         const slideElement = slidesDot[slideElementIndex];
@@ -123,6 +150,12 @@ const sliderSimpleInit = (sliderSimpleElement) => {
           button.classList.toggle(
             '-active',
             button.dataset.index === slideElement.dataset.index
+          );
+        }
+        for (const counter of counters) {
+          counter.classList.toggle(
+            '-active',
+            counter.dataset.index === slideElement.dataset.index
           );
         }
       };
@@ -163,6 +196,14 @@ const sliderSimpleInit = (sliderSimpleElement) => {
       for (const button of buttonsThumbs) {
         const buttonindex = button.dataset.index;
         button.classList.toggle(
+          '-active',
+          Number(buttonindex) === 0
+        );
+        button.classList.toggle(
+          '-peek',
+          Number(buttonindex) === (NumThumbs)
+        );
+        button.classList.toggle(
           '-hide',
           Number(buttonindex) > (NumThumbs - 1)
         );
@@ -175,14 +216,22 @@ const sliderSimpleInit = (sliderSimpleElement) => {
       const updateArrows = function (event) {
         const slideElementIndex = event.detail;
 
+        for (const button of buttonsThumbs) {
+          const buttonindex = button.dataset.index;
+          button.classList.toggle(
+            '-active',
+            Number(buttonindex) === Number(slideElementIndex)
+          );
+        }
+
         if (buttonsThumbs.length > NumThumbs) {
-          if (slideElementIndex + NumThumbs < buttonsThumbs.length) {
-            if (slideElementIndex === 0) {
-              buttonsThumbs[slideElementIndex+NumThumbs].classList.toggle('-hide');
-            } else {
-              buttonsThumbs[slideElementIndex-1].classList.toggle('-hide');
+          if (slideElementIndex + NumThumbs <= buttonsThumbs.length) {
+            buttonsThumbs[slideElementIndex-1]?.classList.toggle('-hide');
+            if (slideElementIndex !== 0) {
+              buttonsThumbs[slideElementIndex+NumThumbs-1]?.classList.toggle('-hide');
+              buttonsThumbs[slideElementIndex+NumThumbs]?.classList.toggle('-peek');
+              buttonsThumbs[slideElementIndex+NumThumbs-1]?.classList.toggle('-peek');
             }
-            buttonsThumbs[slideElementIndex+NumThumbs].classList.toggle('-hide');
           }
         }
 

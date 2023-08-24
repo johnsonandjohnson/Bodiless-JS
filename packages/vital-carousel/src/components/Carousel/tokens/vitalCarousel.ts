@@ -7,8 +7,9 @@ import {
 import { vitalImage } from '@bodiless/vital-image';
 import { vitalCard, CardClean } from '@bodiless/vital-card';
 import { asBodilessList } from '@bodiless/components';
-import { vitalColor, vitalSpacing } from '@bodiless/vital-elements';
+import { vitalColor, vitalPDPProductOverviewElement, vitalSpacing } from '@bodiless/vital-elements';
 import { withChild } from '@bodiless/core';
+import CarouselCounter from '../../utils/CarouselCounter';
 import { asVitalCarouselToken, withCarouselInit } from '../VitalCarouselClean';
 import type { VitalCarousel } from '../types';
 import { CAROUSEL_NODE_KEY } from '../../utils/constants';
@@ -71,7 +72,7 @@ const Default = asVitalCarouselToken({
   },
   Spacing: {
     // Padding under slider above controls
-    Slider: vitalSpacing.PaddingBottomMedium,
+    Slider: vitalSpacing.PaddingBottomSmall,
   },
 });
 
@@ -119,11 +120,41 @@ const WithCarouselDots = asVitalCarouselToken(
       Indicator: 'ps-2',
     },
     Layout: {
-      ControlsWrapper: 'flex',
       Indicator: 'flex items-center dots -simple lg:hidden',
     }
   }
 );
+
+const WithCarouselCounter = asVitalCarouselToken({
+  Components: {
+    CounterWrapper: replaceWith(Div),
+    Counter: as(
+      replaceWith(Div),
+      // Convert Counter to List and use the same node key as slides to keep in sync
+      asBodilessList(CAROUSEL_NODE_KEY, undefined, () => ({ groupLabel: 'Slide' })),
+      withDesign({
+        Item: replaceWith(stylable(CarouselCounter)),
+      }),
+    ),
+  },
+  Behavior: {
+    Counter: as(
+      'indicators',
+      withDesign({
+        Item: 'counter',
+      }),
+    ),
+  },
+  Theme: {
+    CounterWrapper: vitalPDPProductOverviewElement.TextLightThemeIndicator,
+  },
+  Layout: {
+    CounterWrapper: 'flex justify-center',
+  },
+  Spacing: {
+    CounterWrapper: vitalSpacing.PaddingBottomSmall,
+  },
+});
 
 const WithCarouselDotsAllViewports = asVitalCarouselToken({
   Layout: {
@@ -158,23 +189,27 @@ const WithVerticalThumbs = asVitalCarouselToken({
     Next: replaceWith(as(withChild(DownIcon))(Div)),
   },
   Theme: {
-    Prev: vitalColor.TextPrimaryInteractive,
-    Next: vitalColor.TextPrimaryInteractive,
+    // @todo TOKEN PROBLEM IMPORT/VARIABLE NAME
+    // icons need to be text color to fill ImageThumbnailBorderLightThemeActive
+    // vitalImageCarouselElement.ImageThumbnailBorderLightThemeActive,
+    Prev: vitalColor.TextInteractiveDarkIdle,
+    Next: vitalColor.TextInteractiveDarkIdle,
   },
   Layout: {
     Wrapper: 'lg:flex lg:flex-row-reverse',
-    SliderWrapper: 'lg:w-5/6',
-    ControlsWrapper: 'lg:w-1/6 flex-col',
+    SliderWrapper: 'lg:w-full',
+    ControlsWrapper: 'lg:w-[122px] flex-col',
     Indicator: 'flex flex-col list-item',
-    NavWrapper: 'flex flex-row justify-between thumbcontrols',
+    NavWrapper: 'flex flex-row justify-center thumbcontrols',
     Prev: 'arrow -prev',
     Next: 'arrow -next',
   },
   Spacing: {
-    ControlsWrapper: 'pr-16px',
+    SliderWrapper: 'pl-24px',
     Indicator: withDesign({
-      Item: 'pb-8px',
+      Item: vitalSpacing.PaddingBottomMedium,
     }),
+    NavWrapper: vitalSpacing.PaddingBottomMedium,
   },
 });
 
@@ -298,6 +333,7 @@ const vitalCarousel: VitalCarousel = {
   WithVerticalThumbs,
   WithControls,
   WithCarouselDots,
+  WithCarouselCounter,
   WithCarouselDotsAllViewports,
   WithCarouselDotsMobileTablet,
   WithThumbnail,

@@ -51,6 +51,7 @@ const vitalPDPVariations = varyDesigns(
     MobilePDPCarousel: as(
       vitalCarouselStatic.WithCarouselDots,
       vitalCarouselStatic.MobileTabletOnly,
+      vitalCarouselStatic.WithCarouselCounter,
       vitalCarouselStatic.WithCarouselDotsMobileTablet,
     ),
     // DesktopTabletPDPCarousel: as(
@@ -82,49 +83,54 @@ const vitalCarouselFlowContainer = asFluidToken({
 
 // Setup Default Data
 const squareimage1 = {
-  src: 'https://placehold.co/800x800/ff0000/FFF',
+  src: 'https://placehold.co/800x800/ff0000/FFF?text=1',
   alt: 'red',
   title: 'red'
 };
 const squareimage2 = {
-  src: 'https://placehold.co/800x800/00ff00/FFF',
+  src: 'https://placehold.co/800x800/00ff00/FFF?text=2',
   alt: 'green',
   title: 'green'
 };
 const squareimage3 = {
-  src: 'https://placehold.co/800x800/0000ff/FFF',
+  src: 'https://placehold.co/800x800/0000ff/FFF?text=3',
   alt: 'blue',
   title: 'blue'
 };
 const squareimage4 = {
-  src: 'https://placehold.co/800x800/f2bdcd/FFF',
+  src: 'https://placehold.co/800x800/f2bdcd/FFF?text=4',
   alt: 'pink',
   title: 'pink'
 };
 const squareimage5 = {
-  src: 'https://placehold.co/800x800/bcd2ee/FFF',
+  src: 'https://placehold.co/800x800/bcd2ee/FFF?text=5',
   alt: 'lightblue',
   title: 'lightblue'
 };
 const squareimage6 = {
-  src: 'https://placehold.co/800x800/cc6633/FFF',
+  src: 'https://placehold.co/800x800/cc6633/FFF?text=6',
   alt: 'brown',
   title: 'brown'
 };
 const squareimage7 = {
-  src: 'https://placehold.co/800x800/fff000/FFF',
+  src: 'https://placehold.co/800x800/fff000/FFF?text=7',
   alt: 'yellow',
   title: 'yellow'
 };
 const squareimage8 = {
-  src: 'https://placehold.co/800x800/884de3/FFF',
+  src: 'https://placehold.co/800x800/884de3/FFF?text=8',
   alt: 'purple',
   title: 'purple'
 };
 const squareimage9 = {
-  src: 'https://placehold.co/800x800/00ffff/FFF',
+  src: 'https://placehold.co/800x800/00ffff/FFF?text=9',
   alt: 'aqua',
   title: 'aqua'
+};
+const squareimage10 = {
+  src: 'https://placehold.co/800x800/884EA0/FFF?text=10',
+  alt: 'darkpurple',
+  title: 'darkpurple'
 };
 const data = {
   examples$ProductCardSection$slides: {
@@ -140,7 +146,7 @@ const data = {
   examples$MobilePDPCarousel$slides$image5$image: squareimage5,
   examples$MobilePDPCarousel$slides$image6$image: squareimage6,
   examples$DesktopTabletPDPCarousel$slides: {
-    items: ['image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7', 'image8', 'image9'],
+    items: ['image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7', 'image8', 'image9', 'image10'],
   },
   examples$DesktopTabletPDPCarousel$slides$image1$image: squareimage1,
   examples$DesktopTabletPDPCarousel$slides$image2$image: squareimage2,
@@ -151,8 +157,9 @@ const data = {
   examples$DesktopTabletPDPCarousel$slides$image7$image: squareimage7,
   examples$DesktopTabletPDPCarousel$slides$image8$image: squareimage8,
   examples$DesktopTabletPDPCarousel$slides$image9$image: squareimage9,
+  examples$DesktopTabletPDPCarousel$slides$image10$image: squareimage10,
   examples$DesktopPDPVerticalCarousel$slides: {
-    items: ['image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7', 'image8', 'image9'],
+    items: ['image1', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7', 'image8', 'image9', 'image10'],
   },
   examples$DesktopPDPVerticalCarousel$slides$image1$image: squareimage1,
   examples$DesktopPDPVerticalCarousel$slides$image2$image: squareimage2,
@@ -163,6 +170,7 @@ const data = {
   examples$DesktopPDPVerticalCarousel$slides$image7$image: squareimage7,
   examples$DesktopPDPVerticalCarousel$slides$image8$image: squareimage8,
   examples$DesktopPDPVerticalCarousel$slides$image9$image: squareimage9,
+  examples$DesktopPDPVerticalCarousel$slides$image10$image: squareimage10,
 };
 
 export const Carousel = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
