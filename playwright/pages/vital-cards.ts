@@ -16,8 +16,23 @@ import { VitalElement, VitalPage } from './vital-page';
 export class VitalCardsPage extends VitalPage {
   readonly vitalCards: VitalCard[];
 
+  readonly itemContentSelector: string;
+
+  readonly linkWrapperSelector: string;
+
+  readonly cardWrapperSelector: string;
+
+  readonly cardContentWrapperSelector: string;
+
+  readonly cardImageWrapperSelector: string;
+
   constructor() {
     super('/styleguide/card/');
+    this.itemContentSelector = '[data-layer-region="StyleGuideExamples:ItemContent"]';
+    this.linkWrapperSelector = '[data-layer-region="Link:Wrapper"]';
+    this.cardWrapperSelector = '[data-layer-region="Card:Wrapper"]';
+    this.cardContentWrapperSelector = '[data-layer-region="Card:ContentWrapper"]';
+    this.cardImageWrapperSelector = '[data-layer-region="Card:ImageWrapper"]';
     this.vitalCards = [
       {
         id: 'CardLeftContentTopAll'
@@ -82,50 +97,62 @@ export class VitalCardsPage extends VitalPage {
       {
         id: 'HeroLinkLeftContentTop',
         hasButton: true,
+        isHero: true,
       },
       {
         id: 'HeroLinkLeftContentCentered',
         hasButton: true,
+        isHero: true,
       },
       {
         id: 'HeroLinkRightContentTop',
         hasButton: true,
+        isHero: true,
       },
       {
         id: 'HeroLinkRightContentCentered',
         hasButton: true,
+        isHero: true,
       },
       {
         id: 'HeroPrimaryButtonLeftContentTop',
         hasButton: true,
+        isHero: true,
       },
       {
         id: 'HeroPrimaryButtonLeftContentCentered',
         hasButton: true,
+        isHero: true,
       },
       {
         id: 'HeroPrimaryButtonRightContentTop',
         hasButton: true,
+        isHero: true,
       },
       {
         id: 'HeroPrimaryButtonRightContentCentered',
         hasButton: true,
+        isHero: true,
       },
       {
         id: 'HeroSecondaryButtonLeftContentTop',
         hasButton: true,
+        isHero: true,
       },
       {
         id: 'HeroSecondaryButtonLeftContentCentered',
         hasButton: true,
+        isHero: true,
       },
       {
         id: 'HeroSecondaryButtonRightContentTop',
         hasButton: true,
+        isHero: true,
       },
       {
         id: 'HeroSecondaryButtonRightContentCentered',
         hasButton: true,
+        isHero: true,
       }
     ];
   }
@@ -133,8 +160,17 @@ export class VitalCardsPage extends VitalPage {
   getElements(): VitalElement[] {
     return this.vitalCards;
   }
+
+  getHeroCards(): VitalElement[] {
+    return this.vitalCards.filter((card) => card.isHero);
+  }
+
+  getBasicCards(): VitalElement[] {
+    return this.vitalCards.filter((card) => !card.isHero);
+  }
 }
 
 interface VitalCard extends VitalElement {
-  hasButton?: boolean
+  hasButton?: boolean,
+  isHero?: boolean,
 }
