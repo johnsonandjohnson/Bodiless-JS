@@ -51,7 +51,7 @@ Renames and re-exports [vitalLink](README.md#vitallink)
 
 #### Defined in
 
-[vital-link/src/components/Link/types.ts:41](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/vital-link/src/components/Link/types.ts#L41)
+[vital-link/src/components/Link/types.ts:41](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c7cec792d/packages/vital-link/src/components/Link/types.ts#L41)
 
 ## Other Variables
 
@@ -61,7 +61,7 @@ Renames and re-exports [vitalLink](README.md#vitallink)
 
 #### Defined in
 
-[vital-link/src/components/Link/LinkClean.tsx:45](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/vital-link/src/components/Link/LinkClean.tsx#L45)
+[vital-link/src/components/Link/LinkClean.tsx:45](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c7cec792d/packages/vital-link/src/components/Link/LinkClean.tsx#L45)
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 #### Defined in
 
-[vital-link/src/components/Link/LinkClean.tsx:46](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/vital-link/src/components/Link/LinkClean.tsx#L46)
+[vital-link/src/components/Link/LinkClean.tsx:46](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c7cec792d/packages/vital-link/src/components/Link/LinkClean.tsx#L46)
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 #### Defined in
 
-[vital-link/src/components/Link/LinkClean.tsx:23](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/vital-link/src/components/Link/LinkClean.tsx#L23)
+[vital-link/src/components/Link/LinkClean.tsx:23](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c7cec792d/packages/vital-link/src/components/Link/LinkClean.tsx#L23)
 
 ___
 
@@ -99,7 +99,7 @@ Tokens for Vital Image
 
 #### Defined in
 
-[vital-link/src/components/Link/tokens/vitalLink.ts:170](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/vital-link/src/components/Link/tokens/vitalLink.ts#L170)
+[vital-link/src/components/Link/tokens/vitalLink.ts:170](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c7cec792d/packages/vital-link/src/components/Link/tokens/vitalLink.ts#L170)
 
 ## Other Functions
 
@@ -119,7 +119,7 @@ Tokens for Vital Image
 
 #### Defined in
 
-[vital-link/src/components/Link/util.ts:47](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/vital-link/src/components/Link/util.ts#L47)
+[vital-link/src/components/Link/util.ts:47](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c7cec792d/packages/vital-link/src/components/Link/util.ts#L47)
 
 ___
 
@@ -172,7 +172,7 @@ true when link href starts with http:// | https:// | //
 
 #### Defined in
 
-[vital-link/src/components/Link/util.ts:31](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/vital-link/src/components/Link/util.ts#L31)
+[vital-link/src/components/Link/util.ts:31](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c7cec792d/packages/vital-link/src/components/Link/util.ts#L31)
 
 ___
 
@@ -204,7 +204,7 @@ ___
 
 #### Defined in
 
-[vital-link/src/components/Link/util.ts:41](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/vital-link/src/components/Link/util.ts#L41)
+[vital-link/src/components/Link/util.ts:41](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c7cec792d/packages/vital-link/src/components/Link/util.ts#L41)
 
 ___
 

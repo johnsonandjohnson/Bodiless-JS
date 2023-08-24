@@ -24,4 +24,4 @@ Default styling and behavior.
 
 #### Defined in
 
-[vital-carousel/src/components/CarouselDot/types.ts:32](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/vital-carousel/src/components/CarouselDot/types.ts#L32)
+[vital-carousel/src/components/CarouselDot/types.ts:32](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c7cec792d/packages/vital-carousel/src/components/CarouselDot/types.ts#L32)

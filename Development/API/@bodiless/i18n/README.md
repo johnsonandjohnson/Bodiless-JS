@@ -50,7 +50,7 @@
 
 #### Defined in
 
-[bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx:6](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx#L6)
+[bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx:6](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c7cec792d/packages/bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx#L6)
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 #### Defined in
 
-[bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx:8](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx#L8)
+[bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx:8](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c7cec792d/packages/bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx#L8)
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 #### Defined in
 
-[bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx:26](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx#L26)
+[bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx:26](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c7cec792d/packages/bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx#L26)
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 #### Defined in
 
-[bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx:20](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx#L20)
+[bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx:20](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c7cec792d/packages/bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx#L20)
 
 ___
 
@@ -117,7 +117,7 @@ ___
 
 #### Defined in
 
-[bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx:22](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx#L22)
+[bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx:22](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c7cec792d/packages/bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx#L22)
 
 ## Variables
 
@@ -127,7 +127,7 @@ ___
 
 #### Defined in
 
-[bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx:36](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx#L36)
+[bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx:36](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c7cec792d/packages/bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx#L36)
 
 ## API Functions
 
@@ -190,7 +190,7 @@ and object of props:
 
 #### Defined in
 
-[bodiless-i18n/src/LanguageSelector/index.ts:31](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/bodiless-i18n/src/LanguageSelector/index.ts#L31)
+[bodiless-i18n/src/LanguageSelector/index.ts:31](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c7cec792d/packages/bodiless-i18n/src/LanguageSelector/index.ts#L31)
 
 ___
 
@@ -259,7 +259,7 @@ current language object.
 
 #### Defined in
 
-[bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx:70](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx#L70)
+[bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx:70](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c7cec792d/packages/bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx#L70)
 
 ___
 
@@ -284,7 +284,7 @@ languages in the passed list get all necessary default values.
 
 #### Defined in
 
-[bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx:112](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx#L112)
+[bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx:112](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c7cec792d/packages/bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx#L112)
 
 ___
 
@@ -311,7 +311,7 @@ updated list of language objects
 
 #### Defined in
 
-[bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx:86](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx#L86)
+[bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx:86](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c7cec792d/packages/bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx#L86)
 
 ___
 
@@ -334,7 +334,7 @@ an object with lang and dir props.
 
 #### Defined in
 
-[bodiless-i18n/src/LanguageProvider/withLangDirProps.ts:11](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/bodiless-i18n/src/LanguageProvider/withLangDirProps.ts#L11)
+[bodiless-i18n/src/LanguageProvider/withLangDirProps.ts:11](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c7cec792d/packages/bodiless-i18n/src/LanguageProvider/withLangDirProps.ts#L11)
 
 ___
 
@@ -350,7 +350,7 @@ Hook which can be used to use language content.
 
 #### Defined in
 
-[bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx:49](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx#L49)
+[bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx:49](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c7cec792d/packages/bodiless-i18n/src/LanguageProvider/LanguageProvider.tsx#L49)
 
 ___
 
@@ -502,4 +502,4 @@ all nested components.
 
 #### Defined in
 
-[bodiless-i18n/src/LanguageProvider/LanguageProvider.token.tsx:60](https://github.com/johnsonandjohnson/Bodiless-JS/blob/199151d80/packages/bodiless-i18n/src/LanguageProvider/LanguageProvider.token.tsx#L60)
+[bodiless-i18n/src/LanguageProvider/LanguageProvider.token.tsx:60](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c7cec792d/packages/bodiless-i18n/src/LanguageProvider/LanguageProvider.token.tsx#L60)
