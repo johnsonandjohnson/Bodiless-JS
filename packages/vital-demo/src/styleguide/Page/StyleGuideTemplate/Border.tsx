@@ -35,13 +35,7 @@ const BaseVariation = {
 };
 
 const BorderColorVariations = {
-  BorderLightThemeBase: vitalColor.BorderLightBase,
-  BorderInteractiveLightThemeIdle: vitalColor.BorderInteractiveLightIdle,
-  BorderInteractiveLightThemeDisabled: vitalColor.BorderInteractiveLightDisabled,
-  BorderInteractiveLightThemeFocus: 'border-kenvue-green-shade-80',
-  BorderInteractiveLightThemePressed: 'border-kenvue-green-shade-60',
-  BorderInteractiveLightThemeHover: 'border-kenvue-green-shade-80',
-  BorderDarkThemeBase: as(
+  BorderLightThemeBase: as(
     withParent(Div),
     withDesign({
       Parent: as(
@@ -50,8 +44,14 @@ const BorderColorVariations = {
         'flex justify-center items-center w-[150px]',
       ),
     }),
-    vitalColor.BorderDarkBase,
+    vitalColor.BorderLightBase,
   ),
+  BorderInteractiveLightThemeIdle: vitalColor.BorderInteractiveLightIdle,
+  BorderInteractiveLightThemeDisabled: vitalColor.BorderInteractiveLightDisabled,
+  BorderInteractiveLightThemeFocus: 'border-kenvue-green-shade-80',
+  BorderInteractiveLightThemePressed: 'border-kenvue-green-shade-60',
+  BorderInteractiveLightThemeHover: 'border-kenvue-green-shade-80',
+  BorderDarkThemeBase: vitalColor.BorderDarkBase,
   BorderInteractiveDarkThemeIdle: vitalColor.BorderInteractiveDarkIdle,
   BorderInteractiveDarkThemeHover: 'border-kenvue-green-tint-60',
   BorderInteractiveDarkThemeDisabled: vitalColor.BorderInteractiveDarkDisabled,
@@ -91,7 +91,7 @@ const vitalWidthVariations = varyDesigns(
   BaseVariation,
   BorderWidthVariations,
   {
-    '': vitalColor.BorderLightBase
+    '': vitalColor.BorderDarkBase
   }
 );
 const vitalRoundingVariations = varyDesigns(
