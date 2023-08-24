@@ -16,6 +16,7 @@ import React, { FC, PropsWithChildren } from 'react';
 import { StaticPage } from '@bodiless/core';
 import { ContextWrapper } from '@bodiless/core-ui';
 import { PageDataProvider } from '@bodiless/page';
+import { GTMScript, GTMNoScript } from '@bodiless/ga4';
 import type { FinalUI, UI, PageProps } from './types';
 import NextNodeProvider from './NextNodeProvider.bl-edit';
 import ShowDesignKeys from './ShowDesignKeys';
@@ -48,8 +49,10 @@ const Page: FC<PropsWithChildren<PageProps>> = ({ children, ui, ...rest }) => {
         <GoogleFonts />
         <ManifestMeta />
         <CanonicalURL />
+        <GTMScript />
         <ShowDesignKeys>
           <StaticPage>
+            <GTMNoScript />
             <Wrapper>
               {children}
             </Wrapper>

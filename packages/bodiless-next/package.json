@@ -35,6 +35,7 @@
     "@bodiless/core-ui": "^1.0.0-rc.42",
     "@bodiless/data": "^1.0.0-rc.42",
     "@bodiless/fclasses": "^1.0.0-rc.42",
+    "@bodiless/ga4": "^1.0.0-rc.42",
     "@bodiless/git": "^1.0.0-rc.42",
     "@bodiless/page": "^1.0.0-rc.42",
     "@bodiless/webpack": "^1.0.0-rc.42",

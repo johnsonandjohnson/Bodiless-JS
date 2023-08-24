@@ -11,12 +11,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import withDataLayerItem, { withDefaultDataLayer, withDataLayerScript } from './gtm';
+import withDataLayerItem, {
+  withDefaultDataLayer, withDataLayerScript, GTMScript, GTMNoScript,
+} from './gtm';
 
 export {
   withDataLayerItem,
   withDefaultDataLayer,
   withDataLayerScript,
+  GTMScript,
+  GTMNoScript,
 };
 
 export * from './GA4-events';
