@@ -30,6 +30,19 @@ const configurators = {
     baseConfig.globalSetup = require.resolve('./playwright/tests/setup/setup.ts');
     baseConfig.retries = 0;
   },
+  'smoke-bodiless-cli': (baseConfig: PlaywrightTestConfig) => {
+    const siteName = 'bodiless';
+    const sitePath = `generated/sites/${siteName}`;
+    baseConfig.workers = 1;
+    baseConfig.testDir = './playwright/tests/smoke-deprecated';
+    baseConfig.webServer = {
+      ...defaultServerConfig,
+      url: 'http://localhost:8000/',
+      command: `./packages/bodiless-cli/bin/bodiless new -r HEAD --clone-local --dest '${sitePath}' --name '${siteName}' --site-template "__vital_next__" && cd '${sitePath}' && npm run dev`,
+    };
+    baseConfig.use!.baseURL = 'http://localhost:8000';
+    baseConfig.testMatch = '*editorMenu.spec.ts';
+  },
 };
 /* eslint-enable no-param-reassign */
 
