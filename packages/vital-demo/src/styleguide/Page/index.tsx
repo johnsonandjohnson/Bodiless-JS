@@ -42,6 +42,7 @@ const {
   Table,
   Typography,
   Video,
+  Divider
 } = VitalDemoStyleGuideTemplate;
 
 const Default = asFluidToken({
@@ -72,6 +73,7 @@ const Default = asFluidToken({
     Table,
     Typography,
     Video,
+    Divider
   },
 });
 

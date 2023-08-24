@@ -34,6 +34,7 @@ import { Table } from './Table';
 import { Typography } from './Typography';
 import { Video } from './Video';
 import { Section } from './Section';
+import { Divider } from './Divider';
 import { CategoryCard } from './CategoryCard';
 
 export const VitalDemoStyleGuideTemplate = {
@@ -62,4 +63,5 @@ export const VitalDemoStyleGuideTemplate = {
   Table,
   Typography,
   Video,
+  Divider
 };

@@ -760,6 +760,15 @@ demos:
       templateId: bodiless-6GKNPvcRI8
       title: XXL Text
       type: data
+    DHKJSv4YoB:
+      data:
+        props: {}
+        slots: {}
+      id: DHKJSv4YoB
+      patternId: content-dividers
+      templateId: bodiless-esxD6Gxc4_
+      title: Main
+      type: data
     Db_LHeS9Hs:
       data:
         props:

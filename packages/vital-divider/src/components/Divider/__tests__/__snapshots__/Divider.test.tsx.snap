@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Divider Tokens Matches snapshot for Base 1`] = `
+<div>
+  <hr
+    className="border-1px border-solid"
+  />
+</div>
+`;
+
+exports[`Divider Tokens Matches snapshot for WithPrimaryDivider 1`] = `
+<div>
+  <hr
+    className="border-kenvue-neutrals-light-grey"
+  />
+</div>
+`;
+
+exports[`Divider Tokens Matches snapshot for WithSecondaryDivider 1`] = `
+<div>
+  <hr
+    className="border-kenvue-neutrals-grey"
+  />
+</div>
+`;
+
+exports[`Divider Tokens Matches snapshot for WithVerticalOrientation 1`] = `
+<div>
+  <hr
+    className="w-1px h-32px"
+  />
+</div>
+`;

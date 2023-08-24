@@ -30,6 +30,7 @@
     "@bodiless/vital-layout": "^1.0.0-rc.42",
     "@bodiless/vital-link": "^1.0.0-rc.42",
     "@bodiless/vital-templates": "^1.0.0-rc.42",
+    "@bodiless/vital-divider": "^1.0.0-rc.42",
     "@knapsack/app": "^4.4.0",
     "@types/react": "^18.2.0",
     "crypto-browserify": "^3.12.0",

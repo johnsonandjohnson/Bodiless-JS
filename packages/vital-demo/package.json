@@ -69,6 +69,7 @@
     "@bodiless/vital-table": "^1.0.0-rc.42",
     "@bodiless/vital-templates": "^1.0.0-rc.42",
     "@bodiless/vital-youtube": "^1.0.0-rc.42",
+    "@bodiless/vital-divider": "^1.0.0-rc.42",
     "lodash": "^4.17.19",
     "pure-react-carousel": "^1.27.6",
     "tailwindcss": "^3.0.23"
