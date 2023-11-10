@@ -39,7 +39,7 @@
     "@bodiless/git": "^1.0.0-rc.42",
     "@bodiless/layouts": "^1.0.0-rc.42",
     "@bodiless/ui": "^1.0.0-rc.42",
-    "axios": "^0.21.0",
+    "axios": "^1.6.0",
     "common-tags": "^1.8.0",
     "copyfiles": "^2.1.1",
     "debug": "^4.1.1",

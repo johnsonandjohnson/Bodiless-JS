@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@bodiless/cli": "^1.0.0-rc.42",
-    "axios": "^0.21.0",
+    "axios": "^1.6.0",
     "oidc-client-ts": "2.0.0-rc.2"
   },
   "peerDependencies": {
