@@ -70,7 +70,7 @@
     "@bodiless/webpack": "^1.0.0-rc.42",
     "@types/walk": "^2.3.0",
     "autoprefixer": "^10.4.2",
-    "axios": "^0.21.0",
+    "axios": "^1.6.0",
     "common-tags": "^1.8.0",
     "crypto-js": "^4.1.1",
     "debug": "^4.1.1",

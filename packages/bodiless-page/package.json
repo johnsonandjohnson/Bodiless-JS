@@ -39,7 +39,7 @@
     "@bodiless/data": "^1.0.0-rc.42",
     "@bodiless/fclasses": "^1.0.0-rc.42",
     "@bodiless/ui": "^1.0.0-rc.42",
-    "axios": "^0.21.0",
+    "axios": "^1.6.0",
     "informed": "^4.44.0",
     "lodash": "^4.17.19",
     "sleep-promise": "^8.0.1"

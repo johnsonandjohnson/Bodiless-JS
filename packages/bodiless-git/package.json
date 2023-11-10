@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@bodiless/core": "^1.0.0-rc.42",
-    "axios": "^0.21.0",
+    "axios": "^1.6.0",
     "enzyme": "^3.9.0",
     "find-up": "^4.1.0",
     "informed": "^4.44.0",

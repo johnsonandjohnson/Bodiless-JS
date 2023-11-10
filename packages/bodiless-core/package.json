@@ -33,7 +33,7 @@
     "@bodiless/data": "^1.0.0-rc.42",
     "@bodiless/fclasses": "^1.0.0-rc.42",
     "@floating-ui/react": "^0.23.1",
-    "axios": "^0.21.0",
+    "axios": "^1.6.0",
     "informed": "^4.44.0",
     "lodash": "^4.17.19",
     "rc-tooltip": "^5.1.1",
